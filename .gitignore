@@ -1,8 +1,5 @@
 # This file contains some configurations,
-# therefore is better not to manage it
-# via git. Nonetheless, it has to be
-# provided to initial cloner somehow,
-# so it is still part
+# so is better not to managed by git. 
 /lua/run.lua
 
 # For docs, use MarkDown instead
