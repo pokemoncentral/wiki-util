@@ -1,0 +1,5 @@
+# Nobody is meant to work in this branch,
+# but these are here just for safety
+
+# For docs, use MarkDown instead
+*.txt
