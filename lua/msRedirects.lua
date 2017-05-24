@@ -1,7 +1,5 @@
 --[[
 --]]
--- Needed to load utility Wiki modules
-package.path = package.path .. ';../modules/?.lua'
 
 local txt = require('Wikilib-strings')
 local alt = require('AltForms-data')
