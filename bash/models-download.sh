@@ -49,25 +49,12 @@ function print {
 	echo $1 | tee -a $LOG_FILE
 }
 
-# Removes the passed file if not in the
-# accepted file types
-function delIfNot {
-    local FILE="$1"
-    shift 1
-    local ACCEPTED_TYPES="${*:-gif}"
-
-	local FILE=$(echo "$FILE" | uni2ascii -aJ)
-    local ACCEPTED_TYPES=${ACCEPTED_TYPES,,}
-
-    local FILE_TYPE=$(file -b "$FILE" | awk '{ print tolower($1) }')
-
-    [[ ! $ACCEPTED_TYPES =~ $FILE_TYPE ]] && rm "$FILE"
-}
-
 # Moves all gif files in a temporary
 # directory to Dropbox
 function moveToDropbox {
 	TEMP_DIR=Dl$1
+
+	bash delete-by-type.sh $TEMP_DIR gif
 
 	ls -1 $TEMP_DIR >> $LISTFILE
 	mv $TEMP_DIR/* $DROPBOX_DIR
@@ -127,13 +114,11 @@ for GC_NAME in {710,711}{,a,b,c}; do
 	# Male
 	if [[ $MALE_EXISTS == false ]]; then
         curl $PP_URL/$PP_NAME.gif > $MALE_DEST
-        delIfNot $MALE_DEST
     fi
 
 	# Female
 	if [[ $FEMALE_EXISTS == false ]]; then
         curl $PP_URL/$PP_NAME-f.gif > $FEMALE_DEST
-        delIfNot $FEMALE_DEST
     fi
 
 	# Other animation
@@ -142,7 +127,6 @@ for GC_NAME in {710,711}{,a,b,c}; do
 		if [[ -z $(grep $ANI_NAME $LISTFILE) ]]; then
             ANI_DEST=Dlm/$ANI_NAME
             curl $PP_URL/$PP_NAME-$K.gif > $ANI_DEST
-            delIfNot $ANI_DEST
         fi
 	done
 
@@ -163,14 +147,12 @@ for GC_NAME in {710,711}{,a,b,c}; do
 	# Male
 	if [[ $MALE_EXISTS == false ]]; then
         bash getWikiFile.sh -d local -w pokewiki $GC_SPR.gif Dlm
-        delIfNot Dlm/$GC_SPR.gif
     fi
 
 	# Female
 	if [[ $FEMALE_EXISTS == false ]]; then
         GC_SPR="Pokémonsprite_${GC_NAME}_Weiblich_${GC_VARIANTS[$VARIANT]}${GC_GAMES[$GAMES]}"
         bash getWikiFile.sh -d local -w pokewiki $GC_SPR.gif Dlf
-        delIfNot Dlf/$GC_SPR.gif
     fi
 
 done
