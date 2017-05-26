@@ -2,7 +2,7 @@
 config.*
 
 # Config templates are to be here, though
-!/config-templates
+!/config-templates/config.*
 
 # For docs, use MarkDown instead
 *.txt
