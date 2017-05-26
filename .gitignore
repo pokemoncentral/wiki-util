@@ -1,6 +1,8 @@
-# This file contains some configurations,
-# so is better not to managed by git. 
-/lua/run.lua
+# Config files are better not in git
+config.*
+
+# Config templates are to be here, though
+!/config-templates
 
 # For docs, use MarkDown instead
 *.txt
