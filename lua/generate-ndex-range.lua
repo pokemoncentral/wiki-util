@@ -10,13 +10,18 @@ range = table.map(range, function(ndex)
 			and ndex
 			or string.tf(ndex)
 end)
+
+useless = table.filter(useless, function(_, key)
+	return tonumber(key)
+end)
 	
 for ndex, data in pairs(useless) do
-	if tonumber(ndex) then
-		for abbr in pairs(data.names) do
-			abbr = abbr == 'base' and '' or abbr
-			table.insert(range, string.tf(ndex) .. abbr)
-		end
+	data = table.filter(data, function(_, abbr)
+		return abbr ~= 'base'
+	end)
+
+	for abbr in pairs(data.names) do
+		table.insert(range, string.tf(ndex) .. abbr)
 	end
 end
 
