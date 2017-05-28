@@ -13,3 +13,13 @@ appropriate extension:
 -	_run.*_: loads the configuration properly and
 		runs the passed script, comprising command
 		line arguments.
+
+# Dependencies
+
+## Bash
+-	[pywikibot](https://www.mediawiki.org/wiki/Manual:Pywikibot)
+-	[imagemagick](https://www.imagemagick.org/script/index.php)
+-	[gifsicle](https://www.lcdf.org/gifsicle/)
+
+## Lua
+-	[wiki-modules](https://github.com/pokemoncentral/wiki-lua-modules)
