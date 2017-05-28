@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. $HOME/.bash_envvars
-
 # This script uploads all files in a directory
 # to Pokémon Central Wiki with given description,
 # using filenames as they are, overwriting if

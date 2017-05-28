@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Uploads from Bulbapedia to Pokémon Central
-# Wiki a batch of file having conscecutive
+# Wiki a batch of files having conscecutive
 # ndexes in their name, skipping duplicates
 
 # Arguments

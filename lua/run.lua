@@ -16,4 +16,8 @@ package.path = table.concat{
 	'/?.lua'
 }
 
+--[[
+	gsub is used to strip the lua extension,
+	so that you can use shell autocompletion.
+--]]
 require((table.remove(arg, 1):gsub('%.lua', '')))

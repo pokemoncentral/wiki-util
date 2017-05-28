@@ -61,7 +61,7 @@ function moveToDropbox {
 }
 
 # Fetching Pokèmon data
-. spritesPokeList.sh
+. sprites-source.sh
 
 # Dropbox destination
 mkdir -p $DROPBOX_DIR

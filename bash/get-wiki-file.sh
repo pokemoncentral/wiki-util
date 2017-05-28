@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. $HOME/.bash_envvars
-
 # Downloads a file from Bulbapedia, PokéWiki,
 # or Pkoémon Central Wiki, saving it locally
 # or uploading it to Bulbapedia
