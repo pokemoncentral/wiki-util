@@ -28,5 +28,5 @@ for (( NDEX=$BEG; NDEX < $END; ++NDEX )); do
 	NDEX03=$(printf "%03d" $NDEX)
 	SOURCE=${SOURCE_PATTERN//'$NDEX'/$NDEX03}
 	DEST=${DEST_PATTERN//'$NDEX'/$NDEX03}
-	echo n | bash getWikiFile.sh -p $PT -w bulba -d wiki "$SOURCE" "$DEST" "$DESC"
+	echo n | bash get-wiki-file.sh -p $PT -w bulba -d wiki "$SOURCE" "$DEST" "$DESC"
 done

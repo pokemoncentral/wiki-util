@@ -26,7 +26,7 @@ delIfNot () {
 	local FILE=$(echo "$FILE" | uni2ascii -aJ)
     local ACCEPTED_TYPES=${ACCEPTED_TYPES,,}
 
-    local FILE_TYPE=$(file -b "$FILE" | awk '{ print tolower($1) }')
+    local FILE_TYPE=$(bash file-type.sh "$FILE")
 
     [[ ! $ACCEPTED_TYPES =~ $FILE_TYPE ]] && rm "$FILE"
 }

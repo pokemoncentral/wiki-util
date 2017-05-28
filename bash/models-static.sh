@@ -1,40 +1,21 @@
 #!/bin/bash
 
+# This script extracts the first frame out
+# of all gif files in a directory and copies
+# them to another path
+
 # Arguments
-# $1: the folder in which files are
-# -u: uploads the file
-# -g [xy, oras, roza]: game (only used when uploading)
-# -m [path]: moves the files to path
+#	- $1: the folder in which files are
+#	- $2: the destination folder
 
-declare -A games
+SOURCE="$1"
+DEST="$2"
 
-games[xy]='X e Y'
-games[oras]='Rubino Omega e Zaffiro Alpha'
-games[roza]='Rubino Omega e Zaffiro Alpha'
+mkdir -p "$DEST"
 
-upload=false
-dest=.
-while getopts "um:g:" opt; do
-	case $opt in
-		u)
-			upload=true
-			;;
-		m)
-			dest=$OPTARG
-			;;
-		g)
-			game=${games[$OPTARG]}
-			;;
-	esac
-done
-source=${@:$OPTIND:1}
-
-for file in $source/*.gif; do
-	img=$(basename $file .gif)
-	img=${img:3}.png
-	convert $file[0] $dest/$img
-	if $upload; then
-		python $HOME/Files/pywikibot/pwb.py upload -keep -noverify $dest/$img {{I-Fairuse-3Dmodel-game-nocat}} [[Categoria:Modelli Pokémon statici $game]]
-		rm $dest/$img
+for FILE in "$SOURCE"/*; do
+	if [[ $(bash file-type.sh "$FILE") == 'gif' ]]; then
+		BASENAME=$(basename "$FILE")
+		convert $FILE[0] "$DEST"/${BASENAME%.*}.png
 	fi
 done

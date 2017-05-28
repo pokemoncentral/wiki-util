@@ -146,13 +146,13 @@ for GC_NAME in {710,711}{,a,b,c}; do
 
 	# Male
 	if [[ $MALE_EXISTS == false ]]; then
-        bash getWikiFile.sh -d local -w pokewiki $GC_SPR.gif Dlm
+        bash get-wiki-file.sh -d local -w pokewiki $GC_SPR.gif Dlm
     fi
 
 	# Female
 	if [[ $FEMALE_EXISTS == false ]]; then
         GC_SPR="Pokémonsprite_${GC_NAME}_Weiblich_${GC_VARIANTS[$VARIANT]}${GC_GAMES[$GAMES]}"
-        bash getWikiFile.sh -d local -w pokewiki $GC_SPR.gif Dlf
+        bash get-wiki-file.sh -d local -w pokewiki $GC_SPR.gif Dlf
     fi
 
 done

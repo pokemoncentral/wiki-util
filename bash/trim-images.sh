@@ -14,12 +14,12 @@ OUTPUT_DIR="$2"
 
 mkdir -p "$OUTPUT_DIR"
 
-for IMG in "$INPUT_DIR"/*; do
-	OUTIMG=$(basename "$IMG")
-	EXT=${OUTIMG##*.}
-	OUTIMG="$OUTPUT_DIR"/"$OUTIMG"
+for IMG in $(find "$INPUT_DIR" -type f); do
+	IMG_TYPE=$(bash file-type.sh "$IMG")
+	BASENAME=$(basename "$IMG")
+	OUTIMG="$OUTPUT_DIR/$BASENAME"
 
-	case ${EXT,,} in
+	case $IMG_TYPE in
 		'gif') # Gifs are handled using gifsicle
 			gifsicle --crop-transparency "$IMG" > "$OUTIMG"
 
@@ -37,5 +37,5 @@ for IMG in "$INPUT_DIR"/*; do
 			;;
 	esac
 
-	echo Saved $IMG to $OUTIMG with transparent outer pixels removed 
+	echo "Saved trimmed $BASENAME to $OUTIMG" 
 done
