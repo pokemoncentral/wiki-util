@@ -36,8 +36,7 @@ local makeRedirect = function(source, dest, sex, ndex)
 				game = source,
 				sex = sex,
 				var = variant,
-				ndex = ndex,
-				form = form
+				ndex = ndex
 			}
 		)
 

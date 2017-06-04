@@ -10,10 +10,12 @@ A list of all ndexes is ready-made.
 
 local r = {}
 
-local formUtil = require('Wikilib-forms')
 local str = require('Wikilib-strings')
 local tab = require('Wikilib-tables')
+local formUtil = require('Wikilib-forms')
+local genUtil = require('Wikilib-gens')
 local alts = require('AltForms-data')
+local gendata = require('Gens-data')
 local pokes = require('Poké-data')
 local useless = require('UselessForms-data')
 
@@ -60,6 +62,34 @@ r.forms = function(ndex)
 
 	return table.map(forms, function(form)
 		return tFndex .. formUtil.toEmptyAbbr(form)
+	end)
+end
+
+--[[
+
+Returns all the ndexes, including alternative
+forms, of the Pokémon introduced in the first
+game of a generation.
+
+--]]
+r.gen = function(gen)
+	gen = tonumber(gen)
+
+	return table.filter(r.all, function(ndex)
+
+		--[[
+			Brand new Pokémon (no form differences)
+			are normally introduced only in the first
+			games of a generation
+		--]]
+		if tonumber(ndex) then
+			return genUtil.getGen.ndex(ndex) == gen
+		end
+
+		local dex, abbr = formUtil.getNameAbbr(ndex)
+		local sinceGame = (alts[dex] or useless[dex])
+				.since[abbr]
+		return gendata[gen].games[1] == sinceGame
 	end)
 end
 
