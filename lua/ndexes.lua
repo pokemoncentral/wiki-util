@@ -80,7 +80,9 @@ r.gen = function(gen)
 		--[[
 			Brand new Pokémon (no form differences)
 			are normally introduced only in the first
-			games of a generation
+			games of a generation: hence, we only
+			need to check if the Pokémon was introduced
+			in the given generation.
 		--]]
 		if tonumber(ndex) then
 			return genUtil.getGen.ndex(ndex) == gen
@@ -90,6 +92,30 @@ r.gen = function(gen)
 		local sinceGame = (alts[dex] or useless[dex])
 				.since[abbr]
 		return gendata[gen].games[1] == sinceGame
+	end)
+end
+
+--[[
+
+Returns all the ndexes of Pokémon, alternative
+forms included, which where introduced
+in tha passed game.
+
+--]]
+r.game = function(game)
+	return table.filter(r.all, function(ndex)
+		local sinceGame
+
+		if tonumber(ndex) then
+			local gen = genUtil.getGen.ndex(ndex)
+			sinceGame = gendata[gen].games[1]
+		else
+			local dex, abbr = formUtil.getNameAbbr(ndex)
+			sinceGame = (alts[dex] or useless[dex])
+					.since[abbr]
+		end
+
+		return game == sinceGame
 	end)
 end
 

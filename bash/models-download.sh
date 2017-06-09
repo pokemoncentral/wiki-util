@@ -1,8 +1,35 @@
 #!/bin/bash
 
+# This script downloads a single set
+# of 3D models from pkparaiso.com, using
+# pokewiki.de as a backup source.
+
+# A single set of models is identified
+# by the category of those and the game
+# they are from. Both genders are downloaded,
+# including additional attacks.
+
+# The models are saved in two directories
+# in the current path, one for males and the
+# other for females: files are further divided
+# in subdirectories based on game and variant.
+
+# The list of already downloaded sprites
+# is kept in a file, to avoid the expensive
+# process of downloading files twice
+
 # Arguments:
-# variant [shiny, back, back_shiny, normal]
-# game [xy, oras, sm];
+# 	- $1: Variant. One of:
+#		- shiny
+#		- back
+#		- back_shiny
+#		- normal
+#	- $2: Game. One of:
+#		- xy
+#		- oras
+#		- roza
+#		- sm
+#		- sl
 
 # Simple constants
 PP_BASE_URL='http://www.pkparaiso.com/imagenes'
@@ -43,21 +70,12 @@ PP_URL=$PP_BASE_URL/${PP_GAMES[$GAMES]}/sprites/animados${PP_VARIANTS[$VARIANT]}
 DROPBOX_BASE_DIR=~/Dropbox/Wiki/Sprite/Modelli_$GAMES
 LISTFILE=$DROPBOX_BASE_DIR/modellist-$VARIANT.txt
 DROPBOX_DIR=$DROPBOX_BASE_DIR/$VARIANT
+MALE_PATH=Dlm/$GAME/$VARIANT
+FEMALE_PATH=Dlf/$GAME/$VARIANT
 
 # Prints on both STDOUT and log file
 function print {
 	echo $1 | tee -a $LOG_FILE
-}
-
-# Moves all gif files in a temporary
-# directory to Dropbox
-function moveToDropbox {
-	TEMP_DIR=Dl$1
-
-	bash delete-by-type.sh $TEMP_DIR gif
-
-	ls -1 $TEMP_DIR >> $LISTFILE
-	mv $TEMP_DIR/* $DROPBOX_DIR
 }
 
 # Fetching Pokèmon data
@@ -66,27 +84,20 @@ function moveToDropbox {
 # Dropbox destination
 mkdir -p $DROPBOX_DIR
 
-# Creating list file if it does not exist
-touch $LISTFILE
-
 # Temporary directories
-mkdir -p Dlm
-mkdir -p Dlf
+mkdir -p $MALE_PATH
+mkdir -p $FEMALE_PATH
 
 # Log file
 :> $LOG_FILE
 
-for GC_NAME in {710,711}{,a,b,c}; do
-# for GC_NAME in "${!pokemon[@]}"; do
+# for GC_NAME in {710,711}{,a,b,c}; do
+for GC_NAME in "${!pokemon[@]}"; do
 	PP_NAME=${pokemon[$GC_NAME]}
 
 	# Male and female PCW sprite names
-	MALE_NAME=$(bash models-rename.sh $PP_NAME.gif $VARIANT m $GAMES)
-	FEMALE_NAME=$(bash models-rename.sh $PP_NAME.gif $VARIANT f $GAMES)
-
-    # Male and female destination paths
-    MALE_DEST=Dlm/$MALE_NAME
-    FEMALE_DEST=Dlf/$FEMALE_NAME
+	MALE_NAME=$(lua ../lua/run.lua models-rename.lua $PP_NAME.gif $VARIANT m $GAMES)
+	FEMALE_NAME=$(lua ../lua/run.lua models-rename.lua $PP_NAME.gif $VARIANT f $GAMES)
 
 	# If something went wrong, skipping Pokèmon
 	if [[ $MALE_NAME =~ wrong || $FEMALE_NAME =~ wrong ]]; then
@@ -109,24 +120,31 @@ for GC_NAME in {710,711}{,a,b,c}; do
 	fi
 	[[ $FEMALE_EXISTS == true && $MALE_EXISTS == true ]] && continue
 
+    # Male and female destination paths
+    MALE_DEST=$MALE_PATH/$MALE_NAME
+    FEMALE_DEST=$FEMALE_PATH/$FEMALE_NAME
+
 	# Pkparaiso download
 
 	# Male
 	if [[ $MALE_EXISTS == false ]]; then
         curl $PP_URL/$PP_NAME.gif > $MALE_DEST
+        bash delete-by-type $MALE_DEST gif
     fi
 
 	# Female
 	if [[ $FEMALE_EXISTS == false ]]; then
         curl $PP_URL/$PP_NAME-f.gif > $FEMALE_DEST
+        bash delete-by-type $FEMALE_DEST gif
     fi
 
 	# Other animation
 	for K in {2..5}; do
-		ANI_NAME=$(bash models-rename.sh $PP_NAME-$K.gif $VARIANT m $GAMES)
+		ANI_NAME=$(lua ../lua/run.lua models-rename.lua $PP_NAME-$K.gif $VARIANT m $GAMES)
 		if [[ -z $(grep $ANI_NAME $LISTFILE) ]]; then
-            ANI_DEST=Dlm/$ANI_NAME
+            ANI_DEST=$MALE_PATH/$ANI_NAME
             curl $PP_URL/$PP_NAME-$K.gif > $ANI_DEST
+            bash delete-by-type $ANI_DEST gif
         fi
 	done
 
@@ -146,21 +164,17 @@ for GC_NAME in {710,711}{,a,b,c}; do
 
 	# Male
 	if [[ $MALE_EXISTS == false ]]; then
-        bash get-wiki-file.sh -d local -w pokewiki $GC_SPR.gif Dlm
+        bash get-wiki-file.sh -d local -w pokewiki $GC_SPR.gif $MALE_PATH
     fi
 
 	# Female
 	if [[ $FEMALE_EXISTS == false ]]; then
         GC_SPR="Pokémonsprite_${GC_NAME}_Weiblich_${GC_VARIANTS[$VARIANT]}${GC_GAMES[$GAMES]}"
-        bash get-wiki-file.sh -d local -w pokewiki $GC_SPR.gif Dlf
+        bash get-wiki-file.sh -d local -w pokewiki $GC_SPR.gif $FEMALE_PATH
     fi
 
 done
 
-# Moving downloaded files to dropbox
-moveToDropbox m
-moveToDropbox f
-
-# Clearing temporary stuff
-rm -rf Dlm
-rm -rf Dlf
+# Updating list files
+ls -1 $MALE_PATH >> $LISTFILE
+ls -1 $FEMALE_PATH >> $LISTFILE
