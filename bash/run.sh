@@ -6,4 +6,4 @@ SCRIPT="$1"
 
 shift 1
 
-bash "$SCRIPT" $@
+bash "$SCRIPT" "$@"
