@@ -20,7 +20,8 @@
 #	pokewiki)
 #		downloads from PokéWiki
 
-# -p: throttle, defaults to 1
+# -p: Flag. If enabled, sets the
+#		bot throttle to 1
 
 # $1: source filename
 
@@ -34,9 +35,9 @@
 
 DEST=''
 BASE_URL=''
-PT=1
+PT=''
 
-while getopts "d:w:p:" OPTION; do
+while getopts "d:w:p" OPTION; do
 	case $OPTION in
 		d)
 			case "local wiki" in
@@ -67,7 +68,7 @@ while getopts "d:w:p:" OPTION; do
 			esac
 			;;
 		p)
-			PT=$OPTARG
+			PT='-putthrottle:1'
 			;;
 			
 		*)	# getopts already printed error message
@@ -91,5 +92,5 @@ if [[ $DEST == 'local' ]]; then
 	curl -O $FILE_URL
 	cd -
 else
-	python $PYWIKIBOT_DIR/pwb.py upload -putthrottle:$PT -keep -noverify -filename:"$2" $FILE_URL "$3"
+	python $PYWIKIBOT_DIR/pwb.py upload $PT -keep -noverify -filename:"$2" $FILE_URL "$3"
 fi

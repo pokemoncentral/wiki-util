@@ -91,13 +91,15 @@ mkdir -p $FEMALE_PATH
 # Log file
 :> $LOG_FILE
 
-# for GC_NAME in {710,711}{,a,b,c}; do
-for GC_NAME in "${!pokemon[@]}"; do
+for GC_NAME in 773k; do
+# for GC_NAME in "${!pokemon[@]}"; do
 	PP_NAME=${pokemon[$GC_NAME]}
 
 	# Male and female PCW sprite names
-	MALE_NAME=$(lua ../lua/run.lua models-rename.lua $PP_NAME.gif $VARIANT m $GAMES)
-	FEMALE_NAME=$(lua ../lua/run.lua models-rename.lua $PP_NAME.gif $VARIANT f $GAMES)
+	cd ../lua
+	MALE_NAME=$(lua run.lua models-rename.lua $PP_NAME.gif $VARIANT m $GAMES)
+	FEMALE_NAME=$(lua run.lua models-rename.lua $PP_NAME.gif $VARIANT f $GAMES)
+	cd -
 
 	# If something went wrong, skipping Pokèmon
 	if [[ $MALE_NAME =~ wrong || $FEMALE_NAME =~ wrong ]]; then
@@ -129,22 +131,24 @@ for GC_NAME in "${!pokemon[@]}"; do
 	# Male
 	if [[ $MALE_EXISTS == false ]]; then
         curl $PP_URL/$PP_NAME.gif > $MALE_DEST
-        bash delete-by-type $MALE_DEST gif
+        bash delete-by-type.sh $MALE_DEST gif
     fi
 
 	# Female
 	if [[ $FEMALE_EXISTS == false ]]; then
         curl $PP_URL/$PP_NAME-f.gif > $FEMALE_DEST
-        bash delete-by-type $FEMALE_DEST gif
+        bash delete-by-type.sh $FEMALE_DEST gif
     fi
 
 	# Other animation
 	for K in {2..5}; do
-		ANI_NAME=$(lua ../lua/run.lua models-rename.lua $PP_NAME-$K.gif $VARIANT m $GAMES)
+		cd ../lua
+		ANI_NAME=$(lua run.lua models-rename.lua $PP_NAME-$K.gif $VARIANT m $GAMES)
+		cd -
 		if [[ -z $(grep $ANI_NAME $LISTFILE) ]]; then
             ANI_DEST=$MALE_PATH/$ANI_NAME
             curl $PP_URL/$PP_NAME-$K.gif > $ANI_DEST
-            bash delete-by-type $ANI_DEST gif
+            bash delete-by-type.sh $ANI_DEST gif
         fi
 	done
 
@@ -165,12 +169,16 @@ for GC_NAME in "${!pokemon[@]}"; do
 	# Male
 	if [[ $MALE_EXISTS == false ]]; then
         bash get-wiki-file.sh -d local -w pokewiki $GC_SPR.gif $MALE_PATH
+        mv $MALE_PATH/$GC_SPR.gif $MALE_DEST
+        bash delete-by-type.sh $MALE_DEST gif
     fi
 
 	# Female
 	if [[ $FEMALE_EXISTS == false ]]; then
         GC_SPR="Pokémonsprite_${GC_NAME}_Weiblich_${GC_VARIANTS[$VARIANT]}${GC_GAMES[$GAMES]}"
         bash get-wiki-file.sh -d local -w pokewiki $GC_SPR.gif $FEMALE_PATH
+        mv $FEMALE_PATH/$GC_SPR.gif $FEMALE_DEST
+        bash delete-by-type.sh $FEMALE_DEST gif
     fi
 
 done
