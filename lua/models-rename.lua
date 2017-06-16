@@ -121,7 +121,8 @@ local abbr = {
 		basculin = getAbbr('basculin', 'lineablu'),
 		['flabébé'] = getAbbr('flabébé', 'blu'),
 		floette = getAbbr('floette', 'blu'),
-		florges = getAbbr('florges', 'blu')
+		florges = getAbbr('florges', 'blu'),
+		minior = getAbbr('minior', 'blu')
 	},
 	zen = getAbbr('darmanitan', 'zen'),
 	autumn = getAbbr('deerling', 'autunno'),
@@ -158,7 +159,7 @@ local abbr = {
 	pokeball = getAbbr('vivillon', 'poké ball'),
 	orange = getAbbr('floette', 'arancione'),
 	yellow = getAbbr('floette', 'giallo'),
-	-- eternal = getAbbr('floette', 'blu'),
+	eternal = 'E',
 	blade = getAbbr('aegislash', 'spada'),
 	small = getAbbr('pumpkaboo', 'mini'),
 	large = getAbbr('pumpkaboo', 'grande'),
@@ -206,6 +207,23 @@ local abbr = {
 	}
 }
 
+--[[
+	Some Pkparaiso names are not
+	found directly in Poké-data
+--]]
+local trueNames = {
+	['nidoran f'] = 'nidoran♀',
+	['nidoran m'] = 'nidoran♂',
+	farfetchd = "farfetch'd",
+	['mime jr'] = 'mime jr.',
+	['flabebe'] = 'flabébé',
+	typenull = 'tipo zero',
+	tapukoko = 'tapu koko',
+	tapulele = 'tapu lele',
+	tapubulu = 'tapu bulu',
+	tapufini = 'tapu fini'
+}
+
 -- Match strips away any extension
 local splits = mw.text.split(arg[1]:match('(.+)%..+$'),
 		'-', true)
@@ -242,11 +260,10 @@ if #splits > 1 then
 	end
 end
 
-name = table.concat(name, '-')
--- Replace with table lookup if necessary
-if name == 'typenull' then
-	name = 'tipo zero'
-end
+name = table.concat(name, '-'):gsub('_', ' ')
+name = trueNames[name] or name
+
+io.stderr:write(name, '\n')
 
 local ndex = poke[name].ndex
 
@@ -271,7 +288,7 @@ then
 	end
 else
 	if form ~= '' then
-		form = type(form) == 'table'
+		form = type(abbr[form]) == 'table'
 				and abbr[form][name]
 				or abbr[form]
 	end
@@ -280,6 +297,8 @@ else
 		move = '-' .. move
 	end
 end
+
+io.stderr:write(name, form, move, '\n')
 
 local spr = string.interp(
 	'Spr${game}${sex}${var}${ndex}${form}${move}.gif',

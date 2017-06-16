@@ -88,9 +88,7 @@ MD5=$(echo -n "$1" | md5sum -)
 FILE_URL=$(echo -n $BASE_URL/${MD5:0:1}/${MD5:0:2}/$1 | uni2ascii -aJ)
 
 if [[ $DEST == 'local' ]]; then
-	cd $2
-	curl -O $FILE_URL
-	cd -
+	curl $FILE_URL > $2
 else
 	python $PYWIKIBOT_DIR/pwb.py upload $PT -keep -noverify -filename:"$2" $FILE_URL "$3"
 fi
