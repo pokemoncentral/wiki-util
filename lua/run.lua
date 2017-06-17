@@ -8,12 +8,19 @@ script.
 
 --]]
 
-local config = require('config')
-package.path = table.concat{
-	package.path,
-	';',
-	config.modulesPath,
-	'/?.lua'
-}
+local newPath = function(path)
+	return table.concat{
+		package.path,
+		';',
+		path,
+		'/?.lua'
+	}
+end
 
-dofile(table.remove(arg, 1))
+local pathToThis = arg[0]:match('(.+)/.-%.lua$')
+package.path = newPath(pathToThis)
+
+local config = require('config')
+package.path = newPath(config.modulesPath)
+
+dofile(table.concat{pathToThis, '/', table.remove(arg, 1)})
