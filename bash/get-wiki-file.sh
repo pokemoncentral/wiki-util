@@ -27,7 +27,13 @@
 
 # $2:
 #	d == 'local')
-#		destination directory
+#		destination path.
+#		If it contains a dot, it's regarded
+#		as a file path, otherwise as a directory.
+#		In the former case the downloaded file
+#		will have the provided name, while in
+#		the latter it will be downloaded in the
+#		specified directory with its remote name.
 #	d == 'wiki')
 #		destination filename
 
@@ -84,11 +90,22 @@ fi
 
 shift $(( $OPTIND - 1 ))
 
-MD5=$(echo -n "$1" | md5sum -)
-FILE_URL=$(echo -n $BASE_URL/${MD5:0:1}/${MD5:0:2}/$1 | uni2ascii -aJ)
+FILENAME="$1"
+DEST_PATH="$2"
+
+MD5=$(echo -n "$FILENAME" | md5sum -)
+FILE_URL=$(echo -n $BASE_URL/${MD5:0:1}/${MD5:0:2}/$FILENAME | uni2ascii -aJ)
 
 if [[ $DEST == 'local' ]]; then
-	curl $FILE_URL > $2
+	if [[ -n $(grep \\. <<<$DEST_PATH) ]]; then
+		mkdir $(basename "$DEST_PATH")
+		curl $FILE_URL > "$DEST_PATH"
+	else
+		mkdir -p "$DEST_PATH"
+		cd "$DEST_PATH"
+		curl -O $FILE_URL
+		cd - > /dev/null
+	fi
 else
 	python $PYWIKIBOT_DIR/pwb.py upload $PT -keep -noverify -filename:"$2" $FILE_URL "$3"
 fi
