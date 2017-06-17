@@ -32,7 +32,7 @@ for SPRITE in "$SOURCE"/*.gif; do
 
     [[ "$SPRITE" =~ .+-f\.gif ]] && GENDER='f'
 
-    RENAMED=$(lua ../run.lua models-rename.lua $FILENAME $VARIANT $GENDER $GAME)
+    RENAMED=$(lua ../lua/run.lua models-rename.lua $FILENAME $VARIANT $GENDER $GAME)
     DEST_SPRITE="$DEST"/"$RENAMED"
 
     if [[ -e "$DEST_SPRITE" ]]; then

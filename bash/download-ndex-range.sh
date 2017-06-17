@@ -17,8 +17,6 @@ SOURCE="$1"
 DEST="$2"
 shift 2
 
-mkdir -p "$DEST"
-
 OLD_IFS=$IFS
 IFS='\n'
 
