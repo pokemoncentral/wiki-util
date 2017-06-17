@@ -263,8 +263,6 @@ end
 name = table.concat(name, '-'):gsub('_', ' ')
 name = trueNames[name] or name
 
-io.stderr:write(name, '\n')
-
 local ndex = poke[name].ndex
 
 if move ~= '' and form ~= ''
@@ -297,8 +295,6 @@ else
 		move = '-' .. move
 	end
 end
-
-io.stderr:write(name, form, move, '\n')
 
 local spr = string.interp(
 	'Spr${game}${sex}${var}${ndex}${form}${move}.gif',

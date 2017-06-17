@@ -69,7 +69,6 @@ GAMES=${2,,}
 PP_URL=$PP_BASE_URL/${PP_GAMES[$GAMES]}/sprites/animados${PP_VARIANTS[$VARIANT]}
 DROPBOX_BASE_DIR=~/Dropbox/Wiki/Sprite/Modelli_$GAMES
 LISTFILE=$DROPBOX_BASE_DIR/modellist-$VARIANT.txt
-DROPBOX_DIR=$DROPBOX_BASE_DIR/$VARIANT
 MALE_PATH=Dlm/$GAME/$VARIANT
 FEMALE_PATH=Dlf/$GAME/$VARIANT
 
@@ -80,9 +79,6 @@ function print {
 
 # Fetching Pokèmon data
 . sprites-source.sh
-
-# Dropbox destination
-mkdir -p $DROPBOX_DIR
 
 # Temporary directories
 mkdir -p $MALE_PATH

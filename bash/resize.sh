@@ -33,13 +33,13 @@ for IMG in $(find "$SOURCE_DIR" -type f); do
 	[[ $SIZE -lt $MIN_SIZE ]] && SIZE=$MIN_SIZE
 
 	# Optimized gifs yeld strange results, need to be unoptimized
-	[[ $IMG_TYPE == 'gif' ]] && gifsicle -b --unoptimize "$IMG"
+	[[ $IMG_TYPE == 'gif' ]] && gifsicle --colors 256 -b --unoptimize "$IMG"
 
 	# Actually resizing
 	convert "$IMG" -background transparent -gravity center -extent ${SIZE}x${SIZE} -quality 100 "$OUT_IMG"
 
 	# Optimizing gifs back
-	[[ $IMG_TYPE == 'gif' ]] && gifsicle -b -O3 "$OUT_IMG"
+	[[ $IMG_TYPE == 'gif' ]] && gifsicle --colors 256 -b -O3 "$OUT_IMG"
 
 	echo "$BASENAME resized"
 done
