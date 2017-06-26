@@ -98,12 +98,12 @@ FILE_URL=$(echo -n $BASE_URL/${MD5:0:1}/${MD5:0:2}/$FILENAME | uni2ascii -aJ)
 
 if [[ $DEST == 'local' ]]; then
 	if [[ -n $(grep \\. <<<$DEST_PATH) ]]; then
-		mkdir $(basename "$DEST_PATH")
-		curl $FILE_URL > "$DEST_PATH"
+		mkdir -p $(dirname "$DEST_PATH")
+		curl -L $FILE_URL > "$DEST_PATH"
 	else
 		mkdir -p "$DEST_PATH"
 		cd "$DEST_PATH"
-		curl -O $FILE_URL
+		curl -L -O $FILE_URL
 		cd - > /dev/null
 	fi
 else

@@ -5,7 +5,7 @@ generic Pokémon sprites.
 
 Arguments:
 	- $1: specifies which redirect are
-		to eb created. Can be one
+		to be created. Can be one
 		of these:
 		
 		- 'all': Creates redirects for
@@ -14,7 +14,7 @@ Arguments:
 			generation.
 		- <gen number>: Creates redirects
 			for all Pokémon introduced in
-			in the first game of the given
+			the first game of the given
 			generation, using this as target
 			game.
 		- <game>: Creates redirects for

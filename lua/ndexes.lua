@@ -33,18 +33,13 @@ r.all = table.map(r.all, function(ndex)
 			and ndex
 			or string.tf(ndex)
 end)
-
-local intUseless = table.filter(useless, function(_, key)
-	return tonumber(key)
-end)
 	
-for ndex, data in pairs(intUseless) do
-	data = table.filter(data, function(_, abbr)
-		return abbr ~= 'base'
-	end)
-
-	for abbr in pairs(data.names) do
-		table.insert(r.all, string.tf(ndex) .. abbr)
+for key, data in pairs(table.unique(useless)) do
+	for _, abbr in ipairs(data.gamesOrder) do
+        if abbr ~= 'base' then
+            table.insert(r.all, string.tf(pokes[key]
+                    .ndex) .. abbr)
+        end
 	end
 end
 
@@ -61,7 +56,7 @@ r.forms = function(ndex)
 	local forms = table.keys((alts[ndex] or useless[ndex]).names)
 
 	return table.map(forms, function(form)
-		return tFndex .. formUtil.toEmptyAbbr(form)
+		return tfNdex .. formUtil.toEmptyAbbr(form)
 	end)
 end
 

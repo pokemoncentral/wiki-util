@@ -18,9 +18,14 @@ local newPath = function(path)
 end
 
 local pathToThis = arg[0]:match('(.+)/.-%.lua$')
-package.path = newPath(pathToThis)
+local scriptFile = table.remove(arg, 1)
+
+if pathToThis then
+    package.path = newPath(pathToThis)
+    scriptFile = table.concat{pathToThis, '/', scriptFile}
+end
 
 local config = require('config')
 package.path = newPath(config.modulesPath)
 
-dofile(table.concat{pathToThis, '/', table.remove(arg, 1)})
+dofile(scriptFile)
