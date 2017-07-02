@@ -19,7 +19,7 @@ Arguments:
 --]]
 
 local txt = require('Wikilib-strings')
-local makeDict = require('dict-page')
+local makeRedirect = require('dict-page').redirect
 local ms = require('MiniSprite')
 local pokes = require('Poké-data')
 
@@ -42,19 +42,15 @@ local gen = arg[4] or ''
 
 io.output(arg[2])
 
-local body = table.concat{
-    '#RINVIA[[',
-    getMsName(msType, ndex, nil, gen),
-    ']]'
-}
+local source = getMsName(msType, ndex, nil, gen)
 
 local forms = require('AltForms-data')[ndex]
 		or require('UselessForms-data')[ndex]
 
 for _, abbr in ipairs(forms.gamesOrder) do
     if abbr ~= 'base' then
-        local title = getMsName(msType, ndex, abbr, gen)
+        local dest = getMsName(msType, ndex, abbr, gen)
 
-        io.write(makeDict(title, body))
+        io.write(makeRedirect(source, dest))
     end
 end
