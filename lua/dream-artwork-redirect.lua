@@ -15,7 +15,8 @@ local tab = require('Wikilib-tables')
 local makeDict = require('dict-page')
 local pokes = require('Poké-data')
 
-local ndex = pokes[arg[1]].ndex
+local ndex = pokes[tonumber(arg[1])
+        or arg[1]:lower()].ndex
 local forms = require('AltForms-data')[ndex]
 		or require('UselessForms-data')[ndex]
 forms = table.map(forms.names, function(form)
