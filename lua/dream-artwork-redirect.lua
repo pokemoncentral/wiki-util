@@ -15,7 +15,7 @@ local tab = require('Wikilib-tables')
 local makeDict = require('dict-page')
 local pokes = require('Poké-data')
 
-local ndex = tonumber(arg[1])
+local ndex = pokes[arg[1]].ndex
 local forms = require('AltForms-data')[ndex]
 		or require('UselessForms-data')[ndex]
 forms = table.map(forms.names, function(form)
@@ -29,22 +29,25 @@ end)
 
 io.output(arg[2])
 
-for _, form in pairs(forms) do
-	local title = string.interp(
-		'File:Artwork${ndex}-${form}.png',
-		{
-			ndex = ndex,
-			form = form
-		}
-	)
-	local body = string.interp(
-		'#RINVIA[[File:${ndex}${name} ${form} Dream.png]]',
-		{
-			ndex = ndex,
-			name = pokes[ndex].name,
-			form = form
-		}
-	)
+for abbr, form in pairs(forms) do
+    if abbr ~= 'base' then
+    
+        local title = string.interp(
+            'File:Artwork${ndex}-${form}.png',
+            {
+                ndex = ndex,
+                form = form
+            }
+        )
+        local body = string.interp(
+            '#RINVIA[[File:${ndex}${name} ${form} Dream.png]]',
+            {
+                ndex = ndex,
+                name = pokes[ndex].name,
+                form = form
+            }
+        )
 
-	io.write(makeDict(title, body))
+        io.write(makeDict(title, body))
+    end
 end
