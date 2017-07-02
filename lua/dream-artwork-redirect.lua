@@ -31,7 +31,6 @@ io.output(arg[2])
 
 for abbr, form in pairs(forms) do
     if abbr ~= 'base' then
-    
         local title = string.interp(
             'File:Artwork${ndex}-${form}.png',
             {

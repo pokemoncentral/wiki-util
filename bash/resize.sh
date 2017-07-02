@@ -18,7 +18,7 @@ OUT_DIR="$SOURCE_DIR"/Resized
 
 mkdir -p "$OUT_DIR"
 
-for IMG in $(find "$SOURCE_DIR" -type f); do
+for IMG in $(find "$SOURCE_DIR" -maxdepth 1 -type f); do
 	IMG_TYPE=$(file -b "$IMG" | awk '{ print tolower($1) }')
 	BASENAME=$(basename "$IMG")
 	OUT_IMG="$OUT_DIR/$BASENAME"
