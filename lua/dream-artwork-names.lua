@@ -53,11 +53,12 @@ end
 io.output(arg[2])
 
 for _, ndex in pairs(source) do
-    local nNdex = string.parseInt(ndex)
+    local nNdex, form = string.parseInt(ndex), ''
 
-    local abbr, form = formUtil.getAbbr(ndex), ''
-    if abbr ~= 'base' then
-        local name
+    -- A form exists
+    if alt[nNdex] or useless[nNdex] then
+
+        local abbr, name = formUtil.getAbbr(ndex)
 
         -- Damn Pikachu
         if alt[nNdex] and alt[nNdex].names[abbr] then
@@ -66,14 +67,23 @@ for _, ndex in pairs(source) do
             name = useless[nNdex].names[abbr]
         end
 
-        --[[
-            Match stripts the first workd, such
-            as 'Forma' or 'Manto'
-        --]]
-        form = '_' .. name:match('%s*(%S+)$')
+        if formUtil.hasMega(pokes[nNdex].name) then
+
+            -- The subst strips away the Pokémon name
+            form = '_' .. (name:gsub('^(%u%l+)%u%a+(%s?%u?)$',
+                    '%1%2'))
+
+        else
+
+            --[[
+                Match stripts the first workd, such
+                as 'Forma' or 'Manto'
+            --]]
+            form = '_' .. name:match('%s*(%S+)$')
+        end
     end
 
-    io.write(string.interp('${ndex}${name}${form}_Dream.png\n',
+    io.write(string.interp('File:${ndex}${name}${form}_Dream.png\n',
         {
             ndex = string.tf(nNdex),
             name = string.fu(pokes[nNdex].name),

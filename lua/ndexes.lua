@@ -34,7 +34,7 @@ r.all = table.map(r.all, function(ndex)
 			or string.tf(ndex)
 end)
 	
-for key, data in pairs(table.unique(useless)) do
+for key, data in table.nonIntPairs(useless) do
 	for _, abbr in ipairs(data.gamesOrder) do
         if abbr ~= 'base' then
             table.insert(r.all, string.tf(pokes[key]
