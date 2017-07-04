@@ -66,6 +66,7 @@ entries for each Pokémon is in place.
 
 --]]
 local abbr = {
+    f = '',
 	cosplay = getAbbr('pikachu', 'cosplay'),
 	kantocap = 'Kn',
 	hoenncap = 'H',
@@ -138,6 +139,10 @@ local abbr = {
 	},
 	resolute = getAbbr('keldeo', 'risoluta'),
 	pirouette = getAbbr('meloetta', 'danza'),
+    douse = getAbbr('genesect', 'idromodulo'),
+    burn = getAbbr('genesect', 'piromodulo'),
+    chill = getAbbr('genesect', 'gelomodulo'),
+    shock = getAbbr('genesect', 'voltmodulo'),
 	archipelago = getAbbr('vivillon', 'arcipelago'),
 	continental = getAbbr('vivillon', 'continentale'),
 	elegant = getAbbr('vivillon', 'eleganza'),
