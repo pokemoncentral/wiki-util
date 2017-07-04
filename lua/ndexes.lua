@@ -14,6 +14,7 @@ local str = require('Wikilib-strings')
 local tab = require('Wikilib-tables')
 local formUtil = require('Wikilib-forms')
 local genUtil = require('Wikilib-gens')
+local isInGame = require('is-in-game')
 local alts = require('AltForms-data')
 local gendata = require('Gens-data')
 local pokes = require('Poké-data')
@@ -46,14 +47,32 @@ end
 --[[
 
 Returns the ndexes plus abbreviations of
-all forms of the given ndex.
+all forms of the given Pokémon existing
+in the provided game or generation.
+The Pokémon is accepted as either ndex or
+name; since can be either a generation or
+a game abbreviation, and defaults to the
+most recent game.
 
 --]]
-r.forms = function(ndex)
-	ndex = tonumber(ndex)
+r.forms = function(poke, since)
+    if not since then
+        local latestGenGames = gendata[gendata.latest].games
+        since = latestGenGames[#latestGenGames]
+    end
+
+    local ndex = pokes[tonumber(poke) or poke:lower()].ndex
+
+    if tonumber(since) then
+        since = gendata[tonumber(since)].games[1]
+    end
 
 	local tfNdex = string.tf(ndex)
-	local forms = table.keys((alts[ndex] or useless[ndex]).names)
+	local forms = alts[ndex] or useless[ndex]
+    forms = table.filter(forms.gamesOrder, function(abbr)
+            return isInGame(tfNdex ..
+                    formUtil.toEmptyAbbr(abbr), since)
+            end)
 
 	return table.map(forms, function(form)
 		return tfNdex .. formUtil.toEmptyAbbr(form)

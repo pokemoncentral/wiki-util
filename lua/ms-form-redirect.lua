@@ -19,8 +19,10 @@ Arguments:
 --]]
 
 local txt = require('Wikilib-strings')
+local formUtil = require('Wikilib-forms')
 local makeRedirect = require('dict-page').redirect
 local ms = require('MiniSprite')
+local ndexes = require('ndexes')
 local pokes = require('Poké-data')
 
 --[[
@@ -29,9 +31,8 @@ Returns mini-sprite file name, already
 prefixed by 'File:'
 
 --]]
-local getMsName = function(msType, ndex, abbr, gen)
-    return ms[msType](ndex .. (abbr or ''), gen)
-            :match('^%[%[(File:.-)%|')
+local getMsName = function(msType, ndex, gen)
+    return ms[msType](ndex, gen):match('^%[%[(File:.-)%|')
 end
 
 local ndex = pokes[tonumber(arg[1])
@@ -42,14 +43,14 @@ local gen = arg[4] or ''
 
 io.output(arg[2])
 
-local source = getMsName(msType, ndex, nil, gen)
+local source = getMsName(msType, ndex, gen)
 
-local forms = require('AltForms-data')[ndex]
-		or require('UselessForms-data')[ndex]
+-- arg[4] because nil is needed as default
+local forms = ndexes.forms(ndex, arg[4])
 
-for _, abbr in ipairs(forms.gamesOrder) do
-    if abbr ~= 'base' then
-        local dest = getMsName(msType, ndex, abbr, gen)
+for _, ndex in ipairs(forms) do
+    if formUtil.getAbbr(ndex) ~= 'base' then
+        local dest = getMsName(msType, ndex, gen)
 
         io.write(makeRedirect(source, dest))
     end
