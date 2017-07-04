@@ -17,7 +17,7 @@
 GAME=''
 HALT=false
 
-while getopts "g:h"; do
+while getopts "g:h" OPTION; do
 	case $OPTION in
 		g)
 			GAME=$OPTARG

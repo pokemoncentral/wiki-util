@@ -99,11 +99,11 @@ FILE_URL=$(echo -n $BASE_URL/${MD5:0:1}/${MD5:0:2}/$FILENAME | uni2ascii -aJ)
 if [[ $DEST == 'local' ]]; then
 	if [[ -n $(grep \\. <<<$DEST_PATH) ]]; then
 		mkdir -p $(dirname "$DEST_PATH")
-		curl -L $FILE_URL > "$DEST_PATH"
+		curl -L -A firefox $FILE_URL > "$DEST_PATH" 2> /dev/null
 	else
 		mkdir -p "$DEST_PATH"
 		cd "$DEST_PATH"
-		curl -L -O $FILE_URL
+		curl -L -A firefox -O $FILE_URL 2> /dev/null
 		cd - > /dev/null
 	fi
 else

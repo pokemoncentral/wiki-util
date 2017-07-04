@@ -87,7 +87,7 @@ mkdir -p $FEMALE_PATH
 # Log file
 :> $LOG_FILE
 
-# for GC_NAME in 671{,a,b,c,d}; do
+# for GC_NAME in 773_Pflanze; do
 for GC_NAME in "${!pokemon[@]}"; do
 	PP_NAME=${pokemon[$GC_NAME]}
 
@@ -126,13 +126,13 @@ for GC_NAME in "${!pokemon[@]}"; do
 
 	# Male
 	if [[ $MALE_EXISTS == false ]]; then
-        curl $PP_URL/$PP_NAME.gif > $MALE_DEST
+        curl $PP_URL/$PP_NAME.gif > $MALE_DEST 2> /dev/null
         bash delete-by-type.sh $MALE_DEST gif
     fi
 
 	# Female
 	if [[ $FEMALE_EXISTS == false ]]; then
-        curl $PP_URL/$PP_NAME-f.gif > $FEMALE_DEST
+        curl $PP_URL/$PP_NAME-f.gif > $FEMALE_DEST 2> /dev/null
         bash delete-by-type.sh $FEMALE_DEST gif
     fi
 
@@ -143,7 +143,7 @@ for GC_NAME in "${!pokemon[@]}"; do
 		cd - > /dev/null
 		if [[ -z $(grep $ANI_NAME $LISTFILE) ]]; then
             ANI_DEST=$MALE_PATH/$ANI_NAME
-            curl $PP_URL/$PP_NAME-$K.gif > $ANI_DEST
+            curl $PP_URL/$PP_NAME-$K.gif > $ANI_DEST 2> /dev/null
             bash delete-by-type.sh $ANI_DEST gif
         fi
 	done
