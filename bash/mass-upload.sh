@@ -56,7 +56,7 @@ if [[ $OVERWRITE == true ]]; then
 	# a file already exists, deleting all of them
 	# before uploading
 
-	ls -1p | grep -v / | awk '{print "# [[File:"$0"]]"}' > delete.txt
+	ls -1p "$DIR" | grep -v / | awk '{print "# [[File:"$0"]]"}' > delete.txt
 	python $PYWIKIBOT_DIR/pwb.py delete $PT -file:delete.txt -always -summary:"$REASON"
 	rm delete.txt
 fi
