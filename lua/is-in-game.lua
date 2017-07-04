@@ -6,6 +6,7 @@ exists in the given game.
 
 --]]
 
+local txt = require('Wikilib-strings')
 local tab = require('Wikilib-tables')
 local formUtil = require('Wikilib-forms')
 local gens = require('Wikilib-gens')
@@ -15,7 +16,7 @@ local pokes = require('Poké-data')
 local useless = require('UselessForms-data')
 
 return function(poke, game)
-	local ndex = pokes[tonumber(poke) or poke].ndex
+	local ndex = pokes[string.parseInt(poke) or poke].ndex
 	local abbr = formUtil.getAbbr(poke)
 
 	if abbr == 'base' then
