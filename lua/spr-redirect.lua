@@ -22,9 +22,12 @@ Arguments:
 			all Pokémon and alternate
 			forms introduced in the passed
 			game.
-	- $2: source game
-	- $3: target game
-	- $4: output file
+    - $2: flag, wether or not redirects should
+        be created for back sprites. Defaults to
+        false
+	- $3: source game
+	- $4: target game
+	- $5: output file
 
 --]]
 
@@ -32,32 +35,24 @@ local str = require('Wikilib-strings')
 local tab = require('Wikilib-tables')
 local isInGame = require('is-in-game')
 local makeRedirect = require('dict-page').redirect
+local spr = require('Spr').sprLua
 local pokes = require('Poké-data')
 local data = require('Wikilib-data')
 local ndexes = require('ndexes')
 
-local allRedirects = function(source, dest, sex, ndex)
+local sprite = function(ndex, dest, var)
+    return spr(ndex, dest, var)
+            :match('%[%[([^|]+)|?.*%]%]')
+end
+
+local allRedirects = function(source, dest, variants, sex, ndex)
 	local pages = {}
 
-	for _, variant in pairs({'', 'd', 'sh', 'dsh'}) do
-		local dest = string.interp(
-			'File:Spr${game}${sex}${var}${ndex}.gif',
-			{
-				game = dest,
-				sex = sex,
-				var = variant,
-				ndex = ndex
-			}
-		)
-		local source = string.interp(
-			'File:Spr${game}${sex}${var}${ndex}.gif',
-			{
-				game = source,
-				sex = sex,
-				var = variant,
-				ndex = ndex
-			}
-		)
+	for _, variant in pairs(variants) do
+        local var = string.trim(table.concat{sex, ' ', variant})
+
+		local dest = sprite(ndex, dest, var)
+		local source = sprite(ndex, source, var)
 
 		table.insert(pages, makeRedirect(source, dest))
 	end
@@ -65,7 +60,8 @@ local allRedirects = function(source, dest, sex, ndex)
 	return table.concat(pages)
 end
 
-local sourceGame, destGame = arg[2], arg[3]
+-- Sourcegame is necessary for source
+local sourceGame, destGame = arg[3], arg[4]
 
 local source = tonumber(arg[1]) or arg[1]:lower()
 if arg[1] == 'all' then
@@ -82,19 +78,25 @@ else
 	
 end
 
-io.output(arg[4])
+local variants = (arg[2] ~= 'false' and arg[2])
+        and {'', 'back', 'shiny', 'back shiny'}
+        or {'', 'shiny'}
+
+io.output(arg[5])
 
 for _, ndex in pairs(source) do
     local nNdex = string.parseInt(ndex)
     
-    local sex = 'm'
+    local sex = 'male'
     if table.search(data.onlyFemales, nNdex) then
-        sex = 'f'
+        sex = 'female'
     end
 
     if table.search(data.alsoFemales, nNdex) then
-        io.write(allRedirects(sourceGame, destGame, 'f', ndex))
+        io.write(allRedirects(sourceGame, destGame,
+                variants, 'female', ndex))
     end
 
-    io.write(allRedirects(sourceGame, destGame, sex, ndex))
+    io.write(allRedirects(sourceGame, destGame, variants,
+            sex, ndex))
 end
