@@ -53,7 +53,7 @@ end
 io.output(arg[2])
 
 for _, ndex in pairs(source) do
-    local nNdex, form = string.parseInt(ndex), ''
+    local nNdex, form = string.parseInt(ndex), false
 
     -- A form exists
     if alt[nNdex] or useless[nNdex] then
@@ -69,17 +69,29 @@ for _, ndex in pairs(source) do
 
         if formUtil.hasMega(pokes[nNdex].name) then
 
-            -- The subst strips away the Pokémon name
-            form = '_' .. (name:gsub('^(%u%l+)%u%a+(%s?%u?)$',
-                    '%1%2'))
+            if abbr ~= 'base' then
 
+                -- The subst strips away the Pokémon name
+                form = (name:gsub('^(%u%l+)%u%a+(%s?%u?)$', '%1%2'))
+            end
         else
 
             --[[
                 Match stripts the first workd, such
                 as 'Forma' or 'Manto'
             --]]
-            form = '_' .. name:match('%s*(%S+)$')
+            form = name:match('%s*(%S+)$')
+
+            --[[
+                Form names such as 'Forma di <name>"
+                or 'Forma Normale' are not taken in
+                account
+            --]]
+            if form:lower():find(pokes[nNdex].name:lower())
+                    or form:lower() == 'normale'
+            then
+                form = false
+            end
         end
     end
 
@@ -87,7 +99,7 @@ for _, ndex in pairs(source) do
         {
             ndex = string.tf(nNdex),
             name = string.fu(pokes[nNdex].name),
-            form = form:gsub('%s', '_')
+            form = form and '_' .. form:gsub('%s', '_') or ''
         })
     )
 end
