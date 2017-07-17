@@ -33,7 +33,6 @@ Arguments:
 
 local str = require('Wikilib-strings')
 local tab = require('Wikilib-tables')
-local isInGame = require('is-in-game')
 local makeRedirect = require('dict-page').redirect
 local spr = require('Spr').sprLua
 local pokes = require('Poké-data')
