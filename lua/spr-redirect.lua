@@ -82,7 +82,7 @@ local variants = (arg[2] ~= 'false' and arg[2])
         and {'', 'back', 'shiny', 'back shiny'}
         or {'', 'shiny'}
 
-io.output(arg[5])
+io.output(io.open(arg[5], 'a'))
 
 for _, ndex in pairs(source) do
     local nNdex = string.parseInt(ndex)
@@ -100,3 +100,5 @@ for _, ndex in pairs(source) do
     io.write(allRedirects(sourceGame, destGame, variants,
             sex, ndex))
 end
+
+io.close()

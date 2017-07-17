@@ -41,7 +41,7 @@ local msType = string.lower(arg[3] or 'static')
         .. 'Lua'
 local gen = arg[4] or ''
 
-io.output(arg[2])
+io.output(io.open(arg[2], 'a'))
 
 local source = getMsName(msType, ndex, gen)
 
@@ -55,3 +55,5 @@ for _, ndex in ipairs(forms) do
         io.write(makeRedirect(source, dest))
     end
 end
+
+io.close()

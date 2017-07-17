@@ -63,7 +63,7 @@ else
 end
 actualGame = string.fu(actualGame)
 
-io.output(arg[2])
+io.output(io.open(arg[2], 'a'))
 
 for _, ndex in pairs(source) do
 	local nNdex = string.parseInt(ndex)
@@ -75,3 +75,5 @@ for _, ndex in pairs(source) do
 
 	io.write(makeRedirect(actualGame, sex, ndex))
 end
+
+io.close()

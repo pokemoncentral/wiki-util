@@ -16,8 +16,10 @@ local str = require('Wikilib-strings')
 local tab = require('Wikilib-tables')
 local ndexes = require('ndexes')
 
-io.output(arg[1])
+io.output(io.open(arg[1], 'a'))
 
 for _, poke in ipairs(ndexes.all) do
 	io.write(table.concat{arg[2], poke, arg[3], '\n'})
 end
+
+io.close()

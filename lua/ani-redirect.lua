@@ -38,7 +38,7 @@ else
 	
 end
 
-io.output(arg[2])
+io.output(io.open(arg[2], 'a'))
 
 for _, ndex in pairs(source) do
 	local title = string.interp(
@@ -56,3 +56,5 @@ for _, ndex in pairs(source) do
 
 	io.write(makeDictPage(title, content))
 end
+
+io.close()

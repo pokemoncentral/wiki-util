@@ -28,7 +28,7 @@ forms = table.map(forms.names, function(form)
 	return (form:match('^%S*%s*(.+)$'))
 end)
 
-io.output(arg[2])
+io.output(io.open(arg[2], 'a'))
 
 for abbr, form in pairs(forms) do
     if abbr ~= 'base' then
@@ -51,3 +51,5 @@ for abbr, form in pairs(forms) do
         io.write(makeDict(title, body))
     end
 end
+
+io.close()

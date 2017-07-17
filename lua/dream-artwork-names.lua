@@ -50,7 +50,7 @@ else
 	
 end
 
-io.output(arg[2])
+io.output(io.open(arg[2], 'a'), 'a')
 
 for _, ndex in pairs(source) do
     local nNdex, form = string.parseInt(ndex), false
@@ -103,3 +103,5 @@ for _, ndex in pairs(source) do
         })
     )
 end
+
+io.close()
