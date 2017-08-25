@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Downloads a file from Bulbapedia, PokéWiki,
-# or Pkoémon Central Wiki, saving it locally
+# or Pokémon Central Wiki, saving it locally
 # or uploading it to Bulbapedia
 
 # Arguments

@@ -38,6 +38,7 @@ local spr = require('Spr').sprLua
 local pokes = require('Poké-data')
 local data = require('Wikilib-data')
 local ndexes = require('ndexes')
+local useless = require('UselessForms-data')
 
 local sprite = function(ndex, dest, var)
     return spr(ndex, dest, var)
@@ -67,7 +68,12 @@ if arg[1] == 'all' then
 	source = ndexes.all
 
 elseif pokes[source] then
-    source = ndexes.forms(pokes[source].ndex, sourceGame)
+	-- If the alternate form is the female then only the male ndex should be used as source
+	if useless[pokes[source].ndex] and useless[pokes[source].ndex].ext['femmina'] then
+		source = { pokes[source].ndex }
+	else
+		source = ndexes.forms(pokes[source].ndex, sourceGame)
+	end
 
 elseif tonumber(arg[1]) then
 	source = ndexes.gen(arg[1])
@@ -91,7 +97,8 @@ for _, ndex in pairs(source) do
         sex = 'female'
     end
 
-    if table.search(data.alsoFemales, nNdex) then
+	-- If the alternate form is the female the Pokémon is treated as if it is in alsoFemales
+    if table.search(data.alsoFemales, nNdex) or (useless[ndex] and useless[ndex].ext['femmina']) then
         io.write(allRedirects(sourceGame, destGame,
                 variants, 'female', ndex))
     end
