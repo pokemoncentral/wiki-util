@@ -6,3 +6,7 @@ config.*
 
 # For docs, use MarkDown instead
 *.txt
+
+# IDE
+/cmake-build-debug
+/.idea
