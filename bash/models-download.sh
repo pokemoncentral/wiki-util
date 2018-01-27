@@ -33,6 +33,7 @@
 
 # Simple constants
 PP_BASE_URL='http://www.pkparaiso.com/imagenes'
+SHOWDOWN_BASE_URL='https://play.pokemonshowdown.com/sprites/'
 LOG_FILE='models_download.log'
 
 # Pkparaiso games mapping
@@ -61,24 +62,35 @@ GC_VARIANTS[back]='Rückseite_'
 GC_VARIANTS[back_shiny]='Rückseite_Schillernd_'
 GC_VARIANTS[normal]=''
 
+# Showdown games mapping
+declare -A SHOWDOWN_GAMES
+SHOWDOWN_GAMES[xy]='xy'
+SHOWDOWN_GAMES[oras]='xy'
+SHOWDOWN_GAMES[sm]='xy'
+
+# Showdown variants mapping
+declare -A SHOWDOWN_VARIANTS
+SHOWDOWN_VARIANTS[shiny]='shiny'
+SHOWDOWN_VARIANTS[back]='back'
+SHOWDOWN_VARIANTS[back_shiny]='back-shiny'
+SHOWDOWN_VARIANTS[normal]=''
+
 # Input processing
 VARIANT=${1,,}
 GAMES=${2,,}
 
 # Utility variables
 PP_URL=$PP_BASE_URL/${PP_GAMES[$GAMES]}/sprites/animados${PP_VARIANTS[$VARIANT]}
+SHOWDOWN_URL=$SHOWDOWN_BASE_URL/${SHOWDOWN_GAMES[$GAMES]}ani-${SHOWDOWN_VARIANTS[$VARIANT]}
 DROPBOX_BASE_DIR=~/Dropbox/Wiki/Sprite/Modelli_$GAMES
 LISTFILE=$DROPBOX_BASE_DIR/modellist-$VARIANT.txt
-MALE_PATH=Dlm/$GAME/$VARIANT
-FEMALE_PATH=Dlf/$GAME/$VARIANT
+MALE_PATH=Dlm/$GAMES/$VARIANT
+FEMALE_PATH=Dlf/$GAMES/$VARIANT
 
 # Prints on both STDOUT and log file
 function print {
 	echo $1 | tee -a $LOG_FILE
 }
-
-# Fetching Pokèmon data
-. sprites-source.sh
 
 # Temporary directories
 mkdir -p $MALE_PATH
@@ -87,9 +99,10 @@ mkdir -p $FEMALE_PATH
 # Log file
 :> $LOG_FILE
 
-# for GC_NAME in 773_Pflanze; do
-for GC_NAME in "${!pokemon[@]}"; do
-	PP_NAME=${pokemon[$GC_NAME]}
+while read -a LINE; do
+    GC_NAME=${LINE[0]}
+	PP_NAME=${LINE[1]}
+	SD_NAME=${LINE[2]}
 
 	# Male and female PCW sprite names
 	cd ../lua
@@ -126,13 +139,13 @@ for GC_NAME in "${!pokemon[@]}"; do
 
 	# Male
 	if [[ $MALE_EXISTS == false ]]; then
-        curl $PP_URL/$PP_NAME.gif > $MALE_DEST 2> /dev/null
+        curl -R $PP_URL/$PP_NAME.gif > $MALE_DEST 2> /dev/null
         bash delete-by-type.sh $MALE_DEST gif
     fi
 
 	# Female
 	if [[ $FEMALE_EXISTS == false ]]; then
-        curl $PP_URL/$PP_NAME-f.gif > $FEMALE_DEST 2> /dev/null
+        curl -R -R $PP_URL/$PP_NAME-f.gif > $FEMALE_DEST 2> /dev/null
         bash delete-by-type.sh $FEMALE_DEST gif
     fi
 
@@ -143,7 +156,7 @@ for GC_NAME in "${!pokemon[@]}"; do
 		cd - > /dev/null
 		if [[ -z $(grep $ANI_NAME $LISTFILE) ]]; then
             ANI_DEST=$MALE_PATH/$ANI_NAME
-            curl $PP_URL/$PP_NAME-$K.gif > $ANI_DEST 2> /dev/null
+            curl -R $PP_URL/$PP_NAME-$K.gif > $ANI_DEST 2> /dev/null
             bash delete-by-type.sh $ANI_DEST gif
         fi
 	done
@@ -175,7 +188,26 @@ for GC_NAME in "${!pokemon[@]}"; do
         bash delete-by-type.sh $FEMALE_DEST gif
     fi
 
-done
+    [[ -e $MALE_DEST ]] && MALE_EXISTS=true
+    [[ -e $FEMALE_DEST ]] && FEMALE_EXISTS=true
+    [[ $MALE_EXISTS == true && $FEMALE_EXISTS == true ]] \
+        && continue
+
+    # Showdown download
+
+	# Male
+	if [[ $MALE_EXISTS == false ]]; then
+        curl -R $SHOWDOWN_URL/$SD_NAME.gif > $MALE_DEST 2> /dev/null
+        bash delete-by-type.sh $MALE_DEST gif
+    fi
+
+	# Female
+	if [[ $FEMALE_EXISTS == false ]]; then
+        curl -R SHOWDOWN_URL/$SD_NAME-f.gif > $FEMALE_DEST 2> /dev/null
+        bash delete-by-type.sh $FEMALE_DEST gif
+    fi
+
+done < sprites-source.list
 
 # Updating list files
 ls -1 $MALE_PATH >> $LISTFILE
