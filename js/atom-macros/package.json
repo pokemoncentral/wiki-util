@@ -1,0 +1,31 @@
+{
+  "name": "atom-macros",
+  "version": "0.0.1",
+  "description": "Pokémon Central Wiki macros for Atom Text Editor, including standalone node.js CLI utility",
+  "main": "run-macros.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pokemoncentral/wiki-lua-modules.git"
+  },
+  "keywords": [
+    "PCW",
+    "atom",
+    "macros",
+    "node"
+  ],
+  "author": "Davide Laezza",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/pokemoncentral/wiki-lua-modules/issues"
+  },
+  "homepage": "https://github.com/pokemoncentral/wiki-lua-modules#readme",
+  "dependencies": {
+    "coffeescript": "^2.1.1",
+    "mocha": "^5.0.0",
+    "q": "^1.5.1",
+    "yargs": "^11.0.0"
+  }
+}
