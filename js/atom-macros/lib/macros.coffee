@@ -48,7 +48,30 @@ makeFilterMacro = (filter) ->
         editor = getActiveTextEditor()
         editor.setText filter editor.getText()
 
+###
+This object contains all the _filter_ macros, so that they can
+be exported automatically.
+###
 filterMacros =
+
+    big: (text) ->
+        text.replace /<\/big>/gi, '</span>'
+            .replace /<big>/gi, '<span class="text-big">'
+
+    colore: (text) ->
+        text.replace /\{\{[Cc]olore (\w+?)\}\}/g, '{{#invoke: colore | $1}}'
+            .replace /\{\{[Cc]olore (\w+?) (\w+?)\}\}/g, \
+                '{{#invoke: colore | $1 | $2}}'
+
+    p: (text) ->
+        text
+
+    small: (text) ->
+        text.replace /<\/small>/gi, '</span>'
+            .replace /<small>/gi, '<span class="text-small">'
+
+    tags: (text) ->
+        @big @small text
 
     ###
     This function transforms the content of a wiki Scribunto
@@ -85,5 +108,8 @@ filterMacros =
             .replace /require\('(.+?)'\)/g, (_, module) ->
                 "require('#{ fs2wiki module }')"
 
+    wikicode: (text) ->
+        @colore @p text
+
 for own name, filter of filterMacros
-    @[name] = makeFilterMacro filter
+    @[name] = makeFilterMacro filter.bind filterMacros
