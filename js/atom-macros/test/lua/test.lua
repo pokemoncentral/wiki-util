@@ -1,3 +1,3 @@
-local ms = require('Modulo:MiniSprite')
-local txt = require('Modulo:Wikilib/strings')
-local c = mw.loadData('Modulo:Colore/data')
+local ms = require('MiniSprite')
+local txt = require('Wikilib-strings')
+local c = require("Colore-data")
