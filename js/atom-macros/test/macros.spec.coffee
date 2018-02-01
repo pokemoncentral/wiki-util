@@ -37,6 +37,19 @@ goodWikicode = '''
 '''
 
 
+basicBehavior = (source, expected, macroName) ->
+    () ->
+        result = runMacros.applyMacro source, macroName
+        result.should.equal expected
+
+
+idempotence = (source, macroName) ->
+    () ->
+        once = runMacros.applyMacro source, macroName
+        twice = runMacros.applyMacro once, macroName
+        once.should.equal twice
+
+
 describe 'big', () ->
 
     # TODO: better use of match
@@ -45,10 +58,8 @@ describe 'big', () ->
         goodBig = goodHTML.match(/<span class="text-big">.+<\/span>/)[0]
         result.should.contain goodBig
 
-    it 'should be idempotent', () ->
-        once = runMacros.applyMacro badHTML, 'big'
-        twice = runMacros.applyMacro once, 'big'
-        once.should.equal twice
+    it 'should be idempotent', \
+        idempotence badHTML, 'big'
 
 
 describe 'colore', () ->
@@ -59,10 +70,8 @@ describe 'colore', () ->
         goodColore = goodWikicode.match(/\{\{#invoke: colore \| .+\}\}/)[0]
         result.should.contain goodColore
 
-    it 'should be idempotent', () ->
-        once = runMacros.applyMacro badWikicode, 'colore'
-        twice = runMacros.applyMacro once, 'colore'
-        once.should.equal twice
+    it 'should be idempotent', \
+        idempotence badWikicode, 'colore'
 
 
 describe 'small', () ->
@@ -73,55 +82,41 @@ describe 'small', () ->
         goodSmall = goodHTML.match(/<span class="text-small">.+<\/span>/)[0]
         result.should.contain goodSmall
 
-    it 'should be idempotent', () ->
-        once = runMacros.applyMacro badHTML, 'small'
-        twice = runMacros.applyMacro once, 'small'
-        once.should.equal twice
+    it 'should be idempotent', \
+        idempotence badHTML, 'small'
 
 
 describe 'tags', () ->
 
-    it 'should turn all tags to a better version', () ->
-        result = runMacros.applyMacro badHTML, 'tags'
-        result.should.contain goodHTML
+    it 'should turn all tags to a better version', \
+        basicBehavior badHTML, goodHTML, 'tags'
 
-    it 'should be idempotent', () ->
-        once = runMacros.applyMacro badHTML, 'tags'
-        twice = runMacros.applyMacro once, 'tags'
-        once.should.equal twice
+    it 'should be idempotent', \
+        idempotence badHTML, 'tags'
 
 
 describe 'toLua', () ->
 
-    it 'should change module names and remove mw.loadData', () ->
-        result = runMacros.applyMacro luaModule, 'toLua'
-        result.should.equal luaSource
+    it 'should change module names and remove mw.loadData', \
+        basicBehavior luaModule, luaSource, 'toLua'
 
-    it 'should be idempotent', () ->
-        once = runMacros.applyMacro luaModule, 'toLua'
-        twice = runMacros.applyMacro once, 'toLua'
-        once.should.equal twice
+    it 'should be idempotent', \
+        idempotence luaModule, 'toLua'
 
 
 describe 'toModule', () ->
 
-    it 'should prepend Module and insert mw.loadData for double quotes', () ->
-        result = runMacros.applyMacro luaSource, 'toModule'
-        result.should.equal luaModule
+    it 'should prepend Module and insert mw.loadData for double quotes', \
+        basicBehavior luaSource, luaModule, 'toModule'
 
-    it 'should be idempotent', () ->
-        once = runMacros.applyMacro luaSource, 'toModule'
-        twice = runMacros.applyMacro once, 'toModule'
-        once.should.equal twice
+    it 'should be idempotent', \
+        idempotence luaSource, 'toModule'
 
 
 describe.skip 'wikicode', () ->
 
-    it 'should turn the wikicode to a better version', () ->
-        result = runMacros.applyMacro badWikicode, 'wikicode'
-        result.should.contain goodWikicode
+    it 'should turn the wikicode to a better version', \
+        basicBehavior badWikicode, goodWikicode, 'wikicode'
 
-    it 'should be idempotent', () ->
-        once = runMacros.applyMacro badWikicode, 'wikicode'
-        twice = runMacros.applyMacro once, 'wikicode'
-        once.should.equal twice
+    it 'should be idempotent', \
+        idempotence badWikicode, 'wikicode'
