@@ -12,10 +12,12 @@ runMacros = require '../lib/run-macro'
 badHTML = '''
     <small>small text</small>
     <big>big text</big>
+    first line<br>second line
 '''
 goodHTML = '''
     <span class="text-small">small text</span>
     <span class="text-big">big text</span>
+    first line<div>second line</div>
 '''
 luaModule = '''
     local ms = require('Modulo:MiniSprite')

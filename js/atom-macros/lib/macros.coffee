@@ -64,14 +64,26 @@ filterMacros =
                 '{{#invoke: colore | $1 | $2}}'
 
     p: (text) ->
-        text
+        text.replace /\{\{p\|(.+)\}\}/g, '[[$1]]'
 
     small: (text) ->
         text.replace /<\/small>/gi, '</span>'
             .replace /<small>/gi, '<span class="text-small">'
 
+    br: (text) ->
+        # This flags remebers whether there is a <div> to close or not
+        flag = false
+        text.replace /<br>|\n|$/gi, (s) ->
+            if flag
+                flag = not flag
+                '</div>'
+            else if s == '<br>' and not flag
+                flag = not flag
+                '<div>'
+            else s
+
     tags: (text) ->
-        @big @small text
+        @br @big @small text
 
     ###
     This function transforms the content of a wiki Scribunto
