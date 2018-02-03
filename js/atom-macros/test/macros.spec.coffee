@@ -55,7 +55,7 @@ idempotence = (source, macroName) ->
 describe 'big', () ->
 
     # TODO: better use of match
-    it 'should turn big tags into span class="text-big"', () ->
+    it 'should turn big tags to span class="text-big"', () ->
         result = runMacros.applyMacro badHTML, 'big'
         goodBig = goodHTML.match(/<span class="text-big">.+<\/span>/)[0]
         result.should.contain goodBig
@@ -64,10 +64,22 @@ describe 'big', () ->
         idempotence badHTML, 'big'
 
 
+describe 'br', () ->
+
+    # TODO: better use of match
+    it 'should turn br tags to div', () ->
+        result = runMacros.applyMacro badHTML, 'br'
+        goodBr = goodHTML.match(/.*<div>.+<\/div>.*/)[0]
+        result.should.contain goodBr
+
+    it 'should be idempotent', \
+        idempotence badHTML, 'br'
+
+
 describe 'colore', () ->
 
     # TODO: better use of match
-    it 'should turn colore template in colore modules', () ->
+    it 'should turn colore template to colore modules', () ->
         result = runMacros.applyMacro badWikicode, 'colore'
         goodColore = goodWikicode.match(/\{\{#invoke: colore \| .+\}\}/)[0]
         result.should.contain goodColore
@@ -76,10 +88,22 @@ describe 'colore', () ->
         idempotence badWikicode, 'colore'
 
 
+describe 'p', () ->
+
+    # TODO: better use of match
+    it 'should turn p template to plain links', () ->
+        result = runMacros.applyMacro badWikicode, 'p'
+        goodP = goodWikicode.match(/\[\[.+\]\]/)[0]
+        result.should.contain goodP
+
+    it 'should be idempotent', \
+        idempotence badWikicode, 'p'
+
+
 describe 'small', () ->
 
     # TODO: better use of match
-    it 'should turn small tags into span class="text-small"', () ->
+    it 'should turn small tags to span class="text-small"', () ->
         result = runMacros.applyMacro badHTML, 'small'
         goodSmall = goodHTML.match(/<span class="text-small">.+<\/span>/)[0]
         result.should.contain goodSmall
@@ -115,7 +139,7 @@ describe 'toModule', () ->
         idempotence luaSource, 'toModule'
 
 
-describe.skip 'wikicode', () ->
+describe 'wikicode', () ->
 
     it 'should turn the wikicode to a better version', \
         basicBehavior badWikicode, goodWikicode, 'wikicode'
