@@ -1,5 +1,9 @@
 /**
- * @fileoverview
+ * @fileoverview This is the entry point for the standalone
+ * runner for Atom text editor macros. Other than taking
+ * care of CLI arguments, it is just a thin wrapper around
+ * the main coffeescript core, so that the program can be
+ * run from the CLI without any compilation.
  *
  * Created by Davide on 1/30/18.
  */
