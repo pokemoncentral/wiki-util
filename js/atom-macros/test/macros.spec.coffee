@@ -30,10 +30,12 @@ luaSource = '''
     local c = require("Colore-data")
 '''
 badWikicode = '''
+    {{colore pcwiki}}
     {{colore pcwiki dark}}
     {{p|Luxio}}
 '''
 goodWikicode = '''
+    {{#invoke: colore | pcwiki}}
     {{#invoke: colore | pcwiki | dark}}
     [[Luxio]]
 '''
@@ -45,6 +47,13 @@ basicBehavior = (source, expected, macroName) ->
         result.should.equal expected
 
 
+basicBehaviorMatch = (source, expected, macroName, pattern) ->
+    () ->
+        matches = expected.match new RegExp pattern, 'g'
+        result = runMacros.applyMacro source, macroName
+        matches.every (match) -> result.should.contain match
+
+
 idempotence = (source, macroName) ->
     () ->
         once = runMacros.applyMacro source, macroName
@@ -54,11 +63,9 @@ idempotence = (source, macroName) ->
 
 describe 'big', () ->
 
-    # TODO: better use of match
-    it 'should turn big tags to span class="text-big"', () ->
-        result = runMacros.applyMacro badHTML, 'big'
-        goodBig = goodHTML.match(/<span class="text-big">.+<\/span>/)[0]
-        result.should.contain goodBig
+    it 'should turn big tags to span class="text-big"', \
+        basicBehaviorMatch badHTML, goodHTML, 'big', \
+            '<span class="text-big">.+</span>'
 
     it 'should be idempotent', \
         idempotence badHTML, 'big'
@@ -66,11 +73,8 @@ describe 'big', () ->
 
 describe 'br', () ->
 
-    # TODO: better use of match
-    it 'should turn br tags to div', () ->
-        result = runMacros.applyMacro badHTML, 'br'
-        goodBr = goodHTML.match(/.*<div>.+<\/div>.*/)[0]
-        result.should.contain goodBr
+    it 'should turn br tags to div', \
+        basicBehaviorMatch badHTML, goodHTML, 'br', '.*<div>.+</div>'
 
     it 'should be idempotent', \
         idempotence badHTML, 'br'
@@ -78,11 +82,9 @@ describe 'br', () ->
 
 describe 'colore', () ->
 
-    # TODO: better use of match
-    it 'should turn colore template to colore modules', () ->
-        result = runMacros.applyMacro badWikicode, 'colore'
-        goodColore = goodWikicode.match(/\{\{#invoke: colore \| .+\}\}/)[0]
-        result.should.contain goodColore
+    it 'should turn colore template to colore modules', \
+        basicBehaviorMatch badWikicode, goodWikicode, 'colore', \
+            /\{\{#invoke: colore \| .+\}\}/
 
     it 'should be idempotent', \
         idempotence badWikicode, 'colore'
@@ -90,11 +92,8 @@ describe 'colore', () ->
 
 describe 'p', () ->
 
-    # TODO: better use of match
-    it 'should turn p template to plain links', () ->
-        result = runMacros.applyMacro badWikicode, 'p'
-        goodP = goodWikicode.match(/\[\[.+\]\]/)[0]
-        result.should.contain goodP
+    it 'should turn p template to plain links', \
+        basicBehaviorMatch badWikicode, goodWikicode, 'p', /\[\[.+\]\]/
 
     it 'should be idempotent', \
         idempotence badWikicode, 'p'
@@ -102,11 +101,9 @@ describe 'p', () ->
 
 describe 'small', () ->
 
-    # TODO: better use of match
-    it 'should turn small tags to span class="text-small"', () ->
-        result = runMacros.applyMacro badHTML, 'small'
-        goodSmall = goodHTML.match(/<span class="text-small">.+<\/span>/)[0]
-        result.should.contain goodSmall
+    it 'should turn small tags to span class="text-small"', \
+        basicBehaviorMatch badHTML, goodHTML, 'small', \
+            '<span class="text-small">.+</span>'
 
     it 'should be idempotent', \
         idempotence badHTML, 'small'
