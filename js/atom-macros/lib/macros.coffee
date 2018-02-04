@@ -31,6 +31,16 @@ fs2wiki = (module) ->
     namespace + module.replace /-/g, '/'
 
 ###
+@summary Remove the extension from a filename
+
+@param {string} filename -> The filename
+@return {string} The filename without its extension
+###
+trimExtension = (filename) ->
+    filename.substring 0, filename.lastIndexOf '.'
+
+
+###
 This function creates a macro of the _filter_ type, that is
 a macro that applies some transformations to the text in the
 current editor.
@@ -89,7 +99,7 @@ filterMacros =
     This function transforms the content of a wiki Scribunto
     module into a native Lua source file.
 
-    @summary Transforms Scributo modules into Lua sources.
+    @summary Transforms Scribunto modules into Lua sources.
 
     @param {string} scribunto - The whole Scribunto source code.
     @return {string} The Lua source corresponding to `scribunto`.
@@ -108,7 +118,7 @@ filterMacros =
     This function transforms the content of a Lua source file
     into a wiki Scribunto module.
 
-    @summary Transforms Lua sources into Scributo modules.
+    @summary Transforms Lua sources into Scribunto modules.
 
     @param {string} lua - The whole Lua source code.
     @return {string} The Scribunto source corresponding to `lua`.
@@ -125,3 +135,49 @@ filterMacros =
 
 for own name, filter of filterMacros
     @[name] = makeFilterMacro filter.bind filterMacros
+
+
+
+###
+This function creates a macro of the _filter_ type, that is
+a macro that applies some transformations to the text in the
+current editor, from a function that takes both the content and
+the name of a file
+
+@summary Creates a macro of the _filter_ type.
+
+@param {(string, string) => string} filter - The pure function actually
+    performing the transformation.
+@return {(void) => void} The macro function, that reads from the
+    current editor, applies the transformation and writes back
+    into the editor.
+###
+makeFilenameFilterMacro = (filter) ->
+    ->
+        editor = getActiveTextEditor()
+        editor.setText filter editor.getText(), editor.getTitle()
+
+###
+This object contains all the _filter_ macros that also requires the fileName,
+so that they can be exported automatically.
+###
+filenameFilterMacros =
+
+    ###
+    This function transforms a file into a dict that can be uploaded
+    via pwb pagefromfile, adding {{-start-}}, {{-stop-}} and the title.
+
+    @summary Transforms a file into a dict that can be uploaded with pwb pagefromfile
+
+    @param {string} page -> The whole page code
+    @param {string} title -> The title of the page
+    @return {string} the resulting dict
+    ###
+    moduleToDict: (scribunto, title) ->
+        if /^\n*\{\{-start-\}\}.*|.*\{\{-stop-\}\}\n*$/.test(scribunto)
+            scribunto
+        else
+            "{{-start-}}\n'''#{ fs2wiki trimExtension title }'''\n#{ scribunto.replace /\n*$/, '\n{{-stop-}}'}"
+
+for own name, filter of filenameFilterMacros
+    @[name] = makeFilenameFilterMacro filter.bind filenameFilterMacros

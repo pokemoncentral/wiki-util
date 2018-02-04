@@ -23,11 +23,21 @@ luaModule = '''
     local ms = require('Modulo:MiniSprite')
     local txt = require('Modulo:Wikilib/strings')
     local c = mw.loadData('Modulo:Colore/data')
+
 '''
 luaSource = '''
     local ms = require('MiniSprite')
     local txt = require('Wikilib-strings')
     local c = require("Colore-data")
+
+'''
+luaDict = '''
+    {{-start-}}
+    \'''Modulo:Test\'''
+    local ms = require('Modulo:MiniSprite')
+    local txt = require('Modulo:Wikilib/strings')
+    local c = mw.loadData('Modulo:Colore/data')
+    {{-stop-}}
 '''
 badWikicode = '''
     {{colore pcwiki}}
@@ -54,10 +64,16 @@ basicBehaviorMatch = (source, expected, macroName, pattern) ->
         matches.every (match) -> result.should.contain match
 
 
-idempotence = (source, macroName) ->
+basicBehaviorFilename = (source, expected, macroName, filename) ->
     () ->
-        once = runMacros.applyMacro source, macroName
-        twice = runMacros.applyMacro once, macroName
+        result = runMacros.applyMacro source, macroName, filename
+        result.should.equal expected
+
+
+idempotence = (source, macroName, filename) ->
+    () ->
+        once = runMacros.applyMacro source, macroName, filename
+        twice = runMacros.applyMacro once, macroName, filename
         once.should.equal twice
 
 
@@ -143,3 +159,11 @@ describe 'wikicode', () ->
 
     it 'should be idempotent', \
         idempotence badWikicode, 'wikicode'
+
+describe 'moduleToDict', () ->
+
+    it 'should turn the scributo to an uploadable dict', \
+        basicBehaviorFilename luaModule, luaDict, 'moduleToDict', 'Test.lua'
+
+    it 'should be idempotent', \
+        idempotence luaModule, 'moduleToDict', 'Test.lua'
