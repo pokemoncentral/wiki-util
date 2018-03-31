@@ -14,6 +14,8 @@ OUTPUT_DIR="$2"
 
 mkdir -p "$OUTPUT_DIR"
 
+OIFS="$IFS"
+IFS=$'\n'
 for IMG in $(find "$INPUT_DIR" -type f); do
 	IMG_TYPE=$(bash file-type.sh "$IMG")
 	BASENAME=$(basename "$IMG")
