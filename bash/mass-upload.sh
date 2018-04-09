@@ -39,7 +39,7 @@ while getopts "s:d:r:po" OPTION; do
 			exit 1
 			;;
 	esac
-done	
+done
 
 if [[ -z $DIR ]]; then
 	echo No source directory specified. Aborting
