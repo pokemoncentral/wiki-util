@@ -43,11 +43,13 @@ badWikicode = '''
     {{colore pcwiki}}
     {{colore pcwiki dark}}
     {{p|Luxio}}
+    {{template call}}
 '''
 goodWikicode = '''
     {{#invoke: colore | pcwiki}}
     {{#invoke: colore | pcwiki | dark}}
     [[Luxio]]
+    {{template call}}
 '''
 
 

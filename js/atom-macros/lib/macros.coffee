@@ -74,7 +74,7 @@ filterMacros =
                 '{{#invoke: colore | $1 | $2}}'
 
     p: (text) ->
-        text.replace /\{\{p\|(.+)\}\}/g, '[[$1]]'
+        text.replace /\{\{p\|(.+?)\}\}/g, '[[$1]]'
 
     small: (text) ->
         text.replace /<\/small>/gi, '</span>'
