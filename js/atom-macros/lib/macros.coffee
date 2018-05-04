@@ -31,14 +31,13 @@ fs2wiki = (module) ->
     namespace + module.replace /-/g, '/'
 
 ###
-@summary Remove the extension from a filename
+@summary Removes the extension from a filename
 
 @param {string} filename -> The filename
 @return {string} The filename without its extension
 ###
 trimExtension = (filename) ->
     filename.substring 0, filename.lastIndexOf '.'
-
 
 ###
 This function creates a macro of the _filter_ type, that is
@@ -169,15 +168,19 @@ filenameFilterMacros =
 
     @summary Transforms a file into a dict that can be uploaded with pwb pagefromfile
 
-    @param {string} page -> The whole page code
-    @param {string} title -> The title of the page
+    @param {string} scribunto - The whole page code
+    @param {string} title - The title of the page
     @return {string} the resulting dict
     ###
     moduleToDict: (scribunto, title) ->
-        if /^\n*\{\{-start-\}\}.*|.*\{\{-stop-\}\}\n*$/.test(scribunto)
+        if /^\{\{-start-\}\}|\{\{-stop-\}\}$/.test(scribunto.trim())
             scribunto
-        else
-            "{{-start-}}\n'''#{ fs2wiki trimExtension title }'''\n#{ scribunto.replace /\n*$/, '\n{{-stop-}}'}"
+        else """
+            {{-start-}}
+            '''#{ fs2wiki trimExtension title }'''
+            #{ scribunto.trim() }
+            {{-stop-}}
+            """
 
 for own name, filter of filenameFilterMacros
     @[name] = makeFilenameFilterMacro filter.bind filenameFilterMacros
