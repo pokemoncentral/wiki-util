@@ -7,11 +7,12 @@ Created by Davide on 1/30/18.
 require 'coffeescript/register'
 fs = require 'fs'
 util = require 'util'
-macros = require './macros'
+macros = require __dirname + '/macros'
 path = require 'path'
 
 
 TEST = process.env.NODE_ENV == 'testing'
+
 
 applyMacro = (text, macroName, fileName) ->
     global.getActiveTextEditor = () ->
