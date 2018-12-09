@@ -33,7 +33,7 @@ delIfNot () {
 
 FILE_PATH="$1"
 shift 1
-TYPES="$@"
+TYPES="$*"
 
 if [[ -d "$FILE_PATH" ]]; then
 	for FILE in "$FILE_PATH"/*; do

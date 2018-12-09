@@ -18,13 +18,13 @@ DEST="$2"
 shift 2
 
 OLD_IFS=$IFS
-IFS='\n'
+IFS=$'\n'
 
 while read -r FILENAME; do
 	IFS=$OLD_IFS
 
-    bash get-wiki-file.sh $@ "$FILENAME" "$DEST"
+    bash get-wiki-file.sh "$@" "$FILENAME" "$DEST"
 
     OLD_IFS=$IFS
-	IFS='\n'
+	IFS=$'\n'
 done < "$SOURCE"

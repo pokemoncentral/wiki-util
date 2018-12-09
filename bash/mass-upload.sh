@@ -62,5 +62,5 @@ if [[ $OVERWRITE == true ]]; then
 fi
 
 for FILE in "$DIR"/*; do
-	echo y | python $PYWIKIBOT_DIR/pwb.py upload $PT -keep -noverify "$FILE" "$DESC"
+    python $PYWIKIBOT_DIR/pwb.py upload $PT -keep -noverify -ignorewarn:was-deleted -abortonwarn:exists "$FILE" "$DESC"
 done
