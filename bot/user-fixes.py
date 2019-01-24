@@ -17,6 +17,20 @@ except_inside = [
 ]
 
 
+def clean_link(match, text=None):
+    """Simplifies a link"""
+
+    if text is None:
+        target = match.group(1)
+        text = match.group(2)
+
+    # If link target and displayed text are the same, only one value is
+    # interpolated. Two are necessary otherwise.
+    return ('[[{0:s}]]'.format(target)
+            if target == text
+            else '[[{0:s}|{1:s}]]'.format(target, text))
+
+
 def to_link(exceptions, aliases, match):
     """Return the plain link to a given match.
 
@@ -69,9 +83,7 @@ def to_link(exceptions, aliases, match):
 
     # If link target and displayed text are the same, only one value is
     # interpolated. Two are necessary otherwise.
-    return ('[[{0:s}]]'.format(link_target)
-            if link_target == link_display
-            else '[[{0:s}|{1:s}]]'.format(link_target, link_display))
+    return clean_link(link_target, link_display)
 
 
 # This fix fixes grammatically incorrect text and general misspellings.
@@ -82,7 +94,7 @@ fixes['grammar'] = {
         'inside': except_inside,
     },
     'msg': {
-        'it': 'Bot: Fixing grammar'
+        'it': 'Bot: Fixing spelling'
     },
     'replacements': [
         (ur'chè\b', u'ché'),
@@ -92,6 +104,10 @@ fixes['grammar'] = {
         (ur'\bquì\b', 'qui'),
         (ur'\bquà\b', 'qua'),
         (ur'\bfà\b', 'fa'),
+        ('metereologic', 'meteorologic'),
+        (u"qual'è", u'qual è'),
+        (' +', ' '),
+        (r'^\s+$', r'\n')
 
         # Fixing unnecessary replacements made above
         (ur'Arché\b', u'Archè'),
@@ -149,5 +165,22 @@ fixes['obsolete-templates'] = {
         (r'\{\{[Tt]c\|(.+?)\}\}', partial(to_link, tc_exceptions, tc_aliases)),
         (r'\{\{[Aa]a\|(.+?)\}\}', partial(to_link, aa_exceptions, aa_aliases)),
         (r'\{\{MSF', r'\{\{MSP'),
+    ]
+}
+
+# This fix updates redundant code
+fixes['redundant-code'] = {
+    'nocase': False,
+    'regex': True,
+    'exceptions': {
+        'inside': except_inside,
+    },
+    'msg': {
+        'it': 'Bot: Fixing redundant code'
+    },
+    'replacements': [
+        (ur'\[\[(.+?) \((tipo|mossa|abilità)\)\|(.+?)\]\]', clean_link),
+        (ur'\[\[(.+?)\|(.+?)\]\]', clean_link),
+        ('<div></div>', '<br>'),
     ]
 }
