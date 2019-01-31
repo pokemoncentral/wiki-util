@@ -17,8 +17,23 @@ except_inside = [
 ]
 
 
-def clean_link(match, text=None):
-    """Simplifies a link"""
+def simplify_link(match, text=None):
+    """Simplify a link.
+
+    This function returns the link in its simplets possible form. This means
+    that, given link text and target, it returns '[[target|text]]' if the two
+    are different, and '[[target]]' if they are equal.
+
+    It can be passed a match object, from which link target and text will be
+    extracted as groups 1 and 2 respectively. Alternatively, link target and
+    text can be passed directly as arguments.
+
+    :param match: The match object to operate on, or the link target.
+    :type match: re.Match or string.
+    :param text: The link text.
+    :type text: string or None.
+    :return string: The simplified link.
+    """
 
     if text is None:
         target = match.group(1)
@@ -44,9 +59,9 @@ def to_link(exceptions, aliases, match):
     lowercase and underscores need to be replaced by spaces.
     It can be provided with a dictionary of aliases for the first match, that
     will be used as links target. The keys are the values of the first match
-    and the associated values are the aliases. For example, given the former
-    string and regex, and the alias dictionary
-    {'fuocodentro': 'Forza Interiore'}, the returned string will be
+    and the associated values are the aliases. For example, given the the
+    string '{{a|Fuocodentro}}', the regex '\{\{a|(.+?)\}\}', and the alias
+    dictionary {'fuocodentro': 'Forza Interiore'}, the returned string will be
     '[[Forza Interiore|Fuocodentro]]'. The keys must be lowercase and the
     underscores need to be replaced by spaces.
     If the match is in the form <link_target>|<link_display>, than the link
@@ -57,6 +72,8 @@ def to_link(exceptions, aliases, match):
     :type exceptions: List of strings.
     :param aliases: Dictionary of aliases for the first match.
     :type aliases: Dictionary with stirng keys and string values.
+    :param match: The match object to operate on.
+    :type match: re.Match.
     :return string: The plain link to the first group of the match.
     """
 
@@ -81,9 +98,8 @@ def to_link(exceptions, aliases, match):
     # Replacing the link target if it has an alias.
     link_target = aliases.get(key, link_target)
 
-    # If link target and displayed text are the same, only one value is
-    # interpolated. Two are necessary otherwise.
-    return clean_link(link_target, link_display)
+    # Displaying link in the simplest possible form
+    return simplify_link(link_target, link_display)
 
 
 # This fix fixes grammatically incorrect text and general misspellings.
@@ -94,7 +110,7 @@ fixes['grammar'] = {
         'inside': except_inside,
     },
     'msg': {
-        'it': 'Bot: Fixing spelling'
+        'it': 'Bot: Fixing spelling',
     },
     'replacements': [
         (ur'chè\b', u'ché'),
@@ -107,7 +123,7 @@ fixes['grammar'] = {
         ('metereologic', 'meteorologic'),
         (u"qual'è", u'qual è'),
         (' +', ' '),
-        (r'^\s+$', r'\n')
+        (r'^\s+$', r'\n'),
 
         # Fixing unnecessary replacements made above
         (ur'Arché\b', u'Archè'),
@@ -122,7 +138,7 @@ fixes['names-case-sensitive'] = {
         'inside': except_inside,
     },
     'msg': {
-        'it': 'Bot: Fixing names - case sensitive'
+        'it': 'Bot: Fixing names - case sensitive',
     },
     'replacements': [
         (ur'Pokè', u'Poké'),
@@ -138,7 +154,7 @@ fixes['names-case-insensitive'] = {
         'inside': except_inside,
     },
     'msg': {
-        'it': 'Bot: Fixing names - case insensitive'
+        'it': 'Bot: Fixing names - case insensitive',
     },
     'replacements': [
         ('Pallaombra', 'Palla Ombra'),
@@ -155,7 +171,7 @@ fixes['obsolete-templates'] = {
         'inside': except_inside,
     },
     'msg': {
-        'it': 'Bot: Fixing obsolete templates usage'
+        'it': 'Bot: Fixing obsolete templates usage',
     },
     'replacements': [
         (r'\{\{[AaMmPpTt]\|(.+?)\}\}', r'[[\1]]'),
@@ -176,11 +192,11 @@ fixes['redundant-code'] = {
         'inside': except_inside,
     },
     'msg': {
-        'it': 'Bot: Fixing redundant code'
+        'it': 'Bot: Fixing redundant code',
     },
     'replacements': [
-        (ur'\[\[(.+?) \((tipo|mossa|abilità)\)\|(.+?)\]\]', clean_link),
-        (ur'\[\[(.+?)\|(.+?)\]\]', clean_link),
+        (ur'\[\[(.+?) \((tipo|mossa|abilità)\)\|(.+?)\]\]', simplify_link),
+        (r'\[\[(.+?)\|(.+?)\]\]', simplify_link),
         ('<div></div>', '<br>'),
     ]
 }
