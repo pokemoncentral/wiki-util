@@ -11,6 +11,8 @@ data SizeInfo = SizeInfo {
         }
     | EmptySizeInfo
 
+upperSizes = [200, 190, 180, 170, 160, 150, 120, 100, 75, 50]
+
 recordDim :: (Integer -> Integer -> Bool) -> (SizeInfo -> Integer) -> [SizeInfo] -> SizeInfo
 recordDim _ _ [] = EmptySizeInfo
 recordDim comp getDim xs = foldr getRecord (last xs) (init xs)
@@ -44,11 +46,14 @@ instance Show SizeInfo where
             ++ show height ++ ")"
     show EmptySizeInfo = "Empty SizeInfo"
 
+printDouble :: Double -> String
+printDouble = printf "%.2f"
+
 baseStats xs = unlines [
         "Max height: " ++ show (maxHeight xs),
         "Max width: " ++ show (maxWidth xs),
-        "Average height: " ++ show (avgWidth xs),
-        "Average width: " ++ show (avgWidth xs)
+        "Average height: " ++ printDouble (avgWidth xs),
+        "Average width: " ++ printDouble (avgWidth xs)
         ]
 
 dropGt :: Integer -> [SizeInfo] -> [SizeInfo]
@@ -58,22 +63,25 @@ stats totalInfo = unlines ([
     "Total number of elements: " ++ show totalInfoCount, "",
     "Min height: " ++ show (minHeight totalInfo),
     "Min width: " ++ show (minWidth totalInfo),
-    baseStats totalInfo] ++ dropSizesStats totalInfo [200, 150, 120, 100, 75, 50])
+    baseStats totalInfo] ++ dropSizesStats totalInfo upperSizes)
     where
         totalInfoCount = length totalInfo
         dropSizesStats [] _ = []
         dropSizesStats _ [] = []
         dropSizesStats info (size:sizes)
             | lessSizeCount == length info = dropSizesStats info sizes
-            | True = showInfo : dropSizesStats lessSize sizes
+            | True = showInfo : dropSizesStats info sizes
             where
                 lessSize = dropGt size info
                 lessSizeCount = length lessSize
+                droppedCount = totalInfoCount - lessSizeCount
+                droppedPerc = (fromIntegral droppedCount) / (fromIntegral totalInfoCount) * 100
                 showInfo = unlines [
                         "Dropping elements with height or width greater than "
-                        ++ show size ++ "... " ++ show (totalInfoCount - lessSizeCount)
-                        ++ " elements dropped from total\n", baseStats lessSize]
-        
+                        ++ show size ++ "... " ++ printDouble droppedPerc
+                        ++ "% elements dropped from total ("
+                        ++ show droppedCount ++ ")\n", baseStats lessSize]
+
 (#) :: [a] -> Int -> a
 xs # n = (last . take n) xs
 
