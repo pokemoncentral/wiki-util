@@ -1,5 +1,79 @@
+########################################
+# Lua - https://github.com/github/gitignore/blob/master/Lua.gitignore
+########################################
+# Compiled Lua sources
+luac.out
+
+# luarocks build files
+*.src.rock
+*.zip
+*.tar.gz
+
+# Object files
+*.o
+*.os
+*.ko
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+*.def
+*.exp
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+########################################
+# Haskell - https://github.com/github/gitignore/blob/master/Haskell.gitignore
+########################################
+dist
+dist-*
+cabal-dev
+*.o
+*.hi
+*.chi
+*.chs.h
+*.dyn_o
+*.dyn_hi
+.hpc
+.hsenv
+.cabal-sandbox/
+cabal.sandbox.config
+*.prof
+*.aux
+*.hp
+*.eventlog
+.stack-work/
+cabal.project.local
+cabal.project.local~
+.HTF/
+.ghc.environment.*
+
 # Config files are better not in git
 config.*
+
+########################################
+# Custom
+########################################
 
 # Config templates are to be here, though
 !/config-templates/config.*
@@ -10,3 +84,13 @@ config.*
 # IDE
 /cmake-build-debug
 /.idea
+
+# Extensionless files in haskell are supposed to be executables
+/haskell/*
+!/haskell/*.*
+
+# I use this file if I have some rather complex script usage
+/lua/main.lua
+
+# I use this directory to keep miscellanea files
+/misc
