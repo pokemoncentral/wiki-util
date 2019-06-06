@@ -6,8 +6,11 @@
 # All paths relative from there.
 
 export PYWIKIBOT_DIR=ADD_YOUR_PATH_HERE
-# uncomment to load a python virtualenv
+export WIKILUAMODULES_DIR=ADD_YOUR_PATH_HERE
+# Directory containing atom-macros
+export MACROS_DIR=ADD_YOUR_PATH_HERE
 
+# uncomment to load a python virtualenv
 # PYWIKIBOT_VIRTUALENV_DIR=ADD_YOUR_PATH_HERE
 # source $PYWIKIBOT_VIRTUALENV_DIR'/bin/activate'
 

@@ -30,6 +30,7 @@
 #		- roza
 #		- sm
 #		- sl
+#		- usum
 
 # Simple constants
 PP_BASE_URL='http://www.pkparaiso.com/imagenes'
@@ -41,6 +42,7 @@ declare -A PP_GAMES
 PP_GAMES[xy]='xy'
 PP_GAMES[oras]='rubi-omega-zafiro-alfa'
 PP_GAMES[sm]='sol-luna'
+PP_GAMES[usum]='missing'
 
 # Pkparaiso variants mapping
 declare -A PP_VARIANTS
@@ -54,6 +56,7 @@ declare -A GC_GAMES
 GC_GAMES[xy]='XY'
 GC_GAMES[oras]='ORAS'
 GC_GAMES[sm]='SoMo'
+GC_GAMES[usum]='USUM'
 
 # PokéWiki variants mapping
 declare -A GC_VARIANTS
@@ -67,6 +70,7 @@ declare -A SHOWDOWN_GAMES
 SHOWDOWN_GAMES[xy]='xy'
 SHOWDOWN_GAMES[oras]='xy'
 SHOWDOWN_GAMES[sm]='xy'
+SHOWDOWN_GAMES[usum]='xy'
 
 # Showdown variants mapping
 declare -A SHOWDOWN_VARIANTS
@@ -100,7 +104,7 @@ mkdir -p $FEMALE_PATH
 :> $LOG_FILE
 
 while read -a LINE; do
-    GC_NAME=${LINE[0]}
+	GC_NAME=${LINE[0]}
 	PP_NAME=${LINE[1]}
 	SD_NAME=${LINE[2]}
 
@@ -131,23 +135,23 @@ while read -a LINE; do
 	fi
 	[[ $FEMALE_EXISTS == true && $MALE_EXISTS == true ]] && continue
 
-    # Male and female destination paths
-    MALE_DEST=$MALE_PATH/$MALE_NAME
-    FEMALE_DEST=$FEMALE_PATH/$FEMALE_NAME
+	# Male and female destination paths
+	MALE_DEST=$MALE_PATH/$MALE_NAME
+	FEMALE_DEST=$FEMALE_PATH/$FEMALE_NAME
 
 	# Pkparaiso download
 
 	# Male
 	if [[ $MALE_EXISTS == false ]]; then
-        curl -R $PP_URL/$PP_NAME.gif > $MALE_DEST 2> /dev/null
-        bash delete-by-type.sh $MALE_DEST gif
-    fi
+		curl -R $PP_URL/$PP_NAME.gif > $MALE_DEST 2> /dev/null
+		bash delete-by-type.sh $MALE_DEST gif
+	fi
 
 	# Female
 	if [[ $FEMALE_EXISTS == false ]]; then
-        curl -R -R $PP_URL/$PP_NAME-f.gif > $FEMALE_DEST 2> /dev/null
-        bash delete-by-type.sh $FEMALE_DEST gif
-    fi
+		curl -R -R $PP_URL/$PP_NAME-f.gif > $FEMALE_DEST 2> /dev/null
+		bash delete-by-type.sh $FEMALE_DEST gif
+	fi
 
 	# Other animation
 	for K in {2..5}; do
@@ -155,19 +159,19 @@ while read -a LINE; do
 		ANI_NAME=$(lua run.lua models-rename.lua $PP_NAME-$K.gif $VARIANT m $GAMES)
 		cd - > /dev/null
 		if [[ -z $(grep $ANI_NAME $LISTFILE) ]]; then
-            ANI_DEST=$MALE_PATH/$ANI_NAME
-            curl -R $PP_URL/$PP_NAME-$K.gif > $ANI_DEST 2> /dev/null
-            bash delete-by-type.sh $ANI_DEST gif
-        fi
+			ANI_DEST=$MALE_PATH/$ANI_NAME
+			curl -R $PP_URL/$PP_NAME-$K.gif > $ANI_DEST 2> /dev/null
+			bash delete-by-type.sh $ANI_DEST gif
+		fi
 	done
 
 	# Skipping PokéWiki what already
-    # downloaded from Pkparaiso
+	# downloaded from Pkparaiso
 
-    [[ -e $MALE_DEST ]] && MALE_EXISTS=true
-    [[ -e $FEMALE_DEST ]] && FEMALE_EXISTS=true
-    [[ $MALE_EXISTS == true && $FEMALE_EXISTS == true ]] \
-        && continue
+	[[ -e $MALE_DEST ]] && MALE_EXISTS=true
+	[[ -e $FEMALE_DEST ]] && FEMALE_EXISTS=true
+	[[ $MALE_EXISTS == true && $FEMALE_EXISTS == true ]] \
+		&& continue
 
 	# PokéWiki download
 
@@ -177,35 +181,35 @@ while read -a LINE; do
 
 	# Male
 	if [[ $MALE_EXISTS == false ]]; then
-        bash get-wiki-file.sh -d local -w pokewiki $GC_SPR.gif $MALE_DEST
-        bash delete-by-type.sh $MALE_DEST gif
-    fi
+		bash get-wiki-file.sh -d local -w pokewiki $GC_SPR.gif $MALE_DEST
+		bash delete-by-type.sh $MALE_DEST gif
+	fi
 
 	# Female
 	if [[ $FEMALE_EXISTS == false ]]; then
-        GC_SPR="Pokémonsprite_${GC_NAME}_Weiblich_${GC_VARIANTS[$VARIANT]}${GC_GAMES[$GAMES]}"
-        bash get-wiki-file.sh -d local -w pokewiki $GC_SPR.gif $FEMALE_DEST
-        bash delete-by-type.sh $FEMALE_DEST gif
-    fi
+		GC_SPR="Pokémonsprite_${GC_NAME}_Weiblich_${GC_VARIANTS[$VARIANT]}${GC_GAMES[$GAMES]}"
+		bash get-wiki-file.sh -d local -w pokewiki $GC_SPR.gif $FEMALE_DEST
+		bash delete-by-type.sh $FEMALE_DEST gif
+	fi
 
-    [[ -e $MALE_DEST ]] && MALE_EXISTS=true
-    [[ -e $FEMALE_DEST ]] && FEMALE_EXISTS=true
-    [[ $MALE_EXISTS == true && $FEMALE_EXISTS == true ]] \
-        && continue
+	[[ -e $MALE_DEST ]] && MALE_EXISTS=true
+	[[ -e $FEMALE_DEST ]] && FEMALE_EXISTS=true
+	[[ $MALE_EXISTS == true && $FEMALE_EXISTS == true ]] \
+		&& continue
 
-    # Showdown download
+	# Showdown download
 
 	# Male
 	if [[ $MALE_EXISTS == false ]]; then
-        curl -R $SHOWDOWN_URL/$SD_NAME.gif > $MALE_DEST 2> /dev/null
-        bash delete-by-type.sh $MALE_DEST gif
-    fi
+		curl -R $SHOWDOWN_URL/$SD_NAME.gif > $MALE_DEST 2> /dev/null
+		bash delete-by-type.sh $MALE_DEST gif
+	fi
 
 	# Female
 	if [[ $FEMALE_EXISTS == false ]]; then
-        curl -R SHOWDOWN_URL/$SD_NAME-f.gif > $FEMALE_DEST 2> /dev/null
-        bash delete-by-type.sh $FEMALE_DEST gif
-    fi
+		curl -R SHOWDOWN_URL/$SD_NAME-f.gif > $FEMALE_DEST 2> /dev/null
+		bash delete-by-type.sh $FEMALE_DEST gif
+	fi
 
 done < sprites-source.list
 
