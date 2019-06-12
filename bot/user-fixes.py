@@ -121,6 +121,7 @@ fixes['grammar'] = {
         (ur'\bquà\b', 'qua'),
         (ur'\bfà\b', 'fa'),
         ('metereologic', 'meteorologic'),
+        ('obbiettiv', 'obiettiv'),
         (u"qual'è", u'qual è'),
         (' +', ' '),
         (r'^\s+$', r'\n'),
