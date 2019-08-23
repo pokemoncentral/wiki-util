@@ -22,7 +22,8 @@ grep_footer = re.compile(r'\{\{[Ss]ign\|(%s)\|footer\}\}' % first_params)
 grep_title = re.compile(r'\{\{[Ss]ign\|(%s)\|title\|(.*?)\}\}' % first_params)
 grep_content = re.compile(r'\{\{[Ss]ign\|(%s)\|(.*?)\}\}' % first_params)
 
-def FixSign(pagetext):
+
+def fix_sign(pagetext):
     lines = []
     count = 0
 
@@ -33,8 +34,6 @@ def FixSign(pagetext):
             line = grep_footer.sub('}}', line)
 
             # Header
-            header, subs = grep_ha
-
             header = grep_header.match(line)
             if header:
                 count = 0
@@ -60,8 +59,9 @@ def FixSign(pagetext):
 
     return '\n'.join(lines)
 
+
 page = pywikibot.Page(site, u'Utente:Lucas992/Sandbox')
-page.text = FixSign(page.text)
+page.text = fix_sign(page.text)
 page.save(u'Test Sign')
 '''
 for page in listofpages:
