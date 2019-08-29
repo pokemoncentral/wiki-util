@@ -49,10 +49,6 @@ local function ParseCSVLine(line,sep)
 	return res
 end
 
-local function const(v)
-	return function() return v end
-end
-
 local breedgames = { 0, 2, 3, 3, 2, 2, 2 }
 
 local datagen = { {}, {}, {}, {}, {}, {}, {} }
@@ -94,7 +90,7 @@ for line in io.lines("pokecsv/" .. poke .. ".csv") do
 	elseif kind == "tutor" then
 		local tutorgames = pokemoves.games.tutor[gen]
 		data[kind][gen][move] = data[kind][gen][move]
-			or tab.map(tutorgames, const(false))
+			or tab.map(tutorgames, function() return false end)
 		data[kind][gen][move][tab.search(tutorgames, line[4])] = true
 	elseif kind == "breed" then
 		local breedsgames = pokemoves.games.breed[gen]
@@ -109,7 +105,7 @@ for line in io.lines("pokecsv/" .. poke .. ".csv") do
 		if line[4] ~= "Colo" and line[4] ~= "XD" then
 			local levelgames = pokemoves.games.level[gen]
 			data[kind][gen][move] = data[kind][gen][move]
-				or tab.map(levelgames, const{})
+				or tab.map(levelgames, function() return {} end)
 			table.insert(data[kind][gen][move][tab.search(levelgames, line[4])], line[5])
 		end
 	elseif not (poke == 'pichu' and kind == "light-ball-egg")
