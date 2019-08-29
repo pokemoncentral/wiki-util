@@ -21,6 +21,15 @@ local printer = require('pokemove-printer')
 
 local skipkeys = { "games" }
 
+local genderless = {
+    "magnemite", "magneton", "voltorb", "electrode", "staryu", "starmie",
+    "porygon", "porygon2", "shedinja", "lunatone", "solrock", "baltoy",
+    "claydol", "beldum", "metang", "metagross", "bronzor", "bronzong",
+    "magnezone", "porygon-z", "rotom", "phione", "manaphy", "klink", "klang",
+    "klinklang", "cryogonal", "golett", "golurk", "carbink", "minior",
+    "dhelmise"
+}
+
 -- Compare two tables, only on integer keys, to check if they're equal
 local function eqArray(t1, t2)
     if #t1 ~= #t2 then
@@ -47,35 +56,45 @@ local function eggGroupList(group)
 end
 
 -- Returns the list of Pokémon that can breed with a given one (that is: share
--- an egg group that isn't "sconosciuto"). Pokémon of the same evoline and
--- female only Pokémon (because they can't pass an egg move) are excluded
--- from the list
+-- an egg group that isn't "sconosciuto"). Pokémon of the same evoline, female
+-- only and genderless Pokémon (because they can't pass an egg move) are
+-- excluded from the list
 local function eggNeighboursList(poke)
     local groups = tab.filter(pokeeggs[poke] or {},
                               function(g) return g ~= "sconosciuto" end)
     return tab.filter(tab.unique(tab.flatMap(groups, eggGroupList)), function(p)
-        return not evolib.sameEvoLine(poke, p) and not tab.search(onlyFemale, p)
+        return not evolib.sameEvoLine(poke, p)
+               and not tab.search(onlyFemale, p)
+               and not tab.search(genderless, p)
     end)
 end
 
 -- Check whether a Pokémon has at least one parent to learn a move by breed
 -- in a certain game
 local function hasParent(move, poke, gen, gameidx)
-    return pokemoves[poke].breed
-           and pokemoves[poke].breed[gen]
-           and pokemoves[poke].breed[gen][move]
-           and pokemoves[poke].breed[gen][move][gameidx]
-    -- return pokemoves[poke].breed[gen][move]
+    -- return pokemoves[poke].breed
+    --        and pokemoves[poke].breed[gen]
+    --        and pokemoves[poke].breed[gen][move]
+    --        and pokemoves[poke].breed[gen][move][gameidx]
+    return pokemoves[poke].breed[gen][move]
            and pokemoves[poke].breed[gen][move][gameidx][1]
+end
+
+-- Check if a Pokémon can learn a move by level in a certain game.
+local function learnLevelGame(move, poke, gen, game)
+    local idx = tab.search(pokemoves.games.level[gen], game)
+    return pokemoves[poke].level
+           and pokemoves[poke].level[gen]
+           and pokemoves[poke].level[gen][move]
+           and pokemoves[poke].level[gen][move][idx][1]
 end
 
 -- Check if a Pokémon can learn a move by tutor in a certain game.
 local function learnTutorGame(move, poke, gen, game)
-    local _, idx = tab.deepSearch(pokemoves.games.tutor, game)
-    if not pokemoves[poke].tutor or not pokemoves[poke].tutor[gen] then
-        return false
-    end
-    return pokemoves[poke].tutor[gen][move]
+    local idx = tab.search(pokemoves.games.tutor[gen], game)
+    return pokemoves[poke].tutor
+           and pokemoves[poke].tutor[gen]
+           and pokemoves[poke].tutor[gen][move]
            and pokemoves[poke].tutor[gen][move][idx]
 end
 
@@ -92,20 +111,14 @@ for poke, data in pairs(pokemoves) do
     end
 end
 
--- {
---   blocco={ { 185, 299, 476 } },
---   bodyguard={ { 557, games = { "XY" } }, { 476, games = { "ROZA" } } },
---   centripugno={ { 074, 075, 076, 185 } },
---   flagello={ { 185, 557, 558 }, games = { "ROZA" } },
---   resistenza={ { 557 }, notes = "solo per volere del cusu" },
--- },
 -- Can modify gamedata, but has no other side effects. Return the new gamedata
 local function recompPokeMoveGame(poke, gen, game, gameidx, move, gamedata)
+    -- TODO: check Pokémon in the same evoline. Simply adding them to
+    -- neighbours may work
     for _, opoke in pairs(pokemoves[poke].neighbours) do
         if pokemoves[opoke] then
-            -- TODO: check for game also level
             if learnlib.canLearn(move, opoke, gen, {"level", "breed", "preevo" ,"tutor"})
-               or learnlib.learnKind(move, opoke, gen, "level")
+               or learnLevelGame(move, opoke, gen, game)
                or learnTutorGame(move, opoke, gen, game) then
                 -- opoke can learn the move "easily" in this game
                 if not gamedata.direct then
@@ -117,7 +130,7 @@ local function recompPokeMoveGame(poke, gen, game, gameidx, move, gamedata)
             elseif not gamedata.direct
                    and hasParent(move, opoke, gen, gameidx) then
                 -- Isn't direct and opoke can learn by breed (in this game)
-                -- TODO: add an equivalent of direct but for chains
+                gamedata.chain = true
                 table.insert(gamedata, pokes[opoke].ndex)
             end
         end
@@ -132,13 +145,15 @@ local function recompOnePoke(poke, gen)
     local newbreeddata = {}
     for move, movedata in pairs(pokemoves[poke].breed[gen]) do
         newbreeddata[move] = { notes = movedata.notes, games = movedata.games }
-        -- For all Pokémons in the same egg group checks whether it can learn the
-        -- move directly or via breed.
+        -- For all Pokémons in the same egg group checks whether it can learn
+        -- the move directly or via breed.
         for gameidx, game in pairs(pokemoves.games.breed[gen]) do
             -- If direct, parents are Pokémon that can learn the move
             -- directly, so are definitive: no need to recompute
-            if not movedata[gameidx].direct then
-                newbreeddata[move][gameidx] = recompPokeMoveGame(poke, gen, game, gameidx, move, movedata[gameidx])
+            if not movedata[gameidx].direct and not movedata[gameidx].chain then
+                newbreeddata[move][gameidx]
+                    = recompPokeMoveGame(poke, gen, game, gameidx, move,
+                                         tab.copy(movedata[gameidx]))
             else
                 newbreeddata[move][gameidx] = movedata[gameidx]
             end
@@ -202,44 +217,36 @@ for poke, data in pairs(pokemoves) do
     if not tab.search(skipkeys, poke) then
         for gen = 2,7 do
             if data.breed and data.breed[gen] then
-                -- TODO: make this work (compact games)
-                -- for move, movedata in pairs(data.breed[gen]) do
-                --     -- Movedata is a reference to the computed value, so I can
-                --     -- safely create a new table for data.breed[gen][move]
-                --     data.breed[gen][move] = tab.filter(movedata, function(_, k)
-                --         return type(k) ~= "number"
-                --     end)
-                --     for _, v in ipairs(movedata) do
-                --         -- At this point each v has a single element in v.games
-                --         if not movedata.games or tab.search(movedata.games, v.games[1]) then
-                --             -- Clean up v: removes duplicated ndexes, sort and
-                --             -- remove direct
-                --             v = tab.unique(v)
-                --             table.sort(v)
-                --             v.direct = nil
-                --             -- Compress games: if the table is equal to one
-                --             -- already inserted, it simply merges their games
-                --             local eidx = nil
-                --             for k, g in ipairs(data.breed[gen][move]) do
-                --                 if eqArray(v, g) then
-                --                     eidx = k
-                --                 end
-                --             end
-                --             if eidx then
-                --                 table.insert(movedata[eidx].games, v.games[1])
-                --             else
-                --                 table.insert(data.breed[gen][move], v)
-                --             end
-                --         end
-                --     end
-                -- end
+                -- TODO: compact games
                 for move, movedata in pairs(data.breed[gen]) do
-                    for k, v in ipairs(movedata) do
+                    local newmovedata = { games = movedata.games }
+                    for _, v in ipairs(movedata) do
                         v = tab.unique(v)
                         table.sort(v)
                         v.direct = nil
-                        data.breed[gen][move][k] = v
+                        v.chain = nil
+                        local mygame = v.games[1]
+                        -- Remove games in which the Pokémon can't learn the
+                        -- move
+                        -- if tab.search(movedata.games, mygame) then
+                            local found = false
+                            for _, w in ipairs(newmovedata) do
+                                if eqArray(v, w) then
+                                    found = true
+                                    table.insert(w.games, mygame)
+                                end
+                            end
+                            if not found then
+                                table.insert(newmovedata, v)
+                            end
+                        -- end
                     end
+                    -- TODO remove games with no sense
+                    -- if (newmovedata.games and tab.equal(newmovedata[1].games, newmovedata.games))
+                    --    or tab.equal(newmovedata[1].games, pokemoves.games.breed[gen]) then
+                    --     newmovedata[1].games = nil
+                    -- end
+                    data.breed[gen][move] = newmovedata
                 end
             end
         end
