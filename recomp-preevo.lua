@@ -29,16 +29,14 @@ for poke, data in pairs(pokemoves) do
             local preevos = tab.map(evolib.preevoList(poke), forms.uselessToEmpty)
             local res = {}
             for _, preevo in pairs(preevos) do
-                for _, move in pairs(learnlib.learnset(preevo, gen, {"preevo", "breed", "tutor"})) do
-                    if not learnlib.canLearn(move, poke, gen, {"preevo", "breed", "event"}) then
-                        -- TODO: not working with tutor changing inside a gen
-                        -- es: Venusaur learns Semebomba via Bulbasaur in SL, but via tutor in USUL
+                for _, move in pairs(learnlib.learnset(preevo, gen, {"preevo", "tutor"})) do
+                    if not learnlib.canLearn(move, poke, gen, {"preevo", "event"}) then
                         if res[move] then
                             table.insert(res[move], pokes[preevo].ndex)
                         else
                             res[move] = { pokes[preevo].ndex }
                         end
-                    elseif not learnlib.canLearn(move, poke, gen, {"preevo", "breed", "event", "tutor"}) then
+                    elseif not learnlib.canLearn(move, poke, gen, {"preevo", "event", "tutor"}) then
                         -- The Pokémon can learn the move only by tutor, but the
                         -- preevo learn it another way, so it's all the games of
                         -- the generation

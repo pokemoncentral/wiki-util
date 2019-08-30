@@ -17,12 +17,16 @@ docker run --name moves-db -p 12345:5432 -d pokemovesdb
 # psql: server closed the connection unexpectedly
 # 	This probably means the server terminated abnormally
 # 	before or while processing the request.
-# TEST
-# sleep 20
+sleep 20
 cd ..
 
+
 # Run scripts in order
-# TODO: change source-modules.lua to use $MODULESPATH
+
+# Add the lua modules dir in order to allow lua scripts to source them
+sed -e 's:    ";/path/to/lua/modules/?.lua":    ";'"${MODULESPATH}"'/?.lua":' \
+    source-modules.lua.base > source-modules.lua
+chmod 644 source-modules.lua
 
 # First creates a dummy PokéMoves-data.lua with only m.games defined, needed by
 # make-pokes.sh -l
@@ -32,9 +36,7 @@ cp pokemoves-data.lua $MODULESPATH/PokéMoves-data.lua
 # Make level, tm and tutor
 mkdir -p pokecsv
 mkdir -p luamoves
-# TEST
-# ./make-pokes.sh -cl -d pokemovesdb -p 12345
-./make-pokes.sh -l
+./make-pokes.sh -cl -d pokemovesdb -p 12345
 # TODO: at some point here, I should fix mew with alltm
 cp pokemoves-data.lua $MODULESPATH/PokéMoves-data.lua
 
@@ -50,6 +52,6 @@ echo "=================== Updated PokéMoves-data.lua with preevo ==============
 echo "=========================== Start computing breed ============================"
 mkdir -p luamoves-breed
 ./recomp-breed.lua
-./make-pokes.sh s luamoves-breed
+./make-pokes.sh -s luamoves-breed
 cp pokemoves-data.lua $MODULESPATH/PokéMoves-data.lua
 echo "=================== Updated PokéMoves-data.lua with breed ===================="
