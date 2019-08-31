@@ -129,8 +129,6 @@ end
 
 -- Can modify gamedata, but has no other side effects. Return the new gamedata
 local function recompPokeMoveGame(poke, gen, game, gameidx, move, gamedata)
-    -- TODO: check Pokémon in the same evoline. Simply adding them to
-    -- neighbours may work
     for _, opoke in pairs(pokemoves[poke].neighbours) do
         if pokemoves[opoke] then
             if learnlib.canLearn(move, opoke, gen, {"level", "breed", "preevo" ,"tutor"})

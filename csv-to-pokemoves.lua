@@ -80,13 +80,21 @@ local poke = str.trim(arg[1]) or "staraptor"
 
 local outfile = io.open("luamoves/" .. poke .. ".lua", "w")
 
+-- Mew alltm
+if poke == "mew" then
+	data.tm = tab.map(data.tm, function() return { all = true } end)
+end
 for line in io.lines("pokecsv/" .. poke .. ".csv") do
 	line = tab.map(ParseCSVLine(line), str.trim)
 	local kind = line[2]
 	local gen = tonumber(line[3])
 	local move = line[1]
 	if kind == "tm" then
-		table.insert(data[kind][gen], move)
+		-- TODO: check for alltm instead of relying on the fact that only mew
+		 -- uses it
+		 if poke ~= "mew" then
+			 table.insert(data[kind][gen], move)
+		 end
 	elseif kind == "tutor" then
 		local tutorgames = pokemoves.games.tutor[gen]
 		data[kind][gen][move] = data[kind][gen][move]

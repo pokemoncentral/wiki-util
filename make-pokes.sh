@@ -39,6 +39,7 @@ while getopts "hcls:d:p:" o; do
             ;;
         p)
             PORT=$OPTARG
+            ;;
     esac
 done
 shift $((OPTIND-1))
