@@ -1,0 +1,42 @@
+--[[
+
+Data module for moves learning.
+
+For each Pokémon there's a table that contains a table for each generation.
+In those tables indexes are move names, that are associated to a list of
+levels, representing levels at which the Pokémon learns the move in the
+corresponding game. The ordering of games is given in the table "games". A
+level can be a number, "inizio" or "evo".
+
+So for instance the table
+
+{"inizio"}, {"inizio", "evo"}
+
+corresponding to gen 7 means that the Pokémon learns that move at level
+"inizio" in SL (first element of games["7"]) and both at level "inizio" and
+"evo" in USUL (second element of games["7"]).
+
+Some useful informations:
+    - notes are needed only for breed and preevo
+    - except for level and tm, other methods has exactly one line per move.
+      A move can be learned at multiple levels, and a tm or hm with a move can
+      change within a generation (es: spaccaroccia)
+
+--]]
+
+local m = {}
+
+m.games = {
+level = { { "RB", "G" }, { "OA", "C" }, { "RZ", "RFVF", "S" },
+    { "DP", "Pt", "HGSS" }, { "NB", "N2B2" }, { "XY", "ROZA" },
+    { "SL", "USUL" },
+},
+breed = { {}, { "OA", "C" }, { "RZ", "RFVF", "S" },
+    { "DP", "Pt", "HGSS" }, { "NB", "N2B2" }, { "XY", "ROZA" },
+    { "SL", "USUL" },
+},
+tutor = { {}, { "C" }, { "RFVF", "S", "XD" },
+    { "DP", "Pt", "HGSS" }, { "NB", "N2B2" }, { "XY", "ROZA" },
+    { "SL", "USUL" },
+},
+}

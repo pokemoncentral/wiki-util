@@ -1,0 +1,6 @@
+*.log
+pokemoves-data.lua
+pokecsv/
+luamoves*/
+source-modules.lua
+config.sh
