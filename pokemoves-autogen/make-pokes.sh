@@ -22,7 +22,7 @@ while getopts "hcls:d:p:" o; do
             echo "    -s DIR   source, source dir of single Pokémon tables."
             echo "             if DIR is equal to - it uses no source, only adds head and foot"
             echo "    -d name  docker, name of the docker image with the right version of psql."
-            echo "    -p port  port, port of the docker image running the db."
+            echo "    -p num   port, port of the docker image running the db."
             exit 0
             ;;
         c)

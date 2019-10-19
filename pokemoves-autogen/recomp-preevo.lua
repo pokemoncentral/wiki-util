@@ -17,12 +17,9 @@ local forms = require('Wikilib-forms')
 
 local printer = require('pokemove-printer')
 
-local skipkeys = { "games" }
-
 for poke, data in pairs(pokemoves) do
     for gen = 1,7 do
         if type(poke) == "string" and (not tonumber(poke:sub(0, 3)) or poke == "infernape")
-           and not tab.search(skipkeys, poke)
            and evodata[poke] and poke ~= evodata[poke].name -- Isn't a base form
            then
             -- Compute preevo: iterate over all moves that preevo can learn
@@ -40,7 +37,7 @@ for poke, data in pairs(pokemoves) do
                         -- The Pokémon can learn the move only by tutor, but the
                         -- preevo learn it another way, so it's all the games of
                         -- the generation
-                        local tutorGames = pokemoves.games.tutor[gen]
+                        local tutorGames = learnlib.games.tutor[gen]
                         local mdata = data.tutor[gen][move]
                         local moveGames = tab.mapToNum(mdata, function(v, k)
                             return (not v) and tutorGames[k] or nil
@@ -88,4 +85,4 @@ for poke, data in pairs(pokemoves) do
 end
 
 -- Printing
-printer.allToDir(pokemoves, "luamoves-preevo", skipkeys)
+printer.allToDir(pokemoves, "luamoves-preevo")

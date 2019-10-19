@@ -16,13 +16,16 @@ while getopts "hcd:D" o; do
 Options:
   -h        print this help
   -c        force the script to recompute csv files for all Pokémon.
-            By default it checks if directory pokecsv exists and, if it
-            does, the script doesn't recompute csv files. If it doesn't
-            recompute them it also doesn't create the container
+            The script recompute them if either this flag is given or
+            directory \"pokecsv\" doesn't exists. If the script doesn't
+            recompute them it also doesn't create/start the container
   -d name   name of the docker container with the moves db.
             If not given, it creates a new container and removes it after
             the execution. If given but the container doesn't exists the
-            script creates it.
+            script creates and fills it.
+            If the script doesn't need to create the container (eg:
+            because it doesn't have to recompute csv) this argument
+            is ignored.
   -D        same as -d using the default specified in config file"
             exit 0
             ;;

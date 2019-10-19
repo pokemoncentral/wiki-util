@@ -6,6 +6,7 @@ local pokemoves = require("PokéMoves-data")
 local evodata = require("Evo-data")
 local tab = require('Wikilib-tables')
 local str = require('Wikilib-strings')
+local learnlib = require('Wikilib-learnlists')
 
 local printer = require('pokemove-printer')
 
@@ -96,12 +97,12 @@ for line in io.lines("pokecsv/" .. poke .. ".csv") do
 			 table.insert(data[kind][gen], move)
 		 end
 	elseif kind == "tutor" then
-		local tutorgames = pokemoves.games.tutor[gen]
+		local tutorgames = learnlib.games.tutor[gen]
 		data[kind][gen][move] = data[kind][gen][move]
 			or tab.map(tutorgames, function() return false end)
 		data[kind][gen][move][tab.search(tutorgames, line[4])] = true
 	elseif kind == "breed" then
-		local breedsgames = pokemoves.games.breed[gen]
+		local breedsgames = learnlib.games.breed[gen]
 		if not data[kind][gen][move] then
 			data[kind][gen][move] = tab.map(breedsgames, function(v)
 				return { games = { v } }
@@ -111,7 +112,7 @@ for line in io.lines("pokecsv/" .. poke .. ".csv") do
 		table.insert(data[kind][gen][move].games, line[4])
 	elseif kind == "level" then
 		if line[4] ~= "Colo" and line[4] ~= "XD" then
-			local levelgames = pokemoves.games.level[gen]
+			local levelgames = learnlib.games.level[gen]
 			data[kind][gen][move] = data[kind][gen][move]
 				or tab.map(levelgames, function() return {} end)
 			table.insert(data[kind][gen][move][tab.search(levelgames, line[4])], line[5])

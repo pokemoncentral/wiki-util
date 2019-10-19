@@ -20,8 +20,6 @@ local onlyFemale = require('Wikilib-data').onlyFemales
 
 local printer = require('pokemove-printer')
 
-local skipkeys = { "games" }
-
 local genderless = {
     "magnemite", "magneton", "voltorb", "electrode", "staryu", "starmie",
     "porygon", "porygon2", "shedinja", "lunatone", "solrock", "baltoy",
@@ -98,7 +96,7 @@ end
 
 -- Check if a Pokémon can learn a move by level in a certain game.
 local function learnLevelGame(move, poke, gen, game)
-    local idx = tab.search(pokemoves.games.level[gen], game)
+    local idx = tab.search(learnlib.games.level[gen], game)
     return pokemoves[poke].level
            and pokemoves[poke].level[gen]
            and pokemoves[poke].level[gen][move]
@@ -107,7 +105,7 @@ end
 
 -- Check if a Pokémon can learn a move by tutor in a certain game.
 local function learnTutorGame(move, poke, gen, game)
-    local idx = tab.search(pokemoves.games.tutor[gen], game)
+    local idx = tab.search(learnlib.games.tutor[gen], game)
     return pokemoves[poke].tutor
            and pokemoves[poke].tutor[gen]
            and pokemoves[poke].tutor[gen][move]
@@ -122,7 +120,7 @@ end
 
 -- First for each Pokémon computes the list of neighbours
 for poke, data in pairs(pokemoves) do
-    if not tab.search(skipkeys, poke) and not data.neighbours then
+    if not data.neighbours then
         pokemoves[poke].neighbours = eggNeighboursList(poke)
     end
 end
@@ -164,7 +162,7 @@ local function recompOnePoke(poke, gen)
         newbreeddata[move] = { notes = movedata.notes, games = movedata.games }
         -- For all Pokémons in the same egg group checks whether it can learn
         -- the move directly or via breed.
-        for gameidx, game in pairs(pokemoves.games.breed[gen]) do
+        for gameidx, game in pairs(learnlib.games.breed[gen]) do
             -- If direct, parents are Pokémon that can learn the move
             -- directly, so are definitive: no need to recompute
             if not movedata[gameidx].direct and not movedata[gameidx].chain then
@@ -180,15 +178,15 @@ local function recompOnePoke(poke, gen)
 end
 
 -- Iterate recompOnePoke over all Pokémon about 14 (# egg groups) times.
--- for iteration = 1,14 do
-for iteration = 1,7 do -- it seems 7 is enough for any existing breed chain
+for iteration = 1,14 do -- Actually iterations after the thrid are very quick,
+    -- so it's not a big deal to do some some more
+-- for iteration = 1,7 do -- it seems 7 is enough for any existing breed chain
     -- Do by rounds, not modifying inplace
-    local newpokemoves = { games = pokemoves.games }
+    local newpokemoves = { }
     -- First iteration to add tables for any key, required to link them later
     -- for evolutions
     for poke, _ in pairs(pokemoves) do
-        if type(poke) == "string" and (not tonumber(poke:sub(0, 3)) or poke == "infernape")
-           and not tab.search(skipkeys, poke) then
+        if type(poke) == "string" and (not tonumber(poke:sub(0, 3)) or poke == "infernape") then
             newpokemoves[poke] = {
               level = pokemoves[poke].level,
               tm = pokemoves[poke].tm,
@@ -202,8 +200,7 @@ for iteration = 1,7 do -- it seems 7 is enough for any existing breed chain
     end
     for poke, _ in pairs(pokemoves) do
         if type(poke) == "string" and (not tonumber(poke:sub(0, 3))
-                                       or poke == "infernape")
-           and not tab.search(skipkeys, poke) then
+                                       or poke == "infernape") then
             -- Check if this Pokémon has a breed table or uses the one of the base
             -- form
             local basephasename = forms.uselessToEmpty(evodata[poke].name)
@@ -232,42 +229,40 @@ end
 
 -- Unique parents, remove direct, compress games
 for poke, data in pairs(pokemoves) do
-    if not tab.search(skipkeys, poke) then
-        for gen = 2,7 do
-            if data.breed and data.breed[gen] then
-                for move, movedata in pairs(data.breed[gen]) do
-                    if not movedata.new then
-                        local newmovedata = { games = movedata.games,
-                                              new = true }
-                        for _, v in ipairs(movedata) do
-                            v = tab.unique(v)
-                            table.sort(v, compareNdex)
-                            v.direct = nil
-                            v.chain = nil
-                            local mygame = v.games[1]
-                            -- Remove games in which the Pokémon can't learn
-                            -- the move
-                            if not movedata.games
-                               or tab.search(movedata.games, mygame) then
-                                local found = false
-                                for _, w in ipairs(newmovedata) do
-                                    if eqArray(v, w) then
-                                        found = true
-                                        table.insert(w.games, mygame)
-                                    end
-                                end
-                                if not found then
-                                    table.insert(newmovedata, v)
+    for gen = 2,7 do
+        if data.breed and data.breed[gen] then
+            for move, movedata in pairs(data.breed[gen]) do
+                if not movedata.new then
+                    local newmovedata = { games = movedata.games,
+                                          new = true }
+                    for _, v in ipairs(movedata) do
+                        v = tab.unique(v)
+                        table.sort(v, compareNdex)
+                        v.direct = nil
+                        v.chain = nil
+                        local mygame = v.games[1]
+                        -- Remove games in which the Pokémon can't learn
+                        -- the move
+                        if not movedata.games
+                           or tab.search(movedata.games, mygame) then
+                            local found = false
+                            for _, w in ipairs(newmovedata) do
+                                if eqArray(v, w) then
+                                    found = true
+                                    table.insert(w.games, mygame)
                                 end
                             end
+                            if not found then
+                                table.insert(newmovedata, v)
+                            end
                         end
-                        -- remove games field when is contains all games
-                        if tab.equal(newmovedata[1].games,
-                                     pokemoves.games.breed[gen]) then
-                            newmovedata[1].games = nil
-                        end
-                        data.breed[gen][move] = newmovedata
                     end
+                    -- remove games field when is contains all games
+                    if tab.equal(newmovedata[1].games,
+                                 learnlib.games.breed[gen]) then
+                        newmovedata[1].games = nil
+                    end
+                    data.breed[gen][move] = newmovedata
                 end
             end
         end
@@ -276,10 +271,18 @@ end
 
 -- Add previous gens, remove field new added in the previous loop
 for poke, data in pairs(pokemoves) do
+    for gen = 2,3 do
+        if type(poke) == "string" and (not tonumber(poke:sub(0, 3))
+                                       or poke == "infernape")
+           and data.breed and data.breed[gen] then
+            for _, mdata in pairs(data.breed[gen]) do
+                mdata.new = nil
+            end
+        end
+    end
     for gen = 4,7 do
         if type(poke) == "string" and (not tonumber(poke:sub(0, 3))
                                        or poke == "infernape")
-           and not tab.search(skipkeys, poke)
            and data.breed and data.breed[gen] then
             for move, mdata in pairs(data.breed[gen]) do
                 mdata.new = nil
@@ -300,4 +303,4 @@ for poke, data in pairs(pokemoves) do
 end
 
 -- Printing
-printer.allToDir(pokemoves, "luamoves-breed", skipkeys)
+printer.allToDir(pokemoves, "luamoves-breed")

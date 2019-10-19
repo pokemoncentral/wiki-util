@@ -4,7 +4,7 @@ This directory contains scripts and datas to automatically build PokéMoves-data
 ## Create the data module
 First you have to create a config file, copying the template `config-template.sh` to `config.sh` and setting values.
 
-After that, the script `do-things.sh` takes care of anything. Just take a look at its options using `do-things.sh -h` before running it because it involves creating (and afterward removing) containers, so you want to make sure it doesn't clash with anything already on your system.
+After that, the script `do-things.sh` takes care of anything. Just take a look at its options using `do-things.sh -h` before running it because it involves creating (and afterward destroying) containers, so you want to make sure it doesn't clash with anything already on your system.
 
 ## Add datas
 The source of data are some files in the directory `docker-db/sourcecsv/`. Right now there are only csv file, but any format that can be imported by PostgreSQL is fine.
