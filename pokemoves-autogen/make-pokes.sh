@@ -87,7 +87,6 @@ if ! [[ $SDIR == "-" ]]; then
         fi
         cat "${SDIR}/${pokemodule}.lua" >> "$outfile"
         echo "" >> "$outfile"
-        echo "" >> "$outfile"
         if [[ $CFLAG == true ]] || [[ $LFLAG == true ]]; then
             echo "$pokemodule"
         fi

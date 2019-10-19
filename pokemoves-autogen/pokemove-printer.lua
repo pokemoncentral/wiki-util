@@ -7,8 +7,14 @@ This module returns a function with two arguments: the first is the Pokémon's
 name, the second is the data table. The third parameter specifies whether breed
 should be a reference to the base form's breed or not.
 
+The COMPRESS local variable defines whether the output should be "compressed"
+(ie: remove any useless space/newline etc...) or not. It can be used to create
+a debug version of the module.
+
 --]]
 require('source-modules')
+
+local COMPRESS = true
 
 require('dumper')
 -- luacheck: globals DataDumper
@@ -55,19 +61,35 @@ local function compressBrd(s)
     return compressPattern('(%d),', 11, s)
 end
 
-local dumpTab = function(...)
-    return (compressOutput(DataDumper(...)))
+local dumpTab = function(val, id)
+    if COMPRESS then
+        return DataDumper(val, id, true)
+    else
+        return (compressOutput(DataDumper(val, id, false, 2)))
+    end
 end
 
 p.tabToStr = function(poke, data, breedref)
     local res = {}
-    table.insert(res, "m[\"" .. poke .. "\"] = {\n")
+    table.insert(res, "m[\"" .. poke .. "\"] = {")
+    if not COMPRESS then
+        table.insert(res, "\n")
+    end
     -- ================================ LEVEL ================================
-    table.insert(res, dumpTab(data.level, "level", false, 2))
-    table.insert(res, ",\n")
+    table.insert(res, dumpTab(data.level, "level"))
+    table.insert(res, ",")
+    if not COMPRESS then
+        table.insert(res, "\n")
+    end
     -- ================================== TM ==================================
-    table.insert(res, compressTm(dumpTab(data.tm, "tm", false, 2)))
-    table.insert(res, ",\n")
+    -- Counterintuitively, compressTm is used when output is NOT compressed
+    -- because is weaker than full compression and is usefull for legibility
+    table.insert(res, COMPRESS and dumpTab(data.tm, "tm")
+                      or compressTm(dumpTab(data.tm, "tm")))
+    table.insert(res, ",")
+    if not COMPRESS then
+        table.insert(res, "\n")
+    end
     -- ================================ BREED ================================
     if breedref then
         table.insert(res, "breed = m[\"")
@@ -80,20 +102,36 @@ p.tabToStr = function(poke, data, breedref)
         else
             table.insert(res, evodata[poke].name)
         end
-        table.insert(res, "\"].breed,\n")
+        table.insert(res, "\"].breed,")
+        if not COMPRESS then
+            table.insert(res, "\n")
+        end
     else
-        table.insert(res, compressBrd(dumpTab(data.breed, "breed", false, 2)))
-        table.insert(res, ",\n")
+        table.insert(res, COMPRESS and dumpTab(data.breed, "breed")
+                          or compressBrd(dumpTab(data.breed, "breed")))
+        table.insert(res, ",")
+        if not COMPRESS then
+            table.insert(res, "\n")
+        end
     end
     -- ================================= TUTOR =================================
-    table.insert(res, dumpTab(data.tutor, "tutor", false, 2))
-    table.insert(res, ",\n")
+    table.insert(res, dumpTab(data.tutor, "tutor"))
+    table.insert(res, ",")
+    if not COMPRESS then
+        table.insert(res, "\n")
+    end
     -- ================================ PREEVO ================================
-    table.insert(res, dumpTab(data.preevo, "preevo", false, 2))
-    table.insert(res, ",\n")
+    table.insert(res, dumpTab(data.preevo, "preevo"))
+    table.insert(res, ",")
+    if not COMPRESS then
+        table.insert(res, "\n")
+    end
     -- ================================ EVENT ================================
-    table.insert(res, dumpTab(data.event, "event", false, 2))
-    table.insert(res, ",\n")
+    table.insert(res, dumpTab(data.event, "event"))
+    table.insert(res, ",")
+    if not COMPRESS then
+        table.insert(res, "\n")
+    end
     -- ================================ ALIASES ================================
     table.insert(res, "}\nm[")
     local abbr = forms.toEmptyAbbr(forms.getabbr(poke)) or ""
@@ -108,6 +146,9 @@ p.tabToStr = function(poke, data, breedref)
     table.insert(res, "] = m[\"")
     table.insert(res, poke)
     table.insert(res, "\"]")
+    if not COMPRESS then
+        table.insert(res, "\n")
+    end
     return table.concat(res)
 end
 
