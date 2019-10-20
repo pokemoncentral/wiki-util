@@ -8,17 +8,16 @@
 # Arguments:
 #	- s: Source directory
 #	- d: Description
-#	- r: Reason for which new versions are uploaded
 #	- p: Flag, sets bot throttle to 1
 #	- o: Flag, overwrite file if already exists, defaults to no
 
 DIR=''
 DESC=''
-REASON='Tra poco saranno caricate in batch nuover versioni'
 PT=''
 OVERWRITE=false
+EXISTSREACTION=abortonwarn
 
-while getopts "s:d:r:po" OPTION; do
+while getopts "s:d:po" OPTION; do
 	case $OPTION in
 		s)
 			DIR="$OPTARG"
@@ -26,11 +25,8 @@ while getopts "s:d:r:po" OPTION; do
 		d)
 			DESC="$OPTARG"
 			;;
-		r)
-			REASON="$OPTARG"
-			;;
 		p)
-			PT='-putthrottle:1'
+			PT='-putthrottle:0'
 			;;
 		o)
 			OVERWRITE=true
@@ -51,16 +47,9 @@ if [[ -z $DESC ]]; then
 fi
 
 if [[ $OVERWRITE == true ]]; then
-
-	# Since the bot prompts for confirmation when
-	# a file already exists, deleting all of them
-	# before uploading
-
-	ls -1p "$DIR" | grep -v / | awk '{print "# [[File:"$0"]]"}' > delete.txt
-	python $PYWIKIBOT_DIR/pwb.py delete $PT -file:delete.txt -always -summary:"$REASON"
-	rm delete.txt
+	EXISTSREACTION=ignorewarn
 fi
 
 for FILE in "$DIR"/*; do
-    python $PYWIKIBOT_DIR/pwb.py upload $PT -keep -noverify -ignorewarn:was-deleted -abortonwarn:exists "$FILE" "$DESC"
+    python $PYWIKIBOT_DIR/pwb.py upload $PT -keep -noverify -$EXISTSREACTION:exists "$FILE" "$DESC"
 done
