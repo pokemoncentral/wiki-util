@@ -47,13 +47,13 @@ shift $((OPTIND-1))
 
 # Add the lua modules dir in order to allow lua scripts to source them
 sed -e 's:    ";/path/to/lua/modules/?.lua":    ";'"${MODULESPATH}"'/?.lua":' \
+    -e 's:pokemoves = require("pokemoves-data"):pokemoves = require("'"${TMPMODULENAME}"'"):' \
     source-modules.lua.base > source-modules.lua
 chmod 644 source-modules.lua
 
 # First creates a dummy PokéMoves-data.lua with only m.games defined, needed by
 # make-pokes.sh -l
 ./make-pokes.sh -s -
-cp pokemoves-data.lua $MODULESPATH/PokéMoves-data.lua
 
 if [[ $CFLAG == true ]] || [[ ! -d pokecsv ]]; then
     echo "========================= Recomputing csv files =========================="
@@ -84,7 +84,6 @@ if [[ $CFLAG == true ]] || [[ ! -d pokecsv ]]; then
     mkdir -p pokecsv
     mkdir -p luamoves
     ./make-pokes.sh -cl -d pokemovesdb -p ${CONTAINERPORT}
-    cp pokemoves-data.lua $MODULESPATH/PokéMoves-data.lua
 
     docker stop "$CONTAINER" > /dev/null
     # Remove the container if the script wasn't given -d
@@ -96,7 +95,6 @@ else
     # Compute level, tm and tutor
     mkdir -p luamoves
     ./make-pokes.sh -l
-    cp pokemoves-data.lua $MODULESPATH/PokéMoves-data.lua
 fi
 echo "============ Updated PokéMoves-data.lua with level, tm and tutor ============="
 
@@ -105,7 +103,6 @@ echo "=========================== Start computing preevo =======================
 mkdir -p luamoves-preevo
 ./recomp-preevo.lua
 ./make-pokes.sh -s luamoves-preevo
-cp pokemoves-data.lua $MODULESPATH/PokéMoves-data.lua
 echo "=================== Updated PokéMoves-data.lua with preevo ==================="
 
 # Make breed
@@ -113,5 +110,9 @@ echo "=========================== Start computing breed ========================
 mkdir -p luamoves-breed
 ./recomp-breed.lua
 ./make-pokes.sh -s luamoves-breed
-cp pokemoves-data.lua $MODULESPATH/PokéMoves-data.lua
 echo "=================== Updated PokéMoves-data.lua with breed ===================="
+
+# Split Pokémon and copy them to the modules directory
+echo "=========================== Splitting and copying ============================"
+./split-pokes.sh -s luamoves-breed
+echo "================================== Finished =================================="

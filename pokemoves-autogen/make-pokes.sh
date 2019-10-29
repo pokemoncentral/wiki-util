@@ -1,13 +1,12 @@
 #!/bin/bash
 
+source config.sh
+
 CFLAG=false
 LFLAG=false
 SDIR="luamoves"
 DOCKERV="pokemovesdb"
 PORT=12345
-
-outfile="pokemoves-data.lua"
-pokelist="pokemon-names.txt"
 
 repsrc=("farfetchd")
 repdst=("farfetch'd")
@@ -15,14 +14,14 @@ repdst=("farfetch'd")
 while getopts "hcls:d:p:" o; do
     case "${o}" in
         h)
-            echo "Options:"
-            echo "    -h       help, print this help"
-            echo "    -c       csv, recompute csv files from docker db."
-            echo "    -l       lua, recompute lua files from csvs."
-            echo "    -s DIR   source, source dir of single Pokémon tables."
-            echo "             if DIR is equal to - it uses no source, only adds head and foot"
-            echo "    -d name  docker, name of the docker image with the right version of psql."
-            echo "    -p num   port, port of the docker image running the db."
+            echo "Options:
+    -h       help, print this help
+    -c       csv, recompute csv files from docker db.
+    -l       lua, recompute lua files from csvs.
+    -s DIR   source, source dir of single Pokémon tables.
+             if DIR is equal to - it uses no source, only adds head and foot
+    -d name  docker, name of the docker image with the right version of psql.
+    -p num   port, port of the docker image running the db."
             exit 0
             ;;
         c)
@@ -53,8 +52,11 @@ get_index () {
     return -1
 }
 
+outfile="${TMPMODULENAME}.lua"
+
 # Truncate the file at the beginning of the script
-cat pokemoves-head > "$outfile"
+# cat pokemoves-head > "$outfile"
+echo "local m = {}" > "$outfile"
 echo "" >> "$outfile"
 if ! [[ $SDIR == "-" ]]; then
     while read poke; do
@@ -90,7 +92,8 @@ if ! [[ $SDIR == "-" ]]; then
         if [[ $CFLAG == true ]] || [[ $LFLAG == true ]]; then
             echo "$pokemodule"
         fi
-    done < $pokelist
+    done < $POKELIST
 fi
 
-cat pokemoves-foot >> "$outfile"
+echo "return m" >> "$outfile"
+# cat pokemoves-foot >> "$outfile"

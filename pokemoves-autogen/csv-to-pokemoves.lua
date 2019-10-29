@@ -2,7 +2,6 @@
 
 require('source-modules')
 
-local pokemoves = require("PokéMoves-data")
 local evodata = require("Evo-data")
 local tab = require('Wikilib-tables')
 local str = require('Wikilib-strings')
@@ -158,8 +157,7 @@ for _, v1 in pairs(data.level) do
 end
 -- seems that tm has repetitions
 data.tm = tab.map(data.tm, tab.unique)
--- takes event table from the module
-data.event = pokemoves[poke] and pokemoves[poke].event or {}
+-- TODO: no support for events
 
 -- Compute breedref and log
 local nobreed = true

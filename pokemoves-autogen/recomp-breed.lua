@@ -5,9 +5,9 @@ This module recompute breed parents for PokéMoves using other tables as sources
 After it prints to stdout the updated module.
 
 --]]
+-- luacheck: globals pokemoves
 require('source-modules')
 
-local pokemoves = require("PokéMoves-data")
 local pokeeggs = require("PokéEggGroup-data")
 local pokes = require("Poké-data")
 local evodata = require("Evo-data")
@@ -228,7 +228,7 @@ end
 -- depending on the execution time
 
 -- Unique parents, remove direct, compress games
-for poke, data in pairs(pokemoves) do
+for _, data in pairs(pokemoves) do
     for gen = 2,7 do
         if data.breed and data.breed[gen] then
             for move, movedata in pairs(data.breed[gen]) do

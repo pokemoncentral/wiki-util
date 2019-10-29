@@ -1,5 +1,7 @@
+!pokemon-names.txt
+
 *.log
-pokemoves-data.lua
+pokemoves-data*.lua
 pokecsv/
 luamoves*/
 source-modules.lua

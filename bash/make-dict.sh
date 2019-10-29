@@ -5,6 +5,7 @@
 # and save it to a different location.
 
 # Arguments:
+#	- h: Show this help
 #	- s: Source file
 #	- d: Destination directory. Optional, if not given operates in place
 #	- v: Flag, whether the script should show differences or not
@@ -13,8 +14,20 @@ SRC=''
 DEST=''
 DIFF=false
 
-while getopts "s:d:v" OPTION; do
-	case $OPTION in
+while getopts "hs:d:v" OPTION; do
+    case $OPTION in
+        h)
+            echo "Create a dict from a lua module.
+Can show differences with the page on the wiki
+and save it to a different location.
+
+Arguments:
+    - h: Show this help
+    - s: Source file
+    - d: Destination directory. Optional, if not given operates in place
+    - v: Flag, whether the script should show differences or not"
+            exit 0
+            ;;
 		s)
 			SRC="$OPTARG"
 			;;

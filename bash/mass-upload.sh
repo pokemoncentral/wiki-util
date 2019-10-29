@@ -6,6 +6,7 @@
 # told to and using given throttle
 
 # Arguments:
+#	- h: Show this help
 #	- s: Source directory
 #	- d: Description
 #	- p: Flag, sets bot throttle to 1
@@ -17,8 +18,21 @@ PT=''
 OVERWRITE=false
 EXISTSREACTION=abortonwarn
 
-while getopts "s:d:po" OPTION; do
+while getopts "hs:d:po" OPTION; do
 	case $OPTION in
+		h)
+			echo "This script uploads all files in a directory
+to Pokémon Central Wiki with given description,
+using filenames as they are, overwriting if
+told to and using given throttle
+
+Arguments:
+	- h: Show this help
+	- s: Source directory
+	- d: Description
+	- p: Flag, sets bot throttle to 0
+	- o: Flag, overwrite file if already exists, defaults to no"
+			;;
 		s)
 			DIR="$OPTARG"
 			;;

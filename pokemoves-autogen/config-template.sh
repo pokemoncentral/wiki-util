@@ -9,3 +9,16 @@ export CONTAINERPORT=43861
 
 # Default name for the container, used for ./do-things.sh -D
 export CONTAINERDEFAULTNAME="moves-db"
+
+# ================================== Constants ==============================
+# These are just constants shared between scripts. There's no need to change
+# them on your config
+
+# Base name of the result module
+export MODULENAME="PokéMoves-data"
+
+# Base name for temporary results
+export TMPMODULENAME="pokemoves-data"
+
+# List of Pokémon names
+export POKELIST="pokemon-names.txt"

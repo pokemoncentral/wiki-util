@@ -5,9 +5,9 @@ This module recompute preevo learnsets for PokéMoves using other tables as
 sources. After it prints to stdout the updated module.
 
 --]]
+-- luacheck: globals pokemoves
 require('source-modules')
 
-local pokemoves = require("PokéMoves-data")
 local pokes = require("Poké-data")
 local evodata = require("Evo-data")
 local tab = require('Wikilib-tables')
