@@ -10,27 +10,30 @@
 #	- d: Destination directory. Optional, if not given operates in place
 #	- v: Flag, whether the script should show differences or not
 
-SRC=''
+# SRC=''
 DEST=''
 DIFF=false
 
-while getopts "hs:d:v" OPTION; do
+while getopts "hd:v" OPTION; do
     case $OPTION in
         h)
-            echo "Create a dict from a lua module.
+            echo "Usage:
+make-dict [OPTIONS]... [FILES]...
+
+Create a dict from a lua module. Its possible to specify
+multiple files, that are processed separately.
 Can show differences with the page on the wiki
 and save it to a different location.
 
 Arguments:
     - h: Show this help
-    - s: Source file
     - d: Destination directory. Optional, if not given operates in place
     - v: Flag, whether the script should show differences or not"
             exit 0
             ;;
-		s)
-			SRC="$OPTARG"
-			;;
+		# s)
+		# 	SRC="$OPTARG"
+		# 	;;
 		d)
 			DEST="$OPTARG"
 			;;
@@ -42,24 +45,29 @@ Arguments:
 			;;
 	esac
 done
+shift $((OPTIND-1))
 
-if [[ -z $SRC ]]; then
-	echo No source file specified. Aborting
-	exit 1
-fi
+# if [[ -z $SRC ]]; then
+# 	echo No source file specified. Aborting
+# 	exit 1
+# fi
 if [[ -z $DEST ]]; then
-	echo No destination given. Operating in place
-else
-    cp $SRC $DEST
-    SRC=$DEST/$(basename $SRC)
+    echo No destination given. Operating in place
 fi
 
-node "$MACROS_DIR/run-macros.js" "$SRC" toModule
-node "$MACROS_DIR/run-macros.js" "$SRC" moduleToDict
+for SRC in "$@"; do
+    if ! [[ -z $DEST ]]; then
+        cp $SRC $DEST
+        SRC=$DEST/$(basename $SRC)
+    fi
 
-if [[ $DIFF == true ]]; then
-    # Shows diff using pagefromfile. There may be a better script, but
-    # this is just to have a working solution now
+    node "$MACROS_DIR/run-macros.js" "$SRC" toModule
+    node "$MACROS_DIR/run-macros.js" "$SRC" moduleToDict
 
-	yes | python $PYWIKIBOT_DIR/pwb.py pagefromfile -simulate -notitle -force -showdiff -pt:0 -file:"$SRC"
-fi
+    if [[ $DIFF == true ]]; then
+        # Shows diff using pagefromfile. There may be a better script, but
+        # this is just to have a working solution now
+
+    	yes | python $PYWIKIBOT_DIR/pwb.py pagefromfile -simulate -notitle -force -showdiff -pt:0 -file:"$SRC"
+    fi
+done
