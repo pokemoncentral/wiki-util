@@ -177,6 +177,17 @@ local function recompOnePoke(poke, gen)
     return newbreeddata
 end
 
+-- Clean up pokemoves from keys that aren't Pokémon names, this simplify a
+-- little the iteration afterwards
+local tmppokemoves = {}
+for poke, val in pairs(pokemoves) do
+    if type(poke) == "string" and (not tonumber(poke:sub(0, 3)) or poke == "infernape") then
+        -- val.breed = { nil, {}, {}, {}, {}, {}, {} }
+        tmppokemoves[poke] = val
+    end
+end
+pokemoves = tmppokemoves
+
 -- Iterate recompOnePoke over all Pokémon about 14 (# egg groups) times.
 for iteration = 1,14 do -- Actually iterations after the thrid are very quick,
     -- so it's not a big deal to do some some more
@@ -185,35 +196,30 @@ for iteration = 1,14 do -- Actually iterations after the thrid are very quick,
     local newpokemoves = { }
     -- First iteration to add tables for any key, required to link them later
     -- for evolutions
-    for poke, _ in pairs(pokemoves) do
-        if type(poke) == "string" and (not tonumber(poke:sub(0, 3)) or poke == "infernape") then
-            newpokemoves[poke] = {
-              level = pokemoves[poke].level,
-              tm = pokemoves[poke].tm,
-              breed = { nil, {}, {}, {}, {}, {}, {} },
-              tutor = pokemoves[poke].tutor,
-              preevo = pokemoves[poke].preevo,
-              event = pokemoves[poke].event,
-              neighbours = pokemoves[poke].neighbours,
-            }
-        end
+    for poke, val in pairs(pokemoves) do
+        newpokemoves[poke] = {
+            level = val.level,
+            tm = val.tm,
+            breed = { nil, {}, {}, {}, {}, {}, {} },
+            tutor = val.tutor,
+            preevo = val.preevo,
+            event = val.event,
+            neighbours = val.neighbours,
+        }
     end
     for poke, _ in pairs(pokemoves) do
-        if type(poke) == "string" and (not tonumber(poke:sub(0, 3))
-                                       or poke == "infernape") then
-            -- Check if this Pokémon has a breed table or uses the one of the base
-            -- form
-            local basephasename = forms.uselessToEmpty(evodata[poke].name)
-            if pokemoves[poke].breed == pokemoves[basephasename].breed
-               and poke ~= evodata[poke].name then
-                newpokemoves[poke].breed = newpokemoves[basephasename].breed
-            else
-                for gen = 2, 7 do
-                    if pokemoves[poke].breed and pokemoves[poke].breed[gen] then
-                        newpokemoves[poke].breed[gen] = recompOnePoke(poke, gen)
-                    else
-                        newpokemoves[poke].breed[gen] = nil
-                    end
+        -- Check if this Pokémon has a breed table or uses the one of the base
+        -- form
+        local basephasename = forms.uselessToEmpty(evodata[poke].name)
+        if pokemoves[poke].breed == pokemoves[basephasename].breed
+           and poke ~= evodata[poke].name then
+            newpokemoves[poke].breed = newpokemoves[basephasename].breed
+        else
+            for gen = 2, 7 do
+                if pokemoves[poke].breed[gen] then
+                    newpokemoves[poke].breed[gen] = recompOnePoke(poke, gen)
+                else
+                    newpokemoves[poke].breed[gen] = nil
                 end
             end
         end
@@ -221,6 +227,7 @@ for iteration = 1,14 do -- Actually iterations after the thrid are very quick,
     pokemoves = newpokemoves
     print(iteration)
 end
+
 
 -- Remove pokemoves[poke].breed[gen][move].direct (? Or use it)
 -- Keeping direct "should" allow to apply iterations on a non-empty set of
@@ -270,20 +277,22 @@ for _, data in pairs(pokemoves) do
 end
 
 -- Add previous gens, remove field new added in the previous loop
-for poke, data in pairs(pokemoves) do
+for _, data in pairs(pokemoves) do
     for gen = 2,3 do
-        if type(poke) == "string" and (not tonumber(poke:sub(0, 3))
-                                       or poke == "infernape")
-           and data.breed and data.breed[gen] then
+        -- if type(poke) == "string" and (not tonumber(poke:sub(0, 3))
+        --                                or poke == "infernape")
+        --    and data.breed and data.breed[gen] then
+        if data.breed and data.breed[gen] then
             for _, mdata in pairs(data.breed[gen]) do
                 mdata.new = nil
             end
         end
     end
     for gen = 4,7 do
-        if type(poke) == "string" and (not tonumber(poke:sub(0, 3))
-                                       or poke == "infernape")
-           and data.breed and data.breed[gen] then
+        -- if type(poke) == "string" and (not tonumber(poke:sub(0, 3))
+        --                                or poke == "infernape")
+        --    and data.breed and data.breed[gen] then
+        if data.breed and data.breed[gen] then
             for move, mdata in pairs(data.breed[gen]) do
                 mdata.new = nil
                 -- If the Pokémon doesn't have any parent, tries old gens

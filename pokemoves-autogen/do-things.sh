@@ -109,7 +109,7 @@ echo "=================== Updated PokéMoves-data.lua with preevo ==============
 echo "=========================== Start computing breed ============================"
 mkdir -p luamoves-breed
 ./recomp-breed.lua
-./make-pokes.sh -s luamoves-breed
+# ./make-pokes.sh -s luamoves-breed
 echo "=================== Updated PokéMoves-data.lua with breed ===================="
 
 # Split Pokémon and copy them to the modules directory
