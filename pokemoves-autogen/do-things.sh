@@ -95,6 +95,7 @@ else
     # Compute level, tm and tutor
     mkdir -p luamoves
     ./make-pokes.sh -l
+    ./split-pokes.sh -s luamoves
 fi
 echo "============ Updated PokéMoves-data.lua with level, tm and tutor ============="
 
@@ -103,6 +104,7 @@ echo "=========================== Start computing preevo =======================
 mkdir -p luamoves-preevo
 ./recomp-preevo.lua
 ./make-pokes.sh -s luamoves-preevo
+./split-pokes.sh -s luamoves-preevo
 echo "=================== Updated PokéMoves-data.lua with preevo ==================="
 
 # Make breed
@@ -110,9 +112,10 @@ echo "=========================== Start computing breed ========================
 mkdir -p luamoves-breed
 ./recomp-breed.lua
 # ./make-pokes.sh -s luamoves-breed
+# ./split-pokes.sh -s luamoves-breed
 echo "=================== Updated PokéMoves-data.lua with breed ===================="
 
 # Split Pokémon and copy them to the modules directory
-echo "=========================== Splitting and copying ============================"
+echo "================================= Final copy ================================="
 ./split-pokes.sh -s luamoves-breed
 echo "================================== Finished =================================="

@@ -49,9 +49,9 @@ local function ParseCSVLine(line,sep)
 	return res
 end
 
-local breedgames = { 0, 2, 3, 3, 2, 2, 2 }
+local breedgames = { 0, 2, 3, 3, 2, 2, 2, 1 }
 
-local datagen = { {}, {}, {}, {}, {}, {}, {} }
+local datagen = { {}, {}, {}, {}, {}, {}, {}, {} }
 local data = { level = tab.copy(datagen), tm = tab.copy(datagen),
 			   breed = tab.copy(datagen), tutor = tab.copy(datagen),
 		       preevo = {}, event = {} }
@@ -72,8 +72,10 @@ local baseNoBreed = {
 	"volcanion", "tipo zero", "minior", "dhelmise", "tapu koko", "tapu lele",
 	"tapu bulu", "tapu fini", "cosmog", "nihilego", "buzzwole", "pheromosa",
 	"xurkitree", "celesteela", "kartana", "guzzlord", "necrozma", "magearna",
-	"marshadow", "poipole", "stakataka", "blacephalon", "zeraora", "deoxysA",
-	"deoxysD", "deoxysV", "shayminC", "kyuremN", "kyuremB", "hoopaL"}
+	"marshadow", "poipole", "stakataka", "blacephalon", "zeraora", "meltan",
+	"sinistea", "impidimp", "falinks", "dracozolt", "arctozolt", "dracovish",
+	"arctovish", "zacian", "zamazenta", "eternatus",
+	"deoxysA", "deoxysD", "deoxysV", "shayminC", "kyuremN", "kyuremB", "hoopaL"}
 local breedNoBase = { "chansey", "chimecho", "mantine", "marill", "mr. mime", "roselia", "snorlax", "sudowoodo" }
 
 local poke = str.trim(arg[1]) or "staraptor"

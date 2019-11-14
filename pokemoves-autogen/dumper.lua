@@ -124,16 +124,21 @@ function DataDumper(value, varname, fastmode, ident)
   if fastmode then
     fcts.table = function (value)
       -- Table value
-      local numidx = 1
       out[#out+1] = "{"
-      for key,val in pairs(value) do
-        if key == numidx then
+      -- Integer keys
+      local numidx = 0
+      for _,val in ipairs(value) do
+          local str = dumplua(val)
+          out[#out+1] = str..","
           numidx = numidx + 1
-        else
+      end
+      -- Other keys
+      for key,val in pairs(value) do
+        if type(key) ~= "number" or key > numidx then
           out[#out+1] = keycache[key]
+          local str = dumplua(val)
+          out[#out+1] = str..","
         end
-        local str = dumplua(val)
-        out[#out+1] = str..","
       end
       if string.sub(out[#out], -1) == "," then
         out[#out] = string.sub(out[#out], 1, -2);

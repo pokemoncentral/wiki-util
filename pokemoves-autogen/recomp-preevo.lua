@@ -18,7 +18,7 @@ local forms = require('Wikilib-forms')
 local printer = require('pokemove-printer')
 
 for poke, data in pairs(pokemoves) do
-    for gen = 1,7 do
+    for gen = 1,8 do
         if type(poke) == "string" and (not tonumber(poke:sub(0, 3)) or poke == "infernape")
            and evodata[poke] and poke ~= evodata[poke].name -- Isn't a base form
            then

@@ -8,8 +8,8 @@ SDIR="luamoves"
 DOCKERV="pokemovesdb"
 PORT=12345
 
-repsrc=("farfetchd")
-repdst=("farfetch'd")
+repsrc=("farfetchd" "farfetchdG" "sirfetchd")
+repdst=("farfetch'd" "farfetch'dG" "sirfetch'd")
 
 while getopts "hcls:d:p:" o; do
     case "${o}" in

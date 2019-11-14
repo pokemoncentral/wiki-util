@@ -200,7 +200,7 @@ for iteration = 1,14 do -- Actually iterations after the thrid are very quick,
         newpokemoves[poke] = {
             level = val.level,
             tm = val.tm,
-            breed = { nil, {}, {}, {}, {}, {}, {} },
+            breed = { nil, {}, {}, {}, {}, {}, {}, {} },
             tutor = val.tutor,
             preevo = val.preevo,
             event = val.event,
@@ -215,7 +215,7 @@ for iteration = 1,14 do -- Actually iterations after the thrid are very quick,
            and poke ~= evodata[poke].name then
             newpokemoves[poke].breed = newpokemoves[basephasename].breed
         else
-            for gen = 2, 7 do
+            for gen = 2, 8 do
                 if pokemoves[poke].breed[gen] then
                     newpokemoves[poke].breed[gen] = recompOnePoke(poke, gen)
                 else
@@ -236,7 +236,7 @@ end
 
 -- Unique parents, remove direct, compress games
 for _, data in pairs(pokemoves) do
-    for gen = 2,7 do
+    for gen = 2,8 do
         if data.breed and data.breed[gen] then
             for move, movedata in pairs(data.breed[gen]) do
                 if not movedata.new then
@@ -288,7 +288,7 @@ for _, data in pairs(pokemoves) do
             end
         end
     end
-    for gen = 4,7 do
+    for gen = 4,8 do
         -- if type(poke) == "string" and (not tonumber(poke:sub(0, 3))
         --                                or poke == "infernape")
         --    and data.breed and data.breed[gen] then

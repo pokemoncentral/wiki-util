@@ -2,8 +2,8 @@
 
 source config.sh
 
-repsrc=("farfetchd")
-repdst=("farfetch'd")
+repsrc=("farfetchd" "farfetchdG" "sirfetchd")
+repdst=("farfetch'd" "farfetch'dG" "sirfetch'd")
 
 while getopts "hs:" o; do
     case "${o}" in
