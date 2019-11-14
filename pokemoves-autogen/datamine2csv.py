@@ -218,7 +218,7 @@ def parse_move_line(line: str, kind: int):
 		# tm
 		regex = "^\- \[TM\d{1,3}\] (.*)$"
 	elif kind == 3:
-		# tutor
+		# tr
 		regex = "^\- \[TR\d{1,3}\] (.*)$"
 
 	m = re.match(regex, line)
@@ -242,7 +242,7 @@ def convert_kind(kind: int):
 	elif kind == 2:
 		return 4
 	elif kind == 3:
-		return 3
+		return 4
 
 def write_row_csv_pokemoves(poke_id: str, kind: int, elem: Tuple, csvw):
 	if kind == 0:
