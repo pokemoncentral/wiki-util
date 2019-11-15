@@ -111,11 +111,19 @@ echo "=================== Updated PokéMoves-data.lua with preevo ==============
 echo "=========================== Start computing breed ============================"
 mkdir -p luamoves-breed
 ./recomp-breed.lua
-# ./make-pokes.sh -s luamoves-breed
+./make-pokes.sh -s luamoves-breed
 # ./split-pokes.sh -s luamoves-breed
+echo "=================== Updated PokéMoves-data.lua with breed ===================="
+
+# Compress
+echo "============================= Start compressing =============================="
+mkdir -p luamoves-compress
+./compress-pokemoves.lua
+# ./make-pokes.sh -s luamoves-compress
+# ./split-pokes.sh -s luamoves-compress
 echo "=================== Updated PokéMoves-data.lua with breed ===================="
 
 # Split Pokémon and copy them to the modules directory
 echo "================================= Final copy ================================="
-./split-pokes.sh -s luamoves-breed
+./split-pokes.sh -s luamoves-compress
 echo "================================== Finished =================================="
