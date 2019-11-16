@@ -71,6 +71,8 @@ replaces = {
 	u"farfetch’d": "farfetchd",
 	"farfetch'd-1": "farfetchdG",
 	u"farfetch’d-1": "farfetchdG",
+	"sirfetch'd": "sirfetchd",
+	u"sirfetch’d": "sirfetchd",
 	"cramorant": "cramorant",
 	"cramorant-1": "cramorantT",
 	"cramorant-2": "cramorantI",

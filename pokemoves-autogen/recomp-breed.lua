@@ -26,7 +26,7 @@ local genderless = {
     "claydol", "beldum", "metang", "metagross", "bronzor", "bronzong",
     "magnezone", "porygon-z", "rotom", "phione", "manaphy", "klink", "klang",
     "klinklang", "cryogonal", "golett", "golurk", "carbink", "minior",
-    "dhelmise"
+    "dhelmise", "sinistea", "polteageist", "falinks",
 }
 
 -- Compare two tables, only on integer keys, to check if they're equal
@@ -68,10 +68,14 @@ local function eggGroupList(group)
     end)
 end
 
--- Returns the list of Pokémon that can breed with a given one (that is: share
--- an egg group that isn't "sconosciuto"). Pokémon of the same evoline, female
--- only and genderless Pokémon (because they can't pass an egg move) are
--- excluded from the list
+--[[
+
+Returns the list of Pokémon that can breed with a given one (that is: share
+an egg group that isn't "sconosciuto"). Pokémon of the same evoline, female
+only and genderless Pokémon (because they can't pass an egg move) are
+excluded from the list.
+
+--]]
 local function eggNeighboursList(poke)
     local groups = tab.filter(pokeeggs[poke] or {},
                               function(g) return g ~= "sconosciuto" end)
@@ -82,6 +86,21 @@ local function eggNeighboursList(poke)
                and not tab.search(genderless, p)
     end)
 end
+
+--[[
+
+Returns the list of Pokémon that can breed with a given one (that is: share
+an egg group that isn't "sconosciuto") from gen 8 onward. Pokémon of the same
+evoline, are excluded from the list.
+
+--]]
+-- local function egg6NeighboursList(poke)
+--     local groups = tab.filter(pokeeggs[poke] or {},
+--                               function(g) return g ~= "sconosciuto" end)
+--     return tab.filter(tab.unique(tab.flatMap(groups, eggGroupList)), function(p)
+--         return not tab.search(genderless, p)
+--     end)
+-- end
 
 -- Check whether a Pokémon has at least one parent to learn a move by breed
 -- in a certain game
@@ -122,12 +141,16 @@ end
 for poke, data in pairs(pokemoves) do
     if not data.neighbours then
         pokemoves[poke].neighbours = eggNeighboursList(poke)
+        -- pokemoves[poke].neighbours6 = egg6NeighboursList(poke)
     end
 end
 
 -- Can modify gamedata, but has no other side effects. Return the new gamedata
 local function recompPokeMoveGame(poke, gen, game, gameidx, move, gamedata)
-    for _, opoke in pairs(pokemoves[poke].neighbours) do
+    -- local neighbours = gen < 6 and pokemoves[poke].neighbours
+    --                            or pokemoves[poke].neighbours6
+    local neighbours = pokemoves[poke].neighbours
+    for _, opoke in pairs(neighbours) do
         if pokemoves[opoke] then
             if learnlib.canLearn(move, opoke, gen, {"level", "breed", "preevo" ,"tutor"})
                or learnLevelGame(move, opoke, gen, game)
@@ -205,6 +228,7 @@ for iteration = 1,14 do -- Actually iterations after the thrid are very quick,
             preevo = val.preevo,
             event = val.event,
             neighbours = val.neighbours,
+            -- neighbours6 = val.neighbours6,
         }
     end
     for poke, _ in pairs(pokemoves) do
@@ -309,6 +333,11 @@ for _, data in pairs(pokemoves) do
             end
         end
     end
+end
+
+-- Pichu can learn Locomovolt with a special note
+for gen = 3,8 do
+    pokemoves.pichu.breed[gen].locomovolt = {{25, 26, 172}, notes = "Se il genitore tiene una Elettropalla"}
 end
 
 -- Printing
