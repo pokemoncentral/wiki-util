@@ -7,8 +7,9 @@ source config.sh
 CFLAG=false
 CONTAINER=""
 DFLAG=false
+PFLAG=false
 
-while getopts "hcd:D" o; do
+while getopts "hcd:Dp" o; do
     case "${o}" in
         h)
             echo "Compute data module PokéMoves-data
@@ -26,7 +27,9 @@ Options:
             If the script doesn't need to create the container (eg:
             because it doesn't have to recompute csv) this argument
             is ignored.
-  -D        same as -d using the default specified in config file"
+  -D        same as -d using the default specified in config file
+  -p        only processes lua file, without recomputing them from csv.
+            Ignored with -c"
             exit 0
             ;;
         c)
@@ -40,6 +43,9 @@ Options:
             CONTAINER="$CONTAINERDEFAULTNAME"
             DFLAG=true
             ;;
+	p)
+	    PFLAG=true
+	    ;;
     esac
 done
 shift $((OPTIND-1))
@@ -91,12 +97,14 @@ if [[ $CFLAG == true ]] || [[ ! -d pokecsv ]]; then
         echo "=========================== Removing container ==========================="
         docker container rm "$CONTAINER"
     fi
-else
+elif [[ $PFLAG == false ]]; then
     # Compute level, tm and tutor
     mkdir -p luamoves
     ./make-pokes.sh -l
-    ./split-pokes.sh -s luamoves
+else
+    ./make-pokes.sh -s luamoves
 fi
+./split-pokes.sh -s luamoves
 echo "============ Updated PokéMoves-data.lua with level, tm and tutor ============="
 
 # Make preevo
