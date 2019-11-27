@@ -41,3 +41,8 @@ psql -p 5432 -U "$POSTGRES_USER" -d postgres \
     -c "\\COPY pokemon_moves
     FROM '/data/sourcecsv/pokemon_moves_spsc.csv'
     WITH csv"
+
+psql -p 5432 -U "$POSTGRES_USER" -d postgres \
+    -c "\\COPY pokemon_moves
+    FROM '/data/sourcecsv/tutor_moves_spsc.csv'
+    WITH csv header"
