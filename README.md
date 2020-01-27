@@ -20,6 +20,7 @@ appropriate extension:
 -	[pywikibot](https://www.mediawiki.org/wiki/Manual:Pywikibot)
 -	[imagemagick](https://www.imagemagick.org/script/index.php)
 -	[gifsicle](https://www.lcdf.org/gifsicle/)
+-	[uni2ascii](https://billposer.org/Software/uni2ascii.html)
 
 ## Lua
 -	[wiki-modules](https://github.com/pokemoncentral/wiki-lua-modules)

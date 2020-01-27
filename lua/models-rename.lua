@@ -30,15 +30,17 @@ Arguments
 local txt = require('Wikilib-strings')
 local tab = require('Wikilib-tables')
 local poke = require('Poké-data')
-local alts = require('AltForms-data')
+-- local alts = require('AltForms-data')
 local data = require('Wikilib-data')
-local useless = require('UselessForms-data')
+-- local useless = require('UselessForms-data')
+local alts = require('Wikilib-forms').allFormsData()
 
 local mw = require('mw')
 
 local pcwGames = {
 	oras = 'roza',
-	sm = 'sl'
+	sm = 'sl',
+	swsh = 'spsc',
 }
 
 local variants = {
@@ -55,7 +57,7 @@ modules to allow some degree of flexibility
 
 --]]
 local getAbbr = function(poke, extended)
-	return (alts[poke] or useless[poke]).ext[extended]
+	return alts[poke].ext[extended]
 end
 
 --[[
@@ -128,7 +130,7 @@ local abbr = {
 		['flabébé'] = getAbbr('flabébé', 'blu'),
 		floette = getAbbr('floette', 'blu'),
 		florges = getAbbr('florges', 'blu'),
-		minior = getAbbr('minior', 'blu')
+		minior = getAbbr('minior', 'azzurro'),
 	},
 	zen = getAbbr('darmanitan', 'zen'),
 	autumn = getAbbr('deerling', 'autunno'),
@@ -168,8 +170,18 @@ local abbr = {
 	tundra = getAbbr('vivillon', 'manto di neve'),
 	fancy = getAbbr('vivillon', 'sbarazzino'),
 	pokeball = getAbbr('vivillon', 'poké ball'),
-	orange = getAbbr('floette', 'arancione'),
-	yellow = getAbbr('floette', 'giallo'),
+	orange = {
+		floette = getAbbr('floette', 'arancione'),
+		florges = getAbbr('floette', 'arancione'),
+		['flabébé'] = getAbbr('floette', 'arancione'),
+		minior = getAbbr('minior', 'arancione'),
+	},
+	yellow = {
+		floette = getAbbr('floette', 'giallo'),
+		florges = getAbbr('floette', 'giallo'),
+		['flabébé'] = getAbbr('floette', 'giallo'),
+		minior = getAbbr('minior', 'giallo'),
+	},
 	eternal = 'E',
 	blade = getAbbr('aegislash', 'spada'),
 	small = getAbbr('pumpkaboo', 'mini'),
@@ -216,7 +228,119 @@ local abbr = {
 	broken = getAbbr('mimikyu', 'smascherata'),
 	['2'] = {
 		mimikyu = getAbbr('mimikyu', 'smascherata')
-	}
+	},
+	galar = getAbbr('corsola', 'galar'),
+	["galarzen"] = getAbbr('darmanitan', 'galar zen'),
+	lowkey = getAbbr('toxtricity', 'basso'),
+	gulping = getAbbr('cramorant', 'inghiottitutto'),
+	gorging = getAbbr('cramorant', 'inghiottintero'),
+	noice = getAbbr('eiscue', 'liquefaccia'),
+	hangry = getAbbr('morpeko', 'panciavuota'),
+	crowned = getAbbr('zacian', 'eroe'),
+	eternamax = getAbbr('eternatus', 'dynamax'),
+	gigantamax = getAbbr('corviknight', 'gigamax'),
+	-- Alcremie
+	["caramel£swirl"] = getAbbr('alcremie', 'caramelmix'),
+	["lemon£cream"] = getAbbr('alcremie', 'lattelimone'),
+	["matcha£cream"] = getAbbr('alcremie', 'lattematcha'),
+	["mint£cream"] = getAbbr('alcremie', 'lattementa'),
+	["rainbow£swirl"] = getAbbr('alcremie', 'triplomix'),
+	["ruby£cream"] = getAbbr('alcremie', 'latterosa'),
+	["ruby£swirl"] = getAbbr('alcremie', 'rosamix'),
+	["salted£cream"] = getAbbr('alcremie', 'lattesale'),
+	["vanilla£cream"] = '',
+	["berry"] = "B",
+	["clover"] = "Fg",
+	["flower"] = "Fi",
+	["love"] = "C",
+	["ribbon"] = "Fo",
+	["star"] = "S",
+	["strawberry"] = "Fr",
+
+	["caramel£swirlberry"] = getAbbr('alcremie', 'caramelmix') .. "B",
+	["caramel£swirlclover"] = getAbbr('alcremie', 'caramelmix') .. "Fg",
+	["caramel£swirlflower"] = getAbbr('alcremie', 'caramelmix') .. "Fi",
+	["caramel£swirllove"] = getAbbr('alcremie', 'caramelmix') .. "C",
+	["caramel£swirlribbon"] = getAbbr('alcremie', 'caramelmix') .. "Fo",
+	["caramel£swirlstar"] = getAbbr('alcremie', 'caramelmix') .. "S",
+	["caramel£swirlstrawberry"] = getAbbr('alcremie', 'caramelmix') .. "Fr",
+
+	["lemon£creamberry"] = getAbbr('alcremie', 'lattelimone') .. "B",
+	["lemon£creamclover"] = getAbbr('alcremie', 'lattelimone') .. "Fg",
+	["lemon£creamflower"] = getAbbr('alcremie', 'lattelimone') .. "Fi",
+	["lemon£creamlove"] = getAbbr('alcremie', 'lattelimone') .. "C",
+	["lemon£creamribbon"] = getAbbr('alcremie', 'lattelimone') .. "Fo",
+	["lemon£creamstar"] = getAbbr('alcremie', 'lattelimone') .. "S",
+	["lemon£creamstrawberry"] = getAbbr('alcremie', 'lattelimone') .. "Fr",
+
+	["matcha£creamberry"] = getAbbr('alcremie', 'lattematcha') .. "B",
+	["matcha£creamclover"] = getAbbr('alcremie', 'lattematcha') .. "Fg",
+	["matcha£creamflower"] = getAbbr('alcremie', 'lattematcha') .. "Fi",
+	["matcha£creamlove"] = getAbbr('alcremie', 'lattematcha') .. "C",
+	["matcha£creamribbon"] = getAbbr('alcremie', 'lattematcha') .. "Fo",
+	["matcha£creamstar"] = getAbbr('alcremie', 'lattematcha') .. "S",
+	["matcha£creamstrawberry"] = getAbbr('alcremie', 'lattematcha') .. "Fr",
+
+	["mint£creamberry"] = getAbbr('alcremie', 'lattementa') .. "B",
+	["mint£creamclover"] = getAbbr('alcremie', 'lattementa') .. "Fg",
+	["mint£creamflower"] = getAbbr('alcremie', 'lattementa') .. "Fi",
+	["mint£creamlove"] = getAbbr('alcremie', 'lattementa') .. "C",
+	["mint£creamribbon"] = getAbbr('alcremie', 'lattementa') .. "Fo",
+	["mint£creamstar"] = getAbbr('alcremie', 'lattementa') .. "S",
+	["mint£creamstrawberry"] = getAbbr('alcremie', 'lattementa') .. "Fr",
+
+	["rainbow£swirlberry"] = getAbbr('alcremie', 'triplomix') .. "B",
+	["rainbow£swirlclover"] = getAbbr('alcremie', 'triplomix') .. "Fg",
+	["rainbow£swirlflower"] = getAbbr('alcremie', 'triplomix') .. "Fi",
+	["rainbow£swirllove"] = getAbbr('alcremie', 'triplomix') .. "C",
+	["rainbow£swirlribbon"] = getAbbr('alcremie', 'triplomix') .. "Fo",
+	["rainbow£swirlstar"] = getAbbr('alcremie', 'triplomix') .. "S",
+	["rainbow£swirlstrawberry"] = getAbbr('alcremie', 'triplomix') .. "Fr",
+
+	["ruby£creamberry"] = getAbbr('alcremie', 'latterosa') .. "B",
+	["ruby£creamclover"] = getAbbr('alcremie', 'latterosa') .. "Fg",
+	["ruby£creamflower"] = getAbbr('alcremie', 'latterosa') .. "Fi",
+	["ruby£creamlove"] = getAbbr('alcremie', 'latterosa') .. "C",
+	["ruby£creamribbon"] = getAbbr('alcremie', 'latterosa') .. "Fo",
+	["ruby£creamstar"] = getAbbr('alcremie', 'latterosa') .. "S",
+	["ruby£creamstrawberry"] = getAbbr('alcremie', 'latterosa') .. "Fr",
+
+	["ruby£swirlberry"] = getAbbr('alcremie', 'rosamix') .. "B",
+	["ruby£swirlclover"] = getAbbr('alcremie', 'rosamix') .. "Fg",
+	["ruby£swirlflower"] = getAbbr('alcremie', 'rosamix') .. "Fi",
+	["ruby£swirllove"] = getAbbr('alcremie', 'rosamix') .. "C",
+	["ruby£swirlribbon"] = getAbbr('alcremie', 'rosamix') .. "Fo",
+	["ruby£swirlstar"] = getAbbr('alcremie', 'rosamix') .. "S",
+	["ruby£swirlstrawberry"] = getAbbr('alcremie', 'rosamix') .. "Fr",
+
+	["salted£creamberry"] = getAbbr('alcremie', 'lattesale') .. "B",
+	["salted£creamclover"] = getAbbr('alcremie', 'lattesale') .. "Fg",
+	["salted£creamflower"] = getAbbr('alcremie', 'lattesale') .. "Fi",
+	["salted£creamlove"] = getAbbr('alcremie', 'lattesale') .. "C",
+	["salted£creamribbon"] = getAbbr('alcremie', 'lattesale') .. "Fo",
+	["salted£creamstar"] = getAbbr('alcremie', 'lattesale') .. "S",
+	["salted£creamstrawberry"] = getAbbr('alcremie', 'lattesale') .. "Fr",
+
+	["vanilla£creamberry"] = 'V' .. "B",
+	["vanilla£creamclover"] = 'V' .. "Fg",
+	["vanilla£creamflower"] = 'V' .. "Fi",
+	["vanilla£creamlove"] = 'V' .. "C",
+	["vanilla£creamribbon"] = 'V' .. "Fo",
+	["vanilla£creamstar"] = 'V' .. "S",
+	["vanilla£creamstrawberry"] = 'V' .. "Fr",
+}
+
+--[[
+
+Some abbr contain dashes, and this doesn't work with
+the split. They are listed in this table, so that they
+can be replaced with a $ sign.
+
+--]]
+local dashedStrings = {
+	"type-null", "caramel-swirl", "lemon-cream", "matcha-cream",
+	"mint-cream", "rainbow-swirl", "ruby-cream", "ruby-swirl", "salted-cream",
+	"vanilla-cream",
 }
 
 --[[
@@ -230,17 +354,26 @@ local trueNames = {
 	['mime jr'] = 'mime jr.',
 	['flabebe'] = 'flabébé',
 	typenull = 'tipo zero',
+	['type£null'] = 'tipo zero',
 	tapukoko = 'tapu koko',
 	tapulele = 'tapu lele',
 	tapubulu = 'tapu bulu',
-	tapufini = 'tapu fini'
+	tapufini = 'tapu fini',
+	sirfetchd = "sirfetch'd",
 }
 
+local modelname = arg[1]
+
+-- Replaces dashedAbbr
+for _, s in pairs(dashedStrings) do
+	modelname = modelname:gsub(s:gsub("%-", "%%-"), s:gsub("%-", "£"))
+end
+
 -- Match strips away any extension
-local splits = mw.text.split(arg[1]:match('(.+)%..+$'),
+local splits = mw.text.split(modelname:match('(.+)%..+$'),
 		'-', true)
 
-local move, form = '', ''
+local move, form = '', {}
 local name = {splits[1]}
 
 if #splits > 1 then
@@ -262,7 +395,7 @@ if #splits > 1 then
 		end
 
 		if abbr[piece] then
-			form = piece
+			table.insert(form, 1, piece)
 			formOrMove = true
 		end
 
@@ -272,6 +405,7 @@ if #splits > 1 then
 	end
 end
 
+form = table.concat(form)
 name = table.concat(name, '-'):gsub('_', ' ')
 name = trueNames[name] or name
 
@@ -289,7 +423,7 @@ then
 		is regarded as a form, otherwise
 		as a move
 	--]]
-	if abbr[form][name] then	
+	if abbr[form][name] then
 		move = ''
 		form = abbr[form][name]
 	else

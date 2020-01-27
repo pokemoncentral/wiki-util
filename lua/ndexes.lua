@@ -15,10 +15,11 @@ local tab = require('Wikilib-tables')
 local formUtil = require('Wikilib-forms')
 local genUtil = require('Wikilib-gens')
 local isInGame = require('Wikilib-games').isInGame
-local alts = require('AltForms-data')
+-- local alts = require('AltForms-data')
 local gendata = require('Gens-data')
 local pokes = require('Poké-data')
 local useless = require('UselessForms-data')
+local alts = require('Wikilib-forms').allFormsData()
 
 --[[
 
@@ -34,13 +35,15 @@ r.all = table.map(r.all, function(ndex)
 			and ndex
 			or string.tf(ndex)
 end)
-	
+
 for key, data in table.nonIntPairs(useless) do
-	for _, abbr in ipairs(data.gamesOrder) do
-        if abbr ~= 'base' then
-            table.insert(r.all, string.tf(pokes[key]
-                    .ndex) .. abbr)
-        end
+	if key ~= "gigamax" then
+		for _, abbr in ipairs(data.gamesOrder) do
+			if abbr ~= 'base' then
+				table.insert(r.all, string.tf(pokes[key]
+						.ndex) .. abbr)
+		end
+		end
 	end
 end
 
@@ -56,23 +59,23 @@ most recent game.
 
 --]]
 r.forms = function(poke, since)
-    if not since then
-        local latestGenGames = gendata[gendata.latest].games
-        since = latestGenGames[#latestGenGames]
-    end
+	if not since then
+		local latestGenGames = gendata[gendata.latest].games
+		since = latestGenGames[#latestGenGames]
+	end
 
-    local ndex = pokes[tonumber(poke) or poke:lower()].ndex
+	local ndex = pokes[tonumber(poke) or poke:lower()].ndex
 
-    if tonumber(since) then
-        since = gendata[tonumber(since)].games[1]
-    end
+	if tonumber(since) then
+		since = gendata[tonumber(since)].games[1]
+	end
 
 	local tfNdex = string.tf(ndex)
-	local forms = alts[ndex] or useless[ndex]
-    forms = table.filter(forms.gamesOrder, function(abbr)
-            return isInGame(tfNdex ..
-                    formUtil.toEmptyAbbr(abbr), since)
-            end)
+	local forms = alts[ndex]
+	forms = table.filter(forms.gamesOrder, function(abbr)
+		return isInGame(tfNdex ..
+				formUtil.toEmptyAbbr(abbr), since)
+	end)
 
 	return table.map(forms, function(form)
 		return tfNdex .. formUtil.toEmptyAbbr(form)
@@ -103,8 +106,7 @@ r.gen = function(gen)
 		end
 
 		local dex, abbr = formUtil.getNameAbbr(ndex)
-		local sinceGame = (alts[dex] or useless[dex])
-				.since[abbr]
+		local sinceGame = alts[dex].since[abbr]
 		return gendata[gen].games[1] == sinceGame
 	end)
 end
@@ -125,8 +127,7 @@ r.game = function(game)
 			sinceGame = gendata[gen].games[1]
 		else
 			local dex, abbr = formUtil.getNameAbbr(ndex)
-			sinceGame = (alts[dex] or useless[dex])
-					.since[abbr]
+			sinceGame = alts[dex].since[abbr]
 		end
 
 		return game == sinceGame

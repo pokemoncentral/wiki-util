@@ -31,9 +31,10 @@
 #		- sm
 #		- sl
 #		- usum
+#		- swsh
 
 # Simple constants
-PP_BASE_URL='http://www.pkparaiso.com/imagenes'
+PP_BASE_URL='https://www.pkparaiso.com/imagenes'
 SHOWDOWN_BASE_URL='https://play.pokemonshowdown.com/sprites/'
 LOG_FILE='models_download.log'
 
@@ -43,10 +44,12 @@ PP_GAMES[xy]='xy'
 PP_GAMES[oras]='rubi-omega-zafiro-alfa'
 PP_GAMES[sm]='sol-luna'
 PP_GAMES[usum]='missing'
+PP_GAMES[swsh]='espada_escudo'
 
 # Pkparaiso variants mapping
 declare -A PP_VARIANTS
-PP_VARIANTS[shiny]='-shiny'
+# PP_VARIANTS[shiny]='-shiny'
+PP_VARIANTS[shiny]='-s'
 PP_VARIANTS[back]='-espalda'
 PP_VARIANTS[back_shiny]='-espalda-shiny'
 PP_VARIANTS[normal]=''
@@ -57,6 +60,7 @@ GC_GAMES[xy]='XY'
 GC_GAMES[oras]='ORAS'
 GC_GAMES[sm]='SoMo'
 GC_GAMES[usum]='USUM'
+GC_GAMES[swsh]='StSd'
 
 # PokéWiki variants mapping
 declare -A GC_VARIANTS
@@ -71,6 +75,7 @@ SHOWDOWN_GAMES[xy]='xy'
 SHOWDOWN_GAMES[oras]='xy'
 SHOWDOWN_GAMES[sm]='xy'
 SHOWDOWN_GAMES[usum]='xy'
+SHOWDOWN_GAMES[swsh]='missing'
 
 # Showdown variants mapping
 declare -A SHOWDOWN_VARIANTS
@@ -84,7 +89,8 @@ VARIANT=${1,,}
 GAMES=${2,,}
 
 # Utility variables
-PP_URL=$PP_BASE_URL/${PP_GAMES[$GAMES]}/sprites/animados${PP_VARIANTS[$VARIANT]}
+# PP_URL=$PP_BASE_URL/${PP_GAMES[$GAMES]}/sprites/animados${PP_VARIANTS[$VARIANT]}
+PP_URL=$PP_BASE_URL/${PP_GAMES[$GAMES]}/sprites/animados-gigante
 SHOWDOWN_URL=$SHOWDOWN_BASE_URL/${SHOWDOWN_GAMES[$GAMES]}ani-${SHOWDOWN_VARIANTS[$VARIANT]}
 DROPBOX_BASE_DIR=~/Dropbox/Wiki/Sprite/Modelli_$GAMES
 LISTFILE=$DROPBOX_BASE_DIR/modellist-$VARIANT.txt
@@ -107,6 +113,8 @@ while read -a LINE; do
 	GC_NAME=${LINE[0]}
 	PP_NAME=${LINE[1]}
 	SD_NAME=${LINE[2]}
+
+	echo $PP_NAME
 
 	# Male and female PCW sprite names
 	cd ../lua
@@ -141,15 +149,14 @@ while read -a LINE; do
 
 	# Pkparaiso download
 
-	# Male
 	if [[ $MALE_EXISTS == false ]]; then
-		curl -R $PP_URL/$PP_NAME.gif > $MALE_DEST 2> /dev/null
+		curl -R $PP_URL/$PP_NAME"${PP_VARIANTS[$VARIANT]}".gif > $MALE_DEST 2> /dev/null
 		bash delete-by-type.sh $MALE_DEST gif
 	fi
 
 	# Female
 	if [[ $FEMALE_EXISTS == false ]]; then
-		curl -R -R $PP_URL/$PP_NAME-f.gif > $FEMALE_DEST 2> /dev/null
+		curl -R -R $PP_URL/$PP_NAME-f"${PP_VARIANTS[$VARIANT]}".gif > $FEMALE_DEST 2> /dev/null
 		bash delete-by-type.sh $FEMALE_DEST gif
 	fi
 
@@ -160,7 +167,7 @@ while read -a LINE; do
 		cd - > /dev/null
 		if [[ -z $(grep $ANI_NAME $LISTFILE) ]]; then
 			ANI_DEST=$MALE_PATH/$ANI_NAME
-			curl -R $PP_URL/$PP_NAME-$K.gif > $ANI_DEST 2> /dev/null
+			curl -R $PP_URL/$PP_NAME"${PP_VARIANTS[$VARIANT]}"-$K.gif > $ANI_DEST 2> /dev/null
 			bash delete-by-type.sh $ANI_DEST gif
 		fi
 	done
@@ -176,7 +183,6 @@ while read -a LINE; do
 	# PokéWiki download
 
 	GC_SPR="Pokémonsprite_${GC_NAME}_${GC_VARIANTS[$VARIANT]}${GC_GAMES[$GAMES]}"
-    
 	# Male and female
 
 	# Male
