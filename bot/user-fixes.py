@@ -4,7 +4,6 @@
 This file implements custom pywikibot fixes
 """
 
-from __future__ import unicode_literals
 from functools import partial
 
 from fixes_data import (aa_aliases, aa_exceptions, tc_aliases, tc_exceptions)
@@ -113,21 +112,21 @@ fixes['grammar'] = {
         'it': 'Bot: Fixing spelling',
     },
     'replacements': [
-        (ur'chè\b', u'ché'),
-        (ur'\bpò\b', "po'"),
-        (ur'\bsè\b', u'sé'),
-        (ur'\bsé\s+stess', 'se stess'),
-        (ur'\bquì\b', 'qui'),
-        (ur'\bquà\b', 'qua'),
-        (ur'\bfà\b', 'fa'),
+        (r'chè\b', 'ché'),
+        (r'\bpò\b', "po'"),
+        (r'\bsè\b', 'sé'),
+        (r'\bsé\s+stess', 'se stess'),
+        (r'\bquì\b', 'qui'),
+        (r'\bquà\b', 'qua'),
+        (r'\bfà\b', 'fa'),
         ('metereologic', 'meteorologic'),
         ('obbiettiv', 'obiettiv'),
-        (u"qual'è", u'qual è'),
+        ("qual'è", 'qual è'),
         (' +', ' '),
         (r'^\s+$', r'\n'),
 
         # Fixing unnecessary replacements made above
-        (ur'Arché\b', u'Archè'),
+        (r'Arché\b', 'Archè'),
     ],
 }
 
@@ -142,8 +141,8 @@ fixes['names-case-sensitive'] = {
         'it': 'Bot: Fixing names - case sensitive',
     },
     'replacements': [
-        (ur'Pokè', u'Poké'),
-        (ur'POKè', u'POKé'),
+        (r'Pokè', 'Poké'),
+        (r'POKè', 'POKé'),
     ]
 }
 
@@ -160,7 +159,7 @@ fixes['names-case-insensitive'] = {
     'replacements': [
         ('Pallaombra', 'Palla Ombra'),
         ('Iperraggio', 'Iper Raggio'),
-        (ur'\bPokéball', u'Poké Ball'),
+        (r'\bPokéball', 'Poké Ball'),
     ]
 }
 
@@ -196,7 +195,7 @@ fixes['redundant-code'] = {
         'it': 'Bot: Fixing redundant code',
     },
     'replacements': [
-        (ur'\[\[(.+?) \((tipo|mossa|abilità)\)\|(.+?)\]\]', simplify_link),
+        (r'\[\[(.+?) \((tipo|mossa|abilità)\)\|(.+?)\]\]', simplify_link),
         (r'\[\[(.+?)\|(.+?)\]\]', simplify_link),
         ('<div></div>', '<br>'),
     ]

@@ -4,12 +4,10 @@
 This file includes the bug data structures used in fixes in user-fixes.py
 """
 
-from __future__ import unicode_literals
-
 # Aliases for `aa` template replacement with plain links
 aa_aliases = {}
 
-# Exceptions for `tc` template replacement with plainlinks
+# Exceptions for `aa` template replacement with plainlinks
 aa_exceptions = (
     'centrale elettrica',
 )
@@ -19,8 +17,8 @@ tc_aliases = {
     'aeroallenatore': 'Aeroallenatore e Aeroallenatrice',
     'aeroallenatrice': 'Aeroallenatore e Aeroallenatrice',
     'affarista': 'Affarista e Segretaria',
-    u'allen.jr♂': 'Campeggiatore',
-    u'alleva pokémon': u'Allevapokémon',
+    'allen.jr♂': 'Campeggiatore',
+    'alleva pokémon': u'Allevapokémon',
     'avicoltore': 'Avicoltore e Avicoltrice',
     'avicoltrice': 'Avicoltore e Avicoltrice',
     'avventuriero': 'Montanaro',
@@ -91,7 +89,7 @@ tc_exceptions = (
     'bullo',
     'cinturanera',
     'doppioteam',
-    u'pokémon ranger',
+    'pokémon ranger',
     'segugio',
     'sub',
     'team flare',
