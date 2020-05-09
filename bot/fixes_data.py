@@ -89,6 +89,8 @@ tc_exceptions = (
     'bullo',
     'cinturanera',
     'doppioteam',
+    'macro cosmos',
+    'palestra di kanto',
     'pokémon ranger',
     'segugio',
     'sub',
