@@ -37,6 +37,10 @@ def simplify_link(match, text=None):
     if text is None:
         target = match.group(1)
         text = match.group(2)
+    else:
+        target = match
+        # This is what we logically want, commented because it's pointless
+        # text = text
 
     # If link target and displayed text are the same, only one value is
     # interpolated. Two are necessary otherwise.
