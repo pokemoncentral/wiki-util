@@ -7,7 +7,7 @@ Arguments:
 	- $1: specifies which redirect are
 		to be created. Can be one
 		of these:
-		
+
 		- 'all': Creates redirects for
 			all Pokémon, using as target
 			game the first of the latest
@@ -59,7 +59,7 @@ elseif tonumber(arg[1]) then
 else
 	source = ndexes.game(arg[1])
 	actualGame = arg[1]
-	
+
 end
 actualGame = string.fu(actualGame)
 
@@ -67,7 +67,7 @@ io.output(io.open(arg[2], 'a'))
 
 for _, ndex in pairs(source) do
 	local nNdex = string.parseInt(ndex)
-	
+
 	local sex = 'm'
 	if table.search(data.onlyFemales, nNdex) then
 		sex = 'f'

@@ -19,6 +19,10 @@
 #		downloads from Pokémon Central Wiki
 #	pokewiki)
 #		downloads from PokéWiki
+#   wikidex)
+#       downloads from WikiDex
+#       (requires pwb custom script imagedownload,
+#        only work with -d local)
 
 # -p: Flag. If enabled, sets the
 #		bot throttle to 1
@@ -67,6 +71,9 @@ while getopts "d:w:p" OPTION; do
 				pokewiki)
 					BASE_URL='http://www.pokewiki.de/images'
 					;;
+                wikidex)
+                    BASE_URL='wikidex'
+                    ;;
 				*)
 					echo Unknown wiki: $OPTARG
 					exit 1
@@ -99,7 +106,12 @@ FILE_URL=$(echo -n $BASE_URL/${MD5:0:1}/${MD5:0:2}/$FILENAME | uni2ascii -aJ)
 if [[ $DEST == 'local' ]]; then
 	if [[ -n $(grep \\. <<<$DEST_PATH) ]]; then
 		mkdir -p $(dirname "$DEST_PATH")
-		curl -L -A firefox $FILE_URL > "$DEST_PATH" 2> /dev/null
+        if [[ "$BASE_URL" == 'wikidex' ]]; then
+            python $PYWIKIBOT_DIR/pwb.py imagedownload -pt:0 -lang:es -target:"$(dirname "$DEST_PATH")" "Archivo:$1"
+            mv "$(dirname "$DEST_PATH")/$1" "$DEST_PATH"
+        else
+		    curl -L -A firefox $FILE_URL > "$DEST_PATH" 2> /dev/null
+        fi
 	else
 		mkdir -p "$DEST_PATH"
 		cd "$DEST_PATH"

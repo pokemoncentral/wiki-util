@@ -236,7 +236,7 @@ local abbr = {
 	gorging = getAbbr('cramorant', 'inghiottintero'),
 	noice = getAbbr('eiscue', 'liquefaccia'),
 	hangry = getAbbr('morpeko', 'panciavuota'),
-	crowned = getAbbr('zacian', 'eroe'),
+	crowned = getAbbr('zacian', 're'),
 	eternamax = getAbbr('eternatus', 'dynamax'),
 	gigantamax = getAbbr('corviknight', 'gigamax'),
 	-- Alcremie
