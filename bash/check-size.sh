@@ -36,14 +36,18 @@ touch "$OUTLIST"
 
 while read filename; do
     DWLNAME="File:$filename"
-    python $PYWIKIBOT_DIR/pwb.py imagedownload -target:"$TMPDIR" "$DWLNAME" > /dev/null
+    python $PYWIKIBOT_DIR/pwb.py imagedownload -target:"$TMPDIR" "$DWLNAME" &> /dev/null
 
-    FILESIZE=$(identify "$TMPDIR/$filename" | head -n1 | cut -d' ' -f3)
-    if [[ $FILESIZE == 150x150 ]]; then
-        echo "$filename is 150x150"
+    if [[ -f "$TMPDIR/$filename" ]]; then
+        FILESIZE=$(identify "$TMPDIR/$filename" | head -n1 | cut -d' ' -f3)
+        if [[ $FILESIZE == 150x150 ]]; then
+            echo "$filename is 150x150"
+        else
+            echo "$filename is ${FILESIZE}: adding to the list"
+	        echo "$filename" >> $OUTLIST
+        fi
     else
-        echo "$filename is ${FILESIZE}: adding to the list"
-	echo "$filename" >> $OUTLIST
+        echo "$filename doesn't exists on the target Wiki. Skipping"
     fi
 done < $LIST
 
