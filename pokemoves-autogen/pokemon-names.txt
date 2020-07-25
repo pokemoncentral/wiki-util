@@ -901,6 +901,10 @@ dragapult
 zacian
 zamazenta
 eternatus
+kubfu
+urshifu
+urshifuP
+zarude
 deoxysA
 deoxysD
 deoxysV
@@ -932,3 +936,5 @@ darumakaG
 darmanitanG
 stunfiskG
 indeedeeF
+slowpokeG
+slowbroG

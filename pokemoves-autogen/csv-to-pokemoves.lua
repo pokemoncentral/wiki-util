@@ -7,6 +7,7 @@ local tab = require('Wikilib-tables')
 local str = require('Wikilib-strings')
 local learnlib = require('Wikilib-learnlists')
 
+local tweaks = require("custom-edit")
 local printer = require('pokemove-printer')
 
 local function ParseCSVLine(line,sep)
@@ -74,7 +75,7 @@ local baseNoBreed = {
 	"xurkitree", "celesteela", "kartana", "guzzlord", "necrozma", "magearna",
 	"marshadow", "poipole", "stakataka", "blacephalon", "zeraora", "meltan",
 	"sinistea", "impidimp", "falinks", "dracozolt", "arctozolt", "dracovish",
-	"arctovish", "zacian", "zamazenta", "eternatus",
+	"arctovish", "zacian", "zamazenta", "eternatus", "kubfu", "zarude",
 	"deoxysA", "deoxysD", "deoxysV", "shayminC", "kyuremN", "kyuremB", "hoopaL"}
 local breedNoBase = { "chansey", "chimecho", "mantine", "marill", "mr. mime", "roselia", "snorlax", "sudowoodo" }
 
@@ -82,10 +83,6 @@ local poke = str.trim(arg[1]) or "staraptor"
 
 local outfile = io.open("luamoves/" .. poke .. ".lua", "w")
 
--- Mew alltm
-if poke == "mew" then
-	data.tm = tab.map(data.tm, function() return { all = true } end)
-end
 for line in io.lines("pokecsv/" .. poke .. ".csv") do
 	line = tab.map(ParseCSVLine(line), str.trim)
 	local kind = line[2]
@@ -93,10 +90,10 @@ for line in io.lines("pokecsv/" .. poke .. ".csv") do
 	local move = line[1]
 	if kind == "tm" then
 		-- TODO: check for alltm instead of relying on the fact that only mew
-		 -- uses it
-		 if poke ~= "mew" then
-			 table.insert(data[kind][gen], move)
-		 end
+		-- uses it
+		if poke ~= "mew" then
+			table.insert(data[kind][gen], move)
+		end
 	elseif kind == "tutor" then
 		local tutorgames = learnlib.games.tutor[gen]
 		data[kind][gen][move] = data[kind][gen][move]
@@ -181,6 +178,9 @@ else
 		print("Breed for no-base phase: " .. poke)
 	end
 end
+
+-- Applies tweaks
+data = tweaks(poke, data)
 
 outfile:write(printer.tabToStr(poke, data, nobreed))
 outfile:close()

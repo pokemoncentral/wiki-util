@@ -10,6 +10,10 @@ export CONTAINERPORT=43861
 # Default name for the container, used for ./do-things.sh -D
 export CONTAINERDEFAULTNAME="moves-db"
 
+# Whether the resultin pokemoves-data should be splitted or not. Any
+# value different from "no" splits
+export SPLIT="no"
+
 # ================================== Constants ==============================
 # These are just constants shared between scripts. There's no need to change
 # them on your config

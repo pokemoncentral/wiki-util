@@ -13,11 +13,11 @@ local pokes = require("Poké-data")
 local evodata = require("Evo-data")
 local tab = require('Wikilib-tables')
 local str = require('Wikilib-strings')
-local learnlib = require('Wikilib-learnlists')
--- local evolib = require('Wikilib-evos')
 local forms = require('Wikilib-forms')
 local onlyFemale = require('Wikilib-data').onlyFemales
+local multigen = require('Wikilib-multigen')
 
+local lib = require('lib')
 local printer = require('pokemove-printer')
 
 local genderless = {
@@ -58,10 +58,12 @@ end
 
 -- Returns the list of Pokémon with a certain egg group
 local function eggGroupList(group)
+    group = multigen.getGenValue(group)
     return tab.mapToNum(pokeeggs, function(v, k)
         if type(k) ~= "number"
            and (not tonumber(k:sub(0, 3)) or k == "infernape")
-           and (v.group1 == group or v.group2 == group) then
+           and (multigen.getGenValue(v.group1) == group
+                or multigen.getGenValue(v.group2) == group) then
             return k
         end
         return nil
@@ -115,7 +117,7 @@ end
 
 -- Check if a Pokémon can learn a move by level in a certain game.
 local function learnLevelGame(move, poke, gen, game)
-    local idx = tab.search(learnlib.games.level[gen], game)
+    local idx = tab.search(lib.games.level[gen], game)
     return pokemoves[poke].level
            and pokemoves[poke].level[gen]
            and pokemoves[poke].level[gen][move]
@@ -124,7 +126,7 @@ end
 
 -- Check if a Pokémon can learn a move by tutor in a certain game.
 local function learnTutorGame(move, poke, gen, game)
-    local idx = tab.search(learnlib.games.tutor[gen], game)
+    local idx = tab.search(lib.games.tutor[gen], game)
     return pokemoves[poke].tutor
            and pokemoves[poke].tutor[gen]
            and pokemoves[poke].tutor[gen][move]
@@ -152,7 +154,7 @@ local function recompPokeMoveGame(poke, gen, game, gameidx, move, gamedata)
     local neighbours = pokemoves[poke].neighbours
     for _, opoke in pairs(neighbours) do
         if pokemoves[opoke] then
-            if learnlib.canLearn(move, opoke, gen, {"level", "breed", "preevo" ,"tutor"})
+            if lib.canLearn(move, opoke, gen, {"level", "breed", "preevo" ,"tutor"})
                or learnLevelGame(move, opoke, gen, game)
                or learnTutorGame(move, opoke, gen, game) then
                 -- opoke can learn the move "easily" in this game
@@ -185,7 +187,7 @@ local function recompOnePoke(poke, gen)
         newbreeddata[move] = { notes = movedata.notes, games = movedata.games }
         -- For all Pokémons in the same egg group checks whether it can learn
         -- the move directly or via breed.
-        for gameidx, game in pairs(learnlib.games.breed[gen]) do
+        for gameidx, game in pairs(lib.games.breed[gen]) do
             -- If direct, parents are Pokémon that can learn the move
             -- directly, so are definitive: no need to recompute
             if not movedata[gameidx].direct and not movedata[gameidx].chain then
@@ -290,7 +292,7 @@ for _, data in pairs(pokemoves) do
                     end
                     -- remove games field when is contains all games
                     if tab.equal(newmovedata[1].games,
-                                 learnlib.games.breed[gen]) then
+                                 lib.games.breed[gen]) then
                         newmovedata[1].games = nil
                     end
                     data.breed[gen][move] = newmovedata
@@ -324,7 +326,7 @@ for _, data in pairs(pokemoves) do
                     if not gdata[1] then
                         for _, opoke in pairs(data.neighbours) do
                             if pokemoves[opoke]
-                               and learnlib.learnPreviousGen(move, opoke, gen, 3) then
+                               and lib.learnPreviousGen(move, opoke, gen, 3) then
                                 table.insert(gdata, pokes[opoke].ndex)
                             end
                         end

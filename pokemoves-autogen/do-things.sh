@@ -43,9 +43,9 @@ Options:
             CONTAINER="$CONTAINERDEFAULTNAME"
             DFLAG=true
             ;;
-	p)
-	    PFLAG=true
-	    ;;
+	    p)
+	        PFLAG=true
+	        ;;
     esac
 done
 shift $((OPTIND-1))
@@ -71,17 +71,15 @@ if [[ $CFLAG == true ]] || [[ ! -d pokecsv ]]; then
     if [[ $DFLAG == false ]] || [[ -z $(docker ps -aqf "name=${CONTAINER}") ]]; then
         echo "=========================== Creating container ==========================="
         docker build -t pokemovesdb docker-db/
-        CONTAINER=$(docker create -p ${CONTAINERPORT}:5432 --name "${CONTAINER}" pokemovesdb)
-        # Right after creation it take sometime for postgres to load data, but
-        # I can't find a way to get back control only after that time, so this
-        # sleep workaround.
+        CONTAINER=$(docker create -p ${CONTAINERPORT}:5432 --name "${CONTAINER}" -e"POSTGRES_HOST_AUTH_METHOD=trust" pokemovesdb)
         # In case of the following error, try increasing the sleep value
+        # (see README for an explanation)
         #
         # psql: server closed the connection unexpectedly
         # 	This probably means the server terminated abnormally
         # 	before or while processing the request.
         docker start "$CONTAINER" > /dev/null
-        sleep 20
+        sleep 25
     else
         docker start "$CONTAINER" > /dev/null
     fi
@@ -104,34 +102,34 @@ elif [[ $PFLAG == false ]]; then
 else
     ./make-pokes.sh -s luamoves
 fi
-./split-pokes.sh -s luamoves
+./copy-modules.sh -s luamoves
 echo "============ Updated PokéMoves-data.lua with level, tm and tutor ============="
 
 # Make preevo
 echo "=========================== Start computing preevo ==========================="
 mkdir -p luamoves-preevo
-./recomp-preevo.lua
+lua recomp-preevo.lua
 ./make-pokes.sh -s luamoves-preevo
-./split-pokes.sh -s luamoves-preevo
+./copy-modules.sh -s luamoves-preevo
 echo "=================== Updated PokéMoves-data.lua with preevo ==================="
 
 # Make breed
 echo "=========================== Start computing breed ============================"
 mkdir -p luamoves-breed
-./recomp-breed.lua
+lua recomp-breed.lua
 ./make-pokes.sh -s luamoves-breed
-# ./split-pokes.sh -s luamoves-breed
+# ./copy-modules.sh -s luamoves-breed
 echo "=================== Updated PokéMoves-data.lua with breed ===================="
 
 # Compress
 echo "============================= Start compressing =============================="
 mkdir -p luamoves-compress
-./compress-pokemoves.lua
+lua compress-pokemoves.lua
 # ./make-pokes.sh -s luamoves-compress
-# ./split-pokes.sh -s luamoves-compress
+# ./copy-modules.sh -s luamoves-compress
 echo "=================== Updated PokéMoves-data.lua with breed ===================="
 
 # Split Pokémon and copy them to the modules directory
 echo "================================= Final copy ================================="
-./split-pokes.sh -s luamoves-compress
+./copy-modules.sh -s luamoves-compress
 echo "================================== Finished =================================="

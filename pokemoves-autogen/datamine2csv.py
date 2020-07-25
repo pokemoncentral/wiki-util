@@ -163,6 +163,16 @@ replaces = {
 	"rotom-3": "rotomG",
 	"rotom-4": "rotomV",
 	"rotom-5": "rotomT",
+	"exeggutor-1": "exeggutorA",
+	"marowak-1": "marowakA",
+	"sandshrew-1": "sandshrewA",
+	"sandslash-1": "sandslashA",
+	"slowpoke-1": "slowpokeG",
+	"slowbro-2": "slowbroG",
+	"lycanroc": "lycanroc",
+	"lycanroc-1": "lycanrocN",
+	"lycanroc-2": "lycanrocC",
+	"urshifu-1": "urshifuP",
 }
 
 def convert_pokename(poke: str):
@@ -197,7 +207,7 @@ def split_moves(lines: List[str]):
 	These are lists of moves learned by level, breed, tm and tutor
 	"""
 	res = []
-	for fline in ("Level Up Moves:", "Egg Moves:", "TMs:", "TRs:"):
+	for fline in ("Level Up Moves:", "Egg Moves:", "TMs:", "TRs:", "Armor Tutors:"):
 		try:
 			idx = pokelines.index(fline) + 1
 			moves = []
@@ -222,6 +232,9 @@ def parse_move_line(line: str, kind: int):
 	elif kind == 3:
 		# tr
 		regex = "^\- \[TR\d{1,3}\] (.*)$"
+	elif kind == 4:
+		# tutor
+		regex = "^\- (.*)$"
 
 	m = re.match(regex, line)
 	if not m:
@@ -245,6 +258,8 @@ def convert_kind(kind: int):
 		return 4
 	elif kind == 3:
 		return 4
+	elif kind == 4:
+		return 3
 
 def write_row_csv_pokemoves(poke_id: str, kind: int, elem: Tuple, csvw):
 	if kind == 0:

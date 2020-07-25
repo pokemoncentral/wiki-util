@@ -889,6 +889,9 @@ id,identifier,species_id,height,weight,base_experience,order,is_default
 888,zacian,888,000,000,000,1000,1
 889,zamazenta,889,000,000,000,1000,1
 890,eternatus,890,000,000,000,1000,1
+891,kubfu,891,000,000,000,1000,1
+892,urshifu,892,000,000,000,1000,1
+893,zarude,893,000,000,000,1000,1
 10001,deoxysA,386,17,608,270,491,0
 10002,deoxysD,386,17,608,270,492,0
 10003,deoxysV,386,17,608,270,493,0
@@ -1072,3 +1075,6 @@ id,identifier,species_id,height,weight,base_experience,order,is_default
 10181,zacianR,888,000,000,000,1000,0
 10182,zamazentaR,889,000,000,000,1000,0
 10183,eternatusD,890,000,000,000,1000,0
+10184,slowpokeG,79,00,00,00,1000,0
+10185,slowbroG,80,00,00,00,1000,0
+10186,urshifuP,892,000,000,000,1000,0
