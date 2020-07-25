@@ -26,3 +26,9 @@ export TMPMODULENAME="pokemoves-data"
 
 # List of Pokémon names
 export POKELIST="pokemon-names.txt"
+
+# Base dir for intermediate outputs
+export TEMPOUTDIR="intermediate-outputs"
+
+# Lua scripts dir
+export LUASCRPITSDIR="lua-scripts"

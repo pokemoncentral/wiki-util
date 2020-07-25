@@ -61,7 +61,7 @@ chmod 644 source-modules.lua
 # make-pokes.sh -l
 ./make-pokes.sh -s -
 
-if [[ $CFLAG == true ]] || [[ ! -d pokecsv ]]; then
+if [[ $CFLAG == true ]] || [[ ! -d "$TEMPOUTDIR/pokecsv" ]]; then
     echo "========================= Recomputing csv files =========================="
 
     # Setup the container to recompute csvs
@@ -85,8 +85,8 @@ if [[ $CFLAG == true ]] || [[ ! -d pokecsv ]]; then
     fi
 
     # Compute level, tm and tutor
-    mkdir -p pokecsv
-    mkdir -p luamoves
+    mkdir -p "$TEMPOUTDIR/pokecsv"
+    mkdir -p "$TEMPOUTDIR/luamoves"
     ./make-pokes.sh -cl -d pokemovesdb -p ${CONTAINERPORT}
 
     docker stop "$CONTAINER" > /dev/null
@@ -97,39 +97,36 @@ if [[ $CFLAG == true ]] || [[ ! -d pokecsv ]]; then
     fi
 elif [[ $PFLAG == false ]]; then
     # Compute level, tm and tutor
-    mkdir -p luamoves
+    mkdir -p "$TEMPOUTDIR/luamoves"
     ./make-pokes.sh -l
 else
-    ./make-pokes.sh -s luamoves
+    ./make-pokes.sh -s "$TEMPOUTDIR/luamoves"
 fi
-./copy-modules.sh -s luamoves
+./copy-modules.sh -s "$TEMPOUTDIR/luamoves"
 echo "============ Updated PokéMoves-data.lua with level, tm and tutor ============="
 
 # Make preevo
 echo "=========================== Start computing preevo ==========================="
-mkdir -p luamoves-preevo
-lua recomp-preevo.lua
-./make-pokes.sh -s luamoves-preevo
-./copy-modules.sh -s luamoves-preevo
+mkdir -p "$TEMPOUTDIR/luamoves-preevo"
+lua "$LUASCRPITSDIR/recomp-preevo.lua"
+./make-pokes.sh -s "$TEMPOUTDIR/luamoves-preevo"
+./copy-modules.sh -s "$TEMPOUTDIR/luamoves-preevo"
 echo "=================== Updated PokéMoves-data.lua with preevo ==================="
 
 # Make breed
 echo "=========================== Start computing breed ============================"
-mkdir -p luamoves-breed
-lua recomp-breed.lua
-./make-pokes.sh -s luamoves-breed
-# ./copy-modules.sh -s luamoves-breed
+mkdir -p "$TEMPOUTDIR/luamoves-breed"
+lua "$LUASCRPITSDIR/recomp-breed.lua"
+./make-pokes.sh -s "$TEMPOUTDIR/luamoves-breed"
 echo "=================== Updated PokéMoves-data.lua with breed ===================="
 
 # Compress
 echo "============================= Start compressing =============================="
-mkdir -p luamoves-compress
-lua compress-pokemoves.lua
-# ./make-pokes.sh -s luamoves-compress
-# ./copy-modules.sh -s luamoves-compress
+mkdir -p "$TEMPOUTDIR/luamoves-compress"
+lua "$LUASCRPITSDIR/compress-pokemoves.lua"
 echo "=================== Updated PokéMoves-data.lua with breed ===================="
 
 # Split Pokémon and copy them to the modules directory
 echo "================================= Final copy ================================="
-./copy-modules.sh -s luamoves-compress
+./copy-modules.sh -s "$TEMPOUTDIR/luamoves-compress"
 echo "================================== Finished =================================="

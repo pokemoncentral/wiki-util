@@ -5,7 +5,7 @@ This module recompute breed parents for PokéMoves using other tables as sources
 After it prints to stdout the updated module.
 
 --]]
--- luacheck: globals pokemoves
+-- luacheck: globals pokemoves tempoutdir
 require('source-modules')
 
 local pokeeggs = require("PokéEggGroup-data")
@@ -343,4 +343,4 @@ for gen = 3,8 do
 end
 
 -- Printing
-printer.allToDir(pokemoves, "luamoves-breed")
+printer.allToDir(pokemoves, tempoutdir .. "/luamoves-breed")

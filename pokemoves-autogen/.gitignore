@@ -2,6 +2,7 @@
 
 *.log
 pokemoves-data*.lua
+intermediate-outputs/
 pokecsv/
 luamoves*/
 source-modules.lua

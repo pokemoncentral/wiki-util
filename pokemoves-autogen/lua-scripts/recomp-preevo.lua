@@ -5,7 +5,7 @@ This module recompute preevo learnsets for PokéMoves using other tables as
 sources. After it prints to stdout the updated module.
 
 --]]
--- luacheck: globals pokemoves
+-- luacheck: globals pokemoves tempoutdir
 require('source-modules')
 
 local pokes = require("Poké-data")
@@ -85,4 +85,4 @@ for poke, data in pairs(pokemoves) do
 end
 
 -- Printing
-printer.allToDir(pokemoves, "luamoves-preevo")
+printer.allToDir(pokemoves, tempoutdir .. "/luamoves-preevo")

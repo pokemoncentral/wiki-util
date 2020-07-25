@@ -70,8 +70,8 @@ create_csv() {
                JOIN version_groups AS vg ON pm.version_group_id = vg.id
                JOIN moves AS m ON pm.move_id = m.id
                WHERE p.identifier = '${poke}'
-               ORDER BY pmm.id, vg.generation_id, vg.id, pm.level) TO '/data/pokecsv/${poke}.csv' WITH csv" > /dev/null
-    chmod 644 "pokecsv/${poke}.csv"
+               ORDER BY pmm.id, vg.generation_id, vg.id, pm.level) TO '/data/${TEMPOUTDIR}/pokecsv/${poke}.csv' WITH csv" > /dev/null
+    chmod 644 "${TEMPOUTDIR}/pokecsv/${poke}.csv"
 }
 
 outfile="${TMPMODULENAME}.lua"
@@ -102,12 +102,12 @@ if ! [[ $SDIR == "-" ]]; then
         idx=$?
         if [[ $idx -ne 255 ]]; then
             if [[ $CFLAG == true ]]; then
-                mv "pokecsv/${poke}.csv" "pokecsv/${repdst[$idx]}.csv"
+                mv "${TEMPOUTDIR}/pokecsv/${poke}.csv" "${TEMPOUTDIR}/pokecsv/${repdst[$idx]}.csv"
             fi
             pokemodule=${repdst[$idx]}
         fi
         if [[ $LFLAG == true ]]; then
-            lua csv-to-pokemoves.lua "${pokemodule}" >> csv-to-pokemoves.log
+            lua "$LUASCRPITSDIR/csv2pokemoves.lua" "${pokemodule}" >> logs/csv-to-pokemoves.log
         fi
         cat "${SDIR}/${pokemodule}.lua" >> "$outfile"
         echo "" >> "$outfile"

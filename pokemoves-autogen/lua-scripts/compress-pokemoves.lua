@@ -34,13 +34,10 @@ DROPPED because it only saves 1MB (can be implemented if needed)
 preevo: ? It's even worth to compress this? I think they're very small
 
 --]]
--- luacheck: globals pokemoves
+-- luacheck: globals pokemoves tempoutdir
 require('source-modules')
 
--- local evodata = require("Evo-data")
 local tab = require('Wikilib-tables')
--- local str = require('Wikilib-strings')
--- local learnlib = require('Wikilib-learnlists')
 
 local printer = require('pokemove-printer')
 
@@ -107,4 +104,4 @@ for _, data in pairs(pokemoves) do
 end
 
 -- Printing
-printer.allToDir(pokemoves, "luamoves-compress")
+printer.allToDir(pokemoves, tempoutdir .. "/luamoves-compress")

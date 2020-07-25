@@ -14,7 +14,7 @@ a debug version of the module.
 --]]
 require('source-modules')
 
-local COMPRESS = true
+local COMPRESS = false
 
 require('dumper')
 -- luacheck: globals DataDumper
@@ -40,7 +40,7 @@ local function compressPattern(pattern, spaces, s)
     -- Numbers are empirically determined
     local ni = (s:find("{\n", 10) or 0) + 8
     while i ~= nil do
-        ni = (s:find("\n", ni + 1)) < i and (i - 10) or ni
+        ni = (s:find("\n", ni + 1) or i + 1) < i and (i - 10) or ni
         if i - ni > 70 then
             s = table.concat{
                 s:sub(0, i + 1),

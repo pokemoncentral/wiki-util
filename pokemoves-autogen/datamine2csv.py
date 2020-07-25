@@ -9,7 +9,7 @@ logger = logging.getLogger("log")
 logger.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 
-file_lh = logging.FileHandler('datamine2csv.log')
+file_lh = logging.FileHandler('logs/datamine2csv.log')
 file_lh.setLevel(logging.DEBUG)
 file_lh.setFormatter(formatter)
 logger.addHandler(file_lh)

@@ -1,6 +1,11 @@
 -- Add my modules' dir to lua's package.path to allow requiring them
-package.path = package.path ..
+package.path = "lua-scripts/?.lua;" ..
+    package.path ..
     ";/path/to/lua/modules/?.lua"
 
 -- Require the local pokemoves as a global variable named pokemoves
 pokemoves = require("pokemoves-data")
+
+-- TODO: replace like the above
+-- Base dir for intermediate outputs
+tempoutdir="intermediate-outputs"

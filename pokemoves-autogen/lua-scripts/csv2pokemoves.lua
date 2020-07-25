@@ -1,13 +1,14 @@
 #!/usr/bin/lua
 
+-- luacheck: globals tempoutdir
 require('source-modules')
 
 local evodata = require("Evo-data")
 local tab = require('Wikilib-tables')
 local str = require('Wikilib-strings')
-local learnlib = require('Wikilib-learnlists')
 
-local tweaks = require("custom-edit")
+local lib = require('lib')
+local tweaks = require('custom-edit')
 local printer = require('pokemove-printer')
 
 local function ParseCSVLine(line,sep)
@@ -77,11 +78,12 @@ local baseNoBreed = {
 	"sinistea", "impidimp", "falinks", "dracozolt", "arctozolt", "dracovish",
 	"arctovish", "zacian", "zamazenta", "eternatus", "kubfu", "zarude",
 	"deoxysA", "deoxysD", "deoxysV", "shayminC", "kyuremN", "kyuremB", "hoopaL"}
-local breedNoBase = { "chansey", "chimecho", "mantine", "marill", "mr. mime", "roselia", "snorlax", "sudowoodo" }
+local breedNoBase = { "chansey", "chimecho", "mantine", "marill", "mr. mime",
+	"roselia", "snorlax", "sudowoodo", "mr. mimeG" }
 
 local poke = str.trim(arg[1]) or "staraptor"
 
-local outfile = io.open("luamoves/" .. poke .. ".lua", "w")
+local outfile = io.open(tempoutdir .. "/luamoves/" .. poke .. ".lua", "w")
 
 for line in io.lines("pokecsv/" .. poke .. ".csv") do
 	line = tab.map(ParseCSVLine(line), str.trim)
@@ -95,12 +97,12 @@ for line in io.lines("pokecsv/" .. poke .. ".csv") do
 			table.insert(data[kind][gen], move)
 		end
 	elseif kind == "tutor" then
-		local tutorgames = learnlib.games.tutor[gen]
+		local tutorgames = lib.games.tutor[gen]
 		data[kind][gen][move] = data[kind][gen][move]
 			or tab.map(tutorgames, function() return false end)
 		data[kind][gen][move][tab.search(tutorgames, line[4])] = true
 	elseif kind == "breed" then
-		local breedsgames = learnlib.games.breed[gen]
+		local breedsgames = lib.games.breed[gen]
 		if not data[kind][gen][move] then
 			data[kind][gen][move] = tab.map(breedsgames, function(v)
 				return { games = { v } }
@@ -110,7 +112,7 @@ for line in io.lines("pokecsv/" .. poke .. ".csv") do
 		table.insert(data[kind][gen][move].games, line[4])
 	elseif kind == "level" then
 		if line[4] ~= "Colo" and line[4] ~= "XD" then
-			local levelgames = learnlib.games.level[gen]
+			local levelgames = lib.games.level[gen]
 			data[kind][gen][move] = data[kind][gen][move]
 				or tab.map(levelgames, function() return {} end)
 			table.insert(data[kind][gen][move][tab.search(levelgames, line[4])], line[5])
