@@ -11,7 +11,7 @@ its options using `do-things.sh -h` before running it because it involves creati
 (and afterward destroying) containers, so you want to make sure it doesn't clash
 with anything already on your system.
 
-## Add datas
+## Add data
 The source of data are some files in the directory `docker-db/sourcecsv/`. Right
 now there are only csv file, but any format that can be imported by PostgreSQL is fine.
 
@@ -33,14 +33,19 @@ just run `do-things.sh` without any option to do the job.
 Right after creation it take sometime for postgres to load data, but I can't
 find a way to get back control only after that time, so in `do-things.sh` there
 is a sleep at the right point in the code.
-In case of the following error, try increasing the sleep value
-
+Try increasing the sleep value in case you see the following error:
+```
 psql: server closed the connection unexpectedly
 	This probably means the server terminated abnormally
 	before or while processing the request.
+```
 
 # Dependencies
 This repository has just a few dependencies other than standard bash scripting, that should
 be installed on your system:
-- Lua 5.1 (actually any version you use for Wiki modules should be fine, but only 5.1 was tested)
-- Docker (any version should be fine, but only 18.09.5 was tested)
+- Lua >=5.1 (any version you use for Wiki modules is fine)
+- Docker >=18.9.5 (only 18.09.5 and 19.03.12 were actually tested)
+
+# TODO
+- Move lists in a subdir (`pokemon-names.txt*`)
+- Move `pokemoves-data.lua` (the output) in the appropriate subdir

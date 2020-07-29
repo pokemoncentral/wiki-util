@@ -14,7 +14,7 @@ a debug version of the module.
 --]]
 require('source-modules')
 
-local COMPRESS = false
+local COMPRESS = true
 
 require('dumper')
 -- luacheck: globals DataDumper

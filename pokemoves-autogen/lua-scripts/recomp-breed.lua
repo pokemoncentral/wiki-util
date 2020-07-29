@@ -4,6 +4,10 @@
 This module recompute breed parents for PokéMoves using other tables as sources.
 After it prints to stdout the updated module.
 
+TODO: older gen doesn't consider how "easy" is to learn the move for the parent
+It can be done, but it requires some work I don't think it's worth (since it
+should be quite the rare case)
+
 --]]
 -- luacheck: globals pokemoves tempoutdir
 require('source-modules')
@@ -14,8 +18,8 @@ local evodata = require("Evo-data")
 local tab = require('Wikilib-tables')
 local str = require('Wikilib-strings')
 local forms = require('Wikilib-forms')
-local onlyFemale = require('Wikilib-data').onlyFemales
 local multigen = require('Wikilib-multigen')
+local evolib = require('Wikilib-evos')
 
 local lib = require('lib')
 local printer = require('pokemove-printer')
@@ -28,6 +32,12 @@ local genderless = {
     "klinklang", "cryogonal", "golett", "golurk", "carbink", "minior",
     "dhelmise", "sinistea", "polteageist", "falinks",
 }
+
+-- Probably this should become a CLI argument
+-- Starting gen to recompute parents. Previous gen are left untouched (so
+-- probably you will get empty list of parents)
+-- The default value for this is 2
+local STARTGEN = 2
 
 -- Compare two tables, only on integer keys, to check if they're equal
 local function eqArray(t1, t2)
@@ -56,7 +66,17 @@ local function compareNdex(a, b)
     end
 end
 
--- Returns the list of Pokémon with a certain egg group
+-- Adds a Pokémon ndex (taking care of the form) to a table
+-- Modifies the table inplace, and returns it
+local function addPoke(t, poke)
+    local abbr = forms.getabbr(poke)
+    table.insert(t, abbr == 'base'
+                    and pokes[poke].ndex
+                    or (str.tf(pokes[poke].ndex) .. abbr))
+    return t
+end
+
+-- Returns the list of Pokémon with a certain egg group (current gen)
 local function eggGroupList(group)
     group = multigen.getGenValue(group)
     return tab.mapToNum(pokeeggs, function(v, k)
@@ -72,20 +92,42 @@ end
 
 --[[
 
+Return the list of egg groups of the whole evo line of a Pokémon except
+"sconosciuto" (that is, the set of egg groups from which it can inherit
+egg moves).
+
+--]]
+local function evoEggGroups(poke)
+    return tab.unique(evolib.foldEvoTree(evodata[poke], {}, function(acc, v)
+        local pokegroups = tab.mapToNum(pokeeggs[v.name] or {}, function(g)
+            local currentgroup = multigen.getGenValue(g)
+            if currentgroup ~= "sconosciuto" then
+                return currentgroup
+            else
+                -- This correspond to filter out the value
+                return nil
+            end
+        end)
+        return tab.merge(acc, pokegroups)
+    end))
+end
+
+--[[
+
 Returns the list of Pokémon that can breed with a given one (that is: share
-an egg group that isn't "sconosciuto"). Pokémon of the same evoline, female
-only and genderless Pokémon (because they can't pass an egg move) are
-excluded from the list.
+an egg group that isn't "sconosciuto" with the poke or its evolutions).
+Genderless Pokémon are excluded from the list since they can't pass an egg
+move.
 
 --]]
 local function eggNeighboursList(poke)
-    local groups = tab.filter(pokeeggs[poke] or {},
-                              function(g) return g ~= "sconosciuto" end)
+    local groups = evoEggGroups(poke)
     return tab.filter(tab.unique(tab.flatMap(groups, eggGroupList)), function(p)
         -- return not evolib.sameEvoLine(poke, p)
         --        and not tab.search(onlyFemale, p)
-        return not tab.search(onlyFemale, p)
-               and not tab.search(genderless, p)
+        -- return not tab.search(onlyFemale, p)
+        --        and not tab.search(genderless, p)
+        return not tab.search(genderless, p)
     end)
 end
 
@@ -133,21 +175,56 @@ local function learnTutorGame(move, poke, gen, game)
            and pokemoves[poke].tutor[gen][move][idx]
 end
 
--- The main algorithm is iterative, more or less Bellman-Ford. For each Pokémon
--- computes at each step the list of parents from which it can learn a move. A
--- Pokémon is not considered able to learn a move via breed unless it has at
--- least one parent listed for it. Iterating this procedure enough ensures that
--- parents are computed rights
+--[[
+
+The main algorithm is iterative, more or less Bellman-Ford. For each Pokémon
+computes at each step the list of parents from which it can learn a move. A
+Pokémon is not considered able to learn a move via breed unless it has at
+least one parent listed for it. Iterating this procedure enough ensures that
+parents are computed rights
+
+A Pokémon is said to be able to learn a move "easily" in a game if it can
+learn it via level or tutor in that game, or via tm or event in the same
+generation. Idk why this definition, but that's it.
+
+Each iteration proceeds as follows.
+First creates a copy of the breed data table in order to avoid that the
+current iteration influences itself (for instance, preventing the addition
+of further parents after the very first).
+Then for each Pokémon, for each move it can learn via breed does:
+    - check if there are parents already listed. If that is the case, then
+      the move is skipped. This correspond to list only the shortest chains
+      possible, since all the chain of minimal length are computed and
+      added at the same iteration, and after that the move is just skipped.
+    - if not, check if among the neighbours there is someone who can learn
+      the move "easily". If that is the case, adds them as parents.
+    - if not, check if among the neighbours there is someone who can learn
+      the move via breed. If that is the case, adds them as parents.
+    - if not, does nothing.
+end
+
+TODO: after that, something happens.
+
+--]]
 
 -- First for each Pokémon computes the list of neighbours
+-- TODO: this can be optimized avoiding to recompute the list of Pokémon
+-- with a certain egg group each time
 for poke, data in pairs(pokemoves) do
     if not data.neighbours then
         pokemoves[poke].neighbours = eggNeighboursList(poke)
         -- pokemoves[poke].neighbours6 = egg6NeighboursList(poke)
     end
 end
+print("Computed lists of neighbours")
 
--- Can modify gamedata, but has no other side effects. Return the new gamedata
+--[[
+
+Updates the list of parent of a single Pokémon and move as described above.
+
+Can modify gamedata, but has no other side effects. Return the new gamedata
+
+--]]
 local function recompPokeMoveGame(poke, gen, game, gameidx, move, gamedata)
     -- local neighbours = gen < 6 and pokemoves[poke].neighbours
     --                            or pokemoves[poke].neighbours6
@@ -159,19 +236,20 @@ local function recompPokeMoveGame(poke, gen, game, gameidx, move, gamedata)
                or learnTutorGame(move, opoke, gen, game) then
                 -- opoke can learn the move "easily" in this game
                 if not gamedata.direct then
+                    -- DEBUG only
+                    if gamedata.chain then
+                        print("chain -> direct", poke, game, move)
+                    end
                     -- It was a chain before, but now it's direct, so empties
                     -- parents to remove chains
                     gamedata = { direct = true, games = gamedata.games }
                 end
-                local abbr = forms.getabbr(opoke)
-                table.insert(gamedata, abbr == 'base'
-                                       and pokes[opoke].ndex
-                                       or (str.tf(pokes[opoke].ndex) .. abbr))
+                gamedata = addPoke(gamedata, opoke)
             elseif not gamedata.direct
                    and hasParent(move, opoke, gen, gameidx) then
                 -- Isn't direct and opoke can learn by breed (in this game)
                 gamedata.chain = true
-                table.insert(gamedata, pokes[opoke].ndex)
+                gamedata = addPoke(gamedata, opoke)
             end
         end
     end
@@ -189,11 +267,11 @@ local function recompOnePoke(poke, gen)
         -- the move directly or via breed.
         for gameidx, game in pairs(lib.games.breed[gen]) do
             -- If direct, parents are Pokémon that can learn the move
-            -- directly, so are definitive: no need to recompute
+            -- directly, so are final: no need to recompute
             if not movedata[gameidx].direct and not movedata[gameidx].chain then
-                newbreeddata[move][gameidx]
-                    = recompPokeMoveGame(poke, gen, game, gameidx, move,
-                                         tab.copy(movedata[gameidx]))
+                newbreeddata[move][gameidx] = recompPokeMoveGame(
+                    poke, gen, game, gameidx, move, tab.copy(movedata[gameidx])
+                )
             else
                 newbreeddata[move][gameidx] = movedata[gameidx]
             end
@@ -212,11 +290,12 @@ for poke, val in pairs(pokemoves) do
     end
 end
 pokemoves = tmppokemoves
+print("Cleaned up table, starting main iteration")
 
--- Iterate recompOnePoke over all Pokémon about 14 (# egg groups) times.
-for iteration = 1,14 do -- Actually iterations after the thrid are very quick,
-    -- so it's not a big deal to do some some more
--- for iteration = 1,7 do -- it seems 7 is enough for any existing breed chain
+-- Iterate recompOnePoke over all Pokémon 14 (# egg groups) times.
+-- Experimentally 7 seems to be enough, but iterations after the thrid
+-- are very quick, so it's not a big deal to do some more
+for iteration = 1,14 do
     -- Do by rounds, not modifying inplace
     local newpokemoves = { }
     -- First iteration to add tables for any key, required to link them later
@@ -241,7 +320,7 @@ for iteration = 1,14 do -- Actually iterations after the thrid are very quick,
            and poke ~= evodata[poke].name then
             newpokemoves[poke].breed = newpokemoves[basephasename].breed
         else
-            for gen = 2, 8 do
+            for gen = STARTGEN, 8 do
                 if pokemoves[poke].breed[gen] then
                     newpokemoves[poke].breed[gen] = recompOnePoke(poke, gen)
                 else
@@ -251,7 +330,7 @@ for iteration = 1,14 do -- Actually iterations after the thrid are very quick,
         end
     end
     pokemoves = newpokemoves
-    print(iteration)
+    print(table.concat{"Iteration ", tostring(iteration), " finished"})
 end
 
 
@@ -262,7 +341,7 @@ end
 
 -- Unique parents, remove direct, compress games
 for _, data in pairs(pokemoves) do
-    for gen = 2,8 do
+    for gen = STARTGEN,8 do
         if data.breed and data.breed[gen] then
             for move, movedata in pairs(data.breed[gen]) do
                 if not movedata.new then
@@ -290,7 +369,7 @@ for _, data in pairs(pokemoves) do
                             end
                         end
                     end
-                    -- remove games field when is contains all games
+                    -- remove games field when it contains all games
                     if tab.equal(newmovedata[1].games,
                                  lib.games.breed[gen]) then
                         newmovedata[1].games = nil
@@ -301,23 +380,18 @@ for _, data in pairs(pokemoves) do
         end
     end
 end
+print("Finished compressing")
 
 -- Add previous gens, remove field new added in the previous loop
 for _, data in pairs(pokemoves) do
-    for gen = 2,3 do
-        -- if type(poke) == "string" and (not tonumber(poke:sub(0, 3))
-        --                                or poke == "infernape")
-        --    and data.breed and data.breed[gen] then
+    for gen = STARTGEN, 3 do
         if data.breed and data.breed[gen] then
             for _, mdata in pairs(data.breed[gen]) do
                 mdata.new = nil
             end
         end
     end
-    for gen = 4,8 do
-        -- if type(poke) == "string" and (not tonumber(poke:sub(0, 3))
-        --                                or poke == "infernape")
-        --    and data.breed and data.breed[gen] then
+    for gen = math.max(STARTGEN, 4), 8 do
         if data.breed and data.breed[gen] then
             for move, mdata in pairs(data.breed[gen]) do
                 mdata.new = nil
@@ -327,18 +401,21 @@ for _, data in pairs(pokemoves) do
                         for _, opoke in pairs(data.neighbours) do
                             if pokemoves[opoke]
                                and lib.learnPreviousGen(move, opoke, gen, 3) then
-                                table.insert(gdata, pokes[opoke].ndex)
+                                gdata = addPoke(gdata, opoke)
+                                -- table.insert(gdata, pokes[opoke].ndex)
                             end
                         end
+                        table.sort(gdata, compareNdex)
                     end
                 end
             end
         end
     end
 end
+print("Added old gens")
 
 -- Pichu can learn Locomovolt with a special note
-for gen = 3,8 do
+for gen = STARTGEN,8 do
     pokemoves.pichu.breed[gen].locomovolt = {{25, 26, 172}, notes = "Se il genitore tiene una Elettropalla"}
 end
 
