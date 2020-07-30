@@ -406,6 +406,10 @@ for _, data in pairs(pokemoves) do
                             end
                         end
                         table.sort(gdata, compareNdex)
+                        if gdata[1] then
+                            -- If now it has a parent, it can learn the move via old gen
+                            mdata.notes = "il padre deve aver imparato la mossa in una generazione precedente"
+                        end
                     end
                 end
             end
