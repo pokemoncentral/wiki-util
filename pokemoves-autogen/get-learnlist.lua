@@ -25,7 +25,7 @@ local formlib = require('Wikilib-forms')
 local printer = require("static.print-learnlist8")
 local altdata = require("AltForms-data")
 local pokes = require("Poké-data")
-local pmoves = require("PokéMoves-data")
+local pmoves = require("static.pokemoves-data")
 
 local gpoke = str.trim(arg[1]):lower() or "staraptor"
 local kind = str.trim(arg[2]):lower() or "level"
