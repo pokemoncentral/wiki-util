@@ -49,3 +49,10 @@ be installed on your system:
 # TODO
 - Move lists in a subdir (`pokemon-names.txt*`)
 - Move `pokemoves-data.lua` (the output) in the appropriate subdir
+
+# Credits
+Data in this this project are from:
+- learnset until USUM (included) are from VeeKun's repository [pokedex](https://github.com/veekun/pokedex)
+- learnset for LGPE and gen 8 (both games and DLC) are from [SciresM](https://twitter.com/SciresM/)'s and [Kaphotic](https://twitter.com/Kaphotics)'s datamines.
+
+Files in `docker-db/sourcecsv/` are made from those data.
