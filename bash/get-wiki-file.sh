@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Downloads a file from Bulbapedia, PokéWiki,
-# or Pokémon Central Wiki, saving it locally
-# or uploading it to Bulbapedia
+# Poképedia or Pokémon Central Wiki, saving
+# it locally or uploading it to Bulbapedia
 
 # Arguments
 
@@ -19,6 +19,8 @@
 #		downloads from Pokémon Central Wiki
 #	pokewiki)
 #		downloads from PokéWiki
+#	pokepedia)
+#		downloads from Poképedia
 #   wikidex)
 #       downloads from WikiDex
 #       (requires pwb custom script imagedownload,
@@ -70,6 +72,9 @@ while getopts "d:w:p" OPTION; do
 					;;
 				pokewiki)
 					BASE_URL='http://www.pokewiki.de/images'
+					;;
+				pokepedia)
+					BASE_URL='https://www.pokepedia.fr/images'
 					;;
                 wikidex)
                     BASE_URL='wikidex'
