@@ -16,16 +16,16 @@ do
         package.path = table.concat{ package.path, ";", path, "/?.lua" }
     end
 end
-
+-- luacheck: globals pokemoves tempoutdir
 require('source-modules')
 
 local tab = require('Wikilib-tables')
 local str = require('Wikilib-strings')
 local formlib = require('Wikilib-forms')
-local printer = require("static.print-learnlist8")
+local printer = require("learnlist-gen.print-learnlist8")
 local altdata = require("AltForms-data")
 local pokes = require("Poké-data")
-local pmoves = require("static.pokemoves-data")
+local pmoves = require("learnlist-gen.pokemoves-data")
 
 local gpoke = str.trim(arg[1]):lower() or "staraptor"
 local kind = str.trim(arg[2]):lower() or "level"

@@ -32,3 +32,6 @@ export TEMPOUTDIR="intermediate-outputs"
 
 # Lua scripts dir
 export LUASCRPITSDIR="lua-scripts"
+
+# Output dir
+export OUTPUTMODULEDIR="learnlist-gen"

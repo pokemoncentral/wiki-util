@@ -58,6 +58,7 @@ be installed on your system:
 # TODO
 - Move lists in a subdir (`pokemon-names.txt*`)
 - Move `pokemoves-data.lua` (the output) in the appropriate subdir
+- Create a subdir with script/things to build csvs from datamines
 
 # Credits
 Data in this this project are from:

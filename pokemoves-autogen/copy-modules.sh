@@ -76,8 +76,8 @@ if [[ "$SPLIT" == "no" ]]; then
 
     join_files "$POKELIST" "$outfile"
 
-    echo "$MODULESPATH/${MODULENAME}.lua"
-    cp "$outfile" "$MODULESPATH/${MODULENAME}.lua"
+    echo "$OUTPUTMODULEDIR/${MODULENAME}.lua"
+    cp "$outfile" "$OUTPUTMODULEDIR/${MODULENAME}.lua"
 else
     # Iterate for each splitting pattern
     for f in ${POKELIST}.*; do
@@ -86,7 +86,7 @@ else
 
         join_files "$f" "$outfile"
 
-        echo "$MODULESPATH/${MODULENAME}-${j}.lua"
-        cp "$outfile" "$MODULESPATH/${MODULENAME}-${j}.lua"
+        echo "$OUTPUTMODULEDIR/${MODULENAME}-${j}.lua"
+        cp "$outfile" "$OUTPUTMODULEDIR/${MODULENAME}-${j}.lua"
     done
 fi
