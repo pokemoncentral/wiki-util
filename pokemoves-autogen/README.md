@@ -21,6 +21,15 @@ To add a new file you should:
   it at the bottom because of foreign key constraints, but you can decide it on your own
   depending on your file.
 
+## Create a csv from a datamine of Kurt's
+The python scripts here are only used to convert datamines to csv in some way.
+- `datamine2csv.py` takes a full datamine and creates a csv. In the datamine,
+  move names should be in italian (use the macro), the first `======` should be
+  removed and a `\n======` should be added at the end. Some alternative forms
+  should be removed as well. Then you can use the script to build the csv.
+  This doesn't work well with tutor, and possibly there are some constants to
+  modify in the script's code (some things are hardcoded for current games).
+
 ## Tricks
 ### Problems while computing csv files
 If at some point the script crashes or have any problem while computing csv files,

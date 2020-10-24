@@ -77,7 +77,9 @@ local baseNoBreed = {
 	"marshadow", "poipole", "stakataka", "blacephalon", "zeraora", "meltan",
 	"sinistea", "impidimp", "falinks", "dracozolt", "arctozolt", "dracovish",
 	"arctovish", "zacian", "zamazenta", "eternatus", "kubfu", "zarude",
-	"deoxysA", "deoxysD", "deoxysV", "shayminC", "kyuremN", "kyuremB", "hoopaL"}
+	"regieleki", "regidrago", "glastrier", "spectrier", "calyrex", "deoxysA",
+	"deoxysD", "deoxysV", "shayminC", "kyuremN", "kyuremB", "hoopaL",
+	"articunoG", "zapdosG", "moltresG", "calyrexG", "calyrexS" }
 local breedNoBase = { "chansey", "chimecho", "mantine", "marill", "mr. mime",
 	"roselia", "snorlax", "sudowoodo", "mr. mimeG" }
 
@@ -85,7 +87,7 @@ local poke = str.trim(arg[1]) or "staraptor"
 
 local outfile = io.open(tempoutdir .. "/luamoves/" .. poke .. ".lua", "w")
 
-for line in io.lines("pokecsv/" .. poke .. ".csv") do
+for line in io.lines(tempoutdir .. "/pokecsv/" .. poke .. ".csv") do
 	line = tab.map(ParseCSVLine(line), str.trim)
 	local kind = line[2]
 	local gen = tonumber(line[3])

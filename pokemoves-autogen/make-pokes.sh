@@ -109,7 +109,7 @@ if ! [[ $SDIR == "-" ]]; then
         if [[ $LFLAG == true ]]; then
             lua "$LUASCRPITSDIR/csv2pokemoves.lua" "${pokemodule}" >> logs/csv-to-pokemoves.log
         fi
-        cat "${SDIR}/${pokemodule}.lua" >> "$outfile"
+        cat "${TEMPOUTDIR}/${SDIR}/${pokemodule}.lua" >> "$outfile"
         echo "" >> "$outfile"
         if [[ $CFLAG == true ]] || [[ $LFLAG == true ]]; then
             echo "$pokemodule"

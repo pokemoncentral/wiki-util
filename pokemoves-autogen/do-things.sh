@@ -100,7 +100,7 @@ elif [[ $PFLAG == false ]]; then
     mkdir -p "$TEMPOUTDIR/luamoves"
     ./make-pokes.sh -l
 else
-    ./make-pokes.sh -s "$TEMPOUTDIR/luamoves"
+    ./make-pokes.sh -s "luamoves"
 fi
 ./copy-modules.sh -s "$TEMPOUTDIR/luamoves"
 echo "============ Updated PokéMoves-data.lua with level, tm and tutor ============="
@@ -109,7 +109,7 @@ echo "============ Updated PokéMoves-data.lua with level, tm and tutor ========
 echo "=========================== Start computing preevo ==========================="
 mkdir -p "$TEMPOUTDIR/luamoves-preevo"
 lua "$LUASCRPITSDIR/recomp-preevo.lua"
-./make-pokes.sh -s "$TEMPOUTDIR/luamoves-preevo"
+./make-pokes.sh -s "luamoves-preevo"
 ./copy-modules.sh -s "$TEMPOUTDIR/luamoves-preevo"
 echo "=================== Updated PokéMoves-data.lua with preevo ==================="
 
@@ -117,7 +117,7 @@ echo "=================== Updated PokéMoves-data.lua with preevo ==============
 echo "=========================== Start computing breed ============================"
 mkdir -p "$TEMPOUTDIR/luamoves-breed"
 lua "$LUASCRPITSDIR/recomp-breed.lua"
-./make-pokes.sh -s "$TEMPOUTDIR/luamoves-breed"
+./make-pokes.sh -s "luamoves-breed"
 echo "=================== Updated PokéMoves-data.lua with breed ===================="
 
 # Compress

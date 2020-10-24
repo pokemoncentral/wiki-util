@@ -169,10 +169,27 @@ replaces = {
 	"sandslash-1": "sandslashA",
 	"slowpoke-1": "slowpokeG",
 	"slowbro-2": "slowbroG",
+	"slowking-1": "slowkingG",
 	"lycanroc": "lycanroc",
 	"lycanroc-1": "lycanrocN",
 	"lycanroc-2": "lycanrocC",
 	"urshifu-1": "urshifuP",
+	"articuno-1": "articunoG",
+	"zapdos-1": "zapdosG",
+	"moltres-1": "moltresG",
+	"calyrex-1": "calyrexG",
+	"calyrex-2": "calyrexS",
+	"giratina-1": "giratinaO",
+	"tornadus-1": "tornadusT",
+	"thundurus-1": "thundurusT",
+	"landorus-1": "landorusT",
+	"zygarde-1": "zygardeD",
+	"zygarde-4": "zygardeP",
+	"tapu-koko": "tapu koko",
+	"tapu-lele": "tapu lele",
+	"tapu-bulu": "tapu bulu",
+	"tapu-fini": "tapu fini",
+	"zarude-1": "zarudeP",
 }
 
 def convert_pokename(poke: str):
@@ -273,7 +290,11 @@ def write_row_csv_pokemoves(poke_id: str, kind: int, elem: Tuple, csvw):
 		logging.error("No ID for move " + move)
 		exit(1)
 	# pokemon_id,version_group_id,move_id,pokemon_move_method_id,level,order
-	csvw.writerow([poke_id, 19, move_id, convert_kind(kind), level, 0])
+	version_group_id = 19
+	if kind == 4:
+		# tutor
+		version_group_id = 20
+	csvw.writerow([poke_id, version_group_id, move_id, convert_kind(kind), level, 0])
 
 
 with open(sys.argv[1], "r") as f, open(sys.argv[2], "w") as out:

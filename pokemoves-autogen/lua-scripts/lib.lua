@@ -8,7 +8,7 @@ local lib = {}
 
 local txt = require('Wikilib-strings') -- luacheck: no unused
 local tab = require('Wikilib-tables')  -- luacheck: no unused
-local pokemoves = require("PokéMoves-data")
+local pokemoves = require("static.pokemoves-data")
 local tmdata = require("Machines-data")
 local learnlib = require('Wikilib-learnlists')
 

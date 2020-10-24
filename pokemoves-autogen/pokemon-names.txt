@@ -905,6 +905,11 @@ kubfu
 urshifu
 urshifuP
 zarude
+regieleki
+regidrago
+glastrier
+spectrier
+calyrex
 deoxysA
 deoxysD
 deoxysV
@@ -938,3 +943,9 @@ stunfiskG
 indeedeeF
 slowpokeG
 slowbroG
+slowkingG
+articunoG
+zapdosG
+moltresG
+calyrexG
+calyrexS
