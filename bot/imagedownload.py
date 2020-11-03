@@ -11,11 +11,6 @@ NOTE: <pagename> SHOULD contain the namespace prefix (ie: File o its translation
 
 The following parameters are supported:
 
-  -interwiki   Look for images in pages found through interwiki links.
-
-  -file:z      Upload many files from textfile: [[Image:x]]
-                                                [[Image:y]]
-
   -target:z    Target directory for the download
 
 If pagename is an image description page, simply downloads it. If it is
@@ -63,14 +58,16 @@ class ImageTransferBot(object):
 
     def transferImage(self, sourceImagePage):
         """
-        Download image and its description, and upload it to another site.
+        Download image and its description.
 
-        @return: the filename which was used to upload the image
+        @return: None
         """
         url = sourceImagePage.get_file_url()
         target_file = os.path.join(self.target_dir, sourceImagePage._link._title)
-        outcome = urllib.request.urlretrieve(url, target_file)
-        pywikibot.output("Downloaded file to {}".format(outcome[0]))
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with open(target_file, "wb") as outfile, urllib.request.urlopen(req) as infile:
+            outfile.write(infile.read())
+        pywikibot.output("Downloaded file to {}".format(target_file))
 
     def showImageList(self, imagelist):
         """Print image list."""

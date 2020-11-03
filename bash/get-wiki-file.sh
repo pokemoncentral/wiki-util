@@ -23,11 +23,15 @@
 #		downloads from Poképedia
 #   wikidex)
 #       downloads from WikiDex
-#       (requires pwb custom script imagedownload,
-#        only work with -d local)
 
 # -p: Flag. If enabled, sets the
 #		bot throttle to 1
+
+# -b: Flag. If enabled, tries to
+#       use the custom pwb script
+#       imagedownload. Only works
+#       with -d local
+
 
 # $1: source filename
 
@@ -47,9 +51,11 @@
 
 DEST=''
 BASE_URL=''
+LANG=''
 PT=''
+USEPWB='no'
 
-while getopts "d:w:p" OPTION; do
+while getopts "d:w:pb" OPTION; do
 	case $OPTION in
 		d)
 			case "local wiki" in
@@ -66,18 +72,23 @@ while getopts "d:w:p" OPTION; do
 			case $OPTARG in
 				bulba)
 					BASE_URL='http://cdn.bulbagarden.net/upload'
+                    LANG='en'
 					;;
 				pcwiki)
 					BASE_URL='http://media.pokemoncentral.it/wiki'
+                    LANG='it'
 					;;
 				pokewiki)
 					BASE_URL='http://www.pokewiki.de/images'
+                    LANG='de'
 					;;
 				pokepedia)
 					BASE_URL='https://www.pokepedia.fr/images'
+                    LANG='fr'
 					;;
                 wikidex)
-                    BASE_URL='wikidex'
+                    BASE_URL='https://images.wikidexcdn.net/mwuploads/wikidex'
+                    LANG='es'
                     ;;
 				*)
 					echo Unknown wiki: $OPTARG
@@ -88,7 +99,10 @@ while getopts "d:w:p" OPTION; do
 		p)
 			PT='-putthrottle:1'
 			;;
-			
+        b)
+            USEPWB='yes'
+            ;;
+
 		*)	# getopts already printed error message
 			exit 1
 			;;
@@ -98,6 +112,11 @@ done
 if [[ -z $DEST ]]; then
 	echo No destination specified. Aborting.
 	exit 1
+fi
+
+if [[ $USEPWB == 'yes' ]] && [[ $DEST -ne 'local' ]]; then
+    echo "Can't use pwb (-b) if destination isn't local"
+    exit 1
 fi
 
 shift $(( $OPTIND - 1 ))
@@ -111,17 +130,22 @@ FILE_URL=$(echo -n $BASE_URL/${MD5:0:1}/${MD5:0:2}/$FILENAME | uni2ascii -aJ)
 if [[ $DEST == 'local' ]]; then
 	if [[ -n $(grep \\. <<<$DEST_PATH) ]]; then
 		mkdir -p $(dirname "$DEST_PATH")
-        if [[ "$BASE_URL" == 'wikidex' ]]; then
-            python $PYWIKIBOT_DIR/pwb.py imagedownload -pt:0 -lang:es -target:"$(dirname "$DEST_PATH")" "Archivo:$1"
+        if [[ "$USEPWB" == 'yes' ]]; then
+            python $PYWIKIBOT_DIR/pwb.py imagedownload -pt:0 -lang:"$LANG" \
+                   -target:"$(dirname "$DEST_PATH")" "File:$1"
             mv "$(dirname "$DEST_PATH")/$1" "$DEST_PATH"
         else
 		    curl -L -A firefox $FILE_URL > "$DEST_PATH" 2> /dev/null
         fi
 	else
 		mkdir -p "$DEST_PATH"
-		cd "$DEST_PATH"
-		curl -L -A firefox -O $FILE_URL 2> /dev/null
-		cd - > /dev/null
+        if [[ "$USEPWB" == 'yes' ]]; then
+            python $PYWIKIBOT_DIR/pwb.py imagedownload -pt:0 -lang:"$LANG" -target:"$DEST_PATH" "File:$1"
+        else
+            cd "$DEST_PATH"
+            curl -L -A firefox -O $FILE_URL 2> /dev/null
+            cd - > /dev/null
+        fi
 	fi
 else
 	python $PYWIKIBOT_DIR/pwb.py upload $PT -keep -noverify -filename:"$2" $FILE_URL "$3"
