@@ -1,25 +1,27 @@
 # PokéMoves autogen
-This directory contains scripts and datas to automatically build PokéMoves-data,
+This directory contains scripts and data to automatically build PokéMoves-data,
 the data module for learnlist and movelist.
 
 ## Create the data module
-First you have to create a config file, copying the template `config-template.sh`
-to `config.sh` and setting values.
+First you have to create a bash and a lua config file, copying the templates
+`config-template.sh` to `config.sh` and `source-module-template.lua` to
+`source-module.lua`, then setting values. Make sure the two are consistent.
 
-After that, the script `do-things.sh` takes care of anything. Just take a look at
-its options using `do-things.sh -h` before running it because it involves creating
-(and afterward destroying) containers, so you want to make sure it doesn't clash
-with anything already on your system.
+After that, the script `create-pokemoves-data.sh` does all you need. Just take
+a look at its options with `create-pokemoves-data.sh -h` before running it
+because it involves creating (and afterward destroying) containers, so you want
+to make sure it doesn't clash with anything already on your system.
 
 ## Add data
-The source of data are some files in the directory `docker-db/sourcecsv/`. Right
-now there are only csv file, but any format that can be imported by PostgreSQL is fine.
+The source of data are some files in the directory `docker-db/sourcecsv/`.
+Right now there are only csv file, but any format that can be imported by
+PostgreSQL is fine.
 
 To add a new file you should:
-- add the file in that directory (`docker-db/sourcecsv/`, in case you have short memory).
-- add a psql command that loads it to `docker-db/load-pokes.sh`. You should probably add
-  it at the bottom because of foreign key constraints, but you can decide it on your own
-  depending on your file.
+- add the file in that directory (`docker-db/sourcecsv/`)
+- add a psql command that loads it to `docker-db/load-pokes.sh`. You should
+  probably add it at the bottom because of foreign key constraints, but of
+  course it depends on your file.
 
 ## Create a csv from a datamine of Kurt's
 The python scripts here are only used to convert datamines to csv in some way.
@@ -32,16 +34,17 @@ The python scripts here are only used to convert datamines to csv in some way.
 
 ## Tricks
 ### Problems while computing csv files
-If at some point the script crashes or have any problem while computing csv files,
-you aren't doomed to restart the computation from the beginning. You can run
+If at some point the script crashes or have any problem while computing csv
+files, you aren't doomed to restart the computation from the beginning. You can
+run
 `./make-pokes.sh -d IMAGE -p PORT -cb POKE`
 to restart the computation of csv files only from POKE. After that, you should
-just run `do-things.sh` without any option to do the job.
+just run `create-pokemoves-data.sh` without any option to do the job.
 
 ### psql: server closed the connection unexpectedly
 Right after creation it take sometime for postgres to load data, but I can't
-find a way to get back control only after that time, so in `do-things.sh` there
-is a sleep at the right point in the code.
+find a way to get back control only after that time, so in
+`create-pokemoves-data.sh` there is a sleep at the right point in the code.
 Try increasing the sleep value in case you see the following error:
 ```
 psql: server closed the connection unexpectedly
@@ -56,9 +59,11 @@ be installed on your system:
 - Docker >=18.9.5 (only 18.09.5 and 19.03.12 were actually tested)
 
 # TODO
-- Move lists in a subdir (`pokemon-names.txt*`)
-- Move `pokemoves-data.lua` (the output) in the appropriate subdir
 - Create a subdir with script/things to build csvs from datamines
+- Clean up config file: the two `MODULENAME` and `TMPMODULENAME` seem to be
+  the same file, probably the TMP one is a remnant of when the module was
+  moved to wiki-lua-modules directory.
+- Change lua scripts to load only needed data, not the whole pokemoves-data
 
 # Credits
 Data in this this project are from:

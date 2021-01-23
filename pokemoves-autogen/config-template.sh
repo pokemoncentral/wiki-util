@@ -25,7 +25,7 @@ export MODULENAME="PokéMoves-data"
 export TMPMODULENAME="pokemoves-data"
 
 # List of Pokémon names
-export POKELIST="pokemon-names.txt"
+export POKELIST="lists/pokemon-names.list"
 
 # Base dir for intermediate outputs
 export TEMPOUTDIR="intermediate-outputs"

@@ -1,5 +1,3 @@
-!pokemon-names.txt
-
 *.log
 pokemoves-data*.lua
 intermediate-outputs/

@@ -74,7 +74,7 @@ create_csv() {
     chmod 644 "${TEMPOUTDIR}/pokecsv/${poke}.csv"
 }
 
-outfile="${TMPMODULENAME}.lua"
+outfile="$OUTPUTMODULEDIR/${TMPMODULENAME}.lua"
 
 if ! [[ -z ${BEGIN+x} ]]; then
     if [[ $CFLAG -ne "true" ]]; then

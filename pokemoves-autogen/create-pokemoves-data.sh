@@ -12,7 +12,7 @@ PFLAG=false
 while getopts "hcd:Dp" o; do
     case "${o}" in
         h)
-            echo "Compute data module PokéMoves-data
+            echo "Create data module PokéMoves-data from raw data.
 
 Options:
   -h        print this help
@@ -49,13 +49,6 @@ Options:
     esac
 done
 shift $((OPTIND-1))
-
-
-# Add the lua modules dir in order to allow lua scripts to source them
-sed -e 's:    ";/path/to/lua/modules/?.lua":    ";'"${MODULESPATH}"'/?.lua":' \
-    -e 's:pokemoves = require("pokemoves-data"):pokemoves = require("'"${TMPMODULENAME}"'"):' \
-    source-modules.lua.base > source-modules.lua
-chmod 644 source-modules.lua
 
 # First creates a dummy PokéMoves-data.lua with only m.games defined, needed by
 # make-pokes.sh -l

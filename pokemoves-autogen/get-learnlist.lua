@@ -6,6 +6,13 @@ lua get-learnlist.lua <poke> <kind>
 
 --]]
 
+if #arg < 2 then
+    print("Missing mandatory arguments")
+    print("Usage:")
+    print("    lua get-learnlist.lua <poke> <kind>")
+    return 1
+end
+
 -- Add the directory containing this script to package.path
 -- NOTE: this works ONLY if the script is run from cmd, not if it's required
 do
@@ -17,7 +24,7 @@ do
     end
 end
 -- luacheck: globals pokemoves tempoutdir
-require('source-modules')
+require('source-modules')(true)
 
 local tab = require('Wikilib-tables')
 local str = require('Wikilib-strings')
@@ -25,7 +32,6 @@ local formlib = require('Wikilib-forms')
 local printer = require("learnlist-gen.print-learnlist8")
 local altdata = require("AltForms-data")
 local pokes = require("Poké-data")
-local pmoves = require("learnlist-gen.pokemoves-data")
 
 local gpoke = str.trim(arg[1]):lower() or "staraptor"
 local kind = str.trim(arg[2]):lower() or "level"
@@ -39,7 +45,7 @@ local pokealt = altdata[gpoke]
 local res
 local allequals = true
 if pokealt then
-    local basell = pmoves[gpoke][kind]
+    local basell = pokemoves[gpoke][kind]
     -- For each form that has a learnlist, checks if it is the same as the base
     res = tab.map(pokealt.gamesOrder, function(abbr)
         local formname = gpoke .. formlib.toEmptyAbbr(abbr)
@@ -48,11 +54,11 @@ if pokealt then
         return { formextname, formname }
     end)
     res = tab.filter(res, function(pair)
-        return pmoves[pair[2]] ~= nil
+        return pokemoves[pair[2]] ~= nil
     end)
     -- print(table.concat(tab.map(res, table.concat)))
     allequals = tab.all(res, function(pair)
-        return tab.equal(basell, pmoves[pair[2]][kind])
+        return tab.equal(basell, pokemoves[pair[2]][kind])
     end)
     -- print(allequals)
     res = tab.map(res, function(pair)
