@@ -1,0 +1,13 @@
+docker run --rm --network=host --user $(id -u) \
+               -v /etc/passwd:/etc/passwd:ro \
+               -v $(pwd):/data pokemovesdb \
+               psql -h localhost -p 43861 -U postgres \
+               -c "\\COPY
+               (SELECT p.id, pmm.identifier, vg.identifier, pm.level, p.identifier
+               FROM pokemon_moves AS pm JOIN pokemon AS p ON pm.pokemon_id = p.id
+               JOIN pokemon_move_methods AS pmm ON pm.pokemon_move_method_id = pmm.id
+               JOIN version_groups AS vg ON pm.version_group_id = vg.id
+               JOIN moves AS m ON pm.move_id = m.id
+               WHERE m.identifier = '${move}' AND vg.generation_id = 8
+               ORDER BY pmm.id, p.id, vg.id, pm.level)
+               TO '/data/intermediate-outputs/movecsv/${move}.csv' WITH csv"
