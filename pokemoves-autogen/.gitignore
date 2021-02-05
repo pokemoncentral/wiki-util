@@ -1,5 +1,6 @@
 *.log
 pokemoves-data*.lua
+movepokes-data*.lua
 intermediate-outputs/
 pokecsv/
 luamoves*/

@@ -64,6 +64,7 @@ be installed on your system:
   the same file, probably the TMP one is a remnant of when the module was
   moved to wiki-lua-modules directory.
 - Change lua scripts to load only needed data, not the whole pokemoves-data
+- Merge `learnlist-gen` and `lua-scripts`
 
 # Credits
 Data in this this project are from:
