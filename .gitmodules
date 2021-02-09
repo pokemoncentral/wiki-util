@@ -1,0 +1,3 @@
+[submodule "pokemoves-autogen/extend-movelist/slpp"]
+	path = pokemoves-autogen/extend-movelist/slpp
+	url = https://github.com/SirAnthony/slpp.git

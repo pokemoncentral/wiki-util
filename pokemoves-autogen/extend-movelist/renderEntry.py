@@ -56,6 +56,7 @@ class RenderEntry:
 
     def get_ndex(self):
         '''Get the ndex of the entry.'''
+        # TODO: return as number whyen needed
         return self.pos_args[1]
 
     def has_gen_n(self, g):
