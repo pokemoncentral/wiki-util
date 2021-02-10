@@ -4,7 +4,7 @@ class RenderEntry:
     '''Class to represent a single render entry.'''
 
     # GEN_KEYS are shifted by one: index i correspond to gen i+1
-    GEN_KEYS = [[], [], [], ["HGSS"], [], ["ORAS"], ["USUL", "LGPE"], []]
+    GEN_KEYS = [["Y"], ["C"], ["FRLG", "E"], ["HGSS", "PtHGSS"], ["B2W2"], ["ORAS"], ["USUL", "LGPE"], []]
 
     @staticmethod
     def has_right_delims(s):

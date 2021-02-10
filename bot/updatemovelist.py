@@ -38,10 +38,8 @@ docuReplacements = {
 class UpdateMovelistBot(SingleSiteBot, FollowRedirectPageBot, ExistingPageBot):
     """A bot that updates movelists in a move's page."""
 
-    # MOVE_DATA = "/home/Mio/Flavio/2-giochi/Pokémon/Wiki/Script/wiki-util/"\
-    #             "pokemoves-autogen/learnlist-gen/movepokes-data{gen}.lua"
-    MOVE_DATA = "/home/Mio/Flavio/2-giochi/Pokémon/Wiki/Script/wiki-util/"\
-                "pokemoves-autogen/extend-movelist/tests/movepokes-tmp.lua"
+    MOVE_DATA = "/path/to/your/wiki-util/"\
+                "pokemoves-autogen/learnlist-gen/movepokes-data-{gen}.lua"
 
     @staticmethod
     def is_render(node):
@@ -101,6 +99,8 @@ class UpdateMovelistBot(SingleSiteBot, FollowRedirectPageBot, ExistingPageBot):
 
     def treat_page(self):
         """Treat a single page."""
+        if self.current_page.title().lower() not in self.lua_data:
+            return
         ast = mwparser.parse(self.current_page.text, skip_style_tags=True)
         renders = ast.filter_templates(recursive=False,
                                        matches=self.is_render)
