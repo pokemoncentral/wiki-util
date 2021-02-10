@@ -29,6 +29,8 @@ require('source-modules')(true)
 require('dumper')
 local tab = require('Wikilib-tables') -- luacheck: no unused
 local learnlist = require('learnlist-gen.learnlist')
+local evodata = require("Evo-data")
+local forms = require('Wikilib-forms')
 
 local KINDS = {"level", "tm", "tutor", "breed"}
 
@@ -70,6 +72,15 @@ local transformers = {
                 return v
             end)
         end)
+    end,
+    breed = function(val, poke)
+        local fbr = pokemoves[poke].breed == pokemoves[forms.uselessToEmpty(evodata[poke].name)].breed
+                    and poke ~= evodata[poke].ndex
+        if fbr then
+            return nil
+        else
+            return val
+        end
     end
 }
 
@@ -88,7 +99,7 @@ for poke, data in pairs(pokemoves) do
                     addEmptyMove(move)
                     if transformers[kind] then
                         -- print(val, move, poke)
-                        val = transformers[kind](val)
+                        val = transformers[kind](val, poke)
                     end
                     movepokes[move][kind][poke] = val
                 end

@@ -7,7 +7,7 @@ Syntax:
 
     python pwb.py updatemovelist {<pagename>|<generator>} [<options>]
 
-TODO
+NOTE: doesn't update tutor because they are few and quite complex
 
 &params;
 """
@@ -77,10 +77,8 @@ class UpdateMovelistBot(SingleSiteBot, FollowRedirectPageBot, ExistingPageBot):
 
         gen and ndex are those of the entry
         """
-        entry = RenderEntry("[[€" + str(gen) + "|" + str(ndex).zfill(3) + "£]]")
-        for g in range(gen, self.generation):
-            entry.add_arg("no")
-        entry.add_arg(vals)
+        entry = RenderEntry.new_empty(gen, ndex, self.generation)
+        entry.update_gen_n(self.generation, vals)
         return entry
 
     def add_gen(self, render, data):
@@ -105,13 +103,12 @@ class UpdateMovelistBot(SingleSiteBot, FollowRedirectPageBot, ExistingPageBot):
         """Treat a single page."""
         ast = mwparser.parse(self.current_page.text, skip_style_tags=True)
         renders = ast.filter_templates(recursive=False,
-                                       matches=UpdateMovelistBot.is_render)
+                                       matches=self.is_render)
         data = self.lua_data[self.current_page.title().lower()]
         data = preprocess(data)
-        for kind in ["level", "tm", "tutor", "breed"]:
+        for kind in ["level", "tm", "breed"]:
             if kind in data:
-                self.add_gen(UpdateMovelistBot.get_render_kind(renders, kind),
-                             data[kind])
+                self.add_gen(self.get_render_kind(renders, kind), data[kind])
 
         self.put_current(str(ast))
 
