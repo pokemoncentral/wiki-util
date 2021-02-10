@@ -55,17 +55,34 @@ class RenderEntry:
         return int(self.pos_args[0])
 
     def get_ndex(self):
-        '''Get the ndex of the entry.'''
-        # TODO: return as number whyen needed
+        '''Get the ndex of the entry as a string.'''
         return self.pos_args[1]
+
+    def get_ndex_num(self):
+        '''Get the ndex of the entry (either a number or a string).'''
+        try:
+            return int(self.pos_args[1])
+        except ValueError:
+            return self.pos_args[1]
+
+    def get_gen_n_index(self, g):
+        '''Get the index at which gen g value is found.'''
+        # 2 indices fixed, then g - self_gen
+        return 2 + g - self.get_gen()
 
     def has_gen_n(self, g):
         '''Check whether the entry has values for gen g or not.'''
         # len >= 3 + j -> has self_gen + j
         # j = g - self_gen
-        if g < self.get_gen():
-            return False
-        return len(self.pos_args) >= 3 + g - self.get_gen()
+        expected_idx = self.get_gen_n_index(g)
+        return 2 <= expected_idx < len(self.pos_args)
+        # if g < self.get_gen():
+        #     return False
+        # return len(self.pos_args) >= 3 + g - self.get_gen()
+
+    def update_gen_n(self, g, newval):
+        '''Update the value for gen g.'''
+        self.pos_args[self.get_gen_n_index(g)] = newval
 
     def add_arg(self, value, key=None):
         '''Add an arg to the entry.

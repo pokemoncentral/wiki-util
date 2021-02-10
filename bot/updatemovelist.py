@@ -20,7 +20,7 @@ import csv
 import re
 
 from movelistlib.slpp.slpp import slpp as slpp
-from movelistlib.renderEntry import RenderEntry
+from movelistlib.renderentry import RenderEntry
 from movelistlib.preprocess import preprocess
 
 import mwparserfromhell as mwparser
@@ -54,7 +54,6 @@ class UpdateMovelistBot(SingleSiteBot, FollowRedirectPageBot, ExistingPageBot):
         norm_kind = kind.strip().lower()
         get_key = lambda x: x.params[1].split('.')[1].strip().lower()
         return next((x for x in renders if get_key(x) == norm_kind), None)
-        # return find_first(renders, lambda n: n.params[1].split('.')[1].strip().lower(), kind.strip().lower())
 
     def __init__(self, generation, **kwargs):
         """Initializer."""
@@ -63,16 +62,14 @@ class UpdateMovelistBot(SingleSiteBot, FollowRedirectPageBot, ExistingPageBot):
         data_path = UpdateMovelistBot.MOVE_DATA.format(gen=generation)
         with open(data_path, "r") as f:
             self.lua_data = slpp.decode(f.read())
-        # print(self.lua_data)
 
-    def add_gen_entry(self, entry, move_data):
+    def update_gen_entry(self, entry, move_data):
         """Add a gen 8 to a single entry of a movelist render"""
-        if not entry.has_gen_n(self.generation):
-            if entry.get_ndex() in move_data:
-                entry.add_arg(move_data[entry.get_ndex()])
-            else:
-                # The Pokémon can't learn the move in gen 8, so we add "no"
-                entry.add_arg("no")
+        if entry.get_ndex_num() in move_data:
+            entry.update_gen_n(self.generation, move_data[entry.get_ndex_num()])
+        elif not entry.has_gen_n(self.generation):
+            # The Pokémon can't learn the move in gen 8, so we add "no"
+            entry.add_arg("no")
         return entry
 
     def create_gen_entry(self, gen, ndex, vals):
@@ -92,15 +89,15 @@ class UpdateMovelistBot(SingleSiteBot, FollowRedirectPageBot, ExistingPageBot):
             return
         tmp_params = list(map(RenderEntry, render.params[2:]))
         # Update Pokémon already there
-        local_mapper = lambda p: self.add_gen_entry(p, data)
+        local_mapper = lambda p: self.update_gen_entry(p, data)
         new_params = list(map(local_mapper, tmp_params))
         # Adds new Pokémon
-        curr_pokes = list(map(lambda x: x.get_ndex(), tmp_params))
+        curr_pokes = list(map(lambda x: x.get_ndex_num(), tmp_params))
         curr_gen = tmp_params[0].get_gen()
         for pk, vals in data.items():
             if not (pk in curr_pokes):
                 new_params.append(self.create_gen_entry(curr_gen, pk, vals))
-        new_params.sort(key=lambda x: str(x.get_ndex()))
+        new_params.sort(key=lambda x: x.get_ndex())
         render.params[2:] = map(lambda x: "\n" + str(x), new_params)
         return render
 
@@ -109,8 +106,6 @@ class UpdateMovelistBot(SingleSiteBot, FollowRedirectPageBot, ExistingPageBot):
         ast = mwparser.parse(self.current_page.text, skip_style_tags=True)
         renders = ast.filter_templates(recursive=False,
                                        matches=UpdateMovelistBot.is_render)
-        # TODO: change this to invoke some lua script that does the job
-        # data = get_data(self.current_page.title().lower())
         data = self.lua_data[self.current_page.title().lower()]
         data = preprocess(data)
         for kind in ["level", "tm", "tutor", "breed"]:
