@@ -4,7 +4,7 @@ class RenderEntry:
     '''Class to represent a single render entry.'''
 
     # GEN_KEYS are shifted by one: index i correspond to gen i+1
-    GEN_KEYS = [["Y"], ["C"], ["FRLG", "E"], ["HGSS", "PtHGSS"], ["B2W2"], ["ORAS"], ["USUL", "LGPE"], []]
+    GEN_KEYS = [["Y"], ["C"], ["FRLG", "E"], ["HGSS", "PtHGSS"], ["B2W2"], ["ORAS"], ["USUL", "USUM", "LGPE"], []]
 
     @staticmethod
     def has_right_delims(s):
@@ -53,7 +53,7 @@ class RenderEntry:
         # Positional args of the entry
         self.pos_args = [g, ndex]
         for g in range(move_gen, curr_gen + 1):
-            self.__add_arg("no")
+            self.add_arg("no")
         # Named arguments of the entry
         self.named_args = {}
         return self
@@ -69,9 +69,11 @@ class RenderEntry:
         params = self.pos_args[0:2]
         for gen, val in enumerate(self.pos_args[2:]):
             params.append(val)
-            for key in self.GEN_KEYS[gen - self.get_gen() - 1]:
-                if key in self.named_args:
-                    params.append(self.print_named_param(key, self.named_args[key]))
+            if gen + self.get_gen() - 1 < len(self.GEN_KEYS):
+                for key in self.GEN_KEYS[gen + self.get_gen() - 1]:
+                    if key in self.named_args:
+                        params.append(
+                            self.print_named_param(key, self.named_args[key]))
         ALL_GAME_KEYS = [game for gen in RenderEntry.GEN_KEYS for game in gen]
         params.extend([self.print_named_param(k, v)
                          for k, v in self.named_args.items()
@@ -110,7 +112,7 @@ class RenderEntry:
         '''Update the value for gen g.'''
         self.pos_args[self.__get_gen_n_index(g)] = newval
 
-    def __add_arg(self, value, key=None):
+    def add_arg(self, value, key=None):
         '''Add an arg to the entry.
 
         if key is specified is added with that key (possibly overriding).

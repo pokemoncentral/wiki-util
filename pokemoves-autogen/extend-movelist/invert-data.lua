@@ -65,12 +65,14 @@ local transformers = {
     level = function(val)
         val = learnlist.decompressLevelEntry(val, gen)
         return tab.map(val, function(va)
-            return tab.map(va, function(v)
+            return tab.unique(tab.map(va, function(v)
                 if v == "inizio" then
                     return 1
+                elseif v == "evo" then
+                    return "Evo"
                 end
                 return v
-            end)
+            end))
         end)
     end,
     breed = function(val, poke)
@@ -113,6 +115,7 @@ end
 -- bad and I know it
 print("Saved to \"" .. path .. "../" .. resultoutdir .. "/movepokes-data-" .. tostring(gen) .. ".lua\"")
 local outfile = io.open(path .. "../" .. resultoutdir .. "/movepokes-data-" .. tostring(gen) .. ".lua", "w")
-outfile:write(DataDumper(movepokes, "m", false, 2))
-outfile:write("\n\nreturn m")
+-- outfile:write(DataDumper(movepokes, "m", false, 2))
+outfile:write(DataDumper(movepokes))
+-- outfile:write("\n\nreturn m")
 outfile:close()

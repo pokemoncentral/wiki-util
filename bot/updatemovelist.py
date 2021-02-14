@@ -42,9 +42,10 @@ class UpdateMovelistBot(SingleSiteBot, FollowRedirectPageBot, ExistingPageBot):
                 "pokemoves-autogen/learnlist-gen/movepokes-data-{gen}.lua"
 
     @staticmethod
-    def is_render(node):
-        """Check whether its argument is a render module."""
-        return re.match("\#invoke\:\s*render", node.name.strip().lower())
+    def is_old_render(node):
+        """Check whether its argument is an old render module."""
+        return (re.match("\#invoke\:\s*render", node.name.strip().lower())
+                and node.params[0].strip() == "entry")
 
     @staticmethod
     def get_render_kind(renders, kind):
@@ -60,10 +61,14 @@ class UpdateMovelistBot(SingleSiteBot, FollowRedirectPageBot, ExistingPageBot):
         data_path = UpdateMovelistBot.MOVE_DATA.format(gen=generation)
         with open(data_path, "r") as f:
             self.lua_data = slpp.decode(f.read())
+        self.summary = "Updating movelist with gen {gen} info".format(gen=generation)
 
     def update_gen_entry(self, entry, move_data):
         """Add a gen 8 to a single entry of a movelist render"""
         if entry.get_ndex_num() in move_data:
+            if not entry.has_gen_n(self.generation):
+                # The Pokémon can't learn the move in gen 8, so we add "no"
+                entry.add_arg("no")
             entry.update_gen_n(self.generation, move_data[entry.get_ndex_num()])
         elif not entry.has_gen_n(self.generation):
             # The Pokémon can't learn the move in gen 8, so we add "no"
@@ -83,7 +88,8 @@ class UpdateMovelistBot(SingleSiteBot, FollowRedirectPageBot, ExistingPageBot):
         """Add a gen to a movelist render"""
         if render is None:
             return
-        tmp_params = list(map(RenderEntry, render.params[2:]))
+        tmp_params = list(
+            map(RenderEntry, filter(lambda x: str(x).strip(), render.params[2:])))
         # Update Pokémon already there
         local_mapper = lambda p: self.update_gen_entry(p, data)
         new_params = list(map(local_mapper, tmp_params))
@@ -103,14 +109,18 @@ class UpdateMovelistBot(SingleSiteBot, FollowRedirectPageBot, ExistingPageBot):
             return
         ast = mwparser.parse(self.current_page.text, skip_style_tags=True)
         renders = ast.filter_templates(recursive=False,
-                                       matches=self.is_render)
+                                       matches=self.is_old_render)
         data = self.lua_data[self.current_page.title().lower()]
         data = preprocess(data)
-        for kind in ["level", "tm", "breed"]:
-            if kind in data:
-                self.add_gen(self.get_render_kind(renders, kind), data[kind])
+        try:
+            for kind in ["level", "tm", "breed"]:
+                if kind in data:
+                    self.add_gen(self.get_render_kind(renders, kind), data[kind])
+        except ValueError:
+            print("Page", self.current_page.title())
+            raise
 
-        self.put_current(str(ast))
+        self.put_current(str(ast), summary=self.summary)
 
 def main(*args):
     local_args = pywikibot.handle_args(args)

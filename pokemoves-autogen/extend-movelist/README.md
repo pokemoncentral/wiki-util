@@ -11,6 +11,9 @@ lua extend-movelist/invert-data.lua <gen>
 ```
 where gen is the generation for which you want to build the inverted module.
 
+Right now that's not the end of the story: you also have to remove the `return`
+at the beginning of the file.
+
 ## Run the bot script
 In this repo's `bot` directory (path relative from here should be `../../bot`)
 there's a script `updatemovelist.py`. This script does the job, but requires
@@ -31,7 +34,11 @@ python pwb.py updatemovelist -cat:"Mosse"
 ```
 and you're done.
 
-NOTE: that's not true, right now the script does not update tutors. This is because tutors differ a lot from other kinds, and in SpSc they're very few, so I decided that update them by hand was more time efficient than handling them this script. Of course this could change in the future.
+NOTE: that's not true, right now the script does not update tutors. This is
+because tutors differ a lot from other kinds, and in SpSc they're very few,
+so I decided that update them by hand was more time efficient than handling
+them this script. Of course this could change in the future.
 
 # TODO
 - make tutor work
+- automatically remove `return` at the beginning of the inverted data module
