@@ -99,7 +99,8 @@ class UpdateMovelistBot(SingleSiteBot, FollowRedirectPageBot, ExistingPageBot):
         for pk, vals in data.items():
             if not (pk in curr_pokes):
                 new_params.append(self.create_gen_entry(curr_gen, pk, vals))
-        new_params.sort(key=lambda x: x.get_ndex())
+        # Sort before printing
+        new_params.sort(key=lambda x: x.get_sort_key())
         render.params[2:] = map(lambda x: "\n" + str(x), new_params)
         return render
 

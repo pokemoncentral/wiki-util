@@ -97,6 +97,14 @@ class RenderEntry:
         except ValueError:
             return self.get_ndex()
 
+    def get_sort_key(self):
+        '''Get the sort key of this entry (a string).'''
+        # Simply handle some special cases starting from get_ndex
+        if self.get_ndex() == "745N":
+            # Lycanroc Notte, moved between Giorno (base) and Crepuscolo (C)
+            return "745A"
+        return self.get_ndex()
+
     def __get_gen_n_index(self, g):
         '''Get the index at which gen g value is found.'''
         # 2 indices fixed, then g - self_gen
