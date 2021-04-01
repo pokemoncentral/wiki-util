@@ -53,9 +53,9 @@ psql: server closed the connection unexpectedly
 ```
 
 # Dependencies
-This repository has just a few dependencies other than standard bash scripting, that should
-be installed on your system:
-- Lua >=5.1 (any version you use for Wiki modules is fine)
+This repository has just a few dependencies other than standard bash scripting,
+that should be installed on your system:
+- Lua == 5.1 (actually any version you use for Wiki modules should be fine)
 - Docker >=18.9.5 (only 18.09.5 and 19.03.12 were actually tested)
 
 # TODO
@@ -65,10 +65,12 @@ be installed on your system:
   moved to wiki-lua-modules directory.
 - Change lua scripts to load only needed data, not the whole pokemoves-data
 - Merge `learnlist-gen` and `lua-scripts`
+- Add scripts to check that all forms of a Pokémon have the same learnset in
+  a given game (possibly directly in the datamine)
 
 # Credits
 Data in this this project are from:
 - learnset until USUM (included) are from VeeKun's repository [pokedex](https://github.com/veekun/pokedex)
-- learnset for LGPE and gen 8 (both games and DLC) are from [SciresM](https://twitter.com/SciresM/)'s and [Kaphotic](https://twitter.com/Kaphotics)'s datamines.
+- learnset for LGPE and gen 8 (both games and DLCs) are from [SciresM](https://twitter.com/SciresM/)'s and [Kaphotic](https://twitter.com/Kaphotics)'s datamines.
 
 Files in `docker-db/sourcecsv/` are made from those data.

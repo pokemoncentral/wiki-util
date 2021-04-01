@@ -6,7 +6,7 @@ sources. After it prints to stdout the updated module.
 
 --]]
 -- luacheck: globals pokemoves tempoutdir
-require('source-modules')
+require('source-modules')(true)
 
 local pokes = require("Poké-data")
 local evodata = require("Evo-data")
