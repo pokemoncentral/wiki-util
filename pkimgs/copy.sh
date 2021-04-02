@@ -4,8 +4,7 @@
 # bash copy.sh here: copy files from bot directory to here
 # PYWIKIBOT_DIR is imported from config file in bash folder
 
-#source ../bash/config.sh
-PYWIKIBOT_DIR="/mnt/d/git/pcwbot"
+source ../bash/config.sh
 
 declare -a pyfiles
 pyfiles=("pkimgstools.py" "pkimgs-data.py" "pkimgs-create.py" "pkimgs-update.py")
