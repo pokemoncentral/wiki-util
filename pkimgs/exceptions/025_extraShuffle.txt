@@ -1,0 +1,151 @@
+{{pokemonimages/div|text=Altre icone di [[Pokémon Shuffle]]}}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Ar.png
+|downdesc=Arrabbiato }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025As.png
+|downdesc=Assonnato }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025En.png
+|downdesc=Entusiasta }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025So.png
+|downdesc=Sorpreso }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025R.png
+|downdesc=Rubacuori }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Al.png
+|downdesc=Allegro }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Sb.png
+|downdesc=Sbigottito }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Fl.png
+|downdesc=Felice }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025PC.png
+|downdesc=Party }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025PM.png
+|downdesc=Party }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025PG.png
+|downdesc=Party }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025PGc.png
+|downdesc=Party }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025PH.png
+|downdesc=Party }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025PL.png
+|downdesc=Party }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025KB.png
+|downdesc=Kimono Boy }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025KG.png
+|downdesc=Kimono Girl }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025PR.png
+|downdesc=Party }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025PRc.png
+|downdesc=Party }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Ev1.png
+|downdesc=Evento }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Ev2.png
+|downdesc=Evento }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Ev3.png
+|downdesc=Evento }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Ev4.png
+|downdesc=Evento }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Ev5.png
+|downdesc=Evento }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Ev6.png
+|downdesc=Evento }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Ev7.png
+|downdesc=Evento }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Ev8.png
+|downdesc=Evento }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Ev9.png
+|downdesc=Evento }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Ev10.png
+|downdesc=Evento }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Ev11.png
+|downdesc=Evento }}
+{{pokemonimages/entry
+|xl=15|xs=30
+|size=x128px
+|img=Shuffle025Ev12.png
+|downdesc=Evento }}

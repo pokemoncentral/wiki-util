@@ -1,0 +1,5 @@
+{{pokemonimages/div|text=Altri sprite di [[Pokémon Café Mix]]}}
+{{pokemonimages/spinoff
+|ndex=133 Grand Chef
+|cafemix=st
+}}

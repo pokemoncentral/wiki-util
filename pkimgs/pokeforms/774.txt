@@ -1,0 +1,8 @@
+,sl,
+R,sl,
+Ar,sl,sl
+G,sl,sl
+Ve,sl,sl
+Az,sl,sl
+I,sl,sl
+Vi,sl,sl

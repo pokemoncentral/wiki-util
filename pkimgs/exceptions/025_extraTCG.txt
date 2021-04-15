@@ -1,0 +1,8 @@
+{{pokemonimages/div|text=Altri sprite di {{ga|Pokémon Trading Card Game}} e [[Pokémon Card GB2 GR dan sanjou!]]}}
+{{pokemonimages/entry
+|xl=55|lg=60|md=70|sm=80|xs=100
+|updesc='''Serie TCG'''
+|content=<div class="flex flex-row flex-wrap flex-items-start flex-main-stretch">
+<div style="padding: 0.2em;"><div class="small-text" style="padding-bottom: 0.4em;">[[Pokémon Trading Card Game (gioco)|TCG1]]</div>[[File:TCG1 P06 Flying Pikachu.png]] [[File:TCG1 P07 Surfing Pikachu.png]] [[File:TCG1 P08 Surfing Pikachu.png]]</div>
+<div style="padding: 0.2em;"><div class="small-text" style="padding-bottom: 0.4em;">[[Pokémon Card GB2 GR dan sanjou!|TCG2]]</div>[[File:TCG2 P13 Flying Pikachu.png]] [[File:TCG2 P14 Flying Pikachu.png]] [[File:TCG2 P15 Surfing Pikachu.png]] [[File:TCG2 P16 Surfing Pikachu.png]]</div>
+</div> }}

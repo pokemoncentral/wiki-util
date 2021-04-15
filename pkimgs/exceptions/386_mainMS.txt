@@ -1,0 +1,16 @@
+{{pokemonimages/div|ndex=386}}
+{{pokemonimages/entry|xl=10|xs=33|img=Ani386MS5.gif|updesc={{#invoke: blackabbrev | RZ}},{{genblackabbrev|IV|V}}}}
+{{pokemonimages/MSOW|ndex=386}}
+{{pokemonimages/entry|xl=10|xs=33|img=386MS7.png|updesc={{genblackabbrev|VI|VII}}}}
+{{pokemonimages/div|ndex=386A}}
+{{pokemonimages/entry|xl=10|xs=33|img=Ani386AMS5.gif|updesc={{#invoke: blackabbrev | RF}},{{genblackabbrev|IV|V}}}}
+{{pokemonimages/MSOW|ndex=386A}}
+{{pokemonimages/entry|xl=10|xs=33|img=386AMS7.png|updesc={{genblackabbrev|VI|VII}}}}
+{{pokemonimages/div|ndex=386D}}
+{{pokemonimages/entry|xl=10|xs=33|img=Ani386DMS5.gif|updesc={{#invoke: blackabbrev | VF}},{{genblackabbrev|IV|V}}}}
+{{pokemonimages/MSOW|ndex=386D}}
+{{pokemonimages/entry|xl=10|xs=33|img=386DMS7.png|updesc={{genblackabbrev|VI|VII}}}}
+{{pokemonimages/div|ndex=386V}}
+{{pokemonimages/entry|xl=10|xs=33|img=Ani386VMS5.gif|updesc={{#invoke: blackabbrev | S}},{{genblackabbrev|IV|V}}}}
+{{pokemonimages/MSOW|ndex=386V}}
+{{pokemonimages/entry|xl=10|xs=33|img=386VMS7.png|updesc={{genblackabbrev|VI|VII}}}}
