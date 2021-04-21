@@ -15,15 +15,15 @@
 #
 # Arguments:
 #   - $1: The name of the fix to be executed.
-function run-fix {
-    local FIX_NAME="$1"
+run_fix() {
+    FIX_NAME="$1"
 
-    python pwb.py replace -pt:1 -start:! -always -fix:"$FIX_NAME"
-
-    if [[ $? -ne 0 ]]; then
-        logger -p local0.err -t FIXES Error
+    python pwb.py replace -pt:1 -start:! -always -fix:"$FIX_NAME" || {
+        echo >&2 "Error in fix $FIX_NAME"
         exit 1
-    fi
+    }
+
+    unset FIX_NAME
 }
 
 #####################################################
@@ -35,15 +35,14 @@ function run-fix {
 cd "$PYWIKIBOT_DIR" || exit 1
 
 # Grammar
-run-fix 'grammar'
+run_fix 'grammar'
 
 # Case-sensitive names
-run-fix 'names-case-sensitive'
+run_fix 'names-case-sensitive'
 
 # Case-insensitive names
-run-fix 'names-case-insensitive'
+run_fix 'names-case-insensitive'
 
 # Obsolete template removal
-run-fix 'obsolete-templates'
+run_fix 'obsolete-templates'
 
-logger -p local0.info -t FIXES Fixed
