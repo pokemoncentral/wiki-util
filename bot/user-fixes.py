@@ -6,7 +6,7 @@ This file implements custom pywikibot fixes
 
 from functools import partial
 
-from fixes_data import (aa_aliases, aa_exceptions, tc_aliases, tc_exceptions)
+from fixes_data import (aa_aliases, aa_exceptions)
 
 
 except_inside = [
