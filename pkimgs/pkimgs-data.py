@@ -65,7 +65,7 @@ parser.add_argument('--catlistspath', default = 'data/catlists/')
 parser.add_argument('--pokelist', default = '')
 parser.add_argument('--pokelistspath', default = 'data/pokelists/')
 parser.add_argument('--pokerank', default = '')
-parser.add_argument('--allcatsfile', default = 'data/utils/allcats.txt')
+parser.add_argument('--catsfile', default = 'data/utils/cats.txt')
 parser.add_argument('--dexfile', default = 'data/utils/pokes_ndex.txt')
 parser.add_argument('--download', default = '')
 parser.add_argument('--downloadspath', default = 'data/pokepages-downloaded/')
@@ -79,7 +79,7 @@ if __name__ == '__main__':
         if not os.path.isdir(args.catlistspath):
             os.mkdir(args.catlistspath)
         if args.catlist == 'all':
-            with open(args.allcatsfile, 'r') as file:
+            with open(args.catsfile, 'r') as file:
                 allcats = file.read().splitlines()
             for cat in allcats:
                 build_cat_list(cat, args.catlistspath)

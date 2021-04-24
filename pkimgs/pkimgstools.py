@@ -560,12 +560,17 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
         elif 'PBR{}m.png'.format(pokeabbr) in imgs and 'PBR{}f.png'.format(pokeabbr) in imgs:
             formtext += '|pbr=both\n'
         # Rumble
-        if 'SPR{}.png'.format(pokeabbr) in imgs and 'PRW{}.png'.format(pokeabbr) in imgs:
-            formtext += '|rumble=both\n'
-        elif 'SPR{}.png'.format(pokeabbr) in imgs:
-            formtext += '|rumble=spr\n'
-        elif 'PRW{}.png'.format(pokeabbr) in imgs:
-            formtext += '|rumble=prw\n'
+        rumble = ''
+        if 'SPR{}.png'.format(pokeabbr) in imgs:
+            rumble += '2'
+        if 'PRW{}.png'.format(pokeabbr) in imgs:
+            rumble += '4'
+        if 'Rush{} f.png'.format(pokeabbr) in imgs:
+            rumble += '5g'
+        elif 'Rush{}.png'.format(pokeabbr) in imgs:
+            rumble += '5'
+        if rumble:
+            formtext += '|rumble={}\n'.format(rumble)
         # PokéPark
         if 'PPWM{}.png'.format(pokeabbr) in imgs:
             formtext += '|pokepark=both\n'

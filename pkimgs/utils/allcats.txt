@@ -78,6 +78,8 @@ Sprite menu Pokémon Battle Revolution cromatici
 Modelli My Pokémon Ranch
 Modelli Super Pokémon Rumble
 Modelli Pokémon Rumble World
+Modelli Pokémon Rumble Rush
+Icone Pokémon Rumble Rush
 Sprite PokéPark Wii
 Modelli PokéPark Wii
 Sprite PokéPark 2
