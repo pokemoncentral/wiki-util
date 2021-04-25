@@ -36,9 +36,9 @@ python3 pwb.py pkimgs-create --pokepage all
 
 ### pkimgs-update.py
 This script updates subpages, each page is read from `<bot directory>/data/pokepages-downloaded`: missing files are automatically downloaded, but existing ones won't be automatically re-downloaded. Main arguments are the following (for all optional arguments see code):
-- `updatepoke` specifies which Pokémon need to be updated, value works as `pokelist` in `pkimgs-data.py`; edited page is saved in `<bot directory>/data/pokepages-updated` with name `<ndex>.txt`, but only if the edited page is actually different from the original.
-- `section` can be used to specify what section(s) to update, value can be `artwork`, `main`, `spinoff` or `all`.
-- `upload` uploads updated pages to wiki, its value works as `pokelist` in `pkimgs-data.py`. Do note that `<bot directory>/data/pokepages-updated` is not cleared automatically, so remember to do it when necessary.
+- `updatepoke` specifies which Pokémon need to be updated, value works as `pokelist` in `pkimgs-data.py` but `all` updates all pages contained in `<bot directory>/data/pokepages-downloaded`, _not_ all Pokémon subpages; edited page is saved in `<bot directory>/data/pokepages-updated` with name `<ndex>.txt`, but only if the edited page is actually different from the original.
+- `section` can be used to specify what section(s) to update, value can be `all` (default), `artwork`, `main`, `spinoff`.
+- `upload` uploads updated pages to wiki, its value works as `updatepoke`. Do note that `<bot directory>/data/pokepages-updated` is not cleared automatically, so remember to do it when necessary.
 - `summary` allows to change default edit summary when uploading pages to wiki.
 
 Command needed to fully update all subpages and save them in local files:

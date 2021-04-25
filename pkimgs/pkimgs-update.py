@@ -30,8 +30,8 @@ def get_section_text(pagetext, section):
 def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, spsc, rangerdata, goforms, exceptionspath, section, downloadspath, updatespath):
     localfile = os.path.join(downloadspath, '{}.txt'.format(poke))
     if not os.path.isfile(localfile):
-        #print('File "{}" not found, downloading subpage "{}"'.format(poke, name))
-        download_pokepage(poke, name, downloadspath)
+        print('File "{}" not found, skipping it.'.format(localfile))
+        return
     with open(localfile, 'r') as file:
         pagetext = file.read()
     with open('{}.txt'.format(os.path.join(pokelistspath, poke)), 'r') as pokefile:
@@ -90,7 +90,7 @@ if __name__ == '__main__':
     # update pages
     if args.updatepoke:
         if args.updatepoke == 'all':
-            lst = getname
+            lst = os.listdir(args.downloadspath)
         else:
             lst = args.updatepoke.split(',')
         if not os.path.isdir(args.updatespath):
