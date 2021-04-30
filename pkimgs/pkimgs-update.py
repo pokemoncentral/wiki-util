@@ -90,7 +90,7 @@ if __name__ == '__main__':
     # update pages
     if args.updatepoke:
         if args.updatepoke == 'all':
-            lst = os.listdir(args.downloadspath)
+            lst = [poke.replace('.txt', '') for poke in os.listdir(args.downloadspath)]
         else:
             lst = args.updatepoke.split(',')
         if not os.path.isdir(args.updatespath):
