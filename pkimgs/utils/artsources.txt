@@ -57,7 +57,7 @@ anime DP
 anime NB
 anime XY
 anime SL
-anime PM
+anime EP
 anime F15
 anime F17
 anime F18
