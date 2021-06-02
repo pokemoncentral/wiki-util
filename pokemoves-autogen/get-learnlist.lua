@@ -6,6 +6,8 @@ lua get-learnlist.lua <poke> <kind>
 
 --]]
 
+local GENERATION = 8
+
 if #arg < 2 then
     print("Missing mandatory arguments")
     print("Usage:")
@@ -29,7 +31,7 @@ require('source-modules')(true)
 local tab = require('Wikilib-tables')
 local str = require('Wikilib-strings')
 local formlib = require('Wikilib-forms')
-local printer = require("learnlist-gen.print-learnlist8")
+local printer = require("learnlist-gen.print-learnlist" .. tostring(GENERATION))
 local altdata = require("AltForms-data")
 local pokes = require("Poké-data")
 
@@ -58,7 +60,7 @@ if pokealt then
     end)
     -- print(table.concat(tab.map(res, table.concat)))
     allequals = tab.all(res, function(pair)
-        return tab.equal(basell, pokemoves[pair[2]][kind])
+        return tab.equal(basell[GENERATION], pokemoves[pair[2]][kind][GENERATION])
     end)
     -- print(allequals)
     res = tab.map(res, function(pair)

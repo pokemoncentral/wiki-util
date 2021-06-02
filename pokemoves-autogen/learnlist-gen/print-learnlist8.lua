@@ -36,8 +36,8 @@ p.strings = {
         preevo = "|${move}|${STAB}|${poke1}${poke2} //",
     }
 }
-p.strings.HEADER = string.interp(p.strings.HF, { hf = "h" })
-p.strings.FOOTER = string.interp(p.strings.HF, { hf = "f" })
+p.strings.HEADER = str.interp(p.strings.HF, { hf = "h" })
+p.strings.FOOTER = str.interp(p.strings.HF, { hf = "f" })
 
 --[[
 
@@ -65,7 +65,7 @@ p.addhf = function(body, poke, gen, kind)
     local name, abbr = formlib.getnameabbr(poke)
     local pokedata = multigen.getGen(pokes[poke], gen)
     -- Interp of concat because the interp data are used twice
-    return string.interp(table.concat({
+    return str.interp(table.concat({
         p.strings.HEADER,
         body,
         p.strings.FOOTER,
@@ -156,11 +156,11 @@ p.dicts.level.makeEntry = function(poke, gen, pair)
         print("-------------> ERROR")
         return "-------------> ERROR"
     end
-    return string.interp(p.strings.ENTRIES.level, {
+    return str.interp(p.strings.ENTRIES.level, {
         move = multigen.getGenValue(moves[move].name, gen),
         STAB = p.computeSTAB(poke, move, nil, gen),
         notes = "",
-        level = string.fu(levels[1]),
+        level = str.fu(levels[1]),
     })
 end
 
@@ -171,7 +171,7 @@ p.dicts.tm.makeEntry = function(poke, gen, val)
         print("-------------> ERROR")
         return "-------------> ERROR"
     end
-    return string.interp(p.strings.ENTRIES.tm, {
+    return str.interp(p.strings.ENTRIES.tm, {
         move = multigen.getGenValue(moves[move].name, gen),
         STAB = p.computeSTAB(poke, move, nil, gen),
         notes = "",
@@ -189,7 +189,7 @@ p.dicts.tutor.makeEntry = function(poke, gen, val)
         return "-------------> ERROR"
     end
     -- return "-------------> ERROR2"
-    return string.interp(p.strings.ENTRIES.tutor, {
+    return str.interp(p.strings.ENTRIES.tutor, {
         move = multigen.getGenValue(moves[move].name, gen),
         STAB = p.computeSTAB(poke, move, nil, gen),
         notes = "",
@@ -211,11 +211,11 @@ p.dicts.breed.makeEntry = function(poke, gen, val)
         return "-------------> ERROR"
     end
     parents = wlib.mapAndConcat(parents, function(ndex)
-        ndex = type(ndex) == "number" and string.tf(ndex) or ndex
+        ndex = type(ndex) == "number" and str.tf(ndex) or ndex
         return table.concat{ "#", ndex, "#" }
     end)
 
-    return string.interp(p.strings.ENTRIES.breed, {
+    return str.interp(p.strings.ENTRIES.breed, {
     -- "|${parents}|${move}|${STAB}|${notes}| //",
         move = multigen.getGenValue(moves[move].name, gen),
         STAB = p.computeSTAB(poke, move, nil, gen),
@@ -225,7 +225,7 @@ p.dicts.breed.makeEntry = function(poke, gen, val)
 end
 
 local function makePreevoPoke(pair)
-    local t = { string.tf(pair[1]), "|" }
+    local t = { str.tf(pair[1]), "|" }
     if pair[2] then
         table.insert(t, pair[2])
         table.insert(t, "|")
@@ -242,7 +242,7 @@ p.dicts.preevo.makeEntry = function(poke, gen, val)
         print("-------------> ERROR")
         return "-------------> ERROR"
     end
-    return string.interp(p.strings.ENTRIES.preevo, {
+    return str.interp(p.strings.ENTRIES.preevo, {
         move = multigen.getGenValue(moves[move].name, gen),
         STAB = p.computeSTAB(poke, move, nil, gen),
         poke1 = makePreevoPoke(preevos[1]),
