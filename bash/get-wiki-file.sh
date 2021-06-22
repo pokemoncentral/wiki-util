@@ -71,7 +71,7 @@ while getopts "d:w:pb" OPTION; do
 		w)
 			case $OPTARG in
 				bulba)
-					BASE_URL='http://cdn.bulbagarden.net/upload'
+					BASE_URL='http://cdn2.bulbagarden.net/upload'
                     LANG='en'
 					;;
 				pcwiki)
