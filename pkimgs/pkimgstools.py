@@ -510,8 +510,12 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
                 formtext += '|mdrbtoc=toc\n'
         if 'MDPPSI{}.png'.format(pokeabbr) in imgs:
             formtext += '|mdpsi=yes\n'
-        if 'MDPSuper{}.png'.format(pokeabbr) in imgs:
-            formtext += '|mdsuper=yes\n'
+        if 'MDPSuper{} sh.png'.format(pokeabbr) in imgs:
+            formtext += '|mdsuper=shiny\n'
+        elif 'MDPSuper{} f.png'.format(pokeabbr) in imgs:
+            formtext += '|mdsuper=both\n'
+        elif 'MDPSuper{}.png'.format(pokeabbr) in imgs:
+            formtext += '|mdsuper=normal\n'
         mddx = ''
         if 'MDPDX{}.png'.format(pokeabbr) in imgs:
             mddx += 'mn'
