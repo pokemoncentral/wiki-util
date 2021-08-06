@@ -84,7 +84,7 @@
 {{pokemonimages/entry
 |xl=25
 |xs=50
-|img=Sprsmesh386V.png
+|img=Sprsmesh386V.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
