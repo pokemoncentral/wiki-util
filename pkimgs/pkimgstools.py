@@ -449,7 +449,7 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
             for j in range(len(tcg2)):
                 formtext += '|tcg2-{}={}\n'.format(j + 1, re.sub(tcg2search, r'\1', tcg2[j])).replace('-1', '')
             # extras
-            if name not in ['Clefairy', 'Jynx']:
+            if name not in ['Pikachu', 'Clefairy', 'Jynx']:
                 extratcg2 = [img for img in imgs if img.startswith('TCG2') and name in img and not re.search(tcg2search, img)]
                 if len(extratcg2) > 0:
                     darksearch = r'TCG2 (...) Dark {}\.png'.format(name)
