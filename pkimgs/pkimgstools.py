@@ -347,8 +347,8 @@ def build_ms_entry(poke, form, multiform, spsc, genderform = ''):
                 text += '|ms67=rozaonly'
             else:
                 text += '|ms67={}'.format(ms67.get(start, '67'))
-        if spsc == True and end >= 8:
-            text += '|ms8=yes'
+        if spsc == True and start <= 8 and end >= 8:
+            text += '|ms8=spsc'
         if multiform == True:
             text += '|form=yes'
             # these forms don't have an overworld sprite in HGSS
