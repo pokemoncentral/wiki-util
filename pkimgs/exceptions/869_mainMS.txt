@@ -1,3 +1,3 @@
 {{pokemonimages/div|text=[[Alcremie/Forme|Alcremie]]}}
-{{pokemonimages/mainMS|ndex=869|ms8=yes}}
-{{pokemonimages/mainMS|ndex=869Gi|ms8=yes|form=yes}}
+{{pokemonimages/mainMS|ndex=869|ms8=spsc}}
+{{pokemonimages/mainMS|ndex=869Gi|ms8=spsc|form=yes}}
