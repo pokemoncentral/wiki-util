@@ -32,6 +32,11 @@ The python scripts here are only used to convert datamines to csv in some way.
   This doesn't work well with tutor, and possibly there are some constants to
   modify in the script's code (some things are hardcoded for current games).
 
+NOTES (to be sorted):
+- there are now two scripts since they changed format for BDSP datamines
+- in the script, there's a `version_group_id` to change, because it describes
+  the id of the game(s) version for that movelist line
+
 ## Tricks
 ### Problems while computing csv files
 If at some point the script crashes or have any problem while computing csv
@@ -68,6 +73,6 @@ be installed on your system:
 # Credits
 Data in this this project are from:
 - learnset until USUM (included) are from VeeKun's repository [pokedex](https://github.com/veekun/pokedex)
-- learnset for LGPE and gen 8 (both games and DLC) are from [SciresM](https://twitter.com/SciresM/)'s and [Kaphotic](https://twitter.com/Kaphotics)'s datamines.
+- learnset for LGPE and gen 8 are from [SciresM](https://twitter.com/SciresM/)'s and [Kaphotic](https://twitter.com/Kaphotics)'s datamines.
 
 Files in `docker-db/sourcecsv/` are made from those data.

@@ -29,8 +29,8 @@ p.strings = {
     ENTRYHEAD = "{{#invoke: render | render | Modulo:Learnlist/entry8 | ${kind} | //",
     ENTRYFOOT = "}}",
     ENTRIES = {
-        level = "|${move}|${STAB}|${notes}|${level}| //",
-        tm = "|${move}|${STAB}|${notes}|${tmnum}| //",
+        level = "|${move}|${STAB}|${notes}|${levelSpSc}|${levelDLPS}| //",
+        tm = "|${move}|${STAB}|${notes}|${tmnumSpSc}|${tmnumDLPS}| //",
         breed = "|${parents}|${move}|${STAB}|${notes}| //",
         tutor = "|${move}|${STAB}|${notes}|${spscyn}|${iayn}| //",
         preevo = "|${move}|${STAB}|${poke1}${poke2} //",
@@ -151,8 +151,8 @@ makeEntry: create the string of an entry from an element produced by processData
 
 --]]
 p.dicts.level.makeEntry = function(poke, gen, pair)
-    local move, levels = unpack(pair)
-    if #levels ~= 1 then
+    local move, levels = pair[1], pair[2]
+    if #levels ~= 2 then
         print("-------------> ERROR")
         return "-------------> ERROR"
     end
@@ -160,18 +160,19 @@ p.dicts.level.makeEntry = function(poke, gen, pair)
         move = multigen.getGenValue(moves[move].name, gen),
         STAB = p.computeSTAB(poke, move, nil, gen),
         notes = "",
-        level = string.fu(levels[1]),
+        levelSpSc = str.fu(levels[1]),
+        levelDLPS = str.fu(levels[2]),
     })
 end
 
 p.dicts.tm.makeEntry = function(poke, gen, val)
-    local move, tmnum, games = unpack(val)
+    local move, tmnum, games = val[1], val[2], val[3]
 
-    if games ~= "" then
-        print("-------------> ERROR")
-        return "-------------> ERROR"
-    end
-    return string.interp(p.strings.ENTRIES.tm, {
+    -- if games ~= "" then
+    --     print("-------------> ERROR")
+    --     return "-------------> ERROR"
+    -- end
+    return str.interp(p.strings.ENTRIES.tm, {
         move = multigen.getGenValue(moves[move].name, gen),
         STAB = p.computeSTAB(poke, move, nil, gen),
         notes = "",

@@ -72,21 +72,16 @@ join_files() {
 
 # Determines the list files depending on the value of $SPLIT
 if [[ "$SPLIT" == "no" ]]; then
-    outfile="$OUTPUTMODULEDIR/${TMPMODULENAME}.lua"
-
-    join_files "$POKELIST" "$outfile"
-
-    echo "Moving result to $OUTPUTMODULEDIR/${MODULENAME}.lua"
-    cp "$outfile" "$OUTPUTMODULEDIR/${MODULENAME}.lua"
+    join_files "$POKELIST" "$OUTPUTMODULEDIR/${MODULENAME}.lua"
 else
     # Iterate for each splitting pattern
     for f in ${POKELIST}.*; do
         j=${f##*.}
-        outfile="${TMPMODULENAME}${j}.lua"
+        # outfile="${TMPMODULENAME}${j}.lua"
 
-        join_files "$f" "$outfile"
+        join_files "$f" "$OUTPUTMODULEDIR/${MODULENAME}-${j}.lua"
 
-        echo "$OUTPUTMODULEDIR/${MODULENAME}-${j}.lua"
-        cp "$outfile" "$OUTPUTMODULEDIR/${MODULENAME}-${j}.lua"
+        # echo "$OUTPUTMODULEDIR/${MODULENAME}-${j}.lua"
+        # cp "$outfile" "$OUTPUTMODULEDIR/${MODULENAME}-${j}.lua"
     done
 fi

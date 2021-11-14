@@ -117,7 +117,7 @@ echo "=================== Updated PokéMoves-data.lua with breed ===============
 echo "============================= Start compressing =============================="
 mkdir -p "$TEMPOUTDIR/luamoves-compress"
 lua "$LUASCRPITSDIR/compress-pokemoves.lua"
-echo "=================== Updated PokéMoves-data.lua with breed ===================="
+echo "=================== PokéMoves-data.lua compressed ===================="
 
 # Split Pokémon and copy them to the modules directory
 echo "================================= Final copy ================================="
