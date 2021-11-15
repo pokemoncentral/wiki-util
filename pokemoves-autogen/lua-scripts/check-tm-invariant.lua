@@ -93,7 +93,7 @@ end
 -- print(DataDumper(data))
 for gen, moves in pairs(data) do
 	for move, v in pairs(moves) do
-		if not table.all(v, function(a) return a == "NP" or a == "L" end) then
+		if not tab.all(v, function(a) return a == "NP" or a == "L" end) then
 			-- print("ERROR")
 			-- print(poke, move, gen)
 			-- print(DataDumper(v, move))

@@ -11,10 +11,8 @@ where name is the Pokémon name and data is the data table.
 
 require('source-modules')
 
-local tab = require('Wikilib-tables')  -- luacheck: no unused
-local str = require('Wikilib-strings') -- luacheck: no unused
+local tab = require('Wikilib-tables')
 local pokes = require("Poké-data")
--- local evodata = require("Evo-data")
 local multigen = require('Wikilib-multigen')
 local learnlib = require('Wikilib-learnlists')
 

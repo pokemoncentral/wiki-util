@@ -8,8 +8,7 @@ local lib = {}
 
 -- luacheck: globals tempoutdir pokemoves
 require('source-modules')(true)
-local txt = require('Wikilib-strings') -- luacheck: no unused
-local tab = require('Wikilib-tables')  -- luacheck: no unused
+local tab = require('Wikilib-tables')
 local tmdata = require("Machines-data")
 local learnlib = require('Wikilib-learnlists')
 
