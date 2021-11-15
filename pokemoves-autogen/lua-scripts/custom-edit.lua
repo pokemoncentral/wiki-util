@@ -11,14 +11,14 @@ where name is the Pokémon name and data is the data table.
 
 require('source-modules')
 
--- local evodata = require("Evo-data")
 local tab = require('Wikilib-tables')  -- luacheck: no unused
 local str = require('Wikilib-strings') -- luacheck: no unused
 local pokes = require("Poké-data")
+-- local evodata = require("Evo-data")
 local multigen = require('Wikilib-multigen')
 local learnlib = require('Wikilib-learnlists')
 
--- Steel Pokémon learn Raggio d'Acciaio, Dragon learn Dragobolide
+-- Dragon Pokémon learn Dragobolide, Steel learn Raggio d'Acciaio but not in DLPS
 local function typeTutors(poke, data)
     local pokedata = multigen.getGen(pokes[poke] or {}, 8)
     if tab.search(pokedata, "drago") then
@@ -27,12 +27,13 @@ local function typeTutors(poke, data)
     end
     if tab.search(pokedata, "acciaio") then
         local tutorgames = learnlib.games.tutor[8]
-        data.tutor[8]["raggio d'acciaio"] = tab.map(tutorgames, function() return true end)
+        data.tutor[8]["raggio d'acciaio"] = tab.map(tutorgames, function(game) return game ~= "DLPS" end)
     end
     return data
 end
 
--- Starters learns Radicalbero/Incendio/Idrocannone and Erbapatto/Fiammapatto/Acquapatto
+-- Starters learns Radicalbero/Incendio/Idrocannone,
+-- and in SpSc also Erbapatto/Fiammapatto/Acquapatto
 local starterultimate = {
     erba = { "venusaur", "meganium", "sceptile", "torterra", "serperior",
     "chesnaught", "decidueye", "rillaboom" },
@@ -59,25 +60,20 @@ local starterpatti = {
     "sobble", "drizzile", "inteleon"},
 }
 local function starters(poke, data)
+    local tutorgames = learnlib.games.tutor[8]
     if tab.search(starterultimate.erba, poke) then
-        local tutorgames = learnlib.games.tutor[8]
         data.tutor[8].radicalbero = tab.map(tutorgames, function() return true end)
     elseif tab.search(starterultimate.fuoco, poke) then
-        local tutorgames = learnlib.games.tutor[8]
         data.tutor[8].incendio = tab.map(tutorgames, function() return true end)
     elseif tab.search(starterultimate.acqua, poke) then
-        local tutorgames = learnlib.games.tutor[8]
         data.tutor[8].idrocannone = tab.map(tutorgames, function() return true end)
     end
     if tab.search(starterpatti.erba, poke) then
-        local tutorgames = learnlib.games.tutor[8]
-        data.tutor[8].erbapatto = tab.map(tutorgames, function() return true end)
+        data.tutor[8].erbapatto = tab.map(tutorgames, function(game) return game ~= "DLPS" end)
     elseif tab.search(starterpatti.fuoco, poke) then
-        local tutorgames = learnlib.games.tutor[8]
-        data.tutor[8].fiammapatto = tab.map(tutorgames, function() return true end)
+        data.tutor[8].fiammapatto = tab.map(tutorgames, function(game) return game ~= "DLPS" end)
     elseif tab.search(starterpatti.acqua, poke) then
-        local tutorgames = learnlib.games.tutor[8]
-        data.tutor[8].acquapatto = tab.map(tutorgames, function() return true end)
+        data.tutor[8].acquapatto = tab.map(tutorgames, function(game) return game ~= "DLPS" end)
     end
     return data
 end

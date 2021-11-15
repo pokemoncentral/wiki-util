@@ -344,29 +344,47 @@ l.dicts.level = {
 -- ==================================== Tm ====================================
 l.dicts.tm = {
     processData = function(_, gen, move)
-        return table.mapToNum(mtdata[gen], function(tmdata, tmkind)
-            local tmnum, i = table.deepSearch(tmdata, move)
-            if tmnum then
-                local tmnums = string.nFigures(tmnum, 2)
-                if i then
-                    return { move, { tmkind, tmnums }, tmdata[tmnum][i][1] }
-                else
-                    return { move, { tmkind, tmnums }, "" }
-                end
+        if gen >= 8 then
+            local out = { move = move }
+            for _, game in ipairs(lib.games.tm[gen]) do
+                local kind, num = lib.getTMNum(move, gen, game)
+                table.insert(out, { game, kind, num })
             end
-            -- Needed because otherwise the function returns 0 values and
-            -- table.insert complains (there's no automatic addition of nils)
-            return nil
-        end)
+            return out
+        else
+            local kind, num = lib.getTMNum(move, gen)
+            return { move = move, { "", kind, num } }
+        end
     end,
-    dataMap = table.flatMapToNum,
+    dataMap = table.mapToNum,
     -- elements of res are like
-    -- { <movename>, { "M[TN]", "12"}, <games abbr> }
+    -- { move: <movename>, <array of { <games abbr>, <kind>, <num> }> }
+    -- All lists have entries for all games, possibly with kind and num equal
+    -- to nil. Num is a string
     lt = function(a, b)
-		local a2 = a[2]
-		local b2 = b[2]
-		return a2[1] > b2[1]
-		       or (a2[1] == b2[1] and tonumber(a2[2]) < tonumber(b2[2]))
+        if a.move == b.move then
+            -- They are the same element, hence a < b is false
+            return false
+        end
+        for i, aval in ipairs(a) do
+            -- All pairs are guaranteed to be different unless they are both
+            -- nil, since if they were equal then the moves would be the same
+            -- (because are the same TM in at least one game)
+            local bval = b[i]
+            if aval[2] and bval[2] then
+                -- If both exists can compare right away
+                return aval[2] > bval[2]
+                        or (aval[2] == bval[2] and tonumber(aval[3]) < tonumber(bval[3]))
+            elseif not aval[2] and bval[2] then
+                return false
+            elseif aval[2] and not bval[2] then
+                return true
+            end -- else not aval[2] and not bval[2]
+            -- In this case, since neither exists, defers comparison to the
+            -- next pair
+        end
+        -- Because sometimes it compares an element with itself
+        return false
     end,
 }
 

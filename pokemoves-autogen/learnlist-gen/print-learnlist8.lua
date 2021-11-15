@@ -32,7 +32,7 @@ p.strings = {
         level = "|${move}|${STAB}|${notes}|${levelSpSc}|${levelDLPS}| //",
         tm = "|${move}|${STAB}|${notes}|${tmnumSpSc}|${tmnumDLPS}| //",
         breed = "|${parents}|${move}|${STAB}|${notes}| //",
-        tutor = "|${move}|${STAB}|${notes}|${spscyn}|${iayn}| //",
+        tutor = "|${move}|${STAB}|${notes}|${spscyn}|${iayn}|${dlpsyn}| //",
         preevo = "|${move}|${STAB}|${poke1}${poke2} //",
     }
 }
@@ -160,23 +160,25 @@ p.dicts.level.makeEntry = function(poke, gen, pair)
         move = multigen.getGenValue(moves[move].name, gen),
         STAB = p.computeSTAB(poke, move, nil, gen),
         notes = "",
-        levelSpSc = str.fu(levels[1]),
-        levelDLPS = str.fu(levels[2]),
+        levelSpSc = levels[1] and str.fu(levels[1]) or "no",
+        levelDLPS = levels[2] and str.fu(levels[2]) or "no",
     })
 end
 
 p.dicts.tm.makeEntry = function(poke, gen, val)
-    local move, tmnum, games = val[1], val[2], val[3]
+    local move = val.move
+    -- { move: <movename>, <array of { <games abbr>, <kind>, <num> }> }
 
-    -- if games ~= "" then
-    --     print("-------------> ERROR")
-    --     return "-------------> ERROR"
-    -- end
+    if #val ~= 2 then
+        print("-------------> ERROR")
+        return "-------------> ERROR"
+    end
     return str.interp(p.strings.ENTRIES.tm, {
         move = multigen.getGenValue(moves[move].name, gen),
         STAB = p.computeSTAB(poke, move, nil, gen),
         notes = "",
-        tmnum = table.concat(tmnum),
+        tmnumSpSc = val[1][2] and table.concat{ val[1][2], val[1][3]} or "no",
+        tmnumDLPS = val[2][2] and table.concat{ val[2][2], val[2][3]} or "no",
     })
 end
 
@@ -185,7 +187,7 @@ p.dicts.tutor.makeEntry = function(poke, gen, val)
     local move = val[1]
     local gamesarray = val[2]
 
-    if #gamesarray ~= 2 then
+    if #gamesarray ~= 3 then
         print("-------------> ERROR")
         return "-------------> ERROR"
     end
@@ -196,6 +198,7 @@ p.dicts.tutor.makeEntry = function(poke, gen, val)
         notes = "",
         spscyn = gamesarray[1][2]:lower(),
         iayn = gamesarray[2][2]:lower(),
+        dlpsyn = gamesarray[3][2]:lower(),
     })
 end
 
