@@ -111,6 +111,7 @@ echo "=========================== Start computing breed ========================
 mkdir -p "$TEMPOUTDIR/luamoves-breed"
 lua "$LUASCRPITSDIR/recomp-breed.lua"
 ./make-pokes.sh -s "luamoves-breed"
+./copy-modules.sh -s "$TEMPOUTDIR/luamoves-breed"
 echo "=================== Updated PokéMoves-data.lua with breed ===================="
 
 # Compress

@@ -10,7 +10,7 @@ should be quite the rare case)
 
 --]]
 -- luacheck: globals pokemoves tempoutdir
-require('source-modules')
+require('source-modules')(true)
 
 local pokeeggs = require("PokéEggGroup-data")
 local pokes = require("Poké-data")

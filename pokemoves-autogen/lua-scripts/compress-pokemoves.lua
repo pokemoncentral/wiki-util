@@ -35,7 +35,7 @@ preevo: ? It's even worth to compress this? I think they're very small
 
 --]]
 -- luacheck: globals pokemoves tempoutdir
-require('source-modules')
+require('source-modules')(true)
 
 local tab = require('Wikilib-tables')
 
