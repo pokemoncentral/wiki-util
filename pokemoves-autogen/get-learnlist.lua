@@ -29,6 +29,7 @@ require('source-modules')(true)
 local tab = require('Wikilib-tables')
 local str = require('Wikilib-strings')
 local formlib = require('Wikilib-forms')
+local evolib = require('Wikilib-evos')
 local printer = require("learnlist-gen.print-learnlist8")
 local altdata = require("AltForms-data")
 local pokes = require("Poké-data")
@@ -38,6 +39,13 @@ local kind = str.trim(arg[2]):lower() or "level"
 
 local function printOne(poke)
     return printer[kind](poke)
+end
+
+-- If kind is preevo, check if the Pokémon has preevo
+if kind == "preevo" and not evolib.directPreevo(gpoke) then
+    -- If not, returns the empty string because it shouldn't have a preevo
+    -- table, not just a preevonull
+    return 0
 end
 
 -- Check if the Poké has alternative forms

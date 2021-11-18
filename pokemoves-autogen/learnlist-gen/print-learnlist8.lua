@@ -202,12 +202,19 @@ p.dicts.tutor.makeEntry = function(poke, gen, val)
 end
 
 p.dicts.breed.makeEntry = function(poke, gen, val)
-    -- val :: { <movename>, { <array of parents> }, <notes> }
+    -- val :: { <movename>, { <array of parents> }, <notes>, games = <sigla or nil> }
     local move = val[1]
     local parents = val[2]
 
-    -- Removes the tt from notes
-    local notes = val[3]:gsub('<span class="explain tooltips" title="([%w%s]*)">%*</span>', "%1")
+    local notes = val[3]
+    if val.games then
+        -- Add games as a separate note, so that they appear as sup
+        if notes == "" then
+            notes = table.concat(val.games)
+        else
+            notes = table.concat{ notes, "|", table.concat(val.games) }
+        end
+    end
 
     if #parents == 0 then
         print("-------------> ERROR")
@@ -219,7 +226,6 @@ p.dicts.breed.makeEntry = function(poke, gen, val)
     end)
 
     return str.interp(p.strings.ENTRIES.breed, {
-    -- "|${parents}|${move}|${STAB}|${notes}| //",
         move = multigen.getGenValue(moves[move].name, gen),
         STAB = p.computeSTAB(poke, move, nil, gen),
         notes = notes,

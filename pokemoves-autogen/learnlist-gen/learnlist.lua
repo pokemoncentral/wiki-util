@@ -22,8 +22,8 @@ require('source-modules')
 
 local l = {}
 
-local txt = require('Wikilib-strings')      -- luacheck: no unused
-local tab = require('Wikilib-tables')       -- luacheck: no unused
+local str = require('Wikilib-strings')
+local tab = require('Wikilib-tables')
 local lib = require('Wikilib-learnlists')
 local genlib = require('Wikilib-gens')
 local multigen = require('Wikilib-multigen')
@@ -88,7 +88,7 @@ end
 l.decompressLevelEntry = function(entry, gen)
 	local res
 	if type(entry) == 'table' then
-		res = table.copy(entry)
+		res = tab.copy(entry)
 	else
 		res = { { entry } }
 	end
@@ -96,8 +96,8 @@ l.decompressLevelEntry = function(entry, gen)
 	-- 	res[1] = {res[1]}
 	-- end
 	if #res == 1 then
-		res = table.map(lib.games.level[gen], function()
-			return table.copy(res[1])
+		res = tab.map(lib.games.level[gen], function()
+			return tab.copy(res[1])
 		end)
 	end
 	return res
@@ -134,7 +134,7 @@ l.learnKind = function(move, ndex, gen, kind)
 	if kind == "tm" then
 		local mlist = mdata.all and mtdata[gen] or mdata
 		-- Extra parentheses to force a single return value
-		return (table.deepSearch(mlist, move))
+		return (tab.deepSearch(mlist, move))
 	else
 		return mdata[move]
 	end
@@ -155,8 +155,8 @@ Arguments:
 --]]
 l.canLearn = function(move, ndex, gen, excludekinds)
 	excludekinds = excludekinds or {}
-	return table.any(pokemoves[ndex], function(_, kind)
-		if table.search(excludekinds, kind) then
+	return tab.any(pokemoves[ndex], function(_, kind)
+		if tab.search(excludekinds, kind) then
 			return false
 		end
 		return l.learnKind(move, ndex, gen, kind)
@@ -178,7 +178,7 @@ Arguments:
 --]]
 l.learnPreviousGen = function(move, ndex, gen, firstgen)
 	for g = gen - 1, firstgen or 1, -1 do
-		if table.any(pokemoves[ndex], function(_, kind)
+		if tab.any(pokemoves[ndex], function(_, kind)
 			return l.learnKind(move, ndex, g, kind)
 		end) then
 			return g
@@ -325,14 +325,14 @@ l.dicts.level = {
     processData = function(_, gen, levels, move)
         levels = l.decompressLevelEntry(levels, gen)
         -- levels = { {"inizio"}, {"inizio", "evo"} },
-        local alllevels = table.unique(table.flatten(levels))
-        return table.map(alllevels, function(lvl)
-            return { move, table.map(levels, function(t)
-                return table.search(t, lvl) and lvl or false
+        local alllevels = tab.unique(tab.flatten(levels))
+        return tab.map(alllevels, function(lvl)
+            return { move, tab.map(levels, function(t)
+                return tab.search(t, lvl) and lvl or false
             end) }
         end)
     end,
-    dataMap = table.flatMapToNum,
+    dataMap = tab.flatMapToNum,
     -- elements of res are like
     -- {
     --     <movename>,
@@ -356,7 +356,7 @@ l.dicts.tm = {
             return { move = move, { "", kind, num } }
         end
     end,
-    dataMap = table.mapToNum,
+    dataMap = tab.mapToNum,
     -- elements of res are like
     -- { move: <movename>, <array of { <games abbr>, <kind>, <num> }> }
     -- All lists have entries for all games, possibly with kind and num equal
@@ -403,19 +403,14 @@ l.dicts.breed = {
                         lib.games.breed[gen][#lib.games.breed[gen]])
 
         local notes = movedata.notes or l.breednotes(gen, move, parents[1])
-        local res = { move, parents[1] and parents or { 000 },
-                      notes == "" and "" or links.tt("*", string.fu(notes))
+        local res = { move, parents[1] and parents or { 000 }, str.fu(notes),
+                      games = movedata.games
                     }
-        if movedata.games then
-            res[3] = wlib.mapAndConcat(movedata.games,
-                                       function(s) return sup[s] end)
-                     .. res[3]
-        end
         return res
     end,
-    dataMap = table.mapToNum,
+    dataMap = tab.mapToNum,
     -- elements of res are like
-    -- { <movename>, { <array of parents> }, <notes> }
+    -- { <movename>, { <array of parents> }, <notes>, games = <sigla or nil> }
     lt = function(a, b)
         return a[1] < b[1]
     end,
@@ -426,12 +421,12 @@ l.dicts.tutor = {
     processData = function(_, gen, games, move)
         return {
             move,
-            table.zip(lib.games.tutor[gen], games, function(a, b)
+            tab.zip(lib.games.tutor[gen], games, function(a, b)
                 return { a, b and "Yes" or "No" }
             end)
         }
     end,
-    dataMap = table.mapToNum,
+    dataMap = tab.mapToNum,
     -- elements of res are like
     -- { <movename>, { <array of games pairs { <abbr>, "Yes"/"No" }> } }
     lt = function(a, b)
@@ -448,11 +443,11 @@ l.dicts.tutor = {
 -- ================================== Preevo ==================================
 l.dicts.preevo = {
     processData = function(_, _, preevos, move)
-        return { move, table.map(preevos, function(ndex)
+        return { move, tab.map(preevos, function(ndex)
             return { ndex, "" }
         end, ipairs), games = preevos.games }
     end,
-    dataMap = table.mapToNum,
+    dataMap = tab.mapToNum,
     -- elements of res are like
     -- { <movename>, { <array of preevo pairs: { ndex, notes }> } }
     lt = function(a, b)
@@ -465,7 +460,7 @@ l.dicts.event = {
     processData = function(_, _, occasion, move)
         return { move, occasion }
     end,
-    dataMap = table.mapToNum,
+    dataMap = tab.mapToNum,
     -- elements of res are like
     -- { <movename>, <occasion> }
     lt = function(a, b)
