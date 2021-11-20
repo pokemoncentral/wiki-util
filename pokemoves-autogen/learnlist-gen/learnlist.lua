@@ -33,6 +33,7 @@ local hf = require('Learnlist-hf')
 local sup = require("Sup-data")
 local pokes = require("Poké-data")
 local mtdata = require("Machines-data")
+local ex8 = require("learnlist-gen.existence8-data")
 
 -- ============================ Wikilib-learnlists ============================
 -- Here are functions previously in Wikilib-learnlists that uses pokemoves-data
@@ -343,15 +344,26 @@ l.dicts.level = {
 
 -- ==================================== Tm ====================================
 l.dicts.tm = {
-    processData = function(_, gen, move)
-        if gen >= 8 then
+    processData = function(poke, gen, move)
+        if gen == 8 then
             local out = { move = move }
             for _, game in ipairs(lib.games.tm[gen]) do
                 local kind, num = lib.getTMNum(move, gen, game)
                 table.insert(out, { game, kind, num })
             end
+            -- Check if the Pokémon exists only in SpSc or DLPS, and changes
+            -- tms accordingly
+            if tab.search(ex8[poke], "SpSc") then
+                if not tab.search(ex8[poke], "DLPS") then
+                    -- Only SpSc
+                    out[2] = out[1]
+                end
+            elseif tab.search(ex8[poke], "DLPS") then
+                -- Only DLPS
+                    out[1] = out[2]
+            end
             return out
-        else
+        else -- gen <= 7
             local kind, num = lib.getTMNum(move, gen)
             return { move = move, { "", kind, num } }
         end
