@@ -63,7 +63,7 @@ for _, data in pairs(pokemoves) do
 			if tab.all(v2, function(t) return tab.equal(t, v2[1]) end) then
 				v1[move] = { v2[1] }
 			end
-			if #v2[1] == 1 then
+			if #v2 == 1 and #v2[1] == 1 then
 				v1[move] = v2[1][1]
 			end
 		end

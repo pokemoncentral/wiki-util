@@ -8,6 +8,11 @@ and does the following operations:
 - if needed, create the subpage for the specified generation
 - update the subpage using the output of a specified command
 - update the Pokémon page to point to the right subpage
+This last step is optional, and can be suppressed with the option -subpage-only
+
+Options:
+    -subpage-only  suppress update of the main Pokémon page, only processes
+                   subpages
 
 The generation is currently hardcoded, but in a future update (when?) it will
 be specified by a command line argument.
@@ -59,8 +64,7 @@ class UpdateLearnlistSubpagesBot(SingleSiteBot):
 </noinclude>"""
 
     # Content of an empty subpage, to be filled by self.replace_learnlists
-    EMPTY_SUBPAGE = """
-====Aumentando di [[livello]]====
+    EMPTY_SUBPAGE = """====Aumentando di [[livello]]====
 ====Tramite [[MT]]====
 ====Tramite [[Accoppiamento Pokémon|accoppiamento]]====
 ====Dall'[[Insegnamosse]]====
@@ -87,12 +91,15 @@ class UpdateLearnlistSubpagesBot(SingleSiteBot):
     @type summary: str
     @param command_path: The path to the command to execute to get new learnlists
     @type command_path: str
+    @param subpage_only: Whether to suppress edit of the Pokémon page
+    @type subpage_only: bool
     """
-    def __init__(self, summary, command_path, **kwargs):
+    def __init__(self, summary, command_path, subpage_only, **kwargs):
         """Initializer."""
         super(UpdateLearnlistSubpagesBot, self).__init__(**kwargs)
 
         self.command_path = command_path
+        self.subpage_only = subpage_only
         self.summary = (summary or 'Bot: replacing learnlists')
 
     def replace_learnlists(self, page, oldtext=None):
@@ -129,7 +136,14 @@ class UpdateLearnlistSubpagesBot(SingleSiteBot):
         for heading, kind in UpdateLearnlistSubpagesBot.SECTIONS:
             for section in limited_content.get_sections(matches=heading):
                 real_heading = section.filter_headings()[0]
-                newcontent = subprocess.run(["lua", self.command_path, poke, kind], capture_output=True, encoding="utf-8").stdout
+                subout = subprocess.run(["lua", self.command_path, poke, kind], capture_output=True, encoding="utf-8")
+                try:
+                    subout.check_returncode()
+                except CalledProcessError:
+                    pwb.error("The lua subprocess encountered an error")
+                    pwb.error(subout.stderr)
+                    raise
+                newcontent = subout.stdout
                 if newcontent.strip() != "":
                     content.replace(section, str(real_heading) + "\n" + newcontent + "\n")
                 else:
@@ -149,7 +163,7 @@ class UpdateLearnlistSubpagesBot(SingleSiteBot):
         It performs what described above, so:
         - possibly creates the subpage
         - runs ReplaceLearnlistsBot on it
-        - replace the inclusion in the main page
+        - (possibly) replace the inclusion in the main page
         """
         poke = UpdateLearnlistSubpagesBot.get_poke_name(page)
         # Look for the subpage and possibly create it
@@ -160,11 +174,12 @@ class UpdateLearnlistSubpagesBot(SingleSiteBot):
         # Here the subpage is guaranteed to exists, so replace_learnlists on it
         self.replace_learnlists(llsubpage, oldtext="")
         # Possibly change the inclusion in the main page
-        repl = "{{" + UpdateLearnlistSubpagesBot.SUBPAGE_INC_REPL.format(gen=GENERATION) + "}}"
-        newtext = re.sub(UpdateLearnlistSubpagesBot.SUBPAGE_INC_REGEX,
-                         repl,
-                         page.text)
-        self.userPut(page=page, oldtext=page.text, newtext=newtext, summary=self.summary)
+        if not self.subpage_only:
+            repl = "{{" + UpdateLearnlistSubpagesBot.SUBPAGE_INC_REPL.format(gen=GENERATION) + "}}"
+            newtext = re.sub(UpdateLearnlistSubpagesBot.SUBPAGE_INC_REGEX,
+                            repl,
+                            page.text)
+            self.userPut(page=page, oldtext=page.text, newtext=newtext, summary=self.summary)
 
 
 def main(*args):
@@ -177,7 +192,7 @@ def main(*args):
     @type args: str
     """
     # Summary message, whether to accept all uploads
-    summary, always = None, False
+    summary, always, subpage_only = None, False, False
 
     genFactory = pagegenerators.GeneratorFactory()
 
@@ -201,10 +216,13 @@ def main(*args):
             always = True
         elif arg_name == 'summary':
             summary = arg_value
+        elif arg_name == 'subpage-only':
+            subpage_only = True
 
     bot = UpdateLearnlistSubpagesBot(
         always=always,
         summary=summary,
+        subpage_only=subpage_only,
         generator=genFactory.getCombinedGenerator(),
         command_path="/path/to/wiki-util/pokemoves-autogen/get-learnlist.lua"
     )
