@@ -30,8 +30,11 @@ for title in new_pages:
             break
         else:
             author = page.oldest_revision['user']
-            # filters to ignore certain pages (in our case the huge amount of cards)
+            # filters to ignore certain pages
+            # we are ignoring cards and disambiguation pages
             if re.search(r'(\d+|GCC)\)$', title) and author == 'Andrew01':
+                pass
+            elif 'Categoria:Pagine di disambiguazione' in [cat.title() for cat in page.categories()]:
                 pass
             else:
                 last_week_pages += '{} {} ({})\n'.format(title, page.full_url(), author)
