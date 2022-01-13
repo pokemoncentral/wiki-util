@@ -11,6 +11,7 @@ require('source-modules')
 local p = {}
 
 local str = require("Wikilib-strings")
+local tab = require("Wikilib-tables")
 local learnlib = require('Wikilib-learnlists')
 local wlib = require('Wikilib')
 local genlib = require('Wikilib-gens')
@@ -21,6 +22,7 @@ local moves = require("Move-data")
 local pokes = require("Poké-data")
 local altdata = require("AltForms-data")
 local pokemoves = require("learnlist-gen.pokemoves-data")
+local ex8 = require("learnlist-gen.existence8-data")
 
 p.strings = {
     HF = "{{#invoke: Learnlist/hf | ${kind}${hf} | ${poke} | ${type1} | ${type2} | ${genh} | ${genp} }}",
@@ -139,6 +141,30 @@ end
 
 -- Fixing dicts (just printing)
 p.dicts = learnlist.dicts
+
+do
+    local oldprocessData = learnlist.dicts.level.processData
+    p.dicts.level.processData = function(poke, gen, levels, move)
+        levels = learnlist.decompressLevelEntry(levels, gen)
+        -- Check if the Pokémon exists only in SpSc or DLPS, and changes
+        -- levels accordingly
+        if tab.search(ex8[poke], "SpSc") then
+            if not tab.search(ex8[poke], "DLPS") then
+                -- Only SpSc
+                levels[2] = levels[1]
+            end
+        elseif tab.search(ex8[poke], "DLPS") then
+            -- Only DLPS
+            levels[1] = levels[2]
+        end
+        -- If there is only one level in each game for the move, just puts them all
+        -- in a single row, otherwise multiple rows
+        if tab.all(levels, function(v) return #v == 1 end) then
+            return { { move, tab.map(levels, function(t) return t[1] end) } }
+        end
+        return oldprocessData(poke, gen, levels, move)
+    end
+end
 
 --[[
 

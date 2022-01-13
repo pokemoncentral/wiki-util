@@ -325,19 +325,6 @@ end
 l.dicts.level = {
     processData = function(poke, gen, levels, move)
         levels = l.decompressLevelEntry(levels, gen)
-        -- Check if the Pokémon exists only in SpSc or DLPS, and changes
-        -- levels accordingly
-        if gen == 8 then
-            if tab.search(ex8[poke], "SpSc") then
-                if not tab.search(ex8[poke], "DLPS") then
-                    -- Only SpSc
-                    levels[2] = levels[1]
-                end
-            elseif tab.search(ex8[poke], "DLPS") then
-                -- Only DLPS
-                levels[1] = levels[2]
-            end
-        end
         -- levels = { {"inizio"}, {"inizio", "evo"} },
         local alllevels = tab.unique(tab.flatten(levels))
         return tab.map(alllevels, function(lvl)
