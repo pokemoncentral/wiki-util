@@ -63,5 +63,6 @@ anime EP
 anime F15
 anime F17
 anime F18
+anime F22
 anime F23
 GCC
