@@ -132,8 +132,8 @@ class ImageTransferBot(object):
                         break
                     todo = int(todo)
                 if todo in range(len(imagelist)):
-                    if (imagelist[todo].fileIsShared()
-                            and imagelist[todo].site.image_repository()
+                    if (imagelist[todo].file_is_shared()
+                        and imagelist[todo].site.image_repository()
                             == self.targetSite.image_repository()):
                         pywikibot.output(
                             'The image is already shared on {0}.'
@@ -176,7 +176,7 @@ def main(*args):
         elif arg.startswith('-target:'):
             targetDir = arg[8:]
         else:
-            generator_factory.handleArg(arg)
+            generator_factory.handle_arg(arg)
 
     gen = generator_factory.getCombinedGenerator()
     if not gen:

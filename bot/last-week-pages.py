@@ -1,6 +1,6 @@
 import pywikibot, re
+import pywikibot.pagegenerators
 from datetime import date, timedelta
-from subprocess import Popen, PIPE
 '''
 This script lists pages created during last week (from Monday onwards) in
 mainspace; it does not retrieve pages created by bots or redirect removals.
@@ -10,18 +10,13 @@ Exceptions are handled and error messages are printed.
 # get last Monday as datetime
 today = date.today()
 last_monday = today - timedelta(days = today.weekday())
-# get list of new pages (intercepts command output)
-command = 'python3 pwb.py listpages -format:3 -newpages'
-stdout = Popen(command, shell = True, stdout = PIPE).stdout
-new_pages = stdout.read().decode().splitlines()
+
 # retrieve pages created last week
-site = pywikibot.Site()
-last_week_pages = ''
-errors = ''
-for title in new_pages:
+last_week_pages = []
+errors = []
+for page in pywikibot.pagegenerators.NewpagesPageGenerator(pywikibot.Site()):
     # handle a possible error (for example if a page was deleted or moved)
     try:
-        page = pywikibot.Page(site, title)
         # check date of creation
         creation_time = page.oldest_revision['timestamp']
         creation_date = date.fromisoformat(str(creation_time).split('T')[0])
@@ -29,6 +24,7 @@ for title in new_pages:
             # pages are sorted by creation date, no need to continue
             break
         else:
+            title = page.title()
             author = page.oldest_revision['user']
             # filters to ignore certain pages
             # we are ignoring cards and disambiguation pages
@@ -37,16 +33,15 @@ for title in new_pages:
             elif 'Categoria:Pagine di disambiguazione' in [cat.title() for cat in page.categories()]:
                 pass
             else:
-                last_week_pages += '{} {} ({})\n'.format(title, page.full_url(), author)
+                last_week_pages.append('{} {} ({})'.format(title, page.full_url(), author))
     # get error message
-    except BaseException as error_message:
-        errors += '\n{}\n{}\n'.format(title, error_message)
+    except Exception as error_message:
+        errors.append('\n{}\n{}'.format(title, error_message))
 
 # print found page(s) and error(s)
-if last_week_pages == '':
-    print('No pages found!')
+if last_week_pages:
+    print('{} pages found:\n\n{}'.format(len(last_week_pages), "\n".join(last_week_pages)))
 else:
-    last_week_pages = last_week_pages.strip()
-    print('{} pages found:\n\n{}'.format(len(last_week_pages.splitlines()), last_week_pages))
-if errors != '':
-    print('\nThe following error(s) occurred:\n\n{}'.format(errors.strip()))
+    print('No pages found!')
+if errors:
+    print('\n\nThe following error(s) occurred:\n\n{}'.format("\n".join(errors)))
