@@ -17,7 +17,7 @@ def get_section_text(pagetext, section):
     }
     exceptions = ['Altri', '[[Pokédex Rotom]]', '[[Lugia Ombra]]', '[[Dialga Oscuro]]', '[[Zygarde/Forme|Cellula]]']
     for exception in exceptions:
-        delimiter = '{{{{pokemonimages/div|text={}}}}}'.format(exception)
+        delimiter = f'{{{{pokemonimages/div|text={exception}}}}}'
         if delimiter in pagetext:
             delimiters.update({'artwork': ['==Artwork==\n{{pokemonimages/head|content=\n', delimiter],})
     start, end = delimiters[section]
@@ -27,14 +27,14 @@ def get_section_text(pagetext, section):
 
 # update page (all section or given one) and check if it was actually modified
 # in that case save it to new text file
-def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, spsc, rangerdata, goforms, exceptionspath, section, downloadspath, updatespath):
-    localfile = os.path.join(downloadspath, '{}.txt'.format(poke))
+def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, avail, rangerdata, goforms, exceptionspath, section, downloadspath, updatespath):
+    localfile = os.path.join(downloadspath, f'{poke}.txt')
     if not os.path.isfile(localfile):
-        print('File "{}" not found, skipping it.'.format(localfile))
+        print(f'File "{localfile}" not found, skipping it.')
         return
     with open(localfile, 'r') as file:
         pagetext = file.read()
-    with open('{}.txt'.format(os.path.join(pokelistspath, poke)), 'r') as pokefile:
+    with open(f'{os.path.join(pokelistspath, poke)}.txt', 'r') as pokefile:
         imgs = pokefile.read().splitlines()
     edited = False
     if section in ['artwork', 'all']:
@@ -46,7 +46,7 @@ def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, 
             edited = True
     if section in ['main', 'all']:
         oldtext = get_section_text(pagetext, 'main')
-        newtext = build_main(poke, exceptionspath, forms, gender, singleMS, spsc, imgs)
+        newtext = build_main(poke, exceptionspath, forms, gender, singleMS, avail, imgs)
         if newtext != oldtext:
             pagetext = pagetext.replace(oldtext, newtext)
             edited = True
@@ -58,7 +58,7 @@ def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, 
             pagetext = pagetext.replace(oldtext, newtext)
             edited = True
     if edited == True:
-        destfile = os.path.join(updatespath, '{}.txt'.format(poke))
+        destfile = os.path.join(updatespath, f'{poke}.txt')
         with open(destfile, 'w') as file:
             file.write(pagetext)
 
@@ -68,15 +68,15 @@ parser.add_argument('--pokelistspath', default = 'data/pokelists/')
 parser.add_argument('--pokeformspath', default = 'data/pokeforms/')
 parser.add_argument('--exceptionspath', default = 'data/exceptions/')
 parser.add_argument('--downloadspath', default = 'data/pokepages-downloaded/')
-parser.add_argument('--dexfile', default = 'data/utils/pokes_ndex.txt')
-parser.add_argument('--genderdiffsfile', default = 'data/utils/genderdiffs.txt')
-parser.add_argument('--genderformsfile', default = 'data/utils/genderforms.txt')
-parser.add_argument('--femaleonlyfile', default = 'data/utils/femaleonly.txt')
-parser.add_argument('--artsourcesfile', default = 'data/utils/artsources.txt')
-parser.add_argument('--singlemsfile', default = 'data/utils/singleMS.txt')
-parser.add_argument('--spscfile', default = 'data/utils/spsc.txt')
-parser.add_argument('--rangerfile', default = 'data/utils/redirect_ranger.txt')
-parser.add_argument('--goformsfile', default = 'data/utils/goforms.txt')
+parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_ndex.txt')
+parser.add_argument('--genderdiffsfile', default = 'data/pokepages-utils/genderdiffs.txt')
+parser.add_argument('--genderformsfile', default = 'data/pokepages-utils/genderforms.txt')
+parser.add_argument('--femaleonlyfile', default = 'data/pokepages-utils/femaleonly.txt')
+parser.add_argument('--artsourcesfile', default = 'data/pokepages-utils/artsources.txt')
+parser.add_argument('--singlemsfile', default = 'data/pokepages-utils/singleMS.txt')
+parser.add_argument('--availdir', default = 'data/pokepages-availability')
+parser.add_argument('--rangerfile', default = 'data/pokepages-utils/redirect_ranger.txt')
+parser.add_argument('--goformsfile', default = 'data/pokepages-utils/goforms.txt')
 parser.add_argument('--updatepoke', default = '')
 parser.add_argument('--section', default = 'all')
 parser.add_argument('--updatespath', default = 'data/pokepages-updated/')
@@ -86,7 +86,7 @@ args = parser.parse_args()
 
 if __name__ == '__main__':
     # import data
-    getname, genderdiffs, genderforms, femaleonly, artsources, singlemsdata, spscdata, rangerdata, goforms = import_data(args.dexfile, args.genderdiffsfile, args.genderformsfile, args.femaleonlyfile, args.artsourcesfile, args.singlemsfile, args.spscfile, args.rangerfile, args.goformsfile)
+    getname, genderdiffs, genderforms, femaleonly, artsources, singlemsdata, availdata, rangerdata, goforms = import_data(args.dexfile, args.genderdiffsfile, args.genderformsfile, args.femaleonlyfile, args.artsourcesfile, args.singlemsfile, args.availdir, args.rangerfile, args.goformsfile)
     # update pages
     if args.updatepoke:
         if args.updatepoke == 'all':
@@ -96,19 +96,19 @@ if __name__ == '__main__':
         if not os.path.isdir(args.updatespath):
             os.mkdir(args.updatespath)
         for poke in lst:
-            gender, singleMS, spsc = get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata, spscdata)
+            gender, singleMS, avail = get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata, availdata)
             forms = get_forms(poke, args.pokeformspath)
-            update_page(poke, getname[poke], gender, forms, args.pokelistspath, artsources, singleMS, spsc, rangerdata, goforms, args.exceptionspath, args.section, args.downloadspath, args.updatespath)
+            update_page(poke, getname[poke], gender, forms, args.pokelistspath, artsources, singleMS, avail, rangerdata, goforms, args.exceptionspath, args.section, args.downloadspath, args.updatespath)
     # upload pages
     if args.upload:
         if args.upload == 'all':
             lst = os.listdir(args.updatespath)
         else:
-            lst = ['{}.txt'.format(page) for page in args.upload.split(',')]
+            lst = [f'{page}.txt' for page in args.upload.split(',')]
         site = pywikibot.Site()
         for pokepage in lst:
             localpage = os.path.join(args.updatespath, pokepage)
-            wikipage = pywikibot.Page(site, '{}/Immagini'.format(getname[pokepage.replace('.txt', '')]))
+            wikipage = pywikibot.Page(site, f'{getname[pokepage.replace(".txt", "")]}/Immagini')
             with open(localpage, 'r') as file:
                 wikipage.text = file.read()
             wikipage.save(args.summary)
