@@ -61,9 +61,9 @@ def download_pokepage(poke, name, downloadspath):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--catlist', default = '')
-parser.add_argument('--catlistspath', default = 'data/catlists/')
+parser.add_argument('--catlistspath', default = 'data/pokepages-catlists/')
 parser.add_argument('--pokelist', default = '')
-parser.add_argument('--pokelistspath', default = 'data/pokelists/')
+parser.add_argument('--pokelistspath', default = 'data/pokepages-pokelists/')
 parser.add_argument('--pokerank', default = '')
 parser.add_argument('--catsfile', default = 'data/pokepages-utils/cats.txt')
 parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_ndex.txt')

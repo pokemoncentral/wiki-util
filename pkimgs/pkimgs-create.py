@@ -9,11 +9,11 @@ Quick infos about variables:
 # pwb pkimgs-create --pokepage all
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--pokelistspath', default = 'data/pokelists/')
+parser.add_argument('--pokelistspath', default = 'data/pokepages-pokelists/')
 parser.add_argument('--pokepage', default = '')
 parser.add_argument('--pokepagespath', default = 'data/pokepages-created/')
-parser.add_argument('--pokeformspath', default = 'data/pokeforms/')
-parser.add_argument('--exceptionspath', default = 'data/exceptions/')
+parser.add_argument('--pokeformspath', default = 'data/pokepages-pokeforms/')
+parser.add_argument('--exceptionspath', default = 'data/pokepages-exceptions/')
 parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_ndex.txt')
 parser.add_argument('--genderdiffsfile', default = 'data/pokepages-utils/genderdiffs.txt')
 parser.add_argument('--genderformsfile', default = 'data/pokepages-utils/genderforms.txt')

@@ -9,7 +9,7 @@ source ../bash/config.sh
 declare -a pyfiles
 pyfiles=("pkimgstools.py" "pkimgs-data.py" "pkimgs-create.py" "pkimgs-update.py")
 declare -a dirs
-dirs=("exceptions" "pokeforms" "pokepages-availability" "pokepages-utils")
+dirs=("pokepages-availability" "pokepages-exceptions" "pokepages-pokeforms" "pokepages-utils")
 
 if [ ! -d "$PYWIKIBOT_DIR" ]; then
     echo "Directory \"$PYWIKIBOT_DIR\" does not exist."
