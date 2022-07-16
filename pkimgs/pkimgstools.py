@@ -32,6 +32,7 @@ gametogen = {
 'spsc': 8,
 'dlps': 8.1,
 'lpa': 8.2,
+'sv': 9,
 }
 
 # dict to map ndex to name

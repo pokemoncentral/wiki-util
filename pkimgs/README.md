@@ -14,8 +14,8 @@ Pywikibot directory is imported from `config.sh` file in `bash` folder.
 ## Scripts
 ### pkimgs-data.py
 This script downloads various data from wiki, main arguments are the following (for all optional arguments see code):
-- `catlist` is used to retrieve all images contained in a category and save them in a text file; value can be the name of a category or `all`, in this case all categories are updated. By default `all` doesn't actually update all categories: in fact most of them are related to old games that won't receive updates, therefore it is not necessary to check for new images. To force the download of all categories (for example when retrieving them for the first time), argument `--catsfile data/utils/allcats.txt` can be added to command. Do note that retrieving images takes some time and updating all categories will take several minutes, so it is advisable to do this only when needed. Files are saved in `<bot directory>/data/catlists` as `<category name>.txt`, with colon replaced by semicolon.
-- `pokelist` reads all category files and retrieves all images of a certain Pokémon, searching for its name or Pokédex number; do note that some of them won't be found because of their name containing something different from Pokémon names (for example images containing the name of a legendary duo or trio). Value can be a Dex number, a list of Dex numbers separated by comma, or `all`, in this case all Pokémon are evaluated. Files are saved in `<bot directory>/data/pokelists` with name `<ndex>.txt`.
+- `catlist` is used to retrieve all images contained in a category and save them in a text file; value can be the name of a category or `all`, in this case all categories are updated. By default `all` doesn't actually update all categories: in fact most of them are related to old games that won't receive updates, therefore it is not necessary to check for new images. To force the download of all categories (for example when retrieving them for the first time), argument `--catsfile data/pokepages-utils/allcats.txt` can be added to command. Do note that retrieving images takes some time and updating all categories will take several minutes, so it is advisable to do this only when needed. Files are saved in `<bot directory>/data/pokepages-catlists` as `<category name>.txt`, with colon replaced by semicolon.
+- `pokelist` reads all category files and retrieves all images of a certain Pokémon, searching for its name or Pokédex number; do note that some of them won't be found because of their name containing something different from Pokémon names (for example images containing the name of a legendary duo or trio). Value can be a Dex number, a list of Dex numbers separated by comma, or `all`, in this case all Pokémon are evaluated. Files are saved in `<bot directory>/data/pokepages-pokelists` with name `<ndex>.txt`.
 - `pokerank` counts how many images are available for each Pokémon: when the value is a Dex number counts images for that Pokémon, when it is `all` a ranking is created to see who has the highest number of images. Not useful actually, but funny :) (this is also the only thing to be printed)
 - `download` downloads wikicode of pages, value works as `pokelist` and pages are saved in `<bot directory>/data/pokepages-downloaded` with name `<ndex>.txt`. This can take some time if all subpages are retrieved.
 
@@ -54,14 +54,28 @@ python3 pwb.py pkimgs-update --upload all
 ### pkimgstools.py
 This file contains functions that are used by previous scripts, it is not intended to be launched directly.
 
+### pkimgs-home.py
+This file checks which HOME models are missing from Pokémon Central Wiki, reading full list from Bulbapedia. Main arguments are the following (for all optional arguments see code):
+- `updatecats` can be used to update text files containing list of wiki images (Bulba and PCWiki) by passing value `yes`.
+
 ## Other files
-### utils
+### pokepages-availability
+This folder contains lists of Pokémon that exist in games from generation VIII onwards. Each file contains one entry per line and lists Pokédex numbers, not names.
+
+### pokepages-exceptions
+These files contain particular cases, with ad-hoc wikicode that will be read and imported directly.
+
+### pokepages-pokeforms
+Each Pokémon with one or more alternative forms has a file named `<ndex>.txt` in `<bot directory>/data/pokepages-pokeforms`; each line contains abbreviations of form (or empty string for base form), first game where it exists and last game where it exists (the latter if empty will automatically be interpreted as last game available), separated by comma. First line will always be `,<game abbr>,` because availability of Pokémon from generation VIII onwards is managed by files in `<bot directory>/data/pokepages-availability`.
+
+### pokepages-utils
 Each file contains one entry per line; files that list Pokémon (e.g. `femaleonly.txt`) contain their Pokédex numbers, not their names.
+- `abbr-pairs.txt` maps Bulbapedia and PCWiki abbrs for alternative forms.
 - `allcats.txt` contains a list of all relevant categories (artworks, main series sprites/models, spin-offs sprites/models).
 - `artsources.txt` lists abbreviations of sources for artworks.
 - `cats.txt` is a sublist of `allcats.txt` that excludes old games that won't receive updates and only contains categories that are likely to change.
 - `femaleonly.txt` lists female-only Pokémon.
-- `genderdiffs.txt` lists Pokémon with gender differences, included those that are treated as useless forms.
+- `genderdiffs.txt` lists Pokémon with gender differences, including those that are treated as useless forms.
 - `genderforms.txt` lists gender differences that are treated as alternative forms.
 - `goforms.txt` lists abbreviations of events exclusive to Pokémon GO.
 - `pokes_de.txt` maps German names to Italian/English names (used for interwikis).
@@ -69,15 +83,8 @@ Each file contains one entry per line; files that list Pokémon (e.g. `femaleonl
 - `pokes_ndex.txt` maps ndexes to names.
 - `redirect_ranger.txt` lists redirects for Pokémon Ranger sprites.
 - `singleMS.txt` lists Pokémon that have the same mini sprite for base form and all alternative forms.
-- `spsc.txt` lists Pokémon that exist in Pokémon Sword and Shield.
-
-### pokeforms
-Each Pokémon with one or more alternative forms has a file named `<ndex>.txt` in `<bot directory>/data/pokeforms`; each line contains abbreviations of form (or empty string for base form), first game where it exists and last game where it exists (the latter if empty will automatically be interpreted as last game available), separated by comma. If a Pokemon does not exist in Sword and Shield it is not necessary to specify `usul`/`lgpe` for his base form, because `spsc.txt` is used instead to evaluate it.
-
-### exceptions
-These files contain particular cases, with ad-hoc wikicode that will be read and imported directly.
 
 ### extra.txt
-This file lists images that exist only as redirect but are needed because automatic creation/update of pages leads to mistakes, specifically:
+This file lists images that exist only as redirect but are needed because automatic creation/update of pages leads to mistakes, for example:
 - Mini sprites from generation I and II.
 - Shiny models of Minior from Pokémon HOME.

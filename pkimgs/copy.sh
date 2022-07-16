@@ -7,7 +7,7 @@
 source ../bash/config.sh
 
 declare -a pyfiles
-pyfiles=("pkimgstools.py" "pkimgs-data.py" "pkimgs-create.py" "pkimgs-update.py")
+pyfiles=("pkimgstools.py" "pkimgs-data.py" "pkimgs-create.py" "pkimgs-update.py" "pkimgs-home.py")
 declare -a dirs
 dirs=("pokepages-availability" "pokepages-exceptions" "pokepages-pokeforms" "pokepages-utils")
 
@@ -33,7 +33,7 @@ else
                     cp "$dir2"/*.txt ./$dir/
                 fi
             done
-            cp "$PYWIKIBOT_DIR/data/catlists/extra.txt" extra.txt
+            cp "$PYWIKIBOT_DIR/data/pokepages-catlists/extra.txt" extra.txt
             ;;
         botdir)
             for file in "${pyfiles[@]}"; do
@@ -43,8 +43,8 @@ else
                 mkdir -p "$PYWIKIBOT_DIR/data/$dir"
                 cp "$dir"/* "$PYWIKIBOT_DIR/data/$dir/"
             done
-            mkdir -p "$PYWIKIBOT_DIR"/data/catlists
-            cp extra.txt "$PYWIKIBOT_DIR"/data/catlists/extra.txt
+            mkdir -p "$PYWIKIBOT_DIR"/data/pokepages-catlists
+            cp extra.txt "$PYWIKIBOT_DIR"/data/pokepages-catlists/extra.txt
             ;;
         *)
             exit 1
