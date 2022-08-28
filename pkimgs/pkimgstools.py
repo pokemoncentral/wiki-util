@@ -728,7 +728,7 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
             for img in extra:
                 counter += 1
                 formtext += '|smileextra{}={}\n'.format(str(counter).replace('1', ''), re.sub(r'SmileCostume (.+)\.png', r'\1', img))
-        # Café Mix
+        # Café ReMix
         cafemix = ''
         if f'CafeMixSprite{pokeabbr} staff.png' in imgs:
             cafemix += 's'
@@ -738,6 +738,9 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
             cafemix += 't'
         if cafemix:
             formtext += f'|cafemix={cafemix}\n'
+        # New Pokémon Snap
+        if f'NPS{pokeabbr}.png' in imgs:
+            formtext += '|newsnap=yes\n'
         # add only if there are entries for this form
         if formtext:
             texts.append([pokeabbr, formtext])
