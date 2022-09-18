@@ -36,7 +36,7 @@ for page in pywikibot.pagegenerators.NewpagesPageGenerator(pywikibot.Site()):
                 last_week_pages.append('{} {} ({})'.format(title, page.full_url(), author))
     # get error message
     except Exception as error_message:
-        errors.append('\n{}\n{}'.format(title, error_message))
+        errors.append(str(error_message))
 
 # print found page(s) and error(s)
 if last_week_pages:
@@ -44,4 +44,4 @@ if last_week_pages:
 else:
     print('No pages found!')
 if errors:
-    print('\n\nThe following error(s) occurred:\n\n{}'.format("\n".join(errors)))
+    print('\n\n#### The following error(s) occurred:\n' + '\n'.join(errors))
