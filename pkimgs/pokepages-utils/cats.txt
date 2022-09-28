@@ -1,5 +1,8 @@
 Artwork Pokémon
-Modelli Pokémon animati Spada e Scudo
+Modelli animati Pokémon Spada e Scudo
+Modelli statici Pokémon Diamante Lucente e Perla Splendente
+Modelli statici Leggende Pokémon: Arceus
+Mugshot Leggende Pokémon: Arceus
 Mini Sprite statici di ottava generazione
 Modelli Pokémon GO
 Modelli Pokémon Masters EX

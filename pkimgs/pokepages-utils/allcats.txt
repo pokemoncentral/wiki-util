@@ -1,44 +1,34 @@
 Artwork Pokémon
 Concept Art
-Sprite Pokémon Verde
-Sprite Pokémon Rosso e Blu
-Sprite Pokémon Giallo
-Sprite Pokémon Oro
-Sprite Pokémon Argento
-Sprite Pokémon Cristallo
-Sprite Pokémon Rubino e Zaffiro
-Sprite Pokémon Rosso Fuoco e Verde Foglia
-Sprite Pokémon Smeraldo
-Sprite Pokémon Diamante e Perla
-Sprite Pokémon Platino
-Sprite Pokémon Oro HeartGold e Argento SoulSilver
-Sprite Pokémon animati Nero e Bianco
-Sprite Pokémon animati Nero e Bianco Posteriori
-Sprite Pokémon animati Nero e Bianco Cromatici
-Sprite Pokémon animati Nero e Bianco Posteriori Cromatici
-Sprite Pokémon animati Nero 2 e Bianco 2
-Sprite Pokémon animati Nero 2 e Bianco 2 Posteriori
-Sprite Pokémon animati Nero 2 e Bianco 2 Cromatici
-Sprite Pokémon animati Nero 2 e Bianco 2 Posteriori Cromatici
-Modelli Pokémon animati X e Y
-Modelli Pokémon animati X e Y Posteriori
-Modelli Pokémon animati X e Y Cromatici
-Modelli Pokémon animati X e Y Posteriori Cromatici
-Modelli Pokémon animati Rubino Omega e Zaffiro Alpha
-Modelli Pokémon animati Rubino Omega e Zaffiro Alpha Posteriori
-Modelli Pokémon animati Rubino Omega e Zaffiro Alpha Cromatici
-Modelli Pokémon animati Rubino Omega e Zaffiro Alpha Posteriori Cromatici
-Modelli Pokémon animati Sole e Luna
-Modelli Pokémon animati Sole e Luna Posteriori
-Modelli Pokémon animati Sole e Luna Cromatici
-Modelli Pokémon animati Sole e Luna Posteriori Cromatici
-Modelli Pokémon animati Ultrasole e Ultraluna
-Modelli Pokémon animati Ultrasole e Ultraluna Posteriori
-Modelli Pokémon animati Ultrasole e Ultraluna Cromatici
-Modelli Pokémon animati Ultrasole e Ultraluna Posteriori Cromatici
-Modelli Pokémon animati Spada e Scudo
-Mini Sprite animati di quinta generazione
+Sprite statici Pokémon Rosso e Verde
+Sprite statici Pokémon Rosso e Blu
+Sprite statici Pokémon Giallo
+Sprite statici Pokémon Oro
+Sprite statici Pokémon Argento
+Sprite animati Pokémon Cristallo
+Sprite statici Pokémon Oro e Argento
+Sprite statici seconda generazione
+Sprite statici Pokémon Rubino e Zaffiro
+Sprite statici Pokémon Rosso Fuoco e Verde Foglia
+Sprite animati Pokémon Smeraldo
+Sprite statici Pokémon Diamante e Perla
+Sprite statici Pokémon Platino
+Sprite statici Pokémon Oro HeartGold e Argento SoulSilver
+Sprite animati Pokémon Nero e Bianco
+Sprite animati Pokémon Nero 2 e Bianco 2
+Modelli animati Pokémon X e Y
+Modelli animati Pokémon Rubino Omega e Zaffiro Alpha
+Modelli animati Pokémon Sole e Luna
+Modelli animati Pokémon Ultrasole e Ultraluna
+Modelli animati Pokémon Spada e Scudo
+Modelli statici Pokémon Diamante Lucente e Perla Splendente
+Modelli statici Leggende Pokémon: Arceus
+Mugshot Leggende Pokémon: Arceus
+Mini Sprite animati di prima generazione
+Mini Sprite animati di seconda generazione
 Mini sprite Pokémon accompagnatori quarta generazione
+Mini Sprite animati di quinta generazione
+Mini Sprite statici di quinta generazione
 Mini Sprite statici di settima generazione
 Mini Sprite statici di ottava generazione
 Modelli Pokémon Stadium
