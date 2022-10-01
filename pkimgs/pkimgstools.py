@@ -301,18 +301,18 @@ def build_main_gen(poke, gen, avails = [], forms = [], gender = '', gen4sprites 
             # other cases
             else:
                 # check if was introduced in the middle of the generation
-                if numgen < gametogen[since] and gametogen[since] < numgen + 1:
+                if numgen < 8 and numgen < gametogen[since] and gametogen[since] < numgen + 1:
                     text += f'{build_main_gen_entry(poke, gen, form = multiform, since = since, games = avails, female = False, gen4common = gen4common)}\n'
                 else:
-                    text += f'{build_main_gen_entry(poke, gen, form = multiform, games = avails, gen4common = gen4common)}\n'
+                    text += f'{build_main_gen_entry(poke, gen, form = multiform, games = avails, female = False, gen4common = gen4common)}\n'
         elif abbr == 'F' and gender == 'both':
-            pass  # already done
+            pass # already done
         elif floor(gametogen[since]) <= numgen and numgen <= gametogen[until]:
             if gender == 'f':
                 female = True
             else:
                 female = False
-            if numgen < gametogen[since] and gametogen[since] < numgen + 1:
+            if numgen < 8 and numgen < gametogen[since] and gametogen[since] < numgen + 1:
                 text += f'{build_main_gen_entry(poke + abbr, gen, form = True, since = since, games = avails, female = female, gen4common = gen4common)}\n'
             else:
                 text += f'{build_main_gen_entry(poke + abbr, gen, form = True, games = avails, female = female, gen4common = gen4common)}\n'
@@ -320,7 +320,7 @@ def build_main_gen(poke, gen, avails = [], forms = [], gender = '', gen4sprites 
     return text
 
 # build mini sprites entry for given form, TODO: 8th gen (DLPS, LPA)
-def build_ms_entry(poke, form, multiform, avail, genderform = ''):
+def build_ms_entry(poke, form, multiform, avail, gender, genderform = ''):
     # dicts to map introduction to pokemonimages/mainMS parameter values
     ms345 = {
     3: '345',
@@ -359,15 +359,22 @@ def build_ms_entry(poke, form, multiform, avail, genderform = ''):
                 text += '|ms67=rozaonly'
             else:
                 text += f'|ms67={ms67.get(start, "67")}'
-        ms8 = ''
         if avail['spsc'] == True and start <= 8 and end >= 8:
-            ms8 += 'spsc'
+            text += '|msspsc=yes'
         if avail['dlps'] == True and start <= 8.1 and end >= 8.1:
-            ms8 += 'dlps'
+            text += '|msdlps=yes'
+        # ndexes are hardcoded here, game won't change
         if avail['lpa'] == True and start <= 8.2 and end >= 8.2:
-            ms8 += 'lpa'
-        if ms8:
-            text += f'|ms8={ms8}'
+            if gender == 'both':
+                text += '|mslpa=both'
+            elif gender == 'f':
+                text += '|mslpa=female'
+            elif pokeabbr in ['059H', '101H', '713H', '900']:
+                text += '|mslpa=rm'
+            elif pokeabbr == '549H':
+                text += '|mslpa=rf'
+            else:
+                text += '|mslpa=single'
         if multiform == True:
             text += '|form=yes'
             # these forms don't have an overworld sprite in HGSS
@@ -425,21 +432,21 @@ def build_main(poke, exceptionspath, forms, gender, singleMS, avail, imgs):
                 text += file.read()
         else:
             if singleMS == True:
-                text += build_ms_entry(poke, forms[0], False, avail)
+                text += build_ms_entry(poke, forms[0], False, avail, gender)
             else:
                 if len(forms) > 1:
                     multiform = True
                 else:
                     multiform = False
                 if [form[0] for form in forms[:2]] == ['', 'F'] and gender == 'both':
-                    text += build_ms_entry(poke, forms[0], False, avail, genderform = 'm')
-                    text += build_ms_entry(poke, forms[1], False, avail, genderform = 'f')
+                    text += build_ms_entry(poke, forms[0], False, avail, gender, genderform = 'm')
+                    text += build_ms_entry(poke, forms[1], False, avail, gender, genderform = 'f')
                     if len(forms) > 2:
                         for form in forms[2:]:
-                            text += build_ms_entry(poke, form, multiform, avail)
+                            text += build_ms_entry(poke, form, multiform, avail, gender)
                 else:
                     for form in forms:
-                        text += build_ms_entry(poke, form, multiform, avail)
+                        text += build_ms_entry(poke, form, multiform, avail, gender)
         text += '}}\n'
     return text
 

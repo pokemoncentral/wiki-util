@@ -896,3 +896,10 @@ Regidrago,Regidrago
 Polaross,Glastrier
 Phantoross,Spectrier
 Coronospa,Calyrex
+Damythir,Wyrdeer
+Axantor,Kleavor
+Ursaluna,Ursaluna
+Salmagnis,Basculegion
+Snieboss,Sneasler
+Myriador,Overqwil
+Cupidos,Enamorus

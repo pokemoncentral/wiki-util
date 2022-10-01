@@ -896,3 +896,10 @@
 896,Glastrier
 897,Spectrier
 898,Calyrex
+899,Wyrdeer
+900,Kleavor
+901,Ursaluna
+902,Basculegion
+903,Sneasler
+904,Overqwil
+905,Enamorus

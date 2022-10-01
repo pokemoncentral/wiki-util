@@ -6,7 +6,7 @@ Quick infos about variables:
 - 'pokeabbr' always represents number of Pokédex as string (with form abbr)
 - 'ndex' always represents number of Pokédex as integer (without form abbr)
 '''
-# pwb pkimgs-create --pokepage all
+# pwb pkimgs-create --pokepage "899,900,901,902,903,904,905"
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--pokelistspath', default = 'data/pokepages-pokelists/')

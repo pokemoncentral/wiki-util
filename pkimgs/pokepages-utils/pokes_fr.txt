@@ -896,3 +896,10 @@ Regidrago,Regidrago
 Blizzeval,Glastrier
 Spectreval,Spectrier
 Sylveroy,Calyrex
+Cerbyllin,Wyrdeer
+Hachécateur,Kleavor
+Ursaking,Ursaluna
+Paragruel,Basculegion
+Farfurex,Sneasler
+Qwilpik,Overqwil
+Amovénus,Enamorus

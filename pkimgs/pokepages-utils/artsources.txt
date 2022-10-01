@@ -20,6 +20,7 @@ LGPE
 SpSc
 DLPS
 LPA
+SV
 64
 Melee
 Brawl
