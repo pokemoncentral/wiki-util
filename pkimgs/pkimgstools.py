@@ -44,7 +44,7 @@ def import_ndex(dexfile):
             getname.update({items[0]: items[1]})
     return getname
 
-# import various useful data, CHECK: availability
+# import various useful data
 def import_data(dexfile, genderdiffsfile, genderformsfile, femaleonlyfile, artsourcesfile, singlemsfile, availdir, rangerfile, goformsfile):
     getname = import_ndex(dexfile)
     # import other data
@@ -69,7 +69,7 @@ def import_data(dexfile, genderdiffsfile, genderformsfile, femaleonlyfile, artso
         goforms = file.read().splitlines()
     return getname, genderdiffs, genderforms, femaleonly, artsources, singlemsdata, availdata, rangerdata, goforms
 
-# get data for given Pokémon, CHECK: availability
+# get data for given Pokémon
 def get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata, availdata):
     if poke in genderdiffs:
         gender = 'both'
@@ -237,7 +237,7 @@ def build_main_gen_entry(pokeabbr, gen, form = False, since = '', games = [], fe
     text += '}}'
     return text
 
-# build all pokemonimages/main* entries for given Pokémon in given generation, TODO: 8th gen
+# build all pokemonimages/main* entries for given Pokémon in given generation
 def build_main_gen(poke, gen, avails = [], forms = [], gender = '', gen4sprites = []):
     text = f'{{{{pokemonimages/group|gen={gen}|content=\n'
     # search for other forms that esist in given generation
@@ -312,14 +312,20 @@ def build_main_gen(poke, gen, avails = [], forms = [], gender = '', gen4sprites 
                 female = True
             else:
                 female = False
-            if numgen < 8 and numgen < gametogen[since] and gametogen[since] < numgen + 1:
-                text += f'{build_main_gen_entry(poke + abbr, gen, form = True, since = since, games = avails, female = female, gen4common = gen4common)}\n'
+            # check if was introduced in the middle of the generation
+            if numgen < gametogen[since] and gametogen[since] < numgen + 1:
+                if numgen < 8:
+                    text += f'{build_main_gen_entry(poke + abbr, gen, form = True, since = since, games = avails, female = female, gen4common = gen4common)}\n'
+                else:
+                    gen_games = [game for game in gametogen if int(gametogen[game]) == numgen and gametogen[game] >= gametogen[since]]
+                    games = [game for game in gen_games if game in avails]
+                    text += f'{build_main_gen_entry(poke + abbr, gen, form = True, games = games, female = female, gen4common = gen4common)}\n'
             else:
                 text += f'{build_main_gen_entry(poke + abbr, gen, form = True, games = avails, female = female, gen4common = gen4common)}\n'
     text += '}}\n'
     return text
 
-# build mini sprites entry for given form, TODO: 8th gen (DLPS, LPA)
+# build mini sprites entry for given form
 def build_ms_entry(poke, form, multiform, avail, gender, genderform = ''):
     # dicts to map introduction to pokemonimages/mainMS parameter values
     ms345 = {
@@ -423,7 +429,7 @@ def build_main(poke, exceptionspath, forms, gender, singleMS, avail, imgs):
             avails8 = get_avails_list(avail, ['spsc', 'dlps', 'lpa'])
             if avails8 != []:
                 text += build_main_gen(poke, '8', avails = avails8, forms = forms, gender = gender)
-        # mini sprites, TODO: 8th gen (DLPS, LPA)
+        # mini sprites
         text += '{{pokemonimages/group|gen=MS|content=\n'
         # check for exception
         exceptionfile = os.path.join(exceptionspath, f'{poke}_mainMS.txt')

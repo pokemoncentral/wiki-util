@@ -61,6 +61,7 @@ anime NB
 anime XY
 anime SL
 anime EP
+anime F13
 anime F15
 anime F17
 anime F18
