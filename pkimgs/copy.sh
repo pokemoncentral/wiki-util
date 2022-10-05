@@ -30,7 +30,7 @@ else
                     echo "Directory \"$dir2\" does not exist."
                 else
                     mkdir -p $dir
-                    cp "$dir2"/*.txt ./$dir/
+                    cp "$dir2"/* ./$dir/
                 fi
             done
             cp "$PYWIKIBOT_DIR/data/pokepages-catlists/extra.txt" extra.txt

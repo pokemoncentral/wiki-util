@@ -60,7 +60,7 @@ def import_data(dexfile, genderdiffsfile, genderformsfile, femaleonlyfile, artso
     availdata = {}
     for availfile in availfiles:
         with open(os.path.join(availdir, availfile), 'r') as file:
-            availdata.update({availfile.replace('.txt', ''): file.read().splitlines()})
+            availdata.update({availfile.replace('.csv', ''): file.read().splitlines()})
     with open(singlemsfile, 'r') as file:
         singlemsdata = file.read().splitlines()
     with open(rangerfile, 'r') as file:
@@ -95,7 +95,7 @@ def get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata, avai
 def get_forms(poke, formspath):
     ndex = int(poke)
     last = max(gametogen, key = gametogen.get)
-    formsfile = os.path.join(formspath, f'{poke}.txt')
+    formsfile = os.path.join(formspath, f'{poke}.csv')
     # alternative forms
     if os.path.isfile(formsfile):
         forms = []
