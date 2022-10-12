@@ -23,15 +23,15 @@ Modelli animati Pokémon Ultrasole e Ultraluna
 Modelli animati Pokémon Spada e Scudo
 Modelli statici Pokémon Diamante Lucente e Perla Splendente
 Modelli statici Leggende Pokémon: Arceus
-Mini sprite animati di prima generazione
-Mini sprite animati di seconda generazione
-Mini sprite accompagnatori quarta generazione
-Mini Sprite animati di quinta generazione
-Mini Sprite statici di quinta generazione
-Mini Sprite statici di settima generazione
+Mini sprite animati prima generazione‎
+Mini sprite animati seconda generazione‎
+Mini sprite animati terza, quarta e quinta generazione‎
+Mini sprite statici terza, quarta e quinta generazione‎
+Mini sprite accompagnatori animati quarta generazione‎
+Mini sprite statici sesta e settima generazione‎
 Mini sprite statici Pokémon Spada e Scudo‎
-Mini sprite statici Pokémon Diamante Lucente e Perla Splendente‎
-Mugshot Leggende Pokémon: Arceus
+Mini sprite statici Pokémon Diamante Lucente e Perla Splendente
+Mugshot Leggende Pokémon: Arceus‎
 Modelli Pokémon Stadium
 Modelli Pokémon Stadium 2
 Sprite Pokémon Trading Card Game
