@@ -93,10 +93,7 @@ Modelli Pokémon Quest cromatici
 Modelli Pokémon Masters EX
 Modelli Pokémon Masters EX cromatici
 Mugshot Pokémon Masters EX
-Modelli Pokémon statici HOME
-Modelli Pokémon statici HOME cromatici
-Modelli Pokémon statici HOME posteriori
-Modelli Pokémon statici HOME posteriori cromatici
+Modelli statici Pokémon HOME
 Sprite di Pokémon Smile
 Sprite consigli Pokémon Smile‎
 Sprite dormienti Pokémon Smile‎
