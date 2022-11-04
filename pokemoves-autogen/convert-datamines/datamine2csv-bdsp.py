@@ -7,7 +7,7 @@ import os
 from typing import List, Tuple
 
 logger = logging.getLogger("log")
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 
 file_lh = logging.FileHandler('logs/' + os.path.basename(__file__) + '.log')
@@ -39,7 +39,7 @@ replaces = {
 	"rotomv": "rotomV",
 	"rotomt": "rotomT",
 	"giratinao": "giratinaO",
-	"shayminc": "shayminC"
+	"shayminc": "shayminC",
 }
 
 def convert_pokename(poke: str):

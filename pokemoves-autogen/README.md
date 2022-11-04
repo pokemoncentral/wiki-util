@@ -24,7 +24,7 @@ To add a new file you should:
   course it depends on your file.
 
 ## Create a csv from a datamine of Kurt's
-The python scripts here are only used to convert datamines to csv in some way.
+Python scripts in the `convert-datamines` directory convert datamines to csv.
 - `datamine2csv.py` takes a full datamine and creates a csv. In the datamine,
   move names should be in italian (use the macro), the first `======` should be
   removed and a `\n======` should be added at the end. Some alternative forms
