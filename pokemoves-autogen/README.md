@@ -23,6 +23,9 @@ To add a new file you should:
   probably add it at the bottom because of foreign key constraints, but of
   course it depends on your file.
 
+Note that if you add new Pokémon, you must update the list of all Pokémon
+(filename in `config.sh -> $POKELIST`).
+
 ## Create a csv from a datamine of Kurt's
 Python scripts in the `convert-datamines` directory convert datamines to csv.
 - `datamine2csv.py` takes a full datamine and creates a csv. In the datamine,

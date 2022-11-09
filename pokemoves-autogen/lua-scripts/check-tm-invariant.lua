@@ -6,7 +6,7 @@ TM in a generation it can learn it in ALL games of that generation in which
 that move is a tm.
 
 For instance: suppose the move "Azione" is a TM in SpSc and in DLPS, and that
-Bulbasaur can learn Azione via TM in SpSc. Then the invariant is uphold if
+Bulbasaur can learn Azione via TM in SpSc. Then the invariant is upheld iff
 Bulbasaur also learns Azione via TM in DLPS. Conversely, if Semebomba is a TM
 in SpSc but not in DLPS, then the invariant is always valid: since Semebomba is
 a TM only in SpSc in gen 8, either Bulbasaur can learn it via TM in all games
@@ -71,8 +71,6 @@ local libgamestm = {
 local data = { [8] = {} }
 
 local poke = str.trim(arg[1]) or "staraptor"
-
-local outfile = io.open(tempoutdir .. "/luamoves/" .. poke .. ".lua", "w")
 
 for line in io.lines(tempoutdir .. "/pokecsv/" .. poke .. ".csv") do
 	line = tab.map(ParseCSVLine(line), str.trim)

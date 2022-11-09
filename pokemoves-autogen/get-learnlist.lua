@@ -2,14 +2,14 @@
 --[[
 
 Usage:
-lua get-learnlist.lua <poke> <kind>
+lua get-learnlist.lua <poke> <kind> <gen>
 
 --]]
 
 if #arg < 2 then
     print("Missing mandatory arguments")
     print("Usage:")
-    print("    lua get-learnlist.lua <poke> <kind>")
+    print("    lua get-learnlist.lua <poke> <kind> <gen>")
     return 1
 end
 
@@ -30,12 +30,14 @@ local tab = require('Wikilib-tables')
 local str = require('Wikilib-strings')
 local formlib = require('Wikilib-forms')
 local evolib = require('Wikilib-evos')
-local printer = require("learnlist-gen.print-learnlist8")
 local altdata = require("AltForms-data")
 local pokes = require("Poké-data")
 
 local gpoke = str.trim(arg[1]):lower() or "staraptor"
 local kind = str.trim(arg[2]):lower() or "level"
+local gen = tonumber(str.trim(arg[2]) or "8")
+
+local printer = require("learnlist-gen.print-learnlist" .. tostring(gen))
 
 local function printOne(poke)
     return printer[kind](poke)
