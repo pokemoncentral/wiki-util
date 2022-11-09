@@ -51,9 +51,9 @@ local function ParseCSVLine(line,sep)
 	return res
 end
 
-local breedgames = { 0, 2, 3, 3, 2, 2, 2, 2 }
+local breedgames = { 0, 2, 3, 3, 2, 2, 2, 2, 1 }
 
-local datagen = { {}, {}, {}, {}, {}, {}, {}, {} }
+local datagen = { {}, {}, {}, {}, {}, {}, {}, {}, {} }
 local data = { level = tab.copy(datagen), tm = tab.copy(datagen),
 			   breed = tab.copy(datagen), tutor = tab.copy(datagen),
 		       preevo = {}, event = {} }

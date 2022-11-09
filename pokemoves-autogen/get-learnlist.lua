@@ -35,7 +35,7 @@ local pokes = require("Poké-data")
 
 local gpoke = str.trim(arg[1]):lower() or "staraptor"
 local kind = str.trim(arg[2]):lower() or "level"
-local gen = tonumber(str.trim(arg[2]) or "8")
+local gen = tonumber(str.trim(arg[3]) or "8")
 
 local printer = require("learnlist-gen.print-learnlist" .. tostring(gen))
 

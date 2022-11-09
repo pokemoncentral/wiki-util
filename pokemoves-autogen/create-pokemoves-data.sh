@@ -75,6 +75,7 @@ if [[ $CFLAG == true ]] || [[ ! -d "$TEMPOUTDIR/pokecsv" ]]; then
         sleep 25
     else
         docker start "$CONTAINER" > /dev/null
+        sleep 1
     fi
 
     # Compute level, tm and tutor

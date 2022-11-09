@@ -7,10 +7,16 @@ First you have to create a bash and a lua config file, copying the templates
 `config-template.sh` to `config.sh` and `source-module-template.lua` to
 `source-module.lua`, then setting values. Make sure the two are consistent.
 
-After that, the script `create-pokemoves-data.sh` does all you need. Just take
-a look at its options with `create-pokemoves-data.sh -h` before running it
-because it involves creating (and afterward destroying) containers, so you want
-to make sure it doesn't clash with anything already on your system.
+After that, the script `create-pokemoves-data.sh` does all you need. You can
+take a look at its options with `create-pokemoves-data.sh -h`.
+
+## Get the learnlist
+To get a learnlist for a given Pokémon, use `get-learnlist.lua` once you
+created the data module as described above. For its usage, see its
+documentation.
+
+# Edit guide
+How to add data, games, scripts and other things.
 
 ## Add data
 The source of data are some files in the directory `docker-db/sourcecsv/`.
@@ -26,6 +32,19 @@ To add a new file you should:
 Note that if you add new Pokémon, you must update the list of all Pokémon
 (filename in `config.sh -> $POKELIST`).
 
+## Add a game
+To add data for a new game, you have to do the following things:
+- add the csv source as explained above
+- add the game row to `docker-db/sourcecsv/version_groups.csv`
+- update `lua-scripts/csv2pokemoves.lua`:
+  - update `breedgames`
+  - if a new gen, add an empty table in `datagen`
+  - update `baseNoBreed` (and possibly `breedNoBase`, but that's just to
+    suppress a warning) as needed
+
+## Update get-learnlist
+It _should_ be enough to add the `learnlist-gen/print-learnlist<gen>.lua`.
+
 ## Create a csv from a datamine of Kurt's
 Python scripts in the `convert-datamines` directory convert datamines to csv.
 - `datamine2csv.py` takes a full datamine and creates a csv. In the datamine,
@@ -40,8 +59,10 @@ NOTES (to be sorted):
 - in the script, there's a `version_group_id` to change, because it describes
   the id of the game(s) version for that movelist line
 
-## Tricks
-### Problems while computing csv files
+# Tricks
+A few tricks when things goes wrong.
+
+## Problems while computing csv files
 If at some point the script crashes or have any problem while computing csv
 files, you aren't doomed to restart the computation from the beginning. You can
 run
@@ -49,7 +70,7 @@ run
 to restart the computation of csv files only from POKE. After that, you should
 just run `create-pokemoves-data.sh` without any option to do the job.
 
-### psql: server closed the connection unexpectedly
+## psql: server closed the connection unexpectedly
 Right after creation it take sometime for postgres to load data, but I can't
 find a way to get back control only after that time, so in
 `create-pokemoves-data.sh` there is a sleep at the right point in the code.
@@ -67,7 +88,6 @@ be installed on your system:
 - Docker >=18.9.5 (only 18.09.5 and 19.03.12 were actually tested)
 
 # TODO
-- Create a subdir with script/things to build csvs from datamines
 - Clean up config file: the two `MODULENAME` and `TMPMODULENAME` seem to be
   the same file, probably the TMP one is a remnant of when the module was
   moved to wiki-lua-modules directory.

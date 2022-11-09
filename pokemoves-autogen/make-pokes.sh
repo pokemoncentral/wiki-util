@@ -65,7 +65,8 @@ create_csv() {
                psql -h localhost -p $PORT -U postgres \
                -c "\\COPY
                (SELECT m.identifier, pmm.identifier, vg.generation_id, vg.identifier, pm.level
-               FROM pokemon_moves AS pm JOIN pokemon AS p ON pm.pokemon_id = p.id
+               FROM pokemon_moves AS pm
+               JOIN pokemon AS p ON pm.pokemon_id = p.id
                JOIN pokemon_move_methods AS pmm ON pm.pokemon_move_method_id = pmm.id
                JOIN version_groups AS vg ON pm.version_group_id = vg.id
                JOIN moves AS m ON pm.move_id = m.id
