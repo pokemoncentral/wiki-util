@@ -38,6 +38,7 @@ local genderless = {
 -- probably you will get empty list of parents)
 -- The default value for this is 2
 local STARTGEN = 2
+local CURRGEN = 9
 
 -- Compare two tables, only on integer keys, to check if they're equal
 local function eqArray(t1, t2)
@@ -57,8 +58,8 @@ local function compareNdex(a, b)
     if type(a) == type(b) then
         return a < b
     end
-    local an = type(a) == "string" and tonumber(a:sub(0, 3)) or a
-    local bn = type(b) == "string" and tonumber(b:sub(0, 3)) or b
+    local an = lib.getNdex(a) or a
+    local bn = lib.getNdex(b) or b
     if an == bn then
         return type(a) == "number"
     else
@@ -81,9 +82,9 @@ local function eggGroupList(group)
     group = multigen.getGenValue(group)
     return tab.mapToNum(pokeeggs, function(v, k)
         if type(k) ~= "number"
-           and (not tonumber(k:sub(0, 3)) or k == "infernape")
-           and (multigen.getGenValue(v.group1) == group
-                or multigen.getGenValue(v.group2) == group) then
+           and (not lib.getNdex(k))
+           and (multigen.getGenValue(v.group1, CURRGEN) == group
+                or multigen.getGenValue(v.group2, CURRGEN) == group) then
             return k
         end
         return nil
@@ -284,7 +285,7 @@ end
 -- little the iteration afterwards
 local tmppokemoves = {}
 for poke, val in pairs(pokemoves) do
-    if type(poke) == "string" and (not tonumber(poke:sub(0, 3)) or poke == "infernape") then
+    if not lib.getNdex(poke) then
         -- val.breed = { nil, {}, {}, {}, {}, {}, {} }
         tmppokemoves[poke] = val
     end
@@ -320,7 +321,7 @@ for iteration = 1,14 do
            and poke ~= evodata[poke].name then
             newpokemoves[poke].breed = newpokemoves[basephasename].breed
         else
-            for gen = STARTGEN, 8 do
+            for gen = STARTGEN, CURRGEN do
                 if pokemoves[poke].breed[gen] then
                     newpokemoves[poke].breed[gen] = recompOnePoke(poke, gen)
                 else
@@ -341,7 +342,7 @@ end
 
 -- Unique parents, remove direct, compress games
 for _, data in pairs(pokemoves) do
-    for gen = STARTGEN,8 do
+    for gen = STARTGEN,CURRGEN do
         if data.breed and data.breed[gen] then
             for move, movedata in pairs(data.breed[gen]) do
                 if not movedata.new then
@@ -391,7 +392,7 @@ for _, data in pairs(pokemoves) do
             end
         end
     end
-    for gen = math.max(STARTGEN, 4), 8 do
+    for gen = math.max(STARTGEN, 4), CURRGEN do
         if data.breed and data.breed[gen] then
             for move, mdata in pairs(data.breed[gen]) do
                 mdata.new = nil
@@ -419,7 +420,7 @@ end
 print("Added old gens")
 
 -- Pichu can learn Locomovolt with a special note
-for gen = STARTGEN,8 do
+for gen = STARTGEN, CURRGEN do
     pokemoves.pichu.breed[gen].locomovolt = {{25, 26, 172}, notes = "Se il genitore tiene una Elettropalla"}
 end
 

@@ -41,12 +41,23 @@ local tab = require('Wikilib-tables')
 
 local printer = require('pokemove-printer')
 
+-- From lua-scripts/lib.lua
+-- Get the ndex from a key, that is either a number or a string. If it's a
+-- string, it may be an ndex followed by an abbr or a name. If the key is an
+-- ndex (possibly with an abbr) returns the numeric ndex, otherwise nil
+local function getNdex(poke)
+	if type(poke) == "number" then
+		return poke
+	end
+	return type(poke) == "string" and tonumber(poke:match("%d+")) or nil
+end
+
 -- Uses pokemoves because it's easier to print afterward
 -- Clean up pokemoves from keys that aren't Pokémon names, this simplify a
 -- little the iteration afterwards
 local tmppokemoves = {}
 for poke, val in pairs(pokemoves) do
-    if type(poke) == "string" and (not tonumber(poke:sub(0, 3)) or poke == "infernape") then
+    if not getNdex(poke) then
         -- val.breed = { nil, {}, {}, {}, {}, {}, {} }
         tmppokemoves[poke] = val
     end

@@ -27,6 +27,17 @@ local forms = require('Wikilib-forms')
 
 local p = {}
 
+-- From lua-scripts/lib.lua
+-- Get the ndex from a key, that is either a number or a string. If it's a
+-- string, it may be an ndex followed by an abbr or a name. If the key is an
+-- ndex (possibly with an abbr) returns the numeric ndex, otherwise nil
+local function getNdex(poke)
+	if type(poke) == "number" then
+		return poke
+	end
+	return type(poke) == "string" and tonumber(poke:match("%d+")) or nil
+end
+
 local function compressOutput(s)
     return s:gsub("%{%s*%}", "{}")
             :gsub("%{%},%s*\n%s*%{%}", "{}, {}")
@@ -158,8 +169,7 @@ p.allToDir = function(datas, dirname, skipkeys)
     for poke, data in pairs(datas) do
         data.neighbours = nil
         -- "inf"ernape seems to be a number
-        if type(poke) == "string" and (not tonumber(poke:sub(0, 3)) or poke == "infernape")
-           and not tab.search(skipkeys, poke) then
+        if not getNdex(poke) and not tab.search(skipkeys, poke) then
             -- compute breedref
             local fbr = datas[poke].breed == datas[forms.uselessToEmpty(evodata[poke].name)].breed
                         and poke ~= evodata[poke].name

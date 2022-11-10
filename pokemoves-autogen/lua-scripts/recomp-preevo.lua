@@ -17,9 +17,11 @@ local forms = require('Wikilib-forms')
 local lib = require('lib')
 local printer = require('pokemove-printer')
 
+local CURRGEN = 9
+
 for poke, data in pairs(pokemoves) do
-    for gen = 1,8 do
-        if type(poke) == "string" and (not tonumber(poke:sub(0, 3)) or poke == "infernape")
+    for gen = 1, CURRGEN do
+        if not lib.getNdex(poke)
            and evodata[poke] and poke ~= evodata[poke].name -- Isn't a base form
            then
             -- Compute preevo: iterate over all moves that preevo can learn
