@@ -32,10 +32,16 @@ To add a new file you should:
 Note that if you add new Pokémon, you must update the list of all Pokémon
 (filename in `config.sh -> $POKELIST`).
 
+## Add Pokémon
+To add a new Pokémon, you should:
+- add it to `docker-db/sourcecsv/pokemon.csv`
+- add it to `lists/pokemon-names.list`
+
 ## Add a game
 To add data for a new game, you have to do the following things:
 - add the csv source as explained above
 - add the game row to `docker-db/sourcecsv/version_groups.csv`
+- add the new Pokémons, as explained above
 - update `lua-scripts/csv2pokemoves.lua`:
   - update `breedgames`
   - if a new gen, add an empty table in `datagen`
@@ -92,6 +98,8 @@ be installed on your system:
   the same file, probably the TMP one is a remnant of when the module was
   moved to wiki-lua-modules directory.
 - Change lua scripts to load only needed data, not the whole pokemoves-data
+- Change `lua-scripts/csv2pokemoves.lua` so that `baseNoBreed` is only used to
+  suppress a warning instead of being functionally required.
 
 # Credits
 Data in this this project are from:

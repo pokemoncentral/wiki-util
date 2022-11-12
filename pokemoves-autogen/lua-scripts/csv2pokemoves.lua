@@ -77,9 +77,11 @@ local baseNoBreed = {
 	"marshadow", "poipole", "stakataka", "blacephalon", "zeraora", "meltan",
 	"sinistea", "impidimp", "falinks", "dracozolt", "arctozolt", "dracovish",
 	"arctovish", "zacian", "zamazenta", "eternatus", "kubfu", "zarude",
-	"regieleki", "regidrago", "glastrier", "spectrier", "calyrex", "deoxysA",
-	"deoxysD", "deoxysV", "shayminC", "kyuremN", "kyuremB", "hoopaL",
-	"articunoG", "zapdosG", "moltresG", "calyrexG", "calyrexS" }
+	"regieleki", "regidrago", "glastrier", "spectrier", "calyrex", "enamorus",
+	"deoxysA", "deoxysD", "deoxysV", "shayminC", "kyuremN", "kyuremB", "hoopaL",
+	"articunoG", "zapdosG", "moltresG", "calyrexG", "calyrexS", "growlitheH",
+	"voltorbH", "qwilfishH", "sneaselH", "basculinBi", "zoruaH"
+}
 local breedNoBase = { "chansey", "chimecho", "mantine", "marill", "mr. mime",
 	"roselia", "snorlax", "sudowoodo", "mr. mimeG" }
 
