@@ -105,5 +105,6 @@ be installed on your system:
 Data in this this project are from:
 - learnset until USUM (included) are from VeeKun's repository [pokedex](https://github.com/veekun/pokedex)
 - learnset for LGPE and gen 8 are from [SciresM](https://twitter.com/SciresM/)'s and [Kaphotic](https://twitter.com/Kaphotics)'s datamines.
+- learnset from SV are from [Slp32](https://pastebin.com/u/slp32).
 
 Files in `docker-db/sourcecsv/` are made from those data.

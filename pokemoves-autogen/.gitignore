@@ -5,3 +5,4 @@ pokecsv/
 luamoves*/
 source-modules.lua
 config.sh
+__pycache__
