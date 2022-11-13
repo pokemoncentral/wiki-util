@@ -51,9 +51,9 @@ if __name__ == '__main__':
         else:
             lst = args.pokepage.split(',')
         for poke in lst:
-            gender, singleMS, avail = get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata, availdata)
+            gender, singleMS = get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata)
             # names
             name = getname[poke]
             dename = getdename[name]
             frname = getfrname[name]
-            build_poke_page(poke, name, args.pokelistspath, args.pokepagespath, args.pokeformspath, artsources, goforms, args.exceptionspath, gender, singleMS, avail, rangerdata, dename, frname)
+            build_poke_page(poke, name, args.pokelistspath, args.pokepagespath, args.pokeformspath, artsources, goforms, args.exceptionspath, gender, singleMS, availdata, rangerdata, dename, frname)

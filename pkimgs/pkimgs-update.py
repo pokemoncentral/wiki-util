@@ -27,7 +27,7 @@ def get_section_text(pagetext, section):
 
 # update page (all section or given one) and check if it was actually modified
 # in that case save it to new text file
-def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, avail, rangerdata, goforms, exceptionspath, section, downloadspath, updatespath):
+def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, availdata, rangerdata, goforms, exceptionspath, section, downloadspath, updatespath):
     localfile = os.path.join(downloadspath, f'{poke}.txt')
     if not os.path.isfile(localfile):
         print(f'File "{localfile}" not found, skipping it.')
@@ -46,7 +46,7 @@ def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, 
             edited = True
     if section in ['main', 'all']:
         oldtext = get_section_text(pagetext, 'main')
-        newtext = build_main(poke, exceptionspath, forms, gender, singleMS, avail, imgs)
+        newtext = build_main(poke, exceptionspath, forms, gender, singleMS, availdata, imgs)
         if newtext != oldtext:
             pagetext = pagetext.replace(oldtext, newtext)
             edited = True
@@ -96,9 +96,9 @@ if __name__ == '__main__':
         if not os.path.isdir(args.updatespath):
             os.mkdir(args.updatespath)
         for poke in lst:
-            gender, singleMS, avail = get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata, availdata)
+            gender, singleMS = get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata)
             forms = get_forms(poke, args.pokeformspath)
-            update_page(poke, getname[poke], gender, forms, args.pokelistspath, artsources, singleMS, avail, rangerdata, goforms, args.exceptionspath, args.section, args.downloadspath, args.updatespath)
+            update_page(poke, getname[poke], gender, forms, args.pokelistspath, artsources, singleMS, availdata, rangerdata, goforms, args.exceptionspath, args.section, args.downloadspath, args.updatespath)
     # upload pages
     if args.upload:
         if args.upload == 'all':

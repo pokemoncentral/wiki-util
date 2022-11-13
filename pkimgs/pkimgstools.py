@@ -41,7 +41,7 @@ def import_ndex(dexfile):
     with open(dexfile, 'r') as file:
         for line in file:
             items = line.strip().split(',')
-            getname.update({items[0]: items[1]})
+            getname.update({ items[0]: items[1] })
     return getname
 
 # import various useful data
@@ -60,7 +60,7 @@ def import_data(dexfile, genderdiffsfile, genderformsfile, femaleonlyfile, artso
     availdata = {}
     for availfile in availfiles:
         with open(os.path.join(availdir, availfile), 'r') as file:
-            availdata.update({availfile.replace('.csv', ''): file.read().splitlines()})
+            availdata.update({ availfile.replace('.csv', ''): file.read().splitlines() })
     with open(singlemsfile, 'r') as file:
         singlemsdata = file.read().splitlines()
     with open(rangerfile, 'r') as file:
@@ -70,7 +70,7 @@ def import_data(dexfile, genderdiffsfile, genderformsfile, femaleonlyfile, artso
     return getname, genderdiffs, genderforms, femaleonly, artsources, singlemsdata, availdata, rangerdata, goforms
 
 # get data for given Pokémon
-def get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata, availdata):
+def get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata):
     if poke in genderdiffs:
         gender = 'both'
     elif poke in genderforms:
@@ -83,13 +83,7 @@ def get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata, avai
         singleMS = True
     else:
         singleMS = False
-    avail = {}
-    for game in availdata:
-        if poke in availdata[game]:
-            avail.update({game: True})
-        else:
-            avail.update({game: False})
-    return gender, singleMS, avail
+    return gender, singleMS
 
 # get list of alternative forms for given Pokémon
 def get_forms(poke, formspath):
@@ -216,48 +210,89 @@ def build_arts(poke, arts, abbrs, gender, sources, extras):
             text += f'{{{{pokemonimages/entry\n|xl=20|md=25|sm=33|xs=50\n|img={art}\n|size=x150px\n|downdesc= (artwork da [[]]) }}}}\n'
     return text
 
+# check if given Pokémon/form is available in given game
+def check_pokeform_game_availability(poke, form, game, availdata):
+    abbr, since, until = form
+    game_gen = gametogen[game]
+    if int(game_gen) >= 8:
+        game_pokes = availdata[game]
+        # if base form, simply check if ndex is in list
+        if abbr == '':
+            if poke in game_pokes:
+                is_available = True
+            else:
+                is_available = False
+        # with alt forms, additional checks are required
+        else:
+            pokeabbr = poke + abbr
+            # if game contains alt form(s) of a Pokémon but not base form, list will
+            # contain all alt forms instead of base form
+            if pokeabbr in game_pokes:
+                is_available = True
+            # if list doesn't contain base form, alt form is not available in game
+            elif poke not in game_pokes:
+                is_available = False
+            # game contains base form, check if alt form is available
+            else:
+                is_available = (gametogen[since] <= game_gen and gametogen[until] >= game_gen)
+    else:
+        is_available = (gametogen[since] <= game_gen and gametogen[until] >= game_gen)
+    return is_available
+
+# get all games in given generation where given form is available
+def get_pokeform_gen_games(poke, form, gen, availdata):
+    gen_games = [game for game in gametogen if int(gametogen[game]) == int(gen)]
+    return [game for game in gen_games if check_pokeform_game_availability(poke, form, game, availdata)]
+
 # build a single pokemonimages/main* for a single form
-def build_main_gen_entry(pokeabbr, gen, form = False, since = '', games = [], female = False, bothgenders = False, gen4common = ''):
-    text = f'{{{{pokemonimages/main{gen}|ndex={pokeabbr}'
-    if form == True:
+def build_main_gen_entry(poke, form, gen, availdata, isform = False, since = '', female = False, bothgenders = False, gen4common = ''):
+    text = ''
+    if isform:
         text += '|form=yes'
     if since:
         text += f'|since={since}'
-    if female == True:
+    if female:
         text += '|gender=f'
-    if bothgenders == True:
+    if bothgenders:
         text += '|bothgenders=yes'
     # some Pokémon have same sprites in DPPt or PtHGSS or all games
     if gen == '4' and gen4common:
         text += f'|{gen4common}=yes'
     # add abbrs of single games (used from generation VIII onwards because games
     # no longer contain all previous Pokémon)
-    for game in games:
-        text += f'|{game}=yes'
-    text += '}}'
+    if int(gen) >= 8:
+        games = get_pokeform_gen_games(poke, form, gen, availdata)
+        if games:
+            for game in games:
+                text += f'|{game}=yes'
+        else:
+            text = None
+    # if there are no entries return empty string
+    if text is not None:
+        text = f'{{{{pokemonimages/main{gen}|ndex={poke}{form[0]}{text}}}}}'
+    else:
+        text = ''
     return text
 
 # build all pokemonimages/main* entries for given Pokémon in given generation
-def build_main_gen(poke, gen, avails = [], forms = [], gender = '', gen4sprites = []):
-    text = f'{{{{pokemonimages/group|gen={gen}|content=\n'
+def build_main_gen(poke, gen, availdata = {}, forms = [], gender = '', gen4sprites = []):
+    text = ''
     # search for other forms that esist in given generation
     numgen = int(gen)
-    if len([form for form in forms if floor(gametogen[form[1]]) <= numgen and numgen <= gametogen[form[2]]]) > 1:
+    if len([form for form in forms if get_pokeform_gen_games(poke, form, gen, availdata)]) > 1:
         multiform = True
     else:
         multiform = False
-    # gender differences treated as useless forms
-    if [form[0] for form in forms[:2]] == ['', 'F'] and gender == 'both':
-        text += f'{build_main_gen_entry(poke, gen, form = False, games = avails, bothgenders = True)}\n'
-        text += f'{build_main_gen_entry(poke, gen, form = False, games = avails, female = True, bothgenders = True)}\n'
-        if len(forms) > 2:
-            forms = forms[2:]
+    # gender forms
+    if [form[0] for form in forms[:2]] == ['', 'F'] and gender in ['both', 'bothforms']:
+        # gender difference is treated as useless form
+        if gender == 'both':
+            text += f'{build_main_gen_entry(poke, forms[0], gen, availdata, isform = False, bothgenders = True)}\n'
+            text += f'{build_main_gen_entry(poke, forms[0], gen, availdata, isform = False, female = True, bothgenders = True)}\n'
+        # gender difference is treated as alt form
         else:
-            forms = []
-    # gender differences treated as alt forms
-    elif [form[0] for form in forms[:2]] == ['', 'F'] and gender == 'bothforms':
-        text += f'{build_main_gen_entry(poke, gen, form = True, games = avails)}\n'
-        text += f'{build_main_gen_entry(poke, gen, form = True, games = avails, female = True)}\n'
+            text += f'{build_main_gen_entry(poke, forms[0], gen, availdata, isform = True)}\n'
+            text += f'{build_main_gen_entry(poke, forms[0], gen, availdata, isform = True, female = True)}\n'
         if len(forms) > 2:
             forms = forms[2:]
         else:
@@ -289,22 +324,22 @@ def build_main_gen(poke, gen, avails = [], forms = [], gender = '', gen4sprites 
                     gen4common = ''
         else:
             gen4common = ''
-        # Maybe the following part can be done better, but it works and I don't want to break it
+        middlegen = (numgen < gametogen[since] and numgen == int(gametogen[since]))
+        # maybe the following part can be done better, but it works and I don't want to break it
         if abbr == '':
             # gender differences
             if gender == 'both':
-                text += f'{build_main_gen_entry(poke, gen, form = False, games = avails, bothgenders = True, gen4common = gen4common)}\n'
-                text += f'{build_main_gen_entry(poke, gen, form = False, games = avails, female = True, bothgenders = True, gen4common = gen4common)}\n'
+                text += f'{build_main_gen_entry(poke, form, gen, availdata, isform = False, bothgenders = True, gen4common = gen4common)}\n'
+                text += f'{build_main_gen_entry(poke, form, gen, availdata, isform = False, female = True, bothgenders = True, gen4common = gen4common)}\n'
             # female only
             elif gender == 'f':
-                text += f'{build_main_gen_entry(poke, gen, form = multiform, games = avails, female = True, gen4common = gen4common)}\n'
+                text += f'{build_main_gen_entry(poke, form, gen, availdata, isform = multiform, female = True, gen4common = gen4common)}\n'
             # other cases
             else:
                 # check if was introduced in the middle of the generation
-                if numgen < 8 and numgen < gametogen[since] and gametogen[since] < numgen + 1:
-                    text += f'{build_main_gen_entry(poke, gen, form = multiform, since = since, games = avails, female = False, gen4common = gen4common)}\n'
-                else:
-                    text += f'{build_main_gen_entry(poke, gen, form = multiform, games = avails, female = False, gen4common = gen4common)}\n'
+                if numgen >= 8 or not middlegen:
+                    since = ''
+                text += f'{build_main_gen_entry(poke, form, gen, availdata, isform = multiform, since = since, female = False, gen4common = gen4common)}\n'
         elif abbr == 'F' and gender == 'both':
             pass # already done
         elif floor(gametogen[since]) <= numgen and numgen <= gametogen[until]:
@@ -313,20 +348,18 @@ def build_main_gen(poke, gen, avails = [], forms = [], gender = '', gen4sprites 
             else:
                 female = False
             # check if was introduced in the middle of the generation
-            if numgen < gametogen[since] and gametogen[since] < numgen + 1:
-                if numgen < 8:
-                    text += f'{build_main_gen_entry(poke + abbr, gen, form = True, since = since, games = avails, female = female, gen4common = gen4common)}\n'
-                else:
-                    gen_games = [game for game in gametogen if int(gametogen[game]) == numgen and gametogen[game] >= gametogen[since]]
-                    games = [game for game in gen_games if game in avails]
-                    text += f'{build_main_gen_entry(poke + abbr, gen, form = True, games = games, female = female, gen4common = gen4common)}\n'
-            else:
-                text += f'{build_main_gen_entry(poke + abbr, gen, form = True, games = avails, female = female, gen4common = gen4common)}\n'
-    text += '}}\n'
+            if numgen >= 8 or not middlegen:
+                since = ''
+            text += f'{build_main_gen_entry(poke, form, gen, availdata, isform = True, since = since, female = female, gen4common = gen4common)}\n'
+    # if there are no entries for this gen return empty string
+    if text.strip():
+        text = f'{{{{pokemonimages/group|gen={gen}|content=\n{text}}}}}\n'
+    else:
+        text = ''
     return text
 
 # build mini sprites entry for given form
-def build_ms_entry(poke, form, multiform, avail, gender, genderform = ''):
+def build_ms_entry(poke, form, multiform, availdata, gender, genderform = ''):
     # dicts to map introduction to pokemonimages/mainMS parameter values
     ms345 = {
     3: '345',
@@ -365,12 +398,13 @@ def build_ms_entry(poke, form, multiform, avail, gender, genderform = ''):
                 text += '|ms67=rozaonly'
             else:
                 text += f'|ms67={ms67.get(start, "67")}'
-        if avail['spsc'] == True and start <= 8 and end >= 8:
+        if check_pokeform_game_availability(poke, form, 'spsc', availdata):
             text += '|msspsc=yes'
-        if avail['dlps'] == True and start <= 8.1 and end >= 8.1:
+        if check_pokeform_game_availability(poke, form, 'dlps', availdata):
             text += '|msdlps=yes'
-        # ndexes are hardcoded here, game won't change
-        if avail['lpa'] == True and start <= 8.2 and end >= 8.2:
+        # some ndexes are hardcoded here, because game won't change and it's
+        # much easier than reading this info from external file
+        if check_pokeform_game_availability(poke, form, 'lpa', availdata):
             if gender == 'both':
                 text += '|mslpa=both'
             elif gender == 'f':
@@ -389,17 +423,8 @@ def build_ms_entry(poke, form, multiform, avail, gender, genderform = ''):
         text += '}}\n'
     return text
 
-# from a dict and a list of abbrs, return list of abbrs with value True
-def get_avails_list(avail, abbrs):
-    avails = []
-    for abbr in abbrs:
-        if avail[abbr] == True:
-            avails.append(abbr)
-    return avails
-
 # build main series entries
-def build_main(poke, exceptionspath, forms, gender, singleMS, avail, imgs):
-    ndex = int(poke)
+def build_main(poke, exceptionspath, forms, gender, singleMS, availdata, imgs):
     text = ''
     # check for exception
     exceptionfile = os.path.join(exceptionspath, f'{poke}_main.txt')
@@ -407,6 +432,7 @@ def build_main(poke, exceptionspath, forms, gender, singleMS, avail, imgs):
         with open(exceptionfile, 'r') as file:
             text += file.read()
     else:
+        ndex = int(poke)
         if ndex <= 151:
             text += build_main_gen(poke, '1', forms = forms)
         if ndex <= 251:
@@ -426,9 +452,7 @@ def build_main(poke, exceptionspath, forms, gender, singleMS, avail, imgs):
         if ndex <= 807:
             text += build_main_gen(poke, '7', forms = forms, gender = gender)
         if ndex <= 905:
-            avails8 = get_avails_list(avail, ['spsc', 'dlps', 'lpa'])
-            if avails8 != []:
-                text += build_main_gen(poke, '8', avails = avails8, forms = forms, gender = gender)
+            text += build_main_gen(poke, '8', availdata = availdata, forms = forms, gender = gender)
         # mini sprites
         text += '{{pokemonimages/group|gen=MS|content=\n'
         # check for exception
@@ -438,21 +462,21 @@ def build_main(poke, exceptionspath, forms, gender, singleMS, avail, imgs):
                 text += file.read()
         else:
             if singleMS == True:
-                text += build_ms_entry(poke, forms[0], False, avail, gender)
+                text += build_ms_entry(poke, forms[0], False, availdata, gender)
             else:
                 if len(forms) > 1:
                     multiform = True
                 else:
                     multiform = False
                 if [form[0] for form in forms[:2]] == ['', 'F'] and gender == 'both':
-                    text += build_ms_entry(poke, forms[0], False, avail, gender, genderform = 'm')
-                    text += build_ms_entry(poke, forms[1], False, avail, gender, genderform = 'f')
+                    text += build_ms_entry(poke, forms[0], False, availdata, gender, genderform = 'm')
+                    text += build_ms_entry(poke, forms[1], False, availdata, gender, genderform = 'f')
                     if len(forms) > 2:
                         for form in forms[2:]:
-                            text += build_ms_entry(poke, form, multiform, avail, gender)
+                            text += build_ms_entry(poke, form, multiform, availdata, gender)
                 else:
                     for form in forms:
-                        text += build_ms_entry(poke, form, multiform, avail, gender)
+                        text += build_ms_entry(poke, form, multiform, availdata, gender)
         text += '}}\n'
     return text
 
@@ -479,7 +503,7 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
             formtext += '|stadium=StS2\n'
         elif f'Sprstad2{pokeabbr}.png' in imgs:
             formtext += '|stadium=S2\n'
-        if len(pokeabbr) == 3:
+        if abbr == '':
             # TCG
             tcg1search = r'TCG1 (...) {}\.png'.format(name)
             tcg2search = r'TCG2 (...) {}\.png'.format(name)
@@ -806,7 +830,7 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
     return finaltext
 
 # build wikicode of page for given Pokémon
-def build_poke_page(poke, name, pokelistspath, pagespath, formspath, artsources, goforms, exceptionspath, gender, singleMS, avail, rangerdata, dename, frname):
+def build_poke_page(poke, name, pokelistspath, pagespath, formspath, artsources, goforms, exceptionspath, gender, singleMS, availdata, rangerdata, dename, frname):
     # get alternative forms
     forms = get_forms(poke, formspath)
     # get list of images of given Pokémon
@@ -818,7 +842,7 @@ def build_poke_page(poke, name, pokelistspath, pagespath, formspath, artsources,
     pagetext += build_arts(poke, arts, [form[0] for form in forms], gender, artsources, True)
     # main series
     pagetext += '}}\n\n==Sprite e modelli==\n===Serie principale===\n{{pokemonimages/head|content=\n'
-    pagetext += build_main(poke, exceptionspath, forms, gender, singleMS, avail, imgs)
+    pagetext += build_main(poke, exceptionspath, forms, gender, singleMS, availdata, imgs)
     # spin-offs
     pagetext += '}}\n'
     spinoffimages = get_spinoff_imgs(imgs)
