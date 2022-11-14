@@ -135,7 +135,7 @@ def write_row_csv_pokemoves(poke_id: str, kind: int, elem: Tuple, csvw):
 
 
 with open(sys.argv[1], "r") as f, open(sys.argv[2], "w") as out:
-    csvw = csv.writer(out)
+    csvw = csv.writer(out, lineterminator="\n")
     pokelines = []
     move = ""
     for line in f:
