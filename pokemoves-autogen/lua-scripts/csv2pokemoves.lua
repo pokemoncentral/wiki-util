@@ -78,9 +78,13 @@ local baseNoBreed = {
 	"sinistea", "impidimp", "falinks", "dracozolt", "arctozolt", "dracovish",
 	"arctovish", "zacian", "zamazenta", "eternatus", "kubfu", "zarude",
 	"regieleki", "regidrago", "glastrier", "spectrier", "calyrex", "enamorus",
+	"gimmighoul", "grandizanne", "fungofurioso", "peldisabbia", "codaurlante",
+	"crinealato", "alirasenti", "lunaruggente", "solcoferreo", "falenaferrea",
+	"manoferrea", "colloferreo", "spineferree", "saccoferreo", "eroeferreo",
+	"ting-lu", "chien-pao", "wo-chien", "chi-yu", "koraidon", "miraidon",
 	"deoxysA", "deoxysD", "deoxysV", "shayminC", "kyuremN", "kyuremB", "hoopaL",
-	"articunoG", "zapdosG", "moltresG", "calyrexG", "calyrexS", "growlitheH",
-	"voltorbH", "qwilfishH", "sneaselH", "basculinBi", "zoruaH"
+	"articunoG", "zapdosG", "moltresG", "calyrexG", "calyrexS", "palafinP",
+	"gimmighoulA",
 }
 local breedNoBase = { "chansey", "chimecho", "mantine", "marill", "mr. mime",
 	"roselia", "snorlax", "sudowoodo", "mr. mimeG" }

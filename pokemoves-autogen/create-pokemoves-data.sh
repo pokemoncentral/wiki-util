@@ -5,7 +5,7 @@
 source config.sh
 
 CFLAG=false
-CONTAINER=""
+CONTAINER="tmp-pokemoves-db-659"  # random default name
 DFLAG=false
 PFLAG=false
 
@@ -64,7 +64,7 @@ if [[ $CFLAG == true ]] || [[ ! -d "$TEMPOUTDIR/pokecsv" ]]; then
     if [[ $DFLAG == false ]] || [[ -z $(docker ps -aqf "name=${CONTAINER}") ]]; then
         echo "=========================== Creating container ==========================="
         docker build -t pokemovesdb docker-db/
-        CONTAINER=$(docker create -p ${CONTAINERPORT}:5432 --name "${CONTAINER}" -e"POSTGRES_HOST_AUTH_METHOD=trust" pokemovesdb)
+        docker create -p ${CONTAINERPORT}:5432 --name "${CONTAINER}" -e"POSTGRES_HOST_AUTH_METHOD=trust" pokemovesdb
         # In case of the following error, try increasing the sleep value
         # (see README for an explanation)
         #
@@ -72,7 +72,7 @@ if [[ $CFLAG == true ]] || [[ ! -d "$TEMPOUTDIR/pokecsv" ]]; then
         # 	This probably means the server terminated abnormally
         # 	before or while processing the request.
         docker start "$CONTAINER" > /dev/null
-        sleep 25
+        sleep 30
     else
         docker start "$CONTAINER" > /dev/null
         sleep 1
