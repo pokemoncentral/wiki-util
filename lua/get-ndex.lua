@@ -4,7 +4,7 @@
 Utility script to get the ndex of a Pokémon given the name
 
 Usage:
-lua get-ndex.lua <poke> <kind>
+lua get-ndex.lua <poke>
 
 --]]
 

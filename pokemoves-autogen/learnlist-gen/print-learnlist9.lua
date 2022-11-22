@@ -51,6 +51,11 @@ p.computeSTAB = function(ndex, movename, form, gen)
     return stab == "" and "no" or stab
 end
 
+-- Checks whether the entry is alltm
+p.alltm = function(kind, pmkindgen)
+    return kind == "tm" and pmkindgen.all
+end
+
 --[[
 
 Add header and footer for a learnlist table.
@@ -99,7 +104,7 @@ Arguments:
 p._entryGeneric = function(poke, gen, kind, pmkind)
     local funcDict = p.dicts[kind]
     local res = {}
-    if pmkind and pmkind[gen] then
+    if pmkind and pmkind[gen] and not p.alltm(kind, pmkind[gen]) then
         res = funcDict.dataMap(pmkind[gen], function(v, k)
             return funcDict.processData(poke, gen, v, k)
         end)
@@ -107,6 +112,8 @@ p._entryGeneric = function(poke, gen, kind, pmkind)
     local resstr
     if #res == 0 then
         resstr = p.strings.NULLENTRY
+    elseif pmkind and pmkind[gen] and p.alltm(kind, pmkind[gen]) then
+        resstr = "TODO"
     else
         table.sort(res, funcDict.lt)
         resstr = wlib.mapAndConcat(res, "\n", function(val)
