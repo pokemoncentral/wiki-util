@@ -22,7 +22,6 @@ local moves = require("Move-data")
 local pokes = require("Poké-data")
 local altdata = require("AltForms-data")
 local pokemoves = require("learnlist-gen.pokemoves-data")
-local ex8 = require("learnlist-gen.existence8-data")
 
 p.strings = {
     HF = "{{#invoke: Learnlist/hf | ${kind}${hf} | ${poke} | ${type1} | ${type2} | ${genh} | ${genp} }}",
