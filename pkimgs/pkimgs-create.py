@@ -1,5 +1,5 @@
 import argparse, os, os.path, re
-from scripts.userscripts.pkimgstools import import_data, get_poke_data, build_poke_page
+from scripts.userscripts.pkimgstools import import_ndex, import_data, get_poke_data, build_poke_page
 '''
 Quick infos about variables:
 - 'poke' always represents number of Pokédex as string (without form abbr)
@@ -14,7 +14,7 @@ parser.add_argument('--pokepage', default = '')
 parser.add_argument('--pokepagespath', default = 'data/pokepages-created/')
 parser.add_argument('--pokeformspath', default = 'data/pokepages-pokeforms/')
 parser.add_argument('--exceptionspath', default = 'data/pokepages-exceptions/')
-parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_ndex.txt')
+parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_names.csv')
 parser.add_argument('--genderdiffsfile', default = 'data/pokepages-utils/genderdiffs.txt')
 parser.add_argument('--genderformsfile', default = 'data/pokepages-utils/genderforms.txt')
 parser.add_argument('--femaleonlyfile', default = 'data/pokepages-utils/femaleonly.txt')
@@ -28,21 +28,11 @@ parser.add_argument('--frfile', default = 'data/pokepages-utils/pokes_fr.txt')
 args = parser.parse_args()
 
 if __name__ == '__main__':
-    # import data
-    getname, genderdiffs, genderforms, femaleonly, artsources, singlemsdata, availdata, rangerdata, goforms = import_data(args.dexfile, args.genderdiffsfile, args.genderformsfile, args.femaleonlyfile, args.artsourcesfile, args.singlemsfile, args.availdir, args.rangerfile, args.goformsfile)
     # create wikicode of subpage
     if args.pokepage:
-        # import data for German and French names
-        getdename = {}
-        with open(args.defile, 'r') as file:
-            for line in file:
-                names = line.strip().split(',')
-                getdename.update({names[1]: names[0]})
-        getfrname = {}
-        with open(args.frfile, 'r') as file:
-            for line in file:
-                names = line.strip().split(',')
-                getfrname.update({names[1]: names[0]})
+        # import data
+        getname, getenname, getesname, getdename, getfrname = import_ndex(args.dexfile)
+        genderdiffs, genderforms, femaleonly, artsources, singlemsdata, availdata, rangerdata, goforms = import_data(args.genderdiffsfile, args.genderformsfile, args.femaleonlyfile, args.artsourcesfile, args.singlemsfile, args.availdir, args.rangerfile, args.goformsfile)
         # build page
         if not os.path.isdir(args.pokepagespath):
             os.mkdir(args.pokepagespath)
@@ -52,8 +42,4 @@ if __name__ == '__main__':
             lst = args.pokepage.split(',')
         for poke in lst:
             gender, singleMS = get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata)
-            # names
-            name = getname[poke]
-            dename = getdename[name]
-            frname = getfrname[name]
-            build_poke_page(poke, name, args.pokelistspath, args.pokepagespath, args.pokeformspath, artsources, goforms, args.exceptionspath, gender, singleMS, availdata, rangerdata, dename, frname)
+            build_poke_page(poke, getname[poke], args.pokelistspath, args.pokepagespath, args.pokeformspath, artsources, goforms, args.exceptionspath, gender, singleMS, availdata, rangerdata, getenname[poke], getesname[poke], getdename[poke], getfrname[poke])

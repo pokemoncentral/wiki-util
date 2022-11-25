@@ -35,19 +35,25 @@ gametogen = {
 'sv': 9,
 }
 
-# dict to map ndex to name
+# 'getname' maps ndex to italian name, others map italian name to foreign names
 def import_ndex(dexfile):
     getname = {}
+    getenname = {}
+    getesname = {}
+    getdename = {}
+    getfrname = {}
     with open(dexfile, 'r') as file:
         for line in file:
-            items = line.strip().split(',')
-            getname.update({ items[0]: items[1] })
-    return getname
+            ndex, itname, enname, esname, dename, frname = line.strip().split(',')
+            getname.update({ ndex: itname })
+            getenname.update({ itname: enname })
+            getesname.update({ itname: esname })
+            getdename.update({ itname: dename })
+            getfrname.update({ itname: frname })
+    return getname, getenname, getesname, getdename, getfrname
 
 # import various useful data
-def import_data(dexfile, genderdiffsfile, genderformsfile, femaleonlyfile, artsourcesfile, singlemsfile, availdir, rangerfile, goformsfile):
-    getname = import_ndex(dexfile)
-    # import other data
+def import_data(genderdiffsfile, genderformsfile, femaleonlyfile, artsourcesfile, singlemsfile, availdir, rangerfile, goformsfile):
     with open(genderdiffsfile, 'r') as file:
         genderdiffs = file.read().splitlines()
     with open(genderformsfile, 'r') as file:
@@ -67,7 +73,7 @@ def import_data(dexfile, genderdiffsfile, genderformsfile, femaleonlyfile, artso
         rangerdata = file.read().splitlines()
     with open(goformsfile, 'r') as file:
         goforms = file.read().splitlines()
-    return getname, genderdiffs, genderforms, femaleonly, artsources, singlemsdata, availdata, rangerdata, goforms
+    return genderdiffs, genderforms, femaleonly, artsources, singlemsdata, availdata, rangerdata, goforms
 
 # get data for given Pokémon
 def get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata):
@@ -830,7 +836,7 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
     return finaltext
 
 # build wikicode of page for given Pokémon
-def build_poke_page(poke, name, pokelistspath, pagespath, formspath, artsources, goforms, exceptionspath, gender, singleMS, availdata, rangerdata, dename, frname):
+def build_poke_page(poke, name, pokelistspath, pagespath, formspath, artsources, goforms, exceptionspath, gender, singleMS, availdata, rangerdata, enname, esname, dename, frname):
     # get alternative forms
     forms = get_forms(poke, formspath)
     # get list of images of given Pokémon
@@ -850,8 +856,10 @@ def build_poke_page(poke, name, pokelistspath, pagespath, formspath, artsources,
     if spinoffstext:
         pagetext += f'\n===Spin-off===\n{{{{pokemonimages/head|content=\n{spinoffstext}}}}}\n'
     # add category and interwikis
-    pagetext += '\n[[Categoria:Sottopagine immagini Pokémon]]\n'
-    pagetext += f'\n[[de:{dename}/Sprites und 3D-Modelle]]\n'
+    pagetext += '\n[[Categoria:Sottopagine immagini Pokémon]]\n\n'
+    pagetext += f'[[de:{dename}/Sprites und 3D-Modelle]]\n'
+    #pagetext += f'[[en:Category:{enname}]]\n'
+    #pagetext += f'[[es:{esname}/...]]\n'
     pagetext += f'[[fr:{frname}/Imagerie]]\n'
     # write all wikicode to text file
     with open(f'{os.path.join(pagespath, poke)}.txt', 'w') as file:

@@ -52,8 +52,7 @@ def get_poke_rank(poke, pokespath):
     return len(lines)
 
 # download wikicode of pokepage from wiki and save it to text file
-def download_pokepage(poke, name, downloadspath):
-    site = pywikibot.Site()
+def download_pokepage(poke, name, site, downloadspath):
     destfile = os.path.join(downloadspath, '{}.txt'.format(poke))
     page = pywikibot.Page(site, '{}/Immagini'.format(name))
     with open(destfile, 'w') as file:
@@ -66,14 +65,14 @@ parser.add_argument('--pokelist', default = '')
 parser.add_argument('--pokelistspath', default = 'data/pokepages-pokelists/')
 parser.add_argument('--pokerank', default = '')
 parser.add_argument('--catsfile', default = 'data/pokepages-utils/cats.txt')
-parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_ndex.txt')
+parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_names.csv')
 parser.add_argument('--download', default = '')
 parser.add_argument('--downloadspath', default = 'data/pokepages-downloaded/')
 args = parser.parse_args()
 
 if __name__ == '__main__':
     # import data
-    getname = import_ndex(args.dexfile)
+    getname, getenname, getesname, getdename, getfrname = import_ndex(args.dexfile)
     # update categories
     if args.catlist:
         if not os.path.isdir(args.catlistspath):
@@ -120,4 +119,4 @@ if __name__ == '__main__':
         # retrieve subpages
         site = pywikibot.Site()
         for poke in lst:
-            download_pokepage(poke, getname[poke], args.downloadspath)
+            download_pokepage(poke, getname[poke], site, args.downloadspath)

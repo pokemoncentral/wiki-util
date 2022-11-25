@@ -1,5 +1,5 @@
 import pywikibot, argparse, os.path, re
-from scripts.userscripts.pkimgstools import import_data, get_poke_data, get_forms, get_spinoff_imgs, build_arts, build_main, build_spinoffs
+from scripts.userscripts.pkimgstools import import_ndex, import_data, get_poke_data, get_forms, get_spinoff_imgs, build_arts, build_main, build_spinoffs
 '''
 Quick infos about variables:
 - 'poke' always represents number of Pokédex as string (without form abbr)
@@ -68,7 +68,7 @@ parser.add_argument('--pokelistspath', default = 'data/pokepages-pokelists/')
 parser.add_argument('--pokeformspath', default = 'data/pokepages-pokeforms/')
 parser.add_argument('--exceptionspath', default = 'data/pokepages-exceptions/')
 parser.add_argument('--downloadspath', default = 'data/pokepages-downloaded/')
-parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_ndex.txt')
+parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_names.csv')
 parser.add_argument('--genderdiffsfile', default = 'data/pokepages-utils/genderdiffs.txt')
 parser.add_argument('--genderformsfile', default = 'data/pokepages-utils/genderforms.txt')
 parser.add_argument('--femaleonlyfile', default = 'data/pokepages-utils/femaleonly.txt')
@@ -86,7 +86,8 @@ args = parser.parse_args()
 
 if __name__ == '__main__':
     # import data
-    getname, genderdiffs, genderforms, femaleonly, artsources, singlemsdata, availdata, rangerdata, goforms = import_data(args.dexfile, args.genderdiffsfile, args.genderformsfile, args.femaleonlyfile, args.artsourcesfile, args.singlemsfile, args.availdir, args.rangerfile, args.goformsfile)
+    getname, getenname, getesname, getdename, getfrname = import_ndex(args.dexfile)
+    genderdiffs, genderforms, femaleonly, artsources, singlemsdata, availdata, rangerdata, goforms = import_data(args.genderdiffsfile, args.genderformsfile, args.femaleonlyfile, args.artsourcesfile, args.singlemsfile, args.availdir, args.rangerfile, args.goformsfile)
     # update pages
     if args.updatepoke:
         if args.updatepoke == 'all':
