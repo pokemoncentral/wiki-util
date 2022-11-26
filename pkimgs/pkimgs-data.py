@@ -1,5 +1,6 @@
 import pywikibot, argparse, os, os.path, re
 from scripts.userscripts.pkimgstools import import_ndex
+from pywikibot import pagegenerators
 '''
 Quick infos about variables:
 - 'poke' always represents number of Pokédex as string (without form abbr)
@@ -10,7 +11,11 @@ Quick infos about variables:
 
 # get list of images in given category and save it to text file
 def build_cat_list(cat, catspath):
-    os.system('python3 pwb.py listpages -format:3 -cat:"{}" > "{}.txt"'.format(cat, os.path.join(catspath, cat.replace(':', ';'))))
+    cat = pywikibot.Category(site, f'Categoria:{cat}')
+    pages = pagegenerators.CategorizedPageGenerator(cat)
+    with open(os.path.join(catspath, cat.replace(':', ';')), 'w') as file:
+        file.write('\n'.join([page.title() for page in pages]).replace('File:', '') + '\n')
+    print(f'Retrieved list of images in category "{cat}"')
 
 # get list of images in given category with given Pokémon
 def get_poke_in_cat(poke, name, cat, catspath):
