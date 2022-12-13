@@ -7,15 +7,13 @@ Quick infos about variables:
 - 'pokeabbr' always represents number of Pokédex as string (with form abbr)
 - 'ndex' always represents number of Pokédex as integer (without form abbr)
 '''
-# pwb pkimgs-data --catlist all --pokelist all --pokerank all --download all > data/ranking.txt
+# pwb pkimgs-data --catlist all --pokelist all --pokerank all --download all
 
 # get list of images in given category and save it to text file
-def build_cat_list(cat, catspath):
-    cat = pywikibot.Category(site, f'Categoria:{cat}')
-    pages = pagegenerators.CategorizedPageGenerator(cat)
-    with open(os.path.join(catspath, cat.replace(':', ';')), 'w') as file:
+def build_cat_list(site, cat, catspath):
+    pages = pagegenerators.CategorizedPageGenerator(pywikibot.Category(site, f'Categoria:{cat}'))
+    with open(f'{os.path.join(catspath, cat.replace(":", ";"))}.txt', 'w') as file:
         file.write('\n'.join([page.title() for page in pages]).replace('File:', '') + '\n')
-    print(f'Retrieved list of images in category "{cat}"')
 
 # get list of images in given category with given Pokémon
 def get_poke_in_cat(poke, name, cat, catspath):
@@ -32,23 +30,16 @@ def get_poke_in_cat(poke, name, cat, catspath):
 
 # get list of images for given Pokémon and save it to text file
 def build_poke_list(poke, name, catspath, pokelistspath):
-    # create dest file if not exists, otherwise delete its content
-    destfile = '{}.txt'.format(os.path.join(pokelistspath, poke))
-    if not os.path.isfile(destfile):
-        with open(destfile, 'w') as file:
-            pass
-    else:
-        open(destfile, 'w').close()
-    # imgs is the union of all lists, imgsU the final list without duplicates
+    # imgs is the union of all lists, imgs_distinct the final list without duplicates
     imgs = []
-    imgsU = []
+    imgs_distinct = []
     for cat in os.listdir(catspath):
         imgs += get_poke_in_cat(poke, name, cat, catspath)
-    with open(destfile, 'a') as file:
-        for img in imgs:
-            if img not in imgsU:
-                imgsU.append(img)
-                file.write(img + '\n')
+    for img in imgs:
+        if img not in imgs_distinct:
+            imgs_distinct.append(img)
+    with open(f'{os.path.join(pokelistspath, poke)}.txt', 'w') as file:
+        file.write('\n'.join(imgs_distinct) + '\n')
 
 # get number of images for given Pokémon
 def get_poke_rank(poke, pokespath):
@@ -57,7 +48,7 @@ def get_poke_rank(poke, pokespath):
     return len(lines)
 
 # download wikicode of pokepage from wiki and save it to text file
-def download_pokepage(poke, name, site, downloadspath):
+def download_pokepage(site, poke, name, downloadspath):
     destfile = os.path.join(downloadspath, '{}.txt'.format(poke))
     page = pywikibot.Page(site, '{}/Immagini'.format(name))
     with open(destfile, 'w') as file:
@@ -69,6 +60,7 @@ parser.add_argument('--catlistspath', default = 'data/pokepages-catlists/')
 parser.add_argument('--pokelist', default = '')
 parser.add_argument('--pokelistspath', default = 'data/pokepages-pokelists/')
 parser.add_argument('--pokerank', default = '')
+parser.add_argument('--pokerankfile', default = 'data/ranking.txt')
 parser.add_argument('--catsfile', default = 'data/pokepages-utils/cats.txt')
 parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_names.csv')
 parser.add_argument('--download', default = '')
@@ -77,6 +69,7 @@ args = parser.parse_args()
 
 if __name__ == '__main__':
     # import data
+    site = pywikibot.Site()
     getname, getenname, getesname, getdename, getfrname = import_ndex(args.dexfile)
     # update categories
     if args.catlist:
@@ -86,9 +79,11 @@ if __name__ == '__main__':
             with open(args.catsfile, 'r') as file:
                 allcats = file.read().splitlines()
             for cat in allcats:
-                build_cat_list(cat, args.catlistspath)
+                build_cat_list(site, cat, args.catlistspath)
+                print(f'Retrieved list of images in category "{cat}"')
         else:
-            build_cat_list(args.catlist, args.catlistspath)
+            build_cat_list(site, args.catlist, args.catlistspath)
+            print(f'Retrieved list of images in category "{args.catlist}"')
     # update lists of images
     if args.pokelist:
         if not os.path.isdir(args.pokelistspath):
@@ -99,20 +94,27 @@ if __name__ == '__main__':
             lst = args.pokelist.split(',')
         for poke in lst:
             build_poke_list(poke, getname[poke], args.catlistspath, args.pokelistspath)
+        print(f'Updated {args.pokelistspath}')
     # count number of images for given Pokémon or for all Pokémon
     if args.pokerank:
+        print('')
         if args.pokerank == 'all':
+            pokerank_print = ''
             ranks = {}
             for poke in getname:
                 ranks.update({poke: get_poke_rank(poke, args.pokelistspath)})
             ranking = sorted(ranks.items(), key = lambda x: x[1], reverse = True)
-            print('Total: {}\n'.format(sum([n[1] for n in ranking])))
+            pokerank_print += f'Total: {sum([n[1] for n in ranking])}\n\n'
             for item in ranking:
                 poke, rank = item
                 name = getname[poke]
-                print('{} {}{}   {}'.format(poke, name, ' ' * (12 - len(name)), rank))
+                # Pokémon name/nickname cannot be longer than 12 characters
+                pokerank_print += f'{poke} {name.ljust(12, " ")}   {rank}\n'
         else:
-            print(get_poke_rank(args.pokerank, args.pokelistspath))
+            pokerank_print = get_poke_rank(args.pokerank, args.pokelistspath)
+        print('\n'.join(pokerank_print.splitlines()[:12]))
+        with open(args.pokerankfile, 'w') as file:
+            file.write(pokerank_print)
     # download subpages from wiki
     if args.download:
         if args.download == 'all':
@@ -122,6 +124,5 @@ if __name__ == '__main__':
         if not os.path.isdir(args.downloadspath):
             os.mkdir(args.downloadspath)
         # retrieve subpages
-        site = pywikibot.Site()
         for poke in lst:
-            download_pokepage(poke, getname[poke], site, args.downloadspath)
+            download_pokepage(site, poke, getname[poke], args.downloadspath)
