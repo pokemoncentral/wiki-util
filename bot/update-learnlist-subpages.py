@@ -59,6 +59,7 @@ class UpdateLearnlistSubpagesBot(SingleSiteBot):
         ("Tramite \[\[MT\]\]", "tm"),
         ("Tramite \[\[MT\]\]/\[\[MN\]\]", "tm"),
         ("Tramite \[\[Accoppiamento Pokémon\|accoppiamento\]\]", "breed"),
+        ("Come [[Mossa Uovo#Pokémon Scarlatto e Violetto|mosse Uovo]]", "breed"),
         ("Dall'\[\[Insegnamosse\]\]", "tutor"),
         ("Tramite \[\[evoluzione\|evoluzioni\]\] precedenti", "preevo"),
     ]
@@ -69,10 +70,21 @@ class UpdateLearnlistSubpagesBot(SingleSiteBot):
 </noinclude>"""
 
     # Content of an empty subpage, to be filled by self.replace_learnlists
+    #     EMPTY_SUBPAGE = """
+    # ====Aumentando di [[livello]]====
+    # ====Tramite [[MT]]====
+    # ====Tramite [[Accoppiamento Pokémon|accoppiamento]]====
+    # ====Dall'[[Insegnamosse]]====
+    # ====Tramite [[evoluzione|evoluzioni]] precedenti====
+    # <noinclude>
+    # [[Categoria:Sottopagine moveset Pokémon ({gen_text} generazione)]]
+    # [[en:{poke} (Pokémon)/Generation {gen_roman} learnset]]
+    # </noinclude>
+    # """
     EMPTY_SUBPAGE = """
 ====Aumentando di [[livello]]====
 ====Tramite [[MT]]====
-====Tramite [[Accoppiamento Pokémon|accoppiamento]]====
+====Come [[Mossa Uovo#Pokémon Scarlatto e Violetto|mosse Uovo]]====
 ====Dall'[[Insegnamosse]]====
 ====Tramite [[evoluzione|evoluzioni]] precedenti====
 <noinclude>

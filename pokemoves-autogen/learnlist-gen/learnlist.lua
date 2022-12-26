@@ -64,20 +64,23 @@ l.breednotes = function(gen, move, parent, basenotes)
 	-- (for instance: parents that need a chain aren't listed if there are
 	-- some that doesn't)
 
-	if parent and not l.canLearn(move, parent, gen, {"breed"}) then
-		if l.learnKind(move, parent, gen, "breed") then
-			-- Parent can learn by breed but not in any other way: chain
-			table.insert(notes, 1, "catena di accoppiamenti")
-		-- In theory this second check is useless because a parent wouldn't
-		-- be listed if it doesn't learn the move, so if it doesn't in this
-		-- gen it should in a past one
-		-- elseif l.learnPreviousGen(move, parent1, gen) then
-		else
-			table.insert(notes, 1, "il padre deve aver imparato la mossa in una generazione precedente")
-		end
-	elseif not parent then
-		table.insert(notes, 1, "nessun genitore può apprendere la mossa")
-	end
+    if gen ~= 9 then
+        -- All these notes are not needed in gen 9 (because of picnic)
+        if parent and not l.canLearn(move, parent, gen, {"breed"}) then
+            if l.learnKind(move, parent, gen, "breed") then
+                -- Parent can learn by breed but not in any other way: chain
+                table.insert(notes, 1, "catena di accoppiamenti")
+            -- In theory this second check is useless because a parent wouldn't
+            -- be listed if it doesn't learn the move, so if it doesn't in this
+            -- gen it should in a past one
+            -- elseif l.learnPreviousGen(move, parent1, gen) then
+            else
+                table.insert(notes, 1, "il padre deve aver imparato la mossa in una generazione precedente")
+            end
+        elseif not parent then
+            table.insert(notes, 1, "nessun genitore può apprendere la mossa")
+        end
+    end
 
 	return table.concat(notes, ", ")
 end
@@ -404,7 +407,7 @@ l.dicts.tm = {
 l.dicts.breed = {
     processData = function(poke, gen, movedata, move)
 		-- If the Pokémon can learn the move via level, drops it since it
-		-- means the breed is a remnant of the previous evolution.
+		-- means the breed is a remnant of preevos.
 		-- For instance, Abra has Confusione listed via breed, but its evos
 		-- learn it via level
 		if l.learnKind(move, poke, gen, "level") then

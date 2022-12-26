@@ -31,7 +31,7 @@ p.strings = {
     ENTRIES = {
         level = "|${move}|${STAB}|${notes}|${levelSV}| //",
         tm = "|${move}|${STAB}|${notes}|${tmnumSV}| //",
-        breed = "|${parents}|${move}|${STAB}|${notes}| //",
+        breed = "|${move}|${STAB}|${notes}| //",
         tutor = "|${move}|${STAB}|${notes}|${svyn}| //",
         preevo = "|${move}|${STAB}|${poke1}${poke2} //",
     }
@@ -219,7 +219,7 @@ p.dicts.tutor.makeEntry = function(poke, gen, val)
 end
 
 p.dicts.breed.makeEntry = function(poke, gen, val)
-    -- val :: { <movename>, { <array of parents> }, <notes>, games = <sigla or nil> }
+    -- val :: { <movename>, { 0 }, <notes>, games = <sigla or nil> }
     local move = val[1]
     local parents = val[2]
 
@@ -233,20 +233,16 @@ p.dicts.breed.makeEntry = function(poke, gen, val)
         end
     end
 
-    if #parents == 0 then
+    if #parents ~= 1 or parents[1] ~= 0 then
         print("-------------> ERROR")
+        print(require('static.dumper')(parents))
         return "-------------> ERROR"
     end
-    parents = wlib.mapAndConcat(parents, function(ndex)
-        ndex = type(ndex) == "number" and str.tf(ndex) or ndex
-        return table.concat{ "#", ndex, "#" }
-    end)
 
     return str.interp(p.strings.ENTRIES.breed, {
         move = multigen.getGenValue(moves[move].name, gen),
         STAB = p.computeSTAB(poke, move, nil, gen),
         notes = notes,
-        parents = parents,
     })
 end
 

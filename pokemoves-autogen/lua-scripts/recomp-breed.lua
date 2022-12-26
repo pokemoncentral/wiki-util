@@ -227,6 +227,9 @@ Can modify gamedata, but has no other side effects. Return the new gamedata
 
 --]]
 local function recompPokeMoveGame(poke, gen, game, gameidx, move, gamedata)
+    if gen == 9 then
+        return gamedata
+    end
     -- local neighbours = gen < 6 and pokemoves[poke].neighbours
     --                            or pokemoves[poke].neighbours6
     local neighbours = pokemoves[poke].neighbours
@@ -293,9 +296,9 @@ end
 pokemoves = tmppokemoves
 print("Cleaned up table, starting main iteration")
 
--- Iterate recompOnePoke over all Pokémon 14 (# egg groups) times.
+-- Iterate recompOnePoke over all Pokémon 14 (= #egg groups) times.
 -- Experimentally 7 seems to be enough, but iterations after the thrid
--- are very quick, so it's not a big deal to do some more
+-- are very quick, so it's not a big deal to do a few extra ones
 for iteration = 1,14 do
     -- Do by rounds, not modifying inplace
     local newpokemoves = { }
@@ -396,20 +399,22 @@ for _, data in pairs(pokemoves) do
         if data.breed and data.breed[gen] then
             for move, mdata in pairs(data.breed[gen]) do
                 mdata.new = nil
-                -- If the Pokémon doesn't have any parent, tries old gens
-                for _, gdata in ipairs(mdata) do
-                    if not gdata[1] then
-                        for _, opoke in pairs(data.neighbours) do
-                            if pokemoves[opoke]
-                               and lib.learnPreviousGen(move, opoke, gen, 3) then
-                                gdata = addPoke(gdata, opoke)
-                                -- table.insert(gdata, pokes[opoke].ndex)
+                if gen ~= 9 then
+                    -- If the Pokémon doesn't have any parent, tries old gens
+                    for _, gdata in ipairs(mdata) do
+                        if not gdata[1] then
+                            for _, opoke in pairs(data.neighbours) do
+                                if pokemoves[opoke]
+                                and lib.learnPreviousGen(move, opoke, gen, 3) then
+                                    gdata = addPoke(gdata, opoke)
+                                    -- table.insert(gdata, pokes[opoke].ndex)
+                                end
                             end
-                        end
-                        table.sort(gdata, compareNdex)
-                        if gdata[1] then
-                            -- If now it has a parent, it can learn the move via old gen
-                            mdata.notes = "il padre deve aver imparato la mossa in una generazione precedente"
+                            table.sort(gdata, compareNdex)
+                            if gdata[1] then
+                                -- If now it has a parent, it can learn the move via old gen
+                                mdata.notes = "il padre deve aver imparato la mossa in una generazione precedente"
+                            end
                         end
                     end
                 end
