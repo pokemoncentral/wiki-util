@@ -76,7 +76,7 @@ if __name__ == '__main__':
         if not os.path.isdir(args.catlistspath):
             os.mkdir(args.catlistspath)
         if args.catlist == 'all':
-            with open(args.catsfile, 'r') as file:
+            with open(args.catsfile, 'r', encoding = 'utf8') as file:
                 allcats = file.read().splitlines()
             for cat in allcats:
                 build_cat_list(site, cat, args.catlistspath)
