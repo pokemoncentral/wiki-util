@@ -12,7 +12,7 @@ Quick infos about variables:
 # get list of images in given category and save it to text file
 def build_cat_list(site, cat, catspath):
     pages = pagegenerators.CategorizedPageGenerator(pywikibot.Category(site, f'Categoria:{cat}'))
-    with open(f'{os.path.join(catspath, cat.replace(":", ";"))}.txt', 'w') as file:
+    with open(f'{os.path.join(catspath, cat.replace(":", ";"))}.txt', 'w', encoding = 'utf8') as file:
         file.write('\n'.join([page.title() for page in pages]).replace('File:', '') + '\n')
 
 # get list of images in given category with given Pokémon
