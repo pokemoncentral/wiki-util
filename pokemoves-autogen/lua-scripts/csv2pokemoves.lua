@@ -82,6 +82,7 @@ local baseNoBreed = {
 	"crinealato", "alirasenti", "lunaruggente", "solcoferreo", "falenaferrea",
 	"manoferrea", "colloferreo", "spineferree", "saccoferreo", "eroeferreo",
 	"ting-lu", "chien-pao", "wo-chien", "chi-yu", "koraidon", "miraidon",
+	"acquecrespe", "fogliaferrea",
 	"deoxysA", "deoxysD", "deoxysV", "shayminC", "kyuremN", "kyuremB", "hoopaL",
 	"articunoG", "zapdosG", "moltresG", "calyrexG", "calyrexS", "palafinP",
 	"gimmighoulA",

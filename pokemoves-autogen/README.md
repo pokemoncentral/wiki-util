@@ -36,6 +36,8 @@ Note that if you add new Pokémon, you must update the list of all Pokémon
 To add a new Pokémon, you should:
 - add it to `docker-db/sourcecsv/pokemon.csv`
 - add it to `lists/pokemon-names.list`
+- update `baseNoBreed` (and possibly `breedNoBase`, but that's just to suppress
+  a warning) as needed
 
 ## Add a game
 To add data for a new game, you have to do the following things:
@@ -45,8 +47,6 @@ To add data for a new game, you have to do the following things:
 - update `lua-scripts/csv2pokemoves.lua`:
   - update `breedgames`
   - if a new gen, add an empty table in `datagen`
-  - update `baseNoBreed` (and possibly `breedNoBase`, but that's just to
-    suppress a warning) as needed
 
 ## Update get-learnlist
 It _should_ be enough to add the `learnlist-gen/print-learnlist<gen>.lua`.

@@ -59,7 +59,7 @@ class UpdateLearnlistSubpagesBot(SingleSiteBot):
         ("Tramite \[\[MT\]\]", "tm"),
         ("Tramite \[\[MT\]\]/\[\[MN\]\]", "tm"),
         ("Tramite \[\[Accoppiamento Pokémon\|accoppiamento\]\]", "breed"),
-        ("Come [[Mossa Uovo#Pokémon Scarlatto e Violetto|mosse Uovo]]", "breed"),
+        ("Come \[\[Mossa Uovo#Pokémon Scarlatto e Violetto\|mosse Uovo\]\]", "breed"),
         ("Dall'\[\[Insegnamosse\]\]", "tutor"),
         ("Tramite \[\[evoluzione\|evoluzioni\]\] precedenti", "preevo"),
     ]
