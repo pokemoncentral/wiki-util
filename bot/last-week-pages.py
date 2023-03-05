@@ -15,12 +15,12 @@ import pywikibot.pagegenerators
 from datetime import date, timedelta
 
 if "-late" in sys.argv:
-    today = date.today() - timedelta(days=date.today().weekday())
+    today = date.today() - timedelta(days=date.today().weekday() + 1)
     last_monday = today - timedelta(days=7)
 else:
     # get last Monday as datetime
     today = date.today()
-    last_monday = today - timedelta(days=today.weekday())
+    last_monday = today - timedelta(days=today.weekday() + 1)
 
 # retrieve pages created last week
 last_week_pages = []
