@@ -1,0 +1,4590 @@
+{{pokemonimages/group|gen=2|content=
+{{pokemonimages/div|ndex=0201}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201B}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201B.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201B.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201B.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201B.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201B.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201B.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201B.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201C}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201C.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201C.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201C.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201C.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201C.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201C.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201C.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201D}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201D.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201D.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201D.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201D.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201D.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201D.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201D.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201E}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201E.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201E.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201E.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201E.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201E.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201E.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201E.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201F}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201F.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201F.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201F.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201F.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201F.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201F.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201F.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201G}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201G.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201G.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201G.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201G.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201G.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201G.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201G.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201H}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201H.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201H.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201H.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201H.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201H.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201H.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201H.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201I}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201I.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201I.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201I.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201I.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201I.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201I.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201I.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201J}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201J.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201J.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201J.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201J.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201J.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201J.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201J.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201K}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201K.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201K.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201K.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201K.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201K.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201K.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201K.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201L}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201L.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201L.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201L.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201L.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201L.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201L.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201L.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201M}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201M.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201M.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201M.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201M.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201M.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201M.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201M.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201N}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201N.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201N.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201N.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201N.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201N.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201N.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201N.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201O}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201O.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201O.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201O.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201O.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201O.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201O.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201O.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201P}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201P.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201P.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201P.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201P.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201P.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201P.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201P.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201Q}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201Q.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201Q.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201Q.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201Q.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201Q.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201Q.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201Q.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201R}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201R.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201R.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201R.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201R.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201R.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201R.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201R.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201S}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201S.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201S.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201S.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201S.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201S.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201S.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201S.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201T}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201T.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201T.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201T.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201T.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201T.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201T.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201T.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201U}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201U.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201U.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201U.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201U.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201U.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201U.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201U.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201V}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201V.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201V.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201V.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201V.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201V.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201V.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201V.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201W}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201W.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201W.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201W.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201W.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201W.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201W.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201W.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201X}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201X.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201X.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201X.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201X.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201X.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201X.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201X.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201Y}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201Y.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201Y.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201Y.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201Y.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201Y.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201Y.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201Y.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/div|ndex=0201Z}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Spror0201Z.png
+|updesc={{#invoke: blackabbrev | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprorsh0201Z.png
+|updesc={{#invoke: blackabbrev | OA}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcr0201Z.gif
+|updesc={{#invoke: blackabbrev | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrsh0201Z.gif
+|updesc={{#invoke: blackabbrev | C}} [[File:CromaticoII.png]]
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproad0201Z.png
+|updesc='''Retro'''{{#invoke: sup | OA}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sprcrd0201Z.png
+|updesc='''Retro'''{{#invoke: sup | C}}
+}}
+{{pokemonimages/entry
+|xl=10|sm=25|xs=33
+|img=Sproacdsh0201Z.png
+|updesc='''Retro'''{{#invoke: sup | OAC}} [[File:CromaticoII.png]]
+}}
+}}
+{{pokemonimages/group|gen=3|content=
+{{pokemonimages/div|ndex=0201}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201B}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201B.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201B.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201B.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201B.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201B.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201B.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201B.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201B.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201C}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201C.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201C.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201C.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201C.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201C.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201C.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201C.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201C.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201D}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201D.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201D.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201D.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201D.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201D.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201D.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201D.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201D.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201E}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201E.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201E.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201E.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201E.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201E.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201E.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201E.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201E.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201F}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201F.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201F.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201F.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201F.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201F.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201F.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201F.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201F.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201G}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201G.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201G.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201G.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201G.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201G.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201G.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201G.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201G.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201H}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201H.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201H.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201H.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201H.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201H.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201H.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201H.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201H.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201I}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201I.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201I.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201I.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201I.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201I.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201I.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201I.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201I.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201J}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201J.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201J.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201J.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201J.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201J.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201J.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201J.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201J.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201K}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201K.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201K.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201K.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201K.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201K.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201K.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201K.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201K.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201L}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201L.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201L.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201L.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201L.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201L.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201L.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201L.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201L.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201M}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201M.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201M.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201M.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201M.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201M.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201M.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201M.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201M.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201N}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201N.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201N.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201N.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201N.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201N.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201N.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201N.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201N.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201O}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201O.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201O.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201O.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201O.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201O.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201O.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201O.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201O.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201P}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201P.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201P.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201P.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201P.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201P.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201P.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201P.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201P.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201Q}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201Q.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201Q.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201Q.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201Q.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201Q.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201Q.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201Q.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201Q.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201R}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201R.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201R.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201R.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201R.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201R.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201R.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201R.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201R.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201S}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201S.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201S.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201S.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201S.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201S.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201S.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201S.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201S.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201T}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201T.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201T.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201T.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201T.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201T.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201T.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201T.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201T.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201U}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201U.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201U.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201U.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201U.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201U.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201U.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201U.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201U.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201V}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201V.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201V.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201V.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201V.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201V.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201V.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201V.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201V.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201W}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201W.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201W.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201W.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201W.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201W.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201W.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201W.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201W.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201X}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201X.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201X.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201X.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201X.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201X.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201X.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201X.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201X.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201Y}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201Y.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201Y.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201Y.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201Y.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201Y.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201Y.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201Y.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201Y.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201Z}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201Z.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201Z.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201Z.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201Z.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201Z.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201Z.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201Z.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201Z.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201PE}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201PE.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201PE.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201PE.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201PE.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201PE.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201PE.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201PE.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201PE.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0201PI}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrz0201PI.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzsh0201PI.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvf0201PI.png
+|updesc={{#invoke: blackabbrev | RFVF}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrfvfsh0201PI.png
+|updesc={{#invoke: blackabbrev | RFVF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsme0201PI.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprsmesh0201PI.png
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzd0201PI.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprrzdsh0201PI.png
+|updesc='''Retro''' [[File:CromaticoRFVF.png]]
+}}
+}}
+{{pokemonimages/group|gen=4|content=
+{{pokemonimages/div|ndex=0201}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201B}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201B.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201B.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201B.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201B.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201C}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201C.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201C.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201C.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201C.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201D}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201D.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201D.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201D.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201D.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201E}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201E.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201E.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201E.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201E.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201F}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201F.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201F.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201F.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201F.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201G}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201G.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201G.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201G.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201G.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201H}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201H.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201H.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201H.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201H.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201I}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201I.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201I.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201I.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201I.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201J}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201J.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201J.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201J.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201J.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201K}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201K.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201K.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201K.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201K.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201L}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201L.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201L.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201L.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201L.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201M}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201M.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201M.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201M.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201M.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201N}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201N.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201N.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201N.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201N.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201O}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201O.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201O.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201O.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201O.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201P}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201P.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201P.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201P.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201P.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201Q}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201Q.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201Q.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201Q.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201Q.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201R}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201R.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201R.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201R.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201R.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201S}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201S.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201S.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201S.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201S.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201T}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201T.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201T.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201T.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201T.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201U}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201U.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201U.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201U.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201U.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201V}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201V.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201V.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201V.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201V.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201W}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201W.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201W.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201W.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201W.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201X}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201X.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201X.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201X.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201X.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201Y}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201Y.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201Y.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201Y.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201Y.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201Z}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201Z.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201Z.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201Z.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201Z.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201PE}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201PE.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201PE.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201PE.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201PE.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/div|ndex=0201PI}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpm0201PI.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}}
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmsh0201PI.png
+|updesc={{#invoke: blackabbrev | DPPtHGSS}} [[File:CromaticoIV.png]]
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmd0201PI.png
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=10|md=25|xs=50
+|img=Sprdpmdsh0201PI.png
+|updesc='''Retro''' [[File:CromaticoIV.png]]
+}}
+}}
+{{pokemonimages/group|gen=5|content=
+{{pokemonimages/div|ndex=0201}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201B}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201B.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201B.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201B.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201B.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201C}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201C.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201C.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201C.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201C.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201D}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201D.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201D.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201D.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201D.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201E}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201E.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201E.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201E.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201E.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201F}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201F.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201F.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201F.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201F.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201G}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201G.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201G.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201G.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201G.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201H}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201H.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201H.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201H.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201H.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201I}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201I.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201I.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201I.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201I.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201J}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201J.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201J.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201J.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201J.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201K}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201K.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201K.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201K.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201K.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201L}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201L.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201L.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201L.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201L.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201M}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201M.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201M.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201M.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201M.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201N}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201N.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201N.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201N.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201N.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201O}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201O.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201O.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201O.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201O.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201P}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201P.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201P.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201P.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201P.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201Q}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201Q.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201Q.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201Q.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201Q.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201R}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201R.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201R.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201R.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201R.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201S}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201S.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201S.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201S.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201S.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201T}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201T.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201T.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201T.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201T.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201U}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201U.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201U.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201U.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201U.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201V}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201V.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201V.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201V.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201V.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201W}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201W.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201W.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201W.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201W.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201X}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201X.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201X.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201X.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201X.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201Y}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201Y.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201Y.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201Y.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201Y.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201Z}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201Z.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201Z.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201Z.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201Z.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201PE}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201PE.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201PE.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201PE.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201PE.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+{{pokemonimages/div|ndex=0201PI}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbm0201PI.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }}
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmsh0201PI.gif
+|updesc={{#invoke: blackabbrev | NBN2B2 }} [[File:CromaticoV.png]]
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmd0201PI.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|xs=50
+|img=Sprnbmdsh0201PI.gif
+|updesc='''Retro''' [[File:CromaticoV.png]]
+}}
+}}
+{{pokemonimages/group|gen=6|content=
+{{pokemonimages/div|ndex=0201}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201B}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201B.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201B.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201B.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201B.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201C}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201C.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201C.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201C.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201C.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201D}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201D.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201D.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201D.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201D.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201E}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201E.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201E.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201E.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201E.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201F}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201F.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201F.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201F.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201F.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201G}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201G.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201G.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201G.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201G.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201H}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201H.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201H.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201H.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201H.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201I}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201I.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201I.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201I.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201I.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201J}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201J.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201J.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201J.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201J.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201K}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201K.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201K.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201K.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201K.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201L}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201L.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201L.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201L.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201L.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201M}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201M.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201M.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201M.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201M.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201N}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201N.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201N.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201N.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201N.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201O}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201O.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201O.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201O.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201O.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201P}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201P.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201P.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201P.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201P.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201Q}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201Q.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201Q.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201Q.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201Q.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201R}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201R.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201R.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201R.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201R.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201S}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201S.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201S.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201S.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201S.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201T}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201T.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201T.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201T.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201T.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201U}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201U.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201U.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201U.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201U.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201V}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201V.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201V.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201V.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201V.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201W}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201W.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201W.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201W.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201W.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201X}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201X.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201X.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201X.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201X.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201Y}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201Y.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201Y.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201Y.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201Y.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201Z}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201Z.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201Z.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201Z.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201Z.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201PE}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201PE.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201PE.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201PE.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201PE.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201PI}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxym0201PI.gif
+|updesc={{#invoke: blackabbrev | XYROZA }}
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymsh0201PI.gif
+|updesc={{#invoke: blackabbrev | XYROZA }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymd0201PI.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25|md=50
+|img=Sprxymdsh0201PI.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+}}
+{{pokemonimages/group|gen=7|content=
+{{pokemonimages/div|ndex=0201}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201B}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201B.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201B.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201B.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201B.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201C}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201C.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201C.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201C.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201C.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201D}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201D.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201D.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201D.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201D.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201E}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201E.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201E.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201E.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201E.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201F}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201F.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201F.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201F.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201F.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201G}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201G.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201G.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201G.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201G.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201H}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201H.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201H.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201H.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201H.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201I}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201I.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201I.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201I.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201I.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201J}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201J.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201J.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201J.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201J.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201K}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201K.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201K.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201K.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201K.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201L}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201L.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201L.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201L.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201L.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201M}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201M.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201M.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201M.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201M.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201N}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201N.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201N.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201N.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201N.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201O}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201O.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201O.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201O.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201O.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201P}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201P.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201P.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201P.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201P.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201Q}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201Q.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201Q.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201Q.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201Q.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201R}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201R.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201R.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201R.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201R.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201S}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201S.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201S.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201S.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201S.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201T}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201T.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201T.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201T.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201T.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201U}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201U.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201U.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201U.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201U.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201V}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201V.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201V.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201V.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201V.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201W}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201W.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201W.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201W.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201W.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201X}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201X.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201X.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201X.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201X.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201Y}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201Y.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201Y.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201Y.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201Y.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201Z}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201Z.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201Z.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201Z.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201Z.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201PE}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201PE.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201PE.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201PE.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201PE.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/div|ndex=0201PI}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslm0201PI.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }}
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmsh0201PI.gif
+|updesc={{#invoke: blackabbrev | SLUSUL }} [[File:CromaticoVI.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmd0201PI.gif
+|updesc='''Retro'''
+}}
+{{pokemonimages/entry
+|xl=25
+|md=50
+|img=Sprslmdsh0201PI.gif
+|updesc='''Retro''' [[File:CromaticoVI.png]]
+}}
+}}
+{{pokemonimages/group|gen=MS|content=
+{{pokemonimages/mainMS|ndex=0201|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201B|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201C|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201D|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201E|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201F|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201G|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201H|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201I|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201J|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201K|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201L|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201M|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201N|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201O|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201P|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201Q|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201R|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201S|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201T|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201U|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201V|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201W|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201X|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201Y|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201Z|ms2=yes|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201PE|ms345=345|ms67=67|form=yes}}
+{{pokemonimages/mainMS|ndex=0201PI|ms345=345|ms67=67|form=yes}}
+}}

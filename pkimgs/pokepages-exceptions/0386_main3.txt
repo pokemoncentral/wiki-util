@@ -1,0 +1,102 @@
+{{pokemonimages/group|gen=3|content=
+{{pokemonimages/div|ndex=0386}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprrz0386.png
+|updesc={{#invoke: blackabbrev | RZ}}
+}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprrzsh0386.png
+|updesc={{#invoke: blackabbrev | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprrzd0386.png
+|updesc='''Retro'''{{#invoke: sup | RZ}}
+}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprrzdsh0386.png
+|updesc='''Retro'''{{#invoke: sup | RZ}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0386A}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprrfvf0386A.png
+|updesc={{#invoke: blackabbrev | RF}}
+}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprrfvfsh0386A.png
+|updesc={{#invoke: blackabbrev | RF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprrfvfd0386A.png
+|updesc='''Retro'''{{#invoke: sup | RF}}
+}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprrfvfdsh0386A.png
+|updesc='''Retro'''{{#invoke: sup | RF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0386D}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprrfvf0386D.png
+|updesc={{#invoke: blackabbrev | VF}}
+}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprrfvfsh0386D.png
+|updesc={{#invoke: blackabbrev | VF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprrfvfd0386D.png
+|updesc='''Retro'''{{#invoke: sup | VF}}
+}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprrfvfdsh0386D.png
+|updesc='''Retro'''{{#invoke: sup | VF}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/div|ndex=0386V}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprsme0386V.gif
+|updesc={{#invoke: blackabbrev | S}}
+}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprsmesh0386V.gif
+|updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
+}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprsmed0386V.png
+|updesc='''Retro'''{{#invoke: sup | S}}
+}}
+{{pokemonimages/entry
+|xl=25
+|xs=50
+|img=Sprsmedsh0386V.png
+|updesc='''Retro'''{{#invoke: sup | S}} [[File:CromaticoRFVF.png]]
+}}
+}}

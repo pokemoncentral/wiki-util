@@ -1,0 +1,11 @@
+{{pokemonimages/div|text=Altri sprite di [[Pokémon Café ReMix]]}}
+{{pokemonimages/spinoff
+|ndex=0025 Dessert
+|cafemix=st
+|cafemixtitle=Dessert
+}}
+{{pokemonimages/spinoff
+|ndex=0025 Grand Chef
+|cafemix=st
+|cafemixtitle=Grand Chef
+}}

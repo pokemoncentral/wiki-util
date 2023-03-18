@@ -32,6 +32,7 @@ Mini sprite statici sesta e settima generazione
 Mini sprite statici Pokémon Spada e Scudo
 Mini sprite statici Pokémon Diamante Lucente e Perla Splendente
 Mugshot Leggende Pokémon: Arceus
+Mini sprite statici Pokémon Scarlatto e Violetto
 Modelli Pokémon Stadium
 Modelli Pokémon Stadium 2
 Sprite Pokémon Trading Card Game
