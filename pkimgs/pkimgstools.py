@@ -688,10 +688,15 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
             counter = 1
             for img in duel:
                 if not img.startswith('Duelsh'):
-                    formtext += '|duel{}={}\n'.format(str(counter).replace('1', ''), re.sub(r'Duel\d\d\d\w?\w?\-(\d+)\.png', r'\1', img))
+                    param = f'duel{counter}'.replace('1', '')
                     counter += 1
+                    pattern = f'Duel{pokeabbr}'
                 else:
-                    formtext += '|duelsh={}\n'.format(re.sub(r'Duelsh\d\d\d\w?\w?\-(\d+)\.png', r'\1', img))
+                    param = 'duelsh'
+                    pattern = f'Duelsh{pokeabbr}'
+                pattern += r'\-(\d+)\.png'
+                value = re.sub(pattern, r'\1', img)
+                formtext += f'|{param}={value}\n'
         # GO
         if f'GO{pokeabbr} f s.png' in imgs:
             formtext += '|go=shinyboth\n'
