@@ -67,7 +67,6 @@ for SRC in "$@"; do
     if [[ $DIFF == true ]]; then
         # Shows diff using pagefromfile. There may be a better script, but
         # this is just to have a working solution now
-
-    	yes | python $PYWIKIBOT_DIR/pwb.py pagefromfile -simulate -notitle -force -showdiff -pt:0 -file:"$SRC"
+        echo "n" | python $PYWIKIBOT_DIR/pwb.py pagefromfile -simulate -notitle -force -showdiff -pt:0 -file:"$SRC"
     fi
 done
