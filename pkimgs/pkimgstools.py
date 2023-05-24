@@ -128,6 +128,8 @@ def get_forms(poke, formspath):
             forms = [['', 'spsc', last]]
         elif ndex <= 905:
             forms = [['', 'lpa', last]]
+        elif ndex <= 1010:
+            forms = [['', 'sv', last]]
     return forms
 
 # get all artworks for given form
@@ -421,6 +423,8 @@ def build_ms_entry(poke, form, multiform, availdata, gender, genderform = ''):
                 text += '|mslpa=rf'
             else:
                 text += '|mslpa=single'
+        if check_pokeform_game_availability(poke, form, 'sv', availdata):
+            text += '|mssv=yes'
         if multiform == True:
             text += '|form=yes'
             # these forms don't have an overworld sprite in HGSS

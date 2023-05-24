@@ -23,8 +23,6 @@ parser.add_argument('--singlemsfile', default = 'data/pokepages-utils/singleMS.t
 parser.add_argument('--availdir', default = 'data/pokepages-availability')
 parser.add_argument('--rangerfile', default = 'data/pokepages-utils/redirect_ranger.txt')
 parser.add_argument('--goformsfile', default = 'data/pokepages-utils/goforms.txt')
-parser.add_argument('--defile', default = 'data/pokepages-utils/pokes_de.txt')
-parser.add_argument('--frfile', default = 'data/pokepages-utils/pokes_fr.txt')
 args = parser.parse_args()
 
 if __name__ == '__main__':
@@ -41,5 +39,6 @@ if __name__ == '__main__':
         else:
             lst = args.pokepage.split(',')
         for poke in lst:
+            itname = getname[poke]
             gender, singleMS = get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata)
-            build_poke_page(poke, getname[poke], args.pokelistspath, args.pokepagespath, args.pokeformspath, artsources, goforms, args.exceptionspath, gender, singleMS, availdata, rangerdata, getenname[poke], getesname[poke], getdename[poke], getfrname[poke])
+            build_poke_page(poke, itname, args.pokelistspath, args.pokepagespath, args.pokeformspath, artsources, goforms, args.exceptionspath, gender, singleMS, availdata, rangerdata, getenname[itname], getesname[itname], getdename[itname], getfrname[itname])
