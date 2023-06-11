@@ -10,17 +10,31 @@ Options:
 """
 
 import sys
-import pywikibot, re
+import re
+import pywikibot
 import pywikibot.pagegenerators
 from datetime import date, timedelta
 
+
+def should_exclude(page):
+    """Whether the page should be excluded from the list."""
+    cats = [cat.title() for cat in page.categories()]
+    # cards
+    if page.title().endswith("(GCC)") or "Categoria:Carte Pokémon" in cats:
+        return True
+    # disambiguations
+    if "Categoria:Pagine di disambiguazione" in cats:
+        return True
+    return False
+
+
 # get today and last Monday
 today = date.today()
-last_monday = today - timedelta(days = today.weekday())
+last_monday = today - timedelta(days=today.weekday())
 if "-late" in sys.argv:
     # get previous week
-    start_date = last_monday - timedelta(days = 7)
-    end_date = last_monday - timedelta(days = 1)
+    start_date = last_monday - timedelta(days=7)
+    end_date = last_monday - timedelta(days=1)
 else:
     # get current week
     start_date = last_monday
@@ -42,19 +56,11 @@ for page in pywikibot.pagegenerators.NewpagesPageGenerator(pywikibot.Site()):
             # ignore pages created after end date (needed with -late)
             pass
         else:
-            title = page.title()
-            author = page.oldest_revision["user"]
             # filters to ignore certain pages
-            # we are ignoring cards and disambiguation pages
-            if re.search(r"(\d+|GCC)\)$", title) and author == "Andrew01":
-                pass
-            elif "Categoria:Pagine di disambiguazione" in [
-                cat.title() for cat in page.categories()
-            ]:
-                pass
-            else:
+            if not should_exclude(page):
+                author = page.oldest_revision["user"]
                 last_week_pages.append(
-                    "{} {} ({})".format(title, page.full_url(), author)
+                    "{} {} ({})".format(page.title(), page.full_url(), author)
                 )
     # get error message
     except Exception as error_message:
