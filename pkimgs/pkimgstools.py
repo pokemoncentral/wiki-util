@@ -300,7 +300,7 @@ def build_main_gen(poke, gen, availdata = {}, forms = [], gender = '', gen4sprit
         # gender difference is treated as alt form
         else:
             text += f'{build_main_gen_entry(poke, forms[0], gen, availdata, isform = True)}\n'
-            text += f'{build_main_gen_entry(poke, forms[0], gen, availdata, isform = True, female = True)}\n'
+            text += f'{build_main_gen_entry(poke, forms[1], gen, availdata, isform = True, female = True)}\n'
         if len(forms) > 2:
             forms = forms[2:]
         else:
@@ -391,7 +391,6 @@ def build_ms_entry(poke, form, multiform, availdata, gender, genderform = ''):
     else:
         start = gametogen[since]
         end = gametogen[until]
-        ndex = int(poke)
         text = f'{{{{pokemonimages/mainMS|ndex={pokeabbr}'
         if genderform:
             text += f'|bothgenders=yes|gender={genderform}'
@@ -478,9 +477,15 @@ def build_main(poke, exceptionspath, forms, gender, singleMS, availdata, imgs):
                     multiform = True
                 else:
                     multiform = False
-                if [form[0] for form in forms[:2]] == ['', 'F'] and gender == 'both':
-                    text += build_ms_entry(poke, forms[0], False, availdata, gender, genderform = 'm')
-                    text += build_ms_entry(poke, forms[1], False, availdata, gender, genderform = 'f')
+                if [form[0] for form in forms[:2]] == ['', 'F'] and gender in ['both', 'bothforms']:
+                    # gender difference is treated as useless form
+                    if gender == 'both':
+                        text += build_ms_entry(poke, forms[0], False, availdata, gender, genderform = 'm')
+                        text += build_ms_entry(poke, forms[1], False, availdata, gender, genderform = 'f')
+                    # gender difference is treated as alt form
+                    else:
+                        text += build_ms_entry(poke, forms[0], True, availdata, gender = 'm')
+                        text += build_ms_entry(poke, forms[1], True, availdata, gender = 'f')
                     if len(forms) > 2:
                         for form in forms[2:]:
                             text += build_ms_entry(poke, form, multiform, availdata, gender)

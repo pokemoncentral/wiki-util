@@ -9,17 +9,7 @@ Quick infos about variables:
 # pwb pkimgs-update --updatepoke all
 
 # get text for given section (artworks, main series or spin-offs)
-def get_section_text(pagetext, section):
-    delimiters = {
-    'artwork': ['==Artwork==\n{{pokemonimages/head|content=\n', '}}\n\n==Sprite e modelli=='],
-    'main': ['===Serie principale===\n{{pokemonimages/head|content=\n', '}}\n\n===Spin-off==='],
-    'spinoff': ['===Spin-off===\n{{pokemonimages/head|content=\n', '}}\n\n[[Categoria:Sottopagine immagini Pokémon]]'],
-    }
-    exceptions = ['Altri', '[[Pokédex Rotom]]', '[[Lugia Ombra]]', '[[Dialga Oscuro]]', '[[Zygarde/Forme|Cellula]]']
-    for exception in exceptions:
-        delimiter = f'{{{{pokemonimages/div|text={exception}}}}}'
-        if delimiter in pagetext:
-            delimiters.update({'artwork': ['==Artwork==\n{{pokemonimages/head|content=\n', delimiter],})
+def get_section_text(pagetext, delimiters, section):
     start, end = delimiters[section]
     index1 = pagetext.index(start) + len(start)
     index2 = pagetext.index(end)
@@ -37,21 +27,33 @@ def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, 
     with open(f'{os.path.join(pokelistspath, poke)}.txt', 'r') as pokefile:
         imgs = pokefile.read().splitlines()
     edited = False
+    delimiters = {
+    'artwork': ['==Artwork==\n{{pokemonimages/head|content=\n', '}}\n\n==Sprite e modelli=='],
+    'main': ['===Serie principale===\n{{pokemonimages/head|content=\n', '}}\n\n===Spin-off==='],
+    'spinoff': ['===Spin-off===\n{{pokemonimages/head|content=\n', '}}\n\n[[Categoria:Sottopagine immagini Pokémon]]'],
+    }
+    if delimiters['main'][1] not in pagetext:
+        pagetext = pagetext.replace(delimiters['spinoff'][1], '}}\n\n' + delimiters['spinoff'][0] + '<!--[PLACEHOLDER]-->' + delimiters['spinoff'][1])
+    exceptions = ['Altri', '[[Pokédex Rotom]]', '[[Lugia Ombra]]', '[[Dialga Oscuro]]', '[[Zygarde/Forme|Cellula]]']
+    for exception in exceptions:
+        delimiter = f'{{{{pokemonimages/div|text={exception}}}}}'
+        if delimiter in pagetext:
+            delimiters.update({'artwork': ['==Artwork==\n{{pokemonimages/head|content=\n', delimiter],})
     if section in ['artwork', 'all']:
-        oldtext = get_section_text(pagetext, 'artwork')
+        oldtext = get_section_text(pagetext, delimiters, 'artwork')
         arts = [img for img in imgs if img.startswith('Artwork')]
         newtext = build_arts(poke, arts, [form[0] for form in forms], gender, artsources, False)
         if newtext != oldtext:
             pagetext = pagetext.replace(oldtext, newtext)
             edited = True
     if section in ['main', 'all']:
-        oldtext = get_section_text(pagetext, 'main')
+        oldtext = get_section_text(pagetext, delimiters, 'main')
         newtext = build_main(poke, exceptionspath, forms, gender, singleMS, availdata, imgs)
         if newtext != oldtext:
             pagetext = pagetext.replace(oldtext, newtext)
             edited = True
     if section in ['spinoff', 'all']:
-        oldtext = get_section_text(pagetext, 'spinoff')
+        oldtext = get_section_text(pagetext, delimiters, 'spinoff')
         spinoffimages = get_spinoff_imgs(imgs)
         newtext = build_spinoffs(poke, name, gender, [form[0] for form in forms], spinoffimages, rangerdata, goforms, exceptionspath)
         if newtext != oldtext:
