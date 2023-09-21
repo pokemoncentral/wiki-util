@@ -1,4 +1,5 @@
 import re
+import csv
 
 replaces = {
     "mr.-mime": "mr. mime",
@@ -212,13 +213,38 @@ replaces = {
     "squawkabilly-1": "squawkabillyA",
     "squawkabilly-2": "squawkabillyG",
     "squawkabilly-3": "squawkabillyB",
+    "geodude-1": "geodudeA",
+    "graveler-1": "gravelerA",
+    "golem-1": "golemA",
+    "shaymin-1": "shayminC",
+    "ursaluna-1": "ursalunaL",
+    "ogerpon-1": "ogerponP",
+    "ogerpon-2": "ogerponFc",
+    "ogerpon-3": "ogerponFn",
+    # Paradox
+    "great-tusk": "grandizanne",
+    "brute-bonnet": "fungofurioso",
+    "sandy-shocks": "peldisabbia",
+    "scream-tail": "codaurlante",
+    "flutter-mane": "crinealato",
+    "slither-wing": "alirasenti",
+    "roaring-moon": "lunaruggente",
+    "iron-treads": "solcoferreo",
+    "iron-moth": "falenaferrea",
+    "iron-hands": "manoferrea",
+    "iron-jugulis": "colloferreo",
+    "iron-thorns": "spineferree",
+    "iron-bundle": "saccoferreo",
+    "iron-valiant": "eroeferreo",
+    "walking-wake": "acquecrespe",
+    "iron-leaves": "fogliaferrea",
 }
 
 ignores = list(
     map(
         re.compile,
         [
-            "pikachu(O|H|Si|U|K|A|Co|G)",
+            "pikachu(O|H|Si|U|K|A|Co|G|-9)",
             "shellosE",
             "gastrodonE",
             "arceus-\d{1,2}",
@@ -237,6 +263,10 @@ ignores = list(
             "tatsugiri-[12]",
             "koraidon-[1-4]",
             "miraidon-[1-4]",
+            "rockruff-1",
+            "poltchageist-1",
+            "sinistcha-1",
+            "ogerpon-[4-7]",
         ],
     )
 )
@@ -244,3 +274,33 @@ ignores = list(
 
 def should_ignore(pokename: str):
     return any(map(lambda p: re.fullmatch(p, pokename), ignores))
+
+
+def convert_pokename(poke: str):
+    poke = poke.lower().replace(" ", "-")
+    if poke in replaces:
+        return replaces[poke]
+    else:
+        return poke
+
+
+def get_move_id(move: str):
+    move = move.strip().lower()
+    # 1,botta,1,1,40,35,100,0,10,2,1,,5,1,5
+    with open("docker-db/sourcecsv/moves.csv", "r") as movesfile:
+        moves = csv.reader(movesfile)
+        next(moves)
+        for line in moves:
+            if line[1].strip().lower() == move:
+                return line[0]
+
+
+def get_poke_id(poke: str):
+    poke = poke.strip().lower()
+    # 1,botta,1,1,40,35,100,0,10,2,1,,5,1,5
+    with open("docker-db/sourcecsv/pokemon.csv", "r") as file:
+        r = csv.reader(file)
+        next(r)
+        for line in r:
+            if line[1].strip().lower() == poke:
+                return line[0]

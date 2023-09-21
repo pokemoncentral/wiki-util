@@ -138,7 +138,7 @@ id,identifier,generation_id,type_id,power,pp,accuracy,priority,target_id,damage_
 137,sguardo feroce,1,1,,30,100,0,10,1,68,,5,5,19
 138,mangiasogni,1,14,100,15,100,0,10,3,9,,4,8,20
 139,velenogas,1,4,,40,90,0,11,1,67,,4,33,5
-140,sferattacco,1,1,15,20,85,0,10,2,30,,5,12,7
+140,attacco pioggia,1,1,15,20,85,0,10,2,30,,5,12,7
 141,sanguisuga,1,7,80,10,100,0,10,2,4,,4,9,20
 142,demonbacio,1,1,,10,75,0,10,1,2,,2,5,19
 143,aeroattacco,1,3,140,5,90,0,10,2,76,30,1,2,6
@@ -176,7 +176,7 @@ id,identifier,generation_id,type_id,power,pp,accuracy,priority,target_id,damage_
 175,flagello,2,1,,15,100,0,10,2,100,,3,26,15
 176,conversione2,2,1,,30,,0,10,1,94,,2,12,23
 177,aerocolpo,2,3,100,5,95,0,10,3,44,,1,2,22
-178,cotonspora,2,12,,40,100,0,11,1,61,,2,10,1
+178,cottonspora,2,12,,40,100,0,11,1,61,,2,10,1
 179,contropiede,2,2,,15,100,0,10,2,100,,1,28,15
 180,dispetto,2,8,,10,100,0,10,1,101,,5,28,19
 181,polneve,2,15,40,25,100,0,11,3,6,10,2,1,5
@@ -190,7 +190,7 @@ id,identifier,generation_id,type_id,power,pp,accuracy,priority,target_id,damage_
 189,fangosberla,2,5,20,10,100,0,10,3,74,100,3,10,5
 190,octazooka,2,11,65,10,85,0,10,3,74,50,5,10,4
 191,punte,2,5,,20,,0,6,1,113,,4,18,13
-192,elettrocannone,2,13,120,5,50,0,10,3,7,100,1,1,4
+192,falcecannone,2,13,120,5,50,0,10,3,7,100,1,1,4
 193,preveggenza,2,1,,40,,0,10,1,114,,4,33,20
 194,destinobbligato,2,8,,5,,0,7,1,99,,4,7,9
 195,ultimocanto,2,1,,5,,0,14,1,115,,2,14,10
@@ -351,7 +351,7 @@ id,identifier,generation_id,type_id,power,pp,accuracy,priority,target_id,damage_
 350,cadutamassi,3,6,25,10,90,0,10,2,30,,5,12,7
 351,ondashock,3,13,60,20,,0,10,3,18,,1,27,17
 352,idropulsar,3,11,60,20,100,0,10,3,77,20,2,21,17
-353,desiderio fatale,3,9,140,5,100,0,10,3,149,,1,24,17
+353,obbliderio,3,9,140,5,100,0,10,3,149,,1,24,17
 354,psicoslancio,3,14,140,5,90,0,10,3,205,100,4,3,22
 355,trespolo,4,3,,10,,0,7,1,215,,1,,8
 356,gravità,4,14,,5,,0,12,1,216,,2,,13
@@ -394,7 +394,7 @@ id,identifier,generation_id,type_id,power,pp,accuracy,priority,target_id,damage_
 393,magnetascesa,4,13,,10,,0,7,1,253,,3,,13
 394,fuococarica,4,10,120,15,100,0,10,2,254,10,4,,22
 395,palmoforza,4,2,60,10,100,0,10,2,7,30,1,,18
-396,sferapulsar,4,2,80,20,,0,10,3,18,,2,,17
+396,forzasfera,4,2,80,20,,0,10,3,18,,2,,17
 397,lucidatura,4,6,,20,,0,7,1,53,,5,,1
 398,velenpuntura,4,4,80,20,100,0,10,2,3,30,4,,4
 399,neropulsar,4,17,80,15,100,0,10,3,32,20,1,,17
@@ -503,7 +503,7 @@ id,identifier,generation_id,type_id,power,pp,accuracy,priority,target_id,damage_
 502,cambiaposto,5,14,,15,,2,7,1,308,,,,
 503,idrovampata,5,11,80,15,100,0,10,3,5,30,,,
 504,gettaguscio,5,1,,15,,0,7,1,309,,,,
-505,curapulsar,5,14,,10,,0,10,1,310,,,,
+505,ondasana,5,14,,10,,0,10,1,310,,,,
 506,sciagura,5,8,65,10,100,0,10,3,311,,,,
 507,cadutalibera,5,3,60,10,100,0,10,2,312,,,,
 508,cambiomarcia,5,9,,10,,0,7,1,313,,,,
@@ -844,7 +844,3 @@ id,identifier,generation_id,type_id,power,pp,accuracy,priority,target_id,damage_
 902,turboincanto,9,,,,,,,,,,,,
 903,psicolama,9,,,,,,,,,,,,
 904,idrovapore,9,,,,,,,,,,,,
-905,luna rossa,9,,,,,,,,,,,,
-906,bomba sciroppata,9,,,,,,,,,,,,
-907,spruzzatè,9,,,,,,,,,,,,
-908,clava di liane,9,,,,,,,,,,,,

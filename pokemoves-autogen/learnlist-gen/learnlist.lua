@@ -275,19 +275,28 @@ end
 l.dicts = {}
 
 -- ================================== Level ==================================
--- Compares two levels (a number, "inizio", "evo" or nil). The order is
--- "inizio" < "evo" < numbers < nil
-l.ltLevel = function(a, b)
-    if b == "inizio" then
-        return false
-    elseif b == "evo" and a ~= "inizio" then
-        return false
-    elseif b == nil then
-        return a ~= nil
-    elseif (type(a) == "number" and a >= b) or a == nil then -- b is a number
-        return false
+-- Convert a level (a number, "inizio", "evo", "ricorda" or nil) to a numeric
+-- key to make sorting easier
+local function levelToNumkey(l)
+    if type(l) == "number" then
+        return l
+    elseif l == nil then
+        -- A random big number
+        return 999999
+    elseif l == "inizio" then
+        return -5
+    elseif l == "evo" then
+        return 0
+    elseif l == "ricorda" then
+        return -10
     end
-    return true
+    error("unexpected level value")
+end
+
+-- Compares two levels (a number, "inizio", "evo", "ricorda" or nil). The order
+-- is "ricorda" < "inizio" < "evo" < numbers < nil
+l.ltLevel = function(a, b)
+    return levelToNumkey(a) < levelToNumkey(b)
 end
 
 --[[

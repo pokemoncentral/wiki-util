@@ -58,35 +58,40 @@ local data = { level = tab.copy(datagen), tm = tab.copy(datagen),
 			   breed = tab.copy(datagen), tutor = tab.copy(datagen),
 		       preevo = {}, event = {} }
 
+-- List of Pokémon which are base form but don't learn any move via breed
 local baseNoBreed = {
-	"caterpie", "weedle", "magnemite", "voltorb", "tauros", "magikarp", "ditto",
-	"porygon", "articuno", "zapdos", "moltres", "mewtwo", "mew", "unown",
-	"smeargle", "raikou", "entei", "suicune", "lugia", "ho-oh", "celebi",
-	"wurmple", "lunatone", "solrock", "baltoy", "wynaut", "beldum", "regirock",
-	"regice", "registeel", "latias", "latios", "kyogre", "groudon", "rayquaza",
-	"jirachi", "deoxys", "kricketot", "burmy", "combee", "bronzor", "rotom",
-	"uxie", "mesprit", "azelf", "dialga", "palkia", "heatran", "regigigas",
-	"giratina", "cresselia", "phione", "darkrai", "shaymin", "arceus",
-	"victini", "throh", "sawk", "klink", "tynamo", "cryogonal", "golett",
-	"rufflet", "cobalion", "terrakion", "virizion", "tornadus", "thundurus",
-	"reshiram", "zekrom", "landorus", "kyurem", "keldeo", "meloetta",
-	"genesect", "carbink", "xerneas", "yveltal", "zygarde", "diancie", "hoopa",
-	"volcanion", "tipo zero", "minior", "dhelmise", "tapu koko", "tapu lele",
-	"tapu bulu", "tapu fini", "cosmog", "nihilego", "buzzwole", "pheromosa",
-	"xurkitree", "celesteela", "kartana", "guzzlord", "necrozma", "magearna",
-	"marshadow", "poipole", "stakataka", "blacephalon", "zeraora", "meltan",
-	"sinistea", "impidimp", "falinks", "dracozolt", "arctozolt", "dracovish",
-	"arctovish", "zacian", "zamazenta", "eternatus", "kubfu", "zarude",
-	"regieleki", "regidrago", "glastrier", "spectrier", "calyrex", "enamorus",
-	"gimmighoul", "grandizanne", "fungofurioso", "peldisabbia", "codaurlante",
-	"crinealato", "alirasenti", "lunaruggente", "solcoferreo", "falenaferrea",
-	"manoferrea", "colloferreo", "spineferree", "saccoferreo", "eroeferreo",
-	"ting-lu", "chien-pao", "wo-chien", "chi-yu", "koraidon", "miraidon",
-	"acquecrespe", "fogliaferrea",
-	"deoxysA", "deoxysD", "deoxysV", "shayminC", "kyuremN", "kyuremB", "hoopaL",
-	"articunoG", "zapdosG", "moltresG", "calyrexG", "calyrexS", "palafinP",
-	"gimmighoulA",
+	"caterpie", "weedle", "magnemite", "voltorb", "tauros", "magikarp",
+	"ditto", "porygon", "articuno", "zapdos", "moltres", "mewtwo", "mew",
+	"unown", "smeargle", "raikou", "entei", "suicune", "lugia", "ho-oh",
+	"celebi", "wurmple", "lunatone", "solrock", "baltoy", "wynaut", "beldum",
+	"regirock", "regice", "registeel", "latias", "latios", "kyogre", "groudon",
+	"rayquaza", "jirachi", "deoxys", "kricketot", "burmy", "combee", "bronzor",
+	"rotom", "uxie", "mesprit", "azelf", "dialga", "palkia", "heatran",
+	"regigigas", "giratina", "cresselia", "phione", "darkrai", "shaymin",
+	"arceus", "victini", "throh", "sawk", "klink", "tynamo", "cryogonal",
+	"golett", "rufflet", "cobalion", "terrakion", "virizion", "tornadus",
+	"thundurus", "reshiram", "zekrom", "landorus", "kyurem", "keldeo",
+	"meloetta", "genesect", "carbink", "xerneas", "yveltal", "zygarde",
+	"diancie", "hoopa", "volcanion", "tipo zero", "minior", "dhelmise",
+	"tapu koko", "tapu lele", "tapu bulu", "tapu fini", "cosmog", "nihilego",
+	"buzzwole", "pheromosa", "xurkitree", "celesteela", "kartana", "guzzlord",
+	"necrozma", "magearna", "marshadow", "poipole", "stakataka", "blacephalon",
+	"zeraora", "meltan", "sinistea", "impidimp", "falinks", "dracozolt",
+	"arctozolt", "dracovish", "arctovish", "zacian", "zamazenta", "eternatus",
+	"kubfu", "zarude", "regieleki", "regidrago", "glastrier", "spectrier",
+	"calyrex", "enamorus", "gimmighoul", "grandizanne", "fungofurioso",
+	"peldisabbia", "codaurlante", "crinealato", "alirasenti", "lunaruggente",
+	"solcoferreo", "falenaferrea", "manoferrea", "colloferreo", "spineferree",
+	"saccoferreo", "eroeferreo", "ting-lu", "chien-pao", "wo-chien", "chi-yu",
+	"koraidon", "miraidon", "acquecrespe", "fogliaferrea", "poltchageist",
+	"okidogi", "munkidori", "fezandipiti", "ogerpon",
+	"deoxysA", "deoxysD", "deoxysV", "shayminC", "kyuremN", "kyuremB",
+	"hoopaL", "articunoG", "zapdosG", "moltresG", "calyrexG", "calyrexS",
+	"palafinP", "gimmighoulA", "ursalunaL", "ogerponP", "ogerponFn",
+	"ogerponFc",
 }
+-- List of non-base Pokémon with a breed list different from that of their base
+-- form (mostly Pokémon with a baby form). Only used up to gen 8
 local breedNoBase = { "chansey", "chimecho", "mantine", "marill", "mr. mime",
 	"roselia", "snorlax", "sudowoodo", "mr. mimeG" }
 
@@ -103,29 +108,35 @@ for line in io.lines(tempoutdir .. "/pokecsv/" .. poke .. ".csv") do
 		-- TODO: check for alltm instead of relying on the fact that only mew
 		-- uses it
 		if poke ~= "mew" then
-			table.insert(data[kind][gen], move)
+			table.insert(data.tm[gen], move)
 		end
 	elseif kind == "tutor" then
 		local tutorgames = lib.games.tutor[gen]
-		data[kind][gen][move] = data[kind][gen][move]
+		data.tutor[gen][move] = data[kind][gen][move]
 			or tab.map(tutorgames, function() return false end)
-		data[kind][gen][move][tab.search(tutorgames, line[4])] = true
+		data.tutor[gen][move][tab.search(tutorgames, line[4])] = true
 	elseif kind == "breed" then
 		local breedsgames = lib.games.breed[gen]
-		if not data[kind][gen][move] then
-			data[kind][gen][move] = tab.map(breedsgames, function(v)
+		if not data.breed[gen][move] then
+			data.breed[gen][move] = tab.map(breedsgames, function(v)
 				return { games = { v } }
 			end)
-			data[kind][gen][move].games = {}
+			data.breed[gen][move].games = {}
 		end
-		table.insert(data[kind][gen][move].games, line[4])
+		table.insert(data.breed[gen][move].games, line[4])
 	elseif kind == "level" then
 		if line[4] ~= "Colo" and line[4] ~= "XD" then
 			local levelgames = lib.games.level[gen]
-			data[kind][gen][move] = data[kind][gen][move]
+			data.level[gen][move] = data.level[gen][move]
 				or tab.map(levelgames, function() return {} end)
-			table.insert(data[kind][gen][move][tab.search(levelgames, line[4])], line[5])
+			table.insert(data.level[gen][move][tab.search(levelgames, line[4])], line[5])
 		end
+	elseif kind == "reminder" then
+		-- Add reminder moves to level moves at level -1
+		local levelgames = lib.games.level[gen]
+		data.level[gen][move] = data.level[gen][move]
+			or tab.map(levelgames, function() return {} end)
+		table.insert(data.level[gen][move][tab.search(levelgames, line[4])], "-1")
 	elseif not (poke == 'pichu' and kind == "light-ball-egg")
 	       and not (poke == 'pikachu' and kind == "pika-surf")
 		   and not (poke == 'rotom' and kind == "form-change") then
@@ -137,6 +148,7 @@ for line in io.lines(tempoutdir .. "/pokecsv/" .. poke .. ".csv") do
 end
 
 -- After building the raw data, some refinement
+
 -- breed with all games can have the field "games" removed
 data.breed = tab.map(data.breed, function(g, gen)
 	return tab.map(g, function(d, _)
@@ -158,6 +170,8 @@ for _, v1 in pairs(data.level) do
 					return "evo"
 				elseif l == "1" then
 					return "inizio"
+				elseif l == "-1" then
+					return "ricorda"
 				else
 					return tonumber(l)
 				end

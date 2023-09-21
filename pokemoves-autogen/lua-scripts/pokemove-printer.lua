@@ -148,7 +148,7 @@ p.tabToStr = function(poke, data, breedref)
     local abbr = forms.toEmptyAbbr(forms.getabbr(poke)) or ""
     if abbr ~= "" then
         table.insert(res, '"')
-        table.insert(res, tostring(str.tf(pokes[poke].ndex)))
+        table.insert(res, tostring(str.ff(pokes[poke].ndex)))
         table.insert(res, abbr)
         table.insert(res, '"')
     else
