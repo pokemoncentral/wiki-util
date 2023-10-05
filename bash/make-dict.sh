@@ -20,7 +20,7 @@ while getopts "hd:v" OPTION; do
             echo "Usage:
 make-dict [OPTIONS]... [FILES]...
 
-Create a dict from a lua module. Its possible to specify
+Create a dict from a lua module. It's possible to specify
 multiple files, that are processed separately.
 Can show differences with the page on the wiki
 and save it to a different location.
@@ -63,10 +63,22 @@ for SRC in "$@"; do
 
     node "$MACROS_DIR/run-macros.js" "$SRC" toModule
     node "$MACROS_DIR/run-macros.js" "$SRC" moduleToDict
-
-    if [[ $DIFF == true ]]; then
-        # Shows diff using pagefromfile. There may be a better script, but
-        # this is just to have a working solution now
-        echo "n" | python $PYWIKIBOT_DIR/pwb.py pagefromfile -simulate -notitle -force -showdiff -pt:0 -file:"$SRC"
-    fi
 done
+
+# Shows diff using pagefromfile. There may be a better script, but
+# this is just to have a working solution now
+if [[ $DIFF == true ]]; then
+    TMPFILE=$(mktemp -p .)
+    touch $TMPFILE
+
+    for SRC in "$@"; do
+        if ! [[ -z $DEST ]]; then
+            SRC=$DEST/$(basename $SRC)
+        fi
+        cat "$SRC" >> $TMPFILE
+    done
+
+    yes "n" | python $PYWIKIBOT_DIR/pwb.py pagefromfile -simulate -notitle -force -showdiff -pt:0 -file:"$TMPFILE"
+
+    rm $TMPFILE
+fi
