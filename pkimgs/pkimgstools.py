@@ -1,4 +1,4 @@
-import pywikibot, argparse, os, os.path, re
+import os, os.path, re
 from math import floor
 '''
 Quick infos about variables:
@@ -493,6 +493,12 @@ def build_main(poke, exceptionspath, forms, gender, singleMS, availdata, imgs):
                     for form in forms:
                         text += build_ms_entry(poke, form, multiform, availdata, gender)
         text += '}}\n'
+        # fix double lines for alt forms (testing)
+        text = re.sub(r'\{\{pokemonimages/mainMS\|ndex=(.+?)\|(.+)\|form=yes\}\}\n\{\{pokemonimages/mainMS\|ndex=\1\|(.+)\|form=yes\}\}', r'{{pokemonimages/mainMS|ndex=\1|\2|\3|form=yes}}', text)
+        '''
+        {{pokemonimages/mainMS|ndex=0025K|ms67=7|msspsc=yes|form=yes}}
+        {{pokemonimages/mainMS|ndex=0025K|mssv=yes|form=yes}}
+        '''
     return text
 
 # remove artworks and main series sprites/models from list
@@ -853,20 +859,22 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
 def build_poke_page(poke, name, pokelistspath, pagespath, formspath, artsources, goforms, exceptionspath, gender, singleMS, availdata, rangerdata, enname, esname, dename, frname):
     # get alternative forms
     forms = get_forms(poke, formspath)
+    # get list of abbrs without duplicates
+    abbrs = list(dict.fromkeys([form[0] for form in forms]))
     # get list of images of given Pokémon
     with open(f'{os.path.join(pokelistspath, poke)}.txt', 'r') as pokefile:
         imgs = pokefile.read().splitlines()
     # artworks
     arts = [img for img in imgs if img.startswith('Artwork')]
     pagetext = '{{#invoke: PokePrecSucc | subpage }}\n\n==Artwork==\n{{pokemonimages/head|content=\n'
-    pagetext += build_arts(poke, arts, [form[0] for form in forms], gender, artsources, True)
+    pagetext += build_arts(poke, arts, abbrs, gender, artsources, True)
     # main series
     pagetext += '}}\n\n==Sprite e modelli==\n===Serie principale===\n{{pokemonimages/head|content=\n'
     pagetext += build_main(poke, exceptionspath, forms, gender, singleMS, availdata, imgs)
     # spin-offs
     pagetext += '}}\n'
     spinoffimages = get_spinoff_imgs(imgs)
-    spinoffstext = build_spinoffs(poke, name, gender, [form[0] for form in forms], spinoffimages, rangerdata, goforms, exceptionspath)
+    spinoffstext = build_spinoffs(poke, name, gender, abbrs, spinoffimages, rangerdata, goforms, exceptionspath)
     if spinoffstext:
         pagetext += f'\n===Spin-off===\n{{{{pokemonimages/head|content=\n{spinoffstext}}}}}\n'
     # add category and interwikis

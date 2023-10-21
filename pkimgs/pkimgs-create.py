@@ -6,26 +6,26 @@ Quick infos about variables:
 - 'pokeabbr' always represents number of Pokédex as string (with form abbr)
 - 'ndex' always represents number of Pokédex as integer (without form abbr)
 '''
-# pwb pkimgs-create --pokepage "0906,0909,0912"
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--pokelistspath', default = 'data/pokepages-pokelists/')
-parser.add_argument('--pokepage', default = '')
-parser.add_argument('--pokepagespath', default = 'data/pokepages-created/')
-parser.add_argument('--pokeformspath', default = 'data/pokepages-pokeforms/')
-parser.add_argument('--exceptionspath', default = 'data/pokepages-exceptions/')
-parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_names.csv')
-parser.add_argument('--genderdiffsfile', default = 'data/pokepages-utils/genderdiffs.txt')
-parser.add_argument('--genderformsfile', default = 'data/pokepages-utils/genderforms.txt')
-parser.add_argument('--femaleonlyfile', default = 'data/pokepages-utils/femaleonly.txt')
-parser.add_argument('--artsourcesfile', default = 'data/pokepages-utils/artsources.txt')
-parser.add_argument('--singlemsfile', default = 'data/pokepages-utils/singleMS.txt')
-parser.add_argument('--availdir', default = 'data/pokepages-availability')
-parser.add_argument('--rangerfile', default = 'data/pokepages-utils/redirect_ranger.txt')
-parser.add_argument('--goformsfile', default = 'data/pokepages-utils/goforms.txt')
-args = parser.parse_args()
-
-if __name__ == '__main__':
+# main function
+def main():
+    # parse arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--pokelistspath', default = 'data/pokepages-pokelists/')
+    parser.add_argument('--pokepage', default = '')
+    parser.add_argument('--pokepagespath', default = 'data/pokepages-created/')
+    parser.add_argument('--pokeformspath', default = 'data/pokepages-pokeforms/')
+    parser.add_argument('--exceptionspath', default = 'data/pokepages-exceptions/')
+    parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_names.csv')
+    parser.add_argument('--genderdiffsfile', default = 'data/pokepages-utils/genderdiffs.txt')
+    parser.add_argument('--genderformsfile', default = 'data/pokepages-utils/genderforms.txt')
+    parser.add_argument('--femaleonlyfile', default = 'data/pokepages-utils/femaleonly.txt')
+    parser.add_argument('--artsourcesfile', default = 'data/pokepages-utils/artsources.txt')
+    parser.add_argument('--singlemsfile', default = 'data/pokepages-utils/singleMS.txt')
+    parser.add_argument('--availdir', default = 'data/pokepages-availability')
+    parser.add_argument('--rangerfile', default = 'data/pokepages-utils/redirect_ranger.txt')
+    parser.add_argument('--goformsfile', default = 'data/pokepages-utils/goforms.txt')
+    args = parser.parse_args()
     # create wikicode of subpage
     if args.pokepage:
         # import data
@@ -42,3 +42,7 @@ if __name__ == '__main__':
             itname = getname[poke]
             gender, singleMS = get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata)
             build_poke_page(poke, itname, args.pokelistspath, args.pokepagespath, args.pokeformspath, artsources, goforms, args.exceptionspath, gender, singleMS, availdata, rangerdata, getenname[itname], getesname[itname], getdename[itname], getfrname[itname])
+
+# invoke main function
+if __name__ == '__main__':
+    main()

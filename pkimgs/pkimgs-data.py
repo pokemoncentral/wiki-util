@@ -54,22 +54,25 @@ def download_pokepage(site, poke, name, downloadspath):
     with open(destfile, 'w') as file:
         file.write(page.text.strip() + '\n')
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--catlist', default = '')
-parser.add_argument('--catlistspath', default = 'data/pokepages-catlists/')
-parser.add_argument('--pokelist', default = '')
-parser.add_argument('--pokelistspath', default = 'data/pokepages-pokelists/')
-parser.add_argument('--pokerank', default = '')
-parser.add_argument('--pokerankfile', default = 'data/ranking.txt')
-parser.add_argument('--catsfile', default = 'data/pokepages-utils/cats.txt')
-parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_names.csv')
-parser.add_argument('--download', default = '')
-parser.add_argument('--downloadspath', default = 'data/pokepages-downloaded/')
-args = parser.parse_args()
-
-if __name__ == '__main__':
+# main function
+def main():
+    # parse arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--fam', default = 'encypok')
+    parser.add_argument('--lang', default = 'it')
+    parser.add_argument('--catlist', default = '')
+    parser.add_argument('--catlistspath', default = 'data/pokepages-catlists/')
+    parser.add_argument('--pokelist', default = '')
+    parser.add_argument('--pokelistspath', default = 'data/pokepages-pokelists/')
+    parser.add_argument('--pokerank', default = '')
+    parser.add_argument('--pokerankfile', default = 'data/ranking.txt')
+    parser.add_argument('--catsfile', default = 'data/pokepages-utils/cats.txt')
+    parser.add_argument('--dexfile', default = 'data/pokepages-utils/pokes_names.csv')
+    parser.add_argument('--download', default = '')
+    parser.add_argument('--downloadspath', default = 'data/pokepages-downloaded/')
+    args = parser.parse_args()
     # import data
-    site = pywikibot.Site()
+    site = pywikibot.Site(args.lang, fam = args.fam)
     getname, getenname, getesname, getdename, getfrname = import_ndex(args.dexfile)
     # update categories
     if args.catlist:
@@ -126,3 +129,7 @@ if __name__ == '__main__':
         # retrieve subpages
         for poke in lst:
             download_pokepage(site, poke, getname[poke], args.downloadspath)
+
+# invoke main function
+if __name__ == '__main__':
+    main()
