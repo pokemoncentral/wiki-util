@@ -104,6 +104,7 @@ def convert_kind(kind: int):
     2,breed
     3,tutor
     4,tm
+    11,reminder
     """
     if kind == 0:
         return 1
@@ -112,7 +113,7 @@ def convert_kind(kind: int):
     elif kind == 2:
         return 4
     elif kind == 3:
-        return 1
+        return 11
 
 
 def write_row_csv_pokemoves(poke_id: str, kind: int, elem: Tuple, csvw):
@@ -121,7 +122,7 @@ def write_row_csv_pokemoves(poke_id: str, kind: int, elem: Tuple, csvw):
         level = elem[1]
     elif kind == 3:
         move = elem
-        level = 1
+        level = 0
     else:
         move = elem
         level = 0
@@ -148,27 +149,23 @@ with open(sys.argv[1], "r") as f, open(sys.argv[2], "w") as out:
                 logger.error(lines[0])
                 exit(1)
             pokename = convert_pokename(pokename)
-            if should_ignore(pokename):
+            if not should_ignore(pokename):
                 # Ignore a bunch of forms
-                pokelines = []
-                continue
-            poke_id = get_poke_id(pokename)
-            if not poke_id:
-                logger.error("No ID for Pokémon " + pokename)
-                exit(1)
-            logger.info(pokename)
+                poke_id = get_poke_id(pokename)
+                if not poke_id:
+                    logger.error("No ID for Pokémon " + pokename)
+                    exit(1)
+                logger.info(f"{pokename} ({poke_id})")
 
-            moves_by_kind = split_moves(pokelines)
-            logger.debug(str(moves_by_kind))
-            parsed_moves = [
-                [parse_move_line(l, i) for l in lines]
-                for i, lines in enumerate(moves_by_kind)
-            ]
-            parsed_moves = prepare_parsed_moves(parsed_moves)
-            logger.debug(str(parsed_moves))
-            for kind, moves in enumerate(parsed_moves):
-                for move in moves:
-                    write_row_csv_pokemoves(poke_id, kind, move, csvw)
+                moves_by_kind = split_moves(pokelines)
+                parsed_moves = [
+                    [parse_move_line(l, i) for l in lines]
+                    for i, lines in enumerate(moves_by_kind)
+                ]
+                parsed_moves = prepare_parsed_moves(parsed_moves)
+                for kind, moves in enumerate(parsed_moves):
+                    for move in moves:
+                        write_row_csv_pokemoves(poke_id, kind, move, csvw)
 
             pokelines = []
         else:
