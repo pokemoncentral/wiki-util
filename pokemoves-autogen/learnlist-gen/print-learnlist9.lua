@@ -22,6 +22,9 @@ local moves = require("Move-data")
 local pokes = require("Poké-data")
 local altdata = require("AltForms-data")
 local pokemoves = require("learnlist-gen.pokemoves-data")
+local libgames = require("lua-scripts.lib").games
+
+local gen = 9
 
 p.strings = {
     HF = "{{#invoke: Learnlist/hf | ${kind}${hf} | ${poke} | ${type1} | ${type2} | ${genh} | ${genp} }}",
@@ -29,30 +32,85 @@ p.strings = {
     ENTRYHEAD = "{{#invoke: render | render | Modulo:Learnlist/entry9 | ${kind} | //",
     ENTRYFOOT = "}}",
     ENTRIES = {
-        level = "|${move}|${STAB}|${notes}|${levelSV}| //",
-        tm = "|${move}|${STAB}|${notes}|${tmnumSV}| //",
+        level = "|${move}|${STAB}|${notes}|${level}| //",
+        tm = "|${move}|${STAB}|${notes}|${tmnum}| //",
         breed = "|${move}|${STAB}|${notes}| //",
-        tutor = "|${move}|${STAB}|${notes}|${svyn}| //",
+        tutor = "|${move}|${STAB}|${notes}|${yn}| //",
         preevo = "|${move}|${STAB}|${poke1}${poke2} //",
     }
 }
 p.strings.HEADER = str.interp(p.strings.HF, { hf = "h" })
 p.strings.FOOTER = str.interp(p.strings.HF, { hf = "f" })
 
---[[
+-- Exports for get-learnlist
+p.games = learnlist.filterGames(libgames, gen)
+p.getGameName = {
+    SV = "Ver 1.2.0",
+    ["SV-2"] = "Ver 2.0.1",
+}
+-- 2 is the index of "SV-2"
+p.isGameActive = function(num) return num == 2 end
 
-Local computeSTAB function, that puts "no" when needed instead of relying on
-autocompute (that can be wrong for instance for alternative forms).
-
---]]
-p.computeSTAB = function(ndex, movename, form, gen)
-    local stab = learnlib.computeSTAB(ndex, movename, form, gen)
-    return stab == "" and "no" or stab
-end
+p.computeSTAB = learnlist.computeSTAB
 
 -- Checks whether the entry is alltm
 p.alltm = function(kind, pmkindgen)
     return kind == "tm" and pmkindgen.all
+end
+
+-- These Pokémon weren't in SV, and were added in SV-2
+local pokesSV2 = {
+    "aipom", "ambipom", "arbok", "ariados", "bellsprout", "chandelure",
+    "charjabug", "chimchar", "chimecho", "chingling", "clefable", "clefairy",
+    "cleffa", "conkeldurr", "corphish", "cramorant", "crawdaunt", "cutiefly",
+    "darkrai", "dipplin", "ducklett", "dusclops", "dusknoir", "duskull",
+    "ekans", "empoleon", "feebas", "fezandipiti", "furret", "geodude",
+    "gligar", "gliscor", "golem", "graveler", "grotle", "grubbin", "gurdurr",
+    "hakamo-o", "hoothoot", "illumise", "infernape", "jangmo-o", "jirachi",
+    "koffing", "kommo-o", "lampent", "leavanny", "litwick", "lombre", "lotad",
+    "ludicolo", "magcargo", "mamoswine", "manaphy", "mandibuzz", "mienfoo",
+    "mienshao", "mightyena", "milotic", "monferno", "morpeko", "munchlax",
+    "munkidori", "ninetales", "noctowl", "nosepass", "nuzleaf", "ogerpon",
+    "okidogi", "phantump", "phione", "piloswine", "piplup", "politoed",
+    "poliwag", "poliwhirl", "poliwrath", "poltchageist", "poochyena",
+    "prinplup", "probopass", "ribombee", "sandshrew", "sandslash", "seedot",
+    "sentret", "sewaddle", "shaymin", "shiftry", "sinistcha", "slugma",
+    "snorlax", "spinarak", "swadloon", "swanna", "swinub", "timburr",
+    "torterra", "trevenant", "turtwig", "victreebel", "vikavolt", "volbeat",
+    "vullaby", "vulpix", "weepinbell", "weezing", "yanma", "yanmega",
+    -- New Pokémon, not returning old ones
+    "ursalunaL", "dipplin", "poltchageist", "sinistcha", "okidogi",
+    "munkidori", "fezandipiti", "ogerpon", "ogerponFc", "ogerponFn",
+    "ogerponP",
+}
+-- Checks if a Pokémon exists in a given gen 9 game
+p.existsInGame = function(poke, game)
+    if game == "SV" then
+        return not tab.search(pokesSV2, poke)
+    -- elseif game == "SV-2" then
+    --     return true
+    else
+        return true
+    end
+end
+
+-- ====================== "Decompress" PokéMoves entries ======================
+-- Decompress a level entry. A level entry is the "table" obtained picking a
+-- pokemon, generation and move from pokemoves-data
+-- (ie: pokemoves[poke].level[gen][move])
+p.decompressLevelEntry = function(entry, gen)
+    local res
+    if type(entry) == 'table' then
+        res = tab.copy(entry)
+    else
+        res = { { entry } }
+    end
+    if #res == 1 then
+        res = tab.map(p.games.level, function()
+            return tab.copy(res[1])
+        end)
+    end
+    return res
 end
 
 --[[
@@ -86,26 +144,25 @@ p.addhf = function(body, poke, gen, kind)
     })
 end
 
-
 --[[
 
-Internal function of genericEntry. Used when taking data not from the data
-module (ie: learnlist after base SV)
+General function to build a call.
 
 Arguments:
     - poke: Pokémon name or ndex
-    - gen: the generation of this entry
+    - game: the game of this entry
     - kind: kind of entry. Either "level", "tm", "breed", "tutor", "preevo" and
             "event". Also used to select functions (picks the funcDict)
-    - pmkind: the (possibly fake) entry of the data module
 
 --]]
-p._entryGeneric = function(poke, gen, kind, pmkind)
+p.entryGeneric = function(poke, game, kind)
+    local pmkind = pokemoves[poke][kind]
+
     local funcDict = p.dicts[kind]
     local res = {}
     if pmkind and pmkind[gen] and not p.alltm(kind, pmkind[gen]) then
         res = funcDict.dataMap(pmkind[gen], function(v, k)
-            return funcDict.processData(poke, gen, v, k)
+            return funcDict.processData(poke, gen, game, v, k)
         end)
     end
     local resstr
@@ -116,7 +173,7 @@ p._entryGeneric = function(poke, gen, kind, pmkind)
     else
         table.sort(res, funcDict.lt)
         resstr = wlib.mapAndConcat(res, "\n", function(val)
-            return funcDict.makeEntry(poke, gen, val)
+            return funcDict.makeEntry(poke, gen, game, val)
         end)
         resstr = table.concat({
             p.strings.ENTRYHEAD,
@@ -128,124 +185,111 @@ p._entryGeneric = function(poke, gen, kind, pmkind)
     return p.addhf(resstr, poke, gen, kind)
 end
 
---[[
-
-General function to build a call. Copied from Learnlist module.
-
-Arguments:
-    - poke: Pokémon name or ndex
-    - gen: the generation of this entry
-    - kind: kind of entry. Either "level", "tm", "breed", "tutor", "preevo" and
-            "event". Also used to select functions (picks the funcDict)
-
---]]
-p.entryGeneric = function(poke, gen, kind)
-    local pmkind = pokemoves[poke][kind]
-
-    return p._entryGeneric(poke, gen, kind, pmkind)
-end
-
--- Fixing dicts (just printing)
+-- Fixing dicts
 p.dicts = learnlist.dicts
 
-do
-    local oldprocessData = learnlist.dicts.level.processData
-    p.dicts.level.processData = function(poke, gen, levels, move)
-        levels = learnlist.decompressLevelEntry(levels, gen)
-        -- If there is only one level in each game for the move, just puts them all
-        -- in a single row, otherwise multiple rows
-        if tab.all(levels, function(v) return #v == 1 end) then
-            return { { move, tab.map(levels, function(t) return t[1] end) } }
+-- ================================== Level ==================================
+p.dicts.level = {
+    processData = function(poke, gen, game, levels, move)
+        levels = p.decompressLevelEntry(levels, gen)
+        -- levels = { {"inizio"}, {"inizio", "evo"} },
+        local gameidx = tab.search(p.games.level, game)
+        assert(gameidx, "game not found")
+        return tab.map(levels[gameidx], function(lvl)
+            return { move, lvl }
+        end)
+    end,
+    dataMap = tab.flatMapToNum,
+    -- elements of res are like
+    -- { <movename>, <level> }
+    lt = function(a, b)
+        return a[2] == b[2] and a[1] < b[1] or learnlist.ltLevel(a[2], b[2])
+    end,
+    --[[
+    makeEntry: create the string of an entry from an element produced by processData.
+        Takes three arguments:
+            - poke: Pokémon name or ndex
+            - gen: the generation of this entry
+            - game: the game of this entry
+            - entry: the element produced by processData
+    --]]
+    makeEntry = function(poke, gen, game, entry)
+        local move = entry[1]
+        return str.interp(p.strings.ENTRIES.level, {
+            move = multigen.getGenValue(moves[move].name, gen),
+            STAB = p.computeSTAB(poke, move, nil, gen),
+            notes = "",
+            level = str.fu(entry[2]),
+        })
+    end
+}
+
+-- ==================================== Tm ====================================
+p.dicts.tm = {
+    processData = function(poke, gen, game, move)
+        local kind, num = learnlist.getTMNum(move, gen)
+        return { move, kind, num }
+    end,
+    dataMap = tab.mapToNum,
+    -- elements of res are like
+    -- { <movename>, <kind>, <num> }
+    -- num is a string
+    lt = function(a, b)
+        if a[1] == b[2] then
+            -- They are the same element, hence a < b is false
+            return false
         end
-        return oldprocessData(poke, gen, levels, move)
+        -- "kind" are already sorted alfabetically
+        return a[2] > b[2]
+            or (a[2] == b[2] and tonumber(a[3]) < tonumber(b[3]))
+    end,
+    makeEntry = function(poke, gen, game, entry)
+        local move = entry[1]
+        -- { <movename>, <kind>, <num> }
+        return str.interp(p.strings.ENTRIES.tm, {
+            move = multigen.getGenValue(moves[move].name, gen),
+            STAB = p.computeSTAB(poke, move, nil, gen),
+            notes = "",
+            tmnum = table.concat{ entry[2], entry[3] },
+        })
     end
-end
+}
 
---[[
-
-makeEntry: create the string of an entry from an element produced by processData.
-    Takes three arguments:
-        - poke: Pokémon name or ndex
-        - gen: the generation of this entry
-        - entry: the element produced by processData
-
---]]
-p.dicts.level.makeEntry = function(poke, gen, pair)
-    local move, levels = pair[1], pair[2]
-    if #levels ~= 1 then
-        print("-------------> ERROR")
-        return "-------------> ERROR"
-    end
-    return str.interp(p.strings.ENTRIES.level, {
-        move = multigen.getGenValue(moves[move].name, gen),
-        STAB = p.computeSTAB(poke, move, nil, gen),
-        notes = "",
-        levelSV = levels[1] and str.fu(levels[1]) or "no",
-    })
-end
-
-p.dicts.tm.makeEntry = function(poke, gen, val)
-    local move = val.move
-    -- { move: <movename>, <array of { <games abbr>, <kind>, <num> }> }
-
-    if #val ~= 1 then
-        print("-------------> ERROR")
-        return "-------------> ERROR"
-    end
-    return str.interp(p.strings.ENTRIES.tm, {
-        move = multigen.getGenValue(moves[move].name, gen),
-        STAB = p.computeSTAB(poke, move, nil, gen),
-        notes = "",
-        tmnumSV = val[1][2] and table.concat{ val[1][2], val[1][3] } or "no",
-    })
-end
-
-p.dicts.tutor.makeEntry = function(poke, gen, val)
-    -- val :: { <movename>, { <array of games pairs { <abbr>, "Yes"/"No" }> } }
-    local move = val[1]
-    local gamesarray = val[2]
-
-    if #gamesarray ~= 1 then
-        print("-------------> ERROR")
-        return "-------------> ERROR"
-    end
-    -- return "-------------> ERROR2"
-    return str.interp(p.strings.ENTRIES.tutor, {
-        move = multigen.getGenValue(moves[move].name, gen),
-        STAB = p.computeSTAB(poke, move, nil, gen),
-        notes = "",
-        svyn = gamesarray[1][2]:lower(),
-    })
-end
-
-p.dicts.breed.makeEntry = function(poke, gen, val)
-    -- val :: { <movename>, { 0 }, <notes>, games = <sigla or nil> }
-    local move = val[1]
-    local parents = val[2]
-
-    local notes = val[3]
-    if val.games then
-        -- Add games as a separate note, so that they appear as sup
-        if notes == "" then
-            notes = table.concat(val.games)
+-- ================================== Breed ==================================
+p.dicts.breed = {
+    processData = function(poke, gen, game, movedata, move)
+		-- If the Pokémon can learn the move via level, drops it since it
+		-- means the breed is a remnant of preevos.
+		-- For instance, Abra has Confusione listed via breed, but its evos
+		-- learn it via level
+		if learnlist.learnKind(move, poke, gen, "level") then
+			return nil
+		end
+        -- If the current game is among the games the Pokémon can learn the
+        -- move in, we keep it
+        if not movedata.games or tab.search(movedata.games, game) then
+            return move
         else
-            notes = table.concat{ notes, "|", table.concat(val.games) }
+            return nil
         end
+    end,
+    dataMap = tab.mapToNum,
+    -- elements of res are just
+    -- <movename>
+    lt = function(a, b)
+        return a < b
+    end,
+    makeEntry = function(poke, gen, game, move)
+        -- val :: <movename>
+        return str.interp(p.strings.ENTRIES.breed, {
+            move = multigen.getGenValue(moves[move].name, gen),
+            STAB = p.computeSTAB(poke, move, nil, gen),
+            notes = "",
+        })
     end
+}
 
-    if #parents ~= 1 or parents[1] ~= 0 then
-        print("-------------> ERROR")
-        print(require('static.dumper')(parents))
-        return "-------------> ERROR"
-    end
-
-    return str.interp(p.strings.ENTRIES.breed, {
-        move = multigen.getGenValue(moves[move].name, gen),
-        STAB = p.computeSTAB(poke, move, nil, gen),
-        notes = notes,
-    })
-end
-
+-- ================================== Preevo ==================================
 local function makePreevoPoke(pair)
     local t = { str.tf(pair[1]), "|" }
     if pair[2] then
@@ -255,38 +299,47 @@ local function makePreevoPoke(pair)
     return table.concat(t)
 end
 
-p.dicts.preevo.makeEntry = function(poke, gen, val)
-    -- val :: { <movename>, { <array of preevo pairs { ndex, notes }> } }
-    local move = val[1]
-    local preevos = val[2]
+p.dicts.preevo = {
+    processData = function(poke, gen, game, preevos, move)
+        return { move, tab.map(preevos, function(ndex)
+            return { ndex, "" }
+        end, ipairs), games = preevos.games }
+    end,
+    dataMap = tab.mapToNum,
+    -- elements of res are like
+    -- { <movename>, { <array of preevo pairs: { ndex, notes }> }, games = <some list of games?> }
+    lt = function(a, b)
+        return a[1] < b[1]
+    end,
+    makeEntry = function(poke, gen, game, val)
+        local move = val[1]
+        local preevos = val[2]
 
-    if #preevos < 1 or #preevos > 2 then
-        print("-------------> ERROR")
-        return "-------------> ERROR"
+        if #preevos < 1 or #preevos > 2 then
+            print("-------------> ERROR")
+            return "-------------> ERROR"
+        end
+        return str.interp(p.strings.ENTRIES.preevo, {
+            move = multigen.getGenValue(moves[move].name, gen),
+            STAB = p.computeSTAB(poke, move, nil, gen),
+            poke1 = makePreevoPoke(preevos[1]),
+            poke2 = preevos[2] and makePreevoPoke(preevos[2]) or "",
+        })
     end
-    return str.interp(p.strings.ENTRIES.preevo, {
-        move = multigen.getGenValue(moves[move].name, gen),
-        STAB = p.computeSTAB(poke, move, nil, gen),
-        poke1 = makePreevoPoke(preevos[1]),
-        poke2 = preevos[2] and makePreevoPoke(preevos[2]) or "",
-    })
-end
+}
 
 
-p.level = function(poke)
-    return p.entryGeneric(poke, 9, "level")
+p.level = function(poke, game)
+    return p.entryGeneric(poke, game, "level")
 end
-p.tm = function(poke)
-    return p.entryGeneric(poke, 9, "tm")
+p.tm = function(poke, game)
+    return p.entryGeneric(poke, game, "tm")
 end
-p.breed = function(poke)
-    return p.entryGeneric(poke, 9, "breed")
+p.breed = function(poke, game)
+    return p.entryGeneric(poke, game, "breed")
 end
-p.tutor = function(poke)
-    return p.entryGeneric(poke, 9, "tutor")
-end
-p.preevo = function(poke)
-    return p.entryGeneric(poke, 9, "preevo")
+p.preevo = function(poke, game)
+    return p.entryGeneric(poke, game, "preevo")
 end
 
 return p

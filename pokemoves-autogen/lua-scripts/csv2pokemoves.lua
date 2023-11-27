@@ -51,8 +51,6 @@ local function ParseCSVLine(line,sep)
 	return res
 end
 
-local breedgames = { 0, 2, 3, 3, 2, 2, 2, 2, 1 }
-
 local datagen = { {}, {}, {}, {}, {}, {}, {}, {}, {} }
 local data = { level = tab.copy(datagen), tm = tab.copy(datagen),
 			   breed = tab.copy(datagen), tutor = tab.copy(datagen),
@@ -132,7 +130,7 @@ for line in io.lines(tempoutdir .. "/pokecsv/" .. poke .. ".csv") do
 			table.insert(data.level[gen][move][tab.search(levelgames, line[4])], line[5])
 		end
 	elseif kind == "reminder" then
-		-- Add reminder moves to level moves at level -1
+		-- Add reminder moves to level moves with level -1
 		local levelgames = lib.games.level[gen]
 		data.level[gen][move] = data.level[gen][move]
 			or tab.map(levelgames, function() return {} end)
@@ -152,7 +150,7 @@ end
 -- breed with all games can have the field "games" removed
 data.breed = tab.map(data.breed, function(g, gen)
 	return tab.map(g, function(d, _)
-		if #d.games == breedgames[gen] then
+		if #d.games == #lib.games.breed[gen] then
 			d.games = nil
 		end
 		return d

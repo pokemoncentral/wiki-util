@@ -10,9 +10,46 @@ local lib = {}
 require('source-modules')(true)
 local tab = require('Wikilib-tables')
 local tmdata = require("Machines-data")
-local learnlib = require('Wikilib-learnlists')
 
-lib.games = learnlib.games
+-- copy of Wikilib-learnlists.games
+lib.games = {
+    level = {
+        { "RB", "G" },
+        { "OA", "C" },
+        { "RZ", "RFVF", "S" },
+        { "DP", "Pt", "HGSS" },
+        { "NB", "N2B2" },
+        { "XY", "ROZA" },
+        { "SL", "USUL" },
+        { "SpSc", "DLPS" },
+        { "SV", "SV-2" },
+    },
+    -- TODO make effective this table, right now only gen 8 is used
+    tm = { {}, {}, {}, {}, {}, {}, {}, { "SpSc", "DLPS" }, { "SV", "SV-2" } },
+    breed = {
+        {},
+        { "OA", "C" },
+        { "RZ", "RFVF", "S" },
+        { "DP", "Pt", "HGSS" },
+        { "NB", "N2B2" },
+        { "XY", "ROZA" },
+        { "SL", "USUL" },
+        { "SpSc", "DLPS" },
+        { "SV", "SV-2" },
+    },
+    tutor = {
+        {},
+        { "C" },
+        { "RFVF", "S", "XD" },
+        { "DP", "Pt", "HGSS" },
+        { "NB", "N2B2" },
+        { "XY", "ROZA" },
+        { "SL", "USUL" },
+        { "SpSc", "IA", "DLPS" },
+        { },
+    },
+    preevo =  { {}, {}, {}, {}, {}, {}, {}, { "SpSc", "DLPS" }, { "SV", "SV-2" } },
+}
 
 --[[
 

@@ -308,7 +308,7 @@ for iteration = 1,14 do
         newpokemoves[poke] = {
             level = val.level,
             tm = val.tm,
-            breed = { nil, {}, {}, {}, {}, {}, {}, {} },
+            breed = { {}, {}, {}, {}, {}, {}, {}, {} },
             tutor = val.tutor,
             preevo = val.preevo,
             event = val.event,
@@ -334,9 +334,9 @@ for iteration = 1,14 do
         end
     end
     pokemoves = newpokemoves
-    print(table.concat{"Iteration ", tostring(iteration), " finished"})
+    print(table.concat{"> Iteration ", tostring(iteration), " finished"})
 end
-
+print("Finished main iteration")
 
 -- Remove pokemoves[poke].breed[gen][move].direct (? Or use it)
 -- Keeping direct "should" allow to apply iterations on a non-empty set of
@@ -373,9 +373,9 @@ for _, data in pairs(pokemoves) do
                             end
                         end
                     end
-                    -- remove games field when it contains all games
-                    if tab.equal(newmovedata[1].games,
-                                 lib.games.breed[gen]) then
+                    -- remove games field when it contains all games, but only for gen <= 8
+                    if gen <= 8 and
+                       tab.equal(newmovedata[1].games, lib.games.breed[gen]) then
                         newmovedata[1].games = nil
                     end
                     data.breed[gen][move] = newmovedata

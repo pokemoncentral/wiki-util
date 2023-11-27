@@ -43,6 +43,20 @@ local pokemoves = require("learnlist-gen.pokemoves-data")
 
 --[[
 
+Local computeSTAB function, that puts "no" when needed instead of relying on
+autocompute (that can be wrong for instance for alternative forms).
+
+--]]
+l.computeSTAB = function(ndex, movename, form, gen)
+    local stab = lib.computeSTAB(ndex, movename, form, gen)
+    return stab == "" and "no" or stab
+end
+
+-- Re-expose getTMNum
+l.getTMNum = lib.getTMNum
+
+--[[
+
 Given something, compute breed notes, ie. "breed chain", "the parent should
 have learned the move in a previous gen" or "no parent can learn the move".
 Arguments:
@@ -114,6 +128,13 @@ l.getLevelEntry = function(move, ndex, gen)
 		return nil
 	end
 	return l.decompressLevelEntry(pmkind[gen][move], gen)
+end
+
+-- Get the list of games by kind for the given generation
+l.filterGames = function(games, gen)
+    return tab.map(games, function(lst)
+        return lst[gen]
+    end)
 end
 
 -- ========================== Check learn functions ==========================
@@ -190,6 +211,7 @@ l.learnPreviousGen = function(move, ndex, gen, firstgen)
 	end
 	return false
 end
+
 
 -- ========================== End Wikilib-learnlists ==========================
 --[[
