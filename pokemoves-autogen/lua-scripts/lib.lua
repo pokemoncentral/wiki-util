@@ -64,18 +64,16 @@ Arguments:
 
 --]]
 lib.learnKind = function(move, ndex, gen, kind)
-	local pmkind = pokemoves[ndex][kind]
-	if not pmkind or not pmkind[gen] then
-		return false
-	end
-	local mdata = pmkind[gen]
-	if kind == "tm" then
-		local mlist = mdata.all and tmdata[gen] or mdata
-		-- Extra parentheses to force a single return value
-		return (tab.deepSearch(mlist, move))
-	else
-		return mdata[move]
-	end
+    local pmkind = pokemoves[ndex][kind]
+    if not pmkind or not pmkind[gen] then
+        return false
+    end
+    local mdata = pmkind[gen]
+    if kind == "tm" and mdata.all then
+        return (tab.deepSearch(tmdata[gen], move))
+    else
+        return mdata[move]
+    end
 end
 
 --[[
@@ -115,20 +113,20 @@ Return an array of move names.
 
 --]]
 lib.learnset = function(ndex, gen, excludekinds)
-        local movedata = pokemoves[ndex]
-        excludekinds = excludekinds or {}
-        local res = {}
-        if movedata.tm[gen] and not tab.search(excludekinds, "tm") then
-                res = tab.copy(movedata.tm[gen])
-                table.insert(excludekinds, "tm")
-        end
+    local movedata = pokemoves[ndex]
+    excludekinds = excludekinds or {}
+    local res = {}
+    -- if movedata.tm[gen] and not tab.search(excludekinds, "tm") then
+    --     res = tab.copy(movedata.tm[gen])
+    --     table.insert(excludekinds, "tm")
+    -- end
 
-        for kind, data in pairs(movedata) do
-                if not tab.search(excludekinds, kind) and data[gen] then
-                        res = tab.merge(res, tab.keys(data[gen]))
-                end
+    for kind, data in pairs(movedata) do
+        if not tab.search(excludekinds, kind) and data[gen] then
+            res = tab.merge(res, tab.keys(data[gen]))
         end
-        return tab.unique(res)
+    end
+    return tab.unique(res)
 end
 
 --[[

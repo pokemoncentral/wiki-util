@@ -106,7 +106,11 @@ for line in io.lines(tempoutdir .. "/pokecsv/" .. poke .. ".csv") do
 		-- TODO: check for alltm instead of relying on the fact that only mew
 		-- uses it
 		if poke ~= "mew" then
-			table.insert(data.tm[gen], move)
+			if not data.tm[gen][move] then
+				data.tm[gen][move] = { line[4] }
+			elseif not tab.search(data.tm[gen][move], line[4]) then
+				table.insert(data.tm[gen][move], line[4])
+			end
 		end
 	elseif kind == "tutor" then
 		local tutorgames = lib.games.tutor[gen]
@@ -177,8 +181,6 @@ for _, v1 in pairs(data.level) do
 		end
 	end
 end
--- seems that tm has repetitions
-data.tm = tab.map(data.tm, tab.unique)
 -- TODO: no support for events
 
 -- Compute breedref and log

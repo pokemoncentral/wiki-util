@@ -17,12 +17,11 @@ local wlib = require('Wikilib')
 local genlib = require('Wikilib-gens')
 local multigen = require('Wikilib-multigen')
 local formlib = require('Wikilib-forms')
-local learnlist = require('learnlist-gen.learnlist')
+local printlib = require("learnlist-gen.print-learnlist-lib")
 local moves = require("Move-data")
 local pokes = require("Poké-data")
 local altdata = require("AltForms-data")
 local pokemoves = require("learnlist-gen.pokemoves-data")
-local libgames = require("lua-scripts.lib").games
 
 local gen = 9
 
@@ -43,20 +42,19 @@ p.strings.HEADER = str.interp(p.strings.HF, { hf = "h" })
 p.strings.FOOTER = str.interp(p.strings.HF, { hf = "f" })
 
 -- Exports for get-learnlist
-p.games = learnlist.filterGames(libgames, gen)
-p.getGameName = {
-    SV = "Ver 1.2.0",
-    ["SV-2"] = "Ver 2.0.1",
+p.games = printlib.getGames(gen)
+-- These should match the order of p.games
+p.gameNames = {
+    "Ver 1.2.0",
+    "Ver 2.0.1",
 }
 -- 2 is the index of "SV-2"
 p.isGameActive = function(num) return num == 2 end
 
-p.computeSTAB = learnlist.computeSTAB
+p.computeSTAB = printlib.computeSTAB
 
 -- Checks whether the entry is alltm
-p.alltm = function(kind, pmkindgen)
-    return kind == "tm" and pmkindgen.all
-end
+p.alltm = printlib.isAlltm
 
 -- These Pokémon weren't in SV, and were added in SV-2
 local pokesSV2 = {
@@ -94,25 +92,6 @@ p.existsInGame = function(poke, game)
     end
 end
 
--- ====================== "Decompress" PokéMoves entries ======================
--- Decompress a level entry. A level entry is the "table" obtained picking a
--- pokemon, generation and move from pokemoves-data
--- (ie: pokemoves[poke].level[gen][move])
-p.decompressLevelEntry = function(entry, gen)
-    local res
-    if type(entry) == 'table' then
-        res = tab.copy(entry)
-    else
-        res = { { entry } }
-    end
-    if #res == 1 then
-        res = tab.map(p.games.level, function()
-            return tab.copy(res[1])
-        end)
-    end
-    return res
-end
-
 --[[
 
 Add header and footer for a learnlist table.
@@ -124,7 +103,7 @@ Arguments:
             "event".
 
 --]]
-p.addhf = function(body, poke, gen, kind)
+p.addhf = function(body, poke, kind)
     local name, abbr = formlib.getnameabbr(poke)
     local pokedata = multigen.getGen(pokes[poke], gen)
     -- Interp of concat because the interp data are used twice
@@ -144,35 +123,14 @@ p.addhf = function(body, poke, gen, kind)
     })
 end
 
---[[
-
-General function to build a call.
-
-Arguments:
-    - poke: Pokémon name or ndex
-    - game: the game of this entry
-    - kind: kind of entry. Either "level", "tm", "breed", "tutor", "preevo" and
-            "event". Also used to select functions (picks the funcDict)
-
---]]
-p.entryGeneric = function(poke, game, kind)
-    local pmkind = pokemoves[poke][kind]
-
+-- Build a single learnlist call given the preprocessed data
+p.makeSingleGameEntry = function(data, poke, kind)
     local funcDict = p.dicts[kind]
-    local res = {}
-    if pmkind and pmkind[gen] and not p.alltm(kind, pmkind[gen]) then
-        res = funcDict.dataMap(pmkind[gen], function(v, k)
-            return funcDict.processData(poke, gen, game, v, k)
-        end)
-    end
     local resstr
-    if #res == 0 then
+    if #data == 0 then
         resstr = p.strings.NULLENTRY
-    elseif pmkind and pmkind[gen] and p.alltm(kind, pmkind[gen]) then
-        resstr = "TODO"
     else
-        table.sort(res, funcDict.lt)
-        resstr = wlib.mapAndConcat(res, "\n", function(val)
+        resstr = wlib.mapAndConcat(data, "\n", function(val)
             return funcDict.makeEntry(poke, gen, game, val)
         end)
         resstr = table.concat({
@@ -182,16 +140,61 @@ p.entryGeneric = function(poke, game, kind)
         }, "\n")
     end
 
-    return p.addhf(resstr, poke, gen, kind)
+    return p.addhf(resstr, poke, kind)
 end
 
--- Fixing dicts
-p.dicts = learnlist.dicts
+--[[
+
+General function to make the code for a given Pokémon and kind.
+
+Arguments:
+    - poke: Pokémon name or ndex
+    - game: the game of this entry
+    - kind: kind of entry. Either "level", "tm", "breed", "tutor", "preevo" and
+            "event". Also used to select functions (picks the funcDict)
+
+--]]
+p.entryGeneric = function(poke, kind)
+    local pmkind = pokemoves[poke][kind]
+    local funcDict = p.dicts[kind]
+
+    -- No data
+    if not pmkind or not pmkind[gen] then
+        return p.strings.NULLENTRY
+    end
+
+    -- All the interesting games
+    local games = tab.filter(p.games[kind], function(game)
+        return p.existsInGame(poke, game)
+    end)
+
+    local res = {}
+    for n, game in ipairs(games) do
+        -- Preprocess data to make it more printable
+        res[n] = funcDict.dataMap(pmkind[gen], function(v, k)
+            return funcDict.processData(poke, gen, game, v, k)
+        end)
+        table.sort(res[n], funcDict.lt)
+    end
+    -- Check for equality
+    local eqcheck = tab.map(res, funcDict.toGameEqCheck or printlib.id)
+    if printlib.allEquals(eqcheck) then
+        local data = funcDict.getSingleGameData(res)
+        return p.makeSingleGameEntry(data, poke, kind)
+    end
+
+    -- Different: print all in tabs
+    return printlib.putInTabs(p.gameNames, tab.map(res, function(r)
+        return p.makeSingleGameEntry(r, poke, kind)
+    end), p.isGameActive)
+end
+
+p.dicts = {}
 
 -- ================================== Level ==================================
 p.dicts.level = {
     processData = function(poke, gen, game, levels, move)
-        levels = p.decompressLevelEntry(levels, gen)
+        levels = printlib.decompressLevelEntry(levels, gen)
         -- levels = { {"inizio"}, {"inizio", "evo"} },
         local gameidx = tab.search(p.games.level, game)
         assert(gameidx, "game not found")
@@ -203,8 +206,9 @@ p.dicts.level = {
     -- elements of res are like
     -- { <movename>, <level> }
     lt = function(a, b)
-        return a[2] == b[2] and a[1] < b[1] or learnlist.ltLevel(a[2], b[2])
+        return a[2] == b[2] and a[1] < b[1] or printlib.ltLevel(a[2], b[2])
     end,
+    getSingleGameData = function(res) return res[1] end,
     --[[
     makeEntry: create the string of an entry from an element produced by processData.
         Takes three arguments:
@@ -226,9 +230,13 @@ p.dicts.level = {
 
 -- ==================================== Tm ====================================
 p.dicts.tm = {
-    processData = function(poke, gen, game, move)
-        local kind, num = learnlist.getTMNum(move, gen)
-        return { move, kind, num }
+    processData = function(poke, gen, game, games, move)
+        if tab.search(games, game) then
+            local kind, num = printlib.getTMNum(move, gen)
+            return { move, kind, num }
+        else
+            return nil
+        end
     end,
     dataMap = tab.mapToNum,
     -- elements of res are like
@@ -242,6 +250,12 @@ p.dicts.tm = {
         -- "kind" are already sorted alfabetically
         return a[2] > b[2]
             or (a[2] == b[2] and tonumber(a[3]) < tonumber(b[3]))
+    end,
+    toGameEqCheck = function(data)
+        return tab.filter(data, function(entry) return tonumber(entry[3]) < 172 end)
+    end,
+    getSingleGameData = function(res)
+        return res[#res]
     end,
     makeEntry = function(poke, gen, game, entry)
         local move = entry[1]
@@ -262,7 +276,7 @@ p.dicts.breed = {
 		-- means the breed is a remnant of preevos.
 		-- For instance, Abra has Confusione listed via breed, but its evos
 		-- learn it via level
-		if learnlist.learnKind(move, poke, gen, "level") then
+		if printlib.learnKind(move, poke, gen, "level") then
 			return nil
 		end
         -- If the current game is among the games the Pokémon can learn the
@@ -279,6 +293,7 @@ p.dicts.breed = {
     lt = function(a, b)
         return a < b
     end,
+    getSingleGameData = function(res) return res[1] end,
     makeEntry = function(poke, gen, game, move)
         -- val :: <movename>
         return str.interp(p.strings.ENTRIES.breed, {
@@ -311,6 +326,7 @@ p.dicts.preevo = {
     lt = function(a, b)
         return a[1] < b[1]
     end,
+    getSingleGameData = function(res) return res[1] end,
     makeEntry = function(poke, gen, game, val)
         local move = val[1]
         local preevos = val[2]
@@ -329,17 +345,17 @@ p.dicts.preevo = {
 }
 
 
-p.level = function(poke, game)
-    return p.entryGeneric(poke, game, "level")
+p.level = function(poke)
+    return p.entryGeneric(poke, "level")
 end
-p.tm = function(poke, game)
-    return p.entryGeneric(poke, game, "tm")
+p.tm = function(poke)
+    return p.entryGeneric(poke, "tm")
 end
-p.breed = function(poke, game)
-    return p.entryGeneric(poke, game, "breed")
+p.breed = function(poke)
+    return p.entryGeneric(poke, "breed")
 end
-p.preevo = function(poke, game)
-    return p.entryGeneric(poke, game, "preevo")
+p.preevo = function(poke)
+    return p.entryGeneric(poke, "preevo")
 end
 
 return p

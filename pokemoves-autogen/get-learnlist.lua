@@ -44,53 +44,8 @@ end
 
 -- ================================== Utils ==================================
 -- Print the learnlist of a single Pokémon/form in a single game
-local function printOne(poke, game)
-    return printer[kind](poke, game)
-end
-
-local strings = {
-    TABS_HEADER = "{{Tabs/header|style=border}}",
-    TABS_HEADERITEM = "{{Tabs/headeritem|n=${n}|title=${gameName}${active}}}",
-    TABS_HEADERACTIVE = "|active=yes",
-    TABS_BODY = "{{Tabs/body}}",
-    TABS_ITEM = "{{Tabs/item|n=${n}${active}|content=\n${content}\n}}",
-    TABS_FOOTER = "{{Tabs/footer}}",
-}
-
--- Print the learnlist of a single Pokémon/form in all the games, including the
--- tabs code
-local function printPoke(poke)
-    -- Use the list of games in which the Pokémon exists provided by printer
-    local games = tab.filter(printer.games[kind], function(game)
-        return printer.existsInGame(poke, game)
-    end)
-    local gamells = tab.map(games, function(game)
-        return printOne(poke, game)
-    end)
-    if tab.all(gamells, function(ll) return ll == gamells[1] end) then
-        -- All equal, no tabs
-        return gamells[1]
-    else
-        return table.concat({
-            strings.TABS_HEADER,
-            wlib.mapAndConcat(games, function(game, n)
-                return str.interp(strings.TABS_HEADERITEM, {
-                    n = n,
-                    gameName = printer.getGameName[game],
-                    active = printer.isGameActive(n) and strings.TABS_HEADERACTIVE or "",
-                })
-            end, "\n"),
-            strings.TABS_BODY,
-            wlib.mapAndConcat(gamells, function(ll, n)
-                return str.interp(strings.TABS_ITEM, {
-                    n = n,
-                    content = ll,
-                    active = printer.isGameActive(n) and strings.TABS_HEADERACTIVE or "",
-                })
-            end, "\n"),
-            strings.TABS_FOOTER,
-        }, "\n")
-    end
+local function printOne(poke)
+    return printer[kind](poke)
 end
 
 -- =================================== Main ===================================
@@ -127,7 +82,7 @@ local allequals = tab.all(interestingForms, function(abbr)
     return tab.equal(pokemoves[formname][kind], baselld)
 end)
 if allequals then
-    print(printPoke(gpoke))
+    print(printOne(gpoke))
     return 0
 end
 
@@ -138,7 +93,7 @@ local formlls = tab.map(interestingForms, function(abbr)
     local formname = gpoke .. formlib.toEmptyAbbr(abbr)
     local formextname = pokealt.names[abbr]
     formextname = formextname == "" and pokes[gpoke].name or formextname
-    return { formextname, printPoke(formname) }
+    return { formextname, printOne(formname) }
 end)
 for _, v in ipairs(formlls) do
     print("=====" .. v[1] .. "=====")
