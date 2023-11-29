@@ -3,29 +3,66 @@
 Utils for print-learnlist-n with n >= 9
 
 --]]
--- luacheck: globals pokemoves tempoutdir
-require('source-modules')
+-- luacheck: globals tempoutdir
+require('source-modules')(false)
+
+package.path = package.path .. ";/home/Mio/Flavio/2-giochi/Pokémon/Wiki/Script/wiki-util/pokemoves-autogen/learnlist-gen/require-fallback.lua"
 
 local l = {}
 
 local str = require("Wikilib-strings")
 local tab = require("Wikilib-tables")
 local learnlib = require("Wikilib-learnlists")
-local scriptslib = require("lua-scripts.lib")
+-- local scriptslib = require("lua-scripts.lib")
 local wlib = require('Wikilib')
-local pokemoves = require("learnlist-gen.pokemoves-data")
--- local genlib = require('Wikilib-gens')
--- local multigen = require('Wikilib-multigen')
--- local formlib = require('Wikilib-forms')
--- local learnlist = require('learnlist-gen.learnlist')
--- local moves = require("Move-data")
--- local pokes = require("Poké-data")
--- local altdata = require("AltForms-data")
 
+-- copy of Wikilib-learnlists.games
+l.games = {
+    level = {
+        { "RB", "G" },
+        { "OA", "C" },
+        { "RZ", "RFVF", "S" },
+        { "DP", "Pt", "HGSS" },
+        { "NB", "N2B2" },
+        { "XY", "ROZA" },
+        { "SL", "USUL" },
+        { "SpSc", "DLPS" },
+        { "SV", "SV-2" },
+    },
+    tm = { {}, {}, {}, {}, {}, {}, {}, { "SpSc", "DLPS" }, { "SV", "SV-2" } },
+    breed = {
+        {},
+        { "OA", "C" },
+        { "RZ", "RFVF", "S" },
+        { "DP", "Pt", "HGSS" },
+        { "NB", "N2B2" },
+        { "XY", "ROZA" },
+        { "SL", "USUL" },
+        { "SpSc", "DLPS" },
+        { "SV", "SV-2" },
+    },
+    tutor = {
+        {},
+        { "C" },
+        { "RFVF", "S", "XD" },
+        { "DP", "Pt", "HGSS" },
+        { "NB", "N2B2" },
+        { "XY", "ROZA" },
+        { "SL", "USUL" },
+        { "SpSc", "IA", "DLPS" },
+        { },
+    },
+    preevo =  { {}, {}, {}, {}, {}, {}, {}, { "SpSc", "DLPS" }, { "SV", "SV-2" } },
+}
+
+
+l.requirepm = function(poke)
+    return require(tempoutdir .. ".luamoves-final." .. poke)
+end
 
 -- Get the list of games by kind for the given generation
 l.getGames = function(gen)
-    return tab.map(scriptslib.games, function(lst)
+    return tab.map(l.games, function(lst)
         return lst[gen]
     end)
 end
@@ -43,8 +80,6 @@ end
 
 -- Re-expose getTMNum
 l.getTMNum = learnlib.getTMNum
-
-l.learnKind = scriptslib.learnKind
 
 -- Checks whether the entry is alltm
 l.isAlltm = function(kind, pmkindgen)
@@ -70,6 +105,31 @@ l.allEquals = function(t, iter)
     return true
 end
 
+--[[
+
+Given a move, an ndex, a gen and a kind check whether that Pokémon can learn
+that move in that generation in that kind. Return a true value if it can, a
+false otherwise.
+Arguments:
+    - pmoves: the data for the given pokemon (pokemoves[poke])
+	- move: name of the move
+	- gen: generation (a string)
+	- kind: kind of learnlist ("level", "tm", ...)
+
+--]]
+l.learnKind = function(pmoves, move, gen, kind)
+    local pmkind = pmoves[kind]
+    if not pmkind or not pmkind[gen] then
+        return false
+    end
+    local mdata = pmkind[gen]
+    if kind == "tm" and mdata.all then
+        return (tab.deepSearch(tmdata[gen], move))
+    else
+        return mdata[move]
+    end
+end
+
 -- ====================== "Decompress" PokéMoves entries ======================
 -- Decompress a level entry. A level entry is the "table" obtained picking a
 -- pokemon, generation and move from pokemoves-data
@@ -82,7 +142,7 @@ l.decompressLevelEntry = function(entry, gen)
 		res = { { entry } }
 	end
 	if #res == 1 then
-		res = tab.map(scriptslib.games.level[gen], function()
+		res = tab.map(l.games.level[gen], function()
 			return tab.copy(res[1])
 		end)
 	end

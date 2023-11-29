@@ -5,7 +5,7 @@ Script to build learnlist-entry calls from pokemoves-data
 TODO: support alltm
 
 --]]
--- luacheck: globals pokemoves tempoutdir
+-- luacheck: globals tempoutdir
 require('source-modules')
 
 local p = {}
@@ -21,7 +21,6 @@ local printlib = require("learnlist-gen.print-learnlist-lib")
 local moves = require("Move-data")
 local pokes = require("Poké-data")
 local altdata = require("AltForms-data")
-local pokemoves = require("learnlist-gen.pokemoves-data")
 
 local gen = 9
 
@@ -63,19 +62,21 @@ local pokesSV2 = {
     "cleffa", "conkeldurr", "corphish", "cramorant", "crawdaunt", "cutiefly",
     "darkrai", "dipplin", "ducklett", "dusclops", "dusknoir", "duskull",
     "ekans", "empoleon", "feebas", "fezandipiti", "furret", "geodude",
-    "gligar", "gliscor", "golem", "graveler", "grotle", "grubbin", "gurdurr",
-    "hakamo-o", "hoothoot", "illumise", "infernape", "jangmo-o", "jirachi",
-    "koffing", "kommo-o", "lampent", "leavanny", "litwick", "lombre", "lotad",
-    "ludicolo", "magcargo", "mamoswine", "manaphy", "mandibuzz", "mienfoo",
-    "mienshao", "mightyena", "milotic", "monferno", "morpeko", "munchlax",
-    "munkidori", "ninetales", "noctowl", "nosepass", "nuzleaf", "ogerpon",
+    "geodudeA", "gligar", "gliscor", "golem", "golemA", "graveler",
+    "gravelerA", "grotle", "grubbin", "gurdurr", "hakamo-o", "hoothoot",
+    "illumise", "infernape", "jangmo-o", "jirachi", "koffing", "kommo-o",
+    "lampent", "leavanny", "litwick", "lombre", "lotad", "ludicolo",
+    "magcargo", "mamoswine", "manaphy", "mandibuzz", "mienfoo", "mienshao",
+    "mightyena", "milotic", "monferno", "morpeko", "munchlax", "munkidori",
+    "ninetales", "ninetalesA", "noctowl", "nosepass", "nuzleaf", "ogerpon",
     "okidogi", "phantump", "phione", "piloswine", "piplup", "politoed",
     "poliwag", "poliwhirl", "poliwrath", "poltchageist", "poochyena",
-    "prinplup", "probopass", "ribombee", "sandshrew", "sandslash", "seedot",
-    "sentret", "sewaddle", "shaymin", "shiftry", "sinistcha", "slugma",
-    "snorlax", "spinarak", "swadloon", "swanna", "swinub", "timburr",
-    "torterra", "trevenant", "turtwig", "victreebel", "vikavolt", "volbeat",
-    "vullaby", "vulpix", "weepinbell", "weezing", "yanma", "yanmega",
+    "prinplup", "probopass", "ribombee", "sandshrew", "sandshrewA",
+    "sandslash", "sandslashA", "seedot", "sentret", "sewaddle", "shaymin",
+    "shayminC", "shiftry", "sinistcha", "slugma", "snorlax", "spinarak",
+    "swadloon", "swanna", "swinub", "timburr", "torterra", "trevenant",
+    "turtwig", "victreebel", "vikavolt", "volbeat", "vullaby", "vulpix",
+    "vulpixA", "weepinbell", "weezing", "weezingG", "yanma", "yanmega",
     -- New Pokémon, not returning old ones
     "ursalunaL", "dipplin", "poltchageist", "sinistcha", "okidogi",
     "munkidori", "fezandipiti", "ogerpon", "ogerponFc", "ogerponFn",
@@ -155,12 +156,12 @@ Arguments:
 
 --]]
 p.entryGeneric = function(poke, kind)
-    local pmkind = pokemoves[poke][kind]
+    local pmkind = printlib.requirepm(poke)[kind]
     local funcDict = p.dicts[kind]
 
     -- No data
     if not pmkind or not pmkind[gen] then
-        return p.strings.NULLENTRY
+        return p.addhf(p.strings.NULLENTRY, poke, kind)
     end
 
     -- All the interesting games
@@ -243,11 +244,11 @@ p.dicts.tm = {
     -- { <movename>, <kind>, <num> }
     -- num is a string
     lt = function(a, b)
-        if a[1] == b[2] then
+        if a[1] == b[1] then
             -- They are the same element, hence a < b is false
             return false
         end
-        -- "kind" are already sorted alfabetically
+        -- "kind"s are already sorted alfabetically
         return a[2] > b[2]
             or (a[2] == b[2] and tonumber(a[3]) < tonumber(b[3]))
     end,
@@ -276,30 +277,31 @@ p.dicts.breed = {
 		-- means the breed is a remnant of preevos.
 		-- For instance, Abra has Confusione listed via breed, but its evos
 		-- learn it via level
-		if printlib.learnKind(move, poke, gen, "level") then
-			return nil
-		end
+        local pmoves = printlib.requirepm(poke)
+        if printlib.learnKind(pmoves, move, gen, "level") then
+            return nil
+        end
         -- If the current game is among the games the Pokémon can learn the
         -- move in, we keep it
         if not movedata.games or tab.search(movedata.games, game) then
-            return move
+            return { move, movedata.notes or "" }
         else
             return nil
         end
     end,
     dataMap = tab.mapToNum,
     -- elements of res are just
-    -- <movename>
+    -- { <movename>, <notes> }
     lt = function(a, b)
-        return a < b
+        return a[1] < b[1]
     end,
     getSingleGameData = function(res) return res[1] end,
-    makeEntry = function(poke, gen, game, move)
-        -- val :: <movename>
+    makeEntry = function(poke, gen, game, entry)
+        -- val :: { <movename>, <notes> }
         return str.interp(p.strings.ENTRIES.breed, {
-            move = multigen.getGenValue(moves[move].name, gen),
-            STAB = p.computeSTAB(poke, move, nil, gen),
-            notes = "",
+            move = multigen.getGenValue(moves[entry[1]].name, gen),
+            STAB = p.computeSTAB(poke, entry[1], nil, gen),
+            notes = entry[2],
         })
     end
 }

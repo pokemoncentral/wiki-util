@@ -163,8 +163,9 @@ p.tabToStr = function(poke, data, breedref)
     return table.concat(res)
 end
 
-p.allToDir = function(datas, dirname, skipkeys)
+p.allToDir = function(datas, dirname, skipkeys, standalone)
     skipkeys = skipkeys or {}
+    local usebreedref = not standalone and true or nil
     -- Printing
     for poke, data in pairs(datas) do
         data.neighbours = nil
@@ -174,7 +175,13 @@ p.allToDir = function(datas, dirname, skipkeys)
             local fbr = datas[poke].breed == datas[forms.uselessToEmpty(evodata[poke].name)].breed
                         and poke ~= evodata[poke].name
             local outfile = io.open(dirname .. "/" .. poke .. ".lua", "w")
-            outfile:write(p.tabToStr(poke, data, fbr))
+            if standalone then
+                outfile:write("local m = {}\n")
+            end
+            outfile:write(p.tabToStr(poke, data, usebreedref and fbr))
+            if standalone then
+                outfile:write("\nreturn m[\"" .. poke .. "\"]")
+            end
             outfile:close()
         end
     end

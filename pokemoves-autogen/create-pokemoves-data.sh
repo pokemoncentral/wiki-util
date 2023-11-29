@@ -124,4 +124,10 @@ echo "=================== PokéMoves-data.lua compressed ===================="
 # Split Pokémon and copy them to the modules directory
 echo "================================= Final copy ================================="
 ./copy-modules.sh -s "$TEMPOUTDIR/luamoves-compress"
+
+# Split Pokémon without breedref to have separate files
+echo "============================== Making standalone =============================="
+mkdir -p "$TEMPOUTDIR/luamoves-final"
+lua "$LUASCRPITSDIR/print-standalone.lua"
+
 echo "================================== Finished =================================="

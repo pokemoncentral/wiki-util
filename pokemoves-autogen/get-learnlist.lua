@@ -17,8 +17,8 @@ do
         package.path = table.concat{ package.path, ";", path, "/?.lua" }
     end
 end
--- luacheck: globals pokemoves tempoutdir
-require('source-modules')(true)
+-- luacheck: globals tempoutdir
+require('source-modules')
 
 local tab = require('Wikilib-tables')
 local str = require('Wikilib-strings')
@@ -27,6 +27,7 @@ local formlib = require('Wikilib-forms')
 local evolib = require('Wikilib-evos')
 local altdata = require("AltForms-data")
 local pokes = require("Poké-data")
+local printlib = require("learnlist-gen.print-learnlist-lib")
 
 local gpoke = str.trim(arg[1]):lower() or "staraptor"
 local kind = str.trim(arg[2]):lower() or "level"
@@ -71,15 +72,15 @@ end
 -- We're only interested in forms with an learnlist
 local interestingForms = tab.filter(pokealt.gamesOrder, function(abbr)
     local formname = gpoke .. formlib.toEmptyAbbr(abbr)
-    return pokemoves[formname] ~= nil
+    return printlib.requirepm(formname)
 end)
 -- The learnlist data of the base form
-local baselld = pokemoves[gpoke][kind]
+local baselld = printlib.requirepm(gpoke)[kind]
 
 -- First, check if all forms have the same learnlist data
 local allequals = tab.all(interestingForms, function(abbr)
     local formname = gpoke .. formlib.toEmptyAbbr(abbr)
-    return tab.equal(pokemoves[formname][kind], baselld)
+    return tab.equal(printlib.requirepm(formname)[kind], baselld)
 end)
 if allequals then
     print(printOne(gpoke))
