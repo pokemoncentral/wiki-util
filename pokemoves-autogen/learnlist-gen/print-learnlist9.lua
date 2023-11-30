@@ -232,6 +232,9 @@ p.dicts.level = {
 -- ==================================== Tm ====================================
 p.dicts.tm = {
     processData = function(poke, gen, game, games, move)
+        if move == "all" and type(games) == "boolean" then
+            return nil
+        end
         if tab.search(games, game) then
             local kind, num = printlib.getTMNum(move, gen)
             return { move, kind, num }

@@ -126,7 +126,7 @@ echo "================================= Final copy =============================
 ./copy-modules.sh -s "$TEMPOUTDIR/luamoves-compress"
 
 # Split Pokémon without breedref to have separate files
-echo "============================== Making standalone =============================="
+echo "============================= Making standalone =============================="
 mkdir -p "$TEMPOUTDIR/luamoves-final"
 lua "$LUASCRPITSDIR/print-standalone.lua"
 

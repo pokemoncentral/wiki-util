@@ -103,14 +103,10 @@ for line in io.lines(tempoutdir .. "/pokecsv/" .. poke .. ".csv") do
 	local gen = tonumber(line[3])
 	local move = line[1]
 	if kind == "tm" then
-		-- TODO: check for alltm instead of relying on the fact that only mew
-		-- uses it
-		if poke ~= "mew" then
-			if not data.tm[gen][move] then
-				data.tm[gen][move] = { line[4] }
-			elseif not tab.search(data.tm[gen][move], line[4]) then
-				table.insert(data.tm[gen][move], line[4])
-			end
+		if not data.tm[gen][move] then
+			data.tm[gen][move] = { line[4] }
+		elseif not tab.search(data.tm[gen][move], line[4]) then
+			table.insert(data.tm[gen][move], line[4])
 		end
 	elseif kind == "tutor" then
 		local tutorgames = lib.games.tutor[gen]

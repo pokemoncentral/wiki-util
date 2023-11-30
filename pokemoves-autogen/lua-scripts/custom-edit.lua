@@ -78,7 +78,7 @@ end
 
 local function mewtm(poke, data)
     if poke == "mew" then
-        data.tm = tab.map(data.tm, function() return { all = true } end)
+        data.tm = tab.map(data.tm, function(d) d.all = true; return d end)
     end
     return data
 end
