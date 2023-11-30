@@ -14,17 +14,17 @@ do
     -- run from within the same directory it is empty, hence the check
     local path = arg[0]:match("(.-)[^/]+$")
     if path ~= "" then
-        package.path = table.concat{ package.path, ";", path, "/?.lua" }
+        package.path = table.concat({ package.path, ";", path, "/?.lua" })
     end
 end
 -- luacheck: globals tempoutdir
-require('source-modules')
+require("source-modules")
 
-local tab = require('Wikilib-tables')
-local str = require('Wikilib-strings')
-local wlib = require('Wikilib')
-local formlib = require('Wikilib-forms')
-local evolib = require('Wikilib-evos')
+local tab = require("Wikilib-tables")
+local str = require("Wikilib-strings")
+local wlib = require("Wikilib")
+local formlib = require("Wikilib-forms")
+local evolib = require("Wikilib-evos")
 local altdata = require("AltForms-data")
 local pokes = require("Poké-data")
 local printlib = require("learnlist-gen.print-learnlist-lib")
@@ -67,7 +67,7 @@ end
 -- Iterate on all alternative forms
 local pokealt = altdata[gpoke]
 if not pokealt then
-    pokealt = { gamesOrder = { "base" }, names = { base = "" }}
+    pokealt = { gamesOrder = { "base" }, names = { base = "" } }
 end
 -- We're only interested in forms with an learnlist
 local interestingForms = tab.filter(pokealt.gamesOrder, function(abbr)

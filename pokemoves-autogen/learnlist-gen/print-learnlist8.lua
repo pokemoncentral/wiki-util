@@ -6,18 +6,18 @@ TODO: support alltm
 
 --]]
 -- luacheck: globals pokemoves tempoutdir
-require('source-modules')
+require("source-modules")
 
 local p = {}
 
 local str = require("Wikilib-strings")
 local tab = require("Wikilib-tables")
-local learnlib = require('Wikilib-learnlists')
-local wlib = require('Wikilib')
-local genlib = require('Wikilib-gens')
-local multigen = require('Wikilib-multigen')
-local formlib = require('Wikilib-forms')
-local learnlist = require('learnlist-gen.learnlist')
+local learnlib = require("Wikilib-learnlists")
+local wlib = require("Wikilib")
+local genlib = require("Wikilib-gens")
+local multigen = require("Wikilib-multigen")
+local formlib = require("Wikilib-forms")
+local learnlist = require("learnlist-gen.learnlist")
 local moves = require("Move-data")
 local pokes = require("Poké-data")
 local altdata = require("AltForms-data")
@@ -35,7 +35,7 @@ p.strings = {
         breed = "|${parents}|${move}|${STAB}|${notes}| //",
         tutor = "|${move}|${STAB}|${notes}|${spscyn}|${iayn}|${dlpsyn}| //",
         preevo = "|${move}|${STAB}|${poke1}${poke2} //",
-    }
+    },
 }
 p.strings.HEADER = str.interp(p.strings.HF, { hf = "h" })
 p.strings.FOOTER = str.interp(p.strings.HF, { hf = "f" })
@@ -66,22 +66,25 @@ p.addhf = function(body, poke, gen, kind)
     local name, abbr = formlib.getnameabbr(poke)
     local pokedata = multigen.getGen(pokes[poke], gen)
     -- Interp of concat because the interp data are used twice
-    return str.interp(table.concat({
-        p.strings.HEADER,
-        body,
-        p.strings.FOOTER,
-    }, "\n"), {
-        -- "{{#invoke: learnlist-hf | ${kind}${hf} | ${poke} | ${type1} | ${type2} | ${genh} | ${genp} }}",
-        kind = kind,
-        poke = pokedata.name,
-        type1 = pokedata.type1,
-        type2 = pokedata.type2,
-        genh = gen,
-        genp = (abbr ~= "base" and abbr ~= "") and genlib.getGen.game(altdata[name].since[abbr])
-               or genlib.getGen.ndex(pokedata.ndex),
-    })
+    return str.interp(
+        table.concat({
+            p.strings.HEADER,
+            body,
+            p.strings.FOOTER,
+        }, "\n"),
+        {
+            -- "{{#invoke: learnlist-hf | ${kind}${hf} | ${poke} | ${type1} | ${type2} | ${genh} | ${genp} }}",
+            kind = kind,
+            poke = pokedata.name,
+            type1 = pokedata.type1,
+            type2 = pokedata.type2,
+            genh = gen,
+            genp = (abbr ~= "base" and abbr ~= "") and genlib.getGen.game(
+                altdata[name].since[abbr]
+            ) or genlib.getGen.ndex(pokedata.ndex),
+        }
+    )
 end
-
 
 --[[
 
@@ -159,8 +162,19 @@ do
         end
         -- If there is only one level in each game for the move, just puts them all
         -- in a single row, otherwise multiple rows
-        if tab.all(levels, function(v) return #v == 1 end) then
-            return { { move, tab.map(levels, function(t) return t[1] end) } }
+        if
+            tab.all(levels, function(v)
+                return #v == 1
+            end)
+        then
+            return {
+                {
+                    move,
+                    tab.map(levels, function(t)
+                        return t[1]
+                    end),
+                },
+            }
         end
         return oldprocessData(poke, gen, levels, move)
     end
@@ -202,8 +216,10 @@ p.dicts.tm.makeEntry = function(poke, gen, val)
         move = multigen.getGenValue(moves[move].name, gen),
         STAB = p.computeSTAB(poke, move, nil, gen),
         notes = "",
-        tmnumSpSc = val[1][2] and table.concat{ val[1][2], val[1][3]} or "no",
-        tmnumDLPS = val[2][2] and table.concat{ val[2][2], val[2][3]} or "no",
+        tmnumSpSc = val[1][2] and table.concat({ val[1][2], val[1][3] })
+            or "no",
+        tmnumDLPS = val[2][2] and table.concat({ val[2][2], val[2][3] })
+            or "no",
     })
 end
 
@@ -238,7 +254,7 @@ p.dicts.breed.makeEntry = function(poke, gen, val)
         if notes == "" then
             notes = table.concat(val.games)
         else
-            notes = table.concat{ notes, "|", table.concat(val.games) }
+            notes = table.concat({ notes, "|", table.concat(val.games) })
         end
     end
 
@@ -248,7 +264,7 @@ p.dicts.breed.makeEntry = function(poke, gen, val)
     end
     parents = wlib.mapAndConcat(parents, function(ndex)
         ndex = type(ndex) == "number" and str.tf(ndex) or ndex
-        return table.concat{ "#", ndex, "#" }
+        return table.concat({ "#", ndex, "#" })
     end)
 
     return str.interp(p.strings.ENTRIES.breed, {
@@ -284,7 +300,6 @@ p.dicts.preevo.makeEntry = function(poke, gen, val)
         poke2 = preevos[2] and makePreevoPoke(preevos[2]) or "",
     })
 end
-
 
 p.level = function(poke)
     return p.entryGeneric(poke, 8, "level")

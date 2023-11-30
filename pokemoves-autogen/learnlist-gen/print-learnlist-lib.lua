@@ -4,9 +4,10 @@ Utils for print-learnlist-n with n >= 9
 
 --]]
 -- luacheck: globals tempoutdir
-require('source-modules')(false)
+require("source-modules")(false)
 
-package.path = package.path .. ";/home/Mio/Flavio/2-giochi/Pokémon/Wiki/Script/wiki-util/pokemoves-autogen/learnlist-gen/require-fallback.lua"
+package.path = package.path
+    .. ";/home/Mio/Flavio/2-giochi/Pokémon/Wiki/Script/wiki-util/pokemoves-autogen/learnlist-gen/require-fallback.lua"
 
 local l = {}
 
@@ -14,7 +15,7 @@ local str = require("Wikilib-strings")
 local tab = require("Wikilib-tables")
 local learnlib = require("Wikilib-learnlists")
 -- local scriptslib = require("lua-scripts.lib")
-local wlib = require('Wikilib')
+local wlib = require("Wikilib")
 
 -- copy of Wikilib-learnlists.games
 l.games = {
@@ -50,11 +51,20 @@ l.games = {
         { "XY", "ROZA" },
         { "SL", "USUL" },
         { "SpSc", "IA", "DLPS" },
-        { },
+        {},
     },
-    preevo =  { {}, {}, {}, {}, {}, {}, {}, { "SpSc", "DLPS" }, { "SV", "SV-2" } },
+    preevo = {
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        { "SpSc", "DLPS" },
+        { "SV", "SV-2" },
+    },
 }
-
 
 l.requirepm = function(poke)
     return require(tempoutdir .. ".luamoves-final." .. poke)
@@ -87,7 +97,9 @@ l.isAlltm = function(kind, pmkindgen)
 end
 
 -- Identity function
-l.id = function(x) return x end
+l.id = function(x)
+    return x
+end
 
 -- Check if all elements in a table are equal
 l.allEquals = function(t, iter)
@@ -135,18 +147,18 @@ end
 -- pokemon, generation and move from pokemoves-data
 -- (ie: pokemoves[poke].level[gen][move])
 l.decompressLevelEntry = function(entry, gen)
-	local res
-	if type(entry) == 'table' then
-		res = tab.copy(entry)
-	else
-		res = { { entry } }
-	end
-	if #res == 1 then
-		res = tab.map(l.games.level[gen], function()
-			return tab.copy(res[1])
-		end)
-	end
-	return res
+    local res
+    if type(entry) == "table" then
+        res = tab.copy(entry)
+    else
+        res = { { entry } }
+    end
+    if #res == 1 then
+        res = tab.map(l.games.level[gen], function()
+            return tab.copy(res[1])
+        end)
+    end
+    return res
 end
 
 -- ================================== Level ==================================

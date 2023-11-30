@@ -1,9 +1,9 @@
 -- This file's content should be consistent with config.sh
 
 -- Add my modules' dir to lua's package.path to allow requiring them
-package.path = "lua-scripts/?.lua;" ..
-    package.path ..
-    ";/path/to/lua/modules/?.lua"
+package.path = "lua-scripts/?.lua;"
+    .. package.path
+    .. ";/path/to/lua/modules/?.lua"
 
 -- Base dir for intermediate outputs
 tempoutdir = "intermediate-outputs"

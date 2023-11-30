@@ -7,8 +7,8 @@ Library for lua files used in pokemoves-autogen
 local lib = {}
 
 -- luacheck: globals tempoutdir pokemoves
-require('source-modules')(true)
-local tab = require('Wikilib-tables')
+require("source-modules")(true)
+local tab = require("Wikilib-tables")
 local tmdata = require("Machines-data")
 local printlib = require("learnlist-gen.print-learnlist-lib")
 
@@ -45,13 +45,13 @@ Arguments:
 
 --]]
 lib.canLearn = function(move, ndex, gen, excludekinds)
-	excludekinds = excludekinds or {}
-	return tab.any(pokemoves[ndex], function(_, kind)
-		if tab.search(excludekinds, kind) then
-			return false
-		end
-		return lib.learnKind(move, ndex, gen, kind)
-	end)
+    excludekinds = excludekinds or {}
+    return tab.any(pokemoves[ndex], function(_, kind)
+        if tab.search(excludekinds, kind) then
+            return false
+        end
+        return lib.learnKind(move, ndex, gen, kind)
+    end)
 end
 
 --[[
@@ -98,24 +98,26 @@ Arguments:
 
 --]]
 lib.learnPreviousGen = function(move, ndex, gen, firstgen)
-	for g = gen - 1, firstgen or 1, -1 do
-		if tab.any(pokemoves[ndex], function(_, kind)
-			return lib.learnKind(move, ndex, g, kind)
-		end) then
-			return g
-		end
-	end
-	return false
+    for g = gen - 1, firstgen or 1, -1 do
+        if
+            tab.any(pokemoves[ndex], function(_, kind)
+                return lib.learnKind(move, ndex, g, kind)
+            end)
+        then
+            return g
+        end
+    end
+    return false
 end
 
 -- Get the ndex from a key, that is either a number or a string. If it's a
 -- string, it may be an ndex followed by an abbr or a name. If the key is an
 -- ndex (possibly with an abbr) returns the numeric ndex, otherwise nil
 lib.getNdex = function(poke)
-	if type(poke) == "number" then
-		return poke
-	end
-	return type(poke) == "string" and tonumber(poke:match("%d+")) or nil
+    if type(poke) == "number" then
+        return poke
+    end
+    return type(poke) == "string" and tonumber(poke:match("%d+")) or nil
 end
 
 return lib

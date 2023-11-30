@@ -6,17 +6,17 @@ TODO: support alltm
 
 --]]
 -- luacheck: globals tempoutdir
-require('source-modules')
+require("source-modules")
 
 local p = {}
 
 local str = require("Wikilib-strings")
 local tab = require("Wikilib-tables")
-local learnlib = require('Wikilib-learnlists')
-local wlib = require('Wikilib')
-local genlib = require('Wikilib-gens')
-local multigen = require('Wikilib-multigen')
-local formlib = require('Wikilib-forms')
+local learnlib = require("Wikilib-learnlists")
+local wlib = require("Wikilib")
+local genlib = require("Wikilib-gens")
+local multigen = require("Wikilib-multigen")
+local formlib = require("Wikilib-forms")
 local printlib = require("learnlist-gen.print-learnlist-lib")
 local moves = require("Move-data")
 local pokes = require("Poké-data")
@@ -35,7 +35,7 @@ p.strings = {
         breed = "|${move}|${STAB}|${notes}| //",
         tutor = "|${move}|${STAB}|${notes}|${yn}| //",
         preevo = "|${move}|${STAB}|${poke1}${poke2} //",
-    }
+    },
 }
 p.strings.HEADER = str.interp(p.strings.HF, { hf = "h" })
 p.strings.FOOTER = str.interp(p.strings.HF, { hf = "f" })
@@ -48,7 +48,9 @@ p.gameNames = {
     "Ver 2.0.1",
 }
 -- 2 is the index of "SV-2"
-p.isGameActive = function(num) return num == 2 end
+p.isGameActive = function(num)
+    return num == 2
+end
 
 p.computeSTAB = printlib.computeSTAB
 
@@ -56,6 +58,7 @@ p.computeSTAB = printlib.computeSTAB
 p.alltm = printlib.isAlltm
 
 -- These Pokémon weren't in SV, and were added in SV-2
+-- stylua: ignore
 local pokesSV2 = {
     "aipom", "ambipom", "arbok", "ariados", "bellsprout", "chandelure",
     "charjabug", "chimchar", "chimecho", "chingling", "clefable", "clefairy",
@@ -107,21 +110,27 @@ Arguments:
 p.addhf = function(body, poke, kind)
     local name, abbr = formlib.getnameabbr(poke)
     local pokedata = multigen.getGen(pokes[poke], gen)
+
+    local genp = (abbr ~= "base" and abbr ~= "")
+            and genlib.getGen.game(altdata[name].since[abbr])
+        or genlib.getGen.ndex(pokedata.ndex)
     -- Interp of concat because the interp data are used twice
-    return str.interp(table.concat({
-        p.strings.HEADER,
-        body,
-        p.strings.FOOTER,
-    }, "\n"), {
-        -- "{{#invoke: learnlist-hf | ${kind}${hf} | ${poke} | ${type1} | ${type2} | ${genh} | ${genp} }}",
-        kind = kind,
-        poke = pokedata.name,
-        type1 = pokedata.type1,
-        type2 = pokedata.type2,
-        genh = gen,
-        genp = (abbr ~= "base" and abbr ~= "") and genlib.getGen.game(altdata[name].since[abbr])
-               or genlib.getGen.ndex(pokedata.ndex),
-    })
+    return str.interp(
+        table.concat({
+            p.strings.HEADER,
+            body,
+            p.strings.FOOTER,
+        }, "\n"),
+        {
+            -- "{{#invoke: learnlist-hf | ${kind}${hf} | ${poke} | ${type1} | ${type2} | ${genh} | ${genp} }}",
+            kind = kind,
+            poke = pokedata.name,
+            type1 = pokedata.type1,
+            type2 = pokedata.type2,
+            genh = gen,
+            genp = genp,
+        }
+    )
 end
 
 -- Build a single learnlist call given the preprocessed data
@@ -185,9 +194,13 @@ p.entryGeneric = function(poke, kind)
     end
 
     -- Different: print all in tabs
-    return printlib.putInTabs(p.gameNames, tab.map(res, function(r)
-        return p.makeSingleGameEntry(r, poke, kind)
-    end), p.isGameActive)
+    return printlib.putInTabs(
+        p.gameNames,
+        tab.map(res, function(r)
+            return p.makeSingleGameEntry(r, poke, kind)
+        end),
+        p.isGameActive
+    )
 end
 
 p.dicts = {}
@@ -209,7 +222,9 @@ p.dicts.level = {
     lt = function(a, b)
         return a[2] == b[2] and a[1] < b[1] or printlib.ltLevel(a[2], b[2])
     end,
-    getSingleGameData = function(res) return res[1] end,
+    getSingleGameData = function(res)
+        return res[1]
+    end,
     --[[
     makeEntry: create the string of an entry from an element produced by processData.
         Takes three arguments:
@@ -226,7 +241,7 @@ p.dicts.level = {
             notes = "",
             level = str.fu(entry[2]),
         })
-    end
+    end,
 }
 
 -- ==================================== Tm ====================================
@@ -252,11 +267,12 @@ p.dicts.tm = {
             return false
         end
         -- "kind"s are already sorted alfabetically
-        return a[2] > b[2]
-            or (a[2] == b[2] and tonumber(a[3]) < tonumber(b[3]))
+        return a[2] > b[2] or (a[2] == b[2] and tonumber(a[3]) < tonumber(b[3]))
     end,
     toGameEqCheck = function(data)
-        return tab.filter(data, function(entry) return tonumber(entry[3]) < 172 end)
+        return tab.filter(data, function(entry)
+            return tonumber(entry[3]) < 172
+        end)
     end,
     getSingleGameData = function(res)
         return res[#res]
@@ -268,18 +284,18 @@ p.dicts.tm = {
             move = multigen.getGenValue(moves[move].name, gen),
             STAB = p.computeSTAB(poke, move, nil, gen),
             notes = "",
-            tmnum = table.concat{ entry[2], entry[3] },
+            tmnum = table.concat({ entry[2], entry[3] }),
         })
-    end
+    end,
 }
 
 -- ================================== Breed ==================================
 p.dicts.breed = {
     processData = function(poke, gen, game, movedata, move)
-		-- If the Pokémon can learn the move via level, drops it since it
-		-- means the breed is a remnant of preevos.
-		-- For instance, Abra has Confusione listed via breed, but its evos
-		-- learn it via level
+        -- If the Pokémon can learn the move via level, drops it since it
+        -- means the breed is a remnant of preevos.
+        -- For instance, Abra has Confusione listed via breed, but its evos
+        -- learn it via level
         local pmoves = printlib.requirepm(poke)
         if printlib.learnKind(pmoves, move, gen, "level") then
             return nil
@@ -298,7 +314,9 @@ p.dicts.breed = {
     lt = function(a, b)
         return a[1] < b[1]
     end,
-    getSingleGameData = function(res) return res[1] end,
+    getSingleGameData = function(res)
+        return res[1]
+    end,
     makeEntry = function(poke, gen, game, entry)
         -- val :: { <movename>, <notes> }
         return str.interp(p.strings.ENTRIES.breed, {
@@ -306,7 +324,7 @@ p.dicts.breed = {
             STAB = p.computeSTAB(poke, entry[1], nil, gen),
             notes = entry[2],
         })
-    end
+    end,
 }
 
 -- ================================== Preevo ==================================
@@ -321,9 +339,13 @@ end
 
 p.dicts.preevo = {
     processData = function(poke, gen, game, preevos, move)
-        return { move, tab.map(preevos, function(ndex)
-            return { ndex, "" }
-        end, ipairs), games = preevos.games }
+        return {
+            move,
+            tab.map(preevos, function(ndex)
+                return { ndex, "" }
+            end, ipairs),
+            games = preevos.games,
+        }
     end,
     dataMap = tab.mapToNum,
     -- elements of res are like
@@ -331,7 +353,9 @@ p.dicts.preevo = {
     lt = function(a, b)
         return a[1] < b[1]
     end,
-    getSingleGameData = function(res) return res[1] end,
+    getSingleGameData = function(res)
+        return res[1]
+    end,
     makeEntry = function(poke, gen, game, val)
         local move = val[1]
         local preevos = val[2]
@@ -346,9 +370,8 @@ p.dicts.preevo = {
             poke1 = makePreevoPoke(preevos[1]),
             poke2 = preevos[2] and makePreevoPoke(preevos[2]) or "",
         })
-    end
+    end,
 }
-
 
 p.level = function(poke)
     return p.entryGeneric(poke, "level")

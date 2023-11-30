@@ -18,18 +18,18 @@ Some useful informations for developers:
 
 --]]
 -- luacheck: globals pokemoves tempoutdir
-require('source-modules')
+require("source-modules")
 
 local l = {}
 
-local str = require('Wikilib-strings')
-local tab = require('Wikilib-tables')
-local lib = require('Wikilib-learnlists')
-local genlib = require('Wikilib-gens')
-local multigen = require('Wikilib-multigen')
-local wlib = require('Wikilib')
-local links = require('Links')
-local hf = require('Learnlist-hf')
+local str = require("Wikilib-strings")
+local tab = require("Wikilib-tables")
+local lib = require("Wikilib-learnlists")
+local genlib = require("Wikilib-gens")
+local multigen = require("Wikilib-multigen")
+local wlib = require("Wikilib")
+local links = require("Links")
+local hf = require("Learnlist-hf")
 local sup = require("Sup-data")
 local pokes = require("Poké-data")
 local mtdata = require("Machines-data")
@@ -72,15 +72,15 @@ here. Right now, this issue isn't happening because those notes are precomputed
 
 --]]
 l.breednotes = function(gen, move, parent, basenotes)
-	local notes = { basenotes }
-	-- To compute notes it checks only one parent because they should all be
-	-- the same for this. Otherwise the different one would be the only one
-	-- (for instance: parents that need a chain aren't listed if there are
-	-- some that doesn't)
+    local notes = { basenotes }
+    -- To compute notes it checks only one parent because they should all be
+    -- the same for this. Otherwise the different one would be the only one
+    -- (for instance: parents that need a chain aren't listed if there are
+    -- some that doesn't)
 
     if gen ~= 9 then
         -- All these notes are not needed in gen 9 (because of picnic)
-        if parent and not l.canLearn(move, parent, gen, {"breed"}) then
+        if parent and not l.canLearn(move, parent, gen, { "breed" }) then
             if l.learnKind(move, parent, gen, "breed") then
                 -- Parent can learn by breed but not in any other way: chain
                 table.insert(notes, 1, "catena di accoppiamenti")
@@ -89,6 +89,7 @@ l.breednotes = function(gen, move, parent, basenotes)
             -- gen it should in a past one
             -- elseif l.learnPreviousGen(move, parent1, gen) then
             else
+                -- stylua: ignore
                 table.insert(notes, 1, "il padre deve aver imparato la mossa in una generazione precedente")
             end
         elseif not parent then
@@ -96,7 +97,7 @@ l.breednotes = function(gen, move, parent, basenotes)
         end
     end
 
-	return table.concat(notes, ", ")
+    return table.concat(notes, ", ")
 end
 
 -- ====================== "Decompress" PokéMoves entries ======================
@@ -104,30 +105,30 @@ end
 -- pokemon, generation and move from pokemoves-data
 -- (ie: pokemoves[poke].level[gen][move])
 l.decompressLevelEntry = function(entry, gen)
-	local res
-	if type(entry) == 'table' then
-		res = tab.copy(entry)
-	else
-		res = { { entry } }
-	end
-	-- if type(res[1]) ~= 'table' then
-	-- 	res[1] = {res[1]}
-	-- end
-	if #res == 1 then
-		res = tab.map(lib.games.level[gen], function()
-			return tab.copy(res[1])
-		end)
-	end
-	return res
+    local res
+    if type(entry) == "table" then
+        res = tab.copy(entry)
+    else
+        res = { { entry } }
+    end
+    -- if type(res[1]) ~= 'table' then
+    -- 	res[1] = {res[1]}
+    -- end
+    if #res == 1 then
+        res = tab.map(lib.games.level[gen], function()
+            return tab.copy(res[1])
+        end)
+    end
+    return res
 end
 
 -- Get a decompressed level entry
 l.getLevelEntry = function(move, ndex, gen)
-	local pmkind = pokemoves[ndex].level
-	if not pmkind or not pmkind[gen] or not pmkind[gen][move] then
-		return nil
-	end
-	return l.decompressLevelEntry(pmkind[gen][move], gen)
+    local pmkind = pokemoves[ndex].level
+    if not pmkind or not pmkind[gen] or not pmkind[gen][move] then
+        return nil
+    end
+    return l.decompressLevelEntry(pmkind[gen][move], gen)
 end
 
 -- Get the list of games by kind for the given generation
@@ -151,18 +152,18 @@ Arguments:
 
 --]]
 l.learnKind = function(move, ndex, gen, kind)
-	local pmkind = pokemoves[ndex][kind]
-	if not pmkind or not pmkind[gen] then
-		return false
-	end
-	local mdata = pmkind[gen]
-	if kind == "tm" then
-		local mlist = mdata.all and mtdata[gen] or mdata
-		-- Extra parentheses to force a single return value
-		return (tab.deepSearch(mlist, move))
-	else
-		return mdata[move]
-	end
+    local pmkind = pokemoves[ndex][kind]
+    if not pmkind or not pmkind[gen] then
+        return false
+    end
+    local mdata = pmkind[gen]
+    if kind == "tm" then
+        local mlist = mdata.all and mtdata[gen] or mdata
+        -- Extra parentheses to force a single return value
+        return (tab.deepSearch(mlist, move))
+    else
+        return mdata[move]
+    end
 end
 
 --[[
@@ -179,13 +180,13 @@ Arguments:
 
 --]]
 l.canLearn = function(move, ndex, gen, excludekinds)
-	excludekinds = excludekinds or {}
-	return tab.any(pokemoves[ndex], function(_, kind)
-		if tab.search(excludekinds, kind) then
-			return false
-		end
-		return l.learnKind(move, ndex, gen, kind)
-	end)
+    excludekinds = excludekinds or {}
+    return tab.any(pokemoves[ndex], function(_, kind)
+        if tab.search(excludekinds, kind) then
+            return false
+        end
+        return l.learnKind(move, ndex, gen, kind)
+    end)
 end
 
 --[[
@@ -202,16 +203,17 @@ Arguments:
 
 --]]
 l.learnPreviousGen = function(move, ndex, gen, firstgen)
-	for g = gen - 1, firstgen or 1, -1 do
-		if tab.any(pokemoves[ndex], function(_, kind)
-			return l.learnKind(move, ndex, g, kind)
-		end) then
-			return g
-		end
-	end
-	return false
+    for g = gen - 1, firstgen or 1, -1 do
+        if
+            tab.any(pokemoves[ndex], function(_, kind)
+                return l.learnKind(move, ndex, g, kind)
+            end)
+        then
+            return g
+        end
+    end
+    return false
 end
-
 
 -- ========================== End Wikilib-learnlists ==========================
 --[[
@@ -227,12 +229,17 @@ Arguments:
 --]]
 l.addhf = function(str, poke, gen, kind)
     local pokedata = multigen.getGen(pokes[poke], gen)
-    local hfargs = { pokedata.name, pokedata.type1, pokedata.type2, gen,
-                     genlib.getGen.ndex(pokedata.ndex) }
+    local hfargs = {
+        pokedata.name,
+        pokedata.type1,
+        pokedata.type2,
+        gen,
+        genlib.getGen.ndex(pokedata.ndex),
+    }
     return table.concat({
-        hf[kind .. "h"]{ args = hfargs },
+        hf[kind .. "h"]({ args = hfargs }),
         str,
-        hf[kind .. "f"]{ args = hfargs },
+        hf[kind .. "f"]({ args = hfargs }),
     }, "\n")
 end
 
@@ -278,8 +285,9 @@ l.entryLua = function(poke, gen, kind)
     local res = {}
     local pmkind = pokemoves[poke][kind]
     if pmkind and pmkind[gen] then
-        res = funcDict.dataMap(pmkind[gen],
-            function(v, k) return funcDict.processData(poke, gen, v, k) end)
+        res = funcDict.dataMap(pmkind[gen], function(v, k)
+            return funcDict.processData(poke, gen, v, k)
+        end)
     end
     local resstr
     if #res == 0 then
@@ -362,9 +370,12 @@ l.dicts.level = {
         -- levels = { {"inizio"}, {"inizio", "evo"} },
         local alllevels = tab.unique(tab.flatten(levels))
         return tab.map(alllevels, function(lvl)
-            return { move, tab.map(levels, function(t)
-                return tab.search(t, lvl) and lvl or false
-            end) }
+            return {
+                move,
+                tab.map(levels, function(t)
+                    return tab.search(t, lvl) and lvl or false
+                end),
+            }
         end)
     end,
     dataMap = tab.flatMapToNum,
@@ -420,7 +431,10 @@ l.dicts.tm = {
             if aval[2] and bval[2] then
                 -- If both exists can compare right away
                 return aval[2] > bval[2]
-                        or (aval[2] == bval[2] and tonumber(aval[3]) < tonumber(bval[3]))
+                    or (
+                        aval[2] == bval[2]
+                        and tonumber(aval[3]) < tonumber(bval[3])
+                    )
             elseif not aval[2] and bval[2] then
                 return false
             elseif aval[2] and not bval[2] then
@@ -437,21 +451,26 @@ l.dicts.tm = {
 -- ================================== Breed ==================================
 l.dicts.breed = {
     processData = function(poke, gen, movedata, move)
-		-- If the Pokémon can learn the move via level, drops it since it
-		-- means the breed is a remnant of preevos.
-		-- For instance, Abra has Confusione listed via breed, but its evos
-		-- learn it via level
-		if l.learnKind(move, poke, gen, "level") then
-			return nil
-		end
+        -- If the Pokémon can learn the move via level, drops it since it
+        -- means the breed is a remnant of preevos.
+        -- For instance, Abra has Confusione listed via breed, but its evos
+        -- learn it via level
+        if l.learnKind(move, poke, gen, "level") then
+            return nil
+        end
         -- Bulba style: in a Pokémon page it prints parents for the latest game
-        local parents = lib.moveParentsGame(movedata,
-                        lib.games.breed[gen][#lib.games.breed[gen]])
+        local parents = lib.moveParentsGame(
+            movedata,
+            lib.games.breed[gen][#lib.games.breed[gen]]
+        )
 
         local notes = movedata.notes or l.breednotes(gen, move, parents[1])
-        local res = { move, parents[1] and parents or { 000 }, str.fu(notes),
-                      games = movedata.games
-                    }
+        local res = {
+            move,
+            parents[1] and parents or { 000 },
+            str.fu(notes),
+            games = movedata.games,
+        }
         return res
     end,
     dataMap = tab.mapToNum,
@@ -469,7 +488,7 @@ l.dicts.tutor = {
             move,
             tab.zip(lib.games.tutor[gen], games, function(a, b)
                 return { a, b and "Yes" or "No" }
-            end)
+            end),
         }
     end,
     dataMap = tab.mapToNum,
@@ -489,9 +508,13 @@ l.dicts.tutor = {
 -- ================================== Preevo ==================================
 l.dicts.preevo = {
     processData = function(_, _, preevos, move)
-        return { move, tab.map(preevos, function(ndex)
-            return { ndex, "" }
-        end, ipairs), games = preevos.games }
+        return {
+            move,
+            tab.map(preevos, function(ndex)
+                return { ndex, "" }
+            end, ipairs),
+            games = preevos.games,
+        }
     end,
     dataMap = tab.mapToNum,
     -- elements of res are like

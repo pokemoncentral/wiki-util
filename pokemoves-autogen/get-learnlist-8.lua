@@ -20,16 +20,16 @@ do
     -- run from within the same directory it is empty, hence the check
     local path = arg[0]:match("(.-)[^/]+$")
     if path ~= "" then
-        package.path = table.concat{ package.path, ";", path, "/?.lua" }
+        package.path = table.concat({ package.path, ";", path, "/?.lua" })
     end
 end
 -- luacheck: globals pokemoves tempoutdir
-require('source-modules')(true)
+require("source-modules")(true)
 
-local tab = require('Wikilib-tables')
-local str = require('Wikilib-strings')
-local formlib = require('Wikilib-forms')
-local evolib = require('Wikilib-evos')
+local tab = require("Wikilib-tables")
+local str = require("Wikilib-strings")
+local formlib = require("Wikilib-forms")
+local evolib = require("Wikilib-evos")
 local altdata = require("AltForms-data")
 local pokes = require("Poké-data")
 

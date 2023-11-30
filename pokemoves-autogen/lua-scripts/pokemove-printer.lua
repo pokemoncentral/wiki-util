@@ -12,18 +12,18 @@ The COMPRESS local variable defines whether the output should be "compressed"
 a debug version of the module.
 
 --]]
-require('source-modules')
+require("source-modules")
 
 local COMPRESS = true
 
-require('dumper')
+require("dumper")
 -- luacheck: globals DataDumper
 
-local pokes = require('Poké-data')
+local pokes = require("Poké-data")
 local evodata = require("Evo-data")
-local tab = require('Wikilib-tables')
-local str = require('Wikilib-strings')
-local forms = require('Wikilib-forms')
+local tab = require("Wikilib-tables")
+local str = require("Wikilib-strings")
+local forms = require("Wikilib-forms")
 
 local p = {}
 
@@ -32,32 +32,33 @@ local p = {}
 -- string, it may be an ndex followed by an abbr or a name. If the key is an
 -- ndex (possibly with an abbr) returns the numeric ndex, otherwise nil
 local function getNdex(poke)
-	if type(poke) == "number" then
-		return poke
-	end
-	return type(poke) == "string" and tonumber(poke:match("%d+")) or nil
+    if type(poke) == "number" then
+        return poke
+    end
+    return type(poke) == "string" and tonumber(poke:match("%d+")) or nil
 end
 
 local function compressOutput(s)
     return s:gsub("%{%s*%}", "{}")
-            :gsub("%{%},%s*\n%s*%{%}", "{}, {}")
-            :gsub("%{%},%s*\n%s*%{%}", "{}, {}")
-            :gsub(" *\n", "\n")
+        :gsub("%{%},%s*\n%s*%{%}", "{}, {}")
+        :gsub("%{%},%s*\n%s*%{%}", "{}, {}")
+        :gsub(" *\n", "\n")
 end
 
 local function compressPattern(pattern, spaces, s)
-    s = s:gsub(pattern .. '\n%s*', '%1, ')
+    s = s:gsub(pattern .. "\n%s*", "%1, ")
     local i = s:find(pattern)
     -- Numbers are empirically determined
     local ni = (s:find("{\n", 10) or 0) + 8
     while i ~= nil do
         ni = (s:find("\n", ni + 1) or i + 1) < i and (i - 10) or ni
         if i - ni > 70 then
-            s = table.concat{
+            s = table.concat({
                 s:sub(0, i + 1),
-                "\n", string.rep(" ", spaces),
-                s:sub(i + 2)
-            }
+                "\n",
+                string.rep(" ", spaces),
+                s:sub(i + 2),
+            })
             ni = i
         end
         i = s:find(pattern, i + 1)
@@ -69,7 +70,7 @@ local function compressTm(s)
     return compressPattern('("),', 7, s)
 end
 local function compressBrd(s)
-    return compressPattern('(%d),', 11, s)
+    return compressPattern("(%d),", 11, s)
 end
 
 local dumpTab = function(val, id)
@@ -82,7 +83,7 @@ end
 
 p.tabToStr = function(poke, data, breedref)
     local res = {}
-    table.insert(res, "m[\"" .. poke .. "\"] = {")
+    table.insert(res, 'm["' .. poke .. '"] = {')
     if not COMPRESS then
         table.insert(res, "\n")
     end
@@ -95,15 +96,18 @@ p.tabToStr = function(poke, data, breedref)
     -- ================================== TM ==================================
     -- Counterintuitively, compressTm is used when output is NOT compressed
     -- because is weaker than full compression and is usefull for legibility
-    table.insert(res, COMPRESS and dumpTab(data.tm, "tm")
-                      or compressTm(dumpTab(data.tm, "tm")))
+    table.insert(
+        res,
+        COMPRESS and dumpTab(data.tm, "tm")
+            or compressTm(dumpTab(data.tm, "tm"))
+    )
     table.insert(res, ",")
     if not COMPRESS then
         table.insert(res, "\n")
     end
     -- ================================ BREED ================================
     if breedref then
-        table.insert(res, "breed = m[\"")
+        table.insert(res, 'breed = m["')
         -- Some special cases
         -- if poke == "meowsticF" then
         --     table.insert(res, "espurr")
@@ -113,13 +117,16 @@ p.tabToStr = function(poke, data, breedref)
         else
             table.insert(res, evodata[poke].name)
         end
-        table.insert(res, "\"].breed,")
+        table.insert(res, '"].breed,')
         if not COMPRESS then
             table.insert(res, "\n")
         end
     else
-        table.insert(res, COMPRESS and dumpTab(data.breed, "breed")
-                          or compressBrd(dumpTab(data.breed, "breed")))
+        table.insert(
+            res,
+            COMPRESS and dumpTab(data.breed, "breed")
+                or compressBrd(dumpTab(data.breed, "breed"))
+        )
         table.insert(res, ",")
         if not COMPRESS then
             table.insert(res, "\n")
@@ -154,9 +161,9 @@ p.tabToStr = function(poke, data, breedref)
     else
         table.insert(res, tostring(pokes[poke].ndex))
     end
-    table.insert(res, "] = m[\"")
+    table.insert(res, '] = m["')
     table.insert(res, poke)
-    table.insert(res, "\"]")
+    table.insert(res, '"]')
     if not COMPRESS then
         table.insert(res, "\n")
     end
@@ -172,15 +179,16 @@ p.allToDir = function(datas, dirname, skipkeys, standalone)
         -- "inf"ernape seems to be a number
         if not getNdex(poke) and not tab.search(skipkeys, poke) then
             -- compute breedref
-            local fbr = datas[poke].breed == datas[forms.uselessToEmpty(evodata[poke].name)].breed
-                        and poke ~= evodata[poke].name
+            local fbr = datas[poke].breed
+                    == datas[forms.uselessToEmpty(evodata[poke].name)].breed
+                and poke ~= evodata[poke].name
             local outfile = io.open(dirname .. "/" .. poke .. ".lua", "w")
             if standalone then
                 outfile:write("local m = {}\n")
             end
             outfile:write(p.tabToStr(poke, data, usebreedref and fbr))
             if standalone then
-                outfile:write("\nreturn m[\"" .. poke .. "\"]")
+                outfile:write('\nreturn m["' .. poke .. '"]')
             end
             outfile:close()
         end

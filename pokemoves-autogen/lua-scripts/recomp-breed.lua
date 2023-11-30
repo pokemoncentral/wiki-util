@@ -10,20 +10,21 @@ should be quite the rare case)
 
 --]]
 -- luacheck: globals pokemoves tempoutdir
-require('source-modules')(true)
+require("source-modules")(true)
 
 local pokeeggs = require("PokéEggGroup-data")
 local pokes = require("Poké-data")
 local evodata = require("Evo-data")
-local tab = require('Wikilib-tables')
-local str = require('Wikilib-strings')
-local forms = require('Wikilib-forms')
-local multigen = require('Wikilib-multigen')
-local evolib = require('Wikilib-evos')
+local tab = require("Wikilib-tables")
+local str = require("Wikilib-strings")
+local forms = require("Wikilib-forms")
+local multigen = require("Wikilib-multigen")
+local evolib = require("Wikilib-evos")
 
-local lib = require('lib')
-local printer = require('pokemove-printer')
+local lib = require("lib")
+local printer = require("pokemove-printer")
 
+-- stylua: ignore
 local genderless = {
     "magnemite", "magneton", "voltorb", "electrode", "staryu", "starmie",
     "porygon", "porygon2", "shedinja", "lunatone", "solrock", "baltoy",
@@ -71,9 +72,11 @@ end
 -- Modifies the table inplace, and returns it
 local function addPoke(t, poke)
     local abbr = forms.getabbr(poke)
-    table.insert(t, abbr == 'base'
-                    and pokes[poke].ndex
-                    or (str.tf(pokes[poke].ndex) .. abbr))
+    table.insert(
+        t,
+        abbr == "base" and pokes[poke].ndex
+            or (str.tf(pokes[poke].ndex) .. abbr)
+    )
     return t
 end
 
@@ -81,10 +84,14 @@ end
 local function eggGroupList(group)
     group = multigen.getGenValue(group)
     return tab.mapToNum(pokeeggs, function(v, k)
-        if type(k) ~= "number"
-           and (not lib.getNdex(k))
-           and (multigen.getGenValue(v.group1, CURRGEN) == group
-                or multigen.getGenValue(v.group2, CURRGEN) == group) then
+        if
+            type(k) ~= "number"
+            and (not lib.getNdex(k))
+            and (
+                multigen.getGenValue(v.group1, CURRGEN) == group
+                or multigen.getGenValue(v.group2, CURRGEN) == group
+            )
+        then
             return k
         end
         return nil
@@ -155,25 +162,25 @@ local function hasParent(move, poke, gen, gameidx)
     --        and pokemoves[poke].breed[gen][move]
     --        and pokemoves[poke].breed[gen][move][gameidx]
     return pokemoves[poke].breed[gen][move]
-           and pokemoves[poke].breed[gen][move][gameidx][1]
+        and pokemoves[poke].breed[gen][move][gameidx][1]
 end
 
 -- Check if a Pokémon can learn a move by level in a certain game.
 local function learnLevelGame(move, poke, gen, game)
     local idx = tab.search(lib.games.level[gen], game)
     return pokemoves[poke].level
-           and pokemoves[poke].level[gen]
-           and pokemoves[poke].level[gen][move]
-           and pokemoves[poke].level[gen][move][idx][1]
+        and pokemoves[poke].level[gen]
+        and pokemoves[poke].level[gen][move]
+        and pokemoves[poke].level[gen][move][idx][1]
 end
 
 -- Check if a Pokémon can learn a move by tutor in a certain game.
 local function learnTutorGame(move, poke, gen, game)
     local idx = tab.search(lib.games.tutor[gen], game)
     return pokemoves[poke].tutor
-           and pokemoves[poke].tutor[gen]
-           and pokemoves[poke].tutor[gen][move]
-           and pokemoves[poke].tutor[gen][move][idx]
+        and pokemoves[poke].tutor[gen]
+        and pokemoves[poke].tutor[gen][move]
+        and pokemoves[poke].tutor[gen][move][idx]
 end
 
 --[[
@@ -235,9 +242,16 @@ local function recompPokeMoveGame(poke, gen, game, gameidx, move, gamedata)
     local neighbours = pokemoves[poke].neighbours
     for _, opoke in pairs(neighbours) do
         if pokemoves[opoke] then
-            if lib.canLearn(move, opoke, gen, {"level", "breed", "preevo" ,"tutor"})
-               or learnLevelGame(move, opoke, gen, game)
-               or learnTutorGame(move, opoke, gen, game) then
+            if
+                lib.canLearn(
+                    move,
+                    opoke,
+                    gen,
+                    { "level", "breed", "preevo", "tutor" }
+                )
+                or learnLevelGame(move, opoke, gen, game)
+                or learnTutorGame(move, opoke, gen, game)
+            then
                 -- opoke can learn the move "easily" in this game
                 if not gamedata.direct then
                     -- DEBUG only
@@ -249,8 +263,9 @@ local function recompPokeMoveGame(poke, gen, game, gameidx, move, gamedata)
                     gamedata = { direct = true, games = gamedata.games }
                 end
                 gamedata = addPoke(gamedata, opoke)
-            elseif not gamedata.direct
-                   and hasParent(move, opoke, gen, gameidx) then
+            elseif
+                not gamedata.direct and hasParent(move, opoke, gen, gameidx)
+            then
                 -- Isn't direct and opoke can learn by breed (in this game)
                 gamedata.chain = true
                 gamedata = addPoke(gamedata, opoke)
@@ -274,7 +289,12 @@ local function recompOnePoke(poke, gen)
             -- directly, so are final: no need to recompute
             if not movedata[gameidx].direct and not movedata[gameidx].chain then
                 newbreeddata[move][gameidx] = recompPokeMoveGame(
-                    poke, gen, game, gameidx, move, tab.copy(movedata[gameidx])
+                    poke,
+                    gen,
+                    game,
+                    gameidx,
+                    move,
+                    tab.copy(movedata[gameidx])
                 )
             else
                 newbreeddata[move][gameidx] = movedata[gameidx]
@@ -299,9 +319,9 @@ print("Cleaned up table, starting main iteration")
 -- Iterate recompOnePoke over all Pokémon 14 (= #egg groups) times.
 -- Experimentally 7 seems to be enough, but iterations after the thrid
 -- are very quick, so it's not a big deal to do a few extra ones
-for iteration = 1,14 do
+for iteration = 1, 14 do
     -- Do by rounds, not modifying inplace
-    local newpokemoves = { }
+    local newpokemoves = {}
     -- First iteration to add tables for any key, required to link them later
     -- for evolutions
     for poke, val in pairs(pokemoves) do
@@ -320,8 +340,10 @@ for iteration = 1,14 do
         -- Check if this Pokémon has a breed table or uses the one of the base
         -- form
         local basephasename = forms.uselessToEmpty(evodata[poke].name)
-        if pokemoves[poke].breed == pokemoves[basephasename].breed
-           and poke ~= evodata[poke].name then
+        if
+            pokemoves[poke].breed == pokemoves[basephasename].breed
+            and poke ~= evodata[poke].name
+        then
             newpokemoves[poke].breed = newpokemoves[basephasename].breed
         else
             for gen = STARTGEN, CURRGEN do
@@ -334,7 +356,7 @@ for iteration = 1,14 do
         end
     end
     pokemoves = newpokemoves
-    print(table.concat{"> Iteration ", tostring(iteration), " finished"})
+    print(table.concat({ "> Iteration ", tostring(iteration), " finished" }))
 end
 print("Finished main iteration")
 
@@ -345,12 +367,11 @@ print("Finished main iteration")
 
 -- Unique parents, remove direct, compress games
 for _, data in pairs(pokemoves) do
-    for gen = STARTGEN,CURRGEN do
+    for gen = STARTGEN, CURRGEN do
         if data.breed and data.breed[gen] then
             for move, movedata in pairs(data.breed[gen]) do
                 if not movedata.new then
-                    local newmovedata = { games = movedata.games,
-                                          new = true }
+                    local newmovedata = { games = movedata.games, new = true }
                     for _, v in ipairs(movedata) do
                         v = tab.unique(v)
                         table.sort(v, compareNdex)
@@ -359,8 +380,10 @@ for _, data in pairs(pokemoves) do
                         local mygame = v.games[1]
                         -- Remove games in which the Pokémon can't learn
                         -- the move
-                        if not movedata.games
-                           or tab.search(movedata.games, mygame) then
+                        if
+                            not movedata.games
+                            or tab.search(movedata.games, mygame)
+                        then
                             local found = false
                             for _, w in ipairs(newmovedata) do
                                 if eqArray(v, w) then
@@ -374,8 +397,13 @@ for _, data in pairs(pokemoves) do
                         end
                     end
                     -- remove games field when it contains all games, but only for gen <= 8
-                    if gen <= 8 and
-                       tab.equal(newmovedata[1].games, lib.games.breed[gen]) then
+                    if
+                        gen <= 8
+                        and tab.equal(
+                            newmovedata[1].games,
+                            lib.games.breed[gen]
+                        )
+                    then
                         newmovedata[1].games = nil
                     end
                     data.breed[gen][move] = newmovedata
@@ -404,8 +432,15 @@ for _, data in pairs(pokemoves) do
                     for _, gdata in ipairs(mdata) do
                         if not gdata[1] then
                             for _, opoke in pairs(data.neighbours) do
-                                if pokemoves[opoke]
-                                and lib.learnPreviousGen(move, opoke, gen, 3) then
+                                if
+                                    pokemoves[opoke]
+                                    and lib.learnPreviousGen(
+                                        move,
+                                        opoke,
+                                        gen,
+                                        3
+                                    )
+                                then
                                     gdata = addPoke(gdata, opoke)
                                     -- table.insert(gdata, pokes[opoke].ndex)
                                 end
@@ -413,7 +448,8 @@ for _, data in pairs(pokemoves) do
                             table.sort(gdata, compareNdex)
                             if gdata[1] then
                                 -- If now it has a parent, it can learn the move via old gen
-                                mdata.notes = "il padre deve aver imparato la mossa in una generazione precedente"
+                                mdata.notes =
+                                    "il padre deve aver imparato la mossa in una generazione precedente"
                             end
                         end
                     end
@@ -426,7 +462,8 @@ print("Added old gens")
 
 -- Pichu can learn Locomovolt with a special note
 for gen = STARTGEN, CURRGEN do
-    pokemoves.pichu.breed[gen].locomovolt = {{25, 26, 172}, notes = "Se il genitore tiene una Elettropalla"}
+    pokemoves.pichu.breed[gen].locomovolt =
+        { { 25, 26, 172 }, notes = "Se il genitore tiene una Elettropalla" }
 end
 
 -- Printing

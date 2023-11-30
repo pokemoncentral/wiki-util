@@ -11,3 +11,8 @@ repos:
   rev: 22.10.0
   hooks:
   - id: black
+- repo: https://github.com/JohnnyMorganz/StyLua
+  rev: v0.17.1
+  hooks:
+  - id: stylua
+    files: ^pokemoves-autogen/
