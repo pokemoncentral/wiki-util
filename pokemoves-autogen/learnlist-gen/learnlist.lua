@@ -389,7 +389,7 @@ l.dicts.level = {
 
 -- ==================================== Tm ====================================
 l.dicts.tm = {
-    processData = function(poke, gen, move)
+    processData = function(poke, gen, games, move)
         if gen == 8 then
             local out = { move = move }
             for _, game in ipairs(lib.games.tm[gen]) do

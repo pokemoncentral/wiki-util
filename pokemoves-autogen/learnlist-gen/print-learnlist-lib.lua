@@ -161,7 +161,7 @@ l.decompressLevelEntry = function(entry, gen)
     return res
 end
 
--- ================================== Level ==================================
+-- ================================== Level ===================================
 -- Convert a level (a number, "inizio", "evo", "ricorda" or nil) to a numeric
 -- key to make sorting easier
 local function levelToNumkey(l)
@@ -184,6 +184,16 @@ end
 -- is "ricorda" < "inizio" < "evo" < numbers < nil
 l.ltLevel = function(a, b)
     return levelToNumkey(a) < levelToNumkey(b)
+end
+
+-- =================================== Preevo =================================
+l.makePreevoPoke = function(pair)
+    local t = { str.tf(pair[1]), "|" }
+    if pair[2] then
+        table.insert(t, pair[2])
+        table.insert(t, "|")
+    end
+    return table.concat(t)
 end
 
 -- =================================== Tabs ===================================

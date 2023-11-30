@@ -328,15 +328,6 @@ p.dicts.breed = {
 }
 
 -- ================================== Preevo ==================================
-local function makePreevoPoke(pair)
-    local t = { str.tf(pair[1]), "|" }
-    if pair[2] then
-        table.insert(t, pair[2])
-        table.insert(t, "|")
-    end
-    return table.concat(t)
-end
-
 p.dicts.preevo = {
     processData = function(poke, gen, game, preevos, move)
         return {
@@ -367,23 +358,10 @@ p.dicts.preevo = {
         return str.interp(p.strings.ENTRIES.preevo, {
             move = multigen.getGenValue(moves[move].name, gen),
             STAB = p.computeSTAB(poke, move, nil, gen),
-            poke1 = makePreevoPoke(preevos[1]),
-            poke2 = preevos[2] and makePreevoPoke(preevos[2]) or "",
+            poke1 = printlib.makePreevoPoke(preevos[1]),
+            poke2 = preevos[2] and printlib.makePreevoPoke(preevos[2]) or "",
         })
     end,
 }
-
-p.level = function(poke)
-    return p.entryGeneric(poke, "level")
-end
-p.tm = function(poke)
-    return p.entryGeneric(poke, "tm")
-end
-p.breed = function(poke)
-    return p.entryGeneric(poke, "breed")
-end
-p.preevo = function(poke)
-    return p.entryGeneric(poke, "preevo")
-end
 
 return p

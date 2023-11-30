@@ -46,7 +46,7 @@ end
 -- ================================== Utils ==================================
 -- Print the learnlist of a single Pokémon/form in a single game
 local function printOne(poke)
-    return printer[kind](poke)
+    return printer.entryGeneric(poke, kind)
 end
 
 -- =================================== Main ===================================

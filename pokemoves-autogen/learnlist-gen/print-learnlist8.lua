@@ -6,7 +6,7 @@ TODO: support alltm
 
 --]]
 -- luacheck: globals pokemoves tempoutdir
-require("source-modules")
+require("source-modules")(true)
 
 local p = {}
 
@@ -22,6 +22,7 @@ local moves = require("Move-data")
 local pokes = require("Poké-data")
 local altdata = require("AltForms-data")
 local pokemoves = require("learnlist-gen.pokemoves-data")
+local printlib = require("learnlist-gen.print-learnlist-lib")
 local ex8 = require("learnlist-gen.existence8-data")
 
 p.strings = {
@@ -275,15 +276,6 @@ p.dicts.breed.makeEntry = function(poke, gen, val)
     })
 end
 
-local function makePreevoPoke(pair)
-    local t = { str.tf(pair[1]), "|" }
-    if pair[2] then
-        table.insert(t, pair[2])
-        table.insert(t, "|")
-    end
-    return table.concat(t)
-end
-
 p.dicts.preevo.makeEntry = function(poke, gen, val)
     -- val :: { <movename>, { <array of preevo pairs { ndex, notes }> } }
     local move = val[1]
@@ -296,8 +288,8 @@ p.dicts.preevo.makeEntry = function(poke, gen, val)
     return str.interp(p.strings.ENTRIES.preevo, {
         move = multigen.getGenValue(moves[move].name, gen),
         STAB = p.computeSTAB(poke, move, nil, gen),
-        poke1 = makePreevoPoke(preevos[1]),
-        poke2 = preevos[2] and makePreevoPoke(preevos[2]) or "",
+        poke1 = printlib.makePreevoPoke(preevos[1]),
+        poke2 = preevos[2] and printlib.makePreevoPoke(preevos[2]) or "",
     })
 end
 
