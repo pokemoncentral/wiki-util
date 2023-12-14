@@ -1016,6 +1016,14 @@ id,identifier,species_id,height,weight,base_experience,order,is_default
 1015,munkidori,1015,000,000,000,1000,1
 1016,fezandipiti,1016,000,000,000,1000,1
 1017,ogerpon,1017,000,000,000,1000,1
+1018,archaludon,1018,000,000,000,1000,1
+1019,hydrapple,1019,000,000,000,1000,1
+1020,vampeaguzze,1020,000,000,000,1000,1
+1021,furiatonante,1021,000,000,000,1000,1
+1022,massoferreo,1022,000,000,000,1000,1
+1023,capoferreo,1023,000,000,000,1000,1
+1024,terapagos,1024,000,000,000,1000,1
+1025,pecharunt,1025,000,000,000,1000,1
 10001,deoxysA,386,17,608,270,491,0
 10002,deoxysD,386,17,608,270,492,0
 10003,deoxysV,386,17,608,270,493,0
@@ -1151,7 +1159,7 @@ id,identifier,species_id,height,weight,base_experience,order,is_default
 10133,minior-blue-meteor,774,3,400,154,907,0
 10134,minior-indigo-meteor,774,3,400,154,908,0
 10135,minior-violet-meteor,774,3,400,154,909,0
-10136,minior-red,774,3,3,175,910,0
+10136,miniorR,774,3,3,175,910,0
 10137,minior-orange,774,3,3,175,911,0
 10138,minior-yellow,774,3,3,175,912,0
 10139,minior-green,774,3,3,175,913,0
@@ -1247,3 +1255,5 @@ id,identifier,species_id,height,weight,base_experience,order,is_default
 10229,ogerponP,1017,000,000,000,1000,0
 10230,ogerponFn,1017,000,000,000,1000,0
 10231,ogerponFc,1017,000,000,000,1000,0
+10232,terapagos-1,1024,000,000,000,1000,0
+10233,terapagos-2,1024,000,000,000,1000,0

@@ -202,7 +202,6 @@ replaces = {
     "basculegion-1": "basculegionF",
     "enamorus-1": "enamorusT",
     "gimmighoul-1": "gimmighoulA",
-    # TODO
     "tauros-1": "taurosC",
     "tauros-2": "taurosI",
     "tauros-3": "taurosA",
@@ -238,6 +237,15 @@ replaces = {
     "iron-valiant": "eroeferreo",
     "walking-wake": "acquecrespe",
     "iron-leaves": "fogliaferrea",
+    "gouging-fire": "vampeaguzze",
+    "raging-bolt": "furiatonante",
+    "iron-crown": "capoferreo",
+    "iron-boulder": "massoferreo",
+    # End paradox
+    "deoxys-1": "deoxysA",
+    "deoxys-2": "deoxysD",
+    "deoxys-3": "deoxysV",
+    "minior-7": "miniorR",
 }
 
 ignores = list(
@@ -267,6 +275,9 @@ ignores = list(
             "poltchageist-1",
             "sinistcha-1",
             "ogerpon-[4-7]",
+            "minior-(1|2|3|4|5|6|8|9|10|11|12|13|14)",
+            "alcremie(R|Ma|Me|L|S|Rm|Cm|Tm)",
+            "terapagos-(1|2)",
         ],
     )
 )
