@@ -117,7 +117,7 @@ lib.getNdex = function(poke)
     if type(poke) == "number" then
         return poke
     end
-    return type(poke) == "string" and tonumber(poke:match("%d+")) or nil
+    return type(poke) == "string" and tonumber(poke:match("^%d+")) or nil
 end
 
 return lib

@@ -92,7 +92,9 @@ local baseNoBreed = {
     "solcoferreo", "falenaferrea", "manoferrea", "colloferreo", "spineferree",
     "saccoferreo", "eroeferreo", "ting-lu", "chien-pao", "wo-chien", "chi-yu",
     "koraidon", "miraidon", "acquecrespe", "fogliaferrea", "poltchageist",
-    "okidogi", "munkidori", "fezandipiti", "ogerpon",
+    "okidogi", "munkidori", "fezandipiti", "ogerpon", "vampeaguzze",
+    "furiatonante", "capoferreo", "massoferreo", "terapagos", "pecharunt",
+    -- Forms
     "deoxysA", "deoxysD", "deoxysV", "shayminC", "kyuremN", "kyuremB",
     "hoopaL", "articunoG", "zapdosG", "moltresG", "calyrexG", "calyrexS",
     "palafinP", "gimmighoulA", "ursalunaL", "ogerponP", "ogerponFn",

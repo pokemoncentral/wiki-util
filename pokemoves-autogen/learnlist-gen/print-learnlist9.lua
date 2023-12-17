@@ -46,11 +46,8 @@ p.games = printlib.getGames(gen)
 p.gameNames = {
     "Ver 1.2.0",
     "Ver 2.0.1",
+    "Ver 3.0.0",
 }
--- 2 is the index of "SV-2"
-p.isGameActive = function(num)
-    return num == 2
-end
 
 p.computeSTAB = printlib.computeSTAB
 
@@ -85,12 +82,42 @@ local pokesSV2 = {
     "munkidori", "fezandipiti", "ogerpon", "ogerponFc", "ogerponFn",
     "ogerponP",
 }
+-- These Pokémon weren't in SV and SV-2, and were added in SV-3
+-- stylua: ignore
+local pokesSV3 = {
+    "alcremie", "araquanid", "bastiodon", "bayleef", "beldum", "bellossom",
+    "blastoise", "blaziken", "blitzle", "brionne", "bulbasaur", "chikorita",
+    "chinchou", "cinccino", "cobalion", "combusken", "comfey", "cosmoem",
+    "cosmog", "cottonee", "cranidos", "croconaw", "deoxys", "dewgong",
+    "dewpider", "dodrio", "doduo", "drilbur", "duosion", "duraludon",
+    "electabuzz", "electivire", "elekid", "emboar", "entei", "espurr",
+    "excadrill", "exeggcute", "exeggutor", "feraligatr", "flygon",
+    "galvantula", "gloom", "golett", "golurk", "granbull", "grovyle",
+    "hitmonchan", "hitmonlee", "hitmontop", "ho-oh", "horsea", "incineroar",
+    "inkay", "ivysaur", "joltik", "keldeo", "kingdra", "kyurem", "lanturn",
+    "lapras", "latias", "latios", "litten", "lugia", "lunala", "magby",
+    "magmar", "magmortar", "malamar", "marshtomp", "meganium", "meowstic",
+    "metagross", "metang", "milcery", "minccino", "minior", "minun", "mudkip",
+    "necrozma", "oddish", "pignite", "pikipek", "plusle", "popplio", "porygon",
+    "porygon2", "porygon-z", "primarina", "raikou", "rampardos", "regice",
+    "regigigas", "regirock", "registeel", "reshiram", "reuniclus", "rhydon",
+    "rhyhorn", "rhyperior", "sceptile", "scrafty", "scraggy", "seadra", "seel",
+    "serperior", "servine", "shieldon", "skarmory", "smeargle", "snivy",
+    "snubbull", "solgaleo", "solosis", "squirtle", "suicune", "swampert",
+    "tentacool", "tentacruel", "tepig", "terrakion", "torchic", "torracat",
+    "totodile", "toucannon", "trapinch", "treecko", "trumbeak", "tyrogue",
+    "venusaur", "vibrava", "vileplume", "virizion", "wartortle", "whimsicott",
+    "zebstrika", "zekrom",
+    -- New Pokémon, not returning old ones
+    "archaludon", "hydrapple", "vampeaguzze", "furiatonante", "capoferreo",
+    "massoferreo", "terapagos", "pecharunt",
+}
 -- Checks if a Pokémon exists in a given gen 9 game
 p.existsInGame = function(poke, game)
     if game == "SV" then
-        return not tab.search(pokesSV2, poke)
-    -- elseif game == "SV-2" then
-    --     return true
+        return not tab.search(pokesSV2, poke) and not tab.search(pokesSV3, poke)
+    elseif game == "SV-2" then
+        return not tab.search(pokesSV3, poke)
     else
         return true
     end
@@ -187,19 +214,20 @@ p.entryGeneric = function(poke, kind)
         table.sort(res[n], funcDict.lt)
     end
     -- Check for equality
-    local eqcheck = tab.map(res, funcDict.toGameEqCheck or printlib.id)
-    if printlib.allEquals(eqcheck) then
+    if funcDict.allEquals(res) then
         local data = funcDict.getSingleGameData(res)
         return p.makeSingleGameEntry(data, poke, kind)
     end
 
     -- Different: print all in tabs
+    local gameTitles = tab.filter(p.gameNames, function(_, i)
+        return p.existsInGame(poke, p.games[kind][i])
+    end)
     return printlib.putInTabs(
-        p.gameNames,
+        gameTitles,
         tab.map(res, function(r)
             return p.makeSingleGameEntry(r, poke, kind)
-        end),
-        p.isGameActive
+        end)
     )
 end
 
@@ -222,6 +250,7 @@ p.dicts.level = {
     lt = function(a, b)
         return a[2] == b[2] and a[1] < b[1] or printlib.ltLevel(a[2], b[2])
     end,
+    allEquals = printlib.allEquals,
     getSingleGameData = function(res)
         return res[1]
     end,
@@ -266,13 +295,41 @@ p.dicts.tm = {
             -- They are the same element, hence a < b is false
             return false
         end
-        -- "kind"s are already sorted alfabetically
+        -- "kind"s are inverted alfabetically sorted
         return a[2] > b[2] or (a[2] == b[2] and tonumber(a[3]) < tonumber(b[3]))
     end,
-    toGameEqCheck = function(data)
-        return tab.filter(data, function(entry)
-            return tonumber(entry[3]) < 172
-        end)
+    allEquals = function(res)
+        if #res == 3 then
+            -- all games
+            -- base game < 172
+            local baseDLC1 = tab.equal(
+                res[1],
+                tab.filter(res[2], function(entry)
+                    return tonumber(entry[3]) < 172
+                end)
+            )
+            -- first DLC < 202
+            local DLC1DLC2 = tab.equal(
+                res[2],
+                tab.filter(res[3], function(entry)
+                    return tonumber(entry[3]) < 202
+                end)
+            )
+            -- No check for base and DLC2 because (DLC2 == DLC1) => (DLC2 == base)
+            return baseDLC1 and DLC1DLC2
+        elseif #res == 2 then
+            -- only DLC1 and 2
+            -- first DLC < 202
+            local DLC1DLC2 = tab.equal(
+                res[1],
+                tab.filter(res[2], function(entry)
+                    return tonumber(entry[3]) < 202
+                end)
+            )
+            return DLC1DLC2
+        else
+            return true
+        end
     end,
     getSingleGameData = function(res)
         return res[#res]
@@ -314,6 +371,7 @@ p.dicts.breed = {
     lt = function(a, b)
         return a[1] < b[1]
     end,
+    allEquals = printlib.allEquals,
     getSingleGameData = function(res)
         return res[1]
     end,
@@ -344,6 +402,7 @@ p.dicts.preevo = {
     lt = function(a, b)
         return a[1] < b[1]
     end,
+    allEquals = printlib.allEquals,
     getSingleGameData = function(res)
         return res[1]
     end,

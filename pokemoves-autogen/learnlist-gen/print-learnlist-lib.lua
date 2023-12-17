@@ -28,9 +28,19 @@ l.games = {
         { "XY", "ROZA" },
         { "SL", "USUL" },
         { "SpSc", "DLPS" },
-        { "SV", "SV-2" },
+        { "SV", "SV-2", "SV-3" },
     },
-    tm = { {}, {}, {}, {}, {}, {}, {}, { "SpSc", "DLPS" }, { "SV", "SV-2" } },
+    tm = {
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        { "SpSc", "DLPS" },
+        { "SV", "SV-2", "SV-3" },
+    },
     breed = {
         {},
         { "OA", "C" },
@@ -40,7 +50,7 @@ l.games = {
         { "XY", "ROZA" },
         { "SL", "USUL" },
         { "SpSc", "DLPS" },
-        { "SV", "SV-2" },
+        { "SV", "SV-2", "SV-3" },
     },
     tutor = {
         {},
@@ -62,7 +72,7 @@ l.games = {
         {},
         {},
         { "SpSc", "DLPS" },
-        { "SV", "SV-2" },
+        { "SV", "SV-2", "SV-3" },
     },
 }
 
@@ -207,16 +217,15 @@ local TABS_STRINGS = {
 }
 
 -- Given a pair of arrays, put them in tabs. The first array contains titles,
--- and the second contains corresponding contents of the tabs. The third
--- parameter is a function to know whether the current index is active
-l.putInTabs = function(titles, contents, isActive)
+-- and the second contains corresponding contents of the tabs
+l.putInTabs = function(titles, contents)
     return table.concat({
         TABS_STRINGS.HEADER,
         wlib.mapAndConcat(titles, function(title, n)
             return str.interp(TABS_STRINGS.HEADERITEM, {
                 n = n,
                 title = title,
-                active = isActive(n) and TABS_STRINGS.ACTIVE or "",
+                active = n == #titles and TABS_STRINGS.ACTIVE or "",
             })
         end, "\n"),
         TABS_STRINGS.BODY,
@@ -224,7 +233,7 @@ l.putInTabs = function(titles, contents, isActive)
             return str.interp(TABS_STRINGS.ITEM, {
                 n = n,
                 content = content,
-                active = isActive(n) and TABS_STRINGS.ACTIVE or "",
+                active = n == #contents and TABS_STRINGS.ACTIVE or "",
             })
         end, "\n"),
         TABS_STRINGS.FOOTER,
