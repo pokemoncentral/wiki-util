@@ -156,6 +156,16 @@ fixes['names-case-insensitive'] = {
     'regex': True,
     'exceptions': {
         'inside': except_inside,
+        # These pages have text that would be replaced but it shouldn't, as
+        # it's in another language. Skipping them temporarily (last famous
+        # words)
+        'title': (
+            'Poké Ball Miraidon',
+            'Poké Ball Koraidon',
+            'Poké Ball (strumento)',
+            'Elenco degli strumenti chiave in nona generazione',
+            'AG074'
+        ),
     },
     'msg': {
         'it': 'Bot: Fixing names - case insensitive',
