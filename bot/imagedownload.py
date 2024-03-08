@@ -7,11 +7,14 @@ Syntax:
 
     python pwb.py imagedownload {<pagename>|<generator>} [<options>]
 
-NOTE: <pagename> SHOULD contain the namespace prefix (ie: File o its translations)
+NOTE: <pagename> SHOULD contain the namespace prefix (ie: File or its translations);
+<generator> can be any supported page generator (e.g. -cat:'<category name>')
 
 The following parameters are supported:
 
-  -target:z    Target directory for the download
+  -target:z    Target directory for the download (optional, default /tmp)
+  -family:y    Name of family with desired wiki (optional)
+  -lang:it     Language of desired wiki (optional)
 
 If pagename is an image description page, simply downloads it. If it is
 a normal page, it will offer to copy any of the images used on that page,
@@ -31,6 +34,7 @@ from __future__ import absolute_import, division, unicode_literals
 import re
 import sys
 import os
+import os.path
 import urllib.request
 
 import pywikibot
@@ -39,22 +43,29 @@ from pywikibot import config, i18n, pagegenerators, textlib
 from pywikibot.specialbots import UploadRobot
 
 
-docuReplacements = {
-    '&params;': pagegenerators.parameterHelp
-}
+docuReplacements = {"&params;": pagegenerators.parameterHelp}
+
 
 class ImageTransferBot(object):
-
     """Image transfer bot."""
 
-    def __init__(self, generator, targetSite=None, interwiki=False,
-                 ignore_warning=False, target_dir="/tmp"):
+    def __init__(
+        self,
+        generator,
+        targetSite=None,
+        interwiki=False,
+        ignore_warning=False,
+        target_dir="/tmp",
+    ):
         """Initializer."""
         self.generator = generator
         self.interwiki = interwiki
         self.targetSite = targetSite
         self.ignore_warning = ignore_warning
         self.target_dir = target_dir
+
+        if not os.path.isdir(self.target_dir):
+            os.mkdir(self.target_dir)
 
     def transferImage(self, sourceImagePage):
         """
@@ -64,7 +75,7 @@ class ImageTransferBot(object):
         """
         url = sourceImagePage.get_file_url()
         target_file = os.path.join(self.target_dir, sourceImagePage._link._title)
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with open(target_file, "wb") as outfile, urllib.request.urlopen(req) as infile:
             outfile.write(infile.read())
         pywikibot.output("Downloaded file to {}".format(target_file))
@@ -72,9 +83,8 @@ class ImageTransferBot(object):
     def showImageList(self, imagelist):
         """Print image list."""
         for i, image in enumerate(imagelist):
-            pywikibot.output('-' * 60)
-            pywikibot.output('{}. Found image: {}'
-                             .format(i, image.title(as_link=True)))
+            pywikibot.output("-" * 60)
+            pywikibot.output("{}. Found image: {}".format(i, image.title(as_link=True)))
             # try:
             #     # Show the image description page's contents
             #     # pywikibot.output(image.get())
@@ -101,7 +111,7 @@ class ImageTransferBot(object):
             #     pass
             # except pywikibot.NoPage:
             #     break
-        pywikibot.output('=' * 60)
+        pywikibot.output("=" * 60)
 
     def run(self):
         """Run the bot."""
@@ -110,9 +120,7 @@ class ImageTransferBot(object):
                 imagelist = []
                 for linkedPage in page.interwiki():
                     linkedPage = pywikibot.Page(linkedPage)
-                    imagelist.extend(
-                        linkedPage.imagelinks(
-                            followRedirects=True))
+                    imagelist.extend(linkedPage.imagelinks(followRedirects=True))
             elif page.is_filepage():
                 imagePage = pywikibot.FilePage(page.site, page.title())
                 imagelist = [imagePage]
@@ -125,25 +133,28 @@ class ImageTransferBot(object):
                     # no need to query the user, only one possibility
                     todo = 0
                 else:
-                    pywikibot.output(
-                        'Give the number of the image to transfer.')
-                    todo = pywikibot.input('To end uploading, press enter:')
+                    pywikibot.output("Give the number of the image to transfer.")
+                    todo = pywikibot.input("To end uploading, press enter:")
                     if not todo:
                         break
                     todo = int(todo)
                 if todo in range(len(imagelist)):
-                    if (imagelist[todo].file_is_shared()
+                    if (
+                        imagelist[todo].file_is_shared()
                         and imagelist[todo].site.image_repository()
-                            == self.targetSite.image_repository()):
+                        == self.targetSite.image_repository()
+                    ):
                         pywikibot.output(
-                            'The image is already shared on {0}.'
-                            .format(self.targetSite.image_repository()))
+                            "The image is already shared on {0}.".format(
+                                self.targetSite.image_repository()
+                            )
+                        )
                     else:
                         self.transferImage(imagelist[todo])
                     # remove the selected image from the list
-                    imagelist = imagelist[:todo] + imagelist[todo + 1:]
+                    imagelist = imagelist[:todo] + imagelist[todo + 1 :]
                 else:
-                    pywikibot.output('No such image number.')
+                    pywikibot.output("No such image number.")
 
 
 def main(*args):
@@ -161,19 +172,18 @@ def main(*args):
     targetFamily = None
 
     local_args = pywikibot.handle_args(args)
-    generator_factory = pagegenerators.GeneratorFactory(
-        positional_arg_name='page')
+    generator_factory = pagegenerators.GeneratorFactory(positional_arg_name="page")
 
     for arg in local_args:
-        if arg == '-interwiki':
+        if arg == "-interwiki":
             interwiki = True
-        elif arg.startswith('-keepname'):
+        elif arg.startswith("-keepname"):
             keep_name = True
         # elif arg.startswith('-tolang:'):
         #     targetLang = arg[8:]
         # elif arg.startswith('-tofamily:'):
         #     targetFamily = arg[10:]
-        elif arg.startswith('-target:'):
+        elif arg.startswith("-target:"):
             targetDir = arg[8:]
         else:
             generator_factory.handle_arg(arg)
@@ -181,20 +191,21 @@ def main(*args):
     gen = generator_factory.getCombinedGenerator()
     if not gen:
         pywikibot.bot.suggest_help(
-            missing_parameters=['page'],
-            additional_text='and no other generator was defined.')
+            missing_parameters=["page"],
+            additional_text="and no other generator was defined.",
+        )
         return False
 
     site = pywikibot.Site()
     # if not targetLang and not targetFamily:
     #     targetSite = site.image_repository()
     # else:
-    targetSite = pywikibot.Site(targetLang or site.lang,
-                                targetFamily or site.family)
-    bot = ImageTransferBot(gen, interwiki=interwiki, targetSite=targetSite,
-                           target_dir=targetDir)
+    targetSite = pywikibot.Site(targetLang or site.lang, targetFamily or site.family)
+    bot = ImageTransferBot(
+        gen, interwiki=interwiki, targetSite=targetSite, target_dir=targetDir
+    )
     bot.run()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
