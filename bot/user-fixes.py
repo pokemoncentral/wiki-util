@@ -164,7 +164,8 @@ fixes['names-case-insensitive'] = {
             'Poké Ball Koraidon',
             'Poké Ball (strumento)',
             'Elenco degli strumenti chiave in nona generazione',
-            'AG074'
+            'AG074',
+            'OP006'
         ),
     },
     'msg': {
