@@ -197,7 +197,12 @@ def build_form_arts(pokeabbr, form, arts, sources):
     return text, arts
 
 # build entire content of artworks box for given Pokémon
-def build_arts(poke, arts, abbrs, gender, sources, extras):
+def build_arts(poke, arts, abbrs, gender, sources, extras, pagetext = ''):
+    # remove unneded arts
+    arts = [art for art in arts if ' tutte le forme' not in art]
+    if poke in ['0025', '0133']:
+        arts.remove(f'Artwork{poke}m PMDDX.png')
+        arts.remove(f'Artwork{poke}f PMDDX.png')
     # no alternative forms
     if len(abbrs) == 1:
         text, arts = build_form_arts(poke, False, arts, sources)
@@ -212,10 +217,19 @@ def build_arts(poke, arts, abbrs, gender, sources, extras):
         text = text.replace('|form=yes', '|gender=m\n|bothgenders=yes', 1)
         text = text.replace('|form=yes', '|gender=f\n|bothgenders=yes', 1)
     # unused arts (those with non-standard names)
-    if extras == True and arts != []:
-        text += '\n{{pokemonimages/div|text=Altri}}\n'
+    if arts != []:
+        newtext = '\n{{pokemonimages/div|text=Altri}}\n'
         for art in arts:
-            text += f'{{{{pokemonimages/entry\n|xl=20|md=25|sm=33|xs=50\n|img={art}\n|size=x150px\n|downdesc= (artwork da [[]]) }}}}\n'
+            if f'|img={art}\n' not in pagetext:
+                newtext += f'{{{{pokemonimages/entry\n|xl=20|md=25|sm=33|xs=50\n|img={art}\n|size=x150px\n|downdesc= (artwork da [[]]) }}}}\n'
+        if extras:
+            text += newtext
+            text = text.replace('\n\n{{pokemonimages/div|text=Altri}}', '\n{{pokemonimages/div|text=Altri}}')
+        else:
+            for art in arts:
+                if art not in pagetext:
+                    print(f'Not added to {poke}:\n{newtext}')
+                    break
     return text
 
 # check if given Pokémon/form is available in given game

@@ -43,7 +43,11 @@ def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, 
     if section in ['artwork', 'all']:
         oldtext = get_section_text(pagetext, delimiters, 'artwork')
         arts = [img for img in imgs if img.startswith('Artwork')]
-        newtext = build_arts(poke, arts, abbrs, gender, artsources, False)
+        if '{{pokemonimages/div|text=Altri}}' in pagetext:
+            extras = False
+        else:
+            extras = True
+        newtext = build_arts(poke, arts, abbrs, gender, artsources, extras, pagetext)
         if newtext != oldtext:
             pagetext = pagetext.replace(oldtext, newtext)
             edited = True
