@@ -132,9 +132,19 @@ def get_forms(poke, formspath):
             forms = [['', 'sv', last]]
     return forms
 
+# check if list of artworks contain given artwork trying with all possible extensions
+def check_art(arts, art_noext, exts):
+    match = None
+    for ext in exts:
+        if f'{art_noext}.{ext}' in arts:
+            match = ext
+            break
+    return match
+
 # get all artworks for given form
 def insert_arts(pokeabbr, arts, shiny, sources):
     text = ''
+    exts = ['png', 'jpg']
     for source in sources:
         # handle these two special cases
         if source == 'PMDDX' and pokeabbr in ['025', '133']:
@@ -143,28 +153,31 @@ def insert_arts(pokeabbr, arts, shiny, sources):
             arts.remove(f'Artwork{pokeabbr}f PMDDX.png')
         else:
             # build name of artwork
-            art = f'Artwork{pokeabbr} '
+            art_base = f'Artwork{pokeabbr} '
             if shiny == True:
-                art += 'cromatico '
-            art += f'{source}.png'
-            if art in arts:
+                art_base += 'cromatico '
+            art_base += f'{source}'
+            # now art_base will be something like 'Artwork<pokeabbr> <source>', without extension
+            ext = check_art(arts, art_base, exts)
+            if ext:
                 # parameter of template pokemonimages/artworks
                 sourceabbr = source.replace(' ', '').replace('é', 'e')
                 # add found artwork to page and remove it from list of artworks
                 # this is needed to retrieve artworks with non-standard name
                 # they will be added separately and have to be handled manually
+                art = f'{art_base}.{ext}'
                 arts.remove(art)
-                counter = 1
-                art = art.replace('.png', ' 1.png')
-                found = True
                 # count number of artworks of given form from this source
-                while found == True:
-                    art = re.sub(r' \d+\.png', r' {}.png'.format(counter + 1), art)
-                    if art in arts:
+                counter = 1
+                while True:
+                    art_noext = f'{art_base} {counter + 1}'
+                    ext = check_art(arts, art_noext, exts)
+                    if ext:
+                        art = f'{art_noext}.{ext}'
                         arts.remove(art)
                         counter += 1
                     else:
-                        found = False
+                        break
                 text += f'|{sourceabbr}={counter}\n'
     return text, arts
 
