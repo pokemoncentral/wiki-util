@@ -1,0 +1,5 @@
+{{pokemonimages/div|text=[[Lugia Ombra]]}}
+{{pokemonimages/spinoff
+|ndex=0249Ombra
+|auros=xdsingle
+}}

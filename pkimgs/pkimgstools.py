@@ -33,6 +33,7 @@ gametogen = {
 'dlps': 8.1,
 'lpa': 8.2,
 'sv': 9,
+'lpza': 9.1,
 }
 
 # 'getname' maps ndex to italian name, others map italian name to foreign names
@@ -843,14 +844,17 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
             finaltext = finaltext.replace('|form=yes', '|gender=f\n|bothgenders=yes', 1)
     elif len(texts) == 1:
         finaltext = f'{{{{pokemonimages/spinoff\n|ndex={texts[0][0]}\n{texts[0][1]}}}}}\n'
-    # extras for Pikachu and Magikarp
-    if poke == '025':
-        with open(os.path.join(exceptionspath, '025_extraTCG.txt'), 'r') as file:
+    # extras for specific Pokémon (Pikachu, Magikarp, Lugia)
+    if poke == '0025':
+        with open(os.path.join(exceptionspath, '0025_extraTCG.txt'), 'r') as file:
             finaltext += file.read()
-        with open(os.path.join(exceptionspath, '025_extraShuffle.txt'), 'r') as file:
+        with open(os.path.join(exceptionspath, '0025_extraShuffle.txt'), 'r') as file:
             finaltext += file.read()
-    elif poke == '129':
-        with open(os.path.join(exceptionspath, '129_extraMJ.txt'), 'r') as file:
+    elif poke == '0129':
+        with open(os.path.join(exceptionspath, '0129_extraMJ.txt'), 'r') as file:
+            finaltext += file.read()
+    elif poke == '0249':
+        with open(os.path.join(exceptionspath, '0249_extraXD.txt'), 'r') as file:
             finaltext += file.read()
     # GO extras
     extrago = ''

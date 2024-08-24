@@ -21,6 +21,9 @@ SpSc
 DLPS
 LPA
 SV
+LPZA
+St
+S2
 64
 Melee
 Brawl

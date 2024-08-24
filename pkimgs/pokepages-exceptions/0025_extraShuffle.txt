@@ -22,7 +22,7 @@
 {{pokemonimages/entry
 |xl=15|xs=30
 |size=x128px
-|img=Shuffle0025R.png
+|img=Shuffle0025Ru.png
 |downdesc=Rubacuori }}
 {{pokemonimages/entry
 |xl=15|xs=30
