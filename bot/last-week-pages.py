@@ -59,18 +59,14 @@ for page in pywikibot.pagegenerators.NewpagesPageGenerator(pywikibot.Site()):
             # filters to ignore certain pages
             if not should_exclude(page):
                 author = page.oldest_revision["user"]
-                last_week_pages.append(
-                    "{} {} ({})".format(page.title(), page.full_url(), author)
-                )
+                last_week_pages.append("[{}]({}) - {}".format(page.title(), page.full_url(), author))  # fmt: skip
     # get error message
     except Exception as error_message:
         errors.append(str(error_message))
 
 # print found page(s) and error(s)
 if last_week_pages:
-    print(
-        "{} pages found:\n\n{}".format(len(last_week_pages), "\n".join(last_week_pages))
-    )
+    print("{} pages found:\n\n{}".format(len(last_week_pages), "\n".join(last_week_pages)))  # fmt: skip
 else:
     print("No pages found!")
 if errors:
