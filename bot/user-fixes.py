@@ -165,7 +165,8 @@ fixes['names-case-insensitive'] = {
             'Poké Ball (strumento)',
             'Elenco degli strumenti chiave in nona generazione',
             'AG074',
-            'OP006'
+            'OP006',
+            'Viale Autunno',
         ),
     },
     'msg': {
