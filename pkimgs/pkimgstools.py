@@ -134,7 +134,7 @@ def get_forms(poke, formspath):
             forms = [["", "spsc", last]]
         elif ndex <= 905:
             forms = [["", "lpa", last]]
-        elif ndex <= 1010:
+        elif ndex <= 1025:
             forms = [["", "sv", last]]
     return forms
 
