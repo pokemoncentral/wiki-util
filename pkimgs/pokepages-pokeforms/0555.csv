@@ -1,4 +1,6 @@
 ,nb,
 Z,nb,
-G,spsc,
-GZ,spsc,
+G,spsc,spsc
+G,sv,
+GZ,spsc,spsc
+GZ,sv,

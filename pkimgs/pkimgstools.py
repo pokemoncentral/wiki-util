@@ -473,6 +473,9 @@ def build_ms_entry(poke, form, multiform, availdata, gender, genderform=""):
             if ndex == 351 and abbr:
                 text += "|overworld=no"
         text += "}}\n"
+    # check if there are mini sprites, otherwise return empty string
+    if not re.search(r"\|ms\w+=\w+", text):
+        text = ""
     return text
 
 
