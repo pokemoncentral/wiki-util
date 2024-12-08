@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import itertools
 import re
 from collections import defaultdict
 
@@ -12,7 +13,7 @@ from pywikibot.bot import ExistingPageBot, SingleSiteBot
 class AffectedPages:
     def __init__(self):
         self.episodes = []
-        self.files = defaultdict(list)
+        self.files = {}
         self.backlinks = defaultdict(list)
 
     def add_episode(self, episode):
@@ -27,7 +28,7 @@ class AffectedPages:
             if not is_episode_file:
                 continue
 
-            self.files[file].append(episode)
+            self.files[file] = episode
             for usage in file.using_pages():
                 if usage not in self.episodes:
                     self.backlinks[usage].append(file)
@@ -40,8 +41,8 @@ class AffectedPages:
             for backlink, episodes in self.backlinks.items()
         )
         files = self.items_separator.join(
-            f"{file.title()} ({', '.join(self._titles(episodes))})"
-            for file, episodes in self.files.items()
+            f"{file.title()} ({episode.title()})"
+            for file, episode in self.files.items()
         )
         return f"""
 Episodes:
@@ -64,8 +65,9 @@ Files:
 
 
 class MoveBrutalBot(SingleSiteBot, ExistingPageBot):
-    def __init__(self, page_list_output, *args, **kwargs):
+    def __init__(self, from_to_pairs, page_list_output, *args, **kwargs):
         super(MoveBrutalBot, self).__init__(*args, **kwargs)
+        self.from_to_pairs = from_to_pairs
         self.page_list_output = page_list_output
         self.affected_pages = AffectedPages()
 
@@ -73,7 +75,7 @@ class MoveBrutalBot(SingleSiteBot, ExistingPageBot):
         self.affected_pages.add_episode(self.current_page)
 
         old_title = self.current_page.title()
-        new_title = self._make_new_title(old_title)
+        new_title = self._make_new_title(old_title, self.current_page)
         reason = self._single_episode_reason(old_title, new_title)
 
         updated_text = self.current_page.text.replace(old_title, new_title)
@@ -91,21 +93,21 @@ class MoveBrutalBot(SingleSiteBot, ExistingPageBot):
             new_text = backlink.text
             for old_page in old_pages:
                 old_title = old_page.title()
-                new_text = new_text.replace(old_title, self._make_new_title(old_title))
+                old_episode = self.affected_pages.files.get(old_page, old_page)
+                new_title = self._make_new_title(old_title, old_episode)
+                new_text = new_text.replace(old_title, new_title)
 
             self.userPut(backlink, backlink.text, new_text, summary=backlinks_summary)
 
-        for file in self.affected_pages.files.keys():
-            new_title = self._make_new_title(file.title())
-            reason = self._single_episode_reason(file.title(), new_title)
+        for file, episode in self.affected_pages.files.items():
+            old_title = file.title()
+            new_title = self._make_new_title(old_title, episode)
+            reason = self._single_episode_reason(old_title, new_title)
             file.move(new_title, reason=reason, noredirect=True)
 
-    _episode_number_regex = re.compile(r"XY(\d{3})")
-
-    @classmethod
-    def _make_new_title(cls, old_title):
-        episode_number = int(cls._episode_number_regex.search(old_title).group(1))
-        return f"XY{episode_number + 1:03}"
+    def _make_new_title(self, old_title, old_episode):
+        new_episode = self.from_to_pairs[old_episode]
+        return old_title.replace(old_episode.title(), new_episode.title())
 
     @staticmethod
     def _single_episode_reason(old_title, new_title):
@@ -130,7 +132,7 @@ def main(*args):
     local_args = pwb.handle_args(args)
     gen_factory = pagegenerators.GeneratorFactory()
 
-    pages = ()
+    from_to_pairs = {}
     page_list_output = []
     pos_args = []
 
@@ -143,13 +145,16 @@ def main(*args):
 
         match arg_name:
             case "pagesfile":
-                pages = pagegenerators.TextIOPageGenerator(arg_value)
+                from_to_pairs = dict(
+                    itertools.batched(pagegenerators.TextIOPageGenerator(arg_value), 2)
+                )
 
             case "output-pages-to":
                 page_list_output = arg_value
 
     bot = MoveBrutalBot(
-        generator=gen_factory.getCombinedGenerator(pages),
+        from_to_pairs=from_to_pairs,
+        generator=gen_factory.getCombinedGenerator(list(from_to_pairs.keys())),
         page_list_output=page_list_output,
     )
     bot.run()
