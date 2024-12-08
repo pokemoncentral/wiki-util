@@ -3,6 +3,7 @@
 
 import itertools
 import re
+import shlex
 from collections import defaultdict
 
 import pywikibot as pwb
@@ -65,9 +66,10 @@ Files:
 
 
 class MoveBrutalBot(SingleSiteBot, ExistingPageBot):
-    def __init__(self, from_to_pairs, page_list_output, *args, **kwargs):
+    def __init__(self, from_to_pairs, extras, page_list_output, *args, **kwargs):
         super(MoveBrutalBot, self).__init__(*args, **kwargs)
         self.from_to_pairs = from_to_pairs
+        self.extras = extras
         self.page_list_output = page_list_output
         self.affected_pages = AffectedPages()
 
@@ -79,6 +81,10 @@ class MoveBrutalBot(SingleSiteBot, ExistingPageBot):
         reason = self._single_episode_reason(old_title, new_title)
 
         updated_text = self.current_page.text.replace(old_title, new_title)
+        extra_replacements = self.extras.get(self.current_page.title(), ())
+        for old, new in extra_replacements:
+            updated_text = old.sub(new, updated_text)
+
         self.put_current(updated_text, summary=reason)
 
         self.current_page.move(new_title, reason=reason, noredirect=True)
@@ -120,6 +126,20 @@ class MoveBrutalBot(SingleSiteBot, ExistingPageBot):
         return f"Move XY episodes [{min_episode.title()}; {max_episode.title()}]"
 
 
+def parse_extras(extras_file_name):
+    extras = {}
+
+    with open(extras_file_name, "r") as extras_file:
+        for line in extras_file.readlines():
+            title, *replacements = shlex.split(line.strip())
+            extras[title] = [
+                (re.compile(old), new)
+                for old, new in itertools.batched(replacements, 2)
+            ]
+
+    return extras
+
+
 def main(*args):
     """
     Process command line arguments and invoke bot.
@@ -152,8 +172,12 @@ def main(*args):
             case "output-pages-to":
                 page_list_output = arg_value
 
+            case "extras":
+                extras = dict(parse_extras(arg_value))
+
     bot = MoveBrutalBot(
         from_to_pairs=from_to_pairs,
+        extras=extras,
         generator=gen_factory.getCombinedGenerator(list(from_to_pairs.keys())),
         page_list_output=page_list_output,
     )
