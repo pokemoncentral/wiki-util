@@ -54,7 +54,7 @@ def move_page(site, old_title, new_title, reason, noredirect=False, fixlinks=Tru
             else:
                 # move page to new title
                 print(f"Moving '{old_title}' to '{new_title}'")
-                if test:
+                if not test:
                     old_page.move(new_title, reason=reason, noredirect=noredirect)
     if fixlinks:
         # fix all links to page
