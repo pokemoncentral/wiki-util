@@ -19,16 +19,18 @@ movepages.py when generator is -pairsfile).
 # function that fixes links by replacing old title with new title, to ensure that
 # templates are fixed along with direct links (the ones in square brackets): old
 # title is replaced only if it is a whole word and is not an interwiki
-def fix_links(page, old_title, new_title, test=False):
-    text = re.sub(r"(?<!^\[\[\w\w:)\b{}\b".format(old_title), new_title, page.text, flags=re.MULTILINE)  # fmt: skip
+def fix_links(page, replacements, test=True):
+    text = page.text
+    for replacement in replacements:
+        text = re.sub(replacement[0], replacement[1], text, flags=re.MULTILINE)
     if page.text != text:
         page.text = text
         if test:
-            print(f"[DEBUG] Fixing links '{old_title}' > '{new_title}' in '{page.title()}'")  # fmt: skip
+            print(f"[DEBUG] Fixing links to '{page.title()}'")
             # print(text)
             # break
         else:
-            page.save(f"Bot: fixing links to '{old_title}' after moving to '{new_title}'")  # fmt: skip
+            page.save(f"Bot: fixing links to '{page.title()}'")
 
 
 # function that moves page to new title after performing some checks: new title
@@ -38,7 +40,9 @@ def move_page(site, old_title, new_title, reason, noredirect=False, fixlinks=Tru
     old_page = pywikibot.Page(site, old_title)
     # get links before moving page if needed, to avoid cache issues
     if fixlinks:
-        page_backlinks = old_page.backlinks()
+        backlinks_titles = [page.title() for page in old_page.backlinks()]
+    else:
+        backlinks_titles = []
     # check if new title is same as old title
     if old_title == new_title:
         print(f"New title is same as old one: {old_title}")
@@ -56,10 +60,7 @@ def move_page(site, old_title, new_title, reason, noredirect=False, fixlinks=Tru
                 print(f"Moving '{old_title}' to '{new_title}'")
                 if not test:
                     old_page.move(new_title, reason=reason, noredirect=noredirect)
-    if fixlinks:
-        # fix all links to page
-        for link in page_backlinks:
-            fix_links(link, old_title, new_title, test)
+    return backlinks_titles
 
 
 # function that moves a file: uses previous function and does not touch links
@@ -74,14 +75,14 @@ def move_file(site, old_name, new_name, reason, noredirect=False, test=True):
     else:
         new_title = new_name
     # move file
-    move_page(site, old_title, new_title, reason, noredirect=noredirect, fixlinks=False, test=test)  # fmt: skip
+    _ = move_page(site, old_title, new_title, reason, noredirect=noredirect, fixlinks=False, test=test)  # fmt: skip
 
 
 # function to parse a string and return a boolean
 def parse_bool(input_string):
-    if input_string.strip().lower() == 'true':
+    if input_string.strip().lower() == "true":
         return True
-    elif input_string.strip().lower() == 'false':
+    elif input_string.strip().lower() == "false":
         return False
     else:
         sys.exit(f"Failed to parse {input_string}")
@@ -121,14 +122,26 @@ def main():
     test = parse_bool(args.test)
     noredirect = parse_bool(args.noredirect)
     fixlinks = parse_bool(args.fixlinks)
-    # print(f"test: {test}")
-    # print(f"noredirect: {noredirect}")
-    # print(f"fixlinks: {fixlinks}")
-    # print(movements)
+    backlinks_titles = []
+    replacements = []
     for movement in movements:
         old_title = movement[0]
         new_title = movement[1]
-        move_page(site, old_title, new_title, args.reason, noredirect=noredirect, fixlinks=fixlinks, test=test)  # fmt: skip
+        backlinks_page = move_page(site, old_title, new_title, args.reason, noredirect=noredirect, fixlinks=fixlinks, test=test)  # fmt: skip
+        backlinks_titles += backlinks_page
+        replacements.append([r"(?<!^\[\[\w\w:)\b{}\b".format(old_title), new_title])
+    if backlinks_titles:
+        backlinks_fixed = []
+        old_titles = [m[0] for m in movements]
+        new_titles = [m[1] for m in movements]
+        for title in list(set(backlinks_titles)):
+            if title not in old_titles:
+                backlinks_fixed += [title]
+            else:
+                backlinks_fixed += [new_titles[old_titles.index(title)]]
+        for backlink in backlinks_fixed:
+            page = pywikibot.Page(site, backlink)
+            fix_links(page, replacements, test=test)
 
 
 # invoke main function
