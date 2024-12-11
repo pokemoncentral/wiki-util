@@ -19,10 +19,10 @@ movepages.py when generator is -pairsfile).
 # function that fixes links by replacing old title with new title, to ensure that
 # templates are fixed along with direct links (the ones in square brackets): old
 # title is replaced only if it is a whole word and is not an interwiki
-def fix_links(page, replacements, test=True):
+def fix_links(page, replacements, reason="Bot: fixing links after moving pages", test=True):  # fmt: skip
     text = ""
     for line in page.text.splitlines():
-        if re.search(r"^\[\[\w+:", line):
+        if re.search(r"^\[\[[a-z]+:", line):
             text += line + "\n"
         else:
             newline = line
@@ -32,11 +32,11 @@ def fix_links(page, replacements, test=True):
     if page.text != text:
         page.text = text
         if test:
-            print(f"[DEBUG] Fixing links to '{page.title()}'")
+            print(f"[DEBUG] Fixing links in '{page.title()}")
             # print(text)
             # break
         else:
-            page.save(f"Bot: fixing links to '{page.title()}'")
+            page.save(reason)
 
 
 # function that moves page to new title after performing some checks: new title
@@ -148,7 +148,7 @@ def main():
                 backlinks_fixed += [new_titles[old_titles.index(title)]]
         for backlink in backlinks_fixed:
             page = pywikibot.Page(site, backlink)
-            fix_links(page, replacements, test=test)
+            fix_links(page, replacements, args.reason, test=test)
 
 
 # invoke main function
