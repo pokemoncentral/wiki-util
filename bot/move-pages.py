@@ -20,9 +20,15 @@ movepages.py when generator is -pairsfile).
 # templates are fixed along with direct links (the ones in square brackets): old
 # title is replaced only if it is a whole word and is not an interwiki
 def fix_links(page, replacements, test=True):
-    text = page.text
-    for replacement in replacements:
-        text = re.sub(replacement[0], replacement[1], text, flags=re.MULTILINE)
+    text = ""
+    for line in page.text.splitlines():
+        if re.search(r"^\[\[\w+:", line):
+            text += line + "\n"
+        else:
+            newline = line
+            for replacement in replacements:
+                newline = re.sub(replacement[0], replacement[1], newline, flags=re.MULTILINE)  # fmt: skip
+            text += newline + "\n"
     if page.text != text:
         page.text = text
         if test:
@@ -129,7 +135,8 @@ def main():
         new_title = movement[1]
         backlinks_page = move_page(site, old_title, new_title, args.reason, noredirect=noredirect, fixlinks=fixlinks, test=test)  # fmt: skip
         backlinks_titles += backlinks_page
-        replacements.append([r"(?<!^\[\[\w\w:)\b{}\b".format(old_title), new_title])
+        # replacements.append([r"(?<!^\[\[\w\w:)\b{}\b".format(old_title), new_title])
+        replacements.append([r"\b{}\b".format(old_title), new_title])
     if backlinks_titles:
         backlinks_fixed = []
         old_titles = [m[0] for m in movements]
