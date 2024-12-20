@@ -1,0 +1,19 @@
+[project]
+name = "pcw-utils"
+version = "0.1.0"
+description = "Pokémon Central Wiki utilities"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pywikibot>=9.6.1",
+]
+
+[dependency-groups]
+dev = [
+    "black>=24.10.0",
+    "isort>=5.13.2",
+    "pre-commit>=4.0.1",
+]
+
+[tool.isort]
+profile = "black"
