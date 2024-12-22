@@ -62,3 +62,74 @@ find-and-replace strategy, which only works because sequential pages usually hav
 following some sort of scheme containing numbers and abbreviations. Such titles don't
 occur normally in free text or code, making the naive replacement quite safe to execute.
 """
+
+import pywikibot as pwb
+
+
+def main(*args):
+    """
+    Process command line arguments and invoke bot.
+
+    If args is an empty list, sys.argv is used.
+
+    @param args: command line arguments
+    @type args: str
+    """
+    local_args = pwb.handle_args(args)
+
+    # Positional args
+    pos_args = []
+
+    # Named args
+    output = None
+    pages = None
+    reverse_sort = None
+
+    # Processing all non-global CLI arguments
+    for arg in local_args:
+        # All the arguments not starting with "-" are considered positional.
+        if not arg.startswith("-"):
+            pos_args.append(arg)
+            continue
+
+        arg_name, _, arg_value = arg[1:].partition(":")
+        match arg_name.lower():
+            case "output":
+                output = arg_value
+            case "pages":
+                pages = arg_value
+            case "moveorder":
+                reverse_sort = arg_value.lower().startswith("desc")
+            case _:
+                raise ValueError(f"Unkwnow named argument: -{arg_name}")
+
+    try:
+        match pos_args[0].lower():
+            case "scan":
+                if output is None:
+                    raise ValueError(
+                        '"-output" argument is mandatory with "scan" sub-command'
+                    )
+                bot = None
+
+            case "do":
+                if pages is None:
+                    raise ValueError(
+                        '"-pages" argument is mandatory with "do" sub-command'
+                    )
+                if reverse_sort is None:
+                    raise ValueError(
+                        '"-moveorder" argument is mandatory with "do" sub-command'
+                    )
+                bot = None
+
+            case _:
+                raise ValueError(f"Unknown sub-command {pos_args[0]}")
+    except IndexError:
+        raise ValueError("No sub-command given")
+
+    bot.run()
+
+
+if __name__ == "__main__":
+    main()
