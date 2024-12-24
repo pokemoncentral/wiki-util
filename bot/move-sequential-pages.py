@@ -63,7 +63,86 @@ following some sort of scheme containing numbers and abbreviations. Such titles 
 occur normally in free text or code, making the naive replacement quite safe to execute.
 """
 
+import itertools
+import json
+from collections import defaultdict
+
 import pywikibot as pwb
+from pywikibot import pagegenerators
+
+
+class AffectedPages:
+    def __init__(self, pairs_file):
+        pages = pagegenerators.TextIOPageGenerator(pairs_file)
+        self.from_to_pairs = dict(itertools.batched(pages, 2))
+        self._input_pages = self.from_to_pairs.keys()
+        self._input_titles = [p.title() for p in self._input_pages]
+
+        self.to_move = {input_page: input_page for input_page in self._input_pages}
+        self.to_change = defaultdict(
+            set, {input_page: set((input_page,)) for input_page in self._input_pages}
+        )
+
+    def scan(self):
+        for input_page in self._input_pages:
+            pwb.info(
+                f"<<green>>[INFO]<<default>> Scanning for page '{input_page.title()}'"
+            )
+            self._update_for_moved_page(input_page)
+
+    def write_json(self, file_name):
+        json_obj = {
+            "from_to_pairs": {
+                from_page.title(): to_page.title()
+                for from_page, to_page in self.from_to_pairs.items()
+            },
+            "to_move": {
+                from_page.title(): to_page.title()
+                for from_page, to_page in self.to_move.items()
+            },
+            "to_change": {
+                page.title(): [l.title() for l in links]
+                for page, links in self.to_change.items()
+            },
+        }
+
+        with open(file_name, "w") as output:
+            json.dump(json_obj, output, indent=2)
+
+    def _update_for_moved_page(self, page):
+        self._update_inbound(page, page.backlinks())
+        self._update_files(page)
+
+    def _update_inbound(self, page, inbound_pages):
+        pwb.debug(f"Update inbound links to '{page.title()}'", layer="bot")
+        for inbound in inbound_pages:
+            self.to_change[inbound].add(page)
+            if self._should_move_page(inbound):
+                self.to_move[inbound] = page
+                self._update_for_moved_page(inbound)
+
+    def _update_files(self, page):
+        pwb.debug(f"Update used files in '{page.title()}'", layer="bot")
+        for file in page.imagelinks():
+            if self._should_move_page(file):
+                self.to_move[file] = page
+                self._update_inbound(file, file.using_pages())
+
+    def _should_move_page(self, page):
+        if page in self.to_move:
+            return False
+
+        title = page.title()
+        return any(input_title in title for input_title in self._input_titles)
+
+
+def verify_args(args, sub_command):
+    missing_arg_names = [name for name, val in args.items() if val is None]
+    if missing_arg_names:
+        args_pretty = ", ".join(f'"-{arg}"' for arg in missing_arg_names)
+        raise ValueError(
+            f'{args_pretty} argument are mandatory with "{sub_command}" sub-command'
+        )
 
 
 def main(*args):
@@ -81,6 +160,7 @@ def main(*args):
     pos_args = []
 
     # Named args
+    pairs_file = None
     output = None
     pages = None
     reverse_sort = None
@@ -94,6 +174,8 @@ def main(*args):
 
         arg_name, _, arg_value = arg[1:].partition(":")
         match arg_name.lower():
+            case "movepairs":
+                pairs_file = arg_value
             case "output":
                 output = arg_value
             case "pages":
@@ -106,29 +188,19 @@ def main(*args):
     try:
         match pos_args[0].lower():
             case "scan":
-                if output is None:
-                    raise ValueError(
-                        '"-output" argument is mandatory with "scan" sub-command'
-                    )
-                bot = None
+                verify_args({"output": output, "movepairs": pairs_file}, "scan")
+                affected_pages = AffectedPages(pairs_file)
+                affected_pages.scan()
+                affected_pages.write_json(output)
 
             case "do":
-                if pages is None:
-                    raise ValueError(
-                        '"-pages" argument is mandatory with "do" sub-command'
-                    )
-                if reverse_sort is None:
-                    raise ValueError(
-                        '"-moveorder" argument is mandatory with "do" sub-command'
-                    )
+                verify_args({"pages": pages, "moveorder": reverse_sort}, "do")
                 bot = None
 
             case _:
                 raise ValueError(f"Unknown sub-command {pos_args[0]}")
     except IndexError:
         raise ValueError("No sub-command given")
-
-    bot.run()
 
 
 if __name__ == "__main__":
