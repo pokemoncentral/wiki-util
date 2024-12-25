@@ -66,22 +66,28 @@ occur normally in free text or code, making the naive replacement quite safe to 
 import itertools
 import json
 from collections import defaultdict
+from dataclasses import dataclass
+from typing import Iterable
 
 import pywikibot as pwb
 from pywikibot import pagegenerators
 
 
+@dataclass
 class AffectedPages:
-    def __init__(self, pairs_file):
-        pages = pagegenerators.TextIOPageGenerator(pairs_file)
-        self.from_to_pairs = dict(itertools.batched(pages, 2))
-        self._input_pages = self.from_to_pairs.keys()
-        self._input_titles = [p.title() for p in self._input_pages]
+    from_to_pairs: dict[pwb.Page, pwb.Page]
+    to_move: dict[pwb.Page, pwb.Page]
+    to_change: defaultdict[pwb.Page, set[pwb.Page]]
 
-        self.to_move = {input_page: input_page for input_page in self._input_pages}
-        self.to_change = defaultdict(
-            set, {input_page: set((input_page,)) for input_page in self._input_pages}
+    _input_pages: Iterable[pwb.Page] | None = None
+
+    def __post_init__(self):
+        self._input_pages = (
+            self.from_to_pairs.keys()
+            if self._input_pages is None
+            else self._input_pages
         )
+        self._input_titles = [p.title() for p in self._input_pages]
 
     def scan(self):
         for input_page in self._input_pages:
@@ -108,6 +114,43 @@ class AffectedPages:
 
         with open(file_name, "w") as output:
             json.dump(json_obj, output, indent=2)
+
+    @classmethod
+    def from_pairs_file(cls, pairs_file):
+        pages = pagegenerators.TextIOPageGenerator(pairs_file)
+        from_to_pairs = dict(itertools.batched(pages, 2))
+        input_pages = from_to_pairs.keys()
+
+        return cls(
+            from_to_pairs=from_to_pairs,
+            _input_pages=input_pages,
+            to_move={input_page: input_page for input_page in input_pages},
+            to_change=defaultdict(
+                set,
+                {input_page: set((input_page,)) for input_page in input_pages},
+            ),
+        )
+
+    @classmethod
+    def from_json(cls, json_path):
+        with open(json_path, "r") as input_json:
+            json_content = json.load(input_json)
+
+        site = pwb.Site()
+        from_to_pairs = {
+            pwb.Page(site, from_page): pwb.Page(site, to_page)
+            for from_page, to_page in json_content["from_to_pairs"].items()
+        }
+        to_move = {
+            pwb.Page(site, from_page): pwb.Page(site, to_page)
+            for from_page, to_page in json_content["to_move"].items()
+        }
+        to_change = {
+            pwb.Page(site, page): pagegenerators.PagesFromTitlesGenerator(links)
+            for page, links in json_content["to_change"].items()
+        }
+
+        return AffectedPages(from_to_pairs, to_move, to_change)
 
     def _update_for_moved_page(self, page):
         self._update_inbound(page, page.backlinks())
@@ -189,13 +232,13 @@ def main(*args):
         match pos_args[0].lower():
             case "scan":
                 verify_args({"output": output, "movepairs": pairs_file}, "scan")
-                affected_pages = AffectedPages(pairs_file)
+                affected_pages = AffectedPages.from_pairs_file(pairs_file)
                 affected_pages.scan()
                 affected_pages.write_json(output)
 
             case "do":
                 verify_args({"pages": pages, "moveorder": reverse_sort}, "do")
-                bot = None
+                affected_pages = AffectedPages.from_json(pages)
 
             case _:
                 raise ValueError(f"Unknown sub-command {pos_args[0]}")
