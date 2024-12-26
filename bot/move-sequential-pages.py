@@ -65,12 +65,13 @@ occur normally in free text or code, making the naive replacement quite safe to 
 
 import itertools
 import json
+import re
 from collections import defaultdict
 from dataclasses import dataclass
 from typing import Iterable
 
 import pywikibot as pwb
-from pywikibot import pagegenerators
+from pywikibot import pagegenerators, textlib
 from pywikibot.bot import ExistingPageBot, SingleSiteBot
 
 
@@ -79,20 +80,17 @@ class AffectedPages:
     from_to_pairs: dict[pwb.Page, pwb.Page]
     to_move: dict[pwb.Page, pwb.Page]
     to_change: defaultdict[pwb.Page, set[pwb.Page]]
-
-    _input_pages: Iterable[pwb.Page] | None = None
+    input_pages: Iterable[pwb.Page] | None = None
 
     def __post_init__(self):
-        self._input_pages = (
-            self.from_to_pairs.keys()
-            if self._input_pages is None
-            else self._input_pages
+        self.input_pages = (
+            self.from_to_pairs.keys() if self.input_pages is None else self.input_pages
         )
-        self._input_titles = [p.title() for p in self._input_pages]
+        self._input_titles = [p.title() for p in self.input_pages]
         self.range = [min(self._input_titles), max(self._input_titles)]
 
     def scan(self):
-        for input_page in self._input_pages:
+        for input_page in self.input_pages:
             pwb.info(
                 f"<<green>>[INFO]<<default>> Scanning for page '{input_page.title()}'"
             )
@@ -130,7 +128,7 @@ class AffectedPages:
 
         return cls(
             from_to_pairs=from_to_pairs,
-            _input_pages=input_pages,
+            input_pages=input_pages,
             to_move={input_page: input_page for input_page in input_pages},
             to_change=defaultdict(
                 set,
@@ -184,6 +182,47 @@ class AffectedPages:
 
         title = page.title()
         return any(input_title in title for input_title in self._input_titles)
+
+
+class UpdateLinksBot(SingleSiteBot, ExistingPageBot):
+    _replace_exceptions = [
+        # regex for interwiki links
+        re.compile(r"\[\[\w{2}:.+\]\]")
+    ]
+
+    def __init__(self, affected_pages, reverse_sort, *args, **kwargs):
+        super(UpdateLinksBot, self).__init__(
+            *args, generator=affected_pages.to_change.keys(), **kwargs
+        )
+        self.affected_pages = affected_pages
+        self.summary = f"Moving pages [{'; '.join(self.affected_pages.range)}]"
+
+        self.input_page_n, self.other_page_n = (1, 0) if reverse_sort else (0, 1)
+        self.reverse = reverse_sort
+
+    def treat_page(self):
+        to_change = self.current_page
+        links = self.affected_pages.to_change[to_change]
+
+        new_text = to_change.text
+        for link in sorted(links, key=self._input_first, reverse=self.reverse):
+            new_text = textlib.replaceExcept(
+                new_text,
+                link.title(),
+                self.affected_pages.get_moved_title(link),
+                self._replace_exceptions,
+            )
+
+        pwb.info(f"<<green>>[INFO]<<default>> Replace inbound links in {to_change}")
+        self.userPut(to_change, to_change.text, new_text, summary=self.summary)
+
+    def _input_first(self, page):
+        n = (
+            self.input_page_n
+            if page in self.affected_pages.input_pages
+            else self.other_page_n
+        )
+        return (n, page)
 
 
 class MoveSequentialBot(SingleSiteBot, ExistingPageBot):
@@ -266,6 +305,7 @@ def main(*args):
             case "do":
                 verify_args({"pages": pages, "moveorder": reverse_sort}, "do")
                 affected_pages = AffectedPages.from_json(pages)
+                UpdateLinksBot(affected_pages, reverse_sort).run()
                 MoveSequentialBot(affected_pages, reverse_sort).run()
 
             case _:
