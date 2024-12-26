@@ -71,6 +71,7 @@ from typing import Iterable
 
 import pywikibot as pwb
 from pywikibot import pagegenerators
+from pywikibot.bot import ExistingPageBot, SingleSiteBot
 
 
 @dataclass
@@ -88,6 +89,7 @@ class AffectedPages:
             else self._input_pages
         )
         self._input_titles = [p.title() for p in self._input_pages]
+        self.range = [min(self._input_titles), max(self._input_titles)]
 
     def scan(self):
         for input_page in self._input_pages:
@@ -114,6 +116,11 @@ class AffectedPages:
 
         with open(file_name, "w") as output:
             json.dump(json_obj, output, indent=2)
+
+    def get_moved_title(self, page):
+        input_page = self.to_move.get(page, page)
+        moved = self.from_to_pairs[input_page]
+        return page.title().replace(input_page.title(), moved.title())
 
     @classmethod
     def from_pairs_file(cls, pairs_file):
@@ -179,6 +186,26 @@ class AffectedPages:
         return any(input_title in title for input_title in self._input_titles)
 
 
+class MoveSequentialBot(SingleSiteBot, ExistingPageBot):
+    def __init__(self, affected_pages, reverse_sort, *args, **kwargs):
+        super(MoveSequentialBot, self).__init__(
+            *args,
+            generator=sorted(affected_pages.to_move.keys(), reverse=reverse_sort),
+            **kwargs,
+        )
+        self.affected_pages = affected_pages
+        self.reason = f"Moving pages [{'; '.join(self.affected_pages.range)}]"
+
+    def treat_page(self):
+        from_page = self.current_page
+
+        old_title = from_page.title()
+        new_title = self.affected_pages.get_moved_title(from_page)
+
+        pwb.info(f"<<green>>[INFO]<<default>> Move {old_title} -> {new_title}")
+        from_page.move(new_title, reason=self.reason, noredirect=True)
+
+
 def verify_args(args, sub_command):
     missing_arg_names = [name for name, val in args.items() if val is None]
     if missing_arg_names:
@@ -239,6 +266,7 @@ def main(*args):
             case "do":
                 verify_args({"pages": pages, "moveorder": reverse_sort}, "do")
                 affected_pages = AffectedPages.from_json(pages)
+                MoveSequentialBot(affected_pages, reverse_sort).run()
 
             case _:
                 raise ValueError(f"Unknown sub-command {pos_args[0]}")
