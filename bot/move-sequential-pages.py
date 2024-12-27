@@ -10,58 +10,121 @@ WARNING: Do *NOT* use this bot to move _whatever_ kind of page. Replacing backli
          moved pages is implemented with a naive find-and-replace strategy, which will
          spread chaos with non-sequential page titles.
 
-## Mode of operation
+Usage:
+    pwb move-sequential-pages.py scan [global-options] -movepairs:<pairs-file> \
+        -output:<json-output-file>
 
-This bot is operated in two steps, with two different commands (as a matter of fact, it
-could be two separate bots). This is so that in case anything goes wrong when you
-actually operate on the Wiki, you still have the list of pages that should have been
-operated on originally. Talking from personal experience, reconstructing the data from
-the live Wiki after you have moved and/or updated *some* of the pages can be really
-time-consuming.
+    pwb move-sequential-pages.py do [global-options] -pages:<json-input-file> \
+        -moveorder:<asc | desc> [-extrareplacements:<extra-replacements-file>]
 
-In the first step you gather the pages to operate on, via the `scan` sub-command. The
-result of the search is saved in the file specified in the `-output` argument, in JSON
-format. Verify that the content looks plausible before proceeding with the next step!
+Options for the `scan` sub command:
+    -movepairs  A file containing pairs of page titles in the format [[frompage]]
+                [[topage]] [[frompage]] [[topage]] ..., optionally on multiple lines
 
-In the second step you *actually* change stuff on the Wiki, via the `do` sub-command.
-The pages to be operated on are input via the `-pages` argument, whose file is in the
-same JSON format output by the `scan` sub-command.
+    -output     The file where the list of affected pages will be saved, usually for
+                subsequent uses of the `do` sub-command.
 
-## What is carried out
+Options for the `do` sub command:
+    -pages              The file containing the list of affected pages in the same
+                        format output by the `scan` sub-command, usually from a previous
+                        run of this script.
 
-This bot moves sequential pages. It can be used to move a range of pages by a fixed
-amount (for instance backwards by two).
+    -moveorder          `ascending`|`asc` or `descending`|`desc`. Sets the order by
+                        which pages are moved and inbound links replaced. It should be
+                        `descending` when moving pages ahead (e.g. AB003 -> AB004),
+                        `ascending` when moving backwards (e.g. CD032 -> CD031). This is
+                        necessary since otherwise moving pages would fail, as the new
+                        title already exists.
 
-Because of this, pages are moved without leaving behind redirects, so the initial page
-title can be used by another one in the same range. For example, when moving
-EP006 - EP010 backwards by two, we move EP006 -> EP004 and EP008 -> EP006. If EP006 were
-moved with redirect, moving EP008 would fail, as EP006 would still exist as a redirect.
+    -extrareplacements  A file containing extra replacement pairs for some affected
+                        pages.
+                        Each line starts with the page where the replacement should
+                        occur, and is followed by the replacement pairs for the page.
+                        The text to replace can be a regex. Fields on a line are
+                        space-separated, and can be quoted via shell syntax (precisely,
+                        the subset Python's shlex module supports).
+                        For example:
+                        "List of episodes" damn 'oopsie woopsie'
+                        EF138 twenty.+ 'twenty\1'
 
-Furthermore, pages are moved in ascending or descending order, based on the `-moveorder`
-argument. When moving backwards, `-moveorder` should be `ascending`, while when moving
-forwards it should be `descending`. This is necessary because we first need to vacate
-any existing title before we can move pages. For example, when moving BW037 - BW092
-forwards by three, before we can move BW037 -> BW040 we need to move BW040 -> BW043,
-BW043 -> BW046, and so on, hence the need to move pages with higher numbers first.
 
-The bot also moves pages whose title contains any of input pages titles, provided that
-it links to the initial page. For example, when moving XY122 -> XY123,
-"Jimmy (XY122)" -> "Jimmy (XY123)" will also be moved, assuming that it links XY122.
-The backlink constraint is enforced to avoid moving unrelated pages that somehow contain
-the title of any input page.
+As you can see from the usage, this bot is operated in two steps, with two different
+sub-commands `scan` and `do` (as a matter of fact, it could be two separate bots).
+This is so that in case anything goes wrong when you actually operate on the Wiki, you
+still have the list of pages that should have been touched originally.
+Talking from personal experience, reconstructing the data from the live Wiki after you
+have touched only *some* of the pages can be really time-consuming.
 
-Similarly, the bot also moves files whose name contains any of the input page titles,
-but only if the file is used in the input page itself, or in any page linking to it.
-For instance, when moving XY104 -> XY105, if "File:WTP XY104.png" is used in XY104
-then it is moved to "File:WTP XY105.png".
-The file-in-use constraint is in place to avoid moving unrelated files that somehow
-contain the title of any input page.
+In the first step you gather the pages to touch, via the `scan` sub-command. The
+result of the search is saved to disk in JSON format. Verify that the content looks
+plausible before proceeding with the next step!
 
-Finally, the bot also updates links to the moved pages. This is implemented with a naive
-find-and-replace strategy, which only works because sequential pages usually have titles
-following some sort of scheme containing numbers and abbreviations. Such titles don't
-occur normally in free text or code, making the naive replacement quite safe to execute.
+In the second step you *actually* update the Wiki via the `do` sub-command. The pages
+to be touched are input in the same format as the output of the `scan` command. In this
+step, the input pages are moved and inbound links to them are updated. Furthermore,
+touched pages and files used by them are also moved, if their title contains the title
+of an input page. Last, if any extra replacements are provided, they are also applied.
+
+For more in-depth information on the implementation details of this bot, check the
+comments in the source code just below the file's docstring.
 """
+
+#################### What does this bot do? ####################
+#
+# This bot moves sequential pages. It can be used to move a range of pages by a fixed
+# amount (for instance backwards by two).
+#
+# The bot also moves pages whose title contains any of input pages titles, provided
+# that it links to the initial page. For example, when moving XY122 -> XY123, Jimmy
+# (XY122) -> Jimmy (XY123) will also be moved, assuming that it links XY122.
+# The backlink constraint is enforced to avoid moving unrelated pages that somehow
+# contain the title of any input page.
+#
+# Similarly, the bot moves files whose name contains any of the input page titles, but
+# only if the file is used in the input page itself, or in any page linking to it. For
+# instance, when moving XY104 -> XY105, if "File:WTP XY104.png" is used in XY104 then it
+# is moved to "File:WTP XY105.png".
+# The file-in-use constraint is in place to avoid moving unrelated files that somehow
+# contain the title of any input page.
+#
+# Moreover, the bot also updates links to the moved pages. This is implemented with a
+# naive find-and-replace strategy, which only works because sequential pages usually
+# have titles following some sort of scheme containing numbers and abbreviations. Such
+# titles are hardly ever accidentally embedded in content or code, so the naive strategy
+# works while keeping the implementation simple.
+#
+# Optionally, the bot also executes extra replacements on given pages, when a file with
+# such replacements is provided. The format is somehow cumbersome, but it should not be
+# used for large replacements anyway. See the docstring for the -extrareplacements
+# parameter for more information about the format.
+
+#################### Implementation quirks ####################
+#
+# This script has two sub commands: `scan` retrieves the pages to be updated and saves
+# the results to disk; `do` uses the file produced by `scan` to actually update the live
+# Wiki.
+# I made this decision following the long hours spent trying to recover the list of
+# affected pages from a partially updated live Wiki, whenever I spotted a bug and killed
+# the bot process midway through. By forcing a dump of the affected pages before doing
+# anything to the live Wiki, we won't run into this problem again.
+# The two sub-commands could be implemented in separate files. However, it's clearer
+# that they are are highly related if they are in the same file, and it's also easier to
+# share the `AffectedPages` class by keeping it all in one file.
+#
+# Pages are moved without leaving behind redirects, because often the current title of a
+# page to be moved will become the title of another page after all the input pages have
+# been moved. For example, when moving EP006 - EP010 backwards by two, we move
+# EP006 -> EP004 and EP008 -> EP006. If EP006 were moved with redirect, moving EP008
+# would fail, as EP006 would still exist as a redirect.
+#
+# Pages are moved and link replaced in ascending or descending order, depending on a
+# command-line parameter. This is because when moving pages ahead, we need to operate
+# by descending order, while it has to be ascending if moving backwards.
+# For example, let's use a move of BW037 - BW092 forwards by three. When moving, if we
+# tried to move BW037 -> BW040 before moving BW040 -> BW043 the move would fail, as
+# BW040 still exists. When replacing, if we replaced BW037 -> BW040 before replacing
+# BW040 -> BW043, we'd end up replacing BW037 -> BW043, which is not what we want.
+# Both of these apply recursively, so we need to move pages with higher numbers first.
 
 import itertools
 import json
@@ -78,6 +141,27 @@ from pywikibot.bot import ExistingPageBot, SingleSiteBot
 
 @dataclass
 class AffectedPages:
+    """Keep lists of pages to move and change when moving sequential pages
+
+    Attributes:
+        from_to_pairs: The (from_page -> to_page) mapping of sequential pages to be
+                       moved.
+
+        to_move: Pages to be moved, as a mapping from the page to be moved to the input
+                 page used compute the new title.
+
+        to_change: Pages where the links to pages that will be moved need to be updated.
+                   A mapping from the page to be updated to the set of pages whose links
+                   need to be updated.
+
+        input_pages: The list of pages to be moved that have been explicitly input, as
+                     opposed to be computed. Optional, defaults to the keys in
+                     from_to_pairs.
+
+        range: The range of sequential pages to be moved, as [min, max]. Mostly useful
+               for edit summaries.
+    """
+
     from_to_pairs: dict[pwb.Page, pwb.Page]
     to_move: dict[pwb.Page, pwb.Page]
     to_change: defaultdict[pwb.Page, set[pwb.Page]]
@@ -91,6 +175,7 @@ class AffectedPages:
         self.range = [min(self._input_titles), max(self._input_titles)]
 
     def scan(self):
+        """Compute to_change and to_move"""
         for input_page in self.input_pages:
             pwb.info(
                 f"<<green>>[INFO]<<default>> Scanning for page '{input_page.title()}'"
@@ -98,6 +183,7 @@ class AffectedPages:
             self._update_for_moved_page(input_page)
 
     def write_json(self, file_name):
+        """Write the data in this object into a JSON file"""
         json_obj = {
             "from_to_pairs": {
                 from_page.title(): to_page.title()
@@ -117,12 +203,14 @@ class AffectedPages:
             json.dump(json_obj, output, indent=2)
 
     def get_moved_title(self, page):
+        """Return the title a page should be moved to"""
         input_page = self.to_move.get(page, page)
         moved = self.from_to_pairs[input_page]
         return page.title().replace(input_page.title(), moved.title())
 
     @classmethod
     def from_pairs_file(cls, pairs_file):
+        """Instantiate from a file with pairs of pages to be moved"""
         pages = pagegenerators.TextIOPageGenerator(pairs_file)
         from_to_pairs = dict(itertools.batched(pages, 2))
         input_pages = from_to_pairs.keys()
@@ -139,6 +227,7 @@ class AffectedPages:
 
     @classmethod
     def from_json(cls, json_path):
+        """Instantiate from a JSON file in the format produced by write_json"""
         with open(json_path, "r") as input_json:
             json_content = json.load(input_json)
 
@@ -159,6 +248,7 @@ class AffectedPages:
         return AffectedPages(from_to_pairs, to_move, to_change)
 
     def _update_for_moved_page(self, page):
+        # This is called recursively by _update_inbound. Don't inline.
         self._update_inbound(page, page.backlinks())
         self._update_files(page)
 
@@ -178,6 +268,7 @@ class AffectedPages:
                 self._update_inbound(file, file.using_pages())
 
     def _should_move_page(self, page):
+        # This stops the recursion in _update_inbound
         if page in self.to_move:
             return False
 
@@ -186,6 +277,12 @@ class AffectedPages:
 
 
 class UpdateLinksBot(SingleSiteBot, ExistingPageBot):
+    """Update links in AffectedPage.to_change
+
+    The only reason this is a bot and not a loop is to have global pywikibot arguments
+    handled for free, especially `-simulate`.
+    """
+
     _replace_exceptions = [
         # regex for interwiki links
         re.compile(r"\[\[\w{2}:.+\]\]")
@@ -200,8 +297,10 @@ class UpdateLinksBot(SingleSiteBot, ExistingPageBot):
         self.affected_pages = affected_pages
         self.summary = f"Moving pages [{'; '.join(self.affected_pages.range)}]"
 
+        # These are only used for sorting inbound links
         self.input_page_n, self.other_page_n = (1, 0) if reverse_sort else (0, 1)
         self.reverse = reverse_sort
+
         self.extra_replacements = (
             self._parse_extra_replacements_file(extra_replacements)
             if extra_replacements
@@ -211,23 +310,28 @@ class UpdateLinksBot(SingleSiteBot, ExistingPageBot):
     def treat_page(self):
         to_change = self.current_page
         links = self.affected_pages.to_change[to_change]
+        pwb.info(
+            f"<<green>>[INFO]<<default>> Replace inbound links in '{to_change.title()}'"
+        )
 
         new_text = to_change.text
         for link in sorted(links, key=self._input_first, reverse=self.reverse):
+            old_title = link.title()
+            new_title = self.affected_pages.get_moved_title(link)
+            pwb.debug(f"Replace '{old_title}' -> '{new_title}'")
             new_text = textlib.replaceExcept(
-                new_text,
-                link.title(),
-                self.affected_pages.get_moved_title(link),
-                self._replace_exceptions,
+                new_text, old_title, new_title, self._replace_exceptions
             )
 
         try:
             for replacement_regex, replacement in self.extra_replacements[to_change]:
+                pwb.debug(
+                    f"Apply extra replacement '{replacement_regex}' -> '{replacement}'"
+                )
                 new_text = replacement_regex.sub(replacement, new_text)
         except KeyError:
             pass
 
-        pwb.info(f"<<green>>[INFO]<<default>> Replace inbound links in {to_change}")
         self.userPut(to_change, to_change.text, new_text, summary=self.summary)
 
     def _input_first(self, page):
@@ -240,11 +344,15 @@ class UpdateLinksBot(SingleSiteBot, ExistingPageBot):
 
     @staticmethod
     def _parse_extra_replacements_file(file_name):
+        pwb.debug(f"Read extra replacements from {file_name}")
         extras = {}
 
         with open(file_name, "r") as file:
             for line in file.readlines():
                 title, *replacements = shlex.split(line.strip())
+                pwb.debug(
+                    f"Populate replacement for page '{title}': [{', '.join(replacements)}]"
+                )
                 extras[pwb.Page(pwb.Site(), title)] = [
                     (re.compile(old), new)
                     for old, new in itertools.batched(replacements, 2)
@@ -254,6 +362,12 @@ class UpdateLinksBot(SingleSiteBot, ExistingPageBot):
 
 
 class MoveSequentialBot(SingleSiteBot, ExistingPageBot):
+    """Move pages in AffectedPage.to_move
+
+    The only reason this is a bot and not a loop is to have global pywikibot arguments
+    handled for free, especially `-simulate`.
+    """
+
     def __init__(self, affected_pages, reverse_sort, *args, **kwargs):
         super(MoveSequentialBot, self).__init__(
             *args,
@@ -269,7 +383,7 @@ class MoveSequentialBot(SingleSiteBot, ExistingPageBot):
         old_title = from_page.title()
         new_title = self.affected_pages.get_moved_title(from_page)
 
-        pwb.info(f"<<green>>[INFO]<<default>> Move {old_title} -> {new_title}")
+        pwb.info(f"<<green>>[INFO]<<default>> Move '{old_title}' -> '{new_title}'")
         from_page.move(new_title, reason=self.reason, noredirect=True)
 
 
@@ -278,7 +392,7 @@ def verify_args(args, sub_command):
     if missing_arg_names:
         args_pretty = ", ".join(f'"-{arg}"' for arg in missing_arg_names)
         raise ValueError(
-            f'{args_pretty} argument are mandatory with "{sub_command}" sub-command'
+            f"{args_pretty} argument are mandatory with '{sub_command}' sub-command"
         )
 
 
@@ -297,11 +411,11 @@ def main(*args):
     pos_args = []
 
     # Named args
-    pairs_file = None
+    extra_replacements = None
     output = None
     pages = None
+    pairs_file = None
     reverse_sort = None
-    extra_replacements = None
 
     # Processing all non-global CLI arguments
     for arg in local_args:
@@ -312,16 +426,16 @@ def main(*args):
 
         arg_name, _, arg_value = arg[1:].partition(":")
         match arg_name.lower():
+            case "extrareplacements":
+                extra_replacements = arg_value
+            case "moveorder":
+                reverse_sort = arg_value.lower().startswith("desc")
             case "movepairs":
                 pairs_file = arg_value
             case "output":
                 output = arg_value
             case "pages":
                 pages = arg_value
-            case "moveorder":
-                reverse_sort = arg_value.lower().startswith("desc")
-            case "extrareplacements":
-                extra_replacements = arg_value
             case _:
                 raise ValueError(f"Unkwnow named argument: -{arg_name}")
 
@@ -340,7 +454,7 @@ def main(*args):
                 MoveSequentialBot(affected_pages, reverse_sort).run()
 
             case _:
-                raise ValueError(f"Unknown sub-command {pos_args[0]}")
+                raise ValueError(f"Unknown sub-command: '{pos_args[0]}'")
     except IndexError:
         raise ValueError("No sub-command given")
 
