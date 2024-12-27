@@ -66,6 +66,7 @@ occur normally in free text or code, making the naive replacement quite safe to 
 import itertools
 import json
 import re
+import shlex
 from collections import defaultdict
 from dataclasses import dataclass
 from typing import Iterable
@@ -190,7 +191,9 @@ class UpdateLinksBot(SingleSiteBot, ExistingPageBot):
         re.compile(r"\[\[\w{2}:.+\]\]")
     ]
 
-    def __init__(self, affected_pages, reverse_sort, *args, **kwargs):
+    def __init__(
+        self, affected_pages, reverse_sort, extra_replacements, *args, **kwargs
+    ):
         super(UpdateLinksBot, self).__init__(
             *args, generator=affected_pages.to_change.keys(), **kwargs
         )
@@ -199,6 +202,11 @@ class UpdateLinksBot(SingleSiteBot, ExistingPageBot):
 
         self.input_page_n, self.other_page_n = (1, 0) if reverse_sort else (0, 1)
         self.reverse = reverse_sort
+        self.extra_replacements = (
+            self._parse_extra_replacements_file(extra_replacements)
+            if extra_replacements
+            else {}
+        )
 
     def treat_page(self):
         to_change = self.current_page
@@ -213,6 +221,12 @@ class UpdateLinksBot(SingleSiteBot, ExistingPageBot):
                 self._replace_exceptions,
             )
 
+        try:
+            for replacement_regex, replacement in self.extra_replacements[to_change]:
+                new_text = replacement_regex.sub(replacement, new_text)
+        except KeyError:
+            pass
+
         pwb.info(f"<<green>>[INFO]<<default>> Replace inbound links in {to_change}")
         self.userPut(to_change, to_change.text, new_text, summary=self.summary)
 
@@ -223,6 +237,20 @@ class UpdateLinksBot(SingleSiteBot, ExistingPageBot):
             else self.other_page_n
         )
         return (n, page)
+
+    @staticmethod
+    def _parse_extra_replacements_file(file_name):
+        extras = {}
+
+        with open(file_name, "r") as file:
+            for line in file.readlines():
+                title, *replacements = shlex.split(line.strip())
+                extras[pwb.Page(pwb.Site(), title)] = [
+                    (re.compile(old), new)
+                    for old, new in itertools.batched(replacements, 2)
+                ]
+
+        return extras
 
 
 class MoveSequentialBot(SingleSiteBot, ExistingPageBot):
@@ -273,6 +301,7 @@ def main(*args):
     output = None
     pages = None
     reverse_sort = None
+    extra_replacements = None
 
     # Processing all non-global CLI arguments
     for arg in local_args:
@@ -291,6 +320,8 @@ def main(*args):
                 pages = arg_value
             case "moveorder":
                 reverse_sort = arg_value.lower().startswith("desc")
+            case "extrareplacements":
+                extra_replacements = arg_value
             case _:
                 raise ValueError(f"Unkwnow named argument: -{arg_name}")
 
@@ -305,7 +336,7 @@ def main(*args):
             case "do":
                 verify_args({"pages": pages, "moveorder": reverse_sort}, "do")
                 affected_pages = AffectedPages.from_json(pages)
-                UpdateLinksBot(affected_pages, reverse_sort).run()
+                UpdateLinksBot(affected_pages, reverse_sort, extra_replacements).run()
                 MoveSequentialBot(affected_pages, reverse_sort).run()
 
             case _:
