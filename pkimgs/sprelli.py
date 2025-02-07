@@ -114,7 +114,7 @@ def build_home_template(img, credits=""):
     if img.startswith("Home"):
         type = "modelli"
         ani = "no"
-        if " r" in img:
+        if " r" in img or "_r" in img:
             back = "yes"
         else:
             back = "no"
@@ -122,7 +122,7 @@ def build_home_template(img, credits=""):
         type = "modelli scalati"
         ani = ""
         back = ""  # resized models are only static and frontal
-    ndex = re.sub(r"^[A-z]+(\d+\w*)( r)?\.\w+", r"\1", img)
+    ndex = re.sub(r"^[A-z]+(\d+\w*)([ _]r)?\.\w+", r"\1", img)
     if "sh" in img:
         shiny = "yes"
     else:
@@ -220,7 +220,7 @@ if __name__ == "__main__":
             if args.test.lower().strip() == "no":
                 page = pywikibot.Page(site, f"File:{img}")
                 if page.exists():
-                    if page.text.startswith("#RINVIA") or page.text.startswith("#REDIRECT"):
+                    if page.text.startswith("#RINVIA") or page.text.startswith("#REDIRECT"):  # fmt: skip
                         page.delete("Bot: deleting redirect to upload actual image")
                     else:
                         print(f"Skipping {img} since it already exists and is not a redirect")  # fmt: skip
