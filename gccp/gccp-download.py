@@ -1,4 +1,8 @@
-import pywikibot, argparse, os, os.path
+import argparse
+import os
+import os.path
+
+import pywikibot
 from pywikibot import pagegenerators
 
 """
@@ -19,7 +23,7 @@ def download_page(page=None, site=None, title="", dest_dir="", dest_file=""):
     if not dest_file:
         dest_file = os.path.join(dest_dir, f"{title}.txt")
     # write page text to file
-    with open(dest_file, "w") as file:
+    with open(dest_file, "w", encoding="utf-8") as file:
         file.write(page.text.strip() + "\n")
 
 
