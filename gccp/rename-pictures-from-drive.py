@@ -83,6 +83,8 @@ import shutil
 import sys
 from dataclasses import dataclass
 from enum import Enum
+from itertools import groupby
+from typing import Tuple
 
 import mwparserfromhell as mwparser
 import pywikibot
@@ -103,21 +105,22 @@ class CardCategory(Enum):
 @dataclass
 class Card:
     number: int
-    it_name: str
+    file_name: str
     category: CardCategory
 
     NON_PKMN_CARD_CATEGORIES = set(("Item", "Tool", "Supporter"))
+
+    _CARD_NAME_REGEX = re.compile(r"\d+.\w+$")
+
+    @property
+    def reissue_key(self):
+        return re.sub(self._CARD_NAME_REGEX, "", self.file_name)
 
     @classmethod
     def from_template_call(cls, template_call, expansion_name, extension):
         args = template_call.params
 
         deck_number = int(args[0].split("/")[0])
-        category = (
-            CardCategory.OTHER
-            if str(args[2]) in cls.NON_PKMN_CARD_CATEGORIES
-            else CardCategory.PKMN
-        )
 
         name_arg = cls._parse_name_arg(args[1], expansion_name)
         it_name = "{}{}{}.{}".format(
@@ -125,6 +128,12 @@ class Card:
             expansion_name.replace(" ", ""),
             deck_number,
             extension,
+        )
+
+        category = (
+            CardCategory.OTHER
+            if str(args[2]) in cls.NON_PKMN_CARD_CATEGORIES
+            else CardCategory.PKMN
         )
 
         return cls(deck_number, it_name, category)
@@ -149,19 +158,67 @@ class Card:
 
 
 @dataclass
+class CardReissues:
+    cards: list[Card]
+    name: str
+    category: CardCategory
+    first_number: int
+
+    @classmethod
+    def from_group(cls, group):
+        name, cards = group
+        cards = list(sorted(cards, key=lambda c: c.number))
+        category = cards[0].category
+        first_number = cards[0].number
+        return cls(cards, name, category, first_number)
+
+
+@dataclass
 class DriveFile:
     number: int
     category: CardCategory
+    reissue: int | None
+    magical_pair: Tuple[int, int]
     name: str
+
+    def expansion_key(self, offset):
+        return (self.number - offset, *self.in_packs)
 
     @classmethod
     def from_file_name(cls, drive_file_name):
         segments = drive_file_name.split("_")
 
-        number = int(segments[2][:-1])
         category = CardCategory(segments[0][1:].lower())
+        number = int(segments[2][:-1])
+        magical_pair = (int(segments[1][0]), int(segments[3]))
 
-        return cls(number, category, drive_file_name)
+        return cls(number, category, None, magical_pair, drive_file_name)
+
+
+def fetch_expansion_cards(expansion_name, picture_ext):
+    expansion_page = pywikibot.Page(pywikibot.Site(), expansion_name + " (GCC Pocket)")
+    page_wikicode = mwparser.parse(expansion_page.text)
+    return [
+        Card.from_template_call(entry, expansion_name, picture_ext)
+        for entry in page_wikicode.ifilter_templates(matches="setlist/entry")
+        if expansion_name in str(entry)
+    ]
+
+
+def list_drive_files(input_dir, picture_ext):
+    drive_files = [
+        DriveFile.from_file_name(file.name)
+        for file in os.scandir(input_dir)
+        if file.is_file() and file.name.endswith("." + picture_ext)
+    ]
+    for drive_file in drive_files:
+        files_with_same_number = [
+            other for other in drive_files if other.number == drive_file.number
+        ]
+        files_with_same_number.sort(key=lambda f: f.magical_pair)
+        drive_file.reissue = files_with_same_number.index(drive_file)
+
+    return drive_files
 
 
 def category_min(items, category):
@@ -171,43 +228,44 @@ def category_min(items, category):
 def rename_pictures(
     input_dir, output_dir, expansion_name, picture_ext, failed_log_file
 ):
-    expansion_page = pywikibot.Page(pywikibot.Site(), expansion_name + " (GCC Pocket)")
-    expansion_cards = [
-        Card.from_template_call(entry, expansion_name, picture_ext)
-        for entry in mwparser.parse(expansion_page.text).ifilter_templates(
-            matches="setlist/entry"
-        )
-        if expansion_name in str(entry)
-    ]
-
-    drive_files = [
-        DriveFile.from_file_name(file.name)
-        for file in os.scandir(input_dir)
-        if file.is_file() and file.name.endswith("." + picture_ext)
-    ]
-
+    expansion_cards = fetch_expansion_cards(expansion_name, picture_ext)
+    drive_files = list_drive_files(input_dir, picture_ext)
     offsets = {
         c: category_min(drive_files, c) - category_min(expansion_cards, c)
         for c in list(CardCategory)
     }
 
-    expansion_cards = {card.number: card for card in expansion_cards}
+    expansion_cards.sort(key=lambda c: c.file_name)
+    expansion_cards_by_pkmn = {
+        (reissues := CardReissues.from_group(group)).first_number: reissues
+        for group in groupby(expansion_cards, key=lambda c: c.reissue_key)
+    }
     for drive_file in drive_files:
-        offset = offsets[drive_file.category]
+        try:
+            match_key = drive_file.number - offsets[drive_file.category]
+            expansion_card_reissues = expansion_cards_by_pkmn[match_key]
+        except KeyError:
+            print(
+                f"{Colors.yellow}{drive_file.name} not renamed. Card in PCW not found{Colors.reset}"
+            )
+            failed_log_file.write(f"{drive_file.name} [NO PCW CARD]{os.linesep}")
+            continue
 
         try:
-            card = expansion_cards[drive_file.number - offset]
-        except KeyError:
-            print(f"{Colors.yellow}{drive_file.name} not renamed{Colors.reset}")
-            failed_log_file.write(drive_file.name + os.linesep)
+            card = expansion_card_reissues.cards[drive_file.reissue]
+        except IndexError:
+            print(
+                f"{Colors.yellow}{drive_file.name} not renamed. Reissue in PCW not found{Colors.reset}"
+            )
+            failed_log_file.write(f"{drive_file.name} [NO PCW REISSUE]{os.linesep}")
             continue
 
         shutil.copy(
             os.path.join(input_dir, drive_file.name),
-            os.path.join(output_dir, card.it_name),
+            os.path.join(output_dir, card.file_name),
         )
         print(
-            f"Renamed {Colors.green}{card.it_name}{Colors.reset} <- {Colors.green}{drive_file.name}{Colors.reset}",
+            f"Renamed {Colors.green}{card.file_name}{Colors.reset} <- {Colors.green}{drive_file.name}{Colors.reset}",
         )
 
 
