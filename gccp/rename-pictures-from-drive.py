@@ -113,7 +113,7 @@ class Card:
     _INVALID_FILE_NAME_CHARS = re.compile(r"[^\w-]")
 
     @property
-    def reissue_key(self):
+    def group_key(self):
         return re.sub(self._CARD_NAME_REGEX, "", self.file_name)
 
     @classmethod
@@ -158,7 +158,7 @@ class Card:
 
 
 @dataclass
-class CardReissues:
+class SameSubjectCards:
     cards: list[Card]
     name: str
     category: CardCategory
@@ -177,8 +177,7 @@ class CardReissues:
 class DriveFile:
     number: int
     category: CardCategory
-    reissue: int | None
-    magical_pair: Tuple[int, int]
+    sort_key: Tuple[int, int]
     name: str
 
     def expansion_key(self, offset):
@@ -192,7 +191,21 @@ class DriveFile:
         number = int(segments[2][:-1])
         magical_pair = (int(segments[1][0]), int(segments[3]))
 
-        return cls(number, category, None, magical_pair, drive_file_name)
+        return cls(number, category, magical_pair, drive_file_name)
+
+
+@dataclass
+class SameSubjectDriveFile:
+    files: list[DriveFile]
+    number: int
+    category: CardCategory
+
+    @classmethod
+    def from_group(cls, group):
+        number, drive_files = group
+        files = list(sorted(drive_files, key=lambda c: c.sort_key))
+        category = files[0].category
+        return cls(files, number, category)
 
 
 def fetch_expansion_cards(expansion_name, picture_ext):
@@ -209,21 +222,13 @@ def list_drive_files(input_dir, picture_ext):
     def is_promo(file_name):
         return "_90_" in file_name
 
-    drive_files = [
+    return [
         DriveFile.from_file_name(file.name)
         for file in os.scandir(input_dir)
         if file.is_file()
         and not is_promo(file.name)
         and file.name.endswith("." + picture_ext)
     ]
-    for drive_file in drive_files:
-        files_with_same_number = [
-            other for other in drive_files if other.number == drive_file.number
-        ]
-        files_with_same_number.sort(key=lambda f: f.magical_pair)
-        drive_file.reissue = files_with_same_number.index(drive_file)
-
-    return drive_files
 
 
 def category_min(items, category):
@@ -235,43 +240,54 @@ def rename_pictures(
 ):
     expansion_cards = fetch_expansion_cards(expansion_name, picture_ext)
     drive_files = list_drive_files(input_dir, picture_ext)
+
     offsets = {
         c: category_min(drive_files, c) - category_min(expansion_cards, c)
         for c in list(CardCategory)
     }
 
     expansion_cards.sort(key=lambda c: c.file_name)
-    expansion_cards_by_pkmn = {
-        (reissues := CardReissues.from_group(group)).first_number: reissues
-        for group in groupby(expansion_cards, key=lambda c: c.reissue_key)
+    expansion_cards_by_subject = {
+        (sscs := SameSubjectCards.from_group(group)).first_number: sscs
+        for group in groupby(expansion_cards, key=lambda c: c.group_key)
     }
-    for drive_file in drive_files:
+
+    drive_files.sort(key=lambda df: df.number)
+    drive_files_by_subject = map(
+        SameSubjectDriveFile.from_group, groupby(drive_files, key=lambda c: c.number)
+    )
+
+    for drive_files_for_subject in drive_files_by_subject:
+        offset = offsets[drive_files_for_subject.category]
+        match_key = drive_files_for_subject.number - offset
         try:
-            match_key = drive_file.number - offsets[drive_file.category]
-            expansion_card_reissues = expansion_cards_by_pkmn[match_key]
+            expansion_cards_for_subject = expansion_cards_by_subject[match_key]
         except KeyError:
-            print(
-                f"{Colors.yellow}{drive_file.name} not renamed. Card in PCW not found{Colors.reset}"
-            )
-            failed_log_file.write(f"{drive_file.name} [NO PCW CARD]{os.linesep}")
+            for drive_file in drive_files_for_subject.files:
+                print(
+                    f"{Colors.yellow}{drive_file.name} not renamed. Card in PCW not found{Colors.reset}"
+                )
+                failed_log_file.write(f"{drive_file.name} [NO PCW CARD]{os.linesep}")
             continue
 
-        try:
-            card = expansion_card_reissues.cards[drive_file.reissue]
-        except IndexError:
-            print(
-                f"{Colors.yellow}{drive_file.name} not renamed. Reissue in PCW not found{Colors.reset}"
-            )
-            failed_log_file.write(f"{drive_file.name} [NO PCW REISSUE]{os.linesep}")
+        if len(drive_files_for_subject.files) != len(expansion_cards_for_subject.cards):
+            for drive_file in drive_files_for_subject.files:
+                print(
+                    f"{Colors.yellow}{drive_file.name} not renamed. Card in PCW not found{Colors.reset}"
+                )
+                failed_log_file.write(f"{drive_file.name} [NO PCW CARD]{os.linesep}")
             continue
 
-        shutil.copy(
-            os.path.join(input_dir, drive_file.name),
-            os.path.join(output_dir, card.file_name),
-        )
-        print(
-            f"Renamed {Colors.green}{card.file_name}{Colors.reset} <- {Colors.green}{drive_file.name}{Colors.reset}",
-        )
+        for drive_file, card in zip(
+            drive_files_for_subject.files, expansion_cards_for_subject.cards
+        ):
+            shutil.copy(
+                os.path.join(input_dir, drive_file.name),
+                os.path.join(output_dir, card.file_name),
+            )
+            print(
+                f"Renamed {Colors.green}{card.file_name}{Colors.reset} <- {Colors.green}{drive_file.name}{Colors.reset}",
+            )
 
 
 def parse_args(cli_args):
