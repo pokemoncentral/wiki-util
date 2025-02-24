@@ -108,9 +108,9 @@ class Card:
     file_name: str
     category: CardCategory
 
-    NON_PKMN_CARD_CATEGORIES = set(("Item", "Tool", "Supporter"))
-
+    _NON_PKMN_CARD_CATEGORIES = set(("item", "tool", "supporter"))
     _CARD_NAME_REGEX = re.compile(r"\d+.\w+$")
+    _INVALID_FILE_NAME_CHARS = re.compile(r"[^\w-]")
 
     @property
     def reissue_key(self):
@@ -125,14 +125,14 @@ class Card:
         name_arg = cls._parse_name_arg(args[1], expansion_name)
         it_name = "{}{}{}.{}".format(
             name_arg.replace(" ", ""),
-            expansion_name.replace(" ", ""),
+            cls._INVALID_FILE_NAME_CHARS.sub("", expansion_name),
             deck_number,
             extension,
         )
 
         category = (
             CardCategory.OTHER
-            if str(args[2]) in cls.NON_PKMN_CARD_CATEGORIES
+            if str(args[2]).lower() in cls._NON_PKMN_CARD_CATEGORIES
             else CardCategory.PKMN
         )
 
@@ -206,10 +206,15 @@ def fetch_expansion_cards(expansion_name, picture_ext):
 
 
 def list_drive_files(input_dir, picture_ext):
+    def is_promo(file_name):
+        return "_90_" in file_name
+
     drive_files = [
         DriveFile.from_file_name(file.name)
         for file in os.scandir(input_dir)
-        if file.is_file() and file.name.endswith("." + picture_ext)
+        if file.is_file()
+        and not is_promo(file.name)
+        and file.name.endswith("." + picture_ext)
     ]
     for drive_file in drive_files:
         files_with_same_number = [
