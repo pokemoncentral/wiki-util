@@ -1,0 +1,19 @@
+,, ----------------------------------- types -----------------------------------
+\bGrass\b,Erba,
+\bFire\b,Fuoco,
+\bWater\b,Acqua,
+\bLightning\b,Lampo,
+\bPsychic\b,Psico,
+\bFighting\b,Lotta,
+\bDarkness\b,Oscurità,
+\bMetal\b,Metallo,
+\bDragon\b,Drago,
+\bColorless\b,Incolore,
+,, --------------------------------- templates ---------------------------------
+\bTCGPocketPokémonPrevNext\b,GCCPocketPokémonPrevNext,
+\bTCGPocketCardList\b,GCCPocketCardList,
+\bTCG ID\b,GCC ID,
+,, -------------------------------- expansions --------------------------------
+\bGenetic Apex\b,Geni Misteriosi,
+\bMythical Island\b,L'Isola Misteriosa,
+\bSpace-Time Smackdown\b,Scontro Spaziotemporale,

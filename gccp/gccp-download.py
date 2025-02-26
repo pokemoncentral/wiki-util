@@ -36,7 +36,6 @@ def title_en_to_it(title_en):
 def main():
     # parse args
     local_args = pywikibot.handle_args()
-
     args = {
         "fam": "encypok",
         "enpages": "data/gccp-enpages",
@@ -46,15 +45,14 @@ def main():
     for arg in local_args:
         arg_name, _, arg_value = arg[1:].partition(":")
         args[arg_name] = arg_value
-
     # setup
-    overwrite = args["overwrite"].strip().lower() == "yes"
+    overwrite = (args["overwrite"].strip().lower() == "yes")
     if not os.path.isdir(args["enpages"]):
         os.mkdir(args["enpages"])
     if not os.path.isdir(args["itpages"]):
         os.mkdir(args["itpages"])
-    site_it = pywikibot.Site("it", fam=args["fam"])
     site_en = pywikibot.Site("en", fam=args["fam"])
+    site_it = pywikibot.Site("it", fam=args["fam"])
     # retrieve list of EN pages and filter them
     cat_en = pywikibot.Category(site_en, "Category:Pokémon TCG Pocket species by name")  # fmt: skip
     pages_en = pagegenerators.CategorizedPageGenerator(cat_en, recurse=True)
