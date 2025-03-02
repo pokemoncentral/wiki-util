@@ -177,6 +177,7 @@ class SameSubjectCards:
 class DriveFile:
     number: int
     category: CardCategory
+    group_key: Tuple[int, str]
     sort_key: Tuple[int, int]
     name: str
 
@@ -191,7 +192,9 @@ class DriveFile:
         number = int(segments[2][:-1])
         magical_pair = (int(segments[1][0]), int(segments[3]))
 
-        return cls(number, category, magical_pair, drive_file_name)
+        return cls(
+            number, category, (number, str(category)), magical_pair, drive_file_name
+        )
 
 
 @dataclass
@@ -202,8 +205,9 @@ class SameSubjectDriveFile:
 
     @classmethod
     def from_group(cls, group):
-        number, drive_files = group
+        _, drive_files = group
         files = list(sorted(drive_files, key=lambda c: c.sort_key))
+        number = files[0].number
         category = files[0].category
         return cls(files, number, category)
 
@@ -252,9 +256,12 @@ def rename_pictures(
         for group in groupby(expansion_cards, key=lambda c: c.group_key)
     }
 
-    drive_files.sort(key=lambda df: df.number)
-    drive_files_by_subject = map(
-        SameSubjectDriveFile.from_group, groupby(drive_files, key=lambda c: c.number)
+    drive_files.sort(key=lambda df: df.group_key)
+    drive_files_by_subject = list(
+        map(
+            SameSubjectDriveFile.from_group,
+            groupby(drive_files, key=lambda f: f.group_key),
+        )
     )
 
     for drive_files_for_subject in drive_files_by_subject:
