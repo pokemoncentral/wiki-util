@@ -65,6 +65,13 @@ Options:
 -gccp-expansion:<name>          The name of the TCG Pocket expansion the image files
                                 belong to.
 
+-pcw-page:<name>                The name of the Pokémon Central Wiki page containing the
+                                list of cards for the TCG Pocket expansion, in the same
+                                format as the actual page for the expansion would.
+                                \033[33mOptional\033[0m, defaults to the actual page for
+                                the TCG Pocket expansion, i.e.
+                                "<expansion name> (GCC Pocket)"
+
 -failed-log:<file>              The file where the names of the files from Google Drive
                                 that failed to be renamed will be written, one per line.
                                 Any directory in the file path that doesn't exist will
@@ -212,8 +219,8 @@ class SameSubjectDriveFile:
         return cls(files, number, category)
 
 
-def fetch_expansion_cards(expansion_name, picture_ext):
-    expansion_page = pywikibot.Page(pywikibot.Site(), expansion_name + " (GCC Pocket)")
+def fetch_expansion_cards(pcw_page_title, expansion_name, picture_ext):
+    expansion_page = pywikibot.Page(pywikibot.Site(), pcw_page_title)
     page_wikicode = mwparser.parse(expansion_page.text)
     return [
         Card.from_template_call(entry, expansion_name, picture_ext)
@@ -240,9 +247,15 @@ def category_min(items, category):
 
 
 def rename_pictures(
-    input_dir, output_dir, expansion_name, picture_ext, failed_log_file
+    *,
+    input_dir,
+    output_dir,
+    pcw_page_title,
+    expansion_name,
+    picture_ext,
+    failed_log_file,
 ):
-    expansion_cards = fetch_expansion_cards(expansion_name, picture_ext)
+    expansion_cards = fetch_expansion_cards(pcw_page_title, expansion_name, picture_ext)
     drive_files = list_drive_files(input_dir, picture_ext)
 
     offsets = {
@@ -308,7 +321,7 @@ def parse_args(cli_args):
             case "drive-pictures-dir" | "renamed-pictures-dir" | "failed-log":
                 args[name] = os.path.abspath(value)
 
-            case "gccp-expansion" | "picture-ext":
+            case "gccp-expansion" | "picture-ext" | "pcw-page":
                 args[name] = value
 
             case "help":
@@ -317,6 +330,9 @@ def parse_args(cli_args):
 
             case _:
                 raise ValueError(f"Unknown CLI argument: {name}")
+
+    if "pcw-page" not in args:
+        args["pcw-page"] = args["gccp-expansion"] + " (GCC Pocket)"
 
     required_args = set(
         ("drive-pictures-dir", "renamed-pictures-dir", "gccp-expansion")
@@ -338,11 +354,12 @@ def main(cli_args=None):
     os.makedirs(os.path.dirname(args["failed-log"]), exist_ok=True)
     with open(args["failed-log"], "w") as failed_log_file:
         rename_pictures(
-            args["drive-pictures-dir"],
-            args["renamed-pictures-dir"],
-            args["gccp-expansion"],
-            args["picture-ext"],
-            failed_log_file,
+            input_dir=args["drive-pictures-dir"],
+            output_dir=args["renamed-pictures-dir"],
+            pcw_page_title=args["pcw-page"],
+            expansion_name=args["gccp-expansion"],
+            picture_ext=args["picture-ext"],
+            failed_log_file=failed_log_file,
         )
 
 
