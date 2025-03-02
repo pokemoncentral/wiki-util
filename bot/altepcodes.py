@@ -11,6 +11,16 @@ def generate_altepcodes():
     specials = {
         "0065": "GAS01",
         "0066": "GAS02",
+        "0678": "DPS01",
+        "0679": "DPS02",
+        "0804": "NBS01",
+        "0826": "NBS02",
+        "0827": "XYS01",
+        "0856": "XYS02",
+        "0872": "XYS03",
+        "0902": "XYS04",
+        "0950": "XYS05",
+        "0951": "XYS06",
         "1234": "EPS01",
     }
     # initialize counter and text with all altepcodes
@@ -39,10 +49,15 @@ def generate_altepcodes():
 # remove altepcode from page intro and update it in infobox if needed
 def fix_page(text, altepcode=None):
     # remove altepcode from intro
-    text = re.sub(r" e il \w+ episodio della .+?(?=\.)", "", text)  # fmt: skip
+    text = re.sub(r" e (il |l['’])\w+ episodio della (\{\{sap|\[\[serie animata).+?(?=\.)", "", text)  # fmt: skip
     # change altepcode if needed
     if altepcode:
-        text = re.sub(r"(?<=altepcode=)\d+", altepcode, text)
+        pattern = r"(?<=altepcode=)\d+"
+        if re.search(pattern, text):
+            text = re.sub(pattern, altepcode, text)
+        else:
+            text = re.sub(r"(\bepcode=\w+ *\|) *", r"\1\naltepcode=" + f"{altepcode} |", text)  # fmt: skip
+            text = re.sub(r"(\|epcode=\w+)", r"\1\n|altepcode=" + altepcode, text)
     # return updated text
     return text
 
