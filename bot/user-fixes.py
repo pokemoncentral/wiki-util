@@ -6,13 +6,12 @@ This file implements custom pywikibot fixes
 
 from functools import partial
 
-from fixes_data import (aa_aliases, aa_exceptions)
-
+from fixes_data import aa_aliases, aa_exceptions
 
 except_inside = [
     r"'{2,3}.+?'{2,3}",
     r'".+?"',
-    r'\[\[\w{2}:.+?\]\]',
+    r"\[\[\w{2}:.+?\]\]",
 ]
 
 
@@ -44,13 +43,15 @@ def simplify_link(match, text=None):
 
     # If link target and displayed text are the same, only one value is
     # interpolated. Two are necessary otherwise.
-    return ('[[{0:s}]]'.format(target)
-            if target == text
-            else '[[{0:s}|{1:s}]]'.format(target, text))
+    return (
+        "[[{0:s}]]".format(target)
+        if target == text
+        else "[[{0:s}|{1:s}]]".format(target, text)
+    )
 
 
 def to_link(exceptions, aliases, match):
-    """Return the plain link to a given match.
+    r"""Return the plain link to a given match.
 
     This function returns a plain link to the content of the first group in
     the passed match. For example, given the string '{{a|Forza Interiore}}' and
@@ -86,13 +87,13 @@ def to_link(exceptions, aliases, match):
     # Splitting the link target and what is displayed. If there's nothing to
     # split, then they're equal, so they're both assigned the whole content.
     try:
-        link_target, link_display = content.split('|')
+        link_target, link_display = content.split("|")
     except ValueError:
         link_target, link_display = content, content
 
     # The key in the exceptions and aliases must be lowercased and with no
     # underscore in place of spaces.
-    key = link_target.lower().replace('_', ' ')
+    key = link_target.lower().replace("_", " ")
 
     # The link target is an exception, returning the whole match as it is.
     if key in exceptions:
@@ -106,112 +107,111 @@ def to_link(exceptions, aliases, match):
 
 
 # This fix fixes grammatically incorrect text and general misspellings.
-fixes['grammar'] = {
-    'nocase': False,
-    'regex': True,
-    'exceptions': {
-        'inside': except_inside,
+fixes["grammar"] = {
+    "nocase": False,
+    "regex": True,
+    "exceptions": {
+        "inside": except_inside,
     },
-    'msg': {
-        'it': 'Bot: Fixing spelling',
+    "msg": {
+        "it": "Bot: Fixing spelling",
     },
-    'replacements': [
-        (r'chè\b', 'ché'),
-        (r'\bpò\b', "po'"),
-        (r'\bsè\b', 'sé'),
-        (r'\bsé\s+stess', 'se stess'),
-        (r'\bquì\b', 'qui'),
-        (r'\bquà\b', 'qua'),
-        (r'\bfà\b', 'fa'),
-        ('metereologic', 'meteorologic'),
-        ('obbiettiv', 'obiettiv'),
-        ("qual'è", 'qual è'),
-        (' +', ' '),
-        (r'^\s+$', r'\n'),
-
+    "replacements": [
+        (r"chè\b", "ché"),
+        (r"\bpò\b", "po'"),
+        (r"\bsè\b", "sé"),
+        (r"\bsé\s+stess", "se stess"),
+        (r"\bquì\b", "qui"),
+        (r"\bquà\b", "qua"),
+        (r"\bfà\b", "fa"),
+        ("metereologic", "meteorologic"),
+        ("obbiettiv", "obiettiv"),
+        ("qual'è", "qual è"),
+        (" +", " "),
+        (r"^\s+$", r"\n"),
         # Fixing unnecessary replacements made above
-        (r'Arché\b', 'Archè'),
+        (r"Arché\b", "Archè"),
     ],
 }
 
 # This fix addresses misspellings of brand names, where the case matters.
-fixes['names-case-sensitive'] = {
-    'nocase': False,
-    'regex': True,
-    'exceptions': {
-        'inside': except_inside,
+fixes["names-case-sensitive"] = {
+    "nocase": False,
+    "regex": True,
+    "exceptions": {
+        "inside": except_inside,
     },
-    'msg': {
-        'it': 'Bot: Fixing names - case sensitive',
+    "msg": {
+        "it": "Bot: Fixing names - case sensitive",
     },
-    'replacements': [
-        (r'Pokè', 'Poké'),
-        (r'POKè', 'POKé'),
-    ]
+    "replacements": [
+        (r"Pokè", "Poké"),
+        (r"POKè", "POKé"),
+    ],
 }
 
 # This fix addresses brand names misspellings, where the case doesn't matter.
-fixes['names-case-insensitive'] = {
-    'nocase': True,
-    'regex': True,
-    'exceptions': {
-        'inside': except_inside,
+fixes["names-case-insensitive"] = {
+    "nocase": True,
+    "regex": True,
+    "exceptions": {
+        "inside": except_inside,
         # These pages have text that would be replaced but it shouldn't, as
         # it's in another language. Skipping them temporarily (last famous
         # words)
-        'title': (
-            'Poké Ball Miraidon',
-            'Poké Ball Koraidon',
-            'Poké Ball (strumento)',
-            'Elenco degli strumenti chiave in nona generazione',
-            'AG074',
-            'OP006',
-            'Viale Autunno',
+        "title": (
+            "Poké Ball Miraidon",
+            "Poké Ball Koraidon",
+            "Poké Ball (strumento)",
+            "Elenco degli strumenti chiave in nona generazione",
+            "AG074",
+            "OP006",
+            "Viale Autunno",
         ),
     },
-    'msg': {
-        'it': 'Bot: Fixing names - case insensitive',
+    "msg": {
+        "it": "Bot: Fixing names - case insensitive",
     },
-    'replacements': [
-        ('Pallaombra', 'Palla Ombra'),
-        ('Iperraggio', 'Iper Raggio'),
-        (r'\bPokéball', 'Poké Ball'),
-    ]
+    "replacements": [
+        ("Pallaombra", "Palla Ombra"),
+        ("Iperraggio", "Iper Raggio"),
+        (r"\bPokéball", "Poké Ball"),
+    ],
 }
 
 # This fix removes obsolete templates, turning them into plain links.
-fixes['obsolete-templates'] = {
-    'nocase': False,
-    'regex': True,
-    'exceptions': {
-        'inside': except_inside,
+fixes["obsolete-templates"] = {
+    "nocase": False,
+    "regex": True,
+    "exceptions": {
+        "inside": except_inside,
     },
-    'msg': {
-        'it': 'Bot: Fixing obsolete templates usage',
+    "msg": {
+        "it": "Bot: Fixing obsolete templates usage",
     },
-    'replacements': [
-        (r'\{\{[AaMmPpTt]\|(.+?)\}\}', r'[[\1]]'),
-        (r'\{\{[Dd]wa\|(.+?)\}\}', r'[[\1]]'),
-        (r'\{\{[Pp]w\|(.+?)\}\}', r'[[\1]]'),
-        (r'\{\{[Pp]ietraevo\|(.+?)\}\}', r'[[\1]]'),
-        (r'\{\{[Aa]a\|(.+?)\}\}', partial(to_link, aa_exceptions, aa_aliases)),
-        (r'\{\{MSF', r'\{\{MSP'),
-    ]
+    "replacements": [
+        (r"\{\{[AaMmPpTt]\|(.+?)\}\}", r"[[\1]]"),
+        (r"\{\{[Dd]wa\|(.+?)\}\}", r"[[\1]]"),
+        (r"\{\{[Pp]w\|(.+?)\}\}", r"[[\1]]"),
+        (r"\{\{[Pp]ietraevo\|(.+?)\}\}", r"[[\1]]"),
+        (r"\{\{[Aa]a\|(.+?)\}\}", partial(to_link, aa_exceptions, aa_aliases)),
+        (r"\{\{MSF", r"\{\{MSP"),
+    ],
 }
 
 # This fix updates redundant code
-fixes['redundant-code'] = {
-    'nocase': False,
-    'regex': True,
-    'exceptions': {
-        'inside': except_inside,
+fixes["redundant-code"] = {
+    "nocase": False,
+    "regex": True,
+    "exceptions": {
+        "inside": except_inside,
     },
-    'msg': {
-        'it': 'Bot: Fixing redundant code',
+    "msg": {
+        "it": "Bot: Fixing redundant code",
     },
-    'replacements': [
-        (r'\[\[(.+?) \((tipo|mossa|abilità)\)\|(.+?)\]\]', simplify_link),
-        (r'\[\[(.+?)\|(.+?)\]\]', simplify_link),
-        ('<div></div>', '<br>'),
-    ]
+    "replacements": [
+        (r"\[\[(.+?) \((tipo|mossa|abilità)\)\|(.+?)\]\]", simplify_link),
+        (r"\[\[(.+?)\|(.+?)\]\]", simplify_link),
+        ("<div></div>", "<br>"),
+    ],
 }
