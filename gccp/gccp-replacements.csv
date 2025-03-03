@@ -14,7 +14,8 @@
 \bTCGPocketCardList\b,GCCPocketCardList,
 \bTCG ID\b,GCC ID,
 ,, -------------------------------- expansions --------------------------------
-\bGenetic Apex\b,Geni Misteriosi,
+
+\bGenetic Apex\b,Geni Supremi,
 \bMythical Island\b,L'Isola Misteriosa,
 \bSpace-Time Smackdown\b,Scontro Spaziotemporale,
 \bTriumphant Light\b,Luce Trionfale,
@@ -30,3 +31,7 @@
 \bDiamond\b,Diamante,
 \bStar\b,Stella,
 \bCrown\b,Corona,
+,, -------------------------------- stages --------------------------------
+{{TCG\|Basic Pokémon}},{{TCG|Base}}
+{{TCG\|Stage 1 Pokémon}},{{TCG|Fase 1}}
+{{TCG\|Stage 2 Pokémon}},{{TCG|Fase 2}}
