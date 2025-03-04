@@ -4,7 +4,7 @@
     "python.defaultInterpreterPath": ".venv/bin/python",
     "[python]": {
         "diffEditor.ignoreTrimWhitespace": false,
-        "editor.defaultColorDecorators": false,
+        "editor.defaultColorDecorators": "never",
         "editor.wordBasedSuggestions": "off",
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.rulers": [
