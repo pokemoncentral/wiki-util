@@ -9,8 +9,11 @@ from functools import partial
 from fixes_data import aa_aliases, aa_exceptions
 
 except_inside = [
+    # Wikicode markup for bold and italic
     r"'{2,3}.+?'{2,3}",
+    # Quoted strings
     r'".+?"',
+    # Interwiki
     r"\[\[\w{2}:.+?\]\]",
 ]
 
@@ -154,28 +157,11 @@ fixes["names-case-sensitive"] = {
 fixes["names-case-insensitive"] = {
     "nocase": True,
     "regex": True,
-    "exceptions": {
-        "inside": except_inside,
-        # These pages have text that would be replaced but it shouldn't, as
-        # it's in another language. Skipping them temporarily (last famous
-        # words)
-        "title": (
-            "Poké Ball Miraidon",
-            "Poké Ball Koraidon",
-            "Poké Ball (strumento)",
-            "Elenco degli strumenti chiave in nona generazione",
-            "AG074",
-            "OP006",
-            "Viale Autunno",
-        ),
-    },
-    "msg": {
-        "it": "Bot: Fixing names - case insensitive",
-    },
+    "exceptions": {"inside": except_inside},
+    "msg": {"it": "Bot: Fixing names - case insensitive"},
     "replacements": [
         ("Pallaombra", "Palla Ombra"),
         ("Iperraggio", "Iper Raggio"),
-        (r"\bPokéball", "Poké Ball"),
     ],
 }
 
