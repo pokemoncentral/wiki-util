@@ -150,7 +150,7 @@
     "es": "Pidgeotto",
     "de": "Tauboga",
     "fr": "Roucoups",
-    "jp": "{{tt"
+    "jp": "Pigeon"
   },
   {
     "ndex": 18,
@@ -159,7 +159,7 @@
     "es": "Pidgeot",
     "de": "Tauboss",
     "fr": "Roucarnage",
-    "jp": "{{tt"
+    "jp": "Pigeot"
   },
   {
     "ndex": 19,
@@ -267,7 +267,7 @@
     "es": "Nidorina",
     "de": "Nidorina",
     "fr": "Nidorina",
-    "jp": "{{tt"
+    "jp": "Nidorina"
   },
   {
     "ndex": 31,
@@ -294,7 +294,7 @@
     "es": "Nidorino",
     "de": "Nidorino",
     "fr": "Nidorino",
-    "jp": "{{tt"
+    "jp": "Nidorino"
   },
   {
     "ndex": 34,
@@ -321,7 +321,7 @@
     "es": "Clefable",
     "de": "Pixi",
     "fr": "Mélodelfe",
-    "jp": "{{tt"
+    "jp": "Pixy"
   },
   {
     "ndex": 37,
@@ -402,7 +402,7 @@
     "es": "Vileplume",
     "de": "Giflor",
     "fr": "Rafflesia",
-    "jp": "{{tt"
+    "jp": "Ruffresia"
   },
   {
     "ndex": 46,
@@ -465,7 +465,7 @@
     "es": "Meowth",
     "de": "Mauzi",
     "fr": "Miaouss",
-    "jp": "{{tt"
+    "jp": "Nyarth"
   },
   {
     "ndex": 53,
@@ -483,7 +483,7 @@
     "es": "Psyduck",
     "de": "Enton",
     "fr": "Psykokwak",
-    "jp": "{{tt"
+    "jp": "Koduck"
   },
   {
     "ndex": 55,
@@ -492,7 +492,7 @@
     "es": "Golduck",
     "de": "Entoron",
     "fr": "Akwakwak",
-    "jp": "{{tt"
+    "jp": "Golduck"
   },
   {
     "ndex": 56,
@@ -564,7 +564,7 @@
     "es": "Abra",
     "de": "Abra",
     "fr": "Abra",
-    "jp": "{{tt"
+    "jp": "Casey"
   },
   {
     "ndex": 64,
@@ -573,7 +573,7 @@
     "es": "Kadabra",
     "de": "Kadabra",
     "fr": "Kadabra",
-    "jp": "{{tt"
+    "jp": "Yungerer"
   },
   {
     "ndex": 65,
@@ -591,7 +591,7 @@
     "es": "Machop",
     "de": "Machollo",
     "fr": "Machoc",
-    "jp": "{{tt"
+    "jp": "Wanriky"
   },
   {
     "ndex": 67,
@@ -600,7 +600,7 @@
     "es": "Machoke",
     "de": "Maschock",
     "fr": "Machopeur",
-    "jp": "{{tt"
+    "jp": "Goriky"
   },
   {
     "ndex": 68,
@@ -609,7 +609,7 @@
     "es": "Machamp",
     "de": "Machomei",
     "fr": "Mackogneur",
-    "jp": "{{tt"
+    "jp": "Kairiky"
   },
   {
     "ndex": 69,
@@ -663,7 +663,7 @@
     "es": "Geodude",
     "de": "Kleinstein",
     "fr": "Racaillou",
-    "jp": "{{tt"
+    "jp": "Isitsubute"
   },
   {
     "ndex": 75,
@@ -771,7 +771,7 @@
     "es": "Seel",
     "de": "Jurob",
     "fr": "Otaria",
-    "jp": "{{tt"
+    "jp": "Pawou"
   },
   {
     "ndex": 87,
@@ -789,7 +789,7 @@
     "es": "Grimer",
     "de": "Sleima",
     "fr": "Tadmorv",
-    "jp": "{{tt"
+    "jp": "Betbeter"
   },
   {
     "ndex": 89,
@@ -798,7 +798,7 @@
     "es": "Muk",
     "de": "Sleimok",
     "fr": "Grotadmorv",
-    "jp": "{{tt"
+    "jp": "Betbeton"
   },
   {
     "ndex": 90,
@@ -843,7 +843,7 @@
     "es": "Gengar",
     "de": "Gengar",
     "fr": "Ectoplasma",
-    "jp": "{{tt"
+    "jp": "Gangar"
   },
   {
     "ndex": 95,
@@ -861,7 +861,7 @@
     "es": "Drowzee",
     "de": "Traumato",
     "fr": "Soporifik",
-    "jp": "{{tt"
+    "jp": "Sleep"
   },
   {
     "ndex": 97,
@@ -888,7 +888,7 @@
     "es": "Kingler",
     "de": "Kingler",
     "fr": "Krabboss",
-    "jp": "{{tt"
+    "jp": "Kingler"
   },
   {
     "ndex": 100,
@@ -906,7 +906,7 @@
     "es": "Electrode",
     "de": "Lektrobal",
     "fr": "Électrode",
-    "jp": "{{tt"
+    "jp": "Marumine"
   },
   {
     "ndex": 102,
@@ -924,7 +924,7 @@
     "es": "Exeggutor",
     "de": "Kokowei",
     "fr": "Noadkoko",
-    "jp": "{{tt"
+    "jp": "Nassy"
   },
   {
     "ndex": 104,
@@ -987,7 +987,7 @@
     "es": "Weezing",
     "de": "Smogmog",
     "fr": "Smogogo",
-    "jp": "{{tt"
+    "jp": "Matadogas"
   },
   {
     "ndex": 111,
@@ -996,7 +996,7 @@
     "es": "Rhyhorn",
     "de": "Rihorn",
     "fr": "Rhinocorne",
-    "jp": "{{tt"
+    "jp": "Sihorn"
   },
   {
     "ndex": 112,
@@ -1005,7 +1005,7 @@
     "es": "Rhydon",
     "de": "Rizeros",
     "fr": "Rhinoféros",
-    "jp": "{{tt"
+    "jp": "Sidon"
   },
   {
     "ndex": 113,
@@ -1068,7 +1068,7 @@
     "es": "Seaking",
     "de": "Golking",
     "fr": "Poissoroy",
-    "jp": "{{tt"
+    "jp": "Azumao"
   },
   {
     "ndex": 120,
@@ -1167,7 +1167,7 @@
     "es": "Gyarados",
     "de": "Garados",
     "fr": "Léviator",
-    "jp": "{{tt"
+    "jp": "Gyarados"
   },
   {
     "ndex": 131,
@@ -1239,7 +1239,7 @@
     "es": "Omanyte",
     "de": "Amonitas",
     "fr": "Amonita",
-    "jp": "{{tt"
+    "jp": "Omnite"
   },
   {
     "ndex": 139,
@@ -1248,7 +1248,7 @@
     "es": "Omastar",
     "de": "Amoroso",
     "fr": "Amonistar",
-    "jp": "{{tt"
+    "jp": "Omstar"
   },
   {
     "ndex": 140,
@@ -1266,7 +1266,7 @@
     "es": "Kabutops",
     "de": "Kabutops",
     "fr": "Kabutops",
-    "jp": "{{tt"
+    "jp": "Kabutops"
   },
   {
     "ndex": 142,
@@ -8196,7 +8196,7 @@
     "es": "Skeledirge",
     "de": "Skelokrok",
     "fr": "Flâmigator",
-    "jp": "Laudbon{{tt"
+    "jp": "Laudbon"
   },
   {
     "ndex": 912,
