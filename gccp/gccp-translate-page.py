@@ -4,6 +4,7 @@ import sys
 from typing import List, Optional, Tuple
 
 import mwparserfromhell
+import pywikibot as pwb
 from mwparserfromhell.wikicode import Wikicode
 
 """
@@ -14,6 +15,16 @@ Arguments:
 -name:<name> the name of the en page (expected format is "<pokémon> (TCG Pocket)").
   Required for the en interwiki.
 """
+
+BULBAPEDIA = None
+
+
+def count_pages_in_category(cat: str) -> int:
+    global BULBAPEDIA
+    if BULBAPEDIA is None:
+        BULBAPEDIA = pwb.Site("en")
+    cat_page = pwb.page.Category(BULBAPEDIA, title=cat)
+    return BULBAPEDIA.categoryinfo(cat_page)["pages"]
 
 
 def replacements_from_file(text: str, file_path: str, fields_separator=",") -> str:
@@ -49,11 +60,6 @@ def get_name(wikicode: Wikicode, name_arg: Optional[str]) -> str:
     return p.params[0]
 
 
-def count_pages_in_category(cat: str) -> int:
-    # TODO
-    return 0
-
-
 def make_intro_template(wikicode: Wikicode) -> Wikicode:
     """Build the intro template."""
     # {{GCCPocketPokémonIntro|2|Geni Supremi|Fase 2|Erba}}
@@ -64,7 +70,7 @@ def make_intro_template(wikicode: Wikicode) -> Wikicode:
     )
     number_expr = number.name[len("#expr:") :]
     category_name = number_expr.split(":")[1].split("}")[0].strip()
-    intro_template.add("1", count_pages_in_category(category_name))
+    intro_template.add("1", count_pages_in_category(category_name) - 1)
     # Parameter 2: expansion
     expansion = next(wikicode.ifilter_templates(matches=lambda t: (t.name) == "TCGP"))
     intro_template.add("2", expansion.get(1))
@@ -168,11 +174,13 @@ def translate_page(source: str, name_arg: Optional[str]) -> str:
 # main function
 def main():
     # parse args
+    local_args = pwb.handle_args()
+
     named_args = {
         "name": None,
     }
     pos_args = []
-    for arg in sys.argv[1:]:
+    for arg in local_args:
         if arg[0] == "-":
             arg_name, _, arg_value = arg[1:].partition(":")
             named_args[arg_name] = arg_value
