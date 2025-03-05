@@ -1,4 +1,5 @@
 import csv
+import os
 import re
 import sys
 from typing import List, Optional, Tuple
@@ -33,7 +34,7 @@ def replacements_from_file(text: str, file_path: str, fields_separator=",") -> s
     In the CSV, the first column is the pattern while the second is the replacement (see
     gccp-replacements.csv)"""
     # read tablewith replacements from CSV file
-    with open(file_path, "r") as f:
+    with open(os.path.join(os.path.dirname(__file__), file_path), "r") as f:
         replacements = csv.reader(f, delimiter=fields_separator)
         for row in replacements:
             # skip rows where first field is empty
@@ -85,7 +86,7 @@ def make_intro_template(wikicode: Wikicode) -> Wikicode:
 
 
 def replace_ex(val: str) -> str:
-    return re.sub("(\w+) ex", "\g<1>-ex", val)
+    return re.sub(r"(\w+) ex", r"\g<1>-ex", val)
 
 
 CARDLIST_NEXT_FIRSTCARD = ["GCCPocketCardList/Header", "GCCPocketCardList/Divider"]
@@ -128,7 +129,7 @@ def make_card_list_entry(entry: Wikicode, firstcard: bool) -> Tuple[Wikicode, bo
 def make_card_list(wikicode: Wikicode) -> List[Wikicode]:
     card_list = []
     firstcard = False
-    for card_list_row in wikicode.ifilter_templates(matches="^{{GCCPocketCardList\/"):
+    for card_list_row in wikicode.ifilter_templates(matches=r"^{{GCCPocketCardList\/"):
         new_row, firstcard = make_card_list_entry(card_list_row, firstcard)
         card_list.append(new_row)
 
@@ -164,7 +165,7 @@ def translate_page(source: str, name_arg: Optional[str]) -> str:
     # Make the interwikis
     if name_arg is not None:
         resulting_page.append(f"[[en:{name_arg}]]")
-    interwikis = wikicode.ifilter_wikilinks(matches="^\[\[\w{2}:")
+    interwikis = wikicode.ifilter_wikilinks(matches=r"^\[\[\w{2}:")
     interwikis = filter(lambda i: not i.startswith("[[it"), interwikis)
     resulting_page.extend(map(str, interwikis))
 
