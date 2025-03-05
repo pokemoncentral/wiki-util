@@ -15,5 +15,9 @@ dev = [
     "pre-commit>=4.0.1",
 ]
 
+# This is so that `pip install .` doesn't crash
+[tool.setuptools]
+packages = []
+
 [tool.isort]
 profile = "black"
