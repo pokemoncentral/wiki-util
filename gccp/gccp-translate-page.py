@@ -97,7 +97,10 @@ def make_intro_template(wikicode: Wikicode) -> Wikicode:
     else:
         intro_template.add("5", "")
     # Parameter 6 and 7: energy types
-    if str(mon_type.get(1)).lower().strip() == "drago":
+    if (
+        str(intro_template.get("4").value).lower().strip() == "drago"
+        or str(intro_template.get("5").value).lower().strip() == "drago"
+    ):
         energy_types = list(
             itertools.islice(
                 wikicode.ifilter_templates(matches=lambda t: (t.name) == "e"), 2
