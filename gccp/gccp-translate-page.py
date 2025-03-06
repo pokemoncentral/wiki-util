@@ -1,4 +1,5 @@
 import csv
+import itertools
 import os
 import re
 import sys
@@ -83,6 +84,27 @@ def make_intro_template(wikicode: Wikicode) -> Wikicode:
     # Parameter 4: type
     mon_type = next(wikicode.ifilter_templates(matches=lambda t: (t.name) == "ct"))
     intro_template.add("4", mon_type.get(1))
+    # Parameter 5: second type, if any
+    mon_type_idx = wikicode.index(mon_type)
+    if (
+        isinstance(wikicode.get(mon_type_idx + 1), mwparserfromhell.nodes.text.Text)
+        and wikicode.get(mon_type_idx + 1).value.strip() == "or"
+        and isinstance(
+            wikicode.get(mon_type_idx + 2), mwparserfromhell.nodes.template.Template
+        )
+    ):
+        intro_template.add("5", wikicode.get(mon_type_idx + 2).get("1"))
+    else:
+        intro_template.add("5", "")
+    # Parameter 6 and 7: energy types
+    if str(mon_type.get(1)).lower().strip() == "drago":
+        energy_types = list(
+            itertools.islice(
+                wikicode.ifilter_templates(matches=lambda t: (t.name) == "e"), 2
+            )
+        )
+        intro_template.add("6", energy_types[0].get(1))
+        intro_template.add("7", energy_types[1].get(1))
 
     return intro_template
 
@@ -99,7 +121,9 @@ CARDLIST_ENTRY_UNTOUCHED = [
 ]
 
 
-def make_card_list_entry(entry: Wikicode, firstcard: bool) -> Tuple[Wikicode, bool]:
+def make_card_list_entry(
+    entry: Wikicode, firstcard: bool, first_type: str, second_type: Optional[str] = None
+) -> Tuple[Wikicode, bool]:
     if entry.name in CARDLIST_NEXT_FIRSTCARD:
         firstcard = True
     if entry.name in CARDLIST_ENTRY_UNTOUCHED:
@@ -107,6 +131,10 @@ def make_card_list_entry(entry: Wikicode, firstcard: bool) -> Tuple[Wikicode, bo
     if entry.name == "GCCPocketCardList/Card" and firstcard:
         entry.add("firstcard", "yes")
         firstcard = False
+    # Reset dividers types
+    if entry.name == "GCCPocketCardList/Divider":
+        entry.add("2", first_type)
+        entry.add("3", second_type)
     # EX cards
     if entry.name == "GCCPocketCardList/Divider" and entry.get("1").value.contains(
         "{{TCGP Icon|ex}}"
@@ -129,10 +157,21 @@ def make_card_list_entry(entry: Wikicode, firstcard: bool) -> Tuple[Wikicode, bo
 
 
 def make_card_list(wikicode: Wikicode) -> List[Wikicode]:
+    # Get the header types
+    header = next(
+        wikicode.ifilter_templates(
+            matches=lambda t: t.name == "GCCPocketCardList/Header"
+        )
+    )
+    first_type = header.get("2")
+    second_type = header.get("3", default=None)
+
     card_list = []
     firstcard = False
     for card_list_row in wikicode.ifilter_templates(matches=r"^{{GCCPocketCardList\/"):
-        new_row, firstcard = make_card_list_entry(card_list_row, firstcard)
+        new_row, firstcard = make_card_list_entry(
+            card_list_row, firstcard, first_type, second_type
+        )
         card_list.append(new_row)
 
     return card_list
@@ -159,10 +198,13 @@ def translate_page(source: str, name_arg: Optional[str]) -> str:
             )
         )
     )
+    resulting_page.append("")
     resulting_page.append(str(make_intro_template(wikicode)))
+    resulting_page.append("")
 
     # Make the body
     resulting_page.extend(map(str, make_card_list(wikicode)))
+    resulting_page.append("")
 
     # Make the interwikis
     if name_arg is not None:
