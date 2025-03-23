@@ -226,6 +226,7 @@ def main():
 
     named_args = {
         "name": None,
+        "output": None,
     }
     pos_args = []
     for arg in local_args:
@@ -238,7 +239,14 @@ def main():
     with open(pos_args[0], "r", encoding="utf-8") as f:
         source = f.read()
 
-    print(translate_page(source, named_args["name"]))
+    out_stream = (
+        open(named_args["output"], "w", encoding="utf-8")
+        if named_args["output"] is not None
+        else sys.stdout
+    )
+    # This can close sys.sdout. That's not a problem
+    with out_stream:
+        print(translate_page(source, named_args["name"]), file=out_stream)
 
 
 # invoke main function
