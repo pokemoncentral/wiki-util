@@ -18,6 +18,7 @@
 \bMythical Island\b,L'Isola Misteriosa,
 \bSpace-Time Smackdown\b,Scontro Spaziotemporale,
 \bTriumphant Light\b,Luce Trionfale,
+\bShining Revelry\b,Tripudio Splendente,
 ,, --------------------------------- alt forms ---------------------------------
 \bMow Rotom\b,Rotom Taglio,
 \bHeat Rotom\b,Rotom Calore,
@@ -26,10 +27,14 @@
 \bFan Rotom\b,Rotom Vortice,
 \bOrigin Forme Palkia\b,Palkia Forma Originale,
 \bOrigin Forme Dialga\b,Dialga Forma Originale,
+\bPaldean Tauros\b,Tauros di Paldea,
+\bPaldean Wooper\b,Wooper di Paldea,
+\bPaldean Clodsire\b,Clodsire di Paldea,
 ,, ------------------------------- rarities -------------------------------
 \bDiamond\b,Diamante,
 \bStar\b,Stella,
 \bCrown\b,Corona,
+\bShiny\b,Cromatico,
 ,, -------------------------------- stages --------------------------------
 {{TCG\|Basic Pokémon}},{{TCG|Base}}
 {{TCG\|Stage 1 Pokémon}},{{TCG|Fase 1}}
