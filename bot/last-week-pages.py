@@ -19,8 +19,11 @@ from datetime import date, timedelta
 def should_exclude(page):
     """Whether the page should be excluded from the list."""
     cats = [cat.title() for cat in page.categories()]
-    # cards
-    if page.title().endswith("(GCC)") or "Categoria:Carte Pokémon" in cats:
+    # TCG cards
+    if page.title().endswith("(GCC)") or "Categoria:Carte Pokémon (GCC)" in cats:
+        return True
+    # TCG Pocket cards
+    if page.title().endswith("(GCC Pocket)") or "Categoria:Carte Pokémon (GCC Pocket)" in cats:
         return True
     # disambiguations
     if "Categoria:Pagine di disambiguazione" in cats:
