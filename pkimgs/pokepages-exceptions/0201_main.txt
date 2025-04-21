@@ -965,7 +965,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201.png
+|img=Sprsmesh0201.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1006,7 +1006,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201B.png
+|img=Sprsmesh0201B.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1047,7 +1047,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201C.png
+|img=Sprsmesh0201C.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1088,7 +1088,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201D.png
+|img=Sprsmesh0201D.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1129,7 +1129,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201E.png
+|img=Sprsmesh0201E.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1170,7 +1170,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201F.png
+|img=Sprsmesh0201F.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1211,7 +1211,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201G.png
+|img=Sprsmesh0201G.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1252,7 +1252,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201H.png
+|img=Sprsmesh0201H.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1293,7 +1293,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201I.png
+|img=Sprsmesh0201I.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1334,7 +1334,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201J.png
+|img=Sprsmesh0201J.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1375,7 +1375,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201K.png
+|img=Sprsmesh0201K.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1416,7 +1416,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201L.png
+|img=Sprsmesh0201L.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1457,7 +1457,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201M.png
+|img=Sprsmesh0201M.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1498,7 +1498,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201N.png
+|img=Sprsmesh0201N.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1539,7 +1539,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201O.png
+|img=Sprsmesh0201O.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1580,7 +1580,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201P.png
+|img=Sprsmesh0201P.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1621,7 +1621,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201Q.png
+|img=Sprsmesh0201Q.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1662,7 +1662,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201R.png
+|img=Sprsmesh0201R.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1703,7 +1703,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201S.png
+|img=Sprsmesh0201S.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1744,7 +1744,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201T.png
+|img=Sprsmesh0201T.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1785,7 +1785,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201U.png
+|img=Sprsmesh0201U.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1826,7 +1826,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201V.png
+|img=Sprsmesh0201V.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1867,7 +1867,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201W.png
+|img=Sprsmesh0201W.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1908,7 +1908,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201X.png
+|img=Sprsmesh0201X.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1949,7 +1949,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201Y.png
+|img=Sprsmesh0201Y.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -1990,7 +1990,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201Z.png
+|img=Sprsmesh0201Z.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -2031,7 +2031,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201PE.png
+|img=Sprsmesh0201PE.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
@@ -2072,7 +2072,7 @@
 }}
 {{pokemonimages/entry
 |xl=10|md=25|xs=50
-|img=Sprsmesh0201PI.png
+|img=Sprsmesh0201PI.gif
 |updesc={{#invoke: blackabbrev | S}} [[File:CromaticoRFVF.png]]
 }}
 {{pokemonimages/entry
