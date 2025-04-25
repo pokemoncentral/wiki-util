@@ -19,7 +19,7 @@
 \bSpace-Time Smackdown\b,Scontro Spaziotemporale,
 \bTriumphant Light\b,Luce Trionfale,
 \bShining Revelry\b,Tripudio Splendente,
-\bCelestial Guardians\b,Guardiani Astrali
+\bCelestial Guardians\b,Guardiani Astrali,
 ,, --------------------------------- alt forms ---------------------------------
 \bMow Rotom\b,Rotom Taglio,
 \bHeat Rotom\b,Rotom Calore,
@@ -41,6 +41,6 @@
 \bCrown\b,Corona,
 \bShiny\b,Cromatico,
 ,, -------------------------------- stages --------------------------------
-{{TCG\|Basic Pokémon}},{{TCG|Base}}
-{{TCG\|Stage 1 Pokémon}},{{TCG|Fase 1}}
-{{TCG\|Stage 2 Pokémon}},{{TCG|Fase 2}}
+{{TCG\|Basic Pokémon}},{{TCG|Base}},
+{{TCG\|Stage 1 Pokémon}},{{TCG|Fase 1}},
+{{TCG\|Stage 2 Pokémon}},{{TCG|Fase 2}},
