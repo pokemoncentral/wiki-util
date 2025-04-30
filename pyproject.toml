@@ -5,6 +5,7 @@ description = "Pokémon Central Wiki utilities"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "easyocr>=1.7.2",
     "pywikibot>=9.6.1",
 ]
 
