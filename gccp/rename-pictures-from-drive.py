@@ -193,9 +193,10 @@ class DriveFile:
 
     @classmethod
     def from_file_name(cls, drive_file_name):
-        segments = drive_file_name.split("_")
+        (file_name, _) = os.path.splitext(drive_file_name)
+        segments = file_name.split("_")
 
-        category = CardCategory(segments[0][1:].lower())
+        category = CardCategory(segments[0][-2:].lower())
         number = int(segments[2][:-1])
         magical_pair = (int(segments[1][0]), int(segments[3]))
 
