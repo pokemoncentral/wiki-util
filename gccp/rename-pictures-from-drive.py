@@ -50,8 +50,8 @@ fail are skipped, and printed both on STDERR and in a log file.
 
 Usage:
     python rename-pictures-from-drive.py -drive-pictures-dir:<dir> \\
-        -renamed-pictures-dir:<dir> -gccp-expansion:<name> [-failed-log:<file>] \\
-        [-picture-ext:<extension>]
+        -renamed-pictures-dir:<dir> -gccp-expansion:<name> [-ocr-results:<file>] \\
+        [-failed-log:<file>] [-pcw-page:<name>] [-picture-ext:<extension>]
 
 Options:
 
@@ -72,6 +72,11 @@ Options:
                                 the TCG Pocket expansion, i.e.
                                 "<expansion name> (GCC Pocket)"
 
+-ocr-results:<file>             The file where the OCR results are saved to speed up
+                                future runs.
+                                \033[33mOptional\033[0m, defaults to
+                                "<renamed-pictures-dir>/ocr-cache.pickle"
+
 -failed-log:<file>              The file where the names of the files from Google Drive
                                 that failed to be renamed will be written, one per line.
                                 Any directory in the file path that doesn't exist will
@@ -84,6 +89,7 @@ Options:
                                 \033[32mpng\033[0m.
 """
 
+import json
 import os
 import re
 import shutil
@@ -235,7 +241,7 @@ def list_drive_files(input_dir, picture_ext):
         return "_90_" in file_name
 
     return [
-        DriveFile.from_file_name(file.name)
+        file.path
         for file in os.scandir(input_dir)
         if file.is_file()
         and not is_promo(file.name)
@@ -247,6 +253,38 @@ def category_min(items, category):
     return min(item.number for item in items if item.category == category)
 
 
+def init_ocr():
+    import easyocr
+
+    return easyocr.Reader(("it", "en"))
+
+
+def run_ocr(drive_files, results_file):
+    ocr = None
+
+    try:
+        with open(results_file, "r") as f:
+            results = json.load(f)
+    except FileNotFoundError:
+        results = {}
+
+    results_updated = False
+    for drive_file in drive_files:
+        file_name = os.path.basename(drive_file)
+        if file_name not in results:
+            if ocr is None:
+                ocr = init_ocr()
+
+            results_updated = True
+            results[file_name] = " ".join(ocr.readtext(drive_file, detail=0))
+
+    if results_updated:
+        with open(results_file, "w") as f:
+            json.dump(results, f)
+
+    return results
+
+
 def rename_pictures(
     *,
     input_dir,
@@ -254,10 +292,15 @@ def rename_pictures(
     pcw_page_title,
     expansion_name,
     picture_ext,
+    ocr_results_file,
     failed_log_file,
 ):
     expansion_cards = fetch_expansion_cards(pcw_page_title, expansion_name, picture_ext)
     drive_files = list_drive_files(input_dir, picture_ext)
+
+    ocr_results = run_ocr(drive_files, ocr_results_file)
+    print(ocr_results)
+    sys.exit(0)
 
     offsets = {
         c: category_min(drive_files, c) - category_min(expansion_cards, c)
@@ -319,7 +362,12 @@ def parse_args(cli_args):
     for arg in cli_args:
         name, _, value = arg[1:].partition(":")
         match name:
-            case "drive-pictures-dir" | "renamed-pictures-dir" | "failed-log":
+            case (
+                "drive-pictures-dir"
+                | "renamed-pictures-dir"
+                | "ocr-results"
+                | "failed-log"
+            ):
                 args[name] = os.path.abspath(value)
 
             case "gccp-expansion" | "picture-ext" | "pcw-page":
@@ -334,6 +382,11 @@ def parse_args(cli_args):
 
     if "pcw-page" not in args:
         args["pcw-page"] = args["gccp-expansion"] + " (GCC Pocket)"
+
+    if "ocr-results" not in args:
+        args["ocr-results"] = os.path.join(
+            args["renamed-pictures-dir"], "ocr-results.json"
+        )
 
     required_args = set(
         ("drive-pictures-dir", "renamed-pictures-dir", "gccp-expansion")
@@ -351,8 +404,9 @@ def main(cli_args=None):
         return
 
     os.makedirs(args["renamed-pictures-dir"], exist_ok=True)
-
+    os.makedirs(os.path.dirname(args["ocr-results"]), exist_ok=True)
     os.makedirs(os.path.dirname(args["failed-log"]), exist_ok=True)
+
     with open(args["failed-log"], "w") as failed_log_file:
         rename_pictures(
             input_dir=args["drive-pictures-dir"],
@@ -360,6 +414,7 @@ def main(cli_args=None):
             pcw_page_title=args["pcw-page"],
             expansion_name=args["gccp-expansion"],
             picture_ext=args["picture-ext"],
+            ocr_results_file=args["ocr-results"],
             failed_log_file=failed_log_file,
         )
 
