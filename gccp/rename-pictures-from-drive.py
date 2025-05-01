@@ -119,6 +119,7 @@ class CardCategory(Enum):
 class Card:
     number: int
     file_name: str
+    card_name: str
     category: CardCategory
 
     _NON_PKMN_CARD_CATEGORIES = set(("item", "tool", "supporter"))
@@ -149,7 +150,7 @@ class Card:
             else CardCategory.PKMN
         )
 
-        return cls(deck_number, it_name, category)
+        return cls(deck_number, it_name, name_arg.replace(" ", ""), category)
 
     @staticmethod
     def _parse_name_arg(name_arg, expansion_name):
@@ -266,17 +267,20 @@ def run_ocr(drive_files, results_file):
         with open(results_file, "r") as f:
             results = json.load(f)
     except FileNotFoundError:
+        print(f"{Colors.yellow}OCR results not found at {results_file}.{Colors.reset}")
         results = {}
 
     results_updated = False
     for drive_file in drive_files:
         file_name = os.path.basename(drive_file)
         if file_name not in results:
+            results_updated = True
+
             if ocr is None:
                 ocr = init_ocr()
-
-            results_updated = True
-            results[file_name] = " ".join(ocr.readtext(drive_file, detail=0))
+            text = "".join(ocr.readtext(drive_file, detail=0))
+            sanitized_text = re.sub(r"\W+", "", text).lower()
+            results[file_name] = sanitized_text
 
     if results_updated:
         with open(results_file, "w") as f:
@@ -297,29 +301,28 @@ def rename_pictures(
 ):
     expansion_cards = fetch_expansion_cards(pcw_page_title, expansion_name, picture_ext)
     drive_files = list_drive_files(input_dir, picture_ext)
-
     ocr_results = run_ocr(drive_files, ocr_results_file)
-    print(ocr_results)
+
+    def sanitize(s):
+        return re.sub(r"\W+", "", re.sub(r"(@|€)[xX]", "ex", s)).lower()
+
+    for card in expansion_cards:
+        try:
+            drive_file = next(
+                drive_name
+                for drive_name, text_content in ocr_results.items()
+                if sanitize(card.card_name) in sanitize(text_content)
+            )
+            del ocr_results[drive_file]
+            print(
+                f"Renamed {Colors.green}{card.file_name}{Colors.reset} <- {Colors.green}{drive_file}{Colors.reset}",
+            )
+        except StopIteration:
+            print(
+                f"{Colors.yellow}No file found in Google Drive for {card.card_name}{Colors.reset}"
+            )
+            failed_log_file.write(f"{card.card_name} [NO DRIVE FILE]{os.linesep}")
     sys.exit(0)
-
-    offsets = {
-        c: category_min(drive_files, c) - category_min(expansion_cards, c)
-        for c in list(CardCategory)
-    }
-
-    expansion_cards.sort(key=lambda c: c.file_name)
-    expansion_cards_by_subject = {
-        (sscs := SameSubjectCards.from_group(group)).first_number: sscs
-        for group in groupby(expansion_cards, key=lambda c: c.group_key)
-    }
-
-    drive_files.sort(key=lambda df: df.group_key)
-    drive_files_by_subject = list(
-        map(
-            SameSubjectDriveFile.from_group,
-            groupby(drive_files, key=lambda f: f.group_key),
-        )
-    )
 
     for drive_files_for_subject in drive_files_by_subject:
         offset = offsets[drive_files_for_subject.category]
