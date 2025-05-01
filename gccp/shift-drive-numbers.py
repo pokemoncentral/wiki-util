@@ -63,14 +63,15 @@ card_category_to_file_name_segment = {"pkmn": "pk", "other": "tr"}
 
 def shift_files(directory, category, range, by, file_ext):
     beg, end = range
-    file_name_regex = re.compile(rf"^c{category.upper()}_.+\.{file_ext}$")
+    file_name_regex = re.compile(rf"^c?{category.upper()}_.+\.{file_ext}$")
     files = sorted(
         file.name
         for file in os.scandir(directory)
         if file.is_file() and file_name_regex.match(file.name)
     )
     for file_name in files:
-        number_segment = file_name.split("_")[2]
+        (base_name, _) = os.path.splitext(file_name)
+        number_segment = base_name.split("_")[2]
 
         number = int(number_segment[:-1])
         if not beg <= number <= end:
