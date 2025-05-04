@@ -248,6 +248,7 @@ def main():
     # This can close sys.sdout. That's not a problem
     with out_stream:
         print(translate_page(source, named_args["name"]), file=out_stream)
+        print(f"Translated file {pos_args[0]} ({named_args['name']})")
 
 
 # invoke main function
