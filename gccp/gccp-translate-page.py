@@ -107,7 +107,8 @@ def make_intro_template(wikicode: Wikicode) -> Wikicode:
             )
         )
         intro_template.add("6", energy_types[0].get(1))
-        intro_template.add("7", energy_types[1].get(1))
+        if len(energy_types) > 1:
+            intro_template.add("7", energy_types[1].get(1))
 
     return intro_template
 
