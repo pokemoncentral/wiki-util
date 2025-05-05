@@ -5,16 +5,21 @@ import sys
 
 gccptranslatepage = importlib.import_module("gccp-translate-page")
 
-OUTPUT_DIR = os.path.join("desktop", "itpages")
-# OUTPUT_DIR = os.path.join("/tmp", "bbbb")
-
 if __name__ == "__main__":
-    directory = sys.argv[1]
-    assert os.path.isdir(directory), f"{directory} must be a directory"
-    assert os.path.isdir(OUTPUT_DIR), f"No output directory {OUTPUT_DIR}: aborting!"
-    for fullname in os.listdir(path=directory):
-        print(fullname)
-        abspath = os.path.join(directory, fullname)
+    if len(sys.argv) < 3:
+        print("Specify input and output dir!")
+        exit(1)
+    input_dir = sys.argv[1]
+    if not os.path.isdir(input_dir):
+        print(f"Input directory {input_dir} must exist")
+        exit(1)
+    output_dir = sys.argv[2]
+    if not os.path.isdir(output_dir):
+        print(f"Output directory {output_dir} must exist")
+        exit(1)
+
+    for fullname in os.listdir(path=input_dir):
+        abspath = os.path.join(input_dir, fullname)
         with open(abspath, "r", encoding="utf-8") as f:
             source = f.read()
 
