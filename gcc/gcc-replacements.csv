@@ -15,10 +15,10 @@
 \bTCG ID\b,GCC ID,
 ,, -------------------------------- expansions --------------------------------
 // NOTA: I SET CHE HANNO NOME ITA = NOME ENG NON SERVE TRADURLI
-\bBase Set\b,Set Base, //TODO: QUESTA SOSTITUZIONE PRENDE ANCHE "Base Set 2" CHE PERO' NON HA UN CORRISPETTIVO ITALIANO
+\bBase Set\b,Set Base, //TODO: QUESTA SOSTITUZIONE PRENDE ANCHE 'Base Set 2' CHE PERO' NON HA UN CORRISPETTIVO ITALIANO
 \bEX Ruby & Sapphire\b,EX Rubino & Zaffiro,
 \bEX Sandstorm\b,EX Tempesta di Sabbia,
-\bEX Dragon\b,EX Drago // POTENZIALE CONFLITTO CON \bDragon\b --> Drago PER CUI POTREBBE NON SERVIRE QUESTA RIGA
+\bEX Dragon\b,EX Drago,// POTENZIALE CONFLITTO CON \bDragon\b --> Drago PER CUI POTREBBE NON SERVIRE QUESTA RIGA
 \bEX Team Magma vs Team Aqua\b,EX Team Magma vs Team Idro,
 \bEX Hidden Legends\b,EX Leggende Nascoste,
 \bEX FireRed & LeafGreen\b,EX RossoFuoco e VerdeFoglia,
