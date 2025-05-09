@@ -10,12 +10,10 @@
 \bDragon\b,Drago,
 \bColorless\b,Incolore,
 \bFairy\b,Folletto,
-,, --------------------------------- templates ---------------------------------
-// TODO
+,, --------------------------------- templates --------------------------------- // TODO
 \bTCG ID\b,GCC ID,
-,, -------------------------------- expansions --------------------------------
-// NOTA: I SET CHE HANNO NOME ITA = NOME ENG NON SERVE TRADURLI
-\bBase Set\b,Set Base, //TODO: QUESTA SOSTITUZIONE PRENDE ANCHE 'Base Set 2' CHE PERO' NON HA UN CORRISPETTIVO ITALIANO
+,, -------------------------------- expansions -------------------------------- // NOTA: I SET CHE HANNO NOME ITA = NOME ENG NON SERVE TRADURLI
+\bBase Set\b,Set Base,//TODO: QUESTA SOSTITUZIONE PRENDE ANCHE 'Base Set 2' CHE PERO' NON HA UN CORRISPETTIVO ITALIANO
 \bEX Ruby & Sapphire\b,EX Rubino & Zaffiro,
 \bEX Sandstorm\b,EX Tempesta di Sabbia,
 \bEX Dragon\b,EX Drago,// POTENZIALE CONFLITTO CON \bDragon\b --> Drago PER CUI POTREBBE NON SERVIRE QUESTA RIGA
@@ -42,8 +40,7 @@
 \bUndaunted\b,Senza Paura,
 \bTriumphant\b,Battaglie Trionfali,
 \bCall of Legends\b,Richiamo delle Leggende,
-,, --------------------------------- alt forms ---------------------------------
-// TODO
+,, --------------------------------- alt forms ---------------------------------// TODO
 \bMow Rotom\b,Rotom Taglio,
 \bHeat Rotom\b,Rotom Calore,
 \bWash Rotom\b,Rotom Lavaggio,
