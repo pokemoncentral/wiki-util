@@ -25,7 +25,7 @@ def should_exclude(page):
     # TCG Pocket cards
     if page.title().endswith("(GCC Pocket)") or "Categoria:Carte Pokémon (GCC Pocket)" in cats:
         return True
-    # disambiguations
+    # disambiguations and quotes
     if "Categoria:Pagine di disambiguazione" in cats or "Categoria:Sottopagine citazioni" in cats:
         return True
     return False
