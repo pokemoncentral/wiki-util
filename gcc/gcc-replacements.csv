@@ -51,6 +51,18 @@
 \bPlasma Storm\b,Uragano Plasma,
 \bPlasma Freeze\b,Glaciazione Plasma,
 \bPlasma Blast\b,Esplosione Plasma,
+\bFlashfire\b,Fuoco Infernale,
+\bFurious Fists\b,Colpi Furiosi,
+\bPhantom Forces\b,Forze Spettrali,
+\bPrimal Clash\b,Scontro Primordiale,
+\bRoaring Skies\b,Furie Volanti,
+\bAncient Origins\b,Antiche Origini,
+\bBREAKthrough\b,Turboblitz,
+\bBREAKpoint\b,Turbocrash,
+\bGenerations\b,Generazioni,
+\bFates Collide\b,Destini Incrociati,
+\bSteam Siege\b,Vapori Accesi,
+\bEvolutions\b,Evoluzioni, // PROMEMORIA: CONTROLLARE EVENTUALI CONFLITTI
 ,, --------------------------------- alt forms ---------------------------------// TODO
 \bMow Rotom\b,Rotom Taglio,
 \bHeat Rotom\b,Rotom Calore,
