@@ -98,6 +98,10 @@
 \bJourney Together\b,Avventure Insieme,
 \bDestined Rivals\b,Rivali Predestinati,
 ,, --------------------------------- alt forms ---------------------------------// TODO
+\bAsh's Pikachu\b,Pikachu di Ash,
+\bPikachu & Zekrom\b,Pikachu e Zekrom, // LE CARTE SONO GX, NON SO SE VADA AGGIUNTO "-GX" ALLA FINE
+\bFlying Pikachu\b,Pikachu Volo, // CONTROLLARE PER CARTE VECCHIE
+\bSurfing Pikachu\b,Pikachu Surf, // CONTROLLARE PER CARTE VECCHIE
 \bMow Rotom\b,Rotom Taglio,
 \bHeat Rotom\b,Rotom Calore,
 \bWash Rotom\b,Rotom Lavaggio,
@@ -147,6 +151,20 @@
 \bHisuian Goodra\b,Goodra di Hisui,
 \bHisuian Avalugg\b,Avalugg di Hisui,
 \bHisuian Decidueye\b,Decidueye di Hisui,
+\bRadiant Heatran\b,Heatran Lucente,
+\bRadiant Greninja\b,Greninja Lucente,
+\bRadiant Hawlucha\b,Hawlucha Lucente,
+\bRadiant Venusaur\b,Venusaur Lucente,
+\bRadiant Charizard\b,Charizard Lucente,
+\bRadiant Blastoise\b,Blastoise Lucente,
+\bRadiant Eevee\b,Eevee Lucente,
+\bRadiant Gardevoir\b,Gardevoir Lucente,
+\bRadiant Steelix\b,Steelix Lucente,
+\bRadiant Tsareena\b,Tsareena Lucente,
+\bRadiant Alakazam\b,Alakazam Lucente,
+\bRadiant Jirachi\b,Jirachi Lucente,
+\bRadiant Charjabug\b,Charjabug Lucente,
+\bRadiant Eternatus\b,Eternatus Lucente,
 ,, -------------------------------- stages --------------------------------
 {{TCG\|Basic Pokémon}},{{TCG|Base}},
 {{TCG\|Stage 1 Pokémon}},{{TCG|Fase 1}},
