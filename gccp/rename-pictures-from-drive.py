@@ -96,6 +96,8 @@ from typing import Tuple
 import mwparserfromhell as mwparser
 import pywikibot
 
+BULBAPEDIA_CARD_ROW = re.compile(r"\| \d{3}/\d{3} \|\| \{\{TCG ID\|")
+
 
 class Colors:
     blue = "\033[34m"
@@ -111,26 +113,19 @@ class CardCategory(Enum):
 
 @dataclass
 class Card:
-    number: int
     file_name: str
     category: CardCategory
 
-    _NON_PKMN_CARD_CATEGORIES = set(("item", "tool", "supporter"))
-    _CARD_NAME_REGEX = re.compile(r"\d+.\w+$")
+    _NON_PKMN_CARD_CATEGORIES = set(("item", "tool", "pokémon tool", "supporter"))
     _INVALID_FILE_NAME_CHARS = re.compile(r"[^\w-]")
-
-    @property
-    def group_key(self):
-        return re.sub(self._CARD_NAME_REGEX, "", self.file_name)
 
     @classmethod
     def from_template_call(cls, template_call, expansion_name, extension):
         args = template_call.params
 
         deck_number = int(args[0].split("/")[0])
-
         name_arg = cls._parse_name_arg(args[1], expansion_name)
-        it_name = "{}{}{}.{}".format(
+        file_name = "{}{}{}.{}".format(
             name_arg.replace(" ", ""),
             cls._INVALID_FILE_NAME_CHARS.sub("", expansion_name),
             deck_number,
@@ -143,7 +138,31 @@ class Card:
             else CardCategory.PKMN
         )
 
-        return cls(deck_number, it_name, category)
+        return cls(file_name, category)
+
+    @classmethod
+    def from_table_row(cls, table_row, extension):
+        cells = table_row.split("||")
+
+        deck_number = int(cells[0].replace("|", "").strip().split("/")[0])
+        name_cell = next(mwparser.parse(cells[1]).ifilter_templates("TCG ID"))
+        expansion_name = cls._INVALID_FILE_NAME_CHARS.sub("", str(name_cell.params[0]))
+        card_name = name_cell.params[1].replace(" ", "")
+        file_name = "{}{}{}.{}".format(
+            card_name,
+            cls._INVALID_FILE_NAME_CHARS.sub("", expansion_name),
+            deck_number,
+            extension,
+        )
+
+        icon_cell = next(mwparser.parse(cells[2]).ifilter_templates("TCG Icon"))
+        category = (
+            CardCategory.OTHER
+            if icon_cell.params[0].strip().lower() in cls._NON_PKMN_CARD_CATEGORIES
+            else CardCategory.PKMN
+        )
+
+        return cls(file_name, category)
 
     @staticmethod
     def _parse_name_arg(name_arg, expansion_name):
@@ -165,86 +184,55 @@ class Card:
 
 
 @dataclass
-class SameSubjectCards:
-    cards: list[Card]
-    name: str
-    category: CardCategory
-    first_number: int
-
-    @classmethod
-    def from_group(cls, group):
-        name, cards = group
-        cards = list(sorted(cards, key=lambda c: c.number))
-        category = cards[0].category
-        first_number = cards[0].number
-        return cls(cards, name, category, first_number)
-
-
-@dataclass
 class DriveFile:
-    number: int
+    file_name: str
     category: CardCategory
-    group_key: Tuple[int, str]
-    sort_key: Tuple[int, int]
-    name: str
-
-    def expansion_key(self, offset):
-        return (self.number - offset, *self.in_packs)
 
     @classmethod
-    def from_file_name(cls, drive_file_name):
-        (file_name, _) = os.path.splitext(drive_file_name)
+    def from_file_name(cls, file_name):
         segments = file_name.split("_")
-
         category = CardCategory(segments[0][-2:].lower())
-        number = int(segments[2][:-1])
-        magical_pair = (int(segments[1][0]), int(segments[3]))
-
-        return cls(
-            number, category, (number, str(category)), magical_pair, drive_file_name
-        )
-
-
-@dataclass
-class SameSubjectDriveFile:
-    files: list[DriveFile]
-    number: int
-    category: CardCategory
-
-    @classmethod
-    def from_group(cls, group):
-        _, drive_files = group
-        files = list(sorted(drive_files, key=lambda c: c.sort_key))
-        number = files[0].number
-        category = files[0].category
-        return cls(files, number, category)
+        return cls(file_name, category)
 
 
 def fetch_expansion_cards(pcw_page_title, expansion_name, picture_ext):
-    expansion_page = pywikibot.Page(pywikibot.Site(), pcw_page_title)
-    page_wikicode = mwparser.parse(expansion_page.text)
-    return [
+    pcw_page = pywikibot.Page(pywikibot.Site(), pcw_page_title)
+    pcw_wikicode = mwparser.parse(pcw_page.text)
+    pcw_cards = [
         Card.from_template_call(entry, expansion_name, picture_ext)
-        for entry in page_wikicode.ifilter_templates(matches="setlist/entry")
+        for entry in pcw_wikicode.ifilter_templates(matches="setlist/entry")
         if expansion_name in str(entry)
     ]
 
+    try:
+        bulbapedia_link = next(
+            link for link in pcw_page.langlinks() if link.site.code == "en"
+        )
+        bulbapedia_page = pywikibot.Page(bulbapedia_link)
+    except StopIteration:
+        raise ValueError(f"No bulbapedia interwiki found in {pcw_page_title}!")
+
+    bulbapedia_cards = [
+        Card.from_table_row(line, picture_ext)
+        for line in bulbapedia_page.text.splitlines()
+        if BULBAPEDIA_CARD_ROW.search(line)
+    ]
+
+    return (pcw_cards, bulbapedia_cards)
+
+
+def is_promo_drive_file(file_name):
+    return "_90_" in file_name
+
 
 def list_drive_files(input_dir, picture_ext):
-    def is_promo(file_name):
-        return "_90_" in file_name
-
     return [
         DriveFile.from_file_name(file.name)
         for file in os.scandir(input_dir)
         if file.is_file()
-        and not is_promo(file.name)
+        and not is_promo_drive_file(file.name)
         and file.name.endswith("." + picture_ext)
     ]
-
-
-def category_min(items, category):
-    return min(item.number for item in items if item.category == category)
 
 
 def rename_pictures(
@@ -256,27 +244,10 @@ def rename_pictures(
     picture_ext,
     failed_log_file,
 ):
-    expansion_cards = fetch_expansion_cards(pcw_page_title, expansion_name, picture_ext)
-    drive_files = list_drive_files(input_dir, picture_ext)
-
-    offsets = {
-        c: category_min(drive_files, c) - category_min(expansion_cards, c)
-        for c in list(CardCategory)
-    }
-
-    expansion_cards.sort(key=lambda c: c.file_name)
-    expansion_cards_by_subject = {
-        (sscs := SameSubjectCards.from_group(group)).first_number: sscs
-        for group in groupby(expansion_cards, key=lambda c: c.group_key)
-    }
-
-    drive_files.sort(key=lambda df: df.group_key)
-    drive_files_by_subject = list(
-        map(
-            SameSubjectDriveFile.from_group,
-            groupby(drive_files, key=lambda f: f.group_key),
-        )
+    (pcw_cards, bulbapedia_cards) = fetch_expansion_cards(
+        pcw_page_title, expansion_name, picture_ext
     )
+    drive_files = list_drive_files(input_dir, picture_ext)
 
     for drive_files_for_subject in drive_files_by_subject:
         offset = offsets[drive_files_for_subject.category]
