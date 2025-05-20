@@ -84,18 +84,20 @@ Options:
                                 \033[32mpng\033[0m.
 """
 
+import math
 import os
 import re
 import shutil
 import sys
 from dataclasses import dataclass
 from enum import Enum
-from itertools import groupby
 from operator import attrgetter
-from typing import Tuple
+from typing import Optional
 
 import mwparserfromhell as mwparser
 import pywikibot
+from PIL import Image, ImageChops
+from PIL.Image import Resampling
 
 BULBAPEDIA_CARD_ROW = re.compile(r"\| \d{3}/\d{3} \|\| \{\{TCG ID\|")
 
@@ -110,6 +112,22 @@ class Colors:
 class CardCategory(Enum):
     PKMN = "pk"
     OTHER = "tr"
+
+
+CARD_ART_TOP_OFFSET = 46
+CARD_ART_SIZE = (367, 200)
+CARD_ART_BOX = (
+    0,
+    CARD_ART_TOP_OFFSET,
+    CARD_ART_SIZE[0],
+    CARD_ART_TOP_OFFSET + CARD_ART_SIZE[1],
+)
+
+ART_DIFF_MIN_SIMILAR_PIXEL = math.floor(CARD_ART_SIZE[0] * CARD_ART_SIZE[1] * 0.85)
+
+
+def read_card_art(picture):
+    return picture.convert("RGB").crop(CARD_ART_BOX)
 
 
 @dataclass
@@ -204,14 +222,33 @@ class Card:
 
 @dataclass
 class DriveFile:
-    file_name: str
+    file_path: str
     category: CardCategory
 
+    _card_art: Optional[Image.Image] = None
+    _picture_size: Optional[tuple[int, int]] = None
+
     @classmethod
-    def from_file_name(cls, file_name):
-        segments = file_name.split("_")
+    def from_file(cls, file):
+        segments = file.name.split("_")
         category = CardCategory(segments[0][-2:].lower())
-        return cls(file_name, category)
+        return cls(file.path, category)
+
+    @property
+    def card_art(self):
+        self._populate_picture_fields()
+        return self._card_art
+
+    @property
+    def picture_size(self):
+        self._populate_picture_fields()
+        return self._picture_size
+
+    def _populate_picture_fields(self):
+        if self._card_art is None:
+            picture = Image.open(self.file_path)
+            self._card_art = read_card_art(picture)
+            self._picture_size = picture.size
 
 
 def fetch_expansion_cards(pcw_page_title, expansion_name, picture_ext):
@@ -250,7 +287,7 @@ def is_promo_drive_file(file_name):
 
 def list_drive_files(input_dir, picture_ext):
     return [
-        DriveFile.from_file_name(file.name)
+        DriveFile.from_file(file)
         for file in os.scandir(input_dir)
         if file.is_file()
         and not is_promo_drive_file(file.name)
@@ -258,8 +295,9 @@ def list_drive_files(input_dir, picture_ext):
     ]
 
 
-bulbapedia_files_dir = "./bulbapedia-files-dir"
-os.makedirs(bulbapedia_files_dir, exist_ok=True)
+def is_near_black(pixel):
+    (r, g, b) = pixel
+    return r + g + b < 50
 
 
 def rename_pictures(
@@ -270,46 +308,45 @@ def rename_pictures(
     expansion_name,
     picture_ext,
     failed_log_file,
+    bulbapedia_pictures_dir,
 ):
     expansion_cards = fetch_expansion_cards(pcw_page_title, expansion_name, picture_ext)
     drive_files = list_drive_files(input_dir, picture_ext)
+    drive_picture_size = drive_files[0].picture_size
 
     for pcw_card, bulbapedia_card in expansion_cards:
-        print(f"Find file for {Colors.green}{pcw_card.file_name}{Colors.reset}")
-        bulbapedia_file_name = bulbapedia_card.download(bulbapedia_files_dir)
-        pass
+        pcw_card_file_path = os.path.join(output_dir, pcw_card.file_name)
+        if os.path.exists(pcw_card_file_path):
+            print(f"{Colors.green}{pcw_card.file_name}{Colors.reset} already renamed")
+            continue
 
-    # for drive_files_for_subject in drive_files_by_subject:
-    #     offset = offsets[drive_files_for_subject.category]
-    #     match_key = drive_files_for_subject.number - offset
-    #     try:
-    #         expansion_cards_for_subject = expansion_cards_by_subject[match_key]
-    #     except KeyError:
-    #         for drive_file in drive_files_for_subject.files:
-    #             print(
-    #                 f"{Colors.yellow}{drive_file.name} not renamed. Card in PCW not found{Colors.reset}"
-    #             )
-    #             failed_log_file.write(f"{drive_file.name} [NO PCW CARD]{os.linesep}")
-    #         continue
+        print(f"Find file for {Colors.blue}{pcw_card.file_name}{Colors.reset}")
 
-    #     if len(drive_files_for_subject.files) != len(expansion_cards_for_subject.cards):
-    #         for drive_file in drive_files_for_subject.files:
-    #             print(
-    #                 f"{Colors.yellow}{drive_file.name} not renamed. Card in PCW not found{Colors.reset}"
-    #             )
-    #             failed_log_file.write(f"{drive_file.name} [NO PCW CARD]{os.linesep}")
-    #         continue
+        bulbapedia_file_name = bulbapedia_card.download(bulbapedia_pictures_dir)
+        bulbapedia_art = read_card_art(
+            Image.open(bulbapedia_file_name).resize(
+                drive_picture_size, Resampling.NEAREST
+            )
+        )
 
-    #     for drive_file, card in zip(
-    #         drive_files_for_subject.files, expansion_cards_for_subject.cards
-    #     ):
-    #         shutil.copy(
-    #             os.path.join(input_dir, drive_file.name),
-    #             os.path.join(output_dir, card.file_name),
-    #         )
-    #         print(
-    #             f"Renamed {Colors.green}{card.file_name}{Colors.reset} <- {Colors.green}{drive_file.name}{Colors.reset}",
-    #         )
+        for drive_file in drive_files:
+            diff = ImageChops.difference(bulbapedia_art, drive_file.card_art)
+            similar_pixel_count = sum(
+                1 for pixel in diff.getdata() if is_near_black(pixel)
+            )
+            if similar_pixel_count > ART_DIFF_MIN_SIMILAR_PIXEL:
+                drive_file_name = os.path.basename(drive_file.file_path)
+                print(
+                    f"Found {Colors.green}{drive_file_name}{Colors.reset} for {Colors.green}{pcw_card.file_name}{Colors.reset}"
+                )
+                shutil.move(drive_file.file_path, pcw_card_file_path)
+                drive_files.remove(drive_file)
+                break
+        else:
+            print(
+                f"{Colors.yellow}Can't find file for {pcw_card.file_name}{Colors.reset}"
+            )
+            print(pcw_card.file_name, file=failed_log_file)
 
 
 def parse_args(cli_args):
@@ -320,7 +357,12 @@ def parse_args(cli_args):
     for arg in cli_args:
         name, _, value = arg[1:].partition(":")
         match name:
-            case "drive-pictures-dir" | "renamed-pictures-dir" | "failed-log":
+            case (
+                "drive-pictures-dir"
+                | "renamed-pictures-dir"
+                | "bulbapedia-pictures-dir"
+                | "failed-log"
+            ):
                 args[name] = os.path.abspath(value)
 
             case "gccp-expansion" | "picture-ext" | "pcw-page":
@@ -335,6 +377,10 @@ def parse_args(cli_args):
 
     if "pcw-page" not in args:
         args["pcw-page"] = args["gccp-expansion"] + " (GCC Pocket)"
+    if "bulbapedia-pictures-dir" not in args:
+        args["bulbapedia-pictures-dir"] = os.path.join(
+            os.path.dirname(args["drive-pictures-dir"]), "bulbapedia-pictures"
+        )
 
     required_args = set(
         ("drive-pictures-dir", "renamed-pictures-dir", "gccp-expansion")
@@ -352,6 +398,7 @@ def main(cli_args=None):
         return
 
     os.makedirs(args["renamed-pictures-dir"], exist_ok=True)
+    os.makedirs(args["bulbapedia-pictures-dir"], exist_ok=True)
 
     os.makedirs(os.path.dirname(args["failed-log"]), exist_ok=True)
     with open(args["failed-log"], "w") as failed_log_file:
@@ -361,6 +408,7 @@ def main(cli_args=None):
             pcw_page_title=args["pcw-page"],
             expansion_name=args["gccp-expansion"],
             picture_ext=args["picture-ext"],
+            bulbapedia_pictures_dir=args["bulbapedia-pictures-dir"],
             failed_log_file=failed_log_file,
         )
 
