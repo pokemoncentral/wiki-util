@@ -91,6 +91,7 @@ import sys
 from dataclasses import dataclass
 from enum import Enum
 from itertools import groupby
+from operator import attrgetter
 from typing import Tuple
 
 import mwparserfromhell as mwparser
@@ -113,23 +114,34 @@ class CardCategory(Enum):
 
 @dataclass
 class Card:
-    file_name: str
+    deck_number: int
     category: CardCategory
+    file_name: str
+
+    sort_key = attrgetter("deck_number")
+
+    _file_page: pywikibot.FilePage
 
     _NON_PKMN_CARD_CATEGORIES = set(("item", "tool", "pokémon tool", "supporter"))
     _INVALID_FILE_NAME_CHARS = re.compile(r"[^\w-]")
 
+    def download(self, dir_name):
+        dst = os.path.join(dir_name, self.file_name)
+        if not os.path.exists(dst):
+            print(
+                f"Download {Colors.blue}{self.file_name}{Colors.reset} from bulbapedia"
+            )
+            self._file_page.download(dst)
+        return dst
+
     @classmethod
-    def from_template_call(cls, template_call, expansion_name, extension):
+    def from_template_call(cls, template_call, page, expansion_name, extension):
         args = template_call.params
 
         deck_number = int(args[0].split("/")[0])
-        name_arg = cls._parse_name_arg(args[1], expansion_name)
-        file_name = "{}{}{}.{}".format(
-            name_arg.replace(" ", ""),
-            cls._INVALID_FILE_NAME_CHARS.sub("", expansion_name),
-            deck_number,
-            extension,
+        card_name = str(cls._parse_name_arg(args[1], expansion_name))
+        file_name = cls._make_card_name(
+            card_name, expansion_name, deck_number, extension
         )
 
         category = (
@@ -138,21 +150,21 @@ class Card:
             else CardCategory.PKMN
         )
 
-        return cls(file_name, category)
+        file_page = pywikibot.FilePage(page.site, file_name)
+
+        return cls(deck_number, category, file_name, file_page)
 
     @classmethod
-    def from_table_row(cls, table_row, extension):
+    def from_table_row(cls, table_row, page, extension):
         cells = table_row.split("||")
 
         deck_number = int(cells[0].replace("|", "").strip().split("/")[0])
+
         name_cell = next(mwparser.parse(cells[1]).ifilter_templates("TCG ID"))
-        expansion_name = cls._INVALID_FILE_NAME_CHARS.sub("", str(name_cell.params[0]))
-        card_name = name_cell.params[1].replace(" ", "")
-        file_name = "{}{}{}.{}".format(
-            card_name,
-            cls._INVALID_FILE_NAME_CHARS.sub("", expansion_name),
-            deck_number,
-            extension,
+        card_name = str(name_cell.params[1])
+        expansion_name = str(name_cell.params[0])
+        file_name = cls._make_card_name(
+            card_name, expansion_name, deck_number, extension
         )
 
         icon_cell = next(mwparser.parse(cells[2]).ifilter_templates("TCG Icon"))
@@ -162,7 +174,14 @@ class Card:
             else CardCategory.PKMN
         )
 
-        return cls(file_name, category)
+        file_page = pywikibot.FilePage(page.site, file_name)
+
+        return cls(deck_number, category, file_name, file_page)
+
+    @classmethod
+    def _make_card_name(cls, card_name, expansion_name, deck_number, ext):
+        name = cls._INVALID_FILE_NAME_CHARS.sub("", card_name + expansion_name)
+        return f"{name}{deck_number}.{ext}"
 
     @staticmethod
     def _parse_name_arg(name_arg, expansion_name):
@@ -196,14 +215,16 @@ class DriveFile:
 
 
 def fetch_expansion_cards(pcw_page_title, expansion_name, picture_ext):
+    print("Fetch PCW card list")
     pcw_page = pywikibot.Page(pywikibot.Site(), pcw_page_title)
     pcw_wikicode = mwparser.parse(pcw_page.text)
     pcw_cards = [
-        Card.from_template_call(entry, expansion_name, picture_ext)
+        Card.from_template_call(entry, pcw_page, expansion_name, picture_ext)
         for entry in pcw_wikicode.ifilter_templates(matches="setlist/entry")
         if expansion_name in str(entry)
     ]
 
+    print("Fetch Bulbapedia card list")
     try:
         bulbapedia_link = next(
             link for link in pcw_page.langlinks() if link.site.code == "en"
@@ -213,12 +234,14 @@ def fetch_expansion_cards(pcw_page_title, expansion_name, picture_ext):
         raise ValueError(f"No bulbapedia interwiki found in {pcw_page_title}!")
 
     bulbapedia_cards = [
-        Card.from_table_row(line, picture_ext)
+        Card.from_table_row(line, bulbapedia_page, picture_ext)
         for line in bulbapedia_page.text.splitlines()
         if BULBAPEDIA_CARD_ROW.search(line)
     ]
 
-    return (pcw_cards, bulbapedia_cards)
+    pcw_cards.sort(key=Card.sort_key)
+    bulbapedia_cards.sort(key=Card.sort_key)
+    return zip(pcw_cards, bulbapedia_cards)
 
 
 def is_promo_drive_file(file_name):
@@ -235,6 +258,10 @@ def list_drive_files(input_dir, picture_ext):
     ]
 
 
+bulbapedia_files_dir = "./bulbapedia-files-dir"
+os.makedirs(bulbapedia_files_dir, exist_ok=True)
+
+
 def rename_pictures(
     *,
     input_dir,
@@ -244,42 +271,45 @@ def rename_pictures(
     picture_ext,
     failed_log_file,
 ):
-    (pcw_cards, bulbapedia_cards) = fetch_expansion_cards(
-        pcw_page_title, expansion_name, picture_ext
-    )
+    expansion_cards = fetch_expansion_cards(pcw_page_title, expansion_name, picture_ext)
     drive_files = list_drive_files(input_dir, picture_ext)
 
-    for drive_files_for_subject in drive_files_by_subject:
-        offset = offsets[drive_files_for_subject.category]
-        match_key = drive_files_for_subject.number - offset
-        try:
-            expansion_cards_for_subject = expansion_cards_by_subject[match_key]
-        except KeyError:
-            for drive_file in drive_files_for_subject.files:
-                print(
-                    f"{Colors.yellow}{drive_file.name} not renamed. Card in PCW not found{Colors.reset}"
-                )
-                failed_log_file.write(f"{drive_file.name} [NO PCW CARD]{os.linesep}")
-            continue
+    for pcw_card, bulbapedia_card in expansion_cards:
+        print(f"Find file for {Colors.green}{pcw_card.file_name}{Colors.reset}")
+        bulbapedia_file_name = bulbapedia_card.download(bulbapedia_files_dir)
+        pass
 
-        if len(drive_files_for_subject.files) != len(expansion_cards_for_subject.cards):
-            for drive_file in drive_files_for_subject.files:
-                print(
-                    f"{Colors.yellow}{drive_file.name} not renamed. Card in PCW not found{Colors.reset}"
-                )
-                failed_log_file.write(f"{drive_file.name} [NO PCW CARD]{os.linesep}")
-            continue
+    # for drive_files_for_subject in drive_files_by_subject:
+    #     offset = offsets[drive_files_for_subject.category]
+    #     match_key = drive_files_for_subject.number - offset
+    #     try:
+    #         expansion_cards_for_subject = expansion_cards_by_subject[match_key]
+    #     except KeyError:
+    #         for drive_file in drive_files_for_subject.files:
+    #             print(
+    #                 f"{Colors.yellow}{drive_file.name} not renamed. Card in PCW not found{Colors.reset}"
+    #             )
+    #             failed_log_file.write(f"{drive_file.name} [NO PCW CARD]{os.linesep}")
+    #         continue
 
-        for drive_file, card in zip(
-            drive_files_for_subject.files, expansion_cards_for_subject.cards
-        ):
-            shutil.copy(
-                os.path.join(input_dir, drive_file.name),
-                os.path.join(output_dir, card.file_name),
-            )
-            print(
-                f"Renamed {Colors.green}{card.file_name}{Colors.reset} <- {Colors.green}{drive_file.name}{Colors.reset}",
-            )
+    #     if len(drive_files_for_subject.files) != len(expansion_cards_for_subject.cards):
+    #         for drive_file in drive_files_for_subject.files:
+    #             print(
+    #                 f"{Colors.yellow}{drive_file.name} not renamed. Card in PCW not found{Colors.reset}"
+    #             )
+    #             failed_log_file.write(f"{drive_file.name} [NO PCW CARD]{os.linesep}")
+    #         continue
+
+    #     for drive_file, card in zip(
+    #         drive_files_for_subject.files, expansion_cards_for_subject.cards
+    #     ):
+    #         shutil.copy(
+    #             os.path.join(input_dir, drive_file.name),
+    #             os.path.join(output_dir, card.file_name),
+    #         )
+    #         print(
+    #             f"Renamed {Colors.green}{card.file_name}{Colors.reset} <- {Colors.green}{drive_file.name}{Colors.reset}",
+    #         )
 
 
 def parse_args(cli_args):
