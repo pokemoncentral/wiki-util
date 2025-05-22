@@ -51,8 +51,14 @@ Options:
 -bulbapedia-pictures-dir:<dir>  The directory where the card images from Bulbapedia are
                                 downloaded. If a file is already present there, it won't
                                 be downloaded again. \033[33mOptional\033[0m, defaults
-                                to "bulbapedia-pictures" in the parent same directory as
-                                the Google Drive datamine files.
+                                to \033[32mbulbapedia-pictures\033[0m in the same parent
+                                directory as the Google Drive datamine files.
+
+-same-color-threshold:<number>  The highest value of the individual RGB components of a
+                                pixel in the \033[34mcard art diff\033[0m to consider it
+                                a "black pixel", e.g. the pixel in the two card art is
+                                the same. \033[33mOptional\033[0m, defaults to
+                                \033[32m16.6\033[0m.
 
 -failed-log:<file>              The file where the names of the files from Google Drive
                                 that failed to be renamed will be written, one per line.
@@ -66,6 +72,7 @@ Options:
                                 \033[32mpng\033[0m.
 """
 
+import functools
 import math
 import os
 import re
@@ -277,9 +284,9 @@ def list_drive_files(input_dir, picture_ext):
     ]
 
 
-def is_near_black(pixel):
+def is_near_black(rgb_sum_threshold, pixel):
     (r, g, b) = pixel
-    return r + g + b < 50
+    return r + g + b < rgb_sum_threshold
 
 
 def rename_pictures(
@@ -288,13 +295,16 @@ def rename_pictures(
     output_dir,
     pcw_page_title,
     expansion_name,
-    picture_ext,
-    failed_log_file,
     bulbapedia_pictures_dir,
+    failed_log_file,
+    same_rgb_threshold,
+    picture_ext,
 ):
     expansion_cards = fetch_expansion_cards(pcw_page_title, expansion_name, picture_ext)
     drive_files = list_drive_files(input_dir, picture_ext)
+
     drive_picture_size = drive_files[0].picture_size
+    is_same_pixel = functools.partial(is_near_black, math.ceil(same_rgb_threshold * 3))
 
     for pcw_card, bulbapedia_card in expansion_cards:
         pcw_card_file_path = os.path.join(output_dir, pcw_card.file_name)
@@ -314,7 +324,7 @@ def rename_pictures(
         for drive_file in drive_files:
             diff = ImageChops.difference(bulbapedia_art, drive_file.card_art)
             similar_pixel_count = sum(
-                1 for pixel in diff.getdata() if is_near_black(pixel)
+                1 for pixel in diff.getdata() if is_same_pixel(pixel)
             )
             if similar_pixel_count > ART_DIFF_MIN_SIMILAR_PIXEL:
                 drive_file_name = os.path.basename(drive_file.file_path)
@@ -335,6 +345,7 @@ def parse_args(cli_args):
     args = {
         "picture-ext": "png",
         "failed-log": os.path.abspath("gccp-rename-picture-failed.log"),
+        "same-pixel-threshold": 16.6,
     }
     for arg in cli_args:
         name, _, value = arg[1:].partition(":")
@@ -349,6 +360,9 @@ def parse_args(cli_args):
 
             case "gccp-expansion" | "picture-ext" | "pcw-page":
                 args[name] = value
+
+            case "same-pixel-threshold":
+                args[name] = float(value)
 
             case "help":
                 print(__doc__)
@@ -389,9 +403,10 @@ def main(cli_args=None):
             output_dir=args["renamed-pictures-dir"],
             pcw_page_title=args["pcw-page"],
             expansion_name=args["gccp-expansion"],
-            picture_ext=args["picture-ext"],
             bulbapedia_pictures_dir=args["bulbapedia-pictures-dir"],
             failed_log_file=failed_log_file,
+            same_rgb_threshold=args["same-pixel-threshold"],
+            picture_ext=args["picture-ext"],
         )
 
 
