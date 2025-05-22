@@ -1,57 +1,33 @@
 """Rename TCG Pocket card images to Pokémon Central Wiki naming scheme.
 
 Examples:
-    python python rename-pictures-from-drive.py \\
+    python rename-pictures-from-drive.py \\
         -drive-pictures-dir:drive-downloads/it_IT \\
         -renamed-pictures-dir:gccp-pictures/ScontroSpaziotemporale \\
         -gccp-expansion:'Scontro Spaziotemporale' \\
 
-    python python rename-pictures-from-drive.py \\
+    python rename-pictures-from-drive.py \\
         -drive-pictures-dir:drive-downloads/it_IT \\
         -renamed-pictures-dir:gccp/pcw \\
         -gccp-expansion:'Scontro Spaziotemporale' \\
-        -failed-log:gccp/pcw/logs/ScontroSpazioTemporale-not-renamed.log
+        -pcw-page:User:Lollo/Sandbox57 \\
+        -bulbapedia-pictures-dir:gccp-pictures/bulbapedia/ScontroSpaziotemporale \\
+        -failed-log:gccp/pcw/logs/ScontroSpazioTemporale-not-renamed.log \\
+        -picture-ext:png
 
-The overall functioning of the script is the following:
+The core functioning of the script consists in matching the card pictures of the
+expansion from the Google Drive datamines with the images from Bulbapedia, by means of a
+simple pixel-by-pixel difference \033[34mof the card art\033[0m. The Bulbapedia cards
+are then matched to the Pokémon Central Wiki ones by deck number.
 
-- Retrieve the list of cards in the expansion from the Pokémon Central Wiki page.
-  \033[1;91mNOTE\033[0m: this implies that the Pokémon Central Wiki page for the
-        expansion needs to be created \033[34mfirst\033[0m.
-
-- Match the files on Google Drive with the corresponding card data as retrieved in the
-  previous step. The matching is carried out by means of the card number in the
-  expansion. More info below.
-
-- Copy the file with the Pokémon Central Wiki name into the destination directory, for
-  further human verification before bulk uploading (via other scripts).
-
-Even if the Google Drive file names contain seemingly random numbers, they are actually
-sequential. However, the numbering doesn't start at 1 or 0, but rather it has two
-offsets, one for \033[32mPokémon cards\033[0m and one for any \033[33mother card\033[0m
-category. Furthermore, the \033[34mnumbers\033[0m are somehow hidden amidst other digits
-in the file name:
-
-c\033[32mPK\033[0m_10_00\033[34m282\033[0m0_00_NAZONOKUSA_C_M_M_it_IT.png
-c\033[32mPK\033[0m_10_00\033[34m283\033[0m0_00_KUSAIHANA_C_M_M_it_IT.png
----
-c\033[33mTR\033[0m_10_000\033[34m32\033[0m0_00_AKAGI_U_M_M_it_IT.png
-c\033[33mTR\033[0m_10_000\033[34m33\033[0m0_00_GINGADANNOSHITAPPA_U_M_M_it_IT.png
-
-The offsets are constant in the two file name groups (Pokémon and other categories), and
-are equal to \033[32m<number-in-Google-Drive-name> - <card-number-in-expansion>\033[0m.
-\033[1;91mNOTE\033[0m: offsets can be \033[34mnegative\033[0m.
-
-The image files of TCG Pocket cards should be named like in the Google Drive
-directories. You should \033[1;91mdownload\033[0m the files locally first, this script
-will \033[1;91mnot\033[0m do so by its own will.
-
-Not all the files on Google Drive follow the naming scheme exactly. The few that don't
-fail are skipped, and printed both on STDERR and in a log file.
+The card list for the expansion, and their respective file names, are fetched from the
+Pokémon Central Wiki and Bulbapedia pages, by parsing their content. The Bulbapedia page
+is the one listed as the English interwiki in the Pokémon Central Wiki page.
 
 Usage:
     python rename-pictures-from-drive.py -drive-pictures-dir:<dir> \\
         -renamed-pictures-dir:<dir> -gccp-expansion:<name> [-failed-log:<file>] \\
-        [-picture-ext:<extension>]
+        [-picture-ext:<extension>] [-bulbapedia-pictures-dir:<dir>]
 
 Options:
 
@@ -71,6 +47,12 @@ Options:
                                 \033[33mOptional\033[0m, defaults to the actual page for
                                 the TCG Pocket expansion, i.e.
                                 "<expansion name> (GCC Pocket)"
+
+-bulbapedia-pictures-dir:<dir>  The directory where the card images from Bulbapedia are
+                                downloaded. If a file is already present there, it won't
+                                be downloaded again. \033[33mOptional\033[0m, defaults
+                                to "bulbapedia-pictures" in the parent same directory as
+                                the Google Drive datamine files.
 
 -failed-log:<file>              The file where the names of the files from Google Drive
                                 that failed to be renamed will be written, one per line.
