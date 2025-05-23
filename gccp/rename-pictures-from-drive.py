@@ -334,6 +334,7 @@ def rename_pictures(
     is_same_pixel = functools.partial(is_near_black, math.ceil(same_rgb_threshold * 3))
 
     for pcw_card, bulbapedia_card in expansion_cards:
+        print("")
         pcw_card_file_path = os.path.join(output_dir, pcw_card.file_name)
         if os.path.exists(pcw_card_file_path):
             print(f"{Colors.green}{pcw_card.file_name}{Colors.reset} already renamed")
