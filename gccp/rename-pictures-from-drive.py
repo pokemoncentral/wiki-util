@@ -239,6 +239,8 @@ class DriveFile:
     _card_art: Optional[Image.Image] = None
     _picture_size: Optional[tuple[int, int]] = None
 
+    sort_key = attrgetter("file_path")
+
     @classmethod
     def from_file(cls, file):
         segments = file.name.split("_")
@@ -297,13 +299,16 @@ def is_promo_drive_file(file_name):
 
 
 def list_drive_files(input_dir, picture_ext):
-    return [
-        DriveFile.from_file(file)
-        for file in os.scandir(input_dir)
-        if file.is_file()
-        and not is_promo_drive_file(file.name)
-        and file.name.endswith("." + picture_ext)
-    ]
+    return sorted(
+        (
+            DriveFile.from_file(file)
+            for file in os.scandir(input_dir)
+            if file.is_file()
+            and not is_promo_drive_file(file.name)
+            and file.name.endswith("." + picture_ext)
+        ),
+        key=DriveFile.sort_key,
+    )
 
 
 def is_near_black(rgb_sum_threshold, pixel):
