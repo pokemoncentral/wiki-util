@@ -132,7 +132,7 @@ class Card:
     _file_page: pywikibot.FilePage
 
     _NON_PKMN_CARD_CATEGORIES = set(("item", "tool", "pokémon tool", "supporter"))
-    _BULBAPEDIA_CARD_SANITIZE_REGEX = re.compile(r"[\s\.\u0080-\uFFFF]")
+    _BULBAPEDIA_CARD_SANITIZE_REGEX = re.compile(r"(?![éÉ])[\s\.\u0080-\uFFFF]")
     _PCW_CARD_SANITIZE_REGEX = re.compile(r"[^\w-]")
 
     def download(self, dir_name):
