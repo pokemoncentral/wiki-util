@@ -423,6 +423,24 @@ def main(cli_args=None):
     if args is None:
         return
 
+    if args["drive-pictures-dir"] == args["renamed-pictures-dir"]:
+        print(
+            textwrap.dedent(
+                f"""
+                🏴‍☠️🏴‍☠️🏴‍☠️ {Colors.yellow}Yarr harr{Colors.reset} 🏴‍☠️🏴‍☠️🏴‍☠️
+
+                Ye filthy landlubber, check your yarrguments!
+                Ye gave the same {Colors.blue}drive-pictures-dir{Colors.reset} and
+                {Colors.blue}renamed-pictures-dir{Colors.reset}.
+                Ye'll end up with a mess of renamed and not renamed files in the same
+                directory, like a scabby sea bass!
+
+                🏴‍☠️🏴‍☠️🏴‍☠️ Yer script must be keelhauled at once! 🏴‍☠️🏴‍☠️🏴‍☠️
+                """
+            ).strip()
+        )
+        return 1
+
     os.makedirs(args["renamed-pictures-dir"], exist_ok=True)
     os.makedirs(args["bulbapedia-pictures-dir"], exist_ok=True)
 
@@ -438,10 +456,11 @@ def main(cli_args=None):
             same_rgb_threshold=args["same-pixel-threshold"],
             picture_ext=args["picture-ext"],
         )
+    return 0
 
 
 if __name__ == "__main__":
     # Enable colored output on Windows
     if os.name == "nt":
         os.system("")
-    main(sys.argv[1:])
+    sys.exit(main(sys.argv[1:]))
