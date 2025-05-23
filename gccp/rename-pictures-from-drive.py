@@ -78,6 +78,7 @@ import os
 import re
 import shutil
 import sys
+import textwrap
 from dataclasses import dataclass
 from enum import Enum
 from operator import attrgetter
@@ -87,6 +88,7 @@ import mwparserfromhell as mwparser
 import pywikibot
 from PIL import Image, ImageChops
 from PIL.Image import Resampling
+from pywikibot.exceptions import NoPageError
 
 BULBAPEDIA_CARD_ROW = re.compile(r"\| \d{3}/\d{3} \|\| \{\{TCG ID\|")
 
@@ -130,16 +132,28 @@ class Card:
     _file_page: pywikibot.FilePage
 
     _NON_PKMN_CARD_CATEGORIES = set(("item", "tool", "pokémon tool", "supporter"))
-    _INVALID_FILE_NAME_CHARS = re.compile(r"[^\w-]")
+    _BULBAPEDIA_CARD_SANITIZE_REGEX = re.compile(r"[\s\.\u0080-\uFFFF]")
+    _PCW_CARD_SANITIZE_REGEX = re.compile(r"[^\w-]")
 
     def download(self, dir_name):
         dst = os.path.join(dir_name, self.file_name)
-        if not os.path.exists(dst):
-            print(
-                f"Download {Colors.blue}{self.file_name}{Colors.reset} from bulbapedia"
-            )
+        if os.path.exists(dst):
+            return dst
+
+        print(f"Download {Colors.blue}{self.file_name}{Colors.reset} from Bulbapedia")
+        try:
             self._file_page.download(dst)
-        return dst
+            return dst
+        except NoPageError:
+            print(
+                textwrap.dedent(
+                    f"""
+                    File {Colors.yellow}{self.file_name}{Colors.reset} doesn't exist on Bulbapedia.
+                    Report to the maintainers, they likely messed up with computing the card name.
+                    """
+                ).strip()
+            )
+            return None
 
     @classmethod
     def from_template_call(cls, template_call, page, expansion_name, extension):
@@ -148,7 +162,11 @@ class Card:
         deck_number = int(args[0].split("/")[0])
         card_name = str(cls._parse_name_arg(args[1], expansion_name))
         file_name = cls._make_card_name(
-            card_name, expansion_name, deck_number, extension
+            cls._PCW_CARD_SANITIZE_REGEX,
+            card_name,
+            expansion_name,
+            deck_number,
+            extension,
         )
 
         category = (
@@ -171,7 +189,11 @@ class Card:
         card_name = str(name_cell.params[1])
         expansion_name = str(name_cell.params[0])
         file_name = cls._make_card_name(
-            card_name, expansion_name, deck_number, extension
+            cls._BULBAPEDIA_CARD_SANITIZE_REGEX,
+            card_name,
+            expansion_name,
+            deck_number,
+            extension,
         )
 
         icon_cell = next(mwparser.parse(cells[2]).ifilter_templates("TCG Icon"))
@@ -185,9 +207,9 @@ class Card:
 
         return cls(deck_number, category, file_name, file_page)
 
-    @classmethod
-    def _make_card_name(cls, card_name, expansion_name, deck_number, ext):
-        name = cls._INVALID_FILE_NAME_CHARS.sub("", card_name + expansion_name)
+    @staticmethod
+    def _make_card_name(sanitize_regex, card_name, expansion_name, deck_number, ext):
+        name = sanitize_regex.sub("", card_name + expansion_name)
         return f"{name}{deck_number}.{ext}"
 
     @staticmethod
@@ -315,6 +337,9 @@ def rename_pictures(
         print(f"Find file for {Colors.blue}{pcw_card.file_name}{Colors.reset}")
 
         bulbapedia_file_name = bulbapedia_card.download(bulbapedia_pictures_dir)
+        if bulbapedia_file_name is None:
+            continue
+
         bulbapedia_art = read_card_art(
             Image.open(bulbapedia_file_name).resize(
                 drive_picture_size, Resampling.NEAREST
