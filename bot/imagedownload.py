@@ -120,12 +120,12 @@ class ImageTransferBot(object):
                 imagelist = []
                 for linkedPage in page.interwiki():
                     linkedPage = pywikibot.Page(linkedPage)
-                    imagelist.extend(linkedPage.imagelinks(followRedirects=True))
+                    imagelist.extend(linkedPage.imagelinks())
             elif page.is_filepage():
                 imagePage = pywikibot.FilePage(page.site, page.title())
                 imagelist = [imagePage]
             else:
-                imagelist = list(page.imagelinks(followRedirects=True))
+                imagelist = list(page.imagelinks())
 
             while imagelist:
                 self.showImageList(imagelist)
