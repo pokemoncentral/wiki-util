@@ -54,7 +54,7 @@ Options:
                                 to \033[32mbulbapedia-pictures\033[0m in the same parent
                                 directory as the Google Drive datamine files.
 
--same-color-threshold:<number>  The highest value of the individual RGB components of a
+-same-pixel-threshold:<number>  The highest value of the individual RGB components of a
                                 pixel in the \033[34mcard art diff\033[0m to consider it
                                 a "black pixel", e.g. the pixel in the two card art is
                                 the same. \033[33mOptional\033[0m, defaults to
