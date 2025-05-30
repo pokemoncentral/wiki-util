@@ -70,6 +70,8 @@ Options:
 -picture-ext:<extension>        The extension that the image files form Google Drive
                                 have. \033[33mOptional\033[0m, defaults to
                                 \033[32mpng\033[0m.
+
+-help                           Show this help text.
 """
 
 import functools

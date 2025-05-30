@@ -1,3 +1,22 @@
+"""Translate a "<Pokémon> (GCC Pocket)" from Bulbapedia to Pokémon Centra Wiki
+
+Examples:
+    python gccp-translate-page.py aron-gccp.txt -name:'Aron (TCG Pocket)'
+
+Usage:
+    python gccp-translate-page.py [BULBAPEDIA-PAGE-FILE] \\
+        -name:'<Pokémon> (TCG Pocket)'
+
+Arguments:
+    BULBAPEDIA-PAGE-FILE: the name of the file containing the page to translate
+
+Options:
+    -name:<name>    The name of the en page (expected format "<Pokémon> (TCG Pocket)").
+                    \033[34mRequired\033[0m for the en interwiki.
+
+    -help           Show this help text.
+"""
+
 import csv
 import itertools
 import os
@@ -8,15 +27,6 @@ from typing import List, Optional, Tuple
 import mwparserfromhell
 import pywikibot as pwb
 from mwparserfromhell.wikicode import Wikicode
-
-"""
-Script that translates a "<Pokémon> (GCC Pocket)" from Bulba to PCW.
-
-Arguments:
-[0]: the name of the file containing the page to translate
--name:<name> the name of the en page (expected format is "<pokémon> (TCG Pocket)").
-  Required for the en interwiki.
-"""
 
 BULBAPEDIA = None
 
@@ -33,7 +43,8 @@ def replacements_from_file(text: str, file_path: str, fields_separator=",") -> s
     """Perform replacements reading them from a CSV.
 
     In the CSV, the first column is the pattern while the second is the replacement (see
-    gccp-replacements.csv)"""
+    gccp-replacements.csv)
+    """
     # read tablewith replacements from CSV file
     with open(
         os.path.join(os.path.dirname(__file__), file_path), "r", encoding="utf-8"
@@ -221,21 +232,22 @@ def translate_page(source: str, name_arg: Optional[str]) -> str:
 
 
 # main function
-def main():
-    # parse args
-    local_args = pwb.handle_args()
-
+def main(args=sys.argv):
     named_args = {
         "name": None,
         "output": None,
     }
     pos_args = []
-    for arg in local_args:
-        if arg[0] == "-":
+    for arg in args:
+        if arg.startswith("-"):
             arg_name, _, arg_value = arg[1:].partition(":")
-            named_args[arg_name] = arg_value
+            named_args[arg_name] = arg_value.strip() or True
         else:
             pos_args.append(arg.strip())
+
+    if named_args["help"]:
+        print(__doc__)
+        return
 
     with open(pos_args[0], "r", encoding="utf-8") as f:
         source = f.read()
