@@ -1,16 +1,14 @@
+"""
+Download pages to text files.
+"""
+
 import os
 import os.path
 
 import pywikibot
 from pywikibot import pagegenerators
 
-"""
-Script that downloads pages to text files. Arguments:
--fam:<name> name of family in Pywikibot repository.
--enpages:<path> path where EN pages will be downloaded (optional, default data/gccp-enpages).
--itpages:<path> path where IT pages will be downloaded (optional, default data/gccp-itpages).
--overwrite:<yes|no> 'yes' to overwrite existing pages, otherwise they are skipped.
-"""
+from bot.util.PcwCliArgs import PcwCliArgs
 
 
 # download wikicode from a page and save it in text file
@@ -34,19 +32,26 @@ def title_en_to_it(title_en):
 
 # main function
 def main():
-    # parse args
-    local_args = pywikibot.handle_args()
-    args = {
-        "fam": "encypok",
-        "enpages": "data/gccp-enpages",
-        "itpages": "data/gccp-itpages",
-        "overwrite": "no",
-    }
-    for arg in local_args:
-        arg_name, _, arg_value = arg[1:].partition(":")
-        args[arg_name] = arg_value
+    args = (
+        PcwCliArgs(__doc__, include_pwb=True)
+        .opt("fam", "name", "name of family in Pywikibot repository", default="encypok")
+        .opt(
+            "enpages",
+            "path",
+            "path where EN pages will be downloaded",
+            default="data/gccp-enpages",
+        )
+        .opt(
+            "itpages",
+            "path",
+            "path where IT pages will be downloaded",
+            default="data/gccp-itpages",
+        )
+        .flag("owerwrite", "overwrite existing pages")
+        .parse()
+    )
     # setup
-    overwrite = (args["overwrite"].strip().lower() == "yes")
+    overwrite = args["overwrite"]
     if not os.path.isdir(args["enpages"]):
         os.mkdir(args["enpages"])
     if not os.path.isdir(args["itpages"]):
