@@ -54,14 +54,16 @@ class PcwCliArgs:
     _args: dict[str, Arg]
     _opts: dict[str, Opt]
     _include_pwb: bool
+    _desc: bool
 
     INDENT_SIZE = 4
     _help_opt = Opt(name="help", desc="Show this help text", default=False)
 
-    def __init__(self, *, include_pwb: bool = False):
+    def __init__(self, description: str, *, include_pwb: bool = False):
         self._args = {}
         self._opts = {self._help_opt.name: self._help_opt}
         self._include_pwb = include_pwb
+        self._desc = description
 
     def flag(self, name: str, desc: str, *, required: bool = False) -> Self:
         if name in self._opts:
@@ -152,33 +154,33 @@ class PcwCliArgs:
         return res
 
     def help(self) -> str:
-        arg_opt_sep = f"{os.linesep * 2}{" " * self.INDENT_SIZE * 4}"
+        if not self._args and not self._opts:
+            return self._dedent(self._desc)
 
         args = sorted(self._args.values(), key=Arg.sort_key)
         opts = sorted(self._opts.values(), key=Opt.sort_key)
 
-        max_name_len = max(len(a.doc_name) for a in itertools.chain(args, opts))
+        help_text = [self._dedent(self._desc)]
+
+        max_name_len = max((len(a.doc_name) for a in itertools.chain(args, opts)))
         max_name_len += self.INDENT_SIZE - max_name_len % self.INDENT_SIZE
 
-        return self._dedent(
-            f"""
-            {__doc__}
+        if self._args:
+            help_text += ("", "Arguments:")
+            help_text += map(partial(self._arg_help, max_name_len), args)
 
-            Arguments:
+        if self._opts:
+            help_text += ("", "Options:")
+            help_text += map(partial(self._arg_help, max_name_len), opts)
 
-                {arg_opt_sep.join(map(partial(self._arg_help, max_name_len), args))}
+        return os.linesep.join(help_text)
 
-            Options:
-
-                {arg_opt_sep.join(map(partial(self._arg_help, max_name_len), opts))}
-            """
-        )
-
-    @staticmethod
-    def _arg_help(max_name_len: int, a: Arg | Opt) -> str:
+    @classmethod
+    def _arg_help(cls, max_name_len: int, a: Arg | Opt) -> str:
+        indent = " " * cls.INDENT_SIZE
         name = f"\033[1m{a.doc_name}\033[0m"  # bold text
         separator = " " * (max_name_len - len(a.doc_name))
-        return f"{name}{separator}{a.desc}."
+        return f"{os.linesep}{indent}{name}{separator}{a.desc}."
 
     @classmethod
     def _user_facing_error(cls, msg: str, *, exit_code: int = 1):
