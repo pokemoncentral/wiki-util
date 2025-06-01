@@ -105,7 +105,11 @@ class PcwCliArgs:
             args = pwb.handle_args(args, do_help=False)
 
         pos_args_index = 0
-        res = {}
+        res = {
+            a.name: a.default
+            for a in itertools.chain(self._args.values(), self._opts.values())
+            if not a.is_required
+        }
         for cli_arg in map(str.strip, args):
             if cli_arg.startswith("-"):
                 name, _, value = cli_arg[1:].partition(":")
@@ -133,21 +137,15 @@ class PcwCliArgs:
                 pos_args_index += 1
                 res[pos_arg.doc_name] = cli_arg
 
-        missing_cli_args = list(
-            itertools.chain(
-                (
-                    a
-                    for a in self._args.values()
-                    if a.is_required and a.doc_name not in res
-                ),
-                (o for o in self._opts.values() if o.is_required and o.name not in res),
-            )
-        )
+        missing_arg_names = {
+            *(a.doc_name for a in self._args.values()),
+            *(o.name for o in self._opts.values()),
+        }.difference(res.keys())
 
-        if missing_cli_args:
+        if missing_arg_names:
             self._user_facing_error(
                 f"""
-                Missing arguments:{os.linesep.join(a.doc_name for a in missing_cli_args)}
+                Missing arguments:{os.linesep.join(missing_arg_names)}
                 """
             )
 
@@ -180,7 +178,17 @@ class PcwCliArgs:
         indent = " " * cls.INDENT_SIZE
         name = f"\033[1m{a.doc_name}\033[0m"  # bold text
         separator = " " * (max_name_len - len(a.doc_name))
-        return f"{os.linesep}{indent}{name}{separator}{a.desc}."
+
+        if a.is_required or a.name == cls._help_opt.name:
+            default = ""
+        elif isinstance(a.default, bool):
+            default = " \033[33mOptional\033[0m."
+        else:
+            default = (
+                f" \033[33mOptional\033[0m, defaults to \033[32m{a.default}\033[0m."
+            )
+
+        return f"{os.linesep}{indent}{name}{separator}{a.desc}.{default}"
 
     @classmethod
     def _user_facing_error(cls, msg: str, *, exit_code: int = 1):

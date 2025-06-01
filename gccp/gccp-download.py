@@ -38,16 +38,16 @@ def main():
         .opt(
             "enpages",
             "path",
-            "path where EN pages will be downloaded (optional, default data/gccp-enpages)",
+            "path where EN pages will be downloaded",
             default="data/gccp-enpages",
         )
         .opt(
             "itpages",
             "path",
-            "path where IT pages will be downloaded (optional, default data/gccp-itpages).",
+            "path where IT pages will be downloaded",
             default="data/gccp-itpages",
         )
-        .flag("owerwrite", "overwrite existing pages, otherwise they are skipped")
+        .flag("owerwrite", "overwrite existing pages")
         .parse()
     )
     # setup
