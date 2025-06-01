@@ -7,6 +7,8 @@ from functools import partial
 from operator import attrgetter
 from typing import Optional, Self
 
+import pywikibot as pwb
+
 
 @dataclass(kw_only=True)
 class Arg:
@@ -49,40 +51,44 @@ class Opt:
 
 
 class PcwCliArgs:
-    args: dict[str, Arg]
-    opts: dict[str, Opt]
+    _args: dict[str, Arg]
+    _opts: dict[str, Opt]
+    _include_pwb: bool
 
     INDENT_SIZE = 4
     _help_opt = Opt(name="help", desc="Show this help text", default=False)
 
     def __init__(self, *, include_pwb: bool = False):
-        self.args = {}
-        self.opts = {self._help_opt.name: self._help_opt}
+        self._args = {}
+        self._opts = {self._help_opt.name: self._help_opt}
+        self._include_pwb = include_pwb
 
     def flag(self, name: str, desc: str, *, required: bool = False) -> Self:
-        if name in self.opts:
+        if name in self._opts:
             raise ValueError(f"Flag '{name}' is already defined")
 
-        self.opts[name] = Opt(name=name, desc=desc, default=None if required else False)
+        self._opts[name] = Opt(
+            name=name, desc=desc, default=None if required else False
+        )
         return self
 
     def opt(
         self, name: str, value_name: str, desc: str, *, default: Optional[str] = None
     ) -> Self:
-        if name in self.opts:
+        if name in self._opts:
             raise ValueError(f"Option '{name}' is already defined")
 
-        self.opts[name] = Opt(
+        self._opts[name] = Opt(
             name=name, value_name=value_name, desc=desc, default=default
         )
         return self
 
     def pos(self, doc_name: str, desc: str, *, default: Optional[str] = None) -> Self:
-        if doc_name in self.args:
+        if doc_name in self._args:
             raise ValueError(f"Positional argument '{doc_name}' is already defined")
 
-        self.args[doc_name] = Arg(
-            pos=len(self.args), doc_name=doc_name, desc=desc, default=default
+        self._args[doc_name] = Arg(
+            pos=len(self._args), doc_name=doc_name, desc=desc, default=default
         )
         return self
 
@@ -93,6 +99,9 @@ class PcwCliArgs:
             print(self.help())
             sys.exit(0)
 
+        if self._include_pwb:
+            args = pwb.handle_args(args, do_help=False)
+
         pos_args_index = 0
         res = {}
         for cli_arg in map(str.strip, args):
@@ -100,7 +109,7 @@ class PcwCliArgs:
                 name, _, value = cli_arg[1:].partition(":")
 
                 try:
-                    opt = self.opts[name]
+                    opt = self._opts[name]
                 except KeyError:
                     self._user_facing_error(f"Unknown option: -{name}", exit_code=31)
                 if not value and not opt.is_flag:
@@ -112,7 +121,7 @@ class PcwCliArgs:
 
             else:
                 pos_arg = next(
-                    (a for a in self.args.values() if a.pos == pos_args_index), None
+                    (a for a in self._args.values() if a.pos == pos_args_index), None
                 )
                 if pos_arg is None:
                     self._user_facing_error(
@@ -126,10 +135,10 @@ class PcwCliArgs:
             itertools.chain(
                 (
                     a
-                    for a in self.args.values()
+                    for a in self._args.values()
                     if a.is_required and a.doc_name not in res
                 ),
-                (o for o in self.opts.values() if o.is_required and o.name not in res),
+                (o for o in self._opts.values() if o.is_required and o.name not in res),
             )
         )
 
@@ -145,8 +154,8 @@ class PcwCliArgs:
     def help(self) -> str:
         arg_opt_sep = f"{os.linesep * 2}{" " * self.INDENT_SIZE * 4}"
 
-        args = sorted(self.args.values(), key=Arg.sort_key)
-        opts = sorted(self.opts.values(), key=Opt.sort_key)
+        args = sorted(self._args.values(), key=Arg.sort_key)
+        opts = sorted(self._opts.values(), key=Opt.sort_key)
 
         max_name_len = max(len(a.doc_name) for a in itertools.chain(args, opts))
         max_name_len += self.INDENT_SIZE - max_name_len % self.INDENT_SIZE
