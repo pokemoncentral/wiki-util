@@ -101,7 +101,7 @@
 \bType: Null\b,Tipo Zero,
 ,, --------------------------------- alt forms ---------------------------------// TODO
 \bAsh's Pikachu\b,Pikachu di Ash,
-\bPikachu & Zekrom\b,Pikachu e Zekrom, // LE CARTE SONO GX, NON SO SE VADA AGGIUNTO '-GX' ALLA FINE
+\bPikachu & Zekrom\b,Pikachu e Zekrom, // LE CARTE SONO GX; NON SO SE VADA AGGIUNTO '-GX' ALLA FINE
 \bFlying Pikachu\b,Pikachu Volo, // CONTROLLARE PER CARTE VECCHIE
 \bSurfing Pikachu\b,Pikachu Surf, // CONTROLLARE PER CARTE VECCHIE
 \bMow Rotom\b,Rotom Taglio,
@@ -167,6 +167,9 @@
 \bRadiant Jirachi\b,Jirachi Lucente,
 \bRadiant Charjabug\b,Charjabug Lucente,
 \bRadiant Eternatus\b,Eternatus Lucente,
+\bDusk Mane Necrozma\b,Necrozma Criniera del Vespro,
+\bDawn Wings Necrozma\b,Necrozma Ali dell'Aurora,
+\bUltra Necrozma\b,UltraNecrozma,
 ,, -------------------------------- stages --------------------------------
 {{TCG\|Basic Pokémon}},{{TCG|Base}},
 {{TCG\|Stage 1 Pokémon}},{{TCG|Fase 1}},
