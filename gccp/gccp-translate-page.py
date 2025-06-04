@@ -6,15 +6,6 @@ Examples:
 Usage:
     python gccp-translate-page.py [BULBAPEDIA-PAGE-FILE] \\
         -name:'<Pokémon> (TCG Pocket)'
-
-Arguments:
-    BULBAPEDIA-PAGE-FILE: the name of the file containing the page to translate
-
-Options:
-    -name:<name>    The name of the en page (expected format "<Pokémon> (TCG Pocket)").
-                    \033[34mRequired\033[0m for the en interwiki.
-
-    -help           Show this help text.
 """
 
 import csv
@@ -27,6 +18,8 @@ from typing import List, Optional, Tuple
 import mwparserfromhell
 import pywikibot as pwb
 from mwparserfromhell.wikicode import Wikicode
+
+from utils.PcwCliArgs import PcwCliArgs
 
 BULBAPEDIA = None
 
@@ -233,34 +226,39 @@ def translate_page(source: str, name_arg: Optional[str]) -> str:
 
 # main function
 def main(args=sys.argv):
-    named_args = {
-        "name": None,
-        "output": None,
-    }
-    pos_args = []
-    for arg in args:
-        if arg.startswith("-"):
-            arg_name, _, arg_value = arg[1:].partition(":")
-            named_args[arg_name] = arg_value.strip() or True
-        else:
-            pos_args.append(arg.strip())
+    args = (
+        PcwCliArgs(__doc__)
+        .pos(
+            "BULBAPEDIA-PAGE-FILE",
+            "the name of the file containing the page to translate",
+        )
+        .opt(
+            "name",
+            "name",
+            'The name of the en page (expected format "<Pokémon> (TCG Pocket)"). '
+            "\033[34mRequired\033[0m for the en interwiki",
+        )
+        .opt(
+            "output",
+            "file",
+            "The output file",
+            default_desc="defaults to standard output",
+        )
+        .parse(args)
+    )
 
-    if named_args["help"]:
-        print(__doc__)
-        return
-
-    with open(pos_args[0], "r", encoding="utf-8") as f:
+    with open(args["BULBAPEDIA-PAGE-FILE"], "r", encoding="utf-8") as f:
         source = f.read()
 
     out_stream = (
-        open(named_args["output"], "w", encoding="utf-8")
-        if named_args["output"] is not None
+        open(args["output"], "w", encoding="utf-8")
+        if args["output"] is not None
         else sys.stdout
     )
     # This can close sys.sdout. That's not a problem
     with out_stream:
-        print(translate_page(source, named_args["name"]), file=out_stream)
-        print(f"Translated file {pos_args[0]} ({named_args['name']})")
+        print(translate_page(source, args["name"]), file=out_stream)
+        print(f"Translated file {args['BULBAPEDIA-PAGE-FILE']} ({args['name']})")
 
 
 # invoke main function

@@ -47,7 +47,11 @@ def main():
             "path where IT pages will be downloaded",
             default="data/gccp-itpages",
         )
-        .flag("owerwrite", "overwrite existing pages")
+        .flag(
+            "owerwrite",
+            "overwrite existing pages",
+            default_desc="if not given, pages that have been already downloaded will be skipped",
+        )
         .parse()
     )
     # setup

@@ -16,12 +16,13 @@ class Arg:
     doc_name: str
     desc: str
     default: Optional[str] = None
+    default_desc: Optional[str] = None
 
     sort_key = attrgetter("pos")
 
     @property
     def is_required(self) -> bool:
-        return self.default is None
+        return self.default_desc is None and self.default is None
 
 
 @dataclass(kw_only=True)
@@ -30,6 +31,7 @@ class Opt:
     desc: str
     value_name: Optional[str] = None
     default: Optional[str | bool] = None
+    default_desc: Optional[str] = None
 
     sort_key = attrgetter("name")
 
@@ -39,7 +41,7 @@ class Opt:
 
     @property
     def is_required(self) -> bool:
-        return self.default is None
+        return self.default_desc is None and self.default is None
 
     @property
     def doc_name(self) -> str:
@@ -65,32 +67,63 @@ class PcwCliArgs:
         self._include_pwb = include_pwb
         self._desc = description
 
-    def flag(self, name: str, desc: str, *, required: bool = False) -> Self:
+    def flag(
+        self,
+        name: str,
+        desc: str,
+        *,
+        required: bool = False,
+        default_desc: Optional[str] = None,
+    ) -> Self:
         if name in self._opts:
             raise ValueError(f"Flag '{name}' is already defined")
 
         self._opts[name] = Opt(
-            name=name, desc=desc, default=None if required else False
+            name=name,
+            desc=desc,
+            default=None if required else False,
+            default_desc=default_desc,
         )
         return self
 
     def opt(
-        self, name: str, value_name: str, desc: str, *, default: Optional[str] = None
+        self,
+        name: str,
+        value_name: str,
+        desc: str,
+        *,
+        default: Optional[str] = None,
+        default_desc: Optional[str] = None,
     ) -> Self:
         if name in self._opts:
             raise ValueError(f"Option '{name}' is already defined")
 
         self._opts[name] = Opt(
-            name=name, value_name=value_name, desc=desc, default=default
+            name=name,
+            value_name=value_name,
+            desc=desc,
+            default=default,
+            default_desc=default_desc,
         )
         return self
 
-    def pos(self, doc_name: str, desc: str, *, default: Optional[str] = None) -> Self:
+    def pos(
+        self,
+        doc_name: str,
+        desc: str,
+        *,
+        default: Optional[str] = None,
+        default_desc: Optional[str] = None,
+    ) -> Self:
         if doc_name in self._args:
             raise ValueError(f"Positional argument '{doc_name}' is already defined")
 
         self._args[doc_name] = Arg(
-            pos=len(self._args), doc_name=doc_name, desc=desc, default=default
+            pos=len(self._args),
+            doc_name=doc_name,
+            desc=desc,
+            default=default,
+            default_desc=default_desc,
         )
         return self
 
@@ -182,11 +215,15 @@ class PcwCliArgs:
         if a.is_required or a.name == cls._help_opt.name:
             default = ""
         elif isinstance(a.default, bool):
-            default = " \033[33mOptional\033[0m."
+            default_desc = "" if a.default_desc is None else ", " + a.default_desc
+            default = f" \033[33mOptional\033[0m{default_desc}."
         else:
-            default = (
-                f" \033[33mOptional\033[0m, defaults to \033[32m{a.default}\033[0m."
+            default_desc = (
+                f"defaults to \033[32m{a.default}\033[0m"
+                if a.default_desc is None
+                else a.default_desc
             )
+            default = f" \033[33mOptional\033[0m, {default_desc}."
 
         return f"{os.linesep}{indent}{name}{separator}{a.desc}.{default}"
 

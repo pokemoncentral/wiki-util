@@ -28,50 +28,6 @@ Usage:
     python rename-pictures-from-drive.py -drive-pictures-dir:<dir> \\
         -renamed-pictures-dir:<dir> -gccp-expansion:<name> [-failed-log:<file>] \\
         [-picture-ext:<extension>] [-bulbapedia-pictures-dir:<dir>]
-
-Options:
-
--drive-pictures-dir:<dir>       The \033[94mlocal\033[0m directory where the image files
-                                from Google Drive have been downloaded.
-
--renamed-pictures-dir:<dir>     The directory where the image files will be
-                                \033[94mcopied\033[0m with the Pokémon Central Wiki
-                                name. It is created if it doesn't exist.
-
--gccp-expansion:<name>          The name of the TCG Pocket expansion the image files
-                                belong to.
-
--pcw-page:<name>                The name of the Pokémon Central Wiki page containing the
-                                list of cards for the TCG Pocket expansion, in the same
-                                format as the actual page for the expansion would.
-                                \033[33mOptional\033[0m, defaults to the actual page for
-                                the TCG Pocket expansion, i.e.
-                                "<expansion name> (GCC Pocket)"
-
--bulbapedia-pictures-dir:<dir>  The directory where the card images from Bulbapedia are
-                                downloaded. If a file is already present there, it won't
-                                be downloaded again. \033[33mOptional\033[0m, defaults
-                                to \033[32mbulbapedia-pictures\033[0m in the same parent
-                                directory as the Google Drive datamine files.
-
--same-pixel-threshold:<number>  The highest value of the individual RGB components of a
-                                pixel in the \033[34mcard art diff\033[0m to consider it
-                                a "black pixel", e.g. the pixel in the two card art is
-                                the same. \033[33mOptional\033[0m, defaults to
-                                \033[32m16.6\033[0m.
-
--failed-log:<file>              The file where the names of the files from Google Drive
-                                that failed to be renamed will be written, one per line.
-                                Any directory in the file path that doesn't exist will
-                                be created. \033[33mOptional\033[0m, defaults to
-                                \033[32mgccp-rename-picture-failed.log\033[0m in the
-                                current directory.
-
--picture-ext:<extension>        The extension that the image files form Google Drive
-                                have. \033[33mOptional\033[0m, defaults to
-                                \033[32mpng\033[0m.
-
--help                           Show this help text.
 """
 
 import functools
@@ -91,6 +47,8 @@ import pywikibot
 from PIL import Image, ImageChops
 from PIL.Image import Resampling
 from pywikibot.exceptions import NoPageError
+
+from utils.PcwCliArgs import PcwCliArgs
 
 BULBAPEDIA_CARD_ROW = re.compile(r"\| \d{3}/\d{3} \|\| \{\{TCG ID\|")
 
@@ -422,9 +380,76 @@ def parse_args(cli_args):
 
 
 def main(cli_args=None):
-    args = parse_args(cli_args or sys.argv[1:])
-    if args is None:
-        return
+    args = (
+        PcwCliArgs(__doc__)
+        .opt(
+            "drive-pictures-dir",
+            "dir",
+            "The \033[94mlocal\033[0m directory where the image files from Google "
+            "Drive have been downloaded",
+        )
+        .opt(
+            "renamed-pictures-dir",
+            "dir",
+            "The directory where the image files will be \033[94mcopied\033[0m with "
+            "the Pokémon Central Wiki name. It is created if it doesn't exist",
+        )
+        .opt(
+            "gccp-expansion",
+            "name",
+            "The name of the TCG Pocket expansion the image files belong to",
+        )
+        .opt(
+            "pcw-page",
+            "name",
+            "The name of the Pokémon Central Wiki page containing the list of cards "
+            "for the TCG Pocket expansion, in the same format as the actual page for "
+            "the expansion would",
+            default_desc="defaults to the actual page for the TCG Pocket expansion, "
+            'i.e. "<expansion name> (GCC Pocket)"',
+        )
+        .opt(
+            "bulbapedia-pictures-dir",
+            "dir",
+            "The directory where the card images from Bulbapedia are downloaded. If a "
+            "file is already present there, it won't be downloaded again",
+            default="bulbapedia-pictures",
+        )
+        .opt(
+            "same-pixel-threshold",
+            "number",
+            "The highest value of the individual RGB components of a pixel in the "
+            '\033[34mcard art diff\033[0m to consider it a "black pixel", e.g. the '
+            "pixel in the two card art is the same",
+            default="16.6",
+        )
+        .opt(
+            "failed-log",
+            "file",
+            "The file where the names of the files from Google Drive that failed to be "
+            "renamed will be written, one per line. Any directory in the file path "
+            "that doesn't exist will be created",
+            default="gccp-rename-picture-failed.log",
+        )
+        .opt(
+            "picture-ext",
+            "extension",
+            "The extension that the image files form Google Drive have",
+            default="png",
+        )
+        .parse(cli_args)
+    )
+
+    path_args = (
+        "drive-pictures-dir",
+        "renamed-pictures-dir",
+        "bulbapedia-pictures-dir",
+        "failed-log",
+    )
+    args = {
+        name: os.path.abspath(value) if name in path_args else value
+        for name, value in args.pairs()
+    }
 
     if args["drive-pictures-dir"] == args["renamed-pictures-dir"]:
         print(
@@ -456,7 +481,7 @@ def main(cli_args=None):
             expansion_name=args["gccp-expansion"],
             bulbapedia_pictures_dir=args["bulbapedia-pictures-dir"],
             failed_log_file=failed_log_file,
-            same_rgb_threshold=args["same-pixel-threshold"],
+            same_rgb_threshold=float(args["same-pixel-threshold"]),
             picture_ext=args["picture-ext"],
         )
     return 0

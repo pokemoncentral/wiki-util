@@ -5,39 +5,36 @@ Examples:
 
 Usage:
     python gccp-translate-dir.py [INPUT-DIR] [OUTPUT-DIR]
-
-Arguments:
-    INPUT-DIR       The directory containing the files with the Bulbapedia pages to
-                    translate.
-
-    OUTPUT-DIR      The pages where the Pokémon Central Wiki translated files will be
-                    created.
-
-Options:
-    -help           Show this help text.
 """
 
 import importlib
 import os
 import sys
 
+from utils.PcwCliArgs import PcwCliArgs
+
 gccptranslatepage = importlib.import_module("gccp-translate-page")
 
 if __name__ == "__main__":
-    if "-help" in sys.argv:
-        print(__doc__)
-        sys.exit(1)
+    args = (
+        PcwCliArgs(__doc__)
+        .pos(
+            "INPUT-DIR",
+            "The directory containing the files with the Bulbapedia pages to translate",
+        )
+        .pos(
+            "OUTPUT-DIR",
+            "The pages where the Pokémon Central Wiki translated files will be created",
+        )
+        .parse()
+    )
 
-    if len(sys.argv) < 3:
-        print("Specify input and output dir!", file=sys.stderr)
-        sys.exit(1)
-
-    input_dir = sys.argv[1]
+    input_dir = args["INPUT-DIR"]
     if not os.path.isdir(input_dir):
         print(f"Input directory {input_dir} must exist", file=sys.stderr)
         sys.exit(1)
 
-    output_dir = sys.argv[2]
+    output_dir = args["OUTPUT-DIR"]
     if not os.path.isdir(output_dir):
         print(f"Output directory {output_dir} must exist", file=sys.stderr)
         sys.exit(1)
