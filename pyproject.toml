@@ -9,6 +9,15 @@ dependencies = [
     "pywikibot>=9.6.1",
 ]
 
+# While there are definitely more powerful build backends out there, we only
+# need one to add our `utils` directory to the sys.path. setuptools is usually
+# installed by default and it gets the job done
+[build-system]
+requires = [
+    "setuptools >= 77.0.3"
+]
+build-backend = "setuptools.build_meta"
+
 [dependency-groups]
 dev = [
     "black>=24.10.0",
@@ -16,9 +25,10 @@ dev = [
     "pre-commit>=4.0.1",
 ]
 
-# This is so that `pip install .` doesn't crash
-[tool.setuptools]
-packages = []
+[tool.setuptools.packages.find]
+include = [
+    "utils*",
+]
 
 [tool.isort]
 profile = "black"

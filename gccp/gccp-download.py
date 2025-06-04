@@ -8,7 +8,7 @@ import os.path
 import pywikibot
 from pywikibot import pagegenerators
 
-from bot.util.PcwCliArgs import PcwCliArgs
+from utils.PcwCliArgs import PcwCliArgs
 
 
 # download wikicode from a page and save it in text file
