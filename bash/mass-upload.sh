@@ -65,5 +65,5 @@ if [[ $OVERWRITE == true ]]; then
 fi
 
 for FILE in "$DIR"/*; do
-    python $PYWIKIBOT_DIR/pwb.py upload $PT -keep -noverify -$EXISTSREACTION:exists "$FILE" "$DESC"
+    python "$PYWIKIBOT_DIR"/pwb.py upload $PT -keep -noverify -$EXISTSREACTION:exists "$FILE" "$DESC"
 done
