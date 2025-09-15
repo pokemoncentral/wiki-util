@@ -1,0 +1,10 @@
+{
+  "$schema":  "https://raw.githubusercontent.com/jetify-com/devbox/0.16.0/.schema/devbox.schema.json",
+  "packages": ["python-full@3.13.2"],
+  "env": {
+        "VENV_DIR": ".venv"
+    },
+    "shell": {
+        "init_hook": ". $VENV_DIR/bin/activate"
+    }
+}
