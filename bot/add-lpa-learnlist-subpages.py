@@ -1,14 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-r"""
+"""
 This bot adds LPA learnlist to the given Pokémon.
 
 It examine the subpage "/Mosse apprese in ottava generazione" and adds to the
 right subsection (ie. level and tutor) the new learnlist for LPA moves. Note
 that whenever it finds something unexpected in a page (such as more than one
 form), it conservatively abort and log the error.
-
-It requires as argument the name of the datamine file.
 
 Also note that calling this script requires to parse the datamine file, so a
 single call on many pages is more efficient than many calls on single pages.
@@ -18,30 +16,29 @@ These command line parameters can be used to specify which pages to work on:
 &pagegenerator-params;
 """
 
-import codecs
 import re
-import os
-import subprocess
-from functools import partial
-from itertools import dropwhile
 
 import mwparserfromhell as mwparser
 import pywikibot as pwb
 from pywikibot import pagegenerators
-from pywikibot.bot import SingleSiteBot, ExistingPageBot
-from pywikibot.page import Page, BaseLink
+from pywikibot.bot import SingleSiteBot
+from pywikibot.page import BaseLink, Page
+
+from utils.PcwCliArgs import PcwCliArgs
 
 # This is required for the text that is shown when you run this script with the
 # parameter -help.
-docuReplacements = {'&pagegenerator-params;': pagegenerators.parameterHelp}
+docuReplacements = {"&pagegenerator-params;": pagegenerators.parameterHelp}
 
 # Should integrate this with pwb's logging facility, but I can't find
 # documentation online
 import logging
+
 logger = logging.getLogger("log")
-file_lh = logging.FileHandler('/tmp/cusu.log')
+file_lh = logging.FileHandler("/tmp/cusu.log")
 file_lh.setLevel(logging.WARNING)
 logger.addHandler(file_lh)
+
 
 class DatamineParser:
     REPLACES = {
@@ -82,10 +79,10 @@ class DatamineParser:
         "ponyta-1": "ponytaG",
         "rapidash": "rapidash",
         "rapidash-1": "rapidashG",
-        "weezing": 'weezing',
-        "weezing-1": 'weezingG',
-        'corsola': 'corsola',
-        'corsola-1': 'corsolaG',
+        "weezing": "weezing",
+        "weezing-1": "weezingG",
+        "corsola": "corsola",
+        "corsola-1": "corsolaG",
         "zigzagoon": "zigzagoon",
         "zigzagoon-1": "zigzagoonG",
         "linoone": "linoone",
@@ -93,11 +90,11 @@ class DatamineParser:
         "stunfisk": "stunfisk",
         "stunfisk-1": "stunfiskG",
         "farfetch'd": "farfetchd",
-        u"farfetch’d": "farfetchd",
+        "farfetch’d": "farfetchd",
         "farfetch'd-1": "farfetchdG",
-        u"farfetch’d-1": "farfetchdG",
+        "farfetch’d-1": "farfetchdG",
         "sirfetch'd": "sirfetchd",
-        u"sirfetch’d": "sirfetchd",
+        "sirfetch’d": "sirfetchd",
         "cramorant": "cramorant",
         "cramorant-1": "cramorantT",
         "cramorant-2": "cramorantI",
@@ -133,7 +130,7 @@ class DatamineParser:
         "alcremie-8": "alcremieTm",
         "mimikyu": "mimikyu",
         "mimikyu-1": "mimikyuS",
-        "silvally": "silvally", # TODO silvally
+        "silvally": "silvally",  # TODO silvally
         "silvally-1": "silvally",
         "silvally-2": "silvally",
         "silvally-3": "silvally",
@@ -212,7 +209,6 @@ class DatamineParser:
         "tapu-bulu": "tapu bulu",
         "tapu-fini": "tapu fini",
         "zarude-1": "zarudeP",
-
         "growlithe-1": "growlitheH",
         "arcanine-1": "arcanineH",
         "voltorb-1": "voltorbH",
@@ -266,11 +262,11 @@ class DatamineParser:
 
     @staticmethod
     def parse_move_line(line, kind):
-        if kind == 0: # level
+        if kind == 0:  # level
             # - Confusione @ 0, mastered @ 15
-            regex = "^- \[(\d{1,3})\] \[(\d{1,3})\] (.*)$"
-        elif kind == 1:	# tutor
-            regex = "^- (.*)$"
+            regex = r"^- \[(\d{1,3})\] \[(\d{1,3})\] (.*)$"
+        elif kind == 1:  # tutor
+            regex = r"^- (.*)$"
 
         m = re.match(regex, line.strip())
         if not m:
@@ -291,15 +287,21 @@ class DatamineParser:
             move = ""
             for line in f:
                 line = line.strip()
-                if line == "": # Empty lines are the separators
+                if line == "":  # Empty lines are the separators
                     pokename = DatamineParser.normalize_pokename(pokelines[0])
-                    if re.search("-\d+$", pokename):
-                        pwb.warning("{} name ends in \"-number\". This may point to a missing replacement".format(pokename))
+                    if re.search(r"-\d+$", pokename):
+                        pwb.warning(
+                            '{} name ends in "-number". This may point to a missing replacement'.format(
+                                pokename
+                            )
+                        )
                     # logger.info(pokename)
 
                     moves_by_kind = DatamineParser.split_moves(pokelines)
-                    parsed_moves = list(list(map(lambda l: DatamineParser.parse_move_line(l, i), lines))
-                                    for i, lines in enumerate(moves_by_kind))
+                    parsed_moves = list(
+                        list(map(lambda l: DatamineParser.parse_move_line(l, i), lines))
+                        for i, lines in enumerate(moves_by_kind)
+                    )
                     # logger.debug(str(list(parsed_moves)))
                     res[pokename] = parsed_moves
                     pokelines = []
@@ -311,39 +313,51 @@ class DatamineParser:
         self.info = DatamineParser.all_pokes_info(filename)
 
     OUTPUT_LINES = (
-        "|{}|||{}|{}| //", # 0 -> level
-        "|{}|||yes| //", # 1 -> tutor
+        "|{}|||{}|{}| //",  # 0 -> level
+        "|{}|||yes| //",  # 1 -> tutor
     )
 
     KIND_NAME = (
-        "level", # 0 -> level
-        "tutor", # 1 -> tutor
+        "level",  # 0 -> level
+        "tutor",  # 1 -> tutor
     )
 
     def get_learnlists(self, poke, kind):
         """Returns the learnlist call for the given input."""
         parsed_moves = self.info[poke.lower()][kind]
         kindname = DatamineParser.KIND_NAME[kind]
-        res = "{{{{#invoke: Learnlist/hf | {}hLPA | {} | 8 }}}}\n".format(kindname, poke)
-        res += "{{{{#invoke: render | render | Modulo:Learnlist/entry8LPA | {} | //\n".format(kindname)
-        res += "".join(map(lambda move: DatamineParser.OUTPUT_LINES[kind].format(*move) + "\n", parsed_moves))
+        res = "{{{{#invoke: Learnlist/hf | {}hLPA | {} | 8 }}}}\n".format(
+            kindname, poke
+        )
+        res += "{{{{#invoke: render | render | Modulo:Learnlist/entry8LPA | {} | //\n".format(
+            kindname
+        )
+        res += "".join(
+            map(
+                lambda move: DatamineParser.OUTPUT_LINES[kind].format(*move) + "\n",
+                parsed_moves,
+            )
+        )
         res += "}}\n"
-        res += "{{{{#invoke: Learnlist/hf | {}fLPA | {} | 8 }}}}\n".format(kindname, poke)
+        res += "{{{{#invoke: Learnlist/hf | {}fLPA | {} | 8 }}}}\n".format(
+            kindname, poke
+        )
         return res
 
 
 # Global constant for generation
 GENERATION = "ottava"
 
+
 class UpdateLearnlistSubpagesBot(SingleSiteBot):
     SUBPAGE_TITLE = "{poke}/Mosse apprese in {gen} generazione"
-    SUBPAGE_INC_REGEX = "{{/Mosse apprese in [\w]+ generazione}}"
+    SUBPAGE_INC_REGEX = r"{{/Mosse apprese in [\w]+ generazione}}"
     SUBPAGE_INC_REPL = "/Mosse apprese in {gen} generazione"
 
     # Constants specifying which sections to treat and parameters for the command
     SECTIONS = [
-        ("Aumentando di \[\[livello\]\]", 0),
-        ("Dall'\[\[Insegnamosse\]\]", 1),
+        (r"Aumentando di \[\[livello\]\]", 0),
+        (r"Dall'\[\[Insegnamosse\]\]", 1),
     ]
 
     # Content of an empty subpage, to be filled by self.replace_learnlists
@@ -372,11 +386,12 @@ class UpdateLearnlistSubpagesBot(SingleSiteBot):
     @param datamine_file: The path to the datamine file
     @type command_path: str
     """
+
     def __init__(self, summary, datamine_file, **kwargs):
         """Initializer."""
         super(UpdateLearnlistSubpagesBot, self).__init__(**kwargs)
 
-        self.summary = (summary or 'Bot: adding LPA learnlists')
+        self.summary = summary or "Bot: adding LPA learnlists"
         self.datamine = DatamineParser(datamine_file)
 
     def add_learnlists(self, page):
@@ -394,9 +409,16 @@ class UpdateLearnlistSubpagesBot(SingleSiteBot):
 
         # Getting the final noinclude
         try:
-            noinclude_cats = content.filter_tags(recursive=False, matches=lambda c: str(c.tag) == "noinclude")[0]
+            noinclude_cats = content.filter_tags(
+                recursive=False, matches=lambda c: str(c.tag) == "noinclude"
+            )[0]
             links = noinclude_cats.contents.filter_wikilinks(recursive=False)
-            cat = list(filter(lambda c: str(c.title).startswith(("Categoria:", "Category:")), links))[0]
+            cat = list(
+                filter(
+                    lambda c: str(c.title).startswith(("Categoria:", "Category:")),
+                    links,
+                )
+            )[0]
             content.remove(noinclude_cats)
         except IndexError:
             # Here something went wrong, hence rebuild the final noinclude
@@ -413,12 +435,29 @@ class UpdateLearnlistSubpagesBot(SingleSiteBot):
             for section in limited_content.get_sections(matches=heading):
                 if len(section.filter_headings()) > 1:
                     # More than one heading, so skip the section
-                    pwb.warning("Found more than one subsection for kind {}: aborting".format(kind))
+                    pwb.warning(
+                        "Found more than one subsection for kind {}: aborting".format(
+                            kind
+                        )
+                    )
                     logger.warning("Pokémon {} had issues".format(poke))
                     continue
                 real_heading = section.filter_headings()[0]
-                if len(section.filter_templates(matches=lambda t: t.name.lower().strip() == "#invoke: learnlist/hf" and t.get(1).find("LPA") != -1)) > 0:
-                    pwb.warning("Found something that looks like the LPA learnlist for kind {}, skipping".format(kind))
+                if (
+                    len(
+                        section.filter_templates(
+                            matches=lambda t: t.name.lower().strip()
+                            == "#invoke: learnlist/hf"
+                            and t.get(1).find("LPA") != -1
+                        )
+                    )
+                    > 0
+                ):
+                    pwb.warning(
+                        "Found something that looks like the LPA learnlist for kind {}, skipping".format(
+                            kind
+                        )
+                    )
                     continue
                 newcontent = self.datamine.get_learnlists(poke, kind).strip()
                 section.append("\n")
@@ -433,71 +472,44 @@ class UpdateLearnlistSubpagesBot(SingleSiteBot):
             ofile.write(str(content))
             ofile.write("\n{{{{-stop-}}}}")
         # Uploading the page if necessary
-        self.userPut(page=page, oldtext=page.text, newtext=str(content),
-                     summary=self.summary)
+        self.userPut(
+            page=page, oldtext=page.text, newtext=str(content), summary=self.summary
+        )
 
     def treat(self, page):
         """Treats a single page."""
         poke = UpdateLearnlistSubpagesBot.get_poke_name(page)
         # Look for the subpage and possibly create it
-        llsubpagelink = BaseLink(UpdateLearnlistSubpagesBot.SUBPAGE_TITLE.format(poke=poke, gen=GENERATION), site=self.site)
+        llsubpagelink = BaseLink(
+            UpdateLearnlistSubpagesBot.SUBPAGE_TITLE.format(poke=poke, gen=GENERATION),
+            site=self.site,
+        )
         llsubpage = Page(llsubpagelink)
         if not llsubpage.exists():
-            create = pwb.input_yn("Subpage doesn't exists: should I create it?", default=True)
+            create = pwb.input_yn(
+                "Subpage doesn't exists: should I create it?", default=True
+            )
             if not create:
                 return
-            llsubpage.text = UpdateLearnlistSubpagesBot.EMPTY_SUBPAGE.format(poke=poke, gen=GENERATION)
+            llsubpage.text = UpdateLearnlistSubpagesBot.EMPTY_SUBPAGE.format(
+                poke=poke, gen=GENERATION
+            )
         # Here the subpage is guaranteed to exists, so add_learnlists on it
         self.add_learnlists(llsubpage)
 
 
-def main(*args):
-    """
-    Process command line arguments and invoke bot.
-
-    If args is an empty list, sys.argv is used.
-
-    @param args: command line arguments
-    @type args: str
-    """
-    # Summary message, whether to accept all uploads
-    summary, always, subpage_only = None, False, False
-    pos_args = []
-
-    genFactory = pagegenerators.GeneratorFactory()
-
-    # Processing all global bot args
-    local_args = pwb.handle_args(args)
-
-    # Processing all non-global CLI arguments
-    for arg in local_args:
-        if genFactory.handle_arg(arg):
-            continue
-
-        # By convention, all the arguments not starting with - are considered
-        # positional.
-        if not arg.startswith('-'):
-            pos_args.append(arg)
-            continue
-
-        arg_name, _, arg_value = arg[1:].partition(':')
-
-        if arg_name == 'always':
-            always = True
-        elif arg_name == 'summary':
-            summary = arg_value
-
-    if len(pos_args) != 1:
-        pwb.error("Expecting one positional argument (path to the datamine file)")
-        return 1
+def main():
+    args = PcwCliArgs(__doc__).pos("DATAMINE-FILE", "The name of the datamine file")
+    args.parse(include_pwb=True)
 
     bot = UpdateLearnlistSubpagesBot(
-        datamine_file=pos_args[0],
-        always=always,
-        summary=summary,
-        generator=genFactory.getCombinedGenerator(),
+        datamine_file=args[0],
+        always=args.parsed["always"],
+        summary=args.parsed["summary"],
+        generator=args.gen_factory.getCombinedGenerator(),
     )
     bot.run()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

@@ -8,6 +8,7 @@ from operator import attrgetter
 from typing import Optional, Self
 
 import pywikibot as pwb
+from pywikibot import pagegenerators
 
 
 @dataclass(kw_only=True)
@@ -52,20 +53,37 @@ class Opt:
         )
 
 
+type ParsedArgs = dict[str, str | bool]
+
+
 class PcwCliArgs:
     _args: dict[str, Arg]
     _opts: dict[str, Opt]
-    _include_pwb: bool
     _desc: bool
 
     INDENT_SIZE = 4
     _help_opt = Opt(name="help", desc="Show this help text", default=False)
 
-    def __init__(self, description: str, *, include_pwb: bool = False):
+    _parsed: Optional[ParsedArgs]
+    _gen_factory: Optional[pagegenerators.GeneratorFactory]
+
+    @property
+    def parsed(self) -> ParsedArgs:
+        if self._parsed is None:
+            raise ValueError("CLI arguments haven't been parsed yet")
+        return self._parsed
+
+    @property
+    def gen_factory(self) -> pagegenerators.GeneratorFactory:
+        if self._gen_factory is None:
+            raise ValueError("CLI arguments didn't include Pywikibot")
+        return self._gen_factory
+
+    def __init__(self, description: str, ending: str = ""):
         self._args = {}
         self._opts = {self._help_opt.name: self._help_opt}
-        self._include_pwb = include_pwb
         self._desc = description
+        self._ending = ending
 
     def flag(
         self,
@@ -127,14 +145,21 @@ class PcwCliArgs:
         )
         return self
 
-    def parse(self, args: Optional[list[str]] = None) -> dict[str, str]:
+    def parse(
+        self,
+        args: Optional[list[str]] = None,
+        *,
+        include_pwb: bool = False,
+        gen_factory: Optional[pagegenerators.GeneratorFactory] = None,
+    ) -> ParsedArgs:
         args = args or sys.argv[1:]
 
         if self._help_opt.doc_name in args:
             print(self.help())
             sys.exit(0)
 
-        if self._include_pwb:
+        if include_pwb:
+            self._gen_factory = gen_factory or pagegenerators.GeneratorFactory()
             args = pwb.handle_args(args, do_help=False)
 
         pos_args_index = 0
@@ -144,6 +169,8 @@ class PcwCliArgs:
             if not a.is_required
         }
         for cli_arg in map(str.strip, args):
+            if self._gen_factory is not None and self._gen_factory.handle:
+
             if cli_arg.startswith("-"):
                 name, _, value = cli_arg[1:].partition(":")
 
@@ -182,6 +209,7 @@ class PcwCliArgs:
                 """
             )
 
+        self._parsed = res
         return res
 
     def help(self) -> str:
@@ -204,6 +232,9 @@ class PcwCliArgs:
             help_text += ("", "Options:")
             help_text += map(partial(self._arg_help, max_name_len), opts)
 
+        if self._ending:
+            help_text += ("", "", self._dedent(self._ending))
+
         return os.linesep.join(help_text)
 
     @classmethod
@@ -218,11 +249,7 @@ class PcwCliArgs:
             default_desc = "" if a.default_desc is None else ", " + a.default_desc
             default = f" \033[33mOptional\033[0m{default_desc}."
         else:
-            default_desc = (
-                f"defaults to \033[32m{a.default}\033[0m"
-                if a.default_desc is None
-                else a.default_desc
-            )
+            default_desc = a.default_desc or f"defaults to \033[32m{a.default}\033[0m"
             default = f" \033[33mOptional\033[0m, {default_desc}."
 
         return f"{os.linesep}{indent}{name}{separator}{a.desc}.{default}"

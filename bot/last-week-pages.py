@@ -3,17 +3,14 @@ This script lists pages created during last week (from Monday onwards) in
 mainspace; it does not retrieve pages created by bots or redirect removals.
 Output is printed to console, listing page title, URL and author.
 Exceptions are handled and error messages are printed.
-
-Options:
-
--late       If given, returns pages of the previous week, not the current one
 """
 
-import sys
-import re
+from datetime import date, timedelta
+
 import pywikibot
 import pywikibot.pagegenerators
-from datetime import date, timedelta
+
+from utils.PcwCliArgs import PcwCliArgs
 
 
 def should_exclude(page):
@@ -23,18 +20,30 @@ def should_exclude(page):
     if page.title().endswith("(GCC)") or "Categoria:Carte Pokémon (GCC)" in cats:
         return True
     # TCG Pocket cards
-    if page.title().endswith("(GCC Pocket)") or "Categoria:Carte Pokémon (GCC Pocket)" in cats:
+    if (
+        page.title().endswith("(GCC Pocket)")
+        or "Categoria:Carte Pokémon (GCC Pocket)" in cats
+    ):
         return True
     # disambiguations and quotes
-    if "Categoria:Pagine di disambiguazione" in cats or "Categoria:Sottopagine citazioni" in cats:
+    if (
+        "Categoria:Pagine di disambiguazione" in cats
+        or "Categoria:Sottopagine citazioni" in cats
+    ):
         return True
     return False
 
 
+args = (
+    PcwCliArgs(__doc__)
+    .flag("late", "print pages from last week, rather than this week")
+    .parse()
+)
+
 # get today and last Monday
 today = date.today()
 last_monday = today - timedelta(days=today.weekday())
-if "-late" in sys.argv:
+if args["late"]:
     # get previous week
     start_date = last_monday - timedelta(days=7)
     end_date = last_monday - timedelta(days=1)
