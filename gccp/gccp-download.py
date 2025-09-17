@@ -54,7 +54,7 @@ def main():
     site_en = pywikibot.Site("en", fam=args["fam"])
     site_it = pywikibot.Site("it", fam=args["fam"])
     # retrieve list of EN pages and filter them
-    cat_en = pywikibot.Category(site_en, "Category:Pokémon TCG Pocket species by name")  # fmt: skip
+    cat_en = pywikibot.Category(site_en, "Category:TCG Pocket species by name")  # fmt: skip
     pages_en = pagegenerators.CategorizedPageGenerator(cat_en, recurse=True)
     pages_en = (p for p in pages_en if p.title().endswith(" (TCG Pocket)"))
     for page_en in pages_en:
