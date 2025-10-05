@@ -239,27 +239,34 @@ def build_arts(poke, arts, abbrs, gender, sources, extras, pagetext=""):
     else:
         text = ""
         for abbr in abbrs:
-            newtext, arts = build_form_arts(poke + abbr, True, arts, sources)
-            text += newtext
+            addedtext, arts = build_form_arts(poke + abbr, True, arts, sources)
+            text += addedtext
     # fix gender differences treated as useless forms
     if abbrs[:2] == ["", "F"] and gender == "both":
         text = text.replace("|form=yes", "|gender=m\n|bothgenders=yes", 1)
         text = text.replace("|form=yes", "|gender=f\n|bothgenders=yes", 1)
     # unused arts (those with non-standard names)
-    if arts != []:
-        newtext = "\n{{pokemonimages/div|text=Altri}}\n"
+    if not arts:
+        extrastext = None
+    else:
+        divider = "{{pokemonimages/div|text=Altri}}"
+        extrastext = f"\n{divider}\n"
         for art in arts:
             if f"|img={art}\n" not in pagetext:
-                newtext += f"{{{{pokemonimages/entry\n|xl=20|md=25|sm=33|xs=50\n|img={art}\n|size=x150px\n|downdesc= (artwork da [[]]) }}}}\n"
+                if art.endswith(" PF.png"):
+                    pokes = (art.replace("Artwork ", "").replace(" PF.png", "").split(" "))  # fmt: skip
+                    pokes = [f"[[{p}]]" for p in pokes]
+                    downdesc = (", ".join(pokes[:-1]) + f" e {pokes[-1]} (artwork [[Pokéfuta]])")  # fmt: skip
+                else:
+                    downdesc = " (artwork da [[]])"
+                extrastext += f"{{{{pokemonimages/entry\n|width=artwork\n|img={art}\n|downdesc={downdesc} }}}}\n"
         if extras:
-            text += newtext
-            text = text.replace("\n\n{{pokemonimages/div|text=Altri}}", "\n{{pokemonimages/div|text=Altri}}")  # fmt: skip
+            text += extrastext
+            text = text.replace(f"\n\n{divider}", f"\n{divider}")
         else:
-            for art in arts:
-                if art not in pagetext:
-                    print(f"Not added to {poke}:\n{newtext}")
-                    break
-    return text
+            if any(art not in pagetext for art in arts):
+                print(f"Not added to {poke}:\n{extrastext}")
+    return text, extrastext
 
 
 # check if given Pokémon/form is available in given game
@@ -935,7 +942,8 @@ def build_poke_page(poke, name, pokelistspath, pagespath, formspath, artsources,
     # artworks
     arts = [img for img in imgs if img.startswith("Artwork")]
     pagetext = "{{#invoke: PokePrecSucc | subpage }}\n\n==Artwork==\n{{pokemonimages/head|content=\n"
-    pagetext += build_arts(poke, arts, abbrs, gender, artsources, True)
+    artworks, _ = build_arts(poke, arts, abbrs, gender, artsources, True)
+    pagetext += artworks
     # main series
     pagetext += "}}\n\n==Sprite e modelli==\n===Serie principale===\n{{pokemonimages/head|content=\n"
     pagetext += build_main(poke, exceptionspath, forms, gender, singleMS, availdata, imgs)  # fmt: skip

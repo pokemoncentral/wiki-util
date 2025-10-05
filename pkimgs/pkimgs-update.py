@@ -32,10 +32,11 @@ def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, 
     with open(f"{os.path.join(pokelistspath, poke)}.txt", "r") as pokefile:
         imgs = pokefile.read().splitlines()
     edited = False
+    delimiter_artworks_end = "}}\n\n==Sprite e modelli=="
     delimiters = {
         "artwork": [
             "==Artwork==\n{{pokemonimages/head|content=\n",
-            "}}\n\n==Sprite e modelli==",
+            delimiter_artworks_end,
         ],
         "main": [
             "===Serie principale===\n{{pokemonimages/head|content=\n",
@@ -54,16 +55,22 @@ def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, 
         if delimiter in pagetext:
             delimiters.update({"artwork": ["==Artwork==\n{{pokemonimages/head|content=\n", delimiter],})  # fmt: skip
     if section in ["artwork", "all"]:
+        divider = "{{pokemonimages/div|text=Altri}}"
         oldtext = get_section_text(pagetext, delimiters, "artwork")
         arts = [img for img in imgs if img.startswith("Artwork")]
-        if "{{pokemonimages/div|text=Altri}}" in pagetext:
-            extras = False
-        else:
-            extras = True
-        newtext = build_arts(poke, arts, abbrs, gender, artsources, extras, pagetext)  # fmt: skip
+        extras = divider not in pagetext
+        newtext, extrastext = build_arts(poke, arts, abbrs, gender, artsources, extras, pagetext)  # fmt: skip
         if newtext != oldtext:
             pagetext = pagetext.replace(oldtext, newtext)
             edited = True
+        # ------ disabled for the moment
+        # if extrastext and not extras:
+        #     if divider in pagetext:
+        #         extrastext = extrastext.replace(f"\n{divider}\n", "")
+        #     index = pagetext.find(delimiter_artworks_end)
+        #     if index > 0:
+        #         pagetext = pagetext[:index] + extrastext + pagetext[index:]
+        #         edited = True
     if section in ["main", "all"]:
         oldtext = get_section_text(pagetext, delimiters, "main")
         newtext = build_main(poke, exceptionspath, forms, gender, singleMS, availdata, imgs)  # fmt: skip
@@ -77,7 +84,7 @@ def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, 
         if newtext != oldtext:
             pagetext = pagetext.replace(oldtext, newtext)
             edited = True
-    if edited == True:
+    if edited:
         destfile = os.path.join(updatespath, f"{poke}.txt")
         with open(destfile, "w") as file:
             file.write(pagetext)
