@@ -3,9 +3,16 @@ from math import floor
 
 """
 Quick infos about variables:
-- 'poke' always represents number of Pokédex as string (without form abbr)
-- 'pokeabbr' always represents number of Pokédex as string (with form abbr)
-- 'ndex' always represents number of Pokédex as integer (without form abbr)
+- poke is Pokédex number with leading zeros and without form abbr
+- pokeabbr is Pokédex number with leading zeros and with form abbr
+- ndex is Pokédex number without leading zeros and without form abbr
+- ndexabbr is Pokédex number without leading zeros and with form abbr
+
+ndex is integer, others are strings. For example Alolan Vulpix has:
+poke = '0037'
+pokeabbr = '0037A'
+ndex = 37
+ndexabbr = '37A'
 """
 # dict to map games to "generation" (remember to keep updated)
 # non-integers are used for things introduced in the middle of a generation
@@ -470,7 +477,7 @@ def build_ms_entry(poke, form, multiform, availdata, gender, genderform=""):
         if multiform == True:
             text += "|form=yes"
             # Castform's forms don't have an overworld sprite in HGSS
-            if ndex == 351 and abbr:
+            if ndex in (351, 421) and abbr:
                 text += "|overworld=no"
         text += "}}\n"
     # check if there are mini sprites, otherwise return empty string
