@@ -1,5 +1,5 @@
-import re
 import csv
+import re
 
 replaces = {
     "mr.-mime": "mr. mime",
@@ -282,9 +282,7 @@ ignores = list(
     )
 )
 
-
-def should_ignore(pokename: str):
-    return any(map(lambda p: re.fullmatch(p, pokename), ignores))
+IS_VALID_IDENTIFIER = re.compile(r"[_\w][_\w\d]*")
 
 
 def convert_pokename(poke: str):
@@ -293,6 +291,10 @@ def convert_pokename(poke: str):
         return replaces[poke]
     else:
         return poke
+
+
+def find(items, predicate):
+    return next(i for i in items if predicate(i))
 
 
 def get_move_id(move: str):
@@ -315,3 +317,11 @@ def get_poke_id(poke: str):
         for line in r:
             if line[1].strip().lower() == poke:
                 return line[0]
+
+
+def sanitize_lua_table_key(key: str) -> str:
+    return f".{key}" if IS_VALID_IDENTIFIER.fullmatch(key) else f'["{key}"]'
+
+
+def should_ignore(pokename: str):
+    return any(map(lambda p: re.fullmatch(p, pokename), ignores))
