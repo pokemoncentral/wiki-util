@@ -11,7 +11,7 @@ import pywikibot
 def fix_file_name(file_name, invalids_replacement="_"):
     invalid_chars = r'<>:"/\|?*'
     for c in invalid_chars:
-        file_name = file_name.replace(c, invalids_replacement="_")
+        file_name = file_name.replace(c, invalids_replacement)
     return file_name
 
 
