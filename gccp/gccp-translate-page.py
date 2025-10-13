@@ -45,7 +45,7 @@ def replacements_from_file(text: str, file_path: str, fields_separator=",") -> s
     In the CSV, the first column is the pattern while the second is the replacement (see
     gccp-replacements.csv)
     """
-    # read tablewith replacements from CSV file
+    # read table with replacements from CSV file
     with open(
         os.path.join(os.path.dirname(__file__), file_path), "r", encoding="utf-8"
     ) as f:

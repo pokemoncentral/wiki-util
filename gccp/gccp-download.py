@@ -8,9 +8,7 @@ Script that downloads pages to text files. Arguments:
 
 import os
 import os.path
-import json
-import re
-import importlib.util
+import importlib
 import sys
 
 import pywikibot
@@ -24,18 +22,6 @@ spec = importlib.util.spec_from_file_location("utils", os.path.join(utils_dir, "
 utils = importlib.util.module_from_spec(spec)
 sys.modules["utils"] = utils
 spec.loader.exec_module(utils)
-
-
-# function to convert EN title to IT
-def title_en_to_it(title_en, en_to_it):
-    name_en = title_en.replace(" (TCG Pocket)", "")
-    name_it = en_to_it.get(name_en, None)
-    if not name_it:
-        for key in en_to_it:
-            if re.search(r"\b{}\b".format(key), name_en):
-                name_it = name_en.replace(key, en_to_it[key])
-    title_it = f"{name_it} (GCC Pocket)"
-    return title_it
 
 
 # main function
@@ -81,7 +67,7 @@ def main():
         else:
             print(f"Skipping already existing EN page: {page_en_file}")
         # retrieve IT page if exists
-        title_it = title_en_to_it(page_en.title(), en_to_it)
+        title_it = utils.title_en_to_it(page_en.title(), en_to_it)
         page_it_file = os.path.join(args["itpages"], utils.fix_file_name(f"{title_it}.txt"))  # fmt: skip
         page_it = pywikibot.Page(site_it, title_it)
         if not page_it.exists():

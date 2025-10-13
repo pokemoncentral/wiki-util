@@ -1,5 +1,6 @@
 import os
 import json
+import re
 import pywikibot
 
 
@@ -7,10 +8,10 @@ import pywikibot
 # them with desired character (or an empty string to simply remove them); use
 # only on a file/directory name, never on a path, where it would break
 # everything by replacing path separators (/ or \)
-def fix_file_name(file_name, replacement="_"):
+def fix_file_name(file_name, invalids_replacement="_"):
     invalid_chars = r'<>:"/\|?*'
-    for ic in invalid_chars:
-        file_name = file_name.replace(ic, replacement)
+    for c in invalid_chars:
+        file_name = file_name.replace(c, invalids_replacement="_")
     return file_name
 
 
@@ -37,8 +38,14 @@ def read_json_names():
     return json_names
 
 
-# read poke-names.json file in this directory to get useful dictionaries
-def get_ndex_names_dicts():
+# Read poke-names.json file in this directory to get useful dictionaries that map
+# ndex and names in various languages. invalids_replacement is used for characters
+# that are not valid for file names, they will be replaced in keys and added as
+# separate entries: for example "Type: Null" will have both "Type: Null" and "Type_ Null"
+# keys that lead to the same value. This is done because some scripts use Pokémon
+# names as file names and the additional key allows to map existing files that have
+# their invalid characters replaced.
+def get_ndex_names_dicts(invalids_replacement="_"):
     # initialize empty dicts
     ndex_to_it = {}
     en_to_it = {}
@@ -57,7 +64,37 @@ def get_ndex_names_dicts():
         it_to_de.update({j["it"]: j["de"]})
         it_to_fr.update({j["it"]: j["fr"]})
         it_to_jp.update({j["it"]: j["jp"]})
+        if invalids_replacement:
+            en_to_it.update({fix_file_name(j["en"]): j["it"]})
+            it_to_en.update({fix_file_name(j["it"]): j["en"]})
+            it_to_es.update({fix_file_name(j["it"]): j["es"]})
+            it_to_de.update({fix_file_name(j["it"]): j["de"]})
+            it_to_fr.update({fix_file_name(j["it"]): j["fr"]})
+            it_to_jp.update({fix_file_name(j["it"]): j["jp"]})
     return ndex_to_it, en_to_it, it_to_en, it_to_es, it_to_de, it_to_fr, it_to_jp
+
+
+# Convert title of an English page to Italian. If title ends with " (TCG Pocket)",
+# this string is removed and will be replaced by " (GCC Pocket)". Then page title
+# is searched in en_to_it dictionary to check if English title is a Pokémon name:
+# in this case Italian name is used, otherwise all English Pokémon names are
+# searched in English title as whole words and replaced by Italian names.
+def title_en_to_it(title_en, en_to_it):
+    suffix_en = " (TCG Pocket)"
+    if title_en.endswith(suffix_en):
+        name_en = title_en.replace(suffix_en, "")
+        suffix_it = " (GCC Pocket)"
+    else:
+        name_en = title_en
+        suffix_it = ""
+    # try to get IT name from dict, if key does not exist perform all replacements
+    name_it = en_to_it.get(name_en, None)
+    if not name_it:
+        for key in en_to_it:
+            if re.search(r"\b{}\b".format(key), name_en):
+                name_it = name_en.replace(key, en_to_it[key])
+    title_it = f"{name_it}{suffix_it}"
+    return title_it
 
 
 # print warning if file is launched standalone

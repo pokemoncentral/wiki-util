@@ -21,7 +21,16 @@ import importlib
 import os
 import sys
 
+# import gccp-translate-page module from directory of this script
 gccptranslatepage = importlib.import_module("gccp-translate-page")
+# import utils from 'shared' directory of this repository
+script_path = os.path.realpath(__file__)
+script_dir = os.path.dirname(script_path)
+utils_dir = os.path.join(os.path.dirname(script_dir), "shared")
+spec = importlib.util.spec_from_file_location("utils", os.path.join(utils_dir, "utils.py"))  # fmt: skip
+utils = importlib.util.module_from_spec(spec)
+sys.modules["utils"] = utils
+spec.loader.exec_module(utils)
 
 if __name__ == "__main__":
     if "-help" in sys.argv:
@@ -49,7 +58,7 @@ if __name__ == "__main__":
 
         basename = os.path.basename(fullname)
         pagename = str(basename).rsplit(".", 1)[0]
-        outname = os.path.join(output_dir, str(basename).replace("TCG", "GCC"))
+        outname = os.path.join(output_dir, utils.title_en_to_it(str(basename)))
         with open(outname, "w", encoding="utf-8") as out_stream:
             print(gccptranslatepage.translate_page(source, pagename), file=out_stream)
             print(f"Translated file {basename} ({pagename})")
