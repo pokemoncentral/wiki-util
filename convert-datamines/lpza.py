@@ -1,9 +1,14 @@
-from itertools import cycle, dropwhile, islice
-from typing import Generator, Optional, Tuple
+#!/usr/bin/env python
 
+
+import sys
+from itertools import cycle, dropwhile, islice
+from typing import Generator, Literal, Optional, Tuple
+
+from dtos import Abilities, Moves, Pkmn, Stats
 from lib import find
 
-from .dtos import Abilities, Moves, Pkmn, Stats
+LuaModule = Literal["poke-data", "poke-stats", "poke-abils", "learnlist"]
 
 
 def extract_ability(abilities: list[str], tag: str) -> str:
@@ -114,28 +119,58 @@ def parse_types(line: str) -> Tuple[str, str]:
 def serialize_learnlist(moves: Moves) -> str:
     level_up = (
         """
-{{#invoke: Learnlist/hf | levelhLZPA | 9 }}
-{{#invoke: render | render | Modulo:Learnlist/entry9LZPA | level | //
+{{#invoke: Learnlist/hf | levelhLPZA | 9 }}
+{{#invoke: render | render | Modulo:Learnlist/entry9LPZA | level | //
 """
         + "\n".join(
             f"|{name}|||{level}|{{other}}| //" for level, name in moves.level_up
         )
         + """
 }}
-{{#invoke: Learnlist/hf | levelfLZPA | 9 }}
+{{#invoke: Learnlist/hf | levelfLPZA | 9 }}
 """
     )
 
     tutor = (
         """
-{{#invoke: Learnlist/hf | tutorhLZPA | Vespiquen | 9 }}
+{{#invoke: Learnlist/hf | tutorhLPZA | Vespiquen | 9 }}
 {{#invoke: render | render | Modulo:Learnlist/entry9LPZA | tutor | //
 """
         + "\n".join(f"|{name}|||yes| //" for name in moves.reminder)
         + """
 }}
-{{#invoke: Learnlist/hf | tutorfLPA | 9 }}
+{{#invoke: Learnlist/hf | tutorfLPZA | 9 }}
 """
     )
 
     return level_up + tutor
+
+
+def main(lua_module: LuaModule, datamine_file: str):
+    match lua_module:
+        case "poke-data":
+            serializer = Pkmn.to_poke_data
+
+        case "poke-abils":
+            serializer = Pkmn.to_poke_abil_data
+
+        case "poke-stats":
+            serializer = Pkmn.to_poke_stats
+
+        case "learnlist":
+            serializer = lambda pkmn: serialize_learnlist(pkmn.moves)
+
+    with open(datamine_file, "r", encoding="utf-8") as f:
+        datamine_lines = map(str.strip, f.readlines())
+
+        try:
+            while True:
+                pkmn = parse_pkmn(datamine_lines)
+                if pkmn is not None:
+                    print(serializer(pkmn))
+        except StopIteration:
+            pass
+
+
+if __name__ == "__main__":
+    main(sys.argv[1], sys.argv[2])

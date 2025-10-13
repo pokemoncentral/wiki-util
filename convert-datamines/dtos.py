@@ -34,9 +34,6 @@ class Moves:
     egg: list[str]
     reminder: list[str]
 
-    def to_learnlist(self) -> str:
-        return "yoho"
-
 
 @dataclass
 class Pkmn:
@@ -86,7 +83,3 @@ class Pkmn:
 
     def to_poke_stats(self) -> str:
         return self.stats.to_poke_stats(self.lua_table_key)
-
-    def to_learnlist(self) -> str:
-        return self.moves.to_learnlist()
-        return self.moves.to_learnlist()
