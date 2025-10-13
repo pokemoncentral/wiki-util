@@ -1,22 +1,28 @@
 #!/usr/bin/python3
 
 import sys
-from typing import Callable, Literal
+from typing import Literal
 
-from datamine_parser import Game, Pkmn, parse_pkmn
+from datamine_parser import Game, Pkmn, get_learnlist_serializer, get_pkmn_parser
 
-LuaModule = Literal["poke-data", "poke-stats", "poke-abils"]
-
-extractors: dict[LuaModule, Callable[[Pkmn], str]] = {
-    "poke-data": Pkmn.to_poke_data,
-    "poke-abils": Pkmn.to_poke_abil_data,
-    "poke-stats": Pkmn.to_poke_stats,
-}
+LuaModule = Literal["poke-data", "poke-stats", "poke-abils", "learnlist"]
 
 
 def main(game: Game, lua_module: LuaModule, datamine_file: str):
-    parser = parse_pkmn(game)
-    extractor = extractors[lua_module]
+    parser = get_pkmn_parser(game)
+    match lua_module:
+        case "poke-data":
+            extractor = Pkmn.to_poke_data
+
+        case "poke-abils":
+            extractor = Pkmn.to_poke_abil_data
+
+        case "poke-stats":
+            extractor = Pkmn.to_poke_stats
+
+        case "learnlist":
+            serializer = get_learnlist_serializer(game)
+            extractor = lambda pkmn: serializer(pkmn.moves)
 
     with open(datamine_file, "r", encoding="utf-8") as f:
         datamine_lines = map(str.strip, f.readlines())

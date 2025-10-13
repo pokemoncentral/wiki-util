@@ -5,6 +5,16 @@ from lib import convert_pokename, sanitize_lua_table_key, should_ignore
 
 
 @dataclass
+class Abilities:
+    ability1: str
+    ability2: str
+    hidden_ability: str
+
+    def to_poke_abil_data(self, key: str) -> str:
+        return f"t{key} = {{ability1 = '{self.ability1}', ability2 = '{self.ability1}', abilityd = '{self.hidden_ability}'}}"
+
+
+@dataclass
 class Stats:
     hp: int
     atk: int
@@ -18,13 +28,14 @@ class Stats:
 
 
 @dataclass
-class Abilities:
-    ability1: str
-    ability2: str
-    hidden_ability: str
+class Moves:
+    level_up: list[Tuple[int, str]]
+    tm: list[Tuple[str, str]]
+    egg: list[str]
+    reminder: list[str]
 
-    def to_poke_abil_data(self, key: str) -> str:
-        return f"t{key} = {{ability1 = '{self.ability1}', ability2 = '{self.ability1}', abilityd = '{self.hidden_ability}'}}"
+    def to_learnlist(self) -> str:
+        return "yoho"
 
 
 @dataclass
@@ -35,6 +46,7 @@ class Pkmn:
     types: Tuple[str, str]
     stats: Stats
     abilities: Abilities
+    moves: Moves
 
     @classmethod
     def create(
@@ -44,6 +56,7 @@ class Pkmn:
         types: Tuple[str, str],
         stats: Stats,
         abilities: Abilities,
+        moves: Moves,
     ) -> Optional[Self]:
         normalized_name = convert_pokename(name)
         try:
@@ -61,6 +74,7 @@ class Pkmn:
                 types,
                 stats,
                 abilities,
+                moves,
             )
         )
 
@@ -72,3 +86,7 @@ class Pkmn:
 
     def to_poke_stats(self) -> str:
         return self.stats.to_poke_stats(self.lua_table_key)
+
+    def to_learnlist(self) -> str:
+        return self.moves.to_learnlist()
+        return self.moves.to_learnlist()
