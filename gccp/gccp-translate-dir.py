@@ -60,7 +60,9 @@ if __name__ == "__main__":
 
         basename = os.path.basename(fullname)
         pagename = str(basename).rsplit(".", 1)[0]
-        outname = os.path.join(output_dir, utils.title_en_to_it(en_to_it, str(basename)))
+        outname = os.path.join(
+            output_dir, utils.title_en_to_it(str(basename), en_to_it)
+        )
         with open(outname, "w", encoding="utf-8") as out_stream:
             print(gccptranslatepage.translate_page(source, pagename), file=out_stream)
             print(f"Translated file {basename} ({pagename})")
