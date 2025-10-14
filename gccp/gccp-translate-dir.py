@@ -51,6 +51,8 @@ if __name__ == "__main__":
         print(f"Output directory {output_dir} must exist", file=sys.stderr)
         sys.exit(1)
 
+    _, en_to_it, _, _, _, _, _ = utils.get_ndex_names_dicts()
+
     for fullname in os.listdir(path=input_dir):
         abspath = os.path.join(input_dir, fullname)
         with open(abspath, "r", encoding="utf-8") as f:
@@ -58,7 +60,7 @@ if __name__ == "__main__":
 
         basename = os.path.basename(fullname)
         pagename = str(basename).rsplit(".", 1)[0]
-        outname = os.path.join(output_dir, utils.title_en_to_it(str(basename)))
+        outname = os.path.join(output_dir, utils.title_en_to_it(en_to_it, str(basename)))
         with open(outname, "w", encoding="utf-8") as out_stream:
             print(gccptranslatepage.translate_page(source, pagename), file=out_stream)
             print(f"Translated file {basename} ({pagename})")
