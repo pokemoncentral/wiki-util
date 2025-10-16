@@ -90,9 +90,16 @@ def title_en_to_it(title_en, en_to_it):
     # try to get IT name from dict, if key does not exist perform all replacements
     name_it = en_to_it.get(name_en, None)
     if not name_it:
-        for key in en_to_it:
-            if re.search(r"\b{}\b".format(key), name_en):
-                name_it = name_en.replace(key, en_to_it[key])
+        # these specific names cause issues because they don't end with
+        # alphanumeric character; if they are found title does not need
+        # translation, because they have same name in English and Italian
+        exceptions = ["Nidoran♀", "Nidoran♂", "Mime Jr."]
+        if any([e in name_en for e in exceptions]):
+            name_it = name_en
+        else:
+            for key in en_to_it:
+                if re.search(r"\b{}\b".format(key), name_en):
+                    name_it = name_en.replace(key, en_to_it[key])
     title_it = f"{name_it}{suffix_it}"
     return title_it
 

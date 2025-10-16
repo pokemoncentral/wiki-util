@@ -66,19 +66,20 @@ def main():
             utils.download_page(page=page_en, dest_file=page_en_file)
         else:
             print(f"Skipping already existing EN page: {page_en_file}")
-        # retrieve IT page if exists
+        # check if IT file already exists
         title_it = utils.title_en_to_it(page_en.title(), en_to_it)
         page_it_file = os.path.join(args["itpages"], utils.fix_file_name(f"{title_it}.txt"))  # fmt: skip
+        if os.path.isfile(page_it_file) and not overwrite:
+            print(f"Skipping already existing IT page: {page_it_file}")
+            continue
+        # retrieve IT page if exists
         page_it = pywikibot.Page(site_it, title_it)
         if not page_it.exists():
             print(f"Skipping missing IT page: {page_it_file}")
-            # open(page_it_file, "w").close()
             continue
-        if not os.path.isfile(page_it_file) or overwrite:
+        else:
             print(f"Downloading IT page: {page_it_file}")
             utils.download_page(page=page_it, dest_file=page_it_file)
-        else:
-            print(f"Skipping already existing IT page: {page_it_file}")
 
 
 # invoke main function
