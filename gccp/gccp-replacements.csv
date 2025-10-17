@@ -70,7 +70,12 @@
 {{TCG\|Basic Pokémon}},{{TCG|Base}},
 {{TCG\|Stage 1 Pokémon}},{{TCG|Fase 1}},
 {{TCG\|Stage 2 Pokémon}},{{TCG|Fase 2}},
-,, --------------------------------- bugfixes ---------------------------------
+
+,, --------------------------------- superfluous code and bugfixes ---------------------------------
 \B{{rand\/3\|Fuoco\|Psico\|Lampo}}\B,Psico,
 \B{{rand\/3\|Psico\|Lampo\|Fuoco}}\B,Lampo,
 \b\|symbol=Deluxe Pack ex\b,,
+\B\| curr=[^ |]+ \|\B,|,
+\B\| currnum=\d+ \|\B,|,
+\bRelease\|type=[^|]+\|\b,Release|,
+\B{{GCCPocketCardList\/Footer\|type=[^}]+}}\B,{{GCCPocketCardList/Footer}},
