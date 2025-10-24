@@ -25,6 +25,7 @@
 \bWisdom of Sea and Sky\b,La Via del Cielo e del Mare,
 \bSecluded Springs\b,Sorgenti Recondite,
 \bDeluxe Pack: ex\b,Busta Deluxe ex,
+\bMega Rising\b,Mega Ascesa,
 ,, --------------------------------- pkmn names ---------------------------------
 \bType: Null\b,Tipo Zero,
 ,, --------------------------------- alt forms ---------------------------------
@@ -70,7 +71,6 @@
 {{TCG\|Basic Pokémon}},{{TCG|Base}},
 {{TCG\|Stage 1 Pokémon}},{{TCG|Fase 1}},
 {{TCG\|Stage 2 Pokémon}},{{TCG|Fase 2}},
-
 ,, --------------------------------- superfluous code and bugfixes ---------------------------------
 \B{{rand\/3\|Fuoco\|Psico\|Lampo}}\B,Psico,
 \B{{rand\/3\|Psico\|Lampo\|Fuoco}}\B,Lampo,
