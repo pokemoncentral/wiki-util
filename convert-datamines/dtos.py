@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional, Self, Tuple
+from typing import Literal, Optional, Self, Tuple
 
 from lib import convert_pokename, sanitize_lua_table_key, should_ignore
 
@@ -38,10 +38,20 @@ d[{ndex_key}] = d{key}
 
 @dataclass
 class Moves:
-    level_up: list[Tuple[int, str]]
+    Level = int | Literal["Inizio", "Evo"]
+
+    level_up: list[Tuple[Level, str]]
     tm: list[Tuple[str, str]]
     egg: list[str]
     reminder: list[str]
+
+    @staticmethod
+    def translate_int_level(level: int) -> Level:
+        if level == 0:
+            return "Evo"
+        if level < 2:
+            return "Inizio"
+        return level
 
 
 @dataclass

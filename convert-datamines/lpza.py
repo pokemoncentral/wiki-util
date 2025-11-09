@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 
+import re
 import sys
 from itertools import cycle, dropwhile, islice
-from typing import Generator, Literal, Optional, Tuple
+from typing import Any, Callable, Generator, Literal, Optional, Tuple
 
 from dtos import Abilities, Moves, Pkmn, Stats
 from lib import find
@@ -86,9 +87,12 @@ def parse_moves(datamine_lines: Generator[str]) -> Moves:
     return Moves(level_up, tm, egg, reminder)
 
 
-def parse_move_level_up(level_up_line: str) -> Tuple[int, str]:
-    [_, level, *name] = level_up_line.split(" ")
-    return (int(level[1:-1]), " ".join(name))
+level_up_regex = re.compile(r"- \[(-?\d{1,3})\] (.+?) \{(\d{1,3})\}")
+
+
+def parse_move_level_up(level_up_line: str) -> Tuple[Moves.Level, int, str]:
+    [level, name, plus_level] = level_up_regex.match(level_up_line).groups()
+    return (Moves.translate_int_level(int(level)), int(plus_level), name.strip())
 
 
 def parse_move_tm(tm_line: str) -> Tuple[str, str]:
