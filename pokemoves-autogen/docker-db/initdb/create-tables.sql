@@ -369,6 +369,10 @@ from public.moves
 ALTER VIEW public.moves_lpza_useful OWNER TO postgres;
 
 /*
+$ mkdir out
+$ chmod o+w out
+
+copy (
 select format(
     'm%s = { name = "%s", type = "%s", category = "%s", power = %s, recharge = %s, range = %s }',
     case
@@ -386,4 +390,5 @@ select format(
 ) as lua
 from moves_lpza_useful as m
 order by move_id asc
+) to '/out/lzpa-moves.lua';
 */

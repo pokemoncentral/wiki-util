@@ -1,0 +1,32 @@
+# Use postgres/example user/password credentials
+
+services:
+  db:
+    image: postgres:alpine
+    restart: always
+    # set shared memory limit when using docker compose
+    shm_size: 128mb
+    volumes:
+      - type: bind
+        source: ./sourcecsv
+        target: /data/sourcecsv/
+      - type: bind
+        source: ./initdb
+        target: /docker-entrypoint-initdb.d/
+      - type: bind
+        source: ./out
+        target: /out
+      - type: volume
+        source: db-data
+        target: /var/lib/postgresql
+    environment:
+      POSTGRES_PASSWORD: example
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  db-data:
