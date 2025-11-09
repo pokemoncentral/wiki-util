@@ -120,37 +120,26 @@ def parse_types(line: str) -> Tuple[str, str]:
     return tuple(islice(cycle(types), 2))
 
 
-def serialize_learnlist(moves: Moves) -> str:
-    level_up = (
-        """
-{{#invoke: Learnlist/hf | levelhLPZA | 9 }}
-{{#invoke: render | render | Modulo:Learnlist/entry9LPZA | level | //
-"""
-        + "\n".join(
-            f"|{name}|||{level}|{{other}}| //" for level, name in moves.level_up
-        )
-        + """
-}}
-{{#invoke: Learnlist/hf | levelfLPZA | 9 }}
-"""
+def serialize_learnlist(pkmn: Pkmn) -> Tuple[str, str]:
+    return (
+        f"""
+{{{{#invoke: Learnlist-LPZA | level | {pkmn.name} | //
+{"\n".join(        f"| {level} | {plus_level} | {name} | //"
+        for level, plus_level, name in pkmn.moves.level_up
+)}
+}}}}
+""".strip(),
+        f"""
+{{{{#invoke: Learnlist-LPZA | tm | {pkmn.name} | //
+{"\n".join(f"| {tm} | {name} | //" for tm, name in pkmn.moves.tm)}
+}}}}
+""".strip(),
     )
 
-    tutor = (
-        """
-{{#invoke: Learnlist/hf | tutorhLPZA | Vespiquen | 9 }}
-{{#invoke: render | render | Modulo:Learnlist/entry9LPZA | tutor | //
-"""
-        + "\n".join(f"|{name}|||yes| //" for name in moves.reminder)
-        + """
-}}
-{{#invoke: Learnlist/hf | tutorfLPZA | 9 }}
-"""
-    )
 
-    return level_up + tutor
-
-
-def main(lua_module: LuaModule, datamine_file: str):
+def map_datamine(
+    lua_module: LuaModule, datamine_file: str
+) -> Generator[Tuple[Pkmn, Any]]:
     match lua_module:
         case "poke-data":
             serializer = Pkmn.to_poke_data
@@ -162,7 +151,7 @@ def main(lua_module: LuaModule, datamine_file: str):
             serializer = Pkmn.to_poke_stats
 
         case "learnlist":
-            serializer = lambda pkmn: serialize_learnlist(pkmn.moves)
+            serializer = serialize_learnlist
 
     with open(datamine_file, "r", encoding="utf-8") as f:
         datamine_lines = map(str.strip, f.readlines())
@@ -171,9 +160,15 @@ def main(lua_module: LuaModule, datamine_file: str):
             while True:
                 pkmn = parse_pkmn(datamine_lines)
                 if pkmn is not None:
-                    print(serializer(pkmn))
+                    yield (pkmn, serializer(pkmn))
         except StopIteration:
             pass
+
+
+def main(lua_module: LuaModule, datamine_file: str):
+    for _, output in map_datamine(lua_module, datamine_file):
+        output = "\n".join(output) if isinstance(output, tuple) else output
+        print(output)
 
 
 if __name__ == "__main__":
