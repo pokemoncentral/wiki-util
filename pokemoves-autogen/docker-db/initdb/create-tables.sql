@@ -368,6 +368,15 @@ from public.moves
 
 ALTER VIEW public.moves_lpza_useful OWNER TO postgres;
 
+create function to_lua_index(s text) returns text as $$
+    select case
+        when s similar to '[_a-zA-Z]+[_a-zA-Z0-9]*'
+            then '.' || lower(s)
+        else
+            format('["%s"]', lower(s))
+    end
+$$ language sql;
+
 /*
 $ mkdir out
 $ chmod o+w out
@@ -375,12 +384,7 @@ $ chmod o+w out
 copy (
 select format(
     'm%s = { name = "%s", type = "%s", category = "%s", power = %s, recharge = %s, range = %s }',
-    case
-        when m.name similar to '[_a-zA-Z]+[_a-zA-Z0-9]*'
-            then '.' || lower(m.name)
-        else
-            format('["%s"]', lower(m.name))
-    end,
+    to_lua_index(m.name),
     m.name,
     m.type,
     m.category,
