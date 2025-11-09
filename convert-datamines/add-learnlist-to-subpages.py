@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import os
+import re
 import sys
-from typing import Tuple
+from typing import Literal, Tuple
 
 import mwparserfromhell as mwparser
 import pywikibot as pwb
@@ -20,6 +21,10 @@ def find_section(wikicode: Wikicode, heading: str) -> Wikicode:
 
 
 class LpzaLearnlistSubpageBot(CurrentPageBot):
+    PersistAction = Literal["u", "s", "a"]
+
+    pkmn_page_include_regex = re.compile(r"\{\{/Mosse apprese in .+ generazione\}\}")
+
     out_dir: str
     current_datamine_item: DatamineLearnlistItem
     save_all: bool
@@ -42,7 +47,8 @@ class LpzaLearnlistSubpageBot(CurrentPageBot):
             if self.current_page.exists()
             else self._create_learnlist_subpage()
         )
-        self._persist_page(new_content)
+        action = self._ask_action(new_content)
+        self._persist_page(action, new_content)
 
     def _add_lpza_learnlists(self) -> str:
         _, (lpza_level, lpza_tm) = self.current_datamine_item
@@ -71,27 +77,39 @@ class LpzaLearnlistSubpageBot(CurrentPageBot):
 </noinclude>
 """.strip()
 
-    def _persist_page(self, new_content: str):
+    def _ask_action(self, new_content: str) -> PersistAction:
         if self.save_all:
-            answer = "s"
-        else:
-            pwb.output(
-                f"Differences to {self.current_page.title()} after adding LPZA learnlist:"
-            )
-            pwb.showDiff(self.current_page.text, new_content)
-            answer = pwb.input_choice(
-                "What to do?",
-                (
-                    ("upload page", "u"),
-                    ("save locally", "s"),
-                    ("save all", "a"),
-                ),
-            )
+            return "s"
+        if self.opt["always"]:
+            return "u"
+
+        pwb.output(
+            f"Differences to {self.current_page.title()} after adding LPZA learnlist:"
+        )
+        pwb.showDiff(self.current_page.text, new_content)
+        answer = pwb.input_choice(
+            "What to do?",
+            (
+                ("upload page", "u"),
+                ("save locally", "s"),
+                ("save all", "a"),
+            ),
+        )
 
         self.save_all = self.save_all or answer == "a"
-        match answer:
+        return answer
+
+    def _persist_page(self, action: PersistAction, new_content: str):
+        match action:
             case "u":
-                self.put_current(new_content, show_diff=False, force=True)
+                if not self.current_page.exists():
+                    self._use_ninth_gen_learnlist_in_pkmn_page()
+                self.put_current(
+                    new_content,
+                    summary="Add LPZA learnlists",
+                    show_diff=False,
+                    force=True,
+                )
 
             case "a" | "s":
                 file_name = self.current_page.title().replace("/", "--") + ".txt"
@@ -100,7 +118,21 @@ class LpzaLearnlistSubpageBot(CurrentPageBot):
                     f.write(new_content)
 
             case _:
-                raise ValueError(f"Unknown answer: {answer}")
+                raise ValueError(f"Unknown action: {action}")
+
+    def _use_ninth_gen_learnlist_in_pkmn_page(self):
+        pkmn = self.current_datamine_item[0]
+        pwb.output(f"Updating {pkmn.name} to use ninth generation learnlists")
+        pkmn_page = pwb.Page(pwb.Site(), pkmn.name)
+        new_text = self.pkmn_page_include_regex.sub(
+            "{{/Mosse apprese in nona generazione}}", pkmn_page.text
+        )
+        self.userPut(
+            pkmn_page,
+            pkmn_page.text,
+            new_text,
+            summary="Use ninth generation learnlists",
+        )
 
 
 def main(args: list[str]):
