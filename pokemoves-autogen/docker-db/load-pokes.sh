@@ -61,3 +61,13 @@ psql -p 5432 -U "$POSTGRES_USER" -d postgres \
     -c "\\COPY pokemon_moves
     FROM '/data/sourcecsv/pokemon_moves_sv3.csv'
     WITH csv header"
+
+psql -p 5432 -U "$POSTGRES_USER" -d postgres \
+    -c "\\COPY moves_lpza
+    FROM '/data/sourcecsv/lpza-moves.csv'
+    WITH csv header delimiter '	'"
+
+psql -p 5432 -U "$POSTGRES_USER" -d postgres \
+    -c "\\COPY moves_params_lpza
+    FROM '/data/sourcecsv/lpza-moves-params.csv'
+    WITH csv header delimiter '	'"
