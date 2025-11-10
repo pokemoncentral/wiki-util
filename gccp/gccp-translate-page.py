@@ -107,25 +107,23 @@ def make_intro_template(wikicode: Wikicode) -> Wikicode:
         intro_template.add("5", wikicode.get(mon_type_idx + 2).get("1"))
     else:
         intro_template.add("5", "")
-    # Parameter 6 and 7: energy types
+    # Parameter 6, 7 and 8: energy types
     if (
         str(intro_template.get("4").value).lower().strip() == "drago"
         or str(intro_template.get("5").value).lower().strip() == "drago"
     ):
         energy_types = list(
             itertools.islice(
-                wikicode.ifilter_templates(matches=lambda t: (t.name) == "e"), 2
+                wikicode.ifilter_templates(matches=lambda t: (t.name) == "e"), 3
             )
         )
         intro_template.add("6", energy_types[0].get(1))
         if len(energy_types) > 1:
             intro_template.add("7", energy_types[1].get(1))
+            if len(energy_types) > 2:
+                intro_template.add("8", energy_types[2].get(1))
 
     return intro_template
-
-
-def replace_ex(val: str) -> str:
-    return re.sub(r"(\w+) ex", r"\g<1>-ex", val)
 
 
 CARDLIST_NEXT_FIRSTCARD = ["GCCPocketCardList/Header", "GCCPocketCardList/Divider"]
@@ -150,24 +148,6 @@ def make_card_list_entry(
     if entry.name == "GCCPocketCardList/Divider":
         entry.add("2", first_type)
         entry.add("3", second_type)
-    # EX cards
-    if entry.name == "GCCPocketCardList/Divider" and entry.get("1").value.contains(
-        "{{TCGP Icon|ex}}"
-    ):
-        entry.get("1").value.replace("{{TCGP Icon|ex}}", "{{ex|pocket}}")
-        if entry.has("name"):
-            entry.add("name", replace_ex(str(entry.get("name").value)))
-    if entry.name == "GCCPocketCardList/Card" and entry.get("cardname").value.contains(
-        "{{TCGP Icon|ex}}"
-    ):
-        cardname_value = entry.get("cardname").value
-        # {{GCC ID|Geni Supremi|Venusaur ex|4|Venusaur}} -> [[Venusaur-ex (Geni Supremi 4)|Venusaur]]
-        gccid_template = next(
-            cardname_value.ifilter_templates(matches=lambda t: t.name == "GCC ID")
-        )
-        gccid_replacement = f"[[{replace_ex(str(gccid_template.get('2')))} ({gccid_template.get('1')} {gccid_template.get('3')})|{gccid_template.get('4')}]]"
-        cardname_value.replace(gccid_template, gccid_replacement)
-        cardname_value.replace("{{TCGP Icon|ex}}", "{{ex|pocket}}")
     return (entry, firstcard)
 
 
