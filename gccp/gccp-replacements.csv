@@ -13,19 +13,6 @@
 \bTCGPocketPokémonPrevNext\b,GCCPocketPokémonPrevNext,
 \bTCGPocketCardList\b,GCCPocketCardList,
 \bTCG ID\b,GCC ID,
-,, -------------------------------- expansions --------------------------------
-\bGenetic Apex\b,Geni Supremi,
-\bMythical Island\b,L'Isola Misteriosa,
-\bSpace-Time Smackdown\b,Scontro Spaziotemporale,
-\bTriumphant Light\b,Luce Trionfale,
-\bShining Revelry\b,Tripudio Splendente,
-\bCelestial Guardians\b,Guardiani Astrali,
-\bExtradimensional Crisis\b,Crisi Ultradimensionale,
-\bEevee Grove\b,Il Bosco di Eevee,
-\bWisdom of Sea and Sky\b,La Via del Cielo e del Mare,
-\bSecluded Springs\b,Sorgenti Recondite,
-\bDeluxe Pack: ex\b,Busta Deluxe ex,
-\bMega Rising\b,Mega Ascesa,
 ,, --------------------------------- pkmn names ---------------------------------
 \bType: Null\b,Tipo Zero,
 ,, --------------------------------- alt forms ---------------------------------
@@ -62,6 +49,23 @@
 \bUltra Necrozma\b,UltraNecrozma,
 \bGalarian Corsola\b,Corsola di Galar,
 \bGalarian Cursola\b,Cursola di Galar,
+,, --------------------------------- pkmn ex ---------------------------------
+(?:\b|\B){{TCGP Icon\|ex}}\B,{{ex|pocket}},
+(?:\b|\B){{TCGP Icon\|Mega ex}}\B,{{ex|mega}},
+\b ex\b,-ex,
+,, -------------------------------- expansions --------------------------------
+\bGenetic Apex\b,Geni Supremi,
+\bMythical Island\b,L'Isola Misteriosa,
+\bSpace-Time Smackdown\b,Scontro Spaziotemporale,
+\bTriumphant Light\b,Luce Trionfale,
+\bShining Revelry\b,Tripudio Splendente,
+\bCelestial Guardians\b,Guardiani Astrali,
+\bExtradimensional Crisis\b,Crisi Ultradimensionale,
+\bEevee Grove\b,Il Bosco di Eevee,
+\bWisdom of Sea and Sky\b,La Via del Cielo e del Mare,
+\bSecluded Springs\b,Sorgenti Recondite,
+\bDeluxe Pack: ex\b,Busta Deluxe ex,
+\bMega Rising\b,Mega Ascesa,
 ,, ------------------------------- rarities -------------------------------
 \bDiamond\b,Diamante,
 \bStar\b,Stella,
@@ -74,7 +78,7 @@
 ,, --------------------------------- superfluous code and bugfixes ---------------------------------
 \B{{rand\/3\|Fuoco\|Psico\|Lampo}}\B,Psico,
 \B{{rand\/3\|Psico\|Lampo\|Fuoco}}\B,Lampo,
-\b\|symbol=Deluxe Pack ex\b,,
+\b\|symbol=Deluxe Pack-ex\b,,
 \B\| curr=[^ |]+ \|\B,|,
 \B\| currnum=\d+ \|\B,|,
 \bRelease\|type=[^|]+\|\b,Release|,
