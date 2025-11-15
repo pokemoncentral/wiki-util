@@ -6,11 +6,11 @@ from typing import Any, Literal, Optional, Tuple
 
 import mwparserfromhell as mwparser
 import pywikibot as pwb
+from altforms import AltForms
 from dtos import Pkmn
 from mwparserfromhell.wikicode import Wikicode
 from pywikibot.bot import CurrentPageBot
 
-AltForms = dict[str, dict[str, str]]
 DatamineLearnlistItem = Tuple[Pkmn, Tuple[str, str]]
 
 
@@ -23,14 +23,14 @@ class LearnlistSubpageBot(CurrentPageBot):
 
     pkmn_page_include_regex = re.compile(r"\{\{/Mosse apprese in .+ generazione\}\}")
 
-    alt_forms: AltForms
+    alt_forms: dict[str, AltForms]
     it_gen_ord: str
     out_dir: str
     roman_gen: str
     summary: str
 
     current_datamine_item: DatamineLearnlistItem
-    current_alt_form: dict[str, str]
+    current_alt_form: Optional[AltForms]
     save_all: bool
 
     def __init__(
@@ -57,9 +57,15 @@ class LearnlistSubpageBot(CurrentPageBot):
 
     def init_page(self, item: DatamineLearnlistItem):
         self.current_datamine_item = item
+
         pkmn = self.current_datamine_item[0]
-        self.current_alt_form = self.alt_forms.get(pkmn.lua_table_key, dict())
-        base_name = self.current_alt_form.get("baseName", pkmn.name)
+        self.current_alt_form = self.alt_forms.get(pkmn.lua_table_key)
+
+        base_name = (
+            self.current_alt_form.base_name
+            if self.current_alt_form is not None
+            else pkmn.name
+        )
         subpage_name = f"Mosse apprese in {self.it_gen_ord} generazione"
         return pwb.Page(pwb.Site(), f"{base_name}/{subpage_name}")
 
@@ -78,7 +84,7 @@ class LearnlistSubpageBot(CurrentPageBot):
     def _current_form_heading(self) -> str:
         try:
             return f"====={self.current_alt_form['formName']}=====\n"
-        except KeyError:
+        except KeyError | TypeError:
             return ""
 
     @property
