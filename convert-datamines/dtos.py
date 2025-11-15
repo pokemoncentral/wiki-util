@@ -59,6 +59,7 @@ class Pkmn:
     lua_table_key: str
     lua_ndex_index: str
     ndex: int
+    form_abbr: Optional[str]
     name: str
     types: Tuple[str, str]
     stats: Stats
@@ -79,10 +80,11 @@ class Pkmn:
         try:
             int(name[-2:])
             sanitized_name = name[:-2]
-            abbr = normalized_name.removeprefix(sanitized_name.lower())
-            ndex_key = f'"{ndex:04d}{abbr}"'
+            form_abbr = normalized_name.removeprefix(sanitized_name.lower())
+            ndex_key = f'"{ndex:04d}{form_abbr}"'
         except ValueError:
             sanitized_name = name
+            form_abbr = None
             ndex_key = ndex
 
         return (
@@ -92,6 +94,7 @@ class Pkmn:
                 sanitize_lua_table_key(normalized_name),
                 ndex_key,
                 ndex,
+                form_abbr,
                 sanitized_name,
                 types,
                 stats,
