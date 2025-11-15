@@ -6,8 +6,7 @@ from typing import Any, Optional, Self
 
 @dataclass(kw_only=True)
 class SingleAltForm:
-    key: str
-
+    abbr: str
     anchor: Optional[str] = None
     blacklink: str
     cry: Optional[str] = None
@@ -42,12 +41,12 @@ class AltForms:
 
     def for_abbr(self, abbr: str) -> SingleAltForm:
         return SingleAltForm(
-            key=self.key,
+            abbr=abbr,
             anchor=self.anchor,
             blacklink=self.blacklinks[abbr],
-            cry=self.cries[abbr] if self.cries is not None else None,
-            ext=self.ext[abbr],
-            link=self.link[abbr],
+            cry=abbr if self.cries is not None and abbr in self.cries else None,
+            ext=self.ext.get(abbr, ""),
+            link=self.links[abbr],
             full_name=f"{self.base_name} {self.names[abbr]}",
             name=self.names[abbr],
             plainlink=self.plainlinks[abbr],

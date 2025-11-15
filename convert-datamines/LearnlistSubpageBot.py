@@ -3,7 +3,7 @@
 import os
 import re
 from abc import ABC, abstractmethod
-from typing import Any, Literal, Optional
+from typing import Any, Generator, Literal, Optional
 
 import pywikibot as pwb
 from altforms import AltForms, SingleAltForm
@@ -29,15 +29,16 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
 
     def __init__(
         self,
-        *args: Any,
         alt_forms: AltForms,
-        it_gen_ord: str,
         out_dir: str,
+        generator: Generator[Pkmn],
+        *args: Any,
+        it_gen_ord: str,
         roman_gen: str,
         summary: str,
         **kwargs: dict[str, Any],
     ):
-        super(LearnlistSubpageBot, self).__init__(*args, **kwargs)
+        super(LearnlistSubpageBot, self).__init__(*args, generator=generator, **kwargs)
         self.alt_forms = alt_forms
         self.it_gen_ord = it_gen_ord
         self.out_dir = out_dir
@@ -73,12 +74,17 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
         return pwb.Page(pwb.Site(), f"{base_name}/{subpage_name}")
 
     def treat_page(self):
-        current_content = self._read_learnlist_page()
         single_alt_form = (
-            self.current_alt_form.for_abbr(self.current_pkmn.form_abbr)
+            self.current_alt_form.for_abbr(self.current_pkmn.form_abbr or "base")
             if self.current_alt_form is not None
             else None
         )
+
+        # Mega evolutions have the same learnlist as the base form
+        if single_alt_form is not None and single_alt_form.name.startswith("Mega"):
+            return
+
+        current_content = self._read_learnlist_page()
         new_content = (
             self.create_learnlist_subpage(self.current_pkmn, single_alt_form)
             if current_content is None
