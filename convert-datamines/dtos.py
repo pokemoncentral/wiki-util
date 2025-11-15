@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Literal, Optional, Self, Tuple
+from typing import Generic, Optional, Self, Tuple, TypeVar
 
 from lib import convert_pokename, sanitize_lua_table_key, should_ignore
 
@@ -36,22 +36,15 @@ d[{ndex_key}] = d{key}
 """.strip()
 
 
-@dataclass
-class Moves:
-    Level = int | Literal["Inizio", "Evo"]
+U = TypeVar("U")
 
-    level_up: list[Tuple[Level, str]]
+
+@dataclass
+class Moves(Generic[U]):
+    level_up: list[U]
     tm: list[Tuple[str, str]]
     egg: list[str]
     reminder: list[str]
-
-    @staticmethod
-    def translate_int_level(level: int) -> Level:
-        if level == 0:
-            return "Evo"
-        if level < 2:
-            return "Inizio"
-        return level
 
 
 @dataclass
@@ -59,6 +52,7 @@ class Pkmn:
     lua_table_key: str
     lua_ndex_index: str
     ndex: int
+    form_abbr: Optional[str]
     name: str
     types: Tuple[str, str]
     stats: Stats
@@ -79,10 +73,11 @@ class Pkmn:
         try:
             int(name[-2:])
             sanitized_name = name[:-2]
-            abbr = normalized_name.removeprefix(sanitized_name.lower())
-            ndex_key = f'"{ndex:04d}{abbr}"'
+            form_abbr = normalized_name.removeprefix(sanitized_name.lower())
+            ndex_key = f'"{ndex:04d}{form_abbr}"'
         except ValueError:
             sanitized_name = name
+            form_abbr = None
             ndex_key = ndex
 
         return (
@@ -92,6 +87,7 @@ class Pkmn:
                 sanitize_lua_table_key(normalized_name),
                 ndex_key,
                 ndex,
+                form_abbr,
                 sanitized_name,
                 types,
                 stats,

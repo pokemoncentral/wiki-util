@@ -1,26 +1,20 @@
 # -*- coding: utf-8 -*-
 
+import json
 import os
 import re
-from typing import Any, Literal, Optional, Tuple
+from abc import ABC, abstractmethod
+from typing import Any, Generator, Optional, Type
 
-import mwparserfromhell as mwparser
 import pywikibot as pwb
 from altforms import AltForms
-from dtos import Pkmn
+from dtos import Moves, Pkmn
+from Learnlist import FormMoves, Learnlist
 from mwparserfromhell.wikicode import Wikicode
 from pywikibot.bot import CurrentPageBot
 
-DatamineLearnlistItem = Tuple[Pkmn, Tuple[str, str]]
 
-
-def find_section(wikicode: Wikicode, heading: str) -> Wikicode:
-    return wikicode.get_sections(matches=heading)[0]
-
-
-class LearnlistSubpageBot(CurrentPageBot):
-    PersistAction = Literal["u", "s", "a"]
-
+class LearnlistSubpageBot(CurrentPageBot, ABC):
     pkmn_page_include_regex = re.compile(r"\{\{/Mosse apprese in .+ generazione\}\}")
 
     alt_forms: dict[str, AltForms]
@@ -28,151 +22,152 @@ class LearnlistSubpageBot(CurrentPageBot):
     out_dir: str
     roman_gen: str
     summary: str
+    json_object_classes: list[Type]
 
-    current_datamine_item: DatamineLearnlistItem
+    current_pkmn: Pkmn
     current_alt_form: Optional[AltForms]
-    save_all: bool
 
     def __init__(
         self,
-        *args: Any,
         alt_forms: AltForms,
-        it_gen_ord: str,
         out_dir: str,
+        generator: Generator[Pkmn],
+        *args: Any,
+        it_gen_ord: str,
         roman_gen: str,
         summary: str,
+        game_moves_classes: list[Type],
         **kwargs: dict[str, Any],
     ):
-        super(LearnlistSubpageBot, self).__init__(*args, **kwargs)
+        super(LearnlistSubpageBot, self).__init__(*args, generator=generator, **kwargs)
         self.alt_forms = alt_forms
         self.it_gen_ord = it_gen_ord
         self.out_dir = out_dir
         self.roman_gen = roman_gen
         self.summary = summary
+        self.json_object_classes = game_moves_classes + [FormMoves, Learnlist]
 
-        self.save_all = False
+    @abstractmethod
+    def make_learnlist(self, moves: Moves, form_name: str) -> Learnlist:
+        ...
+
+    @abstractmethod
+    def parse_learnlist_subpage(self, learnlist_subpage: str) -> Learnlist:
+        ...
+
+    @abstractmethod
+    def serialize_learnlist_subpage(
+        self, learnlist: Learnlist, pkmn_name: str, form_abbr_by_name: dict[str, str]
+    ) -> str:
+        ...
 
     def setup(self):
         os.makedirs(self.out_dir, exist_ok=True)
 
-    def init_page(self, item: DatamineLearnlistItem):
-        self.current_datamine_item = item
-
-        pkmn = self.current_datamine_item[0]
-        self.current_alt_form = self.alt_forms.get(pkmn.lua_table_key)
-
+    def init_page(self, item: Pkmn):
+        self.current_pkmn = item
+        self.current_alt_form = self.alt_forms.get(self.current_pkmn.name.lower())
         base_name = (
             self.current_alt_form.base_name
             if self.current_alt_form is not None
-            else pkmn.name
+            else self.current_pkmn.name
         )
         subpage_name = f"Mosse apprese in {self.it_gen_ord} generazione"
         return pwb.Page(pwb.Site(), f"{base_name}/{subpage_name}")
 
     def treat_page(self):
-        current_content = self._read_learnlist_page()
-        new_content = (
-            self._create_learnlist_subpage()
-            if current_content is None
-            else self._add_learnlists(current_content)
+        form_abbr = self.current_pkmn.form_abbr or "base"
+        single_alt_form = (
+            self.current_alt_form.for_abbr(form_abbr)
+            if self.current_alt_form is not None
+            else None
         )
 
-        action = self._ask_action(new_content)
-        self._persist_page(action, new_content)
+        form_name = single_alt_form.name if single_alt_form is not None else None
+        # Mega evolutions have the same learnlist as the base form
+        if form_name is not None and form_name.startswith("Mega"):  # Meganium???
+            return
+
+        new_learnlist = self.make_learnlist(
+            self.current_pkmn.moves, form_name if form_abbr != "base" else ""
+        )
+        learnlist = self._read_current_learnlist()
+        if learnlist is not None:
+            learnlist.merge_in(new_learnlist)
+        else:
+            learnlist = new_learnlist
+        self._save_learnlist_cache(learnlist)
+
+    def teardown(self):
+        for cache_file in os.listdir(self.out_dir):
+            with open(os.path.join(self.out_dir, cache_file), "r") as f:
+                learnlist = json.load(f, object_hook=self._learnlist_json_object_hook)
+
+            subpage_title = os.path.splitext(cache_file)[0].replace("--", "/")
+            pkmn_name = os.path.dirname(subpage_title)
+            try:
+                alt_form_names = next(
+                    alt_form.names
+                    for alt_form in self.alt_forms.values()
+                    if alt_form.base_name == pkmn_name
+                )
+                alt_form_names = {name: abbr for abbr, name in alt_form_names.items()}
+            except StopIteration:
+                alt_form_names = {}
+
+            subpage_content = self.serialize_learnlist_subpage(
+                learnlist, pkmn_name, alt_form_names
+            )
+            print(subpage_content)
+
+            page = pwb.Page(pwb.Site(), subpage_title)
+
+            # if not page.exists():
+            #     self._use_new_learnlist_in_pkmn_page()
+            # self.userPut(
+            #     page, page.text, subpage_content, summary=self.summary, show_diff=True
+            # )
+
+    @staticmethod
+    def find_section(wikicode: Wikicode, heading: str) -> Wikicode:
+        return wikicode.get_sections(matches=heading)[0]
 
     @property
-    def _current_form_heading(self) -> str:
-        try:
-            return f"====={self.current_alt_form['formName']}=====\n"
-        except KeyError | TypeError:
-            return ""
-
-    @property
-    def _current_out_file(self) -> str:
-        file_name = self.current_page.title().replace("/", "--") + ".txt"
+    def _current_cache_file(self) -> str:
+        file_name = self.current_page.title().replace("/", "--") + ".json"
         return os.path.join(self.out_dir, file_name)
 
-    def _add_learnlists(self, current_learnlist: str) -> str:
-        _, (new_level, new_tm) = self.current_datamine_item
+    def _learnlist_json_object_hook(
+        self, json: dict[str, Any]
+    ) -> Learnlist | dict[str, Any]:
+        for json_object_class in self.json_object_classes:
+            game_moves = json_object_class.json_object_hook(json)
+            if game_moves != json:
+                return game_moves
+        return json
 
-        wikicode = mwparser.parse(current_learnlist)
-
-        if new_level not in current_learnlist:
-            level_up_section = find_section(wikicode, r"Aumentando di \[\[livello\]\]")
-            level_up_section.append(f"{self._current_form_heading}{new_level}\n\n")
-
-        if new_tm not in current_learnlist:
-            tm_section = find_section(wikicode, r"Tramite \[\[MT\]\]")
-            tm_section.append(f"{self._current_form_heading}{new_tm}\n\n")
-
-        return str(wikicode)
-
-    def _ask_action(self, new_content: str) -> PersistAction:
-        if self.save_all:
-            return "s"
-        if self.opt["always"]:
-            return "u"
-
-        pwb.output(
-            f"Differences to {self.current_page.title()} after adding learnlists:"
-        )
-        pwb.showDiff(self.current_page.text, new_content)
-        answer = pwb.input_choice(
-            "What to do?",
-            (
-                ("upload page", "u"),
-                ("save locally", "s"),
-                ("save all", "a"),
-            ),
-        )
-
-        self.save_all = self.save_all or answer == "a"
-        return answer
-
-    def _create_learnlist_subpage(self) -> str:
-        pkmn, (new_level, new_tm) = self.current_datamine_item
-        return f"""
-====Aumentando di [[livello]]====
-{self._current_form_heading}{new_level}
-
-====Tramite [[MT]]====
-{self._current_form_heading}{new_tm}
-
-<noinclude>
-[[Categoria:Sottopagine moveset Pokémon ({self.it_gen_ord} generazione)]]
-[[en:{pkmn.name} (Pokémon)/Generation {self.roman_gen} learnset]]
-</noinclude>
-""".strip()
-
-    def _persist_page(self, action: PersistAction, new_content: str):
-        match action:
-            case "u":
-                if not self.current_page.exists():
-                    self._use_new_learnlist_in_pkmn_page()
-                self.put_current(
-                    new_content,
-                    summary=self.summary,
-                    show_diff=False,
-                    force=True,
-                )
-
-            case "a" | "s":
-                pwb.output(f"Saving to {self._current_out_file}")
-                with open(self._current_out_file, "w", encoding="utf-8") as f:
-                    f.write(new_content)
-
-            case _:
-                raise ValueError(f"Unknown action: {action}")
-
-    def _read_learnlist_page(self) -> Optional[str]:
+    def _read_current_learnlist(self) -> Optional[Learnlist]:
         try:
-            with open(self._current_out_file, "r", encoding="utf-8") as f:
-                return f.read()
+            pwb.output(f"Read from {self._current_cache_file}")
+            with open(self._current_cache_file, "r", encoding="utf-8") as f:
+                learnlist = json.load(f, object_hook=self._learnlist_json_object_hook)
+
+            if not isinstance(learnlist, Learnlist):
+                raise TypeError(f"Bad JSON in {self._current_cache_file}")
+            return learnlist
+
         except FileNotFoundError:
-            return self.current_page.text if self.current_page.exists() else None
+            if not self.current_page.exists():
+                return None
+            return self.parse_learnlist_subpage(self.current_page.text)
+
+    def _save_learnlist_cache(self, learnlist: Learnlist):
+        pwb.output(f"Saving to {self._current_cache_file}")
+        with open(self._current_cache_file, "w", encoding="utf-8") as f:
+            json.dump(learnlist, f, cls=Learnlist.JSONEncoder)
 
     def _use_new_learnlist_in_pkmn_page(self):
-        pkmn = self.current_datamine_item[0]
+        pkmn = self.current_pkmn[0]
         pwb.output(
             f"Updating {pkmn.name} to use {self.roman_gen} generation learnlists"
         )

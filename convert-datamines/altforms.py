@@ -5,6 +5,21 @@ from typing import Any, Optional, Self
 
 
 @dataclass(kw_only=True)
+class SingleAltForm:
+    abbr: str
+    anchor: Optional[str] = None
+    blacklink: str
+    cry: Optional[str] = None
+    ext: str
+    link: str
+    full_name: str
+    name: str
+    plainlink: str
+    since: str
+    until: Optional[str] = None
+
+
+@dataclass(kw_only=True)
 class AltForms:
     # ndex: int
     key: str = dataclasses.field(init=False)
@@ -24,11 +39,20 @@ class AltForms:
     def base_name(self) -> str:
         return self.names["base"]
 
-    def add_key(self, key: str):
-        self.key = key
-        base_name = self.names["base"]
-        if base_name == "":
-            self.names["base"] = self.key.capitalize()
+    def for_abbr(self, abbr: str) -> SingleAltForm:
+        return SingleAltForm(
+            abbr=abbr,
+            anchor=self.anchor,
+            blacklink=self.blacklinks[abbr],
+            cry=abbr if self.cries is not None and abbr in self.cries else None,
+            ext=self.ext.get(abbr, ""),
+            link=self.links[abbr],
+            full_name=f"{self.base_name} {self.names[abbr]}",
+            name=self.names[abbr],
+            plainlink=self.plainlinks[abbr],
+            since=self.since[abbr],
+            until=self.until,
+        )
 
     @classmethod
     def from_json(cls, file_path: str) -> dict[str, Self]:
@@ -42,9 +66,15 @@ class AltForms:
         }
 
         for key, form_data in alt_form_items.items():
-            form_data.add_key(key)
+            form_data._add_key(key)
 
         return alt_form_items
+
+    def _add_key(self, key: str):
+        self.key = key
+        base_name = self.names["base"]
+        if base_name == "":
+            self.names["base"] = self.key.capitalize()
 
     @classmethod
     def _json_object_hook(cls, json_dict: dict[str, Any]) -> Self | dict[str, Any]:
