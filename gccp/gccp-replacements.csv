@@ -51,7 +51,7 @@
 \bGalarian Cursola\b,Cursola di Galar,
 ,, --------------------------------- pkmn ex ---------------------------------
 (?:\b|\B){{TCGP Icon\|ex}}\B,{{ex|pocket}},
-(?:\b|\B){{TCGP Icon\|Mega ex}}\B,{{ex|mega}},
+(?:\b|\B){{TCGP Icon\|Mega ex}}\B,{{ex|mega pocket}},
 \b ex\b,-ex,
 ,, -------------------------------- expansions --------------------------------
 \bGenetic Apex\b,Geni Supremi,
