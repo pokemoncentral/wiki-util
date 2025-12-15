@@ -8,9 +8,10 @@ in a directory or to update an entire category on Pokémon Central Wiki. Argumen
 --cat: category with images to update (without "Categoria:").
 --prefix: if uploading/updating main series images (excluding mini sprites), can
 be "Spr" for sprite/models or "Icon" for mugshots.
---type: if uploading/updating main series images, can be "sprite", "modelli", "mini sprite".
+--type: if uploading/updating main series images, can be "sprite", "modelli", "mini sprite", "mugshot".
 --game: if uploading/updating main series images, specify game/generation.
---gameabbr: if uploading/updating main series images (excluding mini sprites), specify abbreviation of game.
+--gameabbr: if uploading/updating main series images (excluding mini sprites),
+specify abbreviation of game (is lowercase and may be differ from Modulo:Sigle/data).
 --ani: if uploading/updating main series images (excluding mini sprites), can be "yes" or "no".
 --credits: credits for images (wikicode, optional).
 --test: "no" to perform actual modifications/uploads on website, otherwise only a preview will be printed.
