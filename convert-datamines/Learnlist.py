@@ -1,4 +1,3 @@
-import json
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Any, ClassVar, Literal, Self, cast
@@ -30,9 +29,6 @@ class GameMoves(ABC):
     @abstractmethod
     def to_render_call(self) -> str:
         ...
-
-    def to_json(self) -> dict[str, Any]:
-        return {"game": self.game, "type": self.type}
 
 
 @dataclass
@@ -77,22 +73,6 @@ class FormMoves:
 {"\n\n".join(moves)}
 """.strip()
 
-    def to_json(self) -> dict[str, Any]:
-        return {
-            "form_name": self.form_name,
-            "moves_by_game": [
-                game_moves if isinstance(game_moves, str) else game_moves.to_json()
-                for game_moves in self.moves_by_game
-            ],
-        }
-
-    @classmethod
-    def json_object_hook(cls, json: dict[str, Any]) -> Self | dict[str, Any]:
-        try:
-            return cls(json["form_name"], json["moves_by_game"])
-        except KeyError:
-            return json
-
 
 @dataclass
 class Learnlist:
@@ -122,18 +102,6 @@ class Learnlist:
             except StopIteration:
                 this_form_moves.append(other_moves)
 
-    @classmethod
-    def json_object_hook(cls, json_dict: dict[str, Any]) -> Self | dict[str, Any]:
-        try:
-            return cls(
-                json_dict["level_up"],
-                json_dict["tm"],
-                json_dict["egg"],
-                json_dict["reminder"],
-            )
-        except KeyError:
-            return json_dict
-
     @staticmethod
     def translate_int_level(level: int) -> LearnLevel:
         if level == 0:
@@ -141,16 +109,3 @@ class Learnlist:
         if level < 2:
             return "Inizio"
         return level
-
-    class JSONEncoder(json.JSONEncoder):
-        def default(self, o: Any):
-            if not isinstance(o, Learnlist):
-                return super().default(o)
-
-            learnlist = cast(Learnlist, o)
-            return {
-                "level_up": [level_up.to_json() for level_up in learnlist.level_up],
-                "tm": [tm.to_json() for tm in learnlist.tm],
-                "egg": [egg.to_json() for egg in learnlist.egg],
-                "reminder": [reminder.to_json() for reminder in learnlist.reminder],
-            }

@@ -27,18 +27,6 @@ class LpzaLevelUpMoves(GameMoves):
 }}}}
 """.strip()
 
-    def to_json(self) -> dict[str, Any]:
-        return {**super().to_json(), "moves": self.moves}
-
-    @classmethod
-    def json_object_hook(cls, json: dict[str, Any]) -> Learnlist | dict[str, Any]:
-        try:
-            if json["game"] != cls.game or json["type"] != cls.type:
-                return json
-            return cls(json["moves"])
-        except KeyError:
-            return json
-
 
 @dataclass
 class LpzaTmMoves(GameMoves):
@@ -53,18 +41,6 @@ class LpzaTmMoves(GameMoves):
 }}}}
 """.strip()
 
-    def to_json(self) -> dict[str, Any]:
-        return {**super().to_json(), "moves": self.moves}
-
-    @classmethod
-    def json_object_hook(cls, json: dict[str, Any]) -> Learnlist | dict[str, Any]:
-        try:
-            if json["game"] != cls.game or json["type"] != cls.type:
-                return json
-            return cls(json["moves"])
-        except KeyError:
-            return json
-
 
 class LpzaLearnlistBot(LearnlistSubpageBot):
     def __init__(self, *args: Any, **kwargs: dict[str, Any]):
@@ -73,7 +49,6 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
             it_gen_ord="nona",
             roman_gen="IX",
             summary="Add LPZA learnlists",
-            game_moves_classes=[LpzaLevelUpMoves, LpzaTmMoves],
             **kwargs,
         )
 

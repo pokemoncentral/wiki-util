@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
-import json
 import os
 import re
 from abc import ABC, abstractmethod
-from typing import Any, Generator, Optional, Type
+from typing import Any, Generator, Optional
 
+import jsonpickle
 import pywikibot as pwb
 from altforms import AltForms
 from dtos import Moves, Pkmn
-from Learnlist import FormMoves, Learnlist
+from Learnlist import Learnlist
 from mwparserfromhell.wikicode import Wikicode
 from pywikibot.bot import CurrentPageBot
 
@@ -22,7 +22,6 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
     out_dir: str
     roman_gen: str
     summary: str
-    json_object_classes: list[Type]
 
     current_pkmn: Pkmn
     current_alt_form: Optional[AltForms]
@@ -36,7 +35,6 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
         it_gen_ord: str,
         roman_gen: str,
         summary: str,
-        game_moves_classes: list[Type],
         **kwargs: dict[str, Any],
     ):
         super(LearnlistSubpageBot, self).__init__(*args, generator=generator, **kwargs)
@@ -45,7 +43,6 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
         self.out_dir = out_dir
         self.roman_gen = roman_gen
         self.summary = summary
-        self.json_object_classes = game_moves_classes + [FormMoves, Learnlist]
 
     @abstractmethod
     def make_learnlist(self, moves: Moves, form_name: str) -> Learnlist:
@@ -101,7 +98,7 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
     def teardown(self):
         for cache_file in os.listdir(self.out_dir):
             with open(os.path.join(self.out_dir, cache_file), "r") as f:
-                learnlist = json.load(f, object_hook=self._learnlist_json_object_hook)
+                learnlist = jsonpickle.loads(f.read())
 
             subpage_title = os.path.splitext(cache_file)[0].replace("--", "/")
             pkmn_name = os.path.dirname(subpage_title)
@@ -137,20 +134,11 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
         file_name = self.current_page.title().replace("/", "--") + ".json"
         return os.path.join(self.out_dir, file_name)
 
-    def _learnlist_json_object_hook(
-        self, json: dict[str, Any]
-    ) -> Learnlist | dict[str, Any]:
-        for json_object_class in self.json_object_classes:
-            game_moves = json_object_class.json_object_hook(json)
-            if game_moves != json:
-                return game_moves
-        return json
-
     def _read_current_learnlist(self) -> Optional[Learnlist]:
         try:
             pwb.output(f"Read from {self._current_cache_file}")
             with open(self._current_cache_file, "r", encoding="utf-8") as f:
-                learnlist = json.load(f, object_hook=self._learnlist_json_object_hook)
+                learnlist = jsonpickle.loads(f.read())
 
             if not isinstance(learnlist, Learnlist):
                 raise TypeError(f"Bad JSON in {self._current_cache_file}")
@@ -164,7 +152,7 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
     def _save_learnlist_cache(self, learnlist: Learnlist):
         pwb.output(f"Saving to {self._current_cache_file}")
         with open(self._current_cache_file, "w", encoding="utf-8") as f:
-            json.dump(learnlist, f, cls=Learnlist.JSONEncoder)
+            f.write(jsonpickle.dumps(learnlist))
 
     def _use_new_learnlist_in_pkmn_page(self):
         pkmn = self.current_pkmn[0]
