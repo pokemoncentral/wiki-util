@@ -28,7 +28,7 @@ class AltForms:
     blacklinks: dict[str, str]
     cries: Optional[list[str]] = None
     ext: dict[str, str]
-    gamesOrder: dict[str, str]
+    gamesOrder: list[str]
     links: dict[str, str]
     names: dict[str, str]
     plainlinks: dict[str, str]

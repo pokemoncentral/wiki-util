@@ -54,10 +54,18 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
 
     def make_learnlist(self, moves: Moves, form_name: str) -> Learnlist:
         return Learnlist(
-            [FormMoves(form_name, moves_by_game=[LpzaLevelUpMoves(moves.level_up)])],
-            [FormMoves(form_name, moves_by_game=[LpzaTmMoves(moves.tm)])],
-            [FormMoves(form_name)],
-            [FormMoves(form_name)],
+            {
+                form_name: FormMoves(
+                    form_name, moves_by_game={"LPZA": LpzaLevelUpMoves(moves.level_up)}
+                )
+            },
+            {
+                form_name: FormMoves(
+                    form_name, moves_by_game={"LPZA": LpzaTmMoves(moves.tm)}
+                )
+            },
+            {form_name: FormMoves(form_name)},
+            {form_name: FormMoves(form_name)},
         )
 
     def parse_learnlist_subpage(self, learnlist_subpage: str) -> Learnlist:
@@ -76,8 +84,8 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
             if current_render and (is_end or is_form_heading or is_prop_heading):
                 current_moves = getattr(learnlist, current_prop)
                 if not current_moves:
-                    current_moves.append(FormMoves(form_name))
-                current_moves[-1].wikicode = "\n".join(current_render)
+                    current_moves[form_name] = FormMoves(form_name)
+                current_moves[form_name].wikicode = "\n".join(current_render)
                 current_render.clear()
 
             if is_prop_heading:
@@ -87,7 +95,7 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
                     current_prop = "tm"
                 if "Uovo" in line:
                     current_prop = "egg"
-                setattr(learnlist, current_prop, [])
+                setattr(learnlist, current_prop, {})
 
             if is_form_heading:
                 form_name = line.strip("=")
@@ -103,17 +111,20 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
         return learnlist
 
     def serialize_learnlist_subpage(
-        self, learnlist: Learnlist, pkmn_name: str, form_abbr_by_name: dict[str, str]
+        self,
+        learnlist: Learnlist,
+        pkmn_name: str,
+        form_data_by_name: dict[str, tuple[str, int]],
     ) -> str:
         return f"""
 ====Aumentando di [[livello]]====
-{"\n\n".join(form_moves.to_wikicode(pkmn_name, form_abbr_by_name) for form_moves in learnlist.level_up)}
+{self._form_moves_list_to_wikicode(learnlist.level_up, pkmn_name, form_data_by_name)}
 
 ====Tramite [[MT]]====
-{"\n\n".join(form_moves.to_wikicode(pkmn_name, form_abbr_by_name) for form_moves in learnlist.tm)}
+{self._form_moves_list_to_wikicode(learnlist.tm, pkmn_name, form_data_by_name)}
 
 ====Come [[Mossa Uovo#Pokémon Scarlatto e Violetto|mosse Uovo]]====
-{"\n\n".join(form_moves.to_wikicode(pkmn_name, form_abbr_by_name) for form_moves in learnlist.egg)}
+{self._form_moves_list_to_wikicode(learnlist.egg, pkmn_name, form_data_by_name)}
 
 <noinclude>
 [[Categoria:Sottopagine moveset Pokémon ({self.it_gen_ord} generazione)]]
@@ -121,14 +132,31 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
 </noinclude>
 """.strip()
 
+    @staticmethod
+    def _form_moves_list_to_wikicode(
+        form_moves: list[FormMoves],
+        pkmn_name: str,
+        form_data_by_name: dict[str, tuple[str, int]],
+    ) -> str:
+        form_abbr_by_name = {
+            name: abbr for name, (abbr, _) in form_data_by_name.items()
+        }
+        form_order_by_name = {
+            name: order for name, (_, order) in form_data_by_name.items()
+        }
+        return "\n\n".join(
+            fm.to_wikicode(pkmn_name, form_abbr_by_name, {"SV": 0, "LPZA": 1})
+            for fm in FormMoves.sorted_forms(form_moves, form_order_by_name)
+        )
+
 
 def main(args: list[str]):
-    [datamine_file, alt_forms_file, out_dir] = pwb.handle_args(args)
+    [datamine_file, alt_forms_file, cache_dir] = pwb.handle_args(args)
 
     alt_forms = AltForms.from_json(alt_forms_file)
     generator = parse(datamine_file)
 
-    LpzaLearnlistBot(alt_forms, out_dir, generator).run()
+    LpzaLearnlistBot(alt_forms, cache_dir, generator).run()
 
 
 if __name__ == "__main__":

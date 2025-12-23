@@ -19,7 +19,7 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
 
     alt_forms: dict[str, AltForms]
     it_gen_ord: str
-    out_dir: str
+    cache_dir: str
     roman_gen: str
     summary: str
 
@@ -29,7 +29,7 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
     def __init__(
         self,
         alt_forms: AltForms,
-        out_dir: str,
+        cache_dir: str,
         generator: Generator[Pkmn],
         *args: Any,
         it_gen_ord: str,
@@ -40,7 +40,7 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
         super(LearnlistSubpageBot, self).__init__(*args, generator=generator, **kwargs)
         self.alt_forms = alt_forms
         self.it_gen_ord = it_gen_ord
-        self.out_dir = out_dir
+        self.cache_dir = cache_dir
         self.roman_gen = roman_gen
         self.summary = summary
 
@@ -54,12 +54,15 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
 
     @abstractmethod
     def serialize_learnlist_subpage(
-        self, learnlist: Learnlist, pkmn_name: str, form_abbr_by_name: dict[str, str]
+        self,
+        learnlist: Learnlist,
+        pkmn_name: str,
+        form_data_by_name: dict[str, tuple[str, int]],
     ) -> str:
         ...
 
     def setup(self):
-        os.makedirs(self.out_dir, exist_ok=True)
+        os.makedirs(self.cache_dir, exist_ok=True)
 
     def init_page(self, item: Pkmn):
         self.current_pkmn = item
@@ -96,24 +99,27 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
         self._save_learnlist_cache(learnlist)
 
     def teardown(self):
-        for cache_file in os.listdir(self.out_dir):
-            with open(os.path.join(self.out_dir, cache_file), "r") as f:
+        for cache_file in os.listdir(self.cache_dir):
+            with open(os.path.join(self.cache_dir, cache_file), "r") as f:
                 learnlist = jsonpickle.loads(f.read())
 
             subpage_title = os.path.splitext(cache_file)[0].replace("--", "/")
             pkmn_name = os.path.dirname(subpage_title)
             try:
-                alt_form_names = next(
-                    alt_form.names
+                alt_form = next(
+                    alt_form
                     for alt_form in self.alt_forms.values()
                     if alt_form.base_name == pkmn_name
                 )
-                alt_form_names = {name: abbr for abbr, name in alt_form_names.items()}
+                alt_form_data = {
+                    name: (abbr, alt_form.gamesOrder.index(abbr))
+                    for abbr, name in alt_form.names.items()
+                }
             except StopIteration:
-                alt_form_names = {}
+                alt_form_data = {}
 
             subpage_content = self.serialize_learnlist_subpage(
-                learnlist, pkmn_name, alt_form_names
+                learnlist, pkmn_name, alt_form_data
             )
             print(subpage_content)
 
@@ -132,7 +138,7 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
     @property
     def _current_cache_file(self) -> str:
         file_name = self.current_page.title().replace("/", "--") + ".json"
-        return os.path.join(self.out_dir, file_name)
+        return os.path.join(self.cache_dir, file_name)
 
     def _read_current_learnlist(self) -> Optional[Learnlist]:
         try:
