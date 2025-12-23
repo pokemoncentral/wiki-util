@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Any, ClassVar, Literal, Self, cast
+from typing import ClassVar, Literal, Self
 
 LearnLevel = int | Literal["Inizio", "Evo"]
 LearnType = Literal["LEVEL_UP", "TM", "EGG", "REMINDER"]
@@ -34,44 +34,35 @@ class GameMoves(ABC):
 @dataclass
 class FormMoves:
     form_name: str
-    moves_by_game: list[str | GameMoves]
-
-    @property
-    def learnlist_heading(self) -> str:
-        return "" if self.form_name == "" else f"===={self.form_name}====\n"
+    wikicode: str = ""
+    moves_by_game: list[GameMoves] = field(default_factory=list)
 
     def merge_in(self, other: Self):
         for other_moves in other.moves_by_game:
-            if isinstance(other_moves, str):
-                is_duplicate = any(
-                    other_moves == self_game_move
-                    for self_game_move in self.moves_by_game
-                )
-            else:
-                is_duplicate = any(
-                    other_moves.is_duplicate(self_game_move)
-                    for self_game_move in self.moves_by_game
-                )
+            is_duplicate = any(
+                other_moves.is_duplicate(self_game_move)
+                for self_game_move in self.moves_by_game
+            )
             if not is_duplicate:
                 self.moves_by_game.append(other_moves)
 
     def to_wikicode(self, pkmn_name: str, form_abbr_by_name: dict[str, str]) -> str:
+        lines = []
+        if self.form_name:
+            lines.append(f"===={self.form_name}====\n")
+        if self.wikicode:
+            lines.append(self.wikicode)
+
         try:
             form_param = f" form = {form_abbr_by_name[self.form_name]}"
         except KeyError:
             form_param = ""
-        moves = (
-            (
-                game_moves
-                if isinstance(game_moves, str)
-                else game_moves.to_render_call(pkmn_name, form_param)
-            )
+        lines.extend(
+            f"\n{game_moves.to_render_call(pkmn_name, form_param)}"
             for game_moves in self.moves_by_game
         )
-        return f"""
-{"" if self.form_name == "" else f"===={self.form_name}====\n"}
-{"\n\n".join(moves)}
-""".strip()
+
+        return "\n".join(lines)
 
 
 @dataclass

@@ -54,10 +54,10 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
 
     def make_learnlist(self, moves: Moves, form_name: str) -> Learnlist:
         return Learnlist(
-            [FormMoves(form_name, [LpzaLevelUpMoves(moves.level_up)])],
-            [FormMoves(form_name, [LpzaTmMoves(moves.tm)])],
-            [FormMoves(form_name, [])],
-            [FormMoves(form_name, [])],
+            [FormMoves(form_name, moves_by_game=[LpzaLevelUpMoves(moves.level_up)])],
+            [FormMoves(form_name, moves_by_game=[LpzaTmMoves(moves.tm)])],
+            [FormMoves(form_name)],
+            [FormMoves(form_name)],
         )
 
     def parse_learnlist_subpage(self, learnlist_subpage: str) -> Learnlist:
@@ -76,8 +76,8 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
             if current_render and (is_end or is_form_heading or is_prop_heading):
                 current_moves = getattr(learnlist, current_prop)
                 if not current_moves:
-                    current_moves.append(FormMoves(form_name, []))
-                current_moves[-1].moves_by_game.append("\n".join(current_render))
+                    current_moves.append(FormMoves(form_name))
+                current_moves[-1].wikicode = "\n".join(current_render)
                 current_render.clear()
 
             if is_prop_heading:
