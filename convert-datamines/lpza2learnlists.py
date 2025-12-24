@@ -3,43 +3,14 @@
 
 import os
 import sys
-from dataclasses import dataclass
-from parser.lpza import LpzaLevelUpMove, parse
-from typing import Any, Tuple
+from parser.lpza import parse
+from typing import Any
 
 import pywikibot as pwb
 from altforms import AltForms
-from dtos import Moves
-from Learnlist import FormMoves, GameMoves, Learnlist
+from dtos import Pkmn
+from Learnlist import FormMoves, Learnlist
 from LearnlistSubpageBot import LearnlistSubpageBot
-
-
-@dataclass
-class LpzaLevelUpMoves(GameMoves):
-    game = "LPZA"
-    type = "LEVEL_UP"
-    moves: list[LpzaLevelUpMove]
-
-    def to_render_call(self, pkmn_name: str, form_param: str) -> str:
-        return f"""
-{{{{#invoke: Learnlist-LPZA | level | {pkmn_name} |{form_param} //
-{"\n".join(f"| {level} | {plus_level} | {name} | //" for level, plus_level, name in self.moves)}
-}}}}
-""".strip()
-
-
-@dataclass
-class LpzaTmMoves(GameMoves):
-    game = "LPZA"
-    type = "TM"
-    moves: list[Tuple[str, str]]
-
-    def to_render_call(self, pkmn_name: str, form_param: str) -> str:
-        return f"""
-{{{{#invoke: Learnlist-LPZA | tm | {pkmn_name} |{form_param} //
-{"\n".join(f"| {tm} | {name} | //" for tm, name in self.moves)}
-}}}}
-""".strip()
 
 
 class LpzaLearnlistBot(LearnlistSubpageBot):
@@ -52,16 +23,18 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
             **kwargs,
         )
 
-    def make_learnlist(self, moves: Moves, form_name: str) -> Learnlist:
+    def make_learnlist_from_datamine(self, pkmn: Pkmn, form_name: str) -> Learnlist:
+        form_param = "" if pkmn.form_abbr is None else f" form = {pkmn.form_abbr}"
         return Learnlist(
             {
                 form_name: FormMoves(
-                    form_name, moves_by_game={"LPZA": LpzaLevelUpMoves(moves.level_up)}
+                    form_name,
+                    {"LPZA": self._level_up_wikicode(pkmn, form_param)},
                 )
             },
             {
                 form_name: FormMoves(
-                    form_name, moves_by_game={"LPZA": LpzaTmMoves(moves.tm)}
+                    form_name, {"LPZA": self._tm_wikicode(pkmn, form_param)}
                 )
             },
             {form_name: FormMoves(form_name)},
@@ -84,8 +57,8 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
             if current_render and (is_end or is_form_heading or is_prop_heading):
                 current_moves = getattr(learnlist, current_prop)
                 if not current_moves:
-                    current_moves[form_name] = FormMoves(form_name)
-                current_moves[form_name].wikicode = "\n".join(current_render)
+                    current_moves[form_name] = FormMoves(form_name, {"SV": ""})
+                current_moves[form_name].moves_by_game["SV"] = "\n".join(current_render)
                 current_render.clear()
 
             if is_prop_heading:
@@ -114,17 +87,17 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
         self,
         learnlist: Learnlist,
         pkmn_name: str,
-        form_data_by_name: dict[str, tuple[str, int]],
+        form_order_by_name: dict[str, int],
     ) -> str:
         return f"""
 ====Aumentando di [[livello]]====
-{self._form_moves_list_to_wikicode(learnlist.level_up, pkmn_name, form_data_by_name)}
+{self._form_moves_list_to_wikicode(learnlist.level_up, form_order_by_name)}
 
 ====Tramite [[MT]]====
-{self._form_moves_list_to_wikicode(learnlist.tm, pkmn_name, form_data_by_name)}
+{self._form_moves_list_to_wikicode(learnlist.tm, form_order_by_name)}
 
 ====Come [[Mossa Uovo#Pokémon Scarlatto e Violetto|mosse Uovo]]====
-{self._form_moves_list_to_wikicode(learnlist.egg, pkmn_name, form_data_by_name)}
+{self._form_moves_list_to_wikicode(learnlist.egg, form_order_by_name)}
 
 <noinclude>
 [[Categoria:Sottopagine moveset Pokémon ({self.it_gen_ord} generazione)]]
@@ -135,19 +108,32 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
     @staticmethod
     def _form_moves_list_to_wikicode(
         form_moves: list[FormMoves],
-        pkmn_name: str,
-        form_data_by_name: dict[str, tuple[str, int]],
+        form_order_by_name: dict[str, int],
     ) -> str:
-        form_abbr_by_name = {
-            name: abbr for name, (abbr, _) in form_data_by_name.items()
-        }
-        form_order_by_name = {
-            name: order for name, (_, order) in form_data_by_name.items()
-        }
         return "\n\n".join(
-            fm.to_wikicode(pkmn_name, form_abbr_by_name, {"SV": 0, "LPZA": 1})
+            fm.to_wikicode({"SV": 0, "LPZA": 1})
             for fm in FormMoves.sorted_forms(form_moves, form_order_by_name)
         )
+
+    @staticmethod
+    def _level_up_wikicode(pkmn: Pkmn, form_param: str) -> str:
+        entries = (
+            f"| {level} | {plus_level} | {name} | //"
+            for level, plus_level, name in pkmn.moves.level_up
+        )
+        return f"""
+{{{{#invoke: Learnlist-LPZA | level | {pkmn.name} |{form_param} //
+{"\n".join(entries)}
+}}}}
+""".strip()
+
+    @staticmethod
+    def _tm_wikicode(pkmn: Pkmn, form_param: str) -> str:
+        return f"""
+{{{{#invoke: Learnlist-LPZA | tm | {pkmn.name} |{form_param} //
+{"\n".join(f"| {tm} | {name} | //" for tm, name in pkmn.moves.tm)}
+}}}}
+""".strip()
 
 
 def main(args: list[str]):

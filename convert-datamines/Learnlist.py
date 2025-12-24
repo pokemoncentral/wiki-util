@@ -1,6 +1,5 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import ClassVar, Literal, Self
+from typing import Literal, Self
 
 LearnLevel = int | Literal["Inizio", "Evo"]
 LearnType = Literal["LEVEL_UP", "TM", "EGG", "REMINDER"]
@@ -15,47 +14,22 @@ def parse_learnlevel(level: int) -> LearnLevel:
 
 
 @dataclass
-class GameMoves(ABC):
-    game: ClassVar[str]
-    type: ClassVar[LearnType]
-
-    @abstractmethod
-    def to_render_call(self) -> str:
-        ...
-
-
-@dataclass
 class FormMoves:
     form_name: str
-    wikicode: str = ""
-    moves_by_game: dict[str, GameMoves] = field(default_factory=dict)
+    moves_by_game: dict[str, str] = field(default_factory=dict)
 
     def merge_in(self, other: Self):
         self.moves_by_game = {**other.moves_by_game, **self.moves_by_game}
 
-    def to_wikicode(
-        self,
-        pkmn_name: str,
-        form_abbr_by_name: dict[str, str],
-        games_order: dict[str, int],
-    ) -> str:
+    def to_wikicode(self, games_order: dict[str, int]) -> str:
         lines = []
         if self.form_name:
             lines.append(f"===={self.form_name}====\n")
-        if self.wikicode:
-            lines.append(self.wikicode)
 
-        try:
-            form_param = f" form = {form_abbr_by_name[self.form_name]}"
-        except KeyError:
-            form_param = ""
         sorted_games = sorted(
             self.moves_by_game.items(), key=lambda kv: games_order[kv[0]]
         )
-        lines.extend(
-            f"\n{game_moves.to_render_call(pkmn_name, form_param)}"
-            for _, game_moves in sorted_games
-        )
+        lines.extend(f"\n{game_moves}" for _, game_moves in sorted_games)
 
         return "\n".join(lines)
 

@@ -10,7 +10,6 @@ import pywikibot as pwb
 from altforms import AltForms
 from dtos import Moves, Pkmn
 from Learnlist import Learnlist
-from mwparserfromhell.wikicode import Wikicode
 from pywikibot.bot import CurrentPageBot
 
 
@@ -45,7 +44,7 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
         self.summary = summary
 
     @abstractmethod
-    def make_learnlist(self, moves: Moves, form_name: str) -> Learnlist:
+    def make_learnlist_from_datamine(self, pkmn: Pkmn, form_name: str) -> Learnlist:
         ...
 
     @abstractmethod
@@ -57,7 +56,7 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
         self,
         learnlist: Learnlist,
         pkmn_name: str,
-        form_data_by_name: dict[str, tuple[str, int]],
+        form_order_by_name: dict[str, int],
     ) -> str:
         ...
 
@@ -88,8 +87,8 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
         if form_name is not None and form_name.startswith("Mega"):  # Meganium???
             return
 
-        new_learnlist = self.make_learnlist(
-            self.current_pkmn.moves, form_name if form_abbr != "base" else ""
+        new_learnlist = self.make_learnlist_from_datamine(
+            self.current_pkmn, form_name if form_abbr != "base" else ""
         )
         learnlist = self._read_current_learnlist()
         if learnlist is not None:
@@ -111,15 +110,15 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
                     for alt_form in self.alt_forms.values()
                     if alt_form.base_name == pkmn_name
                 )
-                alt_form_data = {
-                    name: (abbr, alt_form.gamesOrder.index(abbr))
+                forms_order_by_name = {
+                    name: alt_form.gamesOrder.index(abbr)
                     for abbr, name in alt_form.names.items()
                 }
             except StopIteration:
-                alt_form_data = {}
+                forms_order_by_name = {}
 
             subpage_content = self.serialize_learnlist_subpage(
-                learnlist, pkmn_name, alt_form_data
+                learnlist, pkmn_name, forms_order_by_name
             )
             print(subpage_content)
 
@@ -130,10 +129,6 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
             # self.userPut(
             #     page, page.text, subpage_content, summary=self.summary, show_diff=True
             # )
-
-    @staticmethod
-    def find_section(wikicode: Wikicode, heading: str) -> Wikicode:
-        return wikicode.get_sections(matches=heading)[0]
 
     @property
     def _current_cache_file(self) -> str:
