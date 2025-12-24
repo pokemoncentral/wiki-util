@@ -2,9 +2,16 @@ import pywikibot, argparse, os.path
 from scripts.userscripts.pkimgstools import import_ndex, import_data, get_poke_data, get_forms, get_spinoff_imgs, build_arts, build_main, build_spinoffs  # fmt: skip
 """
 Quick infos about variables:
-- 'poke' always represents number of Pokédex as string (without form abbr)
-- 'pokeabbr' always represents number of Pokédex as string (with form abbr)
-- 'ndex' always represents number of Pokédex as integer (without form abbr)
+- poke is Pokédex number with leading zeros and without form abbr
+- pokeabbr is Pokédex number with leading zeros and with form abbr
+- ndex is Pokédex number without leading zeros and without form abbr
+- ndexabbr is Pokédex number without leading zeros and with form abbr
+
+ndex is integer, others are strings. For example Alolan Vulpix has:
+poke = '0037'
+pokeabbr = '0037A'
+ndex = 37
+ndexabbr = '37A'
 """
 
 
@@ -102,7 +109,7 @@ def main():
     parser.add_argument("--pokeformspath", default="data/pokepages-pokeforms/")
     parser.add_argument("--exceptionspath", default="data/pokepages-exceptions/")
     parser.add_argument("--downloadspath", default="data/pokepages-downloaded/")
-    parser.add_argument("--dexfile", default="data/pokepages-utils/pokes_names.csv")
+    parser.add_argument("--dexfile", default="data/wiki-util-data/poke-names.json")
     parser.add_argument("--genderdiffsfile", default="data/pokepages-utils/genderdiffs.txt")
     parser.add_argument("--genderformsfile", default="data/pokepages-utils/genderforms.txt")
     parser.add_argument("--femaleonlyfile", default="data/pokepages-utils/femaleonly.txt")

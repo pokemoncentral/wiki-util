@@ -1,4 +1,4 @@
-import os, os.path, re
+import os, os.path, re, json
 from math import floor
 
 """
@@ -45,7 +45,7 @@ gametogen = {
 }
 
 
-# 'getname' maps ndex to italian name, others map italian name to foreign names
+# 'getname' maps 'poke' to italian name, others map italian name to foreign names
 def import_ndex(dexfile):
     getname = {}
     getenname = {}
@@ -53,13 +53,14 @@ def import_ndex(dexfile):
     getdename = {}
     getfrname = {}
     with open(dexfile, "r") as file:
-        for line in file:
-            ndex, itname, enname, esname, dename, frname = line.strip().split(",")
-            getname.update({ndex: itname})
-            getenname.update({itname: enname})
-            getesname.update({itname: esname})
-            getdename.update({itname: dename})
-            getfrname.update({itname: frname})
+        poke_names = json.load(file)
+    for entry in poke_names:
+        itname = entry["it"]
+        getname.update({entry["poke"]: itname})
+        getenname.update({itname: entry["en"]})
+        getesname.update({itname: entry["es"]})
+        getdename.update({itname: entry["de"]})
+        getfrname.update({itname: entry["fr"]})
     return getname, getenname, getesname, getdename, getfrname
 
 
