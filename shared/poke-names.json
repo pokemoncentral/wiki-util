@@ -1,6 +1,7 @@
 [
   {
     "ndex": 1,
+    "poke": "0001",
     "it": "Bulbasaur",
     "en": "Bulbasaur",
     "es": "Bulbasaur",
@@ -10,6 +11,7 @@
   },
   {
     "ndex": 2,
+    "poke": "0002",
     "it": "Ivysaur",
     "en": "Ivysaur",
     "es": "Ivysaur",
@@ -19,6 +21,7 @@
   },
   {
     "ndex": 3,
+    "poke": "0003",
     "it": "Venusaur",
     "en": "Venusaur",
     "es": "Venusaur",
@@ -28,6 +31,7 @@
   },
   {
     "ndex": 4,
+    "poke": "0004",
     "it": "Charmander",
     "en": "Charmander",
     "es": "Charmander",
@@ -37,6 +41,7 @@
   },
   {
     "ndex": 5,
+    "poke": "0005",
     "it": "Charmeleon",
     "en": "Charmeleon",
     "es": "Charmeleon",
@@ -46,6 +51,7 @@
   },
   {
     "ndex": 6,
+    "poke": "0006",
     "it": "Charizard",
     "en": "Charizard",
     "es": "Charizard",
@@ -55,6 +61,7 @@
   },
   {
     "ndex": 7,
+    "poke": "0007",
     "it": "Squirtle",
     "en": "Squirtle",
     "es": "Squirtle",
@@ -64,6 +71,7 @@
   },
   {
     "ndex": 8,
+    "poke": "0008",
     "it": "Wartortle",
     "en": "Wartortle",
     "es": "Wartortle",
@@ -73,6 +81,7 @@
   },
   {
     "ndex": 9,
+    "poke": "0009",
     "it": "Blastoise",
     "en": "Blastoise",
     "es": "Blastoise",
@@ -82,6 +91,7 @@
   },
   {
     "ndex": 10,
+    "poke": "0010",
     "it": "Caterpie",
     "en": "Caterpie",
     "es": "Caterpie",
@@ -91,6 +101,7 @@
   },
   {
     "ndex": 11,
+    "poke": "0011",
     "it": "Metapod",
     "en": "Metapod",
     "es": "Metapod",
@@ -100,6 +111,7 @@
   },
   {
     "ndex": 12,
+    "poke": "0012",
     "it": "Butterfree",
     "en": "Butterfree",
     "es": "Butterfree",
@@ -109,6 +121,7 @@
   },
   {
     "ndex": 13,
+    "poke": "0013",
     "it": "Weedle",
     "en": "Weedle",
     "es": "Weedle",
@@ -118,6 +131,7 @@
   },
   {
     "ndex": 14,
+    "poke": "0014",
     "it": "Kakuna",
     "en": "Kakuna",
     "es": "Kakuna",
@@ -127,6 +141,7 @@
   },
   {
     "ndex": 15,
+    "poke": "0015",
     "it": "Beedrill",
     "en": "Beedrill",
     "es": "Beedrill",
@@ -136,6 +151,7 @@
   },
   {
     "ndex": 16,
+    "poke": "0016",
     "it": "Pidgey",
     "en": "Pidgey",
     "es": "Pidgey",
@@ -145,6 +161,7 @@
   },
   {
     "ndex": 17,
+    "poke": "0017",
     "it": "Pidgeotto",
     "en": "Pidgeotto",
     "es": "Pidgeotto",
@@ -154,6 +171,7 @@
   },
   {
     "ndex": 18,
+    "poke": "0018",
     "it": "Pidgeot",
     "en": "Pidgeot",
     "es": "Pidgeot",
@@ -163,6 +181,7 @@
   },
   {
     "ndex": 19,
+    "poke": "0019",
     "it": "Rattata",
     "en": "Rattata",
     "es": "Rattata",
@@ -172,6 +191,7 @@
   },
   {
     "ndex": 20,
+    "poke": "0020",
     "it": "Raticate",
     "en": "Raticate",
     "es": "Raticate",
@@ -181,6 +201,7 @@
   },
   {
     "ndex": 21,
+    "poke": "0021",
     "it": "Spearow",
     "en": "Spearow",
     "es": "Spearow",
@@ -190,6 +211,7 @@
   },
   {
     "ndex": 22,
+    "poke": "0022",
     "it": "Fearow",
     "en": "Fearow",
     "es": "Fearow",
@@ -199,6 +221,7 @@
   },
   {
     "ndex": 23,
+    "poke": "0023",
     "it": "Ekans",
     "en": "Ekans",
     "es": "Ekans",
@@ -208,6 +231,7 @@
   },
   {
     "ndex": 24,
+    "poke": "0024",
     "it": "Arbok",
     "en": "Arbok",
     "es": "Arbok",
@@ -217,6 +241,7 @@
   },
   {
     "ndex": 25,
+    "poke": "0025",
     "it": "Pikachu",
     "en": "Pikachu",
     "es": "Pikachu",
@@ -226,6 +251,7 @@
   },
   {
     "ndex": 26,
+    "poke": "0026",
     "it": "Raichu",
     "en": "Raichu",
     "es": "Raichu",
@@ -235,6 +261,7 @@
   },
   {
     "ndex": 27,
+    "poke": "0027",
     "it": "Sandshrew",
     "en": "Sandshrew",
     "es": "Sandshrew",
@@ -244,6 +271,7 @@
   },
   {
     "ndex": 28,
+    "poke": "0028",
     "it": "Sandslash",
     "en": "Sandslash",
     "es": "Sandslash",
@@ -253,6 +281,7 @@
   },
   {
     "ndex": 29,
+    "poke": "0029",
     "it": "Nidoran♀",
     "en": "Nidoran♀",
     "es": "Nidoran♀",
@@ -262,6 +291,7 @@
   },
   {
     "ndex": 30,
+    "poke": "0030",
     "it": "Nidorina",
     "en": "Nidorina",
     "es": "Nidorina",
@@ -271,6 +301,7 @@
   },
   {
     "ndex": 31,
+    "poke": "0031",
     "it": "Nidoqueen",
     "en": "Nidoqueen",
     "es": "Nidoqueen",
@@ -280,6 +311,7 @@
   },
   {
     "ndex": 32,
+    "poke": "0032",
     "it": "Nidoran♂",
     "en": "Nidoran♂",
     "es": "Nidoran♂",
@@ -289,6 +321,7 @@
   },
   {
     "ndex": 33,
+    "poke": "0033",
     "it": "Nidorino",
     "en": "Nidorino",
     "es": "Nidorino",
@@ -298,6 +331,7 @@
   },
   {
     "ndex": 34,
+    "poke": "0034",
     "it": "Nidoking",
     "en": "Nidoking",
     "es": "Nidoking",
@@ -307,6 +341,7 @@
   },
   {
     "ndex": 35,
+    "poke": "0035",
     "it": "Clefairy",
     "en": "Clefairy",
     "es": "Clefairy",
@@ -316,6 +351,7 @@
   },
   {
     "ndex": 36,
+    "poke": "0036",
     "it": "Clefable",
     "en": "Clefable",
     "es": "Clefable",
@@ -325,6 +361,7 @@
   },
   {
     "ndex": 37,
+    "poke": "0037",
     "it": "Vulpix",
     "en": "Vulpix",
     "es": "Vulpix",
@@ -334,6 +371,7 @@
   },
   {
     "ndex": 38,
+    "poke": "0038",
     "it": "Ninetales",
     "en": "Ninetales",
     "es": "Ninetales",
@@ -343,6 +381,7 @@
   },
   {
     "ndex": 39,
+    "poke": "0039",
     "it": "Jigglypuff",
     "en": "Jigglypuff",
     "es": "Jigglypuff",
@@ -352,6 +391,7 @@
   },
   {
     "ndex": 40,
+    "poke": "0040",
     "it": "Wigglytuff",
     "en": "Wigglytuff",
     "es": "Wigglytuff",
@@ -361,6 +401,7 @@
   },
   {
     "ndex": 41,
+    "poke": "0041",
     "it": "Zubat",
     "en": "Zubat",
     "es": "Zubat",
@@ -370,6 +411,7 @@
   },
   {
     "ndex": 42,
+    "poke": "0042",
     "it": "Golbat",
     "en": "Golbat",
     "es": "Golbat",
@@ -379,6 +421,7 @@
   },
   {
     "ndex": 43,
+    "poke": "0043",
     "it": "Oddish",
     "en": "Oddish",
     "es": "Oddish",
@@ -388,6 +431,7 @@
   },
   {
     "ndex": 44,
+    "poke": "0044",
     "it": "Gloom",
     "en": "Gloom",
     "es": "Gloom",
@@ -397,6 +441,7 @@
   },
   {
     "ndex": 45,
+    "poke": "0045",
     "it": "Vileplume",
     "en": "Vileplume",
     "es": "Vileplume",
@@ -406,6 +451,7 @@
   },
   {
     "ndex": 46,
+    "poke": "0046",
     "it": "Paras",
     "en": "Paras",
     "es": "Paras",
@@ -415,6 +461,7 @@
   },
   {
     "ndex": 47,
+    "poke": "0047",
     "it": "Parasect",
     "en": "Parasect",
     "es": "Parasect",
@@ -424,6 +471,7 @@
   },
   {
     "ndex": 48,
+    "poke": "0048",
     "it": "Venonat",
     "en": "Venonat",
     "es": "Venonat",
@@ -433,6 +481,7 @@
   },
   {
     "ndex": 49,
+    "poke": "0049",
     "it": "Venomoth",
     "en": "Venomoth",
     "es": "Venomoth",
@@ -442,6 +491,7 @@
   },
   {
     "ndex": 50,
+    "poke": "0050",
     "it": "Diglett",
     "en": "Diglett",
     "es": "Diglett",
@@ -451,6 +501,7 @@
   },
   {
     "ndex": 51,
+    "poke": "0051",
     "it": "Dugtrio",
     "en": "Dugtrio",
     "es": "Dugtrio",
@@ -460,6 +511,7 @@
   },
   {
     "ndex": 52,
+    "poke": "0052",
     "it": "Meowth",
     "en": "Meowth",
     "es": "Meowth",
@@ -469,6 +521,7 @@
   },
   {
     "ndex": 53,
+    "poke": "0053",
     "it": "Persian",
     "en": "Persian",
     "es": "Persian",
@@ -478,6 +531,7 @@
   },
   {
     "ndex": 54,
+    "poke": "0054",
     "it": "Psyduck",
     "en": "Psyduck",
     "es": "Psyduck",
@@ -487,6 +541,7 @@
   },
   {
     "ndex": 55,
+    "poke": "0055",
     "it": "Golduck",
     "en": "Golduck",
     "es": "Golduck",
@@ -496,6 +551,7 @@
   },
   {
     "ndex": 56,
+    "poke": "0056",
     "it": "Mankey",
     "en": "Mankey",
     "es": "Mankey",
@@ -505,6 +561,7 @@
   },
   {
     "ndex": 57,
+    "poke": "0057",
     "it": "Primeape",
     "en": "Primeape",
     "es": "Primeape",
@@ -514,6 +571,7 @@
   },
   {
     "ndex": 58,
+    "poke": "0058",
     "it": "Growlithe",
     "en": "Growlithe",
     "es": "Growlithe",
@@ -523,6 +581,7 @@
   },
   {
     "ndex": 59,
+    "poke": "0059",
     "it": "Arcanine",
     "en": "Arcanine",
     "es": "Arcanine",
@@ -532,6 +591,7 @@
   },
   {
     "ndex": 60,
+    "poke": "0060",
     "it": "Poliwag",
     "en": "Poliwag",
     "es": "Poliwag",
@@ -541,6 +601,7 @@
   },
   {
     "ndex": 61,
+    "poke": "0061",
     "it": "Poliwhirl",
     "en": "Poliwhirl",
     "es": "Poliwhirl",
@@ -550,6 +611,7 @@
   },
   {
     "ndex": 62,
+    "poke": "0062",
     "it": "Poliwrath",
     "en": "Poliwrath",
     "es": "Poliwrath",
@@ -559,6 +621,7 @@
   },
   {
     "ndex": 63,
+    "poke": "0063",
     "it": "Abra",
     "en": "Abra",
     "es": "Abra",
@@ -568,6 +631,7 @@
   },
   {
     "ndex": 64,
+    "poke": "0064",
     "it": "Kadabra",
     "en": "Kadabra",
     "es": "Kadabra",
@@ -577,6 +641,7 @@
   },
   {
     "ndex": 65,
+    "poke": "0065",
     "it": "Alakazam",
     "en": "Alakazam",
     "es": "Alakazam",
@@ -586,6 +651,7 @@
   },
   {
     "ndex": 66,
+    "poke": "0066",
     "it": "Machop",
     "en": "Machop",
     "es": "Machop",
@@ -595,6 +661,7 @@
   },
   {
     "ndex": 67,
+    "poke": "0067",
     "it": "Machoke",
     "en": "Machoke",
     "es": "Machoke",
@@ -604,6 +671,7 @@
   },
   {
     "ndex": 68,
+    "poke": "0068",
     "it": "Machamp",
     "en": "Machamp",
     "es": "Machamp",
@@ -613,6 +681,7 @@
   },
   {
     "ndex": 69,
+    "poke": "0069",
     "it": "Bellsprout",
     "en": "Bellsprout",
     "es": "Bellsprout",
@@ -622,6 +691,7 @@
   },
   {
     "ndex": 70,
+    "poke": "0070",
     "it": "Weepinbell",
     "en": "Weepinbell",
     "es": "Weepinbell",
@@ -631,6 +701,7 @@
   },
   {
     "ndex": 71,
+    "poke": "0071",
     "it": "Victreebel",
     "en": "Victreebel",
     "es": "Victreebel",
@@ -640,6 +711,7 @@
   },
   {
     "ndex": 72,
+    "poke": "0072",
     "it": "Tentacool",
     "en": "Tentacool",
     "es": "Tentacool",
@@ -649,6 +721,7 @@
   },
   {
     "ndex": 73,
+    "poke": "0073",
     "it": "Tentacruel",
     "en": "Tentacruel",
     "es": "Tentacruel",
@@ -658,6 +731,7 @@
   },
   {
     "ndex": 74,
+    "poke": "0074",
     "it": "Geodude",
     "en": "Geodude",
     "es": "Geodude",
@@ -667,6 +741,7 @@
   },
   {
     "ndex": 75,
+    "poke": "0075",
     "it": "Graveler",
     "en": "Graveler",
     "es": "Graveler",
@@ -676,6 +751,7 @@
   },
   {
     "ndex": 76,
+    "poke": "0076",
     "it": "Golem",
     "en": "Golem",
     "es": "Golem",
@@ -685,6 +761,7 @@
   },
   {
     "ndex": 77,
+    "poke": "0077",
     "it": "Ponyta",
     "en": "Ponyta",
     "es": "Ponyta",
@@ -694,6 +771,7 @@
   },
   {
     "ndex": 78,
+    "poke": "0078",
     "it": "Rapidash",
     "en": "Rapidash",
     "es": "Rapidash",
@@ -703,6 +781,7 @@
   },
   {
     "ndex": 79,
+    "poke": "0079",
     "it": "Slowpoke",
     "en": "Slowpoke",
     "es": "Slowpoke",
@@ -712,6 +791,7 @@
   },
   {
     "ndex": 80,
+    "poke": "0080",
     "it": "Slowbro",
     "en": "Slowbro",
     "es": "Slowbro",
@@ -721,6 +801,7 @@
   },
   {
     "ndex": 81,
+    "poke": "0081",
     "it": "Magnemite",
     "en": "Magnemite",
     "es": "Magnemite",
@@ -730,6 +811,7 @@
   },
   {
     "ndex": 82,
+    "poke": "0082",
     "it": "Magneton",
     "en": "Magneton",
     "es": "Magneton",
@@ -739,6 +821,7 @@
   },
   {
     "ndex": 83,
+    "poke": "0083",
     "it": "Farfetch'd",
     "en": "Farfetch'd",
     "es": "Farfetch'd",
@@ -748,6 +831,7 @@
   },
   {
     "ndex": 84,
+    "poke": "0084",
     "it": "Doduo",
     "en": "Doduo",
     "es": "Doduo",
@@ -757,6 +841,7 @@
   },
   {
     "ndex": 85,
+    "poke": "0085",
     "it": "Dodrio",
     "en": "Dodrio",
     "es": "Dodrio",
@@ -766,6 +851,7 @@
   },
   {
     "ndex": 86,
+    "poke": "0086",
     "it": "Seel",
     "en": "Seel",
     "es": "Seel",
@@ -775,6 +861,7 @@
   },
   {
     "ndex": 87,
+    "poke": "0087",
     "it": "Dewgong",
     "en": "Dewgong",
     "es": "Dewgong",
@@ -784,6 +871,7 @@
   },
   {
     "ndex": 88,
+    "poke": "0088",
     "it": "Grimer",
     "en": "Grimer",
     "es": "Grimer",
@@ -793,6 +881,7 @@
   },
   {
     "ndex": 89,
+    "poke": "0089",
     "it": "Muk",
     "en": "Muk",
     "es": "Muk",
@@ -802,6 +891,7 @@
   },
   {
     "ndex": 90,
+    "poke": "0090",
     "it": "Shellder",
     "en": "Shellder",
     "es": "Shellder",
@@ -811,6 +901,7 @@
   },
   {
     "ndex": 91,
+    "poke": "0091",
     "it": "Cloyster",
     "en": "Cloyster",
     "es": "Cloyster",
@@ -820,6 +911,7 @@
   },
   {
     "ndex": 92,
+    "poke": "0092",
     "it": "Gastly",
     "en": "Gastly",
     "es": "Gastly",
@@ -829,6 +921,7 @@
   },
   {
     "ndex": 93,
+    "poke": "0093",
     "it": "Haunter",
     "en": "Haunter",
     "es": "Haunter",
@@ -838,6 +931,7 @@
   },
   {
     "ndex": 94,
+    "poke": "0094",
     "it": "Gengar",
     "en": "Gengar",
     "es": "Gengar",
@@ -847,6 +941,7 @@
   },
   {
     "ndex": 95,
+    "poke": "0095",
     "it": "Onix",
     "en": "Onix",
     "es": "Onix",
@@ -856,6 +951,7 @@
   },
   {
     "ndex": 96,
+    "poke": "0096",
     "it": "Drowzee",
     "en": "Drowzee",
     "es": "Drowzee",
@@ -865,6 +961,7 @@
   },
   {
     "ndex": 97,
+    "poke": "0097",
     "it": "Hypno",
     "en": "Hypno",
     "es": "Hypno",
@@ -874,6 +971,7 @@
   },
   {
     "ndex": 98,
+    "poke": "0098",
     "it": "Krabby",
     "en": "Krabby",
     "es": "Krabby",
@@ -883,6 +981,7 @@
   },
   {
     "ndex": 99,
+    "poke": "0099",
     "it": "Kingler",
     "en": "Kingler",
     "es": "Kingler",
@@ -892,6 +991,7 @@
   },
   {
     "ndex": 100,
+    "poke": "0100",
     "it": "Voltorb",
     "en": "Voltorb",
     "es": "Voltorb",
@@ -901,6 +1001,7 @@
   },
   {
     "ndex": 101,
+    "poke": "0101",
     "it": "Electrode",
     "en": "Electrode",
     "es": "Electrode",
@@ -910,6 +1011,7 @@
   },
   {
     "ndex": 102,
+    "poke": "0102",
     "it": "Exeggcute",
     "en": "Exeggcute",
     "es": "Exeggcute",
@@ -919,6 +1021,7 @@
   },
   {
     "ndex": 103,
+    "poke": "0103",
     "it": "Exeggutor",
     "en": "Exeggutor",
     "es": "Exeggutor",
@@ -928,6 +1031,7 @@
   },
   {
     "ndex": 104,
+    "poke": "0104",
     "it": "Cubone",
     "en": "Cubone",
     "es": "Cubone",
@@ -937,6 +1041,7 @@
   },
   {
     "ndex": 105,
+    "poke": "0105",
     "it": "Marowak",
     "en": "Marowak",
     "es": "Marowak",
@@ -946,6 +1051,7 @@
   },
   {
     "ndex": 106,
+    "poke": "0106",
     "it": "Hitmonlee",
     "en": "Hitmonlee",
     "es": "Hitmonlee",
@@ -955,6 +1061,7 @@
   },
   {
     "ndex": 107,
+    "poke": "0107",
     "it": "Hitmonchan",
     "en": "Hitmonchan",
     "es": "Hitmonchan",
@@ -964,6 +1071,7 @@
   },
   {
     "ndex": 108,
+    "poke": "0108",
     "it": "Lickitung",
     "en": "Lickitung",
     "es": "Lickitung",
@@ -973,6 +1081,7 @@
   },
   {
     "ndex": 109,
+    "poke": "0109",
     "it": "Koffing",
     "en": "Koffing",
     "es": "Koffing",
@@ -982,6 +1091,7 @@
   },
   {
     "ndex": 110,
+    "poke": "0110",
     "it": "Weezing",
     "en": "Weezing",
     "es": "Weezing",
@@ -991,6 +1101,7 @@
   },
   {
     "ndex": 111,
+    "poke": "0111",
     "it": "Rhyhorn",
     "en": "Rhyhorn",
     "es": "Rhyhorn",
@@ -1000,6 +1111,7 @@
   },
   {
     "ndex": 112,
+    "poke": "0112",
     "it": "Rhydon",
     "en": "Rhydon",
     "es": "Rhydon",
@@ -1009,6 +1121,7 @@
   },
   {
     "ndex": 113,
+    "poke": "0113",
     "it": "Chansey",
     "en": "Chansey",
     "es": "Chansey",
@@ -1018,6 +1131,7 @@
   },
   {
     "ndex": 114,
+    "poke": "0114",
     "it": "Tangela",
     "en": "Tangela",
     "es": "Tangela",
@@ -1027,6 +1141,7 @@
   },
   {
     "ndex": 115,
+    "poke": "0115",
     "it": "Kangaskhan",
     "en": "Kangaskhan",
     "es": "Kangaskhan",
@@ -1036,6 +1151,7 @@
   },
   {
     "ndex": 116,
+    "poke": "0116",
     "it": "Horsea",
     "en": "Horsea",
     "es": "Horsea",
@@ -1045,6 +1161,7 @@
   },
   {
     "ndex": 117,
+    "poke": "0117",
     "it": "Seadra",
     "en": "Seadra",
     "es": "Seadra",
@@ -1054,6 +1171,7 @@
   },
   {
     "ndex": 118,
+    "poke": "0118",
     "it": "Goldeen",
     "en": "Goldeen",
     "es": "Goldeen",
@@ -1063,6 +1181,7 @@
   },
   {
     "ndex": 119,
+    "poke": "0119",
     "it": "Seaking",
     "en": "Seaking",
     "es": "Seaking",
@@ -1072,6 +1191,7 @@
   },
   {
     "ndex": 120,
+    "poke": "0120",
     "it": "Staryu",
     "en": "Staryu",
     "es": "Staryu",
@@ -1081,6 +1201,7 @@
   },
   {
     "ndex": 121,
+    "poke": "0121",
     "it": "Starmie",
     "en": "Starmie",
     "es": "Starmie",
@@ -1090,6 +1211,7 @@
   },
   {
     "ndex": 122,
+    "poke": "0122",
     "it": "Mr. Mime",
     "en": "Mr. Mime",
     "es": "Mr. Mime",
@@ -1099,6 +1221,7 @@
   },
   {
     "ndex": 123,
+    "poke": "0123",
     "it": "Scyther",
     "en": "Scyther",
     "es": "Scyther",
@@ -1108,6 +1231,7 @@
   },
   {
     "ndex": 124,
+    "poke": "0124",
     "it": "Jynx",
     "en": "Jynx",
     "es": "Jynx",
@@ -1117,6 +1241,7 @@
   },
   {
     "ndex": 125,
+    "poke": "0125",
     "it": "Electabuzz",
     "en": "Electabuzz",
     "es": "Electabuzz",
@@ -1126,6 +1251,7 @@
   },
   {
     "ndex": 126,
+    "poke": "0126",
     "it": "Magmar",
     "en": "Magmar",
     "es": "Magmar",
@@ -1135,6 +1261,7 @@
   },
   {
     "ndex": 127,
+    "poke": "0127",
     "it": "Pinsir",
     "en": "Pinsir",
     "es": "Pinsir",
@@ -1144,6 +1271,7 @@
   },
   {
     "ndex": 128,
+    "poke": "0128",
     "it": "Tauros",
     "en": "Tauros",
     "es": "Tauros",
@@ -1153,6 +1281,7 @@
   },
   {
     "ndex": 129,
+    "poke": "0129",
     "it": "Magikarp",
     "en": "Magikarp",
     "es": "Magikarp",
@@ -1162,6 +1291,7 @@
   },
   {
     "ndex": 130,
+    "poke": "0130",
     "it": "Gyarados",
     "en": "Gyarados",
     "es": "Gyarados",
@@ -1171,6 +1301,7 @@
   },
   {
     "ndex": 131,
+    "poke": "0131",
     "it": "Lapras",
     "en": "Lapras",
     "es": "Lapras",
@@ -1180,6 +1311,7 @@
   },
   {
     "ndex": 132,
+    "poke": "0132",
     "it": "Ditto",
     "en": "Ditto",
     "es": "Ditto",
@@ -1189,6 +1321,7 @@
   },
   {
     "ndex": 133,
+    "poke": "0133",
     "it": "Eevee",
     "en": "Eevee",
     "es": "Eevee",
@@ -1198,6 +1331,7 @@
   },
   {
     "ndex": 134,
+    "poke": "0134",
     "it": "Vaporeon",
     "en": "Vaporeon",
     "es": "Vaporeon",
@@ -1207,6 +1341,7 @@
   },
   {
     "ndex": 135,
+    "poke": "0135",
     "it": "Jolteon",
     "en": "Jolteon",
     "es": "Jolteon",
@@ -1216,6 +1351,7 @@
   },
   {
     "ndex": 136,
+    "poke": "0136",
     "it": "Flareon",
     "en": "Flareon",
     "es": "Flareon",
@@ -1225,6 +1361,7 @@
   },
   {
     "ndex": 137,
+    "poke": "0137",
     "it": "Porygon",
     "en": "Porygon",
     "es": "Porygon",
@@ -1234,6 +1371,7 @@
   },
   {
     "ndex": 138,
+    "poke": "0138",
     "it": "Omanyte",
     "en": "Omanyte",
     "es": "Omanyte",
@@ -1243,6 +1381,7 @@
   },
   {
     "ndex": 139,
+    "poke": "0139",
     "it": "Omastar",
     "en": "Omastar",
     "es": "Omastar",
@@ -1252,6 +1391,7 @@
   },
   {
     "ndex": 140,
+    "poke": "0140",
     "it": "Kabuto",
     "en": "Kabuto",
     "es": "Kabuto",
@@ -1261,6 +1401,7 @@
   },
   {
     "ndex": 141,
+    "poke": "0141",
     "it": "Kabutops",
     "en": "Kabutops",
     "es": "Kabutops",
@@ -1270,6 +1411,7 @@
   },
   {
     "ndex": 142,
+    "poke": "0142",
     "it": "Aerodactyl",
     "en": "Aerodactyl",
     "es": "Aerodactyl",
@@ -1279,6 +1421,7 @@
   },
   {
     "ndex": 143,
+    "poke": "0143",
     "it": "Snorlax",
     "en": "Snorlax",
     "es": "Snorlax",
@@ -1288,6 +1431,7 @@
   },
   {
     "ndex": 144,
+    "poke": "0144",
     "it": "Articuno",
     "en": "Articuno",
     "es": "Articuno",
@@ -1297,6 +1441,7 @@
   },
   {
     "ndex": 145,
+    "poke": "0145",
     "it": "Zapdos",
     "en": "Zapdos",
     "es": "Zapdos",
@@ -1306,6 +1451,7 @@
   },
   {
     "ndex": 146,
+    "poke": "0146",
     "it": "Moltres",
     "en": "Moltres",
     "es": "Moltres",
@@ -1315,6 +1461,7 @@
   },
   {
     "ndex": 147,
+    "poke": "0147",
     "it": "Dratini",
     "en": "Dratini",
     "es": "Dratini",
@@ -1324,6 +1471,7 @@
   },
   {
     "ndex": 148,
+    "poke": "0148",
     "it": "Dragonair",
     "en": "Dragonair",
     "es": "Dragonair",
@@ -1333,6 +1481,7 @@
   },
   {
     "ndex": 149,
+    "poke": "0149",
     "it": "Dragonite",
     "en": "Dragonite",
     "es": "Dragonite",
@@ -1342,6 +1491,7 @@
   },
   {
     "ndex": 150,
+    "poke": "0150",
     "it": "Mewtwo",
     "en": "Mewtwo",
     "es": "Mewtwo",
@@ -1351,6 +1501,7 @@
   },
   {
     "ndex": 151,
+    "poke": "0151",
     "it": "Mew",
     "en": "Mew",
     "es": "Mew",
@@ -1360,6 +1511,7 @@
   },
   {
     "ndex": 152,
+    "poke": "0152",
     "it": "Chikorita",
     "en": "Chikorita",
     "es": "Chikorita",
@@ -1369,6 +1521,7 @@
   },
   {
     "ndex": 153,
+    "poke": "0153",
     "it": "Bayleef",
     "en": "Bayleef",
     "es": "Bayleef",
@@ -1378,6 +1531,7 @@
   },
   {
     "ndex": 154,
+    "poke": "0154",
     "it": "Meganium",
     "en": "Meganium",
     "es": "Meganium",
@@ -1387,6 +1541,7 @@
   },
   {
     "ndex": 155,
+    "poke": "0155",
     "it": "Cyndaquil",
     "en": "Cyndaquil",
     "es": "Cyndaquil",
@@ -1396,6 +1551,7 @@
   },
   {
     "ndex": 156,
+    "poke": "0156",
     "it": "Quilava",
     "en": "Quilava",
     "es": "Quilava",
@@ -1405,6 +1561,7 @@
   },
   {
     "ndex": 157,
+    "poke": "0157",
     "it": "Typhlosion",
     "en": "Typhlosion",
     "es": "Typhlosion",
@@ -1414,6 +1571,7 @@
   },
   {
     "ndex": 158,
+    "poke": "0158",
     "it": "Totodile",
     "en": "Totodile",
     "es": "Totodile",
@@ -1423,6 +1581,7 @@
   },
   {
     "ndex": 159,
+    "poke": "0159",
     "it": "Croconaw",
     "en": "Croconaw",
     "es": "Croconaw",
@@ -1432,6 +1591,7 @@
   },
   {
     "ndex": 160,
+    "poke": "0160",
     "it": "Feraligatr",
     "en": "Feraligatr",
     "es": "Feraligatr",
@@ -1441,6 +1601,7 @@
   },
   {
     "ndex": 161,
+    "poke": "0161",
     "it": "Sentret",
     "en": "Sentret",
     "es": "Sentret",
@@ -1450,6 +1611,7 @@
   },
   {
     "ndex": 162,
+    "poke": "0162",
     "it": "Furret",
     "en": "Furret",
     "es": "Furret",
@@ -1459,6 +1621,7 @@
   },
   {
     "ndex": 163,
+    "poke": "0163",
     "it": "Hoothoot",
     "en": "Hoothoot",
     "es": "Hoothoot",
@@ -1468,6 +1631,7 @@
   },
   {
     "ndex": 164,
+    "poke": "0164",
     "it": "Noctowl",
     "en": "Noctowl",
     "es": "Noctowl",
@@ -1477,6 +1641,7 @@
   },
   {
     "ndex": 165,
+    "poke": "0165",
     "it": "Ledyba",
     "en": "Ledyba",
     "es": "Ledyba",
@@ -1486,6 +1651,7 @@
   },
   {
     "ndex": 166,
+    "poke": "0166",
     "it": "Ledian",
     "en": "Ledian",
     "es": "Ledian",
@@ -1495,6 +1661,7 @@
   },
   {
     "ndex": 167,
+    "poke": "0167",
     "it": "Spinarak",
     "en": "Spinarak",
     "es": "Spinarak",
@@ -1504,6 +1671,7 @@
   },
   {
     "ndex": 168,
+    "poke": "0168",
     "it": "Ariados",
     "en": "Ariados",
     "es": "Ariados",
@@ -1513,6 +1681,7 @@
   },
   {
     "ndex": 169,
+    "poke": "0169",
     "it": "Crobat",
     "en": "Crobat",
     "es": "Crobat",
@@ -1522,6 +1691,7 @@
   },
   {
     "ndex": 170,
+    "poke": "0170",
     "it": "Chinchou",
     "en": "Chinchou",
     "es": "Chinchou",
@@ -1531,6 +1701,7 @@
   },
   {
     "ndex": 171,
+    "poke": "0171",
     "it": "Lanturn",
     "en": "Lanturn",
     "es": "Lanturn",
@@ -1540,6 +1711,7 @@
   },
   {
     "ndex": 172,
+    "poke": "0172",
     "it": "Pichu",
     "en": "Pichu",
     "es": "Pichu",
@@ -1549,6 +1721,7 @@
   },
   {
     "ndex": 173,
+    "poke": "0173",
     "it": "Cleffa",
     "en": "Cleffa",
     "es": "Cleffa",
@@ -1558,6 +1731,7 @@
   },
   {
     "ndex": 174,
+    "poke": "0174",
     "it": "Igglybuff",
     "en": "Igglybuff",
     "es": "Igglybuff",
@@ -1567,6 +1741,7 @@
   },
   {
     "ndex": 175,
+    "poke": "0175",
     "it": "Togepi",
     "en": "Togepi",
     "es": "Togepi",
@@ -1576,6 +1751,7 @@
   },
   {
     "ndex": 176,
+    "poke": "0176",
     "it": "Togetic",
     "en": "Togetic",
     "es": "Togetic",
@@ -1585,6 +1761,7 @@
   },
   {
     "ndex": 177,
+    "poke": "0177",
     "it": "Natu",
     "en": "Natu",
     "es": "Natu",
@@ -1594,6 +1771,7 @@
   },
   {
     "ndex": 178,
+    "poke": "0178",
     "it": "Xatu",
     "en": "Xatu",
     "es": "Xatu",
@@ -1603,6 +1781,7 @@
   },
   {
     "ndex": 179,
+    "poke": "0179",
     "it": "Mareep",
     "en": "Mareep",
     "es": "Mareep",
@@ -1612,6 +1791,7 @@
   },
   {
     "ndex": 180,
+    "poke": "0180",
     "it": "Flaaffy",
     "en": "Flaaffy",
     "es": "Flaaffy",
@@ -1621,6 +1801,7 @@
   },
   {
     "ndex": 181,
+    "poke": "0181",
     "it": "Ampharos",
     "en": "Ampharos",
     "es": "Ampharos",
@@ -1630,6 +1811,7 @@
   },
   {
     "ndex": 182,
+    "poke": "0182",
     "it": "Bellossom",
     "en": "Bellossom",
     "es": "Bellossom",
@@ -1639,6 +1821,7 @@
   },
   {
     "ndex": 183,
+    "poke": "0183",
     "it": "Marill",
     "en": "Marill",
     "es": "Marill",
@@ -1648,6 +1831,7 @@
   },
   {
     "ndex": 184,
+    "poke": "0184",
     "it": "Azumarill",
     "en": "Azumarill",
     "es": "Azumarill",
@@ -1657,6 +1841,7 @@
   },
   {
     "ndex": 185,
+    "poke": "0185",
     "it": "Sudowoodo",
     "en": "Sudowoodo",
     "es": "Sudowoodo",
@@ -1666,6 +1851,7 @@
   },
   {
     "ndex": 186,
+    "poke": "0186",
     "it": "Politoed",
     "en": "Politoed",
     "es": "Politoed",
@@ -1675,6 +1861,7 @@
   },
   {
     "ndex": 187,
+    "poke": "0187",
     "it": "Hoppip",
     "en": "Hoppip",
     "es": "Hoppip",
@@ -1684,6 +1871,7 @@
   },
   {
     "ndex": 188,
+    "poke": "0188",
     "it": "Skiploom",
     "en": "Skiploom",
     "es": "Skiploom",
@@ -1693,6 +1881,7 @@
   },
   {
     "ndex": 189,
+    "poke": "0189",
     "it": "Jumpluff",
     "en": "Jumpluff",
     "es": "Jumpluff",
@@ -1702,6 +1891,7 @@
   },
   {
     "ndex": 190,
+    "poke": "0190",
     "it": "Aipom",
     "en": "Aipom",
     "es": "Aipom",
@@ -1711,6 +1901,7 @@
   },
   {
     "ndex": 191,
+    "poke": "0191",
     "it": "Sunkern",
     "en": "Sunkern",
     "es": "Sunkern",
@@ -1720,6 +1911,7 @@
   },
   {
     "ndex": 192,
+    "poke": "0192",
     "it": "Sunflora",
     "en": "Sunflora",
     "es": "Sunflora",
@@ -1729,6 +1921,7 @@
   },
   {
     "ndex": 193,
+    "poke": "0193",
     "it": "Yanma",
     "en": "Yanma",
     "es": "Yanma",
@@ -1738,6 +1931,7 @@
   },
   {
     "ndex": 194,
+    "poke": "0194",
     "it": "Wooper",
     "en": "Wooper",
     "es": "Wooper",
@@ -1747,6 +1941,7 @@
   },
   {
     "ndex": 195,
+    "poke": "0195",
     "it": "Quagsire",
     "en": "Quagsire",
     "es": "Quagsire",
@@ -1756,6 +1951,7 @@
   },
   {
     "ndex": 196,
+    "poke": "0196",
     "it": "Espeon",
     "en": "Espeon",
     "es": "Espeon",
@@ -1765,6 +1961,7 @@
   },
   {
     "ndex": 197,
+    "poke": "0197",
     "it": "Umbreon",
     "en": "Umbreon",
     "es": "Umbreon",
@@ -1774,6 +1971,7 @@
   },
   {
     "ndex": 198,
+    "poke": "0198",
     "it": "Murkrow",
     "en": "Murkrow",
     "es": "Murkrow",
@@ -1783,6 +1981,7 @@
   },
   {
     "ndex": 199,
+    "poke": "0199",
     "it": "Slowking",
     "en": "Slowking",
     "es": "Slowking",
@@ -1792,6 +1991,7 @@
   },
   {
     "ndex": 200,
+    "poke": "0200",
     "it": "Misdreavus",
     "en": "Misdreavus",
     "es": "Misdreavus",
@@ -1801,6 +2001,7 @@
   },
   {
     "ndex": 201,
+    "poke": "0201",
     "it": "Unown",
     "en": "Unown",
     "es": "Unown",
@@ -1810,6 +2011,7 @@
   },
   {
     "ndex": 202,
+    "poke": "0202",
     "it": "Wobbuffet",
     "en": "Wobbuffet",
     "es": "Wobbuffet",
@@ -1819,6 +2021,7 @@
   },
   {
     "ndex": 203,
+    "poke": "0203",
     "it": "Girafarig",
     "en": "Girafarig",
     "es": "Girafarig",
@@ -1828,6 +2031,7 @@
   },
   {
     "ndex": 204,
+    "poke": "0204",
     "it": "Pineco",
     "en": "Pineco",
     "es": "Pineco",
@@ -1837,6 +2041,7 @@
   },
   {
     "ndex": 205,
+    "poke": "0205",
     "it": "Forretress",
     "en": "Forretress",
     "es": "Forretress",
@@ -1846,6 +2051,7 @@
   },
   {
     "ndex": 206,
+    "poke": "0206",
     "it": "Dunsparce",
     "en": "Dunsparce",
     "es": "Dunsparce",
@@ -1855,6 +2061,7 @@
   },
   {
     "ndex": 207,
+    "poke": "0207",
     "it": "Gligar",
     "en": "Gligar",
     "es": "Gligar",
@@ -1864,6 +2071,7 @@
   },
   {
     "ndex": 208,
+    "poke": "0208",
     "it": "Steelix",
     "en": "Steelix",
     "es": "Steelix",
@@ -1873,6 +2081,7 @@
   },
   {
     "ndex": 209,
+    "poke": "0209",
     "it": "Snubbull",
     "en": "Snubbull",
     "es": "Snubbull",
@@ -1882,6 +2091,7 @@
   },
   {
     "ndex": 210,
+    "poke": "0210",
     "it": "Granbull",
     "en": "Granbull",
     "es": "Granbull",
@@ -1891,6 +2101,7 @@
   },
   {
     "ndex": 211,
+    "poke": "0211",
     "it": "Qwilfish",
     "en": "Qwilfish",
     "es": "Qwilfish",
@@ -1900,6 +2111,7 @@
   },
   {
     "ndex": 212,
+    "poke": "0212",
     "it": "Scizor",
     "en": "Scizor",
     "es": "Scizor",
@@ -1909,6 +2121,7 @@
   },
   {
     "ndex": 213,
+    "poke": "0213",
     "it": "Shuckle",
     "en": "Shuckle",
     "es": "Shuckle",
@@ -1918,6 +2131,7 @@
   },
   {
     "ndex": 214,
+    "poke": "0214",
     "it": "Heracross",
     "en": "Heracross",
     "es": "Heracross",
@@ -1927,6 +2141,7 @@
   },
   {
     "ndex": 215,
+    "poke": "0215",
     "it": "Sneasel",
     "en": "Sneasel",
     "es": "Sneasel",
@@ -1936,6 +2151,7 @@
   },
   {
     "ndex": 216,
+    "poke": "0216",
     "it": "Teddiursa",
     "en": "Teddiursa",
     "es": "Teddiursa",
@@ -1945,6 +2161,7 @@
   },
   {
     "ndex": 217,
+    "poke": "0217",
     "it": "Ursaring",
     "en": "Ursaring",
     "es": "Ursaring",
@@ -1954,6 +2171,7 @@
   },
   {
     "ndex": 218,
+    "poke": "0218",
     "it": "Slugma",
     "en": "Slugma",
     "es": "Slugma",
@@ -1963,6 +2181,7 @@
   },
   {
     "ndex": 219,
+    "poke": "0219",
     "it": "Magcargo",
     "en": "Magcargo",
     "es": "Magcargo",
@@ -1972,6 +2191,7 @@
   },
   {
     "ndex": 220,
+    "poke": "0220",
     "it": "Swinub",
     "en": "Swinub",
     "es": "Swinub",
@@ -1981,6 +2201,7 @@
   },
   {
     "ndex": 221,
+    "poke": "0221",
     "it": "Piloswine",
     "en": "Piloswine",
     "es": "Piloswine",
@@ -1990,6 +2211,7 @@
   },
   {
     "ndex": 222,
+    "poke": "0222",
     "it": "Corsola",
     "en": "Corsola",
     "es": "Corsola",
@@ -1999,6 +2221,7 @@
   },
   {
     "ndex": 223,
+    "poke": "0223",
     "it": "Remoraid",
     "en": "Remoraid",
     "es": "Remoraid",
@@ -2008,6 +2231,7 @@
   },
   {
     "ndex": 224,
+    "poke": "0224",
     "it": "Octillery",
     "en": "Octillery",
     "es": "Octillery",
@@ -2017,6 +2241,7 @@
   },
   {
     "ndex": 225,
+    "poke": "0225",
     "it": "Delibird",
     "en": "Delibird",
     "es": "Delibird",
@@ -2026,6 +2251,7 @@
   },
   {
     "ndex": 226,
+    "poke": "0226",
     "it": "Mantine",
     "en": "Mantine",
     "es": "Mantine",
@@ -2035,6 +2261,7 @@
   },
   {
     "ndex": 227,
+    "poke": "0227",
     "it": "Skarmory",
     "en": "Skarmory",
     "es": "Skarmory",
@@ -2044,6 +2271,7 @@
   },
   {
     "ndex": 228,
+    "poke": "0228",
     "it": "Houndour",
     "en": "Houndour",
     "es": "Houndour",
@@ -2053,6 +2281,7 @@
   },
   {
     "ndex": 229,
+    "poke": "0229",
     "it": "Houndoom",
     "en": "Houndoom",
     "es": "Houndoom",
@@ -2062,6 +2291,7 @@
   },
   {
     "ndex": 230,
+    "poke": "0230",
     "it": "Kingdra",
     "en": "Kingdra",
     "es": "Kingdra",
@@ -2071,6 +2301,7 @@
   },
   {
     "ndex": 231,
+    "poke": "0231",
     "it": "Phanpy",
     "en": "Phanpy",
     "es": "Phanpy",
@@ -2080,6 +2311,7 @@
   },
   {
     "ndex": 232,
+    "poke": "0232",
     "it": "Donphan",
     "en": "Donphan",
     "es": "Donphan",
@@ -2089,6 +2321,7 @@
   },
   {
     "ndex": 233,
+    "poke": "0233",
     "it": "Porygon2",
     "en": "Porygon2",
     "es": "Porygon2",
@@ -2098,6 +2331,7 @@
   },
   {
     "ndex": 234,
+    "poke": "0234",
     "it": "Stantler",
     "en": "Stantler",
     "es": "Stantler",
@@ -2107,6 +2341,7 @@
   },
   {
     "ndex": 235,
+    "poke": "0235",
     "it": "Smeargle",
     "en": "Smeargle",
     "es": "Smeargle",
@@ -2116,6 +2351,7 @@
   },
   {
     "ndex": 236,
+    "poke": "0236",
     "it": "Tyrogue",
     "en": "Tyrogue",
     "es": "Tyrogue",
@@ -2125,6 +2361,7 @@
   },
   {
     "ndex": 237,
+    "poke": "0237",
     "it": "Hitmontop",
     "en": "Hitmontop",
     "es": "Hitmontop",
@@ -2134,6 +2371,7 @@
   },
   {
     "ndex": 238,
+    "poke": "0238",
     "it": "Smoochum",
     "en": "Smoochum",
     "es": "Smoochum",
@@ -2143,6 +2381,7 @@
   },
   {
     "ndex": 239,
+    "poke": "0239",
     "it": "Elekid",
     "en": "Elekid",
     "es": "Elekid",
@@ -2152,6 +2391,7 @@
   },
   {
     "ndex": 240,
+    "poke": "0240",
     "it": "Magby",
     "en": "Magby",
     "es": "Magby",
@@ -2161,6 +2401,7 @@
   },
   {
     "ndex": 241,
+    "poke": "0241",
     "it": "Miltank",
     "en": "Miltank",
     "es": "Miltank",
@@ -2170,6 +2411,7 @@
   },
   {
     "ndex": 242,
+    "poke": "0242",
     "it": "Blissey",
     "en": "Blissey",
     "es": "Blissey",
@@ -2179,6 +2421,7 @@
   },
   {
     "ndex": 243,
+    "poke": "0243",
     "it": "Raikou",
     "en": "Raikou",
     "es": "Raikou",
@@ -2188,6 +2431,7 @@
   },
   {
     "ndex": 244,
+    "poke": "0244",
     "it": "Entei",
     "en": "Entei",
     "es": "Entei",
@@ -2197,6 +2441,7 @@
   },
   {
     "ndex": 245,
+    "poke": "0245",
     "it": "Suicune",
     "en": "Suicune",
     "es": "Suicune",
@@ -2206,6 +2451,7 @@
   },
   {
     "ndex": 246,
+    "poke": "0246",
     "it": "Larvitar",
     "en": "Larvitar",
     "es": "Larvitar",
@@ -2215,6 +2461,7 @@
   },
   {
     "ndex": 247,
+    "poke": "0247",
     "it": "Pupitar",
     "en": "Pupitar",
     "es": "Pupitar",
@@ -2224,6 +2471,7 @@
   },
   {
     "ndex": 248,
+    "poke": "0248",
     "it": "Tyranitar",
     "en": "Tyranitar",
     "es": "Tyranitar",
@@ -2233,6 +2481,7 @@
   },
   {
     "ndex": 249,
+    "poke": "0249",
     "it": "Lugia",
     "en": "Lugia",
     "es": "Lugia",
@@ -2242,6 +2491,7 @@
   },
   {
     "ndex": 250,
+    "poke": "0250",
     "it": "Ho-Oh",
     "en": "Ho-Oh",
     "es": "Ho-Oh",
@@ -2251,6 +2501,7 @@
   },
   {
     "ndex": 251,
+    "poke": "0251",
     "it": "Celebi",
     "en": "Celebi",
     "es": "Celebi",
@@ -2260,6 +2511,7 @@
   },
   {
     "ndex": 252,
+    "poke": "0252",
     "it": "Treecko",
     "en": "Treecko",
     "es": "Treecko",
@@ -2269,6 +2521,7 @@
   },
   {
     "ndex": 253,
+    "poke": "0253",
     "it": "Grovyle",
     "en": "Grovyle",
     "es": "Grovyle",
@@ -2278,6 +2531,7 @@
   },
   {
     "ndex": 254,
+    "poke": "0254",
     "it": "Sceptile",
     "en": "Sceptile",
     "es": "Sceptile",
@@ -2287,6 +2541,7 @@
   },
   {
     "ndex": 255,
+    "poke": "0255",
     "it": "Torchic",
     "en": "Torchic",
     "es": "Torchic",
@@ -2296,6 +2551,7 @@
   },
   {
     "ndex": 256,
+    "poke": "0256",
     "it": "Combusken",
     "en": "Combusken",
     "es": "Combusken",
@@ -2305,6 +2561,7 @@
   },
   {
     "ndex": 257,
+    "poke": "0257",
     "it": "Blaziken",
     "en": "Blaziken",
     "es": "Blaziken",
@@ -2314,6 +2571,7 @@
   },
   {
     "ndex": 258,
+    "poke": "0258",
     "it": "Mudkip",
     "en": "Mudkip",
     "es": "Mudkip",
@@ -2323,6 +2581,7 @@
   },
   {
     "ndex": 259,
+    "poke": "0259",
     "it": "Marshtomp",
     "en": "Marshtomp",
     "es": "Marshtomp",
@@ -2332,6 +2591,7 @@
   },
   {
     "ndex": 260,
+    "poke": "0260",
     "it": "Swampert",
     "en": "Swampert",
     "es": "Swampert",
@@ -2341,6 +2601,7 @@
   },
   {
     "ndex": 261,
+    "poke": "0261",
     "it": "Poochyena",
     "en": "Poochyena",
     "es": "Poochyena",
@@ -2350,6 +2611,7 @@
   },
   {
     "ndex": 262,
+    "poke": "0262",
     "it": "Mightyena",
     "en": "Mightyena",
     "es": "Mightyena",
@@ -2359,6 +2621,7 @@
   },
   {
     "ndex": 263,
+    "poke": "0263",
     "it": "Zigzagoon",
     "en": "Zigzagoon",
     "es": "Zigzagoon",
@@ -2368,6 +2631,7 @@
   },
   {
     "ndex": 264,
+    "poke": "0264",
     "it": "Linoone",
     "en": "Linoone",
     "es": "Linoone",
@@ -2377,6 +2641,7 @@
   },
   {
     "ndex": 265,
+    "poke": "0265",
     "it": "Wurmple",
     "en": "Wurmple",
     "es": "Wurmple",
@@ -2386,6 +2651,7 @@
   },
   {
     "ndex": 266,
+    "poke": "0266",
     "it": "Silcoon",
     "en": "Silcoon",
     "es": "Silcoon",
@@ -2395,6 +2661,7 @@
   },
   {
     "ndex": 267,
+    "poke": "0267",
     "it": "Beautifly",
     "en": "Beautifly",
     "es": "Beautifly",
@@ -2404,6 +2671,7 @@
   },
   {
     "ndex": 268,
+    "poke": "0268",
     "it": "Cascoon",
     "en": "Cascoon",
     "es": "Cascoon",
@@ -2413,6 +2681,7 @@
   },
   {
     "ndex": 269,
+    "poke": "0269",
     "it": "Dustox",
     "en": "Dustox",
     "es": "Dustox",
@@ -2422,6 +2691,7 @@
   },
   {
     "ndex": 270,
+    "poke": "0270",
     "it": "Lotad",
     "en": "Lotad",
     "es": "Lotad",
@@ -2431,6 +2701,7 @@
   },
   {
     "ndex": 271,
+    "poke": "0271",
     "it": "Lombre",
     "en": "Lombre",
     "es": "Lombre",
@@ -2440,6 +2711,7 @@
   },
   {
     "ndex": 272,
+    "poke": "0272",
     "it": "Ludicolo",
     "en": "Ludicolo",
     "es": "Ludicolo",
@@ -2449,6 +2721,7 @@
   },
   {
     "ndex": 273,
+    "poke": "0273",
     "it": "Seedot",
     "en": "Seedot",
     "es": "Seedot",
@@ -2458,6 +2731,7 @@
   },
   {
     "ndex": 274,
+    "poke": "0274",
     "it": "Nuzleaf",
     "en": "Nuzleaf",
     "es": "Nuzleaf",
@@ -2467,6 +2741,7 @@
   },
   {
     "ndex": 275,
+    "poke": "0275",
     "it": "Shiftry",
     "en": "Shiftry",
     "es": "Shiftry",
@@ -2476,6 +2751,7 @@
   },
   {
     "ndex": 276,
+    "poke": "0276",
     "it": "Taillow",
     "en": "Taillow",
     "es": "Taillow",
@@ -2485,6 +2761,7 @@
   },
   {
     "ndex": 277,
+    "poke": "0277",
     "it": "Swellow",
     "en": "Swellow",
     "es": "Swellow",
@@ -2494,6 +2771,7 @@
   },
   {
     "ndex": 278,
+    "poke": "0278",
     "it": "Wingull",
     "en": "Wingull",
     "es": "Wingull",
@@ -2503,6 +2781,7 @@
   },
   {
     "ndex": 279,
+    "poke": "0279",
     "it": "Pelipper",
     "en": "Pelipper",
     "es": "Pelipper",
@@ -2512,6 +2791,7 @@
   },
   {
     "ndex": 280,
+    "poke": "0280",
     "it": "Ralts",
     "en": "Ralts",
     "es": "Ralts",
@@ -2521,6 +2801,7 @@
   },
   {
     "ndex": 281,
+    "poke": "0281",
     "it": "Kirlia",
     "en": "Kirlia",
     "es": "Kirlia",
@@ -2530,6 +2811,7 @@
   },
   {
     "ndex": 282,
+    "poke": "0282",
     "it": "Gardevoir",
     "en": "Gardevoir",
     "es": "Gardevoir",
@@ -2539,6 +2821,7 @@
   },
   {
     "ndex": 283,
+    "poke": "0283",
     "it": "Surskit",
     "en": "Surskit",
     "es": "Surskit",
@@ -2548,6 +2831,7 @@
   },
   {
     "ndex": 284,
+    "poke": "0284",
     "it": "Masquerain",
     "en": "Masquerain",
     "es": "Masquerain",
@@ -2557,6 +2841,7 @@
   },
   {
     "ndex": 285,
+    "poke": "0285",
     "it": "Shroomish",
     "en": "Shroomish",
     "es": "Shroomish",
@@ -2566,6 +2851,7 @@
   },
   {
     "ndex": 286,
+    "poke": "0286",
     "it": "Breloom",
     "en": "Breloom",
     "es": "Breloom",
@@ -2575,6 +2861,7 @@
   },
   {
     "ndex": 287,
+    "poke": "0287",
     "it": "Slakoth",
     "en": "Slakoth",
     "es": "Slakoth",
@@ -2584,6 +2871,7 @@
   },
   {
     "ndex": 288,
+    "poke": "0288",
     "it": "Vigoroth",
     "en": "Vigoroth",
     "es": "Vigoroth",
@@ -2593,6 +2881,7 @@
   },
   {
     "ndex": 289,
+    "poke": "0289",
     "it": "Slaking",
     "en": "Slaking",
     "es": "Slaking",
@@ -2602,6 +2891,7 @@
   },
   {
     "ndex": 290,
+    "poke": "0290",
     "it": "Nincada",
     "en": "Nincada",
     "es": "Nincada",
@@ -2611,6 +2901,7 @@
   },
   {
     "ndex": 291,
+    "poke": "0291",
     "it": "Ninjask",
     "en": "Ninjask",
     "es": "Ninjask",
@@ -2620,6 +2911,7 @@
   },
   {
     "ndex": 292,
+    "poke": "0292",
     "it": "Shedinja",
     "en": "Shedinja",
     "es": "Shedinja",
@@ -2629,6 +2921,7 @@
   },
   {
     "ndex": 293,
+    "poke": "0293",
     "it": "Whismur",
     "en": "Whismur",
     "es": "Whismur",
@@ -2638,6 +2931,7 @@
   },
   {
     "ndex": 294,
+    "poke": "0294",
     "it": "Loudred",
     "en": "Loudred",
     "es": "Loudred",
@@ -2647,6 +2941,7 @@
   },
   {
     "ndex": 295,
+    "poke": "0295",
     "it": "Exploud",
     "en": "Exploud",
     "es": "Exploud",
@@ -2656,6 +2951,7 @@
   },
   {
     "ndex": 296,
+    "poke": "0296",
     "it": "Makuhita",
     "en": "Makuhita",
     "es": "Makuhita",
@@ -2665,6 +2961,7 @@
   },
   {
     "ndex": 297,
+    "poke": "0297",
     "it": "Hariyama",
     "en": "Hariyama",
     "es": "Hariyama",
@@ -2674,6 +2971,7 @@
   },
   {
     "ndex": 298,
+    "poke": "0298",
     "it": "Azurill",
     "en": "Azurill",
     "es": "Azurill",
@@ -2683,6 +2981,7 @@
   },
   {
     "ndex": 299,
+    "poke": "0299",
     "it": "Nosepass",
     "en": "Nosepass",
     "es": "Nosepass",
@@ -2692,6 +2991,7 @@
   },
   {
     "ndex": 300,
+    "poke": "0300",
     "it": "Skitty",
     "en": "Skitty",
     "es": "Skitty",
@@ -2701,6 +3001,7 @@
   },
   {
     "ndex": 301,
+    "poke": "0301",
     "it": "Delcatty",
     "en": "Delcatty",
     "es": "Delcatty",
@@ -2710,6 +3011,7 @@
   },
   {
     "ndex": 302,
+    "poke": "0302",
     "it": "Sableye",
     "en": "Sableye",
     "es": "Sableye",
@@ -2719,6 +3021,7 @@
   },
   {
     "ndex": 303,
+    "poke": "0303",
     "it": "Mawile",
     "en": "Mawile",
     "es": "Mawile",
@@ -2728,6 +3031,7 @@
   },
   {
     "ndex": 304,
+    "poke": "0304",
     "it": "Aron",
     "en": "Aron",
     "es": "Aron",
@@ -2737,6 +3041,7 @@
   },
   {
     "ndex": 305,
+    "poke": "0305",
     "it": "Lairon",
     "en": "Lairon",
     "es": "Lairon",
@@ -2746,6 +3051,7 @@
   },
   {
     "ndex": 306,
+    "poke": "0306",
     "it": "Aggron",
     "en": "Aggron",
     "es": "Aggron",
@@ -2755,6 +3061,7 @@
   },
   {
     "ndex": 307,
+    "poke": "0307",
     "it": "Meditite",
     "en": "Meditite",
     "es": "Meditite",
@@ -2764,6 +3071,7 @@
   },
   {
     "ndex": 308,
+    "poke": "0308",
     "it": "Medicham",
     "en": "Medicham",
     "es": "Medicham",
@@ -2773,6 +3081,7 @@
   },
   {
     "ndex": 309,
+    "poke": "0309",
     "it": "Electrike",
     "en": "Electrike",
     "es": "Electrike",
@@ -2782,6 +3091,7 @@
   },
   {
     "ndex": 310,
+    "poke": "0310",
     "it": "Manectric",
     "en": "Manectric",
     "es": "Manectric",
@@ -2791,6 +3101,7 @@
   },
   {
     "ndex": 311,
+    "poke": "0311",
     "it": "Plusle",
     "en": "Plusle",
     "es": "Plusle",
@@ -2800,6 +3111,7 @@
   },
   {
     "ndex": 312,
+    "poke": "0312",
     "it": "Minun",
     "en": "Minun",
     "es": "Minun",
@@ -2809,6 +3121,7 @@
   },
   {
     "ndex": 313,
+    "poke": "0313",
     "it": "Volbeat",
     "en": "Volbeat",
     "es": "Volbeat",
@@ -2818,6 +3131,7 @@
   },
   {
     "ndex": 314,
+    "poke": "0314",
     "it": "Illumise",
     "en": "Illumise",
     "es": "Illumise",
@@ -2827,6 +3141,7 @@
   },
   {
     "ndex": 315,
+    "poke": "0315",
     "it": "Roselia",
     "en": "Roselia",
     "es": "Roselia",
@@ -2836,6 +3151,7 @@
   },
   {
     "ndex": 316,
+    "poke": "0316",
     "it": "Gulpin",
     "en": "Gulpin",
     "es": "Gulpin",
@@ -2845,6 +3161,7 @@
   },
   {
     "ndex": 317,
+    "poke": "0317",
     "it": "Swalot",
     "en": "Swalot",
     "es": "Swalot",
@@ -2854,6 +3171,7 @@
   },
   {
     "ndex": 318,
+    "poke": "0318",
     "it": "Carvanha",
     "en": "Carvanha",
     "es": "Carvanha",
@@ -2863,6 +3181,7 @@
   },
   {
     "ndex": 319,
+    "poke": "0319",
     "it": "Sharpedo",
     "en": "Sharpedo",
     "es": "Sharpedo",
@@ -2872,6 +3191,7 @@
   },
   {
     "ndex": 320,
+    "poke": "0320",
     "it": "Wailmer",
     "en": "Wailmer",
     "es": "Wailmer",
@@ -2881,6 +3201,7 @@
   },
   {
     "ndex": 321,
+    "poke": "0321",
     "it": "Wailord",
     "en": "Wailord",
     "es": "Wailord",
@@ -2890,6 +3211,7 @@
   },
   {
     "ndex": 322,
+    "poke": "0322",
     "it": "Numel",
     "en": "Numel",
     "es": "Numel",
@@ -2899,6 +3221,7 @@
   },
   {
     "ndex": 323,
+    "poke": "0323",
     "it": "Camerupt",
     "en": "Camerupt",
     "es": "Camerupt",
@@ -2908,6 +3231,7 @@
   },
   {
     "ndex": 324,
+    "poke": "0324",
     "it": "Torkoal",
     "en": "Torkoal",
     "es": "Torkoal",
@@ -2917,6 +3241,7 @@
   },
   {
     "ndex": 325,
+    "poke": "0325",
     "it": "Spoink",
     "en": "Spoink",
     "es": "Spoink",
@@ -2926,6 +3251,7 @@
   },
   {
     "ndex": 326,
+    "poke": "0326",
     "it": "Grumpig",
     "en": "Grumpig",
     "es": "Grumpig",
@@ -2935,6 +3261,7 @@
   },
   {
     "ndex": 327,
+    "poke": "0327",
     "it": "Spinda",
     "en": "Spinda",
     "es": "Spinda",
@@ -2944,6 +3271,7 @@
   },
   {
     "ndex": 328,
+    "poke": "0328",
     "it": "Trapinch",
     "en": "Trapinch",
     "es": "Trapinch",
@@ -2953,6 +3281,7 @@
   },
   {
     "ndex": 329,
+    "poke": "0329",
     "it": "Vibrava",
     "en": "Vibrava",
     "es": "Vibrava",
@@ -2962,6 +3291,7 @@
   },
   {
     "ndex": 330,
+    "poke": "0330",
     "it": "Flygon",
     "en": "Flygon",
     "es": "Flygon",
@@ -2971,6 +3301,7 @@
   },
   {
     "ndex": 331,
+    "poke": "0331",
     "it": "Cacnea",
     "en": "Cacnea",
     "es": "Cacnea",
@@ -2980,6 +3311,7 @@
   },
   {
     "ndex": 332,
+    "poke": "0332",
     "it": "Cacturne",
     "en": "Cacturne",
     "es": "Cacturne",
@@ -2989,6 +3321,7 @@
   },
   {
     "ndex": 333,
+    "poke": "0333",
     "it": "Swablu",
     "en": "Swablu",
     "es": "Swablu",
@@ -2998,6 +3331,7 @@
   },
   {
     "ndex": 334,
+    "poke": "0334",
     "it": "Altaria",
     "en": "Altaria",
     "es": "Altaria",
@@ -3007,6 +3341,7 @@
   },
   {
     "ndex": 335,
+    "poke": "0335",
     "it": "Zangoose",
     "en": "Zangoose",
     "es": "Zangoose",
@@ -3016,6 +3351,7 @@
   },
   {
     "ndex": 336,
+    "poke": "0336",
     "it": "Seviper",
     "en": "Seviper",
     "es": "Seviper",
@@ -3025,6 +3361,7 @@
   },
   {
     "ndex": 337,
+    "poke": "0337",
     "it": "Lunatone",
     "en": "Lunatone",
     "es": "Lunatone",
@@ -3034,6 +3371,7 @@
   },
   {
     "ndex": 338,
+    "poke": "0338",
     "it": "Solrock",
     "en": "Solrock",
     "es": "Solrock",
@@ -3043,6 +3381,7 @@
   },
   {
     "ndex": 339,
+    "poke": "0339",
     "it": "Barboach",
     "en": "Barboach",
     "es": "Barboach",
@@ -3052,6 +3391,7 @@
   },
   {
     "ndex": 340,
+    "poke": "0340",
     "it": "Whiscash",
     "en": "Whiscash",
     "es": "Whiscash",
@@ -3061,6 +3401,7 @@
   },
   {
     "ndex": 341,
+    "poke": "0341",
     "it": "Corphish",
     "en": "Corphish",
     "es": "Corphish",
@@ -3070,6 +3411,7 @@
   },
   {
     "ndex": 342,
+    "poke": "0342",
     "it": "Crawdaunt",
     "en": "Crawdaunt",
     "es": "Crawdaunt",
@@ -3079,6 +3421,7 @@
   },
   {
     "ndex": 343,
+    "poke": "0343",
     "it": "Baltoy",
     "en": "Baltoy",
     "es": "Baltoy",
@@ -3088,6 +3431,7 @@
   },
   {
     "ndex": 344,
+    "poke": "0344",
     "it": "Claydol",
     "en": "Claydol",
     "es": "Claydol",
@@ -3097,6 +3441,7 @@
   },
   {
     "ndex": 345,
+    "poke": "0345",
     "it": "Lileep",
     "en": "Lileep",
     "es": "Lileep",
@@ -3106,6 +3451,7 @@
   },
   {
     "ndex": 346,
+    "poke": "0346",
     "it": "Cradily",
     "en": "Cradily",
     "es": "Cradily",
@@ -3115,6 +3461,7 @@
   },
   {
     "ndex": 347,
+    "poke": "0347",
     "it": "Anorith",
     "en": "Anorith",
     "es": "Anorith",
@@ -3124,6 +3471,7 @@
   },
   {
     "ndex": 348,
+    "poke": "0348",
     "it": "Armaldo",
     "en": "Armaldo",
     "es": "Armaldo",
@@ -3133,6 +3481,7 @@
   },
   {
     "ndex": 349,
+    "poke": "0349",
     "it": "Feebas",
     "en": "Feebas",
     "es": "Feebas",
@@ -3142,6 +3491,7 @@
   },
   {
     "ndex": 350,
+    "poke": "0350",
     "it": "Milotic",
     "en": "Milotic",
     "es": "Milotic",
@@ -3151,6 +3501,7 @@
   },
   {
     "ndex": 351,
+    "poke": "0351",
     "it": "Castform",
     "en": "Castform",
     "es": "Castform",
@@ -3160,6 +3511,7 @@
   },
   {
     "ndex": 352,
+    "poke": "0352",
     "it": "Kecleon",
     "en": "Kecleon",
     "es": "Kecleon",
@@ -3169,6 +3521,7 @@
   },
   {
     "ndex": 353,
+    "poke": "0353",
     "it": "Shuppet",
     "en": "Shuppet",
     "es": "Shuppet",
@@ -3178,6 +3531,7 @@
   },
   {
     "ndex": 354,
+    "poke": "0354",
     "it": "Banette",
     "en": "Banette",
     "es": "Banette",
@@ -3187,6 +3541,7 @@
   },
   {
     "ndex": 355,
+    "poke": "0355",
     "it": "Duskull",
     "en": "Duskull",
     "es": "Duskull",
@@ -3196,6 +3551,7 @@
   },
   {
     "ndex": 356,
+    "poke": "0356",
     "it": "Dusclops",
     "en": "Dusclops",
     "es": "Dusclops",
@@ -3205,6 +3561,7 @@
   },
   {
     "ndex": 357,
+    "poke": "0357",
     "it": "Tropius",
     "en": "Tropius",
     "es": "Tropius",
@@ -3214,6 +3571,7 @@
   },
   {
     "ndex": 358,
+    "poke": "0358",
     "it": "Chimecho",
     "en": "Chimecho",
     "es": "Chimecho",
@@ -3223,6 +3581,7 @@
   },
   {
     "ndex": 359,
+    "poke": "0359",
     "it": "Absol",
     "en": "Absol",
     "es": "Absol",
@@ -3232,6 +3591,7 @@
   },
   {
     "ndex": 360,
+    "poke": "0360",
     "it": "Wynaut",
     "en": "Wynaut",
     "es": "Wynaut",
@@ -3241,6 +3601,7 @@
   },
   {
     "ndex": 361,
+    "poke": "0361",
     "it": "Snorunt",
     "en": "Snorunt",
     "es": "Snorunt",
@@ -3250,6 +3611,7 @@
   },
   {
     "ndex": 362,
+    "poke": "0362",
     "it": "Glalie",
     "en": "Glalie",
     "es": "Glalie",
@@ -3259,6 +3621,7 @@
   },
   {
     "ndex": 363,
+    "poke": "0363",
     "it": "Spheal",
     "en": "Spheal",
     "es": "Spheal",
@@ -3268,6 +3631,7 @@
   },
   {
     "ndex": 364,
+    "poke": "0364",
     "it": "Sealeo",
     "en": "Sealeo",
     "es": "Sealeo",
@@ -3277,6 +3641,7 @@
   },
   {
     "ndex": 365,
+    "poke": "0365",
     "it": "Walrein",
     "en": "Walrein",
     "es": "Walrein",
@@ -3286,6 +3651,7 @@
   },
   {
     "ndex": 366,
+    "poke": "0366",
     "it": "Clamperl",
     "en": "Clamperl",
     "es": "Clamperl",
@@ -3295,6 +3661,7 @@
   },
   {
     "ndex": 367,
+    "poke": "0367",
     "it": "Huntail",
     "en": "Huntail",
     "es": "Huntail",
@@ -3304,6 +3671,7 @@
   },
   {
     "ndex": 368,
+    "poke": "0368",
     "it": "Gorebyss",
     "en": "Gorebyss",
     "es": "Gorebyss",
@@ -3313,6 +3681,7 @@
   },
   {
     "ndex": 369,
+    "poke": "0369",
     "it": "Relicanth",
     "en": "Relicanth",
     "es": "Relicanth",
@@ -3322,6 +3691,7 @@
   },
   {
     "ndex": 370,
+    "poke": "0370",
     "it": "Luvdisc",
     "en": "Luvdisc",
     "es": "Luvdisc",
@@ -3331,6 +3701,7 @@
   },
   {
     "ndex": 371,
+    "poke": "0371",
     "it": "Bagon",
     "en": "Bagon",
     "es": "Bagon",
@@ -3340,6 +3711,7 @@
   },
   {
     "ndex": 372,
+    "poke": "0372",
     "it": "Shelgon",
     "en": "Shelgon",
     "es": "Shelgon",
@@ -3349,6 +3721,7 @@
   },
   {
     "ndex": 373,
+    "poke": "0373",
     "it": "Salamence",
     "en": "Salamence",
     "es": "Salamence",
@@ -3358,6 +3731,7 @@
   },
   {
     "ndex": 374,
+    "poke": "0374",
     "it": "Beldum",
     "en": "Beldum",
     "es": "Beldum",
@@ -3367,6 +3741,7 @@
   },
   {
     "ndex": 375,
+    "poke": "0375",
     "it": "Metang",
     "en": "Metang",
     "es": "Metang",
@@ -3376,6 +3751,7 @@
   },
   {
     "ndex": 376,
+    "poke": "0376",
     "it": "Metagross",
     "en": "Metagross",
     "es": "Metagross",
@@ -3385,6 +3761,7 @@
   },
   {
     "ndex": 377,
+    "poke": "0377",
     "it": "Regirock",
     "en": "Regirock",
     "es": "Regirock",
@@ -3394,6 +3771,7 @@
   },
   {
     "ndex": 378,
+    "poke": "0378",
     "it": "Regice",
     "en": "Regice",
     "es": "Regice",
@@ -3403,6 +3781,7 @@
   },
   {
     "ndex": 379,
+    "poke": "0379",
     "it": "Registeel",
     "en": "Registeel",
     "es": "Registeel",
@@ -3412,6 +3791,7 @@
   },
   {
     "ndex": 380,
+    "poke": "0380",
     "it": "Latias",
     "en": "Latias",
     "es": "Latias",
@@ -3421,6 +3801,7 @@
   },
   {
     "ndex": 381,
+    "poke": "0381",
     "it": "Latios",
     "en": "Latios",
     "es": "Latios",
@@ -3430,6 +3811,7 @@
   },
   {
     "ndex": 382,
+    "poke": "0382",
     "it": "Kyogre",
     "en": "Kyogre",
     "es": "Kyogre",
@@ -3439,6 +3821,7 @@
   },
   {
     "ndex": 383,
+    "poke": "0383",
     "it": "Groudon",
     "en": "Groudon",
     "es": "Groudon",
@@ -3448,6 +3831,7 @@
   },
   {
     "ndex": 384,
+    "poke": "0384",
     "it": "Rayquaza",
     "en": "Rayquaza",
     "es": "Rayquaza",
@@ -3457,6 +3841,7 @@
   },
   {
     "ndex": 385,
+    "poke": "0385",
     "it": "Jirachi",
     "en": "Jirachi",
     "es": "Jirachi",
@@ -3466,6 +3851,7 @@
   },
   {
     "ndex": 386,
+    "poke": "0386",
     "it": "Deoxys",
     "en": "Deoxys",
     "es": "Deoxys",
@@ -3475,6 +3861,7 @@
   },
   {
     "ndex": 387,
+    "poke": "0387",
     "it": "Turtwig",
     "en": "Turtwig",
     "es": "Turtwig",
@@ -3484,6 +3871,7 @@
   },
   {
     "ndex": 388,
+    "poke": "0388",
     "it": "Grotle",
     "en": "Grotle",
     "es": "Grotle",
@@ -3493,6 +3881,7 @@
   },
   {
     "ndex": 389,
+    "poke": "0389",
     "it": "Torterra",
     "en": "Torterra",
     "es": "Torterra",
@@ -3502,6 +3891,7 @@
   },
   {
     "ndex": 390,
+    "poke": "0390",
     "it": "Chimchar",
     "en": "Chimchar",
     "es": "Chimchar",
@@ -3511,6 +3901,7 @@
   },
   {
     "ndex": 391,
+    "poke": "0391",
     "it": "Monferno",
     "en": "Monferno",
     "es": "Monferno",
@@ -3520,6 +3911,7 @@
   },
   {
     "ndex": 392,
+    "poke": "0392",
     "it": "Infernape",
     "en": "Infernape",
     "es": "Infernape",
@@ -3529,6 +3921,7 @@
   },
   {
     "ndex": 393,
+    "poke": "0393",
     "it": "Piplup",
     "en": "Piplup",
     "es": "Piplup",
@@ -3538,6 +3931,7 @@
   },
   {
     "ndex": 394,
+    "poke": "0394",
     "it": "Prinplup",
     "en": "Prinplup",
     "es": "Prinplup",
@@ -3547,6 +3941,7 @@
   },
   {
     "ndex": 395,
+    "poke": "0395",
     "it": "Empoleon",
     "en": "Empoleon",
     "es": "Empoleon",
@@ -3556,6 +3951,7 @@
   },
   {
     "ndex": 396,
+    "poke": "0396",
     "it": "Starly",
     "en": "Starly",
     "es": "Starly",
@@ -3565,6 +3961,7 @@
   },
   {
     "ndex": 397,
+    "poke": "0397",
     "it": "Staravia",
     "en": "Staravia",
     "es": "Staravia",
@@ -3574,6 +3971,7 @@
   },
   {
     "ndex": 398,
+    "poke": "0398",
     "it": "Staraptor",
     "en": "Staraptor",
     "es": "Staraptor",
@@ -3583,6 +3981,7 @@
   },
   {
     "ndex": 399,
+    "poke": "0399",
     "it": "Bidoof",
     "en": "Bidoof",
     "es": "Bidoof",
@@ -3592,6 +3991,7 @@
   },
   {
     "ndex": 400,
+    "poke": "0400",
     "it": "Bibarel",
     "en": "Bibarel",
     "es": "Bibarel",
@@ -3601,6 +4001,7 @@
   },
   {
     "ndex": 401,
+    "poke": "0401",
     "it": "Kricketot",
     "en": "Kricketot",
     "es": "Kricketot",
@@ -3610,6 +4011,7 @@
   },
   {
     "ndex": 402,
+    "poke": "0402",
     "it": "Kricketune",
     "en": "Kricketune",
     "es": "Kricketune",
@@ -3619,6 +4021,7 @@
   },
   {
     "ndex": 403,
+    "poke": "0403",
     "it": "Shinx",
     "en": "Shinx",
     "es": "Shinx",
@@ -3628,6 +4031,7 @@
   },
   {
     "ndex": 404,
+    "poke": "0404",
     "it": "Luxio",
     "en": "Luxio",
     "es": "Luxio",
@@ -3637,6 +4041,7 @@
   },
   {
     "ndex": 405,
+    "poke": "0405",
     "it": "Luxray",
     "en": "Luxray",
     "es": "Luxray",
@@ -3646,6 +4051,7 @@
   },
   {
     "ndex": 406,
+    "poke": "0406",
     "it": "Budew",
     "en": "Budew",
     "es": "Budew",
@@ -3655,6 +4061,7 @@
   },
   {
     "ndex": 407,
+    "poke": "0407",
     "it": "Roserade",
     "en": "Roserade",
     "es": "Roserade",
@@ -3664,6 +4071,7 @@
   },
   {
     "ndex": 408,
+    "poke": "0408",
     "it": "Cranidos",
     "en": "Cranidos",
     "es": "Cranidos",
@@ -3673,6 +4081,7 @@
   },
   {
     "ndex": 409,
+    "poke": "0409",
     "it": "Rampardos",
     "en": "Rampardos",
     "es": "Rampardos",
@@ -3682,6 +4091,7 @@
   },
   {
     "ndex": 410,
+    "poke": "0410",
     "it": "Shieldon",
     "en": "Shieldon",
     "es": "Shieldon",
@@ -3691,6 +4101,7 @@
   },
   {
     "ndex": 411,
+    "poke": "0411",
     "it": "Bastiodon",
     "en": "Bastiodon",
     "es": "Bastiodon",
@@ -3700,6 +4111,7 @@
   },
   {
     "ndex": 412,
+    "poke": "0412",
     "it": "Burmy",
     "en": "Burmy",
     "es": "Burmy",
@@ -3709,6 +4121,7 @@
   },
   {
     "ndex": 413,
+    "poke": "0413",
     "it": "Wormadam",
     "en": "Wormadam",
     "es": "Wormadam",
@@ -3718,6 +4131,7 @@
   },
   {
     "ndex": 414,
+    "poke": "0414",
     "it": "Mothim",
     "en": "Mothim",
     "es": "Mothim",
@@ -3727,6 +4141,7 @@
   },
   {
     "ndex": 415,
+    "poke": "0415",
     "it": "Combee",
     "en": "Combee",
     "es": "Combee",
@@ -3736,6 +4151,7 @@
   },
   {
     "ndex": 416,
+    "poke": "0416",
     "it": "Vespiquen",
     "en": "Vespiquen",
     "es": "Vespiquen",
@@ -3745,6 +4161,7 @@
   },
   {
     "ndex": 417,
+    "poke": "0417",
     "it": "Pachirisu",
     "en": "Pachirisu",
     "es": "Pachirisu",
@@ -3754,6 +4171,7 @@
   },
   {
     "ndex": 418,
+    "poke": "0418",
     "it": "Buizel",
     "en": "Buizel",
     "es": "Buizel",
@@ -3763,6 +4181,7 @@
   },
   {
     "ndex": 419,
+    "poke": "0419",
     "it": "Floatzel",
     "en": "Floatzel",
     "es": "Floatzel",
@@ -3772,6 +4191,7 @@
   },
   {
     "ndex": 420,
+    "poke": "0420",
     "it": "Cherubi",
     "en": "Cherubi",
     "es": "Cherubi",
@@ -3781,6 +4201,7 @@
   },
   {
     "ndex": 421,
+    "poke": "0421",
     "it": "Cherrim",
     "en": "Cherrim",
     "es": "Cherrim",
@@ -3790,6 +4211,7 @@
   },
   {
     "ndex": 422,
+    "poke": "0422",
     "it": "Shellos",
     "en": "Shellos",
     "es": "Shellos",
@@ -3799,6 +4221,7 @@
   },
   {
     "ndex": 423,
+    "poke": "0423",
     "it": "Gastrodon",
     "en": "Gastrodon",
     "es": "Gastrodon",
@@ -3808,6 +4231,7 @@
   },
   {
     "ndex": 424,
+    "poke": "0424",
     "it": "Ambipom",
     "en": "Ambipom",
     "es": "Ambipom",
@@ -3817,6 +4241,7 @@
   },
   {
     "ndex": 425,
+    "poke": "0425",
     "it": "Drifloon",
     "en": "Drifloon",
     "es": "Drifloon",
@@ -3826,6 +4251,7 @@
   },
   {
     "ndex": 426,
+    "poke": "0426",
     "it": "Drifblim",
     "en": "Drifblim",
     "es": "Drifblim",
@@ -3835,6 +4261,7 @@
   },
   {
     "ndex": 427,
+    "poke": "0427",
     "it": "Buneary",
     "en": "Buneary",
     "es": "Buneary",
@@ -3844,6 +4271,7 @@
   },
   {
     "ndex": 428,
+    "poke": "0428",
     "it": "Lopunny",
     "en": "Lopunny",
     "es": "Lopunny",
@@ -3853,6 +4281,7 @@
   },
   {
     "ndex": 429,
+    "poke": "0429",
     "it": "Mismagius",
     "en": "Mismagius",
     "es": "Mismagius",
@@ -3862,6 +4291,7 @@
   },
   {
     "ndex": 430,
+    "poke": "0430",
     "it": "Honchkrow",
     "en": "Honchkrow",
     "es": "Honchkrow",
@@ -3871,6 +4301,7 @@
   },
   {
     "ndex": 431,
+    "poke": "0431",
     "it": "Glameow",
     "en": "Glameow",
     "es": "Glameow",
@@ -3880,6 +4311,7 @@
   },
   {
     "ndex": 432,
+    "poke": "0432",
     "it": "Purugly",
     "en": "Purugly",
     "es": "Purugly",
@@ -3889,6 +4321,7 @@
   },
   {
     "ndex": 433,
+    "poke": "0433",
     "it": "Chingling",
     "en": "Chingling",
     "es": "Chingling",
@@ -3898,6 +4331,7 @@
   },
   {
     "ndex": 434,
+    "poke": "0434",
     "it": "Stunky",
     "en": "Stunky",
     "es": "Stunky",
@@ -3907,6 +4341,7 @@
   },
   {
     "ndex": 435,
+    "poke": "0435",
     "it": "Skuntank",
     "en": "Skuntank",
     "es": "Skuntank",
@@ -3916,6 +4351,7 @@
   },
   {
     "ndex": 436,
+    "poke": "0436",
     "it": "Bronzor",
     "en": "Bronzor",
     "es": "Bronzor",
@@ -3925,6 +4361,7 @@
   },
   {
     "ndex": 437,
+    "poke": "0437",
     "it": "Bronzong",
     "en": "Bronzong",
     "es": "Bronzong",
@@ -3934,6 +4371,7 @@
   },
   {
     "ndex": 438,
+    "poke": "0438",
     "it": "Bonsly",
     "en": "Bonsly",
     "es": "Bonsly",
@@ -3943,6 +4381,7 @@
   },
   {
     "ndex": 439,
+    "poke": "0439",
     "it": "Mime Jr.",
     "en": "Mime Jr.",
     "es": "Mime Jr.",
@@ -3952,6 +4391,7 @@
   },
   {
     "ndex": 440,
+    "poke": "0440",
     "it": "Happiny",
     "en": "Happiny",
     "es": "Happiny",
@@ -3961,6 +4401,7 @@
   },
   {
     "ndex": 441,
+    "poke": "0441",
     "it": "Chatot",
     "en": "Chatot",
     "es": "Chatot",
@@ -3970,6 +4411,7 @@
   },
   {
     "ndex": 442,
+    "poke": "0442",
     "it": "Spiritomb",
     "en": "Spiritomb",
     "es": "Spiritomb",
@@ -3979,6 +4421,7 @@
   },
   {
     "ndex": 443,
+    "poke": "0443",
     "it": "Gible",
     "en": "Gible",
     "es": "Gible",
@@ -3988,6 +4431,7 @@
   },
   {
     "ndex": 444,
+    "poke": "0444",
     "it": "Gabite",
     "en": "Gabite",
     "es": "Gabite",
@@ -3997,6 +4441,7 @@
   },
   {
     "ndex": 445,
+    "poke": "0445",
     "it": "Garchomp",
     "en": "Garchomp",
     "es": "Garchomp",
@@ -4006,6 +4451,7 @@
   },
   {
     "ndex": 446,
+    "poke": "0446",
     "it": "Munchlax",
     "en": "Munchlax",
     "es": "Munchlax",
@@ -4015,6 +4461,7 @@
   },
   {
     "ndex": 447,
+    "poke": "0447",
     "it": "Riolu",
     "en": "Riolu",
     "es": "Riolu",
@@ -4024,6 +4471,7 @@
   },
   {
     "ndex": 448,
+    "poke": "0448",
     "it": "Lucario",
     "en": "Lucario",
     "es": "Lucario",
@@ -4033,6 +4481,7 @@
   },
   {
     "ndex": 449,
+    "poke": "0449",
     "it": "Hippopotas",
     "en": "Hippopotas",
     "es": "Hippopotas",
@@ -4042,6 +4491,7 @@
   },
   {
     "ndex": 450,
+    "poke": "0450",
     "it": "Hippowdon",
     "en": "Hippowdon",
     "es": "Hippowdon",
@@ -4051,6 +4501,7 @@
   },
   {
     "ndex": 451,
+    "poke": "0451",
     "it": "Skorupi",
     "en": "Skorupi",
     "es": "Skorupi",
@@ -4060,6 +4511,7 @@
   },
   {
     "ndex": 452,
+    "poke": "0452",
     "it": "Drapion",
     "en": "Drapion",
     "es": "Drapion",
@@ -4069,6 +4521,7 @@
   },
   {
     "ndex": 453,
+    "poke": "0453",
     "it": "Croagunk",
     "en": "Croagunk",
     "es": "Croagunk",
@@ -4078,6 +4531,7 @@
   },
   {
     "ndex": 454,
+    "poke": "0454",
     "it": "Toxicroak",
     "en": "Toxicroak",
     "es": "Toxicroak",
@@ -4087,6 +4541,7 @@
   },
   {
     "ndex": 455,
+    "poke": "0455",
     "it": "Carnivine",
     "en": "Carnivine",
     "es": "Carnivine",
@@ -4096,6 +4551,7 @@
   },
   {
     "ndex": 456,
+    "poke": "0456",
     "it": "Finneon",
     "en": "Finneon",
     "es": "Finneon",
@@ -4105,6 +4561,7 @@
   },
   {
     "ndex": 457,
+    "poke": "0457",
     "it": "Lumineon",
     "en": "Lumineon",
     "es": "Lumineon",
@@ -4114,6 +4571,7 @@
   },
   {
     "ndex": 458,
+    "poke": "0458",
     "it": "Mantyke",
     "en": "Mantyke",
     "es": "Mantyke",
@@ -4123,6 +4581,7 @@
   },
   {
     "ndex": 459,
+    "poke": "0459",
     "it": "Snover",
     "en": "Snover",
     "es": "Snover",
@@ -4132,6 +4591,7 @@
   },
   {
     "ndex": 460,
+    "poke": "0460",
     "it": "Abomasnow",
     "en": "Abomasnow",
     "es": "Abomasnow",
@@ -4141,6 +4601,7 @@
   },
   {
     "ndex": 461,
+    "poke": "0461",
     "it": "Weavile",
     "en": "Weavile",
     "es": "Weavile",
@@ -4150,6 +4611,7 @@
   },
   {
     "ndex": 462,
+    "poke": "0462",
     "it": "Magnezone",
     "en": "Magnezone",
     "es": "Magnezone",
@@ -4159,6 +4621,7 @@
   },
   {
     "ndex": 463,
+    "poke": "0463",
     "it": "Lickilicky",
     "en": "Lickilicky",
     "es": "Lickilicky",
@@ -4168,6 +4631,7 @@
   },
   {
     "ndex": 464,
+    "poke": "0464",
     "it": "Rhyperior",
     "en": "Rhyperior",
     "es": "Rhyperior",
@@ -4177,6 +4641,7 @@
   },
   {
     "ndex": 465,
+    "poke": "0465",
     "it": "Tangrowth",
     "en": "Tangrowth",
     "es": "Tangrowth",
@@ -4186,6 +4651,7 @@
   },
   {
     "ndex": 466,
+    "poke": "0466",
     "it": "Electivire",
     "en": "Electivire",
     "es": "Electivire",
@@ -4195,6 +4661,7 @@
   },
   {
     "ndex": 467,
+    "poke": "0467",
     "it": "Magmortar",
     "en": "Magmortar",
     "es": "Magmortar",
@@ -4204,6 +4671,7 @@
   },
   {
     "ndex": 468,
+    "poke": "0468",
     "it": "Togekiss",
     "en": "Togekiss",
     "es": "Togekiss",
@@ -4213,6 +4681,7 @@
   },
   {
     "ndex": 469,
+    "poke": "0469",
     "it": "Yanmega",
     "en": "Yanmega",
     "es": "Yanmega",
@@ -4222,6 +4691,7 @@
   },
   {
     "ndex": 470,
+    "poke": "0470",
     "it": "Leafeon",
     "en": "Leafeon",
     "es": "Leafeon",
@@ -4231,6 +4701,7 @@
   },
   {
     "ndex": 471,
+    "poke": "0471",
     "it": "Glaceon",
     "en": "Glaceon",
     "es": "Glaceon",
@@ -4240,6 +4711,7 @@
   },
   {
     "ndex": 472,
+    "poke": "0472",
     "it": "Gliscor",
     "en": "Gliscor",
     "es": "Gliscor",
@@ -4249,6 +4721,7 @@
   },
   {
     "ndex": 473,
+    "poke": "0473",
     "it": "Mamoswine",
     "en": "Mamoswine",
     "es": "Mamoswine",
@@ -4258,6 +4731,7 @@
   },
   {
     "ndex": 474,
+    "poke": "0474",
     "it": "Porygon-Z",
     "en": "Porygon-Z",
     "es": "Porygon-Z",
@@ -4267,6 +4741,7 @@
   },
   {
     "ndex": 475,
+    "poke": "0475",
     "it": "Gallade",
     "en": "Gallade",
     "es": "Gallade",
@@ -4276,6 +4751,7 @@
   },
   {
     "ndex": 476,
+    "poke": "0476",
     "it": "Probopass",
     "en": "Probopass",
     "es": "Probopass",
@@ -4285,6 +4761,7 @@
   },
   {
     "ndex": 477,
+    "poke": "0477",
     "it": "Dusknoir",
     "en": "Dusknoir",
     "es": "Dusknoir",
@@ -4294,6 +4771,7 @@
   },
   {
     "ndex": 478,
+    "poke": "0478",
     "it": "Froslass",
     "en": "Froslass",
     "es": "Froslass",
@@ -4303,6 +4781,7 @@
   },
   {
     "ndex": 479,
+    "poke": "0479",
     "it": "Rotom",
     "en": "Rotom",
     "es": "Rotom",
@@ -4312,6 +4791,7 @@
   },
   {
     "ndex": 480,
+    "poke": "0480",
     "it": "Uxie",
     "en": "Uxie",
     "es": "Uxie",
@@ -4321,6 +4801,7 @@
   },
   {
     "ndex": 481,
+    "poke": "0481",
     "it": "Mesprit",
     "en": "Mesprit",
     "es": "Mesprit",
@@ -4330,6 +4811,7 @@
   },
   {
     "ndex": 482,
+    "poke": "0482",
     "it": "Azelf",
     "en": "Azelf",
     "es": "Azelf",
@@ -4339,6 +4821,7 @@
   },
   {
     "ndex": 483,
+    "poke": "0483",
     "it": "Dialga",
     "en": "Dialga",
     "es": "Dialga",
@@ -4348,6 +4831,7 @@
   },
   {
     "ndex": 484,
+    "poke": "0484",
     "it": "Palkia",
     "en": "Palkia",
     "es": "Palkia",
@@ -4357,6 +4841,7 @@
   },
   {
     "ndex": 485,
+    "poke": "0485",
     "it": "Heatran",
     "en": "Heatran",
     "es": "Heatran",
@@ -4366,6 +4851,7 @@
   },
   {
     "ndex": 486,
+    "poke": "0486",
     "it": "Regigigas",
     "en": "Regigigas",
     "es": "Regigigas",
@@ -4375,6 +4861,7 @@
   },
   {
     "ndex": 487,
+    "poke": "0487",
     "it": "Giratina",
     "en": "Giratina",
     "es": "Giratina",
@@ -4384,6 +4871,7 @@
   },
   {
     "ndex": 488,
+    "poke": "0488",
     "it": "Cresselia",
     "en": "Cresselia",
     "es": "Cresselia",
@@ -4393,6 +4881,7 @@
   },
   {
     "ndex": 489,
+    "poke": "0489",
     "it": "Phione",
     "en": "Phione",
     "es": "Phione",
@@ -4402,6 +4891,7 @@
   },
   {
     "ndex": 490,
+    "poke": "0490",
     "it": "Manaphy",
     "en": "Manaphy",
     "es": "Manaphy",
@@ -4411,6 +4901,7 @@
   },
   {
     "ndex": 491,
+    "poke": "0491",
     "it": "Darkrai",
     "en": "Darkrai",
     "es": "Darkrai",
@@ -4420,6 +4911,7 @@
   },
   {
     "ndex": 492,
+    "poke": "0492",
     "it": "Shaymin",
     "en": "Shaymin",
     "es": "Shaymin",
@@ -4429,6 +4921,7 @@
   },
   {
     "ndex": 493,
+    "poke": "0493",
     "it": "Arceus",
     "en": "Arceus",
     "es": "Arceus",
@@ -4438,6 +4931,7 @@
   },
   {
     "ndex": 494,
+    "poke": "0494",
     "it": "Victini",
     "en": "Victini",
     "es": "Victini",
@@ -4447,6 +4941,7 @@
   },
   {
     "ndex": 495,
+    "poke": "0495",
     "it": "Snivy",
     "en": "Snivy",
     "es": "Snivy",
@@ -4456,6 +4951,7 @@
   },
   {
     "ndex": 496,
+    "poke": "0496",
     "it": "Servine",
     "en": "Servine",
     "es": "Servine",
@@ -4465,6 +4961,7 @@
   },
   {
     "ndex": 497,
+    "poke": "0497",
     "it": "Serperior",
     "en": "Serperior",
     "es": "Serperior",
@@ -4474,6 +4971,7 @@
   },
   {
     "ndex": 498,
+    "poke": "0498",
     "it": "Tepig",
     "en": "Tepig",
     "es": "Tepig",
@@ -4483,6 +4981,7 @@
   },
   {
     "ndex": 499,
+    "poke": "0499",
     "it": "Pignite",
     "en": "Pignite",
     "es": "Pignite",
@@ -4492,6 +4991,7 @@
   },
   {
     "ndex": 500,
+    "poke": "0500",
     "it": "Emboar",
     "en": "Emboar",
     "es": "Emboar",
@@ -4501,6 +5001,7 @@
   },
   {
     "ndex": 501,
+    "poke": "0501",
     "it": "Oshawott",
     "en": "Oshawott",
     "es": "Oshawott",
@@ -4510,6 +5011,7 @@
   },
   {
     "ndex": 502,
+    "poke": "0502",
     "it": "Dewott",
     "en": "Dewott",
     "es": "Dewott",
@@ -4519,6 +5021,7 @@
   },
   {
     "ndex": 503,
+    "poke": "0503",
     "it": "Samurott",
     "en": "Samurott",
     "es": "Samurott",
@@ -4528,6 +5031,7 @@
   },
   {
     "ndex": 504,
+    "poke": "0504",
     "it": "Patrat",
     "en": "Patrat",
     "es": "Patrat",
@@ -4537,6 +5041,7 @@
   },
   {
     "ndex": 505,
+    "poke": "0505",
     "it": "Watchog",
     "en": "Watchog",
     "es": "Watchog",
@@ -4546,6 +5051,7 @@
   },
   {
     "ndex": 506,
+    "poke": "0506",
     "it": "Lillipup",
     "en": "Lillipup",
     "es": "Lillipup",
@@ -4555,6 +5061,7 @@
   },
   {
     "ndex": 507,
+    "poke": "0507",
     "it": "Herdier",
     "en": "Herdier",
     "es": "Herdier",
@@ -4564,6 +5071,7 @@
   },
   {
     "ndex": 508,
+    "poke": "0508",
     "it": "Stoutland",
     "en": "Stoutland",
     "es": "Stoutland",
@@ -4573,6 +5081,7 @@
   },
   {
     "ndex": 509,
+    "poke": "0509",
     "it": "Purrloin",
     "en": "Purrloin",
     "es": "Purrloin",
@@ -4582,6 +5091,7 @@
   },
   {
     "ndex": 510,
+    "poke": "0510",
     "it": "Liepard",
     "en": "Liepard",
     "es": "Liepard",
@@ -4591,6 +5101,7 @@
   },
   {
     "ndex": 511,
+    "poke": "0511",
     "it": "Pansage",
     "en": "Pansage",
     "es": "Pansage",
@@ -4600,6 +5111,7 @@
   },
   {
     "ndex": 512,
+    "poke": "0512",
     "it": "Simisage",
     "en": "Simisage",
     "es": "Simisage",
@@ -4609,6 +5121,7 @@
   },
   {
     "ndex": 513,
+    "poke": "0513",
     "it": "Pansear",
     "en": "Pansear",
     "es": "Pansear",
@@ -4618,6 +5131,7 @@
   },
   {
     "ndex": 514,
+    "poke": "0514",
     "it": "Simisear",
     "en": "Simisear",
     "es": "Simisear",
@@ -4627,6 +5141,7 @@
   },
   {
     "ndex": 515,
+    "poke": "0515",
     "it": "Panpour",
     "en": "Panpour",
     "es": "Panpour",
@@ -4636,6 +5151,7 @@
   },
   {
     "ndex": 516,
+    "poke": "0516",
     "it": "Simipour",
     "en": "Simipour",
     "es": "Simipour",
@@ -4645,6 +5161,7 @@
   },
   {
     "ndex": 517,
+    "poke": "0517",
     "it": "Munna",
     "en": "Munna",
     "es": "Munna",
@@ -4654,6 +5171,7 @@
   },
   {
     "ndex": 518,
+    "poke": "0518",
     "it": "Musharna",
     "en": "Musharna",
     "es": "Musharna",
@@ -4663,6 +5181,7 @@
   },
   {
     "ndex": 519,
+    "poke": "0519",
     "it": "Pidove",
     "en": "Pidove",
     "es": "Pidove",
@@ -4672,6 +5191,7 @@
   },
   {
     "ndex": 520,
+    "poke": "0520",
     "it": "Tranquill",
     "en": "Tranquill",
     "es": "Tranquill",
@@ -4681,6 +5201,7 @@
   },
   {
     "ndex": 521,
+    "poke": "0521",
     "it": "Unfezant",
     "en": "Unfezant",
     "es": "Unfezant",
@@ -4690,6 +5211,7 @@
   },
   {
     "ndex": 522,
+    "poke": "0522",
     "it": "Blitzle",
     "en": "Blitzle",
     "es": "Blitzle",
@@ -4699,6 +5221,7 @@
   },
   {
     "ndex": 523,
+    "poke": "0523",
     "it": "Zebstrika",
     "en": "Zebstrika",
     "es": "Zebstrika",
@@ -4708,6 +5231,7 @@
   },
   {
     "ndex": 524,
+    "poke": "0524",
     "it": "Roggenrola",
     "en": "Roggenrola",
     "es": "Roggenrola",
@@ -4717,6 +5241,7 @@
   },
   {
     "ndex": 525,
+    "poke": "0525",
     "it": "Boldore",
     "en": "Boldore",
     "es": "Boldore",
@@ -4726,6 +5251,7 @@
   },
   {
     "ndex": 526,
+    "poke": "0526",
     "it": "Gigalith",
     "en": "Gigalith",
     "es": "Gigalith",
@@ -4735,6 +5261,7 @@
   },
   {
     "ndex": 527,
+    "poke": "0527",
     "it": "Woobat",
     "en": "Woobat",
     "es": "Woobat",
@@ -4744,6 +5271,7 @@
   },
   {
     "ndex": 528,
+    "poke": "0528",
     "it": "Swoobat",
     "en": "Swoobat",
     "es": "Swoobat",
@@ -4753,6 +5281,7 @@
   },
   {
     "ndex": 529,
+    "poke": "0529",
     "it": "Drilbur",
     "en": "Drilbur",
     "es": "Drilbur",
@@ -4762,6 +5291,7 @@
   },
   {
     "ndex": 530,
+    "poke": "0530",
     "it": "Excadrill",
     "en": "Excadrill",
     "es": "Excadrill",
@@ -4771,6 +5301,7 @@
   },
   {
     "ndex": 531,
+    "poke": "0531",
     "it": "Audino",
     "en": "Audino",
     "es": "Audino",
@@ -4780,6 +5311,7 @@
   },
   {
     "ndex": 532,
+    "poke": "0532",
     "it": "Timburr",
     "en": "Timburr",
     "es": "Timburr",
@@ -4789,6 +5321,7 @@
   },
   {
     "ndex": 533,
+    "poke": "0533",
     "it": "Gurdurr",
     "en": "Gurdurr",
     "es": "Gurdurr",
@@ -4798,6 +5331,7 @@
   },
   {
     "ndex": 534,
+    "poke": "0534",
     "it": "Conkeldurr",
     "en": "Conkeldurr",
     "es": "Conkeldurr",
@@ -4807,6 +5341,7 @@
   },
   {
     "ndex": 535,
+    "poke": "0535",
     "it": "Tympole",
     "en": "Tympole",
     "es": "Tympole",
@@ -4816,6 +5351,7 @@
   },
   {
     "ndex": 536,
+    "poke": "0536",
     "it": "Palpitoad",
     "en": "Palpitoad",
     "es": "Palpitoad",
@@ -4825,6 +5361,7 @@
   },
   {
     "ndex": 537,
+    "poke": "0537",
     "it": "Seismitoad",
     "en": "Seismitoad",
     "es": "Seismitoad",
@@ -4834,6 +5371,7 @@
   },
   {
     "ndex": 538,
+    "poke": "0538",
     "it": "Throh",
     "en": "Throh",
     "es": "Throh",
@@ -4843,6 +5381,7 @@
   },
   {
     "ndex": 539,
+    "poke": "0539",
     "it": "Sawk",
     "en": "Sawk",
     "es": "Sawk",
@@ -4852,6 +5391,7 @@
   },
   {
     "ndex": 540,
+    "poke": "0540",
     "it": "Sewaddle",
     "en": "Sewaddle",
     "es": "Sewaddle",
@@ -4861,6 +5401,7 @@
   },
   {
     "ndex": 541,
+    "poke": "0541",
     "it": "Swadloon",
     "en": "Swadloon",
     "es": "Swadloon",
@@ -4870,6 +5411,7 @@
   },
   {
     "ndex": 542,
+    "poke": "0542",
     "it": "Leavanny",
     "en": "Leavanny",
     "es": "Leavanny",
@@ -4879,6 +5421,7 @@
   },
   {
     "ndex": 543,
+    "poke": "0543",
     "it": "Venipede",
     "en": "Venipede",
     "es": "Venipede",
@@ -4888,6 +5431,7 @@
   },
   {
     "ndex": 544,
+    "poke": "0544",
     "it": "Whirlipede",
     "en": "Whirlipede",
     "es": "Whirlipede",
@@ -4897,6 +5441,7 @@
   },
   {
     "ndex": 545,
+    "poke": "0545",
     "it": "Scolipede",
     "en": "Scolipede",
     "es": "Scolipede",
@@ -4906,6 +5451,7 @@
   },
   {
     "ndex": 546,
+    "poke": "0546",
     "it": "Cottonee",
     "en": "Cottonee",
     "es": "Cottonee",
@@ -4915,6 +5461,7 @@
   },
   {
     "ndex": 547,
+    "poke": "0547",
     "it": "Whimsicott",
     "en": "Whimsicott",
     "es": "Whimsicott",
@@ -4924,6 +5471,7 @@
   },
   {
     "ndex": 548,
+    "poke": "0548",
     "it": "Petilil",
     "en": "Petilil",
     "es": "Petilil",
@@ -4933,6 +5481,7 @@
   },
   {
     "ndex": 549,
+    "poke": "0549",
     "it": "Lilligant",
     "en": "Lilligant",
     "es": "Lilligant",
@@ -4942,6 +5491,7 @@
   },
   {
     "ndex": 550,
+    "poke": "0550",
     "it": "Basculin",
     "en": "Basculin",
     "es": "Basculin",
@@ -4951,6 +5501,7 @@
   },
   {
     "ndex": 551,
+    "poke": "0551",
     "it": "Sandile",
     "en": "Sandile",
     "es": "Sandile",
@@ -4960,6 +5511,7 @@
   },
   {
     "ndex": 552,
+    "poke": "0552",
     "it": "Krokorok",
     "en": "Krokorok",
     "es": "Krokorok",
@@ -4969,6 +5521,7 @@
   },
   {
     "ndex": 553,
+    "poke": "0553",
     "it": "Krookodile",
     "en": "Krookodile",
     "es": "Krookodile",
@@ -4978,6 +5531,7 @@
   },
   {
     "ndex": 554,
+    "poke": "0554",
     "it": "Darumaka",
     "en": "Darumaka",
     "es": "Darumaka",
@@ -4987,6 +5541,7 @@
   },
   {
     "ndex": 555,
+    "poke": "0555",
     "it": "Darmanitan",
     "en": "Darmanitan",
     "es": "Darmanitan",
@@ -4996,6 +5551,7 @@
   },
   {
     "ndex": 556,
+    "poke": "0556",
     "it": "Maractus",
     "en": "Maractus",
     "es": "Maractus",
@@ -5005,6 +5561,7 @@
   },
   {
     "ndex": 557,
+    "poke": "0557",
     "it": "Dwebble",
     "en": "Dwebble",
     "es": "Dwebble",
@@ -5014,6 +5571,7 @@
   },
   {
     "ndex": 558,
+    "poke": "0558",
     "it": "Crustle",
     "en": "Crustle",
     "es": "Crustle",
@@ -5023,6 +5581,7 @@
   },
   {
     "ndex": 559,
+    "poke": "0559",
     "it": "Scraggy",
     "en": "Scraggy",
     "es": "Scraggy",
@@ -5032,6 +5591,7 @@
   },
   {
     "ndex": 560,
+    "poke": "0560",
     "it": "Scrafty",
     "en": "Scrafty",
     "es": "Scrafty",
@@ -5041,6 +5601,7 @@
   },
   {
     "ndex": 561,
+    "poke": "0561",
     "it": "Sigilyph",
     "en": "Sigilyph",
     "es": "Sigilyph",
@@ -5050,6 +5611,7 @@
   },
   {
     "ndex": 562,
+    "poke": "0562",
     "it": "Yamask",
     "en": "Yamask",
     "es": "Yamask",
@@ -5059,6 +5621,7 @@
   },
   {
     "ndex": 563,
+    "poke": "0563",
     "it": "Cofagrigus",
     "en": "Cofagrigus",
     "es": "Cofagrigus",
@@ -5068,6 +5631,7 @@
   },
   {
     "ndex": 564,
+    "poke": "0564",
     "it": "Tirtouga",
     "en": "Tirtouga",
     "es": "Tirtouga",
@@ -5077,6 +5641,7 @@
   },
   {
     "ndex": 565,
+    "poke": "0565",
     "it": "Carracosta",
     "en": "Carracosta",
     "es": "Carracosta",
@@ -5086,6 +5651,7 @@
   },
   {
     "ndex": 566,
+    "poke": "0566",
     "it": "Archen",
     "en": "Archen",
     "es": "Archen",
@@ -5095,6 +5661,7 @@
   },
   {
     "ndex": 567,
+    "poke": "0567",
     "it": "Archeops",
     "en": "Archeops",
     "es": "Archeops",
@@ -5104,6 +5671,7 @@
   },
   {
     "ndex": 568,
+    "poke": "0568",
     "it": "Trubbish",
     "en": "Trubbish",
     "es": "Trubbish",
@@ -5113,6 +5681,7 @@
   },
   {
     "ndex": 569,
+    "poke": "0569",
     "it": "Garbodor",
     "en": "Garbodor",
     "es": "Garbodor",
@@ -5122,6 +5691,7 @@
   },
   {
     "ndex": 570,
+    "poke": "0570",
     "it": "Zorua",
     "en": "Zorua",
     "es": "Zorua",
@@ -5131,6 +5701,7 @@
   },
   {
     "ndex": 571,
+    "poke": "0571",
     "it": "Zoroark",
     "en": "Zoroark",
     "es": "Zoroark",
@@ -5140,6 +5711,7 @@
   },
   {
     "ndex": 572,
+    "poke": "0572",
     "it": "Minccino",
     "en": "Minccino",
     "es": "Minccino",
@@ -5149,6 +5721,7 @@
   },
   {
     "ndex": 573,
+    "poke": "0573",
     "it": "Cinccino",
     "en": "Cinccino",
     "es": "Cinccino",
@@ -5158,6 +5731,7 @@
   },
   {
     "ndex": 574,
+    "poke": "0574",
     "it": "Gothita",
     "en": "Gothita",
     "es": "Gothita",
@@ -5167,6 +5741,7 @@
   },
   {
     "ndex": 575,
+    "poke": "0575",
     "it": "Gothorita",
     "en": "Gothorita",
     "es": "Gothorita",
@@ -5176,6 +5751,7 @@
   },
   {
     "ndex": 576,
+    "poke": "0576",
     "it": "Gothitelle",
     "en": "Gothitelle",
     "es": "Gothitelle",
@@ -5185,6 +5761,7 @@
   },
   {
     "ndex": 577,
+    "poke": "0577",
     "it": "Solosis",
     "en": "Solosis",
     "es": "Solosis",
@@ -5194,6 +5771,7 @@
   },
   {
     "ndex": 578,
+    "poke": "0578",
     "it": "Duosion",
     "en": "Duosion",
     "es": "Duosion",
@@ -5203,6 +5781,7 @@
   },
   {
     "ndex": 579,
+    "poke": "0579",
     "it": "Reuniclus",
     "en": "Reuniclus",
     "es": "Reuniclus",
@@ -5212,6 +5791,7 @@
   },
   {
     "ndex": 580,
+    "poke": "0580",
     "it": "Ducklett",
     "en": "Ducklett",
     "es": "Ducklett",
@@ -5221,6 +5801,7 @@
   },
   {
     "ndex": 581,
+    "poke": "0581",
     "it": "Swanna",
     "en": "Swanna",
     "es": "Swanna",
@@ -5230,6 +5811,7 @@
   },
   {
     "ndex": 582,
+    "poke": "0582",
     "it": "Vanillite",
     "en": "Vanillite",
     "es": "Vanillite",
@@ -5239,6 +5821,7 @@
   },
   {
     "ndex": 583,
+    "poke": "0583",
     "it": "Vanillish",
     "en": "Vanillish",
     "es": "Vanillish",
@@ -5248,6 +5831,7 @@
   },
   {
     "ndex": 584,
+    "poke": "0584",
     "it": "Vanilluxe",
     "en": "Vanilluxe",
     "es": "Vanilluxe",
@@ -5257,6 +5841,7 @@
   },
   {
     "ndex": 585,
+    "poke": "0585",
     "it": "Deerling",
     "en": "Deerling",
     "es": "Deerling",
@@ -5266,6 +5851,7 @@
   },
   {
     "ndex": 586,
+    "poke": "0586",
     "it": "Sawsbuck",
     "en": "Sawsbuck",
     "es": "Sawsbuck",
@@ -5275,6 +5861,7 @@
   },
   {
     "ndex": 587,
+    "poke": "0587",
     "it": "Emolga",
     "en": "Emolga",
     "es": "Emolga",
@@ -5284,6 +5871,7 @@
   },
   {
     "ndex": 588,
+    "poke": "0588",
     "it": "Karrablast",
     "en": "Karrablast",
     "es": "Karrablast",
@@ -5293,6 +5881,7 @@
   },
   {
     "ndex": 589,
+    "poke": "0589",
     "it": "Escavalier",
     "en": "Escavalier",
     "es": "Escavalier",
@@ -5302,6 +5891,7 @@
   },
   {
     "ndex": 590,
+    "poke": "0590",
     "it": "Foongus",
     "en": "Foongus",
     "es": "Foongus",
@@ -5311,6 +5901,7 @@
   },
   {
     "ndex": 591,
+    "poke": "0591",
     "it": "Amoonguss",
     "en": "Amoonguss",
     "es": "Amoonguss",
@@ -5320,6 +5911,7 @@
   },
   {
     "ndex": 592,
+    "poke": "0592",
     "it": "Frillish",
     "en": "Frillish",
     "es": "Frillish",
@@ -5329,6 +5921,7 @@
   },
   {
     "ndex": 593,
+    "poke": "0593",
     "it": "Jellicent",
     "en": "Jellicent",
     "es": "Jellicent",
@@ -5338,6 +5931,7 @@
   },
   {
     "ndex": 594,
+    "poke": "0594",
     "it": "Alomomola",
     "en": "Alomomola",
     "es": "Alomomola",
@@ -5347,6 +5941,7 @@
   },
   {
     "ndex": 595,
+    "poke": "0595",
     "it": "Joltik",
     "en": "Joltik",
     "es": "Joltik",
@@ -5356,6 +5951,7 @@
   },
   {
     "ndex": 596,
+    "poke": "0596",
     "it": "Galvantula",
     "en": "Galvantula",
     "es": "Galvantula",
@@ -5365,6 +5961,7 @@
   },
   {
     "ndex": 597,
+    "poke": "0597",
     "it": "Ferroseed",
     "en": "Ferroseed",
     "es": "Ferroseed",
@@ -5374,6 +5971,7 @@
   },
   {
     "ndex": 598,
+    "poke": "0598",
     "it": "Ferrothorn",
     "en": "Ferrothorn",
     "es": "Ferrothorn",
@@ -5383,6 +5981,7 @@
   },
   {
     "ndex": 599,
+    "poke": "0599",
     "it": "Klink",
     "en": "Klink",
     "es": "Klink",
@@ -5392,6 +5991,7 @@
   },
   {
     "ndex": 600,
+    "poke": "0600",
     "it": "Klang",
     "en": "Klang",
     "es": "Klang",
@@ -5401,6 +6001,7 @@
   },
   {
     "ndex": 601,
+    "poke": "0601",
     "it": "Klinklang",
     "en": "Klinklang",
     "es": "Klinklang",
@@ -5410,6 +6011,7 @@
   },
   {
     "ndex": 602,
+    "poke": "0602",
     "it": "Tynamo",
     "en": "Tynamo",
     "es": "Tynamo",
@@ -5419,6 +6021,7 @@
   },
   {
     "ndex": 603,
+    "poke": "0603",
     "it": "Eelektrik",
     "en": "Eelektrik",
     "es": "Eelektrik",
@@ -5428,6 +6031,7 @@
   },
   {
     "ndex": 604,
+    "poke": "0604",
     "it": "Eelektross",
     "en": "Eelektross",
     "es": "Eelektross",
@@ -5437,6 +6041,7 @@
   },
   {
     "ndex": 605,
+    "poke": "0605",
     "it": "Elgyem",
     "en": "Elgyem",
     "es": "Elgyem",
@@ -5446,6 +6051,7 @@
   },
   {
     "ndex": 606,
+    "poke": "0606",
     "it": "Beheeyem",
     "en": "Beheeyem",
     "es": "Beheeyem",
@@ -5455,6 +6061,7 @@
   },
   {
     "ndex": 607,
+    "poke": "0607",
     "it": "Litwick",
     "en": "Litwick",
     "es": "Litwick",
@@ -5464,6 +6071,7 @@
   },
   {
     "ndex": 608,
+    "poke": "0608",
     "it": "Lampent",
     "en": "Lampent",
     "es": "Lampent",
@@ -5473,6 +6081,7 @@
   },
   {
     "ndex": 609,
+    "poke": "0609",
     "it": "Chandelure",
     "en": "Chandelure",
     "es": "Chandelure",
@@ -5482,6 +6091,7 @@
   },
   {
     "ndex": 610,
+    "poke": "0610",
     "it": "Axew",
     "en": "Axew",
     "es": "Axew",
@@ -5491,6 +6101,7 @@
   },
   {
     "ndex": 611,
+    "poke": "0611",
     "it": "Fraxure",
     "en": "Fraxure",
     "es": "Fraxure",
@@ -5500,6 +6111,7 @@
   },
   {
     "ndex": 612,
+    "poke": "0612",
     "it": "Haxorus",
     "en": "Haxorus",
     "es": "Haxorus",
@@ -5509,6 +6121,7 @@
   },
   {
     "ndex": 613,
+    "poke": "0613",
     "it": "Cubchoo",
     "en": "Cubchoo",
     "es": "Cubchoo",
@@ -5518,6 +6131,7 @@
   },
   {
     "ndex": 614,
+    "poke": "0614",
     "it": "Beartic",
     "en": "Beartic",
     "es": "Beartic",
@@ -5527,6 +6141,7 @@
   },
   {
     "ndex": 615,
+    "poke": "0615",
     "it": "Cryogonal",
     "en": "Cryogonal",
     "es": "Cryogonal",
@@ -5536,6 +6151,7 @@
   },
   {
     "ndex": 616,
+    "poke": "0616",
     "it": "Shelmet",
     "en": "Shelmet",
     "es": "Shelmet",
@@ -5545,6 +6161,7 @@
   },
   {
     "ndex": 617,
+    "poke": "0617",
     "it": "Accelgor",
     "en": "Accelgor",
     "es": "Accelgor",
@@ -5554,6 +6171,7 @@
   },
   {
     "ndex": 618,
+    "poke": "0618",
     "it": "Stunfisk",
     "en": "Stunfisk",
     "es": "Stunfisk",
@@ -5563,6 +6181,7 @@
   },
   {
     "ndex": 619,
+    "poke": "0619",
     "it": "Mienfoo",
     "en": "Mienfoo",
     "es": "Mienfoo",
@@ -5572,6 +6191,7 @@
   },
   {
     "ndex": 620,
+    "poke": "0620",
     "it": "Mienshao",
     "en": "Mienshao",
     "es": "Mienshao",
@@ -5581,6 +6201,7 @@
   },
   {
     "ndex": 621,
+    "poke": "0621",
     "it": "Druddigon",
     "en": "Druddigon",
     "es": "Druddigon",
@@ -5590,6 +6211,7 @@
   },
   {
     "ndex": 622,
+    "poke": "0622",
     "it": "Golett",
     "en": "Golett",
     "es": "Golett",
@@ -5599,6 +6221,7 @@
   },
   {
     "ndex": 623,
+    "poke": "0623",
     "it": "Golurk",
     "en": "Golurk",
     "es": "Golurk",
@@ -5608,6 +6231,7 @@
   },
   {
     "ndex": 624,
+    "poke": "0624",
     "it": "Pawniard",
     "en": "Pawniard",
     "es": "Pawniard",
@@ -5617,6 +6241,7 @@
   },
   {
     "ndex": 625,
+    "poke": "0625",
     "it": "Bisharp",
     "en": "Bisharp",
     "es": "Bisharp",
@@ -5626,6 +6251,7 @@
   },
   {
     "ndex": 626,
+    "poke": "0626",
     "it": "Bouffalant",
     "en": "Bouffalant",
     "es": "Bouffalant",
@@ -5635,6 +6261,7 @@
   },
   {
     "ndex": 627,
+    "poke": "0627",
     "it": "Rufflet",
     "en": "Rufflet",
     "es": "Rufflet",
@@ -5644,6 +6271,7 @@
   },
   {
     "ndex": 628,
+    "poke": "0628",
     "it": "Braviary",
     "en": "Braviary",
     "es": "Braviary",
@@ -5653,6 +6281,7 @@
   },
   {
     "ndex": 629,
+    "poke": "0629",
     "it": "Vullaby",
     "en": "Vullaby",
     "es": "Vullaby",
@@ -5662,6 +6291,7 @@
   },
   {
     "ndex": 630,
+    "poke": "0630",
     "it": "Mandibuzz",
     "en": "Mandibuzz",
     "es": "Mandibuzz",
@@ -5671,6 +6301,7 @@
   },
   {
     "ndex": 631,
+    "poke": "0631",
     "it": "Heatmor",
     "en": "Heatmor",
     "es": "Heatmor",
@@ -5680,6 +6311,7 @@
   },
   {
     "ndex": 632,
+    "poke": "0632",
     "it": "Durant",
     "en": "Durant",
     "es": "Durant",
@@ -5689,6 +6321,7 @@
   },
   {
     "ndex": 633,
+    "poke": "0633",
     "it": "Deino",
     "en": "Deino",
     "es": "Deino",
@@ -5698,6 +6331,7 @@
   },
   {
     "ndex": 634,
+    "poke": "0634",
     "it": "Zweilous",
     "en": "Zweilous",
     "es": "Zweilous",
@@ -5707,6 +6341,7 @@
   },
   {
     "ndex": 635,
+    "poke": "0635",
     "it": "Hydreigon",
     "en": "Hydreigon",
     "es": "Hydreigon",
@@ -5716,6 +6351,7 @@
   },
   {
     "ndex": 636,
+    "poke": "0636",
     "it": "Larvesta",
     "en": "Larvesta",
     "es": "Larvesta",
@@ -5725,6 +6361,7 @@
   },
   {
     "ndex": 637,
+    "poke": "0637",
     "it": "Volcarona",
     "en": "Volcarona",
     "es": "Volcarona",
@@ -5734,6 +6371,7 @@
   },
   {
     "ndex": 638,
+    "poke": "0638",
     "it": "Cobalion",
     "en": "Cobalion",
     "es": "Cobalion",
@@ -5743,6 +6381,7 @@
   },
   {
     "ndex": 639,
+    "poke": "0639",
     "it": "Terrakion",
     "en": "Terrakion",
     "es": "Terrakion",
@@ -5752,6 +6391,7 @@
   },
   {
     "ndex": 640,
+    "poke": "0640",
     "it": "Virizion",
     "en": "Virizion",
     "es": "Virizion",
@@ -5761,6 +6401,7 @@
   },
   {
     "ndex": 641,
+    "poke": "0641",
     "it": "Tornadus",
     "en": "Tornadus",
     "es": "Tornadus",
@@ -5770,6 +6411,7 @@
   },
   {
     "ndex": 642,
+    "poke": "0642",
     "it": "Thundurus",
     "en": "Thundurus",
     "es": "Thundurus",
@@ -5779,6 +6421,7 @@
   },
   {
     "ndex": 643,
+    "poke": "0643",
     "it": "Reshiram",
     "en": "Reshiram",
     "es": "Reshiram",
@@ -5788,6 +6431,7 @@
   },
   {
     "ndex": 644,
+    "poke": "0644",
     "it": "Zekrom",
     "en": "Zekrom",
     "es": "Zekrom",
@@ -5797,6 +6441,7 @@
   },
   {
     "ndex": 645,
+    "poke": "0645",
     "it": "Landorus",
     "en": "Landorus",
     "es": "Landorus",
@@ -5806,6 +6451,7 @@
   },
   {
     "ndex": 646,
+    "poke": "0646",
     "it": "Kyurem",
     "en": "Kyurem",
     "es": "Kyurem",
@@ -5815,6 +6461,7 @@
   },
   {
     "ndex": 647,
+    "poke": "0647",
     "it": "Keldeo",
     "en": "Keldeo",
     "es": "Keldeo",
@@ -5824,6 +6471,7 @@
   },
   {
     "ndex": 648,
+    "poke": "0648",
     "it": "Meloetta",
     "en": "Meloetta",
     "es": "Meloetta",
@@ -5833,6 +6481,7 @@
   },
   {
     "ndex": 649,
+    "poke": "0649",
     "it": "Genesect",
     "en": "Genesect",
     "es": "Genesect",
@@ -5842,6 +6491,7 @@
   },
   {
     "ndex": 650,
+    "poke": "0650",
     "it": "Chespin",
     "en": "Chespin",
     "es": "Chespin",
@@ -5851,6 +6501,7 @@
   },
   {
     "ndex": 651,
+    "poke": "0651",
     "it": "Quilladin",
     "en": "Quilladin",
     "es": "Quilladin",
@@ -5860,6 +6511,7 @@
   },
   {
     "ndex": 652,
+    "poke": "0652",
     "it": "Chesnaught",
     "en": "Chesnaught",
     "es": "Chesnaught",
@@ -5869,6 +6521,7 @@
   },
   {
     "ndex": 653,
+    "poke": "0653",
     "it": "Fennekin",
     "en": "Fennekin",
     "es": "Fennekin",
@@ -5878,6 +6531,7 @@
   },
   {
     "ndex": 654,
+    "poke": "0654",
     "it": "Braixen",
     "en": "Braixen",
     "es": "Braixen",
@@ -5887,6 +6541,7 @@
   },
   {
     "ndex": 655,
+    "poke": "0655",
     "it": "Delphox",
     "en": "Delphox",
     "es": "Delphox",
@@ -5896,6 +6551,7 @@
   },
   {
     "ndex": 656,
+    "poke": "0656",
     "it": "Froakie",
     "en": "Froakie",
     "es": "Froakie",
@@ -5905,6 +6561,7 @@
   },
   {
     "ndex": 657,
+    "poke": "0657",
     "it": "Frogadier",
     "en": "Frogadier",
     "es": "Frogadier",
@@ -5914,6 +6571,7 @@
   },
   {
     "ndex": 658,
+    "poke": "0658",
     "it": "Greninja",
     "en": "Greninja",
     "es": "Greninja",
@@ -5923,6 +6581,7 @@
   },
   {
     "ndex": 659,
+    "poke": "0659",
     "it": "Bunnelby",
     "en": "Bunnelby",
     "es": "Bunnelby",
@@ -5932,6 +6591,7 @@
   },
   {
     "ndex": 660,
+    "poke": "0660",
     "it": "Diggersby",
     "en": "Diggersby",
     "es": "Diggersby",
@@ -5941,6 +6601,7 @@
   },
   {
     "ndex": 661,
+    "poke": "0661",
     "it": "Fletchling",
     "en": "Fletchling",
     "es": "Fletchling",
@@ -5950,6 +6611,7 @@
   },
   {
     "ndex": 662,
+    "poke": "0662",
     "it": "Fletchinder",
     "en": "Fletchinder",
     "es": "Fletchinder",
@@ -5959,6 +6621,7 @@
   },
   {
     "ndex": 663,
+    "poke": "0663",
     "it": "Talonflame",
     "en": "Talonflame",
     "es": "Talonflame",
@@ -5968,6 +6631,7 @@
   },
   {
     "ndex": 664,
+    "poke": "0664",
     "it": "Scatterbug",
     "en": "Scatterbug",
     "es": "Scatterbug",
@@ -5977,6 +6641,7 @@
   },
   {
     "ndex": 665,
+    "poke": "0665",
     "it": "Spewpa",
     "en": "Spewpa",
     "es": "Spewpa",
@@ -5986,6 +6651,7 @@
   },
   {
     "ndex": 666,
+    "poke": "0666",
     "it": "Vivillon",
     "en": "Vivillon",
     "es": "Vivillon",
@@ -5995,6 +6661,7 @@
   },
   {
     "ndex": 667,
+    "poke": "0667",
     "it": "Litleo",
     "en": "Litleo",
     "es": "Litleo",
@@ -6004,6 +6671,7 @@
   },
   {
     "ndex": 668,
+    "poke": "0668",
     "it": "Pyroar",
     "en": "Pyroar",
     "es": "Pyroar",
@@ -6013,6 +6681,7 @@
   },
   {
     "ndex": 669,
+    "poke": "0669",
     "it": "Flabébé",
     "en": "Flabébé",
     "es": "Flabébé",
@@ -6022,6 +6691,7 @@
   },
   {
     "ndex": 670,
+    "poke": "0670",
     "it": "Floette",
     "en": "Floette",
     "es": "Floette",
@@ -6031,6 +6701,7 @@
   },
   {
     "ndex": 671,
+    "poke": "0671",
     "it": "Florges",
     "en": "Florges",
     "es": "Florges",
@@ -6040,6 +6711,7 @@
   },
   {
     "ndex": 672,
+    "poke": "0672",
     "it": "Skiddo",
     "en": "Skiddo",
     "es": "Skiddo",
@@ -6049,6 +6721,7 @@
   },
   {
     "ndex": 673,
+    "poke": "0673",
     "it": "Gogoat",
     "en": "Gogoat",
     "es": "Gogoat",
@@ -6058,6 +6731,7 @@
   },
   {
     "ndex": 674,
+    "poke": "0674",
     "it": "Pancham",
     "en": "Pancham",
     "es": "Pancham",
@@ -6067,6 +6741,7 @@
   },
   {
     "ndex": 675,
+    "poke": "0675",
     "it": "Pangoro",
     "en": "Pangoro",
     "es": "Pangoro",
@@ -6076,6 +6751,7 @@
   },
   {
     "ndex": 676,
+    "poke": "0676",
     "it": "Furfrou",
     "en": "Furfrou",
     "es": "Furfrou",
@@ -6085,6 +6761,7 @@
   },
   {
     "ndex": 677,
+    "poke": "0677",
     "it": "Espurr",
     "en": "Espurr",
     "es": "Espurr",
@@ -6094,6 +6771,7 @@
   },
   {
     "ndex": 678,
+    "poke": "0678",
     "it": "Meowstic",
     "en": "Meowstic",
     "es": "Meowstic",
@@ -6103,6 +6781,7 @@
   },
   {
     "ndex": 679,
+    "poke": "0679",
     "it": "Honedge",
     "en": "Honedge",
     "es": "Honedge",
@@ -6112,6 +6791,7 @@
   },
   {
     "ndex": 680,
+    "poke": "0680",
     "it": "Doublade",
     "en": "Doublade",
     "es": "Doublade",
@@ -6121,6 +6801,7 @@
   },
   {
     "ndex": 681,
+    "poke": "0681",
     "it": "Aegislash",
     "en": "Aegislash",
     "es": "Aegislash",
@@ -6130,6 +6811,7 @@
   },
   {
     "ndex": 682,
+    "poke": "0682",
     "it": "Spritzee",
     "en": "Spritzee",
     "es": "Spritzee",
@@ -6139,6 +6821,7 @@
   },
   {
     "ndex": 683,
+    "poke": "0683",
     "it": "Aromatisse",
     "en": "Aromatisse",
     "es": "Aromatisse",
@@ -6148,6 +6831,7 @@
   },
   {
     "ndex": 684,
+    "poke": "0684",
     "it": "Swirlix",
     "en": "Swirlix",
     "es": "Swirlix",
@@ -6157,6 +6841,7 @@
   },
   {
     "ndex": 685,
+    "poke": "0685",
     "it": "Slurpuff",
     "en": "Slurpuff",
     "es": "Slurpuff",
@@ -6166,6 +6851,7 @@
   },
   {
     "ndex": 686,
+    "poke": "0686",
     "it": "Inkay",
     "en": "Inkay",
     "es": "Inkay",
@@ -6175,6 +6861,7 @@
   },
   {
     "ndex": 687,
+    "poke": "0687",
     "it": "Malamar",
     "en": "Malamar",
     "es": "Malamar",
@@ -6184,6 +6871,7 @@
   },
   {
     "ndex": 688,
+    "poke": "0688",
     "it": "Binacle",
     "en": "Binacle",
     "es": "Binacle",
@@ -6193,6 +6881,7 @@
   },
   {
     "ndex": 689,
+    "poke": "0689",
     "it": "Barbaracle",
     "en": "Barbaracle",
     "es": "Barbaracle",
@@ -6202,6 +6891,7 @@
   },
   {
     "ndex": 690,
+    "poke": "0690",
     "it": "Skrelp",
     "en": "Skrelp",
     "es": "Skrelp",
@@ -6211,6 +6901,7 @@
   },
   {
     "ndex": 691,
+    "poke": "0691",
     "it": "Dragalge",
     "en": "Dragalge",
     "es": "Dragalge",
@@ -6220,6 +6911,7 @@
   },
   {
     "ndex": 692,
+    "poke": "0692",
     "it": "Clauncher",
     "en": "Clauncher",
     "es": "Clauncher",
@@ -6229,6 +6921,7 @@
   },
   {
     "ndex": 693,
+    "poke": "0693",
     "it": "Clawitzer",
     "en": "Clawitzer",
     "es": "Clawitzer",
@@ -6238,6 +6931,7 @@
   },
   {
     "ndex": 694,
+    "poke": "0694",
     "it": "Helioptile",
     "en": "Helioptile",
     "es": "Helioptile",
@@ -6247,6 +6941,7 @@
   },
   {
     "ndex": 695,
+    "poke": "0695",
     "it": "Heliolisk",
     "en": "Heliolisk",
     "es": "Heliolisk",
@@ -6256,6 +6951,7 @@
   },
   {
     "ndex": 696,
+    "poke": "0696",
     "it": "Tyrunt",
     "en": "Tyrunt",
     "es": "Tyrunt",
@@ -6265,6 +6961,7 @@
   },
   {
     "ndex": 697,
+    "poke": "0697",
     "it": "Tyrantrum",
     "en": "Tyrantrum",
     "es": "Tyrantrum",
@@ -6274,6 +6971,7 @@
   },
   {
     "ndex": 698,
+    "poke": "0698",
     "it": "Amaura",
     "en": "Amaura",
     "es": "Amaura",
@@ -6283,6 +6981,7 @@
   },
   {
     "ndex": 699,
+    "poke": "0699",
     "it": "Aurorus",
     "en": "Aurorus",
     "es": "Aurorus",
@@ -6292,6 +6991,7 @@
   },
   {
     "ndex": 700,
+    "poke": "0700",
     "it": "Sylveon",
     "en": "Sylveon",
     "es": "Sylveon",
@@ -6301,6 +7001,7 @@
   },
   {
     "ndex": 701,
+    "poke": "0701",
     "it": "Hawlucha",
     "en": "Hawlucha",
     "es": "Hawlucha",
@@ -6310,6 +7011,7 @@
   },
   {
     "ndex": 702,
+    "poke": "0702",
     "it": "Dedenne",
     "en": "Dedenne",
     "es": "Dedenne",
@@ -6319,6 +7021,7 @@
   },
   {
     "ndex": 703,
+    "poke": "0703",
     "it": "Carbink",
     "en": "Carbink",
     "es": "Carbink",
@@ -6328,6 +7031,7 @@
   },
   {
     "ndex": 704,
+    "poke": "0704",
     "it": "Goomy",
     "en": "Goomy",
     "es": "Goomy",
@@ -6337,6 +7041,7 @@
   },
   {
     "ndex": 705,
+    "poke": "0705",
     "it": "Sliggoo",
     "en": "Sliggoo",
     "es": "Sliggoo",
@@ -6346,6 +7051,7 @@
   },
   {
     "ndex": 706,
+    "poke": "0706",
     "it": "Goodra",
     "en": "Goodra",
     "es": "Goodra",
@@ -6355,6 +7061,7 @@
   },
   {
     "ndex": 707,
+    "poke": "0707",
     "it": "Klefki",
     "en": "Klefki",
     "es": "Klefki",
@@ -6364,6 +7071,7 @@
   },
   {
     "ndex": 708,
+    "poke": "0708",
     "it": "Phantump",
     "en": "Phantump",
     "es": "Phantump",
@@ -6373,6 +7081,7 @@
   },
   {
     "ndex": 709,
+    "poke": "0709",
     "it": "Trevenant",
     "en": "Trevenant",
     "es": "Trevenant",
@@ -6382,6 +7091,7 @@
   },
   {
     "ndex": 710,
+    "poke": "0710",
     "it": "Pumpkaboo",
     "en": "Pumpkaboo",
     "es": "Pumpkaboo",
@@ -6391,6 +7101,7 @@
   },
   {
     "ndex": 711,
+    "poke": "0711",
     "it": "Gourgeist",
     "en": "Gourgeist",
     "es": "Gourgeist",
@@ -6400,6 +7111,7 @@
   },
   {
     "ndex": 712,
+    "poke": "0712",
     "it": "Bergmite",
     "en": "Bergmite",
     "es": "Bergmite",
@@ -6409,6 +7121,7 @@
   },
   {
     "ndex": 713,
+    "poke": "0713",
     "it": "Avalugg",
     "en": "Avalugg",
     "es": "Avalugg",
@@ -6418,6 +7131,7 @@
   },
   {
     "ndex": 714,
+    "poke": "0714",
     "it": "Noibat",
     "en": "Noibat",
     "es": "Noibat",
@@ -6427,6 +7141,7 @@
   },
   {
     "ndex": 715,
+    "poke": "0715",
     "it": "Noivern",
     "en": "Noivern",
     "es": "Noivern",
@@ -6436,6 +7151,7 @@
   },
   {
     "ndex": 716,
+    "poke": "0716",
     "it": "Xerneas",
     "en": "Xerneas",
     "es": "Xerneas",
@@ -6445,6 +7161,7 @@
   },
   {
     "ndex": 717,
+    "poke": "0717",
     "it": "Yveltal",
     "en": "Yveltal",
     "es": "Yveltal",
@@ -6454,6 +7171,7 @@
   },
   {
     "ndex": 718,
+    "poke": "0718",
     "it": "Zygarde",
     "en": "Zygarde",
     "es": "Zygarde",
@@ -6463,6 +7181,7 @@
   },
   {
     "ndex": 719,
+    "poke": "0719",
     "it": "Diancie",
     "en": "Diancie",
     "es": "Diancie",
@@ -6472,6 +7191,7 @@
   },
   {
     "ndex": 720,
+    "poke": "0720",
     "it": "Hoopa",
     "en": "Hoopa",
     "es": "Hoopa",
@@ -6481,6 +7201,7 @@
   },
   {
     "ndex": 721,
+    "poke": "0721",
     "it": "Volcanion",
     "en": "Volcanion",
     "es": "Volcanion",
@@ -6490,6 +7211,7 @@
   },
   {
     "ndex": 722,
+    "poke": "0722",
     "it": "Rowlet",
     "en": "Rowlet",
     "es": "Rowlet",
@@ -6499,6 +7221,7 @@
   },
   {
     "ndex": 723,
+    "poke": "0723",
     "it": "Dartrix",
     "en": "Dartrix",
     "es": "Dartrix",
@@ -6508,6 +7231,7 @@
   },
   {
     "ndex": 724,
+    "poke": "0724",
     "it": "Decidueye",
     "en": "Decidueye",
     "es": "Decidueye",
@@ -6517,6 +7241,7 @@
   },
   {
     "ndex": 725,
+    "poke": "0725",
     "it": "Litten",
     "en": "Litten",
     "es": "Litten",
@@ -6526,6 +7251,7 @@
   },
   {
     "ndex": 726,
+    "poke": "0726",
     "it": "Torracat",
     "en": "Torracat",
     "es": "Torracat",
@@ -6535,6 +7261,7 @@
   },
   {
     "ndex": 727,
+    "poke": "0727",
     "it": "Incineroar",
     "en": "Incineroar",
     "es": "Incineroar",
@@ -6544,6 +7271,7 @@
   },
   {
     "ndex": 728,
+    "poke": "0728",
     "it": "Popplio",
     "en": "Popplio",
     "es": "Popplio",
@@ -6553,6 +7281,7 @@
   },
   {
     "ndex": 729,
+    "poke": "0729",
     "it": "Brionne",
     "en": "Brionne",
     "es": "Brionne",
@@ -6562,6 +7291,7 @@
   },
   {
     "ndex": 730,
+    "poke": "0730",
     "it": "Primarina",
     "en": "Primarina",
     "es": "Primarina",
@@ -6571,6 +7301,7 @@
   },
   {
     "ndex": 731,
+    "poke": "0731",
     "it": "Pikipek",
     "en": "Pikipek",
     "es": "Pikipek",
@@ -6580,6 +7311,7 @@
   },
   {
     "ndex": 732,
+    "poke": "0732",
     "it": "Trumbeak",
     "en": "Trumbeak",
     "es": "Trumbeak",
@@ -6589,6 +7321,7 @@
   },
   {
     "ndex": 733,
+    "poke": "0733",
     "it": "Toucannon",
     "en": "Toucannon",
     "es": "Toucannon",
@@ -6598,6 +7331,7 @@
   },
   {
     "ndex": 734,
+    "poke": "0734",
     "it": "Yungoos",
     "en": "Yungoos",
     "es": "Yungoos",
@@ -6607,6 +7341,7 @@
   },
   {
     "ndex": 735,
+    "poke": "0735",
     "it": "Gumshoos",
     "en": "Gumshoos",
     "es": "Gumshoos",
@@ -6616,6 +7351,7 @@
   },
   {
     "ndex": 736,
+    "poke": "0736",
     "it": "Grubbin",
     "en": "Grubbin",
     "es": "Grubbin",
@@ -6625,6 +7361,7 @@
   },
   {
     "ndex": 737,
+    "poke": "0737",
     "it": "Charjabug",
     "en": "Charjabug",
     "es": "Charjabug",
@@ -6634,6 +7371,7 @@
   },
   {
     "ndex": 738,
+    "poke": "0738",
     "it": "Vikavolt",
     "en": "Vikavolt",
     "es": "Vikavolt",
@@ -6643,6 +7381,7 @@
   },
   {
     "ndex": 739,
+    "poke": "0739",
     "it": "Crabrawler",
     "en": "Crabrawler",
     "es": "Crabrawler",
@@ -6652,6 +7391,7 @@
   },
   {
     "ndex": 740,
+    "poke": "0740",
     "it": "Crabominable",
     "en": "Crabominable",
     "es": "Crabominable",
@@ -6661,6 +7401,7 @@
   },
   {
     "ndex": 741,
+    "poke": "0741",
     "it": "Oricorio",
     "en": "Oricorio",
     "es": "Oricorio",
@@ -6670,6 +7411,7 @@
   },
   {
     "ndex": 742,
+    "poke": "0742",
     "it": "Cutiefly",
     "en": "Cutiefly",
     "es": "Cutiefly",
@@ -6679,6 +7421,7 @@
   },
   {
     "ndex": 743,
+    "poke": "0743",
     "it": "Ribombee",
     "en": "Ribombee",
     "es": "Ribombee",
@@ -6688,6 +7431,7 @@
   },
   {
     "ndex": 744,
+    "poke": "0744",
     "it": "Rockruff",
     "en": "Rockruff",
     "es": "Rockruff",
@@ -6697,6 +7441,7 @@
   },
   {
     "ndex": 745,
+    "poke": "0745",
     "it": "Lycanroc",
     "en": "Lycanroc",
     "es": "Lycanroc",
@@ -6706,6 +7451,7 @@
   },
   {
     "ndex": 746,
+    "poke": "0746",
     "it": "Wishiwashi",
     "en": "Wishiwashi",
     "es": "Wishiwashi",
@@ -6715,6 +7461,7 @@
   },
   {
     "ndex": 747,
+    "poke": "0747",
     "it": "Mareanie",
     "en": "Mareanie",
     "es": "Mareanie",
@@ -6724,6 +7471,7 @@
   },
   {
     "ndex": 748,
+    "poke": "0748",
     "it": "Toxapex",
     "en": "Toxapex",
     "es": "Toxapex",
@@ -6733,6 +7481,7 @@
   },
   {
     "ndex": 749,
+    "poke": "0749",
     "it": "Mudbray",
     "en": "Mudbray",
     "es": "Mudbray",
@@ -6742,6 +7491,7 @@
   },
   {
     "ndex": 750,
+    "poke": "0750",
     "it": "Mudsdale",
     "en": "Mudsdale",
     "es": "Mudsdale",
@@ -6751,6 +7501,7 @@
   },
   {
     "ndex": 751,
+    "poke": "0751",
     "it": "Dewpider",
     "en": "Dewpider",
     "es": "Dewpider",
@@ -6760,6 +7511,7 @@
   },
   {
     "ndex": 752,
+    "poke": "0752",
     "it": "Araquanid",
     "en": "Araquanid",
     "es": "Araquanid",
@@ -6769,6 +7521,7 @@
   },
   {
     "ndex": 753,
+    "poke": "0753",
     "it": "Fomantis",
     "en": "Fomantis",
     "es": "Fomantis",
@@ -6778,6 +7531,7 @@
   },
   {
     "ndex": 754,
+    "poke": "0754",
     "it": "Lurantis",
     "en": "Lurantis",
     "es": "Lurantis",
@@ -6787,6 +7541,7 @@
   },
   {
     "ndex": 755,
+    "poke": "0755",
     "it": "Morelull",
     "en": "Morelull",
     "es": "Morelull",
@@ -6796,6 +7551,7 @@
   },
   {
     "ndex": 756,
+    "poke": "0756",
     "it": "Shiinotic",
     "en": "Shiinotic",
     "es": "Shiinotic",
@@ -6805,6 +7561,7 @@
   },
   {
     "ndex": 757,
+    "poke": "0757",
     "it": "Salandit",
     "en": "Salandit",
     "es": "Salandit",
@@ -6814,6 +7571,7 @@
   },
   {
     "ndex": 758,
+    "poke": "0758",
     "it": "Salazzle",
     "en": "Salazzle",
     "es": "Salazzle",
@@ -6823,6 +7581,7 @@
   },
   {
     "ndex": 759,
+    "poke": "0759",
     "it": "Stufful",
     "en": "Stufful",
     "es": "Stufful",
@@ -6832,6 +7591,7 @@
   },
   {
     "ndex": 760,
+    "poke": "0760",
     "it": "Bewear",
     "en": "Bewear",
     "es": "Bewear",
@@ -6841,6 +7601,7 @@
   },
   {
     "ndex": 761,
+    "poke": "0761",
     "it": "Bounsweet",
     "en": "Bounsweet",
     "es": "Bounsweet",
@@ -6850,6 +7611,7 @@
   },
   {
     "ndex": 762,
+    "poke": "0762",
     "it": "Steenee",
     "en": "Steenee",
     "es": "Steenee",
@@ -6859,6 +7621,7 @@
   },
   {
     "ndex": 763,
+    "poke": "0763",
     "it": "Tsareena",
     "en": "Tsareena",
     "es": "Tsareena",
@@ -6868,6 +7631,7 @@
   },
   {
     "ndex": 764,
+    "poke": "0764",
     "it": "Comfey",
     "en": "Comfey",
     "es": "Comfey",
@@ -6877,6 +7641,7 @@
   },
   {
     "ndex": 765,
+    "poke": "0765",
     "it": "Oranguru",
     "en": "Oranguru",
     "es": "Oranguru",
@@ -6886,6 +7651,7 @@
   },
   {
     "ndex": 766,
+    "poke": "0766",
     "it": "Passimian",
     "en": "Passimian",
     "es": "Passimian",
@@ -6895,6 +7661,7 @@
   },
   {
     "ndex": 767,
+    "poke": "0767",
     "it": "Wimpod",
     "en": "Wimpod",
     "es": "Wimpod",
@@ -6904,6 +7671,7 @@
   },
   {
     "ndex": 768,
+    "poke": "0768",
     "it": "Golisopod",
     "en": "Golisopod",
     "es": "Golisopod",
@@ -6913,6 +7681,7 @@
   },
   {
     "ndex": 769,
+    "poke": "0769",
     "it": "Sandygast",
     "en": "Sandygast",
     "es": "Sandygast",
@@ -6922,6 +7691,7 @@
   },
   {
     "ndex": 770,
+    "poke": "0770",
     "it": "Palossand",
     "en": "Palossand",
     "es": "Palossand",
@@ -6931,6 +7701,7 @@
   },
   {
     "ndex": 771,
+    "poke": "0771",
     "it": "Pyukumuku",
     "en": "Pyukumuku",
     "es": "Pyukumuku",
@@ -6940,6 +7711,7 @@
   },
   {
     "ndex": 772,
+    "poke": "0772",
     "it": "Tipo Zero",
     "en": "Type: Null",
     "es": "Código Cero",
@@ -6949,6 +7721,7 @@
   },
   {
     "ndex": 773,
+    "poke": "0773",
     "it": "Silvally",
     "en": "Silvally",
     "es": "Silvally",
@@ -6958,6 +7731,7 @@
   },
   {
     "ndex": 774,
+    "poke": "0774",
     "it": "Minior",
     "en": "Minior",
     "es": "Minior",
@@ -6967,6 +7741,7 @@
   },
   {
     "ndex": 775,
+    "poke": "0775",
     "it": "Komala",
     "en": "Komala",
     "es": "Komala",
@@ -6976,6 +7751,7 @@
   },
   {
     "ndex": 776,
+    "poke": "0776",
     "it": "Turtonator",
     "en": "Turtonator",
     "es": "Turtonator",
@@ -6985,6 +7761,7 @@
   },
   {
     "ndex": 777,
+    "poke": "0777",
     "it": "Togedemaru",
     "en": "Togedemaru",
     "es": "Togedemaru",
@@ -6994,6 +7771,7 @@
   },
   {
     "ndex": 778,
+    "poke": "0778",
     "it": "Mimikyu",
     "en": "Mimikyu",
     "es": "Mimikyu",
@@ -7003,6 +7781,7 @@
   },
   {
     "ndex": 779,
+    "poke": "0779",
     "it": "Bruxish",
     "en": "Bruxish",
     "es": "Bruxish",
@@ -7012,6 +7791,7 @@
   },
   {
     "ndex": 780,
+    "poke": "0780",
     "it": "Drampa",
     "en": "Drampa",
     "es": "Drampa",
@@ -7021,6 +7801,7 @@
   },
   {
     "ndex": 781,
+    "poke": "0781",
     "it": "Dhelmise",
     "en": "Dhelmise",
     "es": "Dhelmise",
@@ -7030,6 +7811,7 @@
   },
   {
     "ndex": 782,
+    "poke": "0782",
     "it": "Jangmo-o",
     "en": "Jangmo-o",
     "es": "Jangmo-o",
@@ -7039,6 +7821,7 @@
   },
   {
     "ndex": 783,
+    "poke": "0783",
     "it": "Hakamo-o",
     "en": "Hakamo-o",
     "es": "Hakamo-o",
@@ -7048,6 +7831,7 @@
   },
   {
     "ndex": 784,
+    "poke": "0784",
     "it": "Kommo-o",
     "en": "Kommo-o",
     "es": "Kommo-o",
@@ -7057,6 +7841,7 @@
   },
   {
     "ndex": 785,
+    "poke": "0785",
     "it": "Tapu Koko",
     "en": "Tapu Koko",
     "es": "Tapu Koko",
@@ -7066,6 +7851,7 @@
   },
   {
     "ndex": 786,
+    "poke": "0786",
     "it": "Tapu Lele",
     "en": "Tapu Lele",
     "es": "Tapu Lele",
@@ -7075,6 +7861,7 @@
   },
   {
     "ndex": 787,
+    "poke": "0787",
     "it": "Tapu Bulu",
     "en": "Tapu Bulu",
     "es": "Tapu Bulu",
@@ -7084,6 +7871,7 @@
   },
   {
     "ndex": 788,
+    "poke": "0788",
     "it": "Tapu Fini",
     "en": "Tapu Fini",
     "es": "Tapu Fini",
@@ -7093,6 +7881,7 @@
   },
   {
     "ndex": 789,
+    "poke": "0789",
     "it": "Cosmog",
     "en": "Cosmog",
     "es": "Cosmog",
@@ -7102,6 +7891,7 @@
   },
   {
     "ndex": 790,
+    "poke": "0790",
     "it": "Cosmoem",
     "en": "Cosmoem",
     "es": "Cosmoem",
@@ -7111,6 +7901,7 @@
   },
   {
     "ndex": 791,
+    "poke": "0791",
     "it": "Solgaleo",
     "en": "Solgaleo",
     "es": "Solgaleo",
@@ -7120,6 +7911,7 @@
   },
   {
     "ndex": 792,
+    "poke": "0792",
     "it": "Lunala",
     "en": "Lunala",
     "es": "Lunala",
@@ -7129,6 +7921,7 @@
   },
   {
     "ndex": 793,
+    "poke": "0793",
     "it": "Nihilego",
     "en": "Nihilego",
     "es": "Nihilego",
@@ -7138,6 +7931,7 @@
   },
   {
     "ndex": 794,
+    "poke": "0794",
     "it": "Buzzwole",
     "en": "Buzzwole",
     "es": "Buzzwole",
@@ -7147,6 +7941,7 @@
   },
   {
     "ndex": 795,
+    "poke": "0795",
     "it": "Pheromosa",
     "en": "Pheromosa",
     "es": "Pheromosa",
@@ -7156,6 +7951,7 @@
   },
   {
     "ndex": 796,
+    "poke": "0796",
     "it": "Xurkitree",
     "en": "Xurkitree",
     "es": "Xurkitree",
@@ -7165,6 +7961,7 @@
   },
   {
     "ndex": 797,
+    "poke": "0797",
     "it": "Celesteela",
     "en": "Celesteela",
     "es": "Celesteela",
@@ -7174,6 +7971,7 @@
   },
   {
     "ndex": 798,
+    "poke": "0798",
     "it": "Kartana",
     "en": "Kartana",
     "es": "Kartana",
@@ -7183,6 +7981,7 @@
   },
   {
     "ndex": 799,
+    "poke": "0799",
     "it": "Guzzlord",
     "en": "Guzzlord",
     "es": "Guzzlord",
@@ -7192,6 +7991,7 @@
   },
   {
     "ndex": 800,
+    "poke": "0800",
     "it": "Necrozma",
     "en": "Necrozma",
     "es": "Necrozma",
@@ -7201,6 +8001,7 @@
   },
   {
     "ndex": 801,
+    "poke": "0801",
     "it": "Magearna",
     "en": "Magearna",
     "es": "Magearna",
@@ -7210,6 +8011,7 @@
   },
   {
     "ndex": 802,
+    "poke": "0802",
     "it": "Marshadow",
     "en": "Marshadow",
     "es": "Marshadow",
@@ -7219,6 +8021,7 @@
   },
   {
     "ndex": 803,
+    "poke": "0803",
     "it": "Poipole",
     "en": "Poipole",
     "es": "Poipole",
@@ -7228,6 +8031,7 @@
   },
   {
     "ndex": 804,
+    "poke": "0804",
     "it": "Naganadel",
     "en": "Naganadel",
     "es": "Naganadel",
@@ -7237,6 +8041,7 @@
   },
   {
     "ndex": 805,
+    "poke": "0805",
     "it": "Stakataka",
     "en": "Stakataka",
     "es": "Stakataka",
@@ -7246,6 +8051,7 @@
   },
   {
     "ndex": 806,
+    "poke": "0806",
     "it": "Blacephalon",
     "en": "Blacephalon",
     "es": "Blacephalon",
@@ -7255,6 +8061,7 @@
   },
   {
     "ndex": 807,
+    "poke": "0807",
     "it": "Zeraora",
     "en": "Zeraora",
     "es": "Zeraora",
@@ -7264,6 +8071,7 @@
   },
   {
     "ndex": 808,
+    "poke": "0808",
     "it": "Meltan",
     "en": "Meltan",
     "es": "Meltan",
@@ -7273,6 +8081,7 @@
   },
   {
     "ndex": 809,
+    "poke": "0809",
     "it": "Melmetal",
     "en": "Melmetal",
     "es": "Melmetal",
@@ -7282,6 +8091,7 @@
   },
   {
     "ndex": 810,
+    "poke": "0810",
     "it": "Grookey",
     "en": "Grookey",
     "es": "Grookey",
@@ -7291,6 +8101,7 @@
   },
   {
     "ndex": 811,
+    "poke": "0811",
     "it": "Thwackey",
     "en": "Thwackey",
     "es": "Thwackey",
@@ -7300,6 +8111,7 @@
   },
   {
     "ndex": 812,
+    "poke": "0812",
     "it": "Rillaboom",
     "en": "Rillaboom",
     "es": "Rillaboom",
@@ -7309,6 +8121,7 @@
   },
   {
     "ndex": 813,
+    "poke": "0813",
     "it": "Scorbunny",
     "en": "Scorbunny",
     "es": "Scorbunny",
@@ -7318,6 +8131,7 @@
   },
   {
     "ndex": 814,
+    "poke": "0814",
     "it": "Raboot",
     "en": "Raboot",
     "es": "Raboot",
@@ -7327,6 +8141,7 @@
   },
   {
     "ndex": 815,
+    "poke": "0815",
     "it": "Cinderace",
     "en": "Cinderace",
     "es": "Cinderace",
@@ -7336,6 +8151,7 @@
   },
   {
     "ndex": 816,
+    "poke": "0816",
     "it": "Sobble",
     "en": "Sobble",
     "es": "Sobble",
@@ -7345,6 +8161,7 @@
   },
   {
     "ndex": 817,
+    "poke": "0817",
     "it": "Drizzile",
     "en": "Drizzile",
     "es": "Drizzile",
@@ -7354,6 +8171,7 @@
   },
   {
     "ndex": 818,
+    "poke": "0818",
     "it": "Inteleon",
     "en": "Inteleon",
     "es": "Inteleon",
@@ -7363,6 +8181,7 @@
   },
   {
     "ndex": 819,
+    "poke": "0819",
     "it": "Skwovet",
     "en": "Skwovet",
     "es": "Skwovet",
@@ -7372,6 +8191,7 @@
   },
   {
     "ndex": 820,
+    "poke": "0820",
     "it": "Greedent",
     "en": "Greedent",
     "es": "Greedent",
@@ -7381,6 +8201,7 @@
   },
   {
     "ndex": 821,
+    "poke": "0821",
     "it": "Rookidee",
     "en": "Rookidee",
     "es": "Rookidee",
@@ -7390,6 +8211,7 @@
   },
   {
     "ndex": 822,
+    "poke": "0822",
     "it": "Corvisquire",
     "en": "Corvisquire",
     "es": "Corvisquire",
@@ -7399,6 +8221,7 @@
   },
   {
     "ndex": 823,
+    "poke": "0823",
     "it": "Corviknight",
     "en": "Corviknight",
     "es": "Corviknight",
@@ -7408,6 +8231,7 @@
   },
   {
     "ndex": 824,
+    "poke": "0824",
     "it": "Blipbug",
     "en": "Blipbug",
     "es": "Blipbug",
@@ -7417,6 +8241,7 @@
   },
   {
     "ndex": 825,
+    "poke": "0825",
     "it": "Dottler",
     "en": "Dottler",
     "es": "Dottler",
@@ -7426,6 +8251,7 @@
   },
   {
     "ndex": 826,
+    "poke": "0826",
     "it": "Orbeetle",
     "en": "Orbeetle",
     "es": "Orbeetle",
@@ -7435,6 +8261,7 @@
   },
   {
     "ndex": 827,
+    "poke": "0827",
     "it": "Nickit",
     "en": "Nickit",
     "es": "Nickit",
@@ -7444,6 +8271,7 @@
   },
   {
     "ndex": 828,
+    "poke": "0828",
     "it": "Thievul",
     "en": "Thievul",
     "es": "Thievul",
@@ -7453,6 +8281,7 @@
   },
   {
     "ndex": 829,
+    "poke": "0829",
     "it": "Gossifleur",
     "en": "Gossifleur",
     "es": "Gossifleur",
@@ -7462,6 +8291,7 @@
   },
   {
     "ndex": 830,
+    "poke": "0830",
     "it": "Eldegoss",
     "en": "Eldegoss",
     "es": "Eldegoss",
@@ -7471,6 +8301,7 @@
   },
   {
     "ndex": 831,
+    "poke": "0831",
     "it": "Wooloo",
     "en": "Wooloo",
     "es": "Wooloo",
@@ -7480,6 +8311,7 @@
   },
   {
     "ndex": 832,
+    "poke": "0832",
     "it": "Dubwool",
     "en": "Dubwool",
     "es": "Dubwool",
@@ -7489,6 +8321,7 @@
   },
   {
     "ndex": 833,
+    "poke": "0833",
     "it": "Chewtle",
     "en": "Chewtle",
     "es": "Chewtle",
@@ -7498,6 +8331,7 @@
   },
   {
     "ndex": 834,
+    "poke": "0834",
     "it": "Drednaw",
     "en": "Drednaw",
     "es": "Drednaw",
@@ -7507,6 +8341,7 @@
   },
   {
     "ndex": 835,
+    "poke": "0835",
     "it": "Yamper",
     "en": "Yamper",
     "es": "Yamper",
@@ -7516,6 +8351,7 @@
   },
   {
     "ndex": 836,
+    "poke": "0836",
     "it": "Boltund",
     "en": "Boltund",
     "es": "Boltund",
@@ -7525,6 +8361,7 @@
   },
   {
     "ndex": 837,
+    "poke": "0837",
     "it": "Rolycoly",
     "en": "Rolycoly",
     "es": "Rolycoly",
@@ -7534,6 +8371,7 @@
   },
   {
     "ndex": 838,
+    "poke": "0838",
     "it": "Carkol",
     "en": "Carkol",
     "es": "Carkol",
@@ -7543,6 +8381,7 @@
   },
   {
     "ndex": 839,
+    "poke": "0839",
     "it": "Coalossal",
     "en": "Coalossal",
     "es": "Coalossal",
@@ -7552,6 +8391,7 @@
   },
   {
     "ndex": 840,
+    "poke": "0840",
     "it": "Applin",
     "en": "Applin",
     "es": "Applin",
@@ -7561,6 +8401,7 @@
   },
   {
     "ndex": 841,
+    "poke": "0841",
     "it": "Flapple",
     "en": "Flapple",
     "es": "Flapple",
@@ -7570,6 +8411,7 @@
   },
   {
     "ndex": 842,
+    "poke": "0842",
     "it": "Appletun",
     "en": "Appletun",
     "es": "Appletun",
@@ -7579,6 +8421,7 @@
   },
   {
     "ndex": 843,
+    "poke": "0843",
     "it": "Silicobra",
     "en": "Silicobra",
     "es": "Silicobra",
@@ -7588,6 +8431,7 @@
   },
   {
     "ndex": 844,
+    "poke": "0844",
     "it": "Sandaconda",
     "en": "Sandaconda",
     "es": "Sandaconda",
@@ -7597,6 +8441,7 @@
   },
   {
     "ndex": 845,
+    "poke": "0845",
     "it": "Cramorant",
     "en": "Cramorant",
     "es": "Cramorant",
@@ -7606,6 +8451,7 @@
   },
   {
     "ndex": 846,
+    "poke": "0846",
     "it": "Arrokuda",
     "en": "Arrokuda",
     "es": "Arrokuda",
@@ -7615,6 +8461,7 @@
   },
   {
     "ndex": 847,
+    "poke": "0847",
     "it": "Barraskewda",
     "en": "Barraskewda",
     "es": "Barraskewda",
@@ -7624,6 +8471,7 @@
   },
   {
     "ndex": 848,
+    "poke": "0848",
     "it": "Toxel",
     "en": "Toxel",
     "es": "Toxel",
@@ -7633,6 +8481,7 @@
   },
   {
     "ndex": 849,
+    "poke": "0849",
     "it": "Toxtricity",
     "en": "Toxtricity",
     "es": "Toxtricity",
@@ -7642,6 +8491,7 @@
   },
   {
     "ndex": 850,
+    "poke": "0850",
     "it": "Sizzlipede",
     "en": "Sizzlipede",
     "es": "Sizzlipede",
@@ -7651,6 +8501,7 @@
   },
   {
     "ndex": 851,
+    "poke": "0851",
     "it": "Centiskorch",
     "en": "Centiskorch",
     "es": "Centiskorch",
@@ -7660,6 +8511,7 @@
   },
   {
     "ndex": 852,
+    "poke": "0852",
     "it": "Clobbopus",
     "en": "Clobbopus",
     "es": "Clobbopus",
@@ -7669,6 +8521,7 @@
   },
   {
     "ndex": 853,
+    "poke": "0853",
     "it": "Grapploct",
     "en": "Grapploct",
     "es": "Grapploct",
@@ -7678,6 +8531,7 @@
   },
   {
     "ndex": 854,
+    "poke": "0854",
     "it": "Sinistea",
     "en": "Sinistea",
     "es": "Sinistea",
@@ -7687,6 +8541,7 @@
   },
   {
     "ndex": 855,
+    "poke": "0855",
     "it": "Polteageist",
     "en": "Polteageist",
     "es": "Polteageist",
@@ -7696,6 +8551,7 @@
   },
   {
     "ndex": 856,
+    "poke": "0856",
     "it": "Hatenna",
     "en": "Hatenna",
     "es": "Hatenna",
@@ -7705,6 +8561,7 @@
   },
   {
     "ndex": 857,
+    "poke": "0857",
     "it": "Hattrem",
     "en": "Hattrem",
     "es": "Hattrem",
@@ -7714,6 +8571,7 @@
   },
   {
     "ndex": 858,
+    "poke": "0858",
     "it": "Hatterene",
     "en": "Hatterene",
     "es": "Hatterene",
@@ -7723,6 +8581,7 @@
   },
   {
     "ndex": 859,
+    "poke": "0859",
     "it": "Impidimp",
     "en": "Impidimp",
     "es": "Impidimp",
@@ -7732,6 +8591,7 @@
   },
   {
     "ndex": 860,
+    "poke": "0860",
     "it": "Morgrem",
     "en": "Morgrem",
     "es": "Morgrem",
@@ -7741,6 +8601,7 @@
   },
   {
     "ndex": 861,
+    "poke": "0861",
     "it": "Grimmsnarl",
     "en": "Grimmsnarl",
     "es": "Grimmsnarl",
@@ -7750,6 +8611,7 @@
   },
   {
     "ndex": 862,
+    "poke": "0862",
     "it": "Obstagoon",
     "en": "Obstagoon",
     "es": "Obstagoon",
@@ -7759,6 +8621,7 @@
   },
   {
     "ndex": 863,
+    "poke": "0863",
     "it": "Perrserker",
     "en": "Perrserker",
     "es": "Perrserker",
@@ -7768,6 +8631,7 @@
   },
   {
     "ndex": 864,
+    "poke": "0864",
     "it": "Cursola",
     "en": "Cursola",
     "es": "Cursola",
@@ -7777,6 +8641,7 @@
   },
   {
     "ndex": 865,
+    "poke": "0865",
     "it": "Sirfetch'd",
     "en": "Sirfetch'd",
     "es": "Sirfetch'd",
@@ -7786,6 +8651,7 @@
   },
   {
     "ndex": 866,
+    "poke": "0866",
     "it": "Mr. Rime",
     "en": "Mr. Rime",
     "es": "Mr. Rime",
@@ -7795,6 +8661,7 @@
   },
   {
     "ndex": 867,
+    "poke": "0867",
     "it": "Runerigus",
     "en": "Runerigus",
     "es": "Runerigus",
@@ -7804,6 +8671,7 @@
   },
   {
     "ndex": 868,
+    "poke": "0868",
     "it": "Milcery",
     "en": "Milcery",
     "es": "Milcery",
@@ -7813,6 +8681,7 @@
   },
   {
     "ndex": 869,
+    "poke": "0869",
     "it": "Alcremie",
     "en": "Alcremie",
     "es": "Alcremie",
@@ -7822,6 +8691,7 @@
   },
   {
     "ndex": 870,
+    "poke": "0870",
     "it": "Falinks",
     "en": "Falinks",
     "es": "Falinks",
@@ -7831,6 +8701,7 @@
   },
   {
     "ndex": 871,
+    "poke": "0871",
     "it": "Pincurchin",
     "en": "Pincurchin",
     "es": "Pincurchin",
@@ -7840,6 +8711,7 @@
   },
   {
     "ndex": 872,
+    "poke": "0872",
     "it": "Snom",
     "en": "Snom",
     "es": "Snom",
@@ -7849,6 +8721,7 @@
   },
   {
     "ndex": 873,
+    "poke": "0873",
     "it": "Frosmoth",
     "en": "Frosmoth",
     "es": "Frosmoth",
@@ -7858,6 +8731,7 @@
   },
   {
     "ndex": 874,
+    "poke": "0874",
     "it": "Stonjourner",
     "en": "Stonjourner",
     "es": "Stonjourner",
@@ -7867,6 +8741,7 @@
   },
   {
     "ndex": 875,
+    "poke": "0875",
     "it": "Eiscue",
     "en": "Eiscue",
     "es": "Eiscue",
@@ -7876,6 +8751,7 @@
   },
   {
     "ndex": 876,
+    "poke": "0876",
     "it": "Indeedee",
     "en": "Indeedee",
     "es": "Indeedee",
@@ -7885,6 +8761,7 @@
   },
   {
     "ndex": 877,
+    "poke": "0877",
     "it": "Morpeko",
     "en": "Morpeko",
     "es": "Morpeko",
@@ -7894,6 +8771,7 @@
   },
   {
     "ndex": 878,
+    "poke": "0878",
     "it": "Cufant",
     "en": "Cufant",
     "es": "Cufant",
@@ -7903,6 +8781,7 @@
   },
   {
     "ndex": 879,
+    "poke": "0879",
     "it": "Copperajah",
     "en": "Copperajah",
     "es": "Copperajah",
@@ -7912,6 +8791,7 @@
   },
   {
     "ndex": 880,
+    "poke": "0880",
     "it": "Dracozolt",
     "en": "Dracozolt",
     "es": "Dracozolt",
@@ -7921,6 +8801,7 @@
   },
   {
     "ndex": 881,
+    "poke": "0881",
     "it": "Arctozolt",
     "en": "Arctozolt",
     "es": "Arctozolt",
@@ -7930,6 +8811,7 @@
   },
   {
     "ndex": 882,
+    "poke": "0882",
     "it": "Dracovish",
     "en": "Dracovish",
     "es": "Dracovish",
@@ -7939,6 +8821,7 @@
   },
   {
     "ndex": 883,
+    "poke": "0883",
     "it": "Arctovish",
     "en": "Arctovish",
     "es": "Arctovish",
@@ -7948,6 +8831,7 @@
   },
   {
     "ndex": 884,
+    "poke": "0884",
     "it": "Duraludon",
     "en": "Duraludon",
     "es": "Duraludon",
@@ -7957,6 +8841,7 @@
   },
   {
     "ndex": 885,
+    "poke": "0885",
     "it": "Dreepy",
     "en": "Dreepy",
     "es": "Dreepy",
@@ -7966,6 +8851,7 @@
   },
   {
     "ndex": 886,
+    "poke": "0886",
     "it": "Drakloak",
     "en": "Drakloak",
     "es": "Drakloak",
@@ -7975,6 +8861,7 @@
   },
   {
     "ndex": 887,
+    "poke": "0887",
     "it": "Dragapult",
     "en": "Dragapult",
     "es": "Dragapult",
@@ -7984,6 +8871,7 @@
   },
   {
     "ndex": 888,
+    "poke": "0888",
     "it": "Zacian",
     "en": "Zacian",
     "es": "Zacian",
@@ -7993,6 +8881,7 @@
   },
   {
     "ndex": 889,
+    "poke": "0889",
     "it": "Zamazenta",
     "en": "Zamazenta",
     "es": "Zamazenta",
@@ -8002,6 +8891,7 @@
   },
   {
     "ndex": 890,
+    "poke": "0890",
     "it": "Eternatus",
     "en": "Eternatus",
     "es": "Eternatus",
@@ -8011,6 +8901,7 @@
   },
   {
     "ndex": 891,
+    "poke": "0891",
     "it": "Kubfu",
     "en": "Kubfu",
     "es": "Kubfu",
@@ -8020,6 +8911,7 @@
   },
   {
     "ndex": 892,
+    "poke": "0892",
     "it": "Urshifu",
     "en": "Urshifu",
     "es": "Urshifu",
@@ -8029,6 +8921,7 @@
   },
   {
     "ndex": 893,
+    "poke": "0893",
     "it": "Zarude",
     "en": "Zarude",
     "es": "Zarude",
@@ -8038,6 +8931,7 @@
   },
   {
     "ndex": 894,
+    "poke": "0894",
     "it": "Regieleki",
     "en": "Regieleki",
     "es": "Regieleki",
@@ -8047,6 +8941,7 @@
   },
   {
     "ndex": 895,
+    "poke": "0895",
     "it": "Regidrago",
     "en": "Regidrago",
     "es": "Regidrago",
@@ -8056,6 +8951,7 @@
   },
   {
     "ndex": 896,
+    "poke": "0896",
     "it": "Glastrier",
     "en": "Glastrier",
     "es": "Glastrier",
@@ -8065,6 +8961,7 @@
   },
   {
     "ndex": 897,
+    "poke": "0897",
     "it": "Spectrier",
     "en": "Spectrier",
     "es": "Spectrier",
@@ -8074,6 +8971,7 @@
   },
   {
     "ndex": 898,
+    "poke": "0898",
     "it": "Calyrex",
     "en": "Calyrex",
     "es": "Calyrex",
@@ -8083,6 +8981,7 @@
   },
   {
     "ndex": 899,
+    "poke": "0899",
     "it": "Wyrdeer",
     "en": "Wyrdeer",
     "es": "Wyrdeer",
@@ -8092,6 +8991,7 @@
   },
   {
     "ndex": 900,
+    "poke": "0900",
     "it": "Kleavor",
     "en": "Kleavor",
     "es": "Kleavor",
@@ -8101,6 +9001,7 @@
   },
   {
     "ndex": 901,
+    "poke": "0901",
     "it": "Ursaluna",
     "en": "Ursaluna",
     "es": "Ursaluna",
@@ -8110,6 +9011,7 @@
   },
   {
     "ndex": 902,
+    "poke": "0902",
     "it": "Basculegion",
     "en": "Basculegion",
     "es": "Basculegion",
@@ -8119,6 +9021,7 @@
   },
   {
     "ndex": 903,
+    "poke": "0903",
     "it": "Sneasler",
     "en": "Sneasler",
     "es": "Sneasler",
@@ -8128,6 +9031,7 @@
   },
   {
     "ndex": 904,
+    "poke": "0904",
     "it": "Overqwil",
     "en": "Overqwil",
     "es": "Overqwil",
@@ -8137,6 +9041,7 @@
   },
   {
     "ndex": 905,
+    "poke": "0905",
     "it": "Enamorus",
     "en": "Enamorus",
     "es": "Enamorus",
@@ -8146,6 +9051,7 @@
   },
   {
     "ndex": 906,
+    "poke": "0906",
     "it": "Sprigatito",
     "en": "Sprigatito",
     "es": "Sprigatito",
@@ -8155,6 +9061,7 @@
   },
   {
     "ndex": 907,
+    "poke": "0907",
     "it": "Floragato",
     "en": "Floragato",
     "es": "Floragato",
@@ -8164,6 +9071,7 @@
   },
   {
     "ndex": 908,
+    "poke": "0908",
     "it": "Meowscarada",
     "en": "Meowscarada",
     "es": "Meowscarada",
@@ -8173,6 +9081,7 @@
   },
   {
     "ndex": 909,
+    "poke": "0909",
     "it": "Fuecoco",
     "en": "Fuecoco",
     "es": "Fuecoco",
@@ -8182,6 +9091,7 @@
   },
   {
     "ndex": 910,
+    "poke": "0910",
     "it": "Crocalor",
     "en": "Crocalor",
     "es": "Crocalor",
@@ -8191,6 +9101,7 @@
   },
   {
     "ndex": 911,
+    "poke": "0911",
     "it": "Skeledirge",
     "en": "Skeledirge",
     "es": "Skeledirge",
@@ -8200,6 +9111,7 @@
   },
   {
     "ndex": 912,
+    "poke": "0912",
     "it": "Quaxly",
     "en": "Quaxly",
     "es": "Quaxly",
@@ -8209,6 +9121,7 @@
   },
   {
     "ndex": 913,
+    "poke": "0913",
     "it": "Quaxwell",
     "en": "Quaxwell",
     "es": "Quaxwell",
@@ -8218,6 +9131,7 @@
   },
   {
     "ndex": 914,
+    "poke": "0914",
     "it": "Quaquaval",
     "en": "Quaquaval",
     "es": "Quaquaval",
@@ -8227,6 +9141,7 @@
   },
   {
     "ndex": 915,
+    "poke": "0915",
     "it": "Lechonk",
     "en": "Lechonk",
     "es": "Lechonk",
@@ -8236,6 +9151,7 @@
   },
   {
     "ndex": 916,
+    "poke": "0916",
     "it": "Oinkologne",
     "en": "Oinkologne",
     "es": "Oinkologne",
@@ -8245,6 +9161,7 @@
   },
   {
     "ndex": 917,
+    "poke": "0917",
     "it": "Tarountula",
     "en": "Tarountula",
     "es": "Tarountula",
@@ -8254,6 +9171,7 @@
   },
   {
     "ndex": 918,
+    "poke": "0918",
     "it": "Spidops",
     "en": "Spidops",
     "es": "Spidops",
@@ -8263,6 +9181,7 @@
   },
   {
     "ndex": 919,
+    "poke": "0919",
     "it": "Nymble",
     "en": "Nymble",
     "es": "Nymble",
@@ -8272,6 +9191,7 @@
   },
   {
     "ndex": 920,
+    "poke": "0920",
     "it": "Lokix",
     "en": "Lokix",
     "es": "Lokix",
@@ -8281,6 +9201,7 @@
   },
   {
     "ndex": 921,
+    "poke": "0921",
     "it": "Pawmi",
     "en": "Pawmi",
     "es": "Pawmi",
@@ -8290,6 +9211,7 @@
   },
   {
     "ndex": 922,
+    "poke": "0922",
     "it": "Pawmo",
     "en": "Pawmo",
     "es": "Pawmo",
@@ -8299,6 +9221,7 @@
   },
   {
     "ndex": 923,
+    "poke": "0923",
     "it": "Pawmot",
     "en": "Pawmot",
     "es": "Pawmot",
@@ -8308,6 +9231,7 @@
   },
   {
     "ndex": 924,
+    "poke": "0924",
     "it": "Tandemaus",
     "en": "Tandemaus",
     "es": "Tandemaus",
@@ -8317,6 +9241,7 @@
   },
   {
     "ndex": 925,
+    "poke": "0925",
     "it": "Maushold",
     "en": "Maushold",
     "es": "Maushold",
@@ -8326,6 +9251,7 @@
   },
   {
     "ndex": 926,
+    "poke": "0926",
     "it": "Fidough",
     "en": "Fidough",
     "es": "Fidough",
@@ -8335,6 +9261,7 @@
   },
   {
     "ndex": 927,
+    "poke": "0927",
     "it": "Dachsbun",
     "en": "Dachsbun",
     "es": "Dachsbun",
@@ -8344,6 +9271,7 @@
   },
   {
     "ndex": 928,
+    "poke": "0928",
     "it": "Smoliv",
     "en": "Smoliv",
     "es": "Smoliv",
@@ -8353,6 +9281,7 @@
   },
   {
     "ndex": 929,
+    "poke": "0929",
     "it": "Dolliv",
     "en": "Dolliv",
     "es": "Dolliv",
@@ -8362,6 +9291,7 @@
   },
   {
     "ndex": 930,
+    "poke": "0930",
     "it": "Arboliva",
     "en": "Arboliva",
     "es": "Arboliva",
@@ -8371,6 +9301,7 @@
   },
   {
     "ndex": 931,
+    "poke": "0931",
     "it": "Squawkabilly",
     "en": "Squawkabilly",
     "es": "Squawkabilly",
@@ -8380,6 +9311,7 @@
   },
   {
     "ndex": 932,
+    "poke": "0932",
     "it": "Nacli",
     "en": "Nacli",
     "es": "Nacli",
@@ -8389,6 +9321,7 @@
   },
   {
     "ndex": 933,
+    "poke": "0933",
     "it": "Naclstack",
     "en": "Naclstack",
     "es": "Naclstack",
@@ -8398,6 +9331,7 @@
   },
   {
     "ndex": 934,
+    "poke": "0934",
     "it": "Garganacl",
     "en": "Garganacl",
     "es": "Garganacl",
@@ -8407,6 +9341,7 @@
   },
   {
     "ndex": 935,
+    "poke": "0935",
     "it": "Charcadet",
     "en": "Charcadet",
     "es": "Charcadet",
@@ -8416,6 +9351,7 @@
   },
   {
     "ndex": 936,
+    "poke": "0936",
     "it": "Armarouge",
     "en": "Armarouge",
     "es": "Armarouge",
@@ -8425,6 +9361,7 @@
   },
   {
     "ndex": 937,
+    "poke": "0937",
     "it": "Ceruledge",
     "en": "Ceruledge",
     "es": "Ceruledge",
@@ -8434,6 +9371,7 @@
   },
   {
     "ndex": 938,
+    "poke": "0938",
     "it": "Tadbulb",
     "en": "Tadbulb",
     "es": "Tadbulb",
@@ -8443,6 +9381,7 @@
   },
   {
     "ndex": 939,
+    "poke": "0939",
     "it": "Bellibolt",
     "en": "Bellibolt",
     "es": "Bellibolt",
@@ -8452,6 +9391,7 @@
   },
   {
     "ndex": 940,
+    "poke": "0940",
     "it": "Wattrel",
     "en": "Wattrel",
     "es": "Wattrel",
@@ -8461,6 +9401,7 @@
   },
   {
     "ndex": 941,
+    "poke": "0941",
     "it": "Kilowattrel",
     "en": "Kilowattrel",
     "es": "Kilowattrel",
@@ -8470,6 +9411,7 @@
   },
   {
     "ndex": 942,
+    "poke": "0942",
     "it": "Maschiff",
     "en": "Maschiff",
     "es": "Maschiff",
@@ -8479,6 +9421,7 @@
   },
   {
     "ndex": 943,
+    "poke": "0943",
     "it": "Mabosstiff",
     "en": "Mabosstiff",
     "es": "Mabosstiff",
@@ -8488,6 +9431,7 @@
   },
   {
     "ndex": 944,
+    "poke": "0944",
     "it": "Shroodle",
     "en": "Shroodle",
     "es": "Shroodle",
@@ -8497,6 +9441,7 @@
   },
   {
     "ndex": 945,
+    "poke": "0945",
     "it": "Grafaiai",
     "en": "Grafaiai",
     "es": "Grafaiai",
@@ -8506,6 +9451,7 @@
   },
   {
     "ndex": 946,
+    "poke": "0946",
     "it": "Bramblin",
     "en": "Bramblin",
     "es": "Bramblin",
@@ -8515,6 +9461,7 @@
   },
   {
     "ndex": 947,
+    "poke": "0947",
     "it": "Brambleghast",
     "en": "Brambleghast",
     "es": "Brambleghast",
@@ -8524,6 +9471,7 @@
   },
   {
     "ndex": 948,
+    "poke": "0948",
     "it": "Toedscool",
     "en": "Toedscool",
     "es": "Toedscool",
@@ -8533,6 +9481,7 @@
   },
   {
     "ndex": 949,
+    "poke": "0949",
     "it": "Toedscruel",
     "en": "Toedscruel",
     "es": "Toedscruel",
@@ -8542,6 +9491,7 @@
   },
   {
     "ndex": 950,
+    "poke": "0950",
     "it": "Klawf",
     "en": "Klawf",
     "es": "Klawf",
@@ -8551,6 +9501,7 @@
   },
   {
     "ndex": 951,
+    "poke": "0951",
     "it": "Capsakid",
     "en": "Capsakid",
     "es": "Capsakid",
@@ -8560,6 +9511,7 @@
   },
   {
     "ndex": 952,
+    "poke": "0952",
     "it": "Scovillain",
     "en": "Scovillain",
     "es": "Scovillain",
@@ -8569,6 +9521,7 @@
   },
   {
     "ndex": 953,
+    "poke": "0953",
     "it": "Rellor",
     "en": "Rellor",
     "es": "Rellor",
@@ -8578,6 +9531,7 @@
   },
   {
     "ndex": 954,
+    "poke": "0954",
     "it": "Rabsca",
     "en": "Rabsca",
     "es": "Rabsca",
@@ -8587,6 +9541,7 @@
   },
   {
     "ndex": 955,
+    "poke": "0955",
     "it": "Flittle",
     "en": "Flittle",
     "es": "Flittle",
@@ -8596,6 +9551,7 @@
   },
   {
     "ndex": 956,
+    "poke": "0956",
     "it": "Espathra",
     "en": "Espathra",
     "es": "Espathra",
@@ -8605,6 +9561,7 @@
   },
   {
     "ndex": 957,
+    "poke": "0957",
     "it": "Tinkatink",
     "en": "Tinkatink",
     "es": "Tinkatink",
@@ -8614,6 +9571,7 @@
   },
   {
     "ndex": 958,
+    "poke": "0958",
     "it": "Tinkatuff",
     "en": "Tinkatuff",
     "es": "Tinkatuff",
@@ -8623,6 +9581,7 @@
   },
   {
     "ndex": 959,
+    "poke": "0959",
     "it": "Tinkaton",
     "en": "Tinkaton",
     "es": "Tinkaton",
@@ -8632,6 +9591,7 @@
   },
   {
     "ndex": 960,
+    "poke": "0960",
     "it": "Wiglett",
     "en": "Wiglett",
     "es": "Wiglett",
@@ -8641,6 +9601,7 @@
   },
   {
     "ndex": 961,
+    "poke": "0961",
     "it": "Wugtrio",
     "en": "Wugtrio",
     "es": "Wugtrio",
@@ -8650,6 +9611,7 @@
   },
   {
     "ndex": 962,
+    "poke": "0962",
     "it": "Bombirdier",
     "en": "Bombirdier",
     "es": "Bombirdier",
@@ -8659,6 +9621,7 @@
   },
   {
     "ndex": 963,
+    "poke": "0963",
     "it": "Finizen",
     "en": "Finizen",
     "es": "Finizen",
@@ -8668,6 +9631,7 @@
   },
   {
     "ndex": 964,
+    "poke": "0964",
     "it": "Palafin",
     "en": "Palafin",
     "es": "Palafin",
@@ -8677,6 +9641,7 @@
   },
   {
     "ndex": 965,
+    "poke": "0965",
     "it": "Varoom",
     "en": "Varoom",
     "es": "Varoom",
@@ -8686,6 +9651,7 @@
   },
   {
     "ndex": 966,
+    "poke": "0966",
     "it": "Revavroom",
     "en": "Revavroom",
     "es": "Revavroom",
@@ -8695,6 +9661,7 @@
   },
   {
     "ndex": 967,
+    "poke": "0967",
     "it": "Cyclizar",
     "en": "Cyclizar",
     "es": "Cyclizar",
@@ -8704,6 +9671,7 @@
   },
   {
     "ndex": 968,
+    "poke": "0968",
     "it": "Orthworm",
     "en": "Orthworm",
     "es": "Orthworm",
@@ -8713,6 +9681,7 @@
   },
   {
     "ndex": 969,
+    "poke": "0969",
     "it": "Glimmet",
     "en": "Glimmet",
     "es": "Glimmet",
@@ -8722,6 +9691,7 @@
   },
   {
     "ndex": 970,
+    "poke": "0970",
     "it": "Glimmora",
     "en": "Glimmora",
     "es": "Glimmora",
@@ -8731,6 +9701,7 @@
   },
   {
     "ndex": 971,
+    "poke": "0971",
     "it": "Greavard",
     "en": "Greavard",
     "es": "Greavard",
@@ -8740,6 +9711,7 @@
   },
   {
     "ndex": 972,
+    "poke": "0972",
     "it": "Houndstone",
     "en": "Houndstone",
     "es": "Houndstone",
@@ -8749,6 +9721,7 @@
   },
   {
     "ndex": 973,
+    "poke": "0973",
     "it": "Flamigo",
     "en": "Flamigo",
     "es": "Flamigo",
@@ -8758,6 +9731,7 @@
   },
   {
     "ndex": 974,
+    "poke": "0974",
     "it": "Cetoddle",
     "en": "Cetoddle",
     "es": "Cetoddle",
@@ -8767,6 +9741,7 @@
   },
   {
     "ndex": 975,
+    "poke": "0975",
     "it": "Cetitan",
     "en": "Cetitan",
     "es": "Cetitan",
@@ -8776,6 +9751,7 @@
   },
   {
     "ndex": 976,
+    "poke": "0976",
     "it": "Veluza",
     "en": "Veluza",
     "es": "Veluza",
@@ -8785,6 +9761,7 @@
   },
   {
     "ndex": 977,
+    "poke": "0977",
     "it": "Dondozo",
     "en": "Dondozo",
     "es": "Dondozo",
@@ -8794,6 +9771,7 @@
   },
   {
     "ndex": 978,
+    "poke": "0978",
     "it": "Tatsugiri",
     "en": "Tatsugiri",
     "es": "Tatsugiri",
@@ -8803,6 +9781,7 @@
   },
   {
     "ndex": 979,
+    "poke": "0979",
     "it": "Annihilape",
     "en": "Annihilape",
     "es": "Annihilape",
@@ -8812,6 +9791,7 @@
   },
   {
     "ndex": 980,
+    "poke": "0980",
     "it": "Clodsire",
     "en": "Clodsire",
     "es": "Clodsire",
@@ -8821,6 +9801,7 @@
   },
   {
     "ndex": 981,
+    "poke": "0981",
     "it": "Farigiraf",
     "en": "Farigiraf",
     "es": "Farigiraf",
@@ -8830,6 +9811,7 @@
   },
   {
     "ndex": 982,
+    "poke": "0982",
     "it": "Dudunsparce",
     "en": "Dudunsparce",
     "es": "Dudunsparce",
@@ -8839,6 +9821,7 @@
   },
   {
     "ndex": 983,
+    "poke": "0983",
     "it": "Kingambit",
     "en": "Kingambit",
     "es": "Kingambit",
@@ -8848,6 +9831,7 @@
   },
   {
     "ndex": 984,
+    "poke": "0984",
     "it": "Grandizanne",
     "en": "Great Tusk",
     "es": "Colmilargo",
@@ -8857,6 +9841,7 @@
   },
   {
     "ndex": 985,
+    "poke": "0985",
     "it": "Codaurlante",
     "en": "Scream Tail",
     "es": "Colagrito",
@@ -8866,6 +9851,7 @@
   },
   {
     "ndex": 986,
+    "poke": "0986",
     "it": "Fungofurioso",
     "en": "Brute Bonnet",
     "es": "Furioseta",
@@ -8875,6 +9861,7 @@
   },
   {
     "ndex": 987,
+    "poke": "0987",
     "it": "Crinealato",
     "en": "Flutter Mane",
     "es": "Melenaleteo",
@@ -8884,6 +9871,7 @@
   },
   {
     "ndex": 988,
+    "poke": "0988",
     "it": "Alirasenti",
     "en": "Slither Wing",
     "es": "Reptalada",
@@ -8893,6 +9881,7 @@
   },
   {
     "ndex": 989,
+    "poke": "0989",
     "it": "Peldisabbia",
     "en": "Sandy Shocks",
     "es": "Pelarena",
@@ -8902,6 +9891,7 @@
   },
   {
     "ndex": 990,
+    "poke": "0990",
     "it": "Solcoferreo",
     "en": "Iron Treads",
     "es": "Ferrodada",
@@ -8911,6 +9901,7 @@
   },
   {
     "ndex": 991,
+    "poke": "0991",
     "it": "Saccoferreo",
     "en": "Iron Bundle",
     "es": "Ferrosaco",
@@ -8920,6 +9911,7 @@
   },
   {
     "ndex": 992,
+    "poke": "0992",
     "it": "Manoferrea",
     "en": "Iron Hands",
     "es": "Ferropalmas",
@@ -8929,6 +9921,7 @@
   },
   {
     "ndex": 993,
+    "poke": "0993",
     "it": "Colloferreo",
     "en": "Iron Jugulis",
     "es": "Ferrocuello",
@@ -8938,6 +9931,7 @@
   },
   {
     "ndex": 994,
+    "poke": "0994",
     "it": "Falenaferrea",
     "en": "Iron Moth",
     "es": "Ferropolilla",
@@ -8947,6 +9941,7 @@
   },
   {
     "ndex": 995,
+    "poke": "0995",
     "it": "Spineferree",
     "en": "Iron Thorns",
     "es": "Ferropúas",
@@ -8956,6 +9951,7 @@
   },
   {
     "ndex": 996,
+    "poke": "0996",
     "it": "Frigibax",
     "en": "Frigibax",
     "es": "Frigibax",
@@ -8965,6 +9961,7 @@
   },
   {
     "ndex": 997,
+    "poke": "0997",
     "it": "Arctibax",
     "en": "Arctibax",
     "es": "Arctibax",
@@ -8974,6 +9971,7 @@
   },
   {
     "ndex": 998,
+    "poke": "0998",
     "it": "Baxcalibur",
     "en": "Baxcalibur",
     "es": "Baxcalibur",
@@ -8983,6 +9981,7 @@
   },
   {
     "ndex": 999,
+    "poke": "0999",
     "it": "Gimmighoul",
     "en": "Gimmighoul",
     "es": "Gimmighoul",
@@ -8992,6 +9991,7 @@
   },
   {
     "ndex": 1000,
+    "poke": "1000",
     "it": "Gholdengo",
     "en": "Gholdengo",
     "es": "Gholdengo",
@@ -9001,6 +10001,7 @@
   },
   {
     "ndex": 1001,
+    "poke": "1001",
     "it": "Wo-Chien",
     "en": "Wo-Chien",
     "es": "Wo-Chien",
@@ -9010,6 +10011,7 @@
   },
   {
     "ndex": 1002,
+    "poke": "1002",
     "it": "Chien-Pao",
     "en": "Chien-Pao",
     "es": "Chien-Pao",
@@ -9019,6 +10021,7 @@
   },
   {
     "ndex": 1003,
+    "poke": "1003",
     "it": "Ting-Lu",
     "en": "Ting-Lu",
     "es": "Ting-Lu",
@@ -9028,6 +10031,7 @@
   },
   {
     "ndex": 1004,
+    "poke": "1004",
     "it": "Chi-Yu",
     "en": "Chi-Yu",
     "es": "Chi-Yu",
@@ -9037,6 +10041,7 @@
   },
   {
     "ndex": 1005,
+    "poke": "1005",
     "it": "Lunaruggente",
     "en": "Roaring Moon",
     "es": "Bramaluna",
@@ -9046,6 +10051,7 @@
   },
   {
     "ndex": 1006,
+    "poke": "1006",
     "it": "Eroeferreo",
     "en": "Iron Valiant",
     "es": "Ferropaladín",
@@ -9055,6 +10061,7 @@
   },
   {
     "ndex": 1007,
+    "poke": "1007",
     "it": "Koraidon",
     "en": "Koraidon",
     "es": "Koraidon",
@@ -9064,6 +10071,7 @@
   },
   {
     "ndex": 1008,
+    "poke": "1008",
     "it": "Miraidon",
     "en": "Miraidon",
     "es": "Miraidon",
@@ -9073,6 +10081,7 @@
   },
   {
     "ndex": 1009,
+    "poke": "1009",
     "it": "Acquecrespe",
     "en": "Walking Wake",
     "es": "Ondulagua",
@@ -9082,6 +10091,7 @@
   },
   {
     "ndex": 1010,
+    "poke": "1010",
     "it": "Fogliaferrea",
     "en": "Iron Leaves",
     "es": "Ferroverdor",
@@ -9091,6 +10101,7 @@
   },
   {
     "ndex": 1011,
+    "poke": "1011",
     "it": "Dipplin",
     "en": "Dipplin",
     "es": "Dipplin",
@@ -9100,6 +10111,7 @@
   },
   {
     "ndex": 1012,
+    "poke": "1012",
     "it": "Poltchageist",
     "en": "Poltchageist",
     "es": "Poltchageist",
@@ -9109,6 +10121,7 @@
   },
   {
     "ndex": 1013,
+    "poke": "1013",
     "it": "Sinistcha",
     "en": "Sinistcha",
     "es": "Sinistcha",
@@ -9118,6 +10131,7 @@
   },
   {
     "ndex": 1014,
+    "poke": "1014",
     "it": "Okidogi",
     "en": "Okidogi",
     "es": "Okidogi",
@@ -9127,6 +10141,7 @@
   },
   {
     "ndex": 1015,
+    "poke": "1015",
     "it": "Munkidori",
     "en": "Munkidori",
     "es": "Munkidori",
@@ -9136,6 +10151,7 @@
   },
   {
     "ndex": 1016,
+    "poke": "1016",
     "it": "Fezandipiti",
     "en": "Fezandipiti",
     "es": "Fezandipiti",
@@ -9145,6 +10161,7 @@
   },
   {
     "ndex": 1017,
+    "poke": "1017",
     "it": "Ogerpon",
     "en": "Ogerpon",
     "es": "Ogerpon",
@@ -9154,6 +10171,7 @@
   },
   {
     "ndex": 1018,
+    "poke": "1018",
     "it": "Archaludon",
     "en": "Archaludon",
     "es": "Archaludon",
@@ -9163,6 +10181,7 @@
   },
   {
     "ndex": 1019,
+    "poke": "1019",
     "it": "Hydrapple",
     "en": "Hydrapple",
     "es": "Hydrapple",
@@ -9172,6 +10191,7 @@
   },
   {
     "ndex": 1020,
+    "poke": "1020",
     "it": "Vampeaguzze",
     "en": "Gouging Fire",
     "es": "Flamariete",
@@ -9181,6 +10201,7 @@
   },
   {
     "ndex": 1021,
+    "poke": "1021",
     "it": "Furiatonante",
     "en": "Raging Bolt",
     "es": "Electrofuria",
@@ -9190,6 +10211,7 @@
   },
   {
     "ndex": 1022,
+    "poke": "1022",
     "it": "Massoferreo",
     "en": "Iron Boulder",
     "es": "Ferromole",
@@ -9199,6 +10221,7 @@
   },
   {
     "ndex": 1023,
+    "poke": "1023",
     "it": "Capoferreo",
     "en": "Iron Crown",
     "es": "Ferrotesta",
@@ -9208,6 +10231,7 @@
   },
   {
     "ndex": 1024,
+    "poke": "1024",
     "it": "Terapagos",
     "en": "Terapagos",
     "es": "Terapagos",
@@ -9217,6 +10241,7 @@
   },
   {
     "ndex": 1025,
+    "poke": "1025",
     "it": "Pecharunt",
     "en": "Pecharunt",
     "es": "Pecharunt",
