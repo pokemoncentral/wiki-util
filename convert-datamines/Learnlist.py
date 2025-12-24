@@ -29,7 +29,7 @@ class FormMoves:
         sorted_games = sorted(
             self.moves_by_game.items(), key=lambda kv: games_order[kv[0]]
         )
-        lines.extend(f"{game_moves}\n" for _, game_moves in sorted_games)
+        lines.extend(f"{game_moves}\n\n" for _, game_moves in sorted_games)
 
         return "\n".join(lines)
 

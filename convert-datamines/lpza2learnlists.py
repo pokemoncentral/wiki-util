@@ -152,7 +152,7 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
             for level, plus_level, name in pkmn.moves.level_up
         )
         return f"""
-{{{{#invoke: Learnlist-LPZA | level | {pkmn.name} |{form_param} //
+{{{{#invoke: Learnlist/LPZA | level | {pkmn.name} |{form_param} //
 {"\n".join(entries)}
 }}}}
 """.strip()
@@ -160,7 +160,7 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
     @staticmethod
     def _tm_wikicode(pkmn: Pkmn, form_param: str) -> str:
         return f"""
-{{{{#invoke: Learnlist-LPZA | tm | {pkmn.name} |{form_param} //
+{{{{#invoke: Learnlist/LPZA | tm | {pkmn.name} |{form_param} //
 {"\n".join(f"| {tm} | {name} | {"yes | " if name in pkmn.moves.alpha else ""}//" for tm, name in pkmn.moves.tm)}
 }}}}
 """.strip()
