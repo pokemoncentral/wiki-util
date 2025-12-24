@@ -120,7 +120,7 @@ def parse_move_level_up(level_up_line: str) -> LpzaLevelUpMove:
 
 def parse_move_tm(tm_line: str) -> Tuple[str, str]:
     [_, tm, *name] = tm_line.split(" ")
-    return (tm[1:-1], " ".join(name))
+    return ("MT" + tm[3:-1], " ".join(name))
 
 
 def parse_move_prefixed(line: str) -> str:
