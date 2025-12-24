@@ -47,7 +47,10 @@ function contains(list, item)
 end
 
 -- add a row to text file with forms
-function addAbbrRow(forms, abbr, abbrSince, abbrUntil)
+function addAbbrRow(forms, row)
+    local abbr = row[1]
+    local abbrSince = row[2]
+    local abbrUntil = row[3]
     return forms .. abbr:gsub('base', '') .. ',' .. abbrSince .. ',' .. abbrUntil .. '\n'
 end
 
@@ -58,19 +61,24 @@ function writeFile(filePath, fileContent)
     file:close()
 end
 
+--[[
+
+Initial setup: require needed modules and extract some data that will be used later
+
+--]]
+
 -- retrieve full path of this script
 local scriptPath = debug.getinfo(1, "S").source:sub(2)
 scriptPath = io.popen("realpath '" .. scriptPath .. "'", 'r'):read('a')
 scriptPath = scriptPath:gsub('[\n\r]*$', '')
 -- get script directory and find forms files directory
-scriptDir = getDirName(scriptPath)
-formsDir = scriptDir .. '/pokepages-pokeforms'
+local scriptDir = getDirName(scriptPath)
+local formsDir = scriptDir .. '/pokepages-pokeforms'
 -- add to package.path directory with config.lua
 addToPath(getDirName(scriptDir) .. '/lua')
 -- add to package.path directory with other modules
 local config = require('config')
 addToPath(config.modulesPath)
--- print(package.path)
 
 -- require needed modules
 local af = require('AltForms-data')
@@ -78,7 +86,6 @@ local uf = require('UselessForms-data')
 local bf = require('BothForms-data')
 local pd = require('Poké-data')
 -- extract some data that will be used later
-local gigas = af.formgroups.gigamax
 local megasSingle = af.formgroups.mega
 local megasMultiple = af.formgroups.megaxy
 local megas = {}
@@ -93,11 +100,12 @@ the upper limit can be any value greater than last Pokémon's Pokédex number.
 --]]
 
 -- The following line is needed, otherwise next one fails because numbers is null
-numbers = { 1, 3, 6, 25, 26, 83, 181, 428, 585, 658, 670 }
+local numbers = { 1, 3, 6, 25, 26, 83, 181, 428, 585, 658, 670 }
 for n = 1, 1500 do numbers[n] = n end
 for _,n in pairs(numbers) do
     local ndex = string.format('%04d', n)
     local gamesOrder = nil
+    -- BothForms contains final order for Pokémon with entries in both AltForms and UselessForms
     if (bf[n] ~= nil) then
         gamesOrder = bf[n].gamesOrder
     elseif (af[n] ~= nil) then
@@ -114,38 +122,65 @@ for _,n in pairs(numbers) do
         print('------ Processing ' .. pokePath .. ' ' .. name)
         -- print(dump(gamesOrder)) -- [debug]
         for _,abbr in pairs(gamesOrder) do
-            local abbrSince = ''
-            local abbrUntil = ''
+            -- abbr, since, until
+            -- done this way because forms that were removed from game code and
+            -- then added back in later games need to be splitted in multiple rows
+            local formsRows = { { abbr, '', '' } }
             if (bf[n] ~= nil) then
-                abbrSince = bf[n].since[abbr]
+                formsRows[1][2] = bf[n].since[abbr]
                 if (bf[n]['until'] ~= nil) then
-                    abbrUntil = bf[n]['until'][abbr] or ''
+                    formsRows[1][3] = bf[n]['until'][abbr] or ''
                 end
             elseif (af[n] ~= nil) then
-                abbrSince = af[n].since[abbr]
+                formsRows[1][2] = af[n].since[abbr]
                 if (af[n]['until'] ~= nil) then
-                    abbrUntil = af[n]['until'][abbr] or ''
+                    formsRows[1][3] = af[n]['until'][abbr] or ''
                 end
             elseif (uf[n] ~= nil) then
-                abbrSince = uf[n].since[abbr]
+                formsRows[1][2] = uf[n].since[abbr]
                 if (uf[n]['until'] ~= nil) then
-                    abbrUntil = uf[n]['until'][abbr] or ''
+                    formsRows[1][3] = uf[n]['until'][abbr] or ''
                 end
             end
             -- Gigamax only exists in spsc
-            if (abbr == 'Gi' and contains(gigas, name:lower())) then
-                abbrUntil = 'spsc'
+            if (abbr == 'Gi' and contains(af.formgroups.gigamax, name:lower())) then
+                formsRows[1][3] = 'spsc'
             end
             -- Megaevolution doesn't exist between spsc and sv (included)
-            if (contains({ 'M', 'MX', 'MY' }, abbr) and contains(megas, name:lower()) and contains({ 'xy', 'roza' }, abbrSince)) then
-                forms = addAbbrRow(forms, abbr, abbrSince, 'lgpe')
-                forms = addAbbrRow(forms, abbr, 'lpza', abbrUntil)
-            else
-                forms = addAbbrRow(forms, abbr, abbrSince, abbrUntil)
+            if (contains({ 'M', 'MX', 'MY' }, abbr) and contains(megas, name:lower()) and contains({ 'xy', 'roza' }, formsRows[1][2])) then
+                formsRows[2] = { abbr, 'lpza', formsRows[1][3] }
+                formsRows[1] = { abbr, formsRows[1][2], 'usul' }
+                if (n < 151) then
+                    formsRows[1][3] = 'lgpe'
+                else
+                    formsRows[1][3] = 'usul'
+                end
+            end
+            -- regional forms don't exist in dlps, lpa, lpza
+            if (abbr == 'A' and contains(af.formgroups.alola, name:lower())) then
+                formsRows[1] = { abbr, 'sl', 'spsc' }
+                formsRows[2] = { abbr, 'sv', 'sv' }
+            end
+            if (abbr == 'G' and contains(af.formgroups.galar, name:lower())) then
+                formsRows[1] = { abbr, 'spsc', 'spsc' }
+                formsRows[2] = { abbr, 'sv', 'sv' }
+            end
+            -- Tauros has different abbrs but does not exist in LPZA, so I'll ignore it
+            if (abbr == 'P' and contains(af.formgroups.paldea, name:lower())) then
+                formsRows[1] = { abbr, 'sv', 'sv' }
+            end
+            -- Pikachu with hat don't exist in dlps, lpa, lpza
+            if (n == 25 and contains({ 'O', 'H', 'Si', 'U', 'K', 'A', 'Co' }, abbr)) then
+                formsRows[1] = { abbr, formsRows[1][2], 'spsc' }
+                formsRows[2] = { abbr, 'sv', 'sv' }
+            end
+            -- finally add row(s)
+            for _,row in pairs(formsRows) do
+                forms = addAbbrRow(forms, row)
             end
         end
         -- enable the following line and disable last one if testing
-        print(forms)
-        -- writeToFile(pokePath, forms)
+        -- print(forms)
+        writeFile(pokePath, forms)
     end
 end
