@@ -26,19 +26,17 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
     def make_learnlist_from_datamine(self, pkmn: Pkmn, form_name: str) -> Learnlist:
         form_param = "" if pkmn.form_abbr is None else f" form = {pkmn.form_abbr}"
         return Learnlist(
-            {
+            level_up={
                 form_name: FormMoves(
                     form_name,
                     {"LPZA": self._level_up_wikicode(pkmn, form_param)},
                 )
             },
-            {
+            tm={
                 form_name: FormMoves(
                     form_name, {"LPZA": self._tm_wikicode(pkmn, form_param)}
                 )
             },
-            {form_name: FormMoves(form_name)},
-            {form_name: FormMoves(form_name)},
         )
 
     def parse_learnlist_subpage(self, learnlist_subpage: str) -> Learnlist:
@@ -52,11 +50,11 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
         for line in non_empty_lines:
             is_end = "noinclude" in line
             is_form_heading = line.startswith("=====")
-            is_prop_heading = line.startswith("====")
+            is_prop_heading = not is_form_heading and line.startswith("====")
 
             if current_render and (is_end or is_form_heading or is_prop_heading):
                 current_moves = getattr(learnlist, current_prop)
-                if not current_moves:
+                if form_name not in current_moves:
                     current_moves[form_name] = FormMoves(form_name, {"SV": ""})
                 current_moves[form_name].moves_by_game["SV"] = "\n".join(current_render)
                 current_render.clear()
@@ -64,10 +62,16 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
             if is_prop_heading:
                 if "livello" in line:
                     current_prop = "level_up"
-                if "MT" in line:
+                elif "MT" in line:
                     current_prop = "tm"
-                if "Uovo" in line:
+                elif "Uovo" in line:
                     current_prop = "egg"
+                elif "precedenti" in line:
+                    current_prop = "pre_evo"
+                elif "Insegnamosse" in line:
+                    current_prop = "reminder"
+                else:
+                    raise ValueError(f"Unknown heading: {line}")
                 setattr(learnlist, current_prop, {})
 
             if is_form_heading:
@@ -89,21 +93,47 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
         pkmn_name: str,
         form_order_by_name: dict[str, int],
     ) -> str:
-        return f"""
+        sections = [
+            f"""
 ====Aumentando di [[livello]]====
 {self._form_moves_list_to_wikicode(learnlist.level_up, form_order_by_name)}
-
+            """,
+            f"""
 ====Tramite [[MT]]====
 {self._form_moves_list_to_wikicode(learnlist.tm, form_order_by_name)}
-
+            """,
+            f"""
 ====Come [[Mossa Uovo#Pokémon Scarlatto e Violetto|mosse Uovo]]====
 {self._form_moves_list_to_wikicode(learnlist.egg, form_order_by_name)}
+            """,
+        ]
 
+        if learnlist.reminder:
+            sections.append(
+                f"""
+====Dall'[[Insegnamosse]]====
+{self._form_moves_list_to_wikicode(learnlist.reminder, form_order_by_name)}
+                """
+            )
+
+        if learnlist.pre_evo:
+            sections.append(
+                f"""
+====Tramite [[evoluzione|evoluzioni]] precedenti====
+{self._form_moves_list_to_wikicode(learnlist.pre_evo, form_order_by_name)}
+                """
+            )
+
+        sections.append(
+            f"""
 <noinclude>
 [[Categoria:Sottopagine moveset Pokémon ({self.it_gen_ord} generazione)]]
 [[en:{pkmn_name} (Pokémon)/Generation {self.roman_gen} learnset]]
 </noinclude>
-""".strip()
+            """
+        )
+
+        return "\n\n".join(map(str.strip, sections))
 
     @staticmethod
     def _form_moves_list_to_wikicode(
@@ -131,7 +161,7 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
     def _tm_wikicode(pkmn: Pkmn, form_param: str) -> str:
         return f"""
 {{{{#invoke: Learnlist-LPZA | tm | {pkmn.name} |{form_param} //
-{"\n".join(f"| {tm} | {name} | //" for tm, name in pkmn.moves.tm)}
+{"\n".join(f"| {tm} | {name} | {"yes | " if name in pkmn.moves.alpha else ""}//" for tm, name in pkmn.moves.tm)}
 }}}}
 """.strip()
 

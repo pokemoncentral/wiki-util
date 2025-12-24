@@ -45,6 +45,7 @@ class Moves(Generic[U]):
     tm: list[Tuple[str, str]]
     egg: list[str]
     reminder: list[str]
+    alpha: list[str]
 
 
 @dataclass

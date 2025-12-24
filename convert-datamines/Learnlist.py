@@ -24,12 +24,12 @@ class FormMoves:
     def to_wikicode(self, games_order: dict[str, int]) -> str:
         lines = []
         if self.form_name:
-            lines.append(f"===={self.form_name}====\n")
+            lines.append(f"===={self.form_name}====")
 
         sorted_games = sorted(
             self.moves_by_game.items(), key=lambda kv: games_order[kv[0]]
         )
-        lines.extend(f"\n{game_moves}" for _, game_moves in sorted_games)
+        lines.extend(f"{game_moves}\n" for _, game_moves in sorted_games)
 
         return "\n".join(lines)
 
@@ -47,6 +47,7 @@ class Learnlist:
     level_up: dict[str, FormMoves] = field(default_factory=dict)
     tm: dict[str, FormMoves] = field(default_factory=dict)
     egg: dict[str, FormMoves] = field(default_factory=dict)
+    pre_evo: dict[str, FormMoves] = field(default_factory=dict)
     reminder: dict[str, FormMoves] = field(default_factory=dict)
 
     def merge_in(self, other: Self):
@@ -54,6 +55,7 @@ class Learnlist:
         self._merge_by_form_name(self.tm, other.tm)
         self._merge_by_form_name(self.egg, other.egg)
         self._merge_by_form_name(self.reminder, other.reminder)
+        self._merge_by_form_name(self.pre_evo, other.pre_evo)
 
     @staticmethod
     def _merge_by_form_name(

@@ -47,7 +47,12 @@ def parse_pkmn(datamine_lines: Generator[str]) -> Optional[Pkmn]:
     )
 
     types = parse_types(find(datamine_lines, lambda l: l.startswith("Type")))
-    next(dropwhile(lambda l: l != "Level Up Moves:", datamine_lines))
+    next(
+        dropwhile(
+            lambda l: l.partition(":")[0] not in ("Height", "Classifications"),
+            datamine_lines,
+        )
+    )
     moves = parse_moves(datamine_lines)
 
     return Pkmn.create(
@@ -70,25 +75,31 @@ def parse_abilities(line: str) -> Abilities:
 
 
 def parse_moves(datamine_lines: Generator[str]) -> Moves:
-    level_up, tm, egg, reminder = [], [], [], []
-    current_move_list, current_move_parser = level_up, parse_move_level_up
+    level_up, tm, egg, reminder, alpha = [], [], [], [], []
+    current_move_list, current_move_parser = None, None
     for line in datamine_lines:
         if is_move_list_item(line):
             current_move_list.append(current_move_parser(line))
             continue
 
         match line:
+            case "Level Up Moves:":
+                current_move_list, current_move_parser = level_up, parse_move_level_up
+
             case "TM Learn:":
-                current_move_list, current_move_parser = (tm, parse_move_tm)
+                current_move_list, current_move_parser = tm, parse_move_tm
 
             case "Egg Moves:":
-                current_move_list, current_move_parser = (egg, parse_move_prefixed)
+                current_move_list, current_move_parser = egg, parse_move_prefixed
 
             case "Reminder:":
-                current_move_list, current_move_parser = (reminder, parse_move_prefixed)
+                current_move_list, current_move_parser = reminder, parse_move_prefixed
 
             case "":
                 break
+
+            case _ if line.startswith("Alpha Move:"):
+                alpha.append(line.partition(":")[2].strip())
 
             case _ if line.startswith("Evolves"):
                 break
@@ -96,7 +107,7 @@ def parse_moves(datamine_lines: Generator[str]) -> Moves:
             case _:
                 raise ValueError(f"Unknown move heading: {line}")
 
-    return Moves[LpzaLevelUpMove](level_up, tm, egg, reminder)
+    return Moves[LpzaLevelUpMove](level_up, tm, egg, reminder, alpha)
 
 
 level_up_regex = re.compile(r"- \[(-?\d{1,3})\] (.+?) \{(\d{1,3})\}")
