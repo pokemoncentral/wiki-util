@@ -92,12 +92,11 @@ the upper limit can be any value greater than last Pokémon's Pokédex number.
 
 --]]
 
--- The following line can be used to test specific Pokémon
+-- The following line is needed, otherwise next one fails because numbers is null
 numbers = { 1, 3, 6, 25, 26, 83, 181, 428, 585, 658, 670 }
--- for n = 1, 50 do numbers[n] = n end
+for n = 1, 1500 do numbers[n] = n end
 for _,n in pairs(numbers) do
     local ndex = string.format('%04d', n)
-    local name = pd[n].name
     local gamesOrder = nil
     if (bf[n] ~= nil) then
         gamesOrder = bf[n].gamesOrder
@@ -109,6 +108,7 @@ for _,n in pairs(numbers) do
     if (gamesOrder == nil) then
         -- print('------ Skipping ' .. n) -- [debug]
     else
+        local name = pd[n].name
         local forms = ''
         local pokePath = formsDir .. '/' .. ndex .. '.csv'
         print('------ Processing ' .. pokePath .. ' ' .. name)
