@@ -8,7 +8,7 @@ from typing import Any, Generator, Optional
 import jsonpickle
 import pywikibot as pwb
 from altforms import AltForms
-from dtos import Moves, Pkmn
+from dtos import Pkmn
 from Learnlist import Learnlist
 from pywikibot.bot import CurrentPageBot
 
@@ -75,20 +75,19 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
         return pwb.Page(pwb.Site(), f"{base_name}/{subpage_name}")
 
     def treat_page(self):
-        form_abbr = self.current_pkmn.form_abbr or "base"
         single_alt_form = (
-            self.current_alt_form.for_abbr(form_abbr)
+            self.current_alt_form.for_abbr(self.current_pkmn.form_abbr or "base")
             if self.current_alt_form is not None
             else None
         )
 
-        form_name = single_alt_form.name if single_alt_form is not None else None
         # Mega evolutions have the same learnlist as the base form
-        if form_name is not None and form_name.startswith("Mega"):  # Meganium???
+        if single_alt_form is not None and single_alt_form.is_mega:
             return
 
         new_learnlist = self.make_learnlist_from_datamine(
-            self.current_pkmn, form_name if form_abbr != "base" else ""
+            self.current_pkmn,
+            "" if self.current_pkmn.form_abbr is None else single_alt_form.name,
         )
         learnlist = self._read_current_learnlist()
         if learnlist is not None:

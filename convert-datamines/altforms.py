@@ -17,6 +17,11 @@ class SingleAltForm:
     plainlink: str
     since: str
     until: Optional[str] = None
+    base_name: str
+
+    @property
+    def is_mega(self) -> bool:
+        return "Megaevoluzione" in self.plainlink
 
 
 @dataclass(kw_only=True)
@@ -52,6 +57,7 @@ class AltForms:
             plainlink=self.plainlinks[abbr],
             since=self.since[abbr],
             until=self.until,
+            base_name=self.base_name,
         )
 
     @classmethod
