@@ -1,5 +1,5 @@
 import re
-from itertools import cycle, dropwhile, islice
+from itertools import chain, cycle, islice
 from typing import Generator, Literal, Optional, Tuple
 
 from dtos import Abilities, Moves, Pkmn, Stats
@@ -13,8 +13,7 @@ LpzaLevelUpMove = Tuple[LearnLevel, int, str]
 
 def parse(datamine_file: str) -> Generator[Pkmn]:
     with open(datamine_file, "r", encoding="utf-8") as f:
-        datamine_lines = map(str.strip, f.readlines())
-
+        datamine_lines = map(str.strip, f)
         try:
             while True:
                 pkmn = parse_pkmn(datamine_lines)
@@ -35,28 +34,29 @@ def is_move_list_item(line: str) -> bool:
 
 
 def parse_pkmn(datamine_lines: Generator[str]) -> Optional[Pkmn]:
-    next(dropwhile(lambda l: l != "======", datamine_lines))
+    while True:
+        line = next(datamine_lines)
 
-    ndex_and_name_line = next(datamine_lines)
-    ndex, _, name_and_rest = ndex_and_name_line.partition(" - ")
-    name = parse_name(name_and_rest)
+        if "(Stage: " in line:
+            ndex, _, name_and_rest = line.partition(" - ")
+            ndex = int(ndex.strip())
+            name = parse_name(name_and_rest)
 
-    stats = parse_stats(find(datamine_lines, lambda l: l.startswith("Base Stats")))
-    abilities = parse_abilities(
-        find(datamine_lines, lambda l: l.startswith("Abilities"))
-    )
+        elif line.startswith("Base Stats"):
+            stats = parse_stats(line)
 
-    types = parse_types(find(datamine_lines, lambda l: l.startswith("Type")))
-    next(
-        dropwhile(
-            lambda l: l.partition(":")[0] not in ("Height", "Classifications"),
-            datamine_lines,
-        )
-    )
-    moves = parse_moves(datamine_lines)
+        elif line.startswith("Abilities"):
+            abilities = parse_abilities(line)
+
+        elif line.startswith("Type"):
+            types = parse_types(line)
+
+        elif line.startswith("Alpha Move"):
+            moves = parse_moves(chain((line,), datamine_lines))
+            break
 
     return Pkmn.create(
-        ndex=int(ndex.strip()),
+        ndex=ndex,
         name=name,
         types=types,
         stats=stats,
@@ -95,11 +95,11 @@ def parse_moves(datamine_lines: Generator[str]) -> Moves:
             case "Reminder:":
                 current_move_list, current_move_parser = reminder, parse_move_prefixed
 
-            case "":
-                break
-
             case _ if line.startswith("Alpha Move:"):
                 alpha.append(line.partition(":")[2].strip())
+
+            case "":
+                break
 
             case _ if line.startswith("Evolves"):
                 break
