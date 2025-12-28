@@ -51,7 +51,9 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
         ...
 
     @abstractmethod
-    def parse_learnlist_subpage(self, learnlist_subpage: str) -> Learnlist:
+    def parse_learnlist_subpage(
+        self, learnlist_subpage: str, pkmn_name: str
+    ) -> Learnlist:
         ...
 
     @abstractmethod
@@ -77,6 +79,7 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
             if alt_form is not None
             else None
         )
+
         base_name = (
             self.alt_form.base_name if self.alt_form is not None else self.pkmn.name
         )
@@ -97,14 +100,14 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
                 learnlist = jsonpickle.loads(f.read())
         except FileNotFoundError:
             learnlist = (
-                self.parse_learnlist_subpage(self.current_page.text)
+                self.parse_learnlist_subpage(self.current_page.text, self.pkmn.name)
                 if self.current_page.exists()
                 else Learnlist()
             )
 
         datamine_learnlist = self.make_learnlist_from_datamine(
             self.pkmn,
-            self.alt_form.name if self.alt_form is not None else "",
+            self.alt_form.name if self.alt_form is not None else self.pkmn.name,
         )
         learnlist.merge_in(datamine_learnlist)
 

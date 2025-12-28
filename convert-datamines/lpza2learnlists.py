@@ -47,10 +47,12 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
             },
         )
 
-    def parse_learnlist_subpage(self, learnlist_subpage: str) -> Learnlist:
+    def parse_learnlist_subpage(
+        self, learnlist_subpage: str, pkmn_name: str
+    ) -> Learnlist:
         learnlist = Learnlist()
         current_prop = None
-        form_name = ""
+        form_name = pkmn_name
         current_render = []
         non_empty_lines = filter(
             None, map(str.strip, learnlist_subpage.split(os.linesep))
@@ -80,6 +82,7 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
                     current_prop = "reminder"
                 else:
                     raise ValueError(f"Unknown heading: {line}")
+                form_name = pkmn_name
                 setattr(learnlist, current_prop, {})
 
             if is_form_heading:
@@ -101,57 +104,20 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
         pkmn_name: str,
         form_order_by_name: dict[str, int],
     ) -> str:
-        sections = [
-            f"""
-====Aumentando di [[livello]]====
-{self._form_moves_list_to_wikicode(learnlist.level_up, form_order_by_name)}
-            """,
-            f"""
-====Tramite [[MT]]====
-{self._form_moves_list_to_wikicode(learnlist.tm, form_order_by_name)}
-            """,
-            f"""
-====Come [[Mossa Uovo#Pokémon Scarlatto e Violetto|mosse Uovo]]====
-{self._form_moves_list_to_wikicode(learnlist.egg, form_order_by_name)}
-            """,
-        ]
+        section_headings = {
+            "egg": "Come [[Mossa Uovo#Pokémon Scarlatto e Violetto|mosse Uovo]]"
+        }
+        learnlist_wikicode = learnlist.to_wikicode(
+            section_headings, form_order_by_name, games_order={"SV": 0, "LPZA": 1}
+        )
+        return f"""
+{learnlist_wikicode}
 
-        if learnlist.reminder:
-            sections.append(
-                f"""
-====Dall'[[Insegnamosse]]====
-{self._form_moves_list_to_wikicode(learnlist.reminder, form_order_by_name)}
-                """
-            )
-
-        if learnlist.pre_evo:
-            sections.append(
-                f"""
-====Tramite [[evoluzione|evoluzioni]] precedenti====
-{self._form_moves_list_to_wikicode(learnlist.pre_evo, form_order_by_name)}
-                """
-            )
-
-        sections.append(
-            f"""
 <noinclude>
 [[Categoria:Sottopagine moveset Pokémon ({self.it_gen_ord} generazione)]]
 [[en:{pkmn_name} (Pokémon)/Generation {self.roman_gen} learnset]]
 </noinclude>
-            """
-        )
-
-        return "\n\n".join(map(str.strip, sections))
-
-    @staticmethod
-    def _form_moves_list_to_wikicode(
-        form_moves: list[FormMoves],
-        form_order_by_name: dict[str, int],
-    ) -> str:
-        return "\n\n".join(
-            fm.to_wikicode({"SV": 0, "LPZA": 1})
-            for fm in FormMoves.sorted_forms(form_moves, form_order_by_name)
-        )
+""".strip()
 
     @staticmethod
     def _level_up_wikicode(pkmn: Pkmn, form_param: str) -> str:
