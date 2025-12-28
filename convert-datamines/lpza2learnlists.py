@@ -4,7 +4,7 @@
 import os
 import sys
 from parser.lpza import parse
-from typing import Any
+from typing import Any, Optional
 
 import pywikibot as pwb
 from altforms import AltForms
@@ -14,12 +14,20 @@ from LearnlistSubpageBot import LearnlistSubpageBot
 
 
 class LpzaLearnlistBot(LearnlistSubpageBot):
-    def __init__(self, *args: Any, **kwargs: dict[str, Any]):
+    def __init__(
+        self,
+        cache_dir: str,
+        out_dir: Optional[str],
+        *args: Any,
+        **kwargs: dict[str, Any],
+    ):
         super(LpzaLearnlistBot, self).__init__(
             *args,
             it_gen_ord="nona",
             roman_gen="IX",
             summary="Add LPZA learnlists",
+            cache_dir=cache_dir,
+            out_dir=out_dir,
             **kwargs,
         )
 
@@ -167,12 +175,16 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
 
 
 def main(args: list[str]):
-    [datamine_file, alt_forms_file, cache_dir] = pwb.handle_args(args)
+    [datamine_file, alt_forms_file, cache_dir, *rest] = pwb.handle_args(args)
+    try:
+        out_dir = rest[0]
+    except IndexError:
+        out_dir = None
 
     alt_forms = AltForms.from_json(alt_forms_file)
     generator = parse(datamine_file)
 
-    LpzaLearnlistBot(alt_forms, cache_dir, generator).run()
+    LpzaLearnlistBot(cache_dir, out_dir, alt_forms, generator).run()
 
 
 if __name__ == "__main__":
