@@ -32,7 +32,7 @@ class LpzaLearnlistBot(LearnlistSubpageBot):
         )
 
     def make_learnlist_from_datamine(self, pkmn: Pkmn, form_name: str) -> Learnlist:
-        form_param = "" if pkmn.form_abbr is None else f" form = {pkmn.form_abbr}"
+        form_param = "" if pkmn.form_abbr is None else f" form = {pkmn.form_abbr} |"
         return Learnlist(
             level_up={
                 form_name: FormMoves(
