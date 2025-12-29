@@ -145,19 +145,17 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
                     f.write(subpage_content)
 
             page = pwb.Page(pwb.Site(), subpage_title)
+            if not page.exists():
+                self._use_new_learnlist_in_pkmn_page(pkmn_name)
+            self.userPut(
+                page, page.text, subpage_content, summary=self.summary, show_diff=True
+            )
 
-            # if not page.exists():
-            #     self._use_new_learnlist_in_pkmn_page()
-            # self.userPut(
-            #     page, page.text, subpage_content, summary=self.summary, show_diff=True
-            # )
-
-    def _use_new_learnlist_in_pkmn_page(self):
-        pkmn = self.pkmn[0]
+    def _use_new_learnlist_in_pkmn_page(self, pkmn_name: str):
         pwb.output(
-            f"Updating {pkmn.name} to use {self.roman_gen} generation learnlists"
+            f"Updating {pkmn_name} to use {self.roman_gen} generation learnlists"
         )
-        pkmn_page = pwb.Page(pwb.Site(), pkmn.name)
+        pkmn_page = pwb.Page(pwb.Site(), pkmn_name)
         new_text = self.pkmn_page_include_regex.sub(
             f"{{{{/Mosse apprese in {self.it_gen_ord} generazione}}}}", pkmn_page.text
         )
