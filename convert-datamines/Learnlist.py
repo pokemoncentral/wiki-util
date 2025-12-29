@@ -65,11 +65,15 @@ class Learnlist:
 ===={section_headings.get("tm", "Tramite [[MT]]")}====
 {self._form_moves_wikicode(self.tm, forms_order, games_order)}
             """,
-            f"""
+        ]
+
+        if self.egg:
+            sections.append(
+                f"""
 ===={section_headings.get("egg", "Come [[Mossa Uovo|mosse Uovo]]")}====
 {self._form_moves_wikicode(self.egg, forms_order, games_order)}
-            """,
-        ]
+                """
+            )
 
         if self.reminder:
             sections.append(

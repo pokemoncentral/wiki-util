@@ -80,11 +80,8 @@ class LearnlistSubpageBot(CurrentPageBot, ABC):
             else None
         )
 
-        base_name = (
-            self.alt_form.base_name if self.alt_form is not None else self.pkmn.name
-        )
         subpage_name = f"Mosse apprese in {self.it_gen_ord} generazione"
-        return pwb.Page(pwb.Site(), f"{base_name}/{subpage_name}")
+        return pwb.Page(pwb.Site(), f"{self.pkmn.name}/{subpage_name}")
 
     def treat_page(self):
         # Mega evolutions have the same learnlist as the base form
