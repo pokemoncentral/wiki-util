@@ -368,7 +368,7 @@ from public.moves
 
 ALTER VIEW public.moves_lpza_useful OWNER TO postgres;
 
-create function to_lua_index(s text) returns text as $$
+create function public.to_lua_index(s text) returns text as $$
     select case
         when s similar to '[_a-zA-Z]+[_a-zA-Z0-9]*'
             then '.' || lower(s)
