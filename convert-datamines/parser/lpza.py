@@ -26,7 +26,7 @@ def parse(datamine_file: str) -> Generator[Pkmn]:
 def extract_ability(abilities: list[str], tag: str) -> str:
     tag = f"({tag})"
     ability = find(abilities, lambda a: a.endswith(tag))
-    return ability.replace(tag, "").strip()
+    return normalize(ability.replace(tag, "").strip())
 
 
 def is_move_list_item(line: str) -> bool:
@@ -115,22 +115,22 @@ level_up_regex = re.compile(r"- \[(-?\d{1,3})\] (.+?) \{(\d{1,3})\}")
 
 def parse_move_level_up(level_up_line: str) -> LpzaLevelUpMove:
     [level, name, plus_level] = level_up_regex.match(level_up_line).groups()
-    return (parse_learnlevel(int(level)), int(plus_level), name.strip())
+    return (parse_learnlevel(int(level)), int(plus_level), normalize(name.strip()))
 
 
 def parse_move_tm(tm_line: str) -> Tuple[str, str]:
     [_, tm, *name] = tm_line.split(" ")
-    return ("MT" + tm[3:-1], " ".join(name))
+    return ("MT" + tm[3:-1], normalize(" ".join(name)))
 
 
 def parse_move_prefixed(line: str) -> str:
-    return line.removeprefix(" -")
+    return normalize(line.removeprefix(" -"))
 
 
 def parse_name(name_segment: str) -> str:
     name_end = min(name_segment.find("#"), name_segment.find("("))
     name = name_segment if name_end == -1 else name_segment[:name_end]
-    return name.strip()
+    return normalize(name.strip())
 
 
 def parse_stats(line: str) -> Stats:
@@ -141,3 +141,7 @@ def parse_stats(line: str) -> Stats:
 def parse_types(line: str) -> Tuple[str, str]:
     types = line.removeprefix("Type: ").split(" / ")
     return tuple(islice(cycle(types), 2))
+
+
+def normalize(text: str) -> str:
+    return text.replace("’", "'")
