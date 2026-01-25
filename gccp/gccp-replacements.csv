@@ -49,6 +49,8 @@
 \bUltra Necrozma\b,UltraNecrozma,
 \bGalarian Corsola\b,Corsola di Galar,
 \bGalarian Cursola\b,Cursola di Galar,
+\bTeal Mask Ogerpon\b,Ogerpon Maschera Turchese,
+\bGalarian Obstagoon\b,Obstagoon di Galar,
 ,, --------------------------------- pkmn ex ---------------------------------
 (?:\b|\B){{TCGP Icon\|ex}}\B,{{ex|pocket}},
 (?:\b|\B){{TCGP Icon\|Mega ex}}\B,{{ex|mega pocket}},
@@ -67,6 +69,7 @@
 \bDeluxe Pack: ex\b,Busta Deluxe ex,
 \bMega Rising\b,Mega Ascesa,
 \bCrimson Blaze\b,Fiamme Cremisi,
+\bFantastical Parade\b,Parata Fantasmagorica,
 ,, ------------------------------- rarities -------------------------------
 \bDiamond\b,Diamante,
 \bStar\b,Stella,
