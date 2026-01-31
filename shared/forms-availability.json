@@ -3359,10 +3359,10 @@
         "sl": true,
         "usul": true,
         "lgpe": false,
-        "spsc": true,
-        "dlps": true,
+        "spsc": false,
+        "dlps": false,
         "lpa": false,
-        "sv": true,
+        "sv": false,
         "lpza": false
     },
     "383A": {
@@ -3381,10 +3381,10 @@
         "sl": true,
         "usul": true,
         "lgpe": false,
-        "spsc": true,
-        "dlps": true,
+        "spsc": false,
+        "dlps": false,
         "lpa": false,
-        "sv": true,
+        "sv": false,
         "lpza": false
     },
     "384M": {
