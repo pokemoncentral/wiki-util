@@ -28,17 +28,6 @@ import mwparserfromhell
 import pywikibot as pwb
 from mwparserfromhell.wikicode import Wikicode
 
-BULBAPEDIA = None
-
-
-def count_pages_in_category(cat: str) -> int:
-    global BULBAPEDIA
-    if BULBAPEDIA is None:
-        BULBAPEDIA = pwb.Site("en")
-    cat_page = pwb.page.Category(BULBAPEDIA, title=cat)
-    return BULBAPEDIA.categoryinfo(cat_page)["pages"]
-
-
 def replacements_from_file(text: str, file_path: str, fields_separator=",") -> str:
     """Perform replacements reading them from a CSV.
 
@@ -77,25 +66,25 @@ def get_name(wikicode: Wikicode, name_arg: Optional[str]) -> str:
 
 def make_intro_template(wikicode: Wikicode) -> Wikicode:
     """Build the intro template."""
-    # {{GCCPocketPokémonIntro|2|Geni Supremi|Fase 2|Erba}}
+    # {{GCCPocketPokémonIntro|Geni Supremi|Fase 2|Erba}}
     intro_template = mwparserfromhell.nodes.template.Template("GCCPocketPokémonIntro")
     # Parameter 1: expr
-    number = next(
-        wikicode.ifilter_templates(matches=lambda t: (t.name).startswith("#expr:"))
-    )
-    number_expr = number.name[len("#expr:") :]
-    category_name = number_expr.split(":")[1].split("}")[0].strip()
-    intro_template.add("1", count_pages_in_category(category_name) - 1)
-    # Parameter 2: expansion
+    #number = next(
+    #    wikicode.ifilter_templates(matches=lambda t: (t.name).startswith("#expr:"))
+    #)
+    #number_expr = number.name[len("#expr:") :]
+    #category_name = number_expr.split(":")[1].split("}")[0].strip()
+    #intro_template.add("1", count_pages_in_category(category_name) - 1)
+    # Parameter 1: expansion
     expansion = next(wikicode.ifilter_templates(matches=lambda t: (t.name) == "TCGP"))
-    intro_template.add("2", expansion.get(1))
-    # Parameter 3: stage
+    intro_template.add("1", expansion.get(1))
+    # Parameter 2: stage
     stage = next(wikicode.ifilter_templates(matches=lambda t: (t.name) == "TCG"))
-    intro_template.add("3", stage.get(1))
-    # Parameter 4: type
+    intro_template.add("2", stage.get(1))
+    # Parameter 3: type
     mon_type = next(wikicode.ifilter_templates(matches=lambda t: (t.name) == "ct"))
-    intro_template.add("4", mon_type.get(1))
-    # Parameter 5: second type, if any
+    intro_template.add("3", mon_type.get(1))
+    # Parameter 4: second type, if any
     mon_type_idx = wikicode.index(mon_type)
     if (
         isinstance(wikicode.get(mon_type_idx + 1), mwparserfromhell.nodes.text.Text)
@@ -104,24 +93,24 @@ def make_intro_template(wikicode: Wikicode) -> Wikicode:
             wikicode.get(mon_type_idx + 2), mwparserfromhell.nodes.template.Template
         )
     ):
-        intro_template.add("5", wikicode.get(mon_type_idx + 2).get("1"))
+        intro_template.add("4", wikicode.get(mon_type_idx + 2).get("1"))
     else:
-        intro_template.add("5", "")
-    # Parameter 6, 7 and 8: energy types
+        intro_template.add("4", "")
+    # Parameter 5, 6 and 7: energy types
     if (
-        str(intro_template.get("4").value).lower().strip() == "drago"
-        or str(intro_template.get("5").value).lower().strip() == "drago"
+        str(intro_template.get("3").value).lower().strip() == "drago"
+        or str(intro_template.get("4").value).lower().strip() == "drago"
     ):
         energy_types = list(
             itertools.islice(
                 wikicode.ifilter_templates(matches=lambda t: (t.name) == "e"), 3
             )
         )
-        intro_template.add("6", energy_types[0].get(1))
+        intro_template.add("5", energy_types[0].get(1))
         if len(energy_types) > 1:
-            intro_template.add("7", energy_types[1].get(1))
+            intro_template.add("6", energy_types[1].get(1))
             if len(energy_types) > 2:
-                intro_template.add("8", energy_types[2].get(1))
+                intro_template.add("7", energy_types[2].get(1))
 
     return intro_template
 
