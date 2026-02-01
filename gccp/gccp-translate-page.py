@@ -28,6 +28,7 @@ import mwparserfromhell
 import pywikibot as pwb
 from mwparserfromhell.wikicode import Wikicode
 
+
 def replacements_from_file(text: str, file_path: str, fields_separator=",") -> str:
     """Perform replacements reading them from a CSV.
 
@@ -69,12 +70,12 @@ def make_intro_template(wikicode: Wikicode) -> Wikicode:
     # {{GCCPocketPokémonIntro|Geni Supremi|Fase 2|Erba}}
     intro_template = mwparserfromhell.nodes.template.Template("GCCPocketPokémonIntro")
     # Parameter 1: expr
-    #number = next(
+    # number = next(
     #    wikicode.ifilter_templates(matches=lambda t: (t.name).startswith("#expr:"))
-    #)
-    #number_expr = number.name[len("#expr:") :]
-    #category_name = number_expr.split(":")[1].split("}")[0].strip()
-    #intro_template.add("1", count_pages_in_category(category_name) - 1)
+    # )
+    # number_expr = number.name[len("#expr:") :]
+    # category_name = number_expr.split(":")[1].split("}")[0].strip()
+    # intro_template.add("1", count_pages_in_category(category_name) - 1)
     # Parameter 1: expansion
     expansion = next(wikicode.ifilter_templates(matches=lambda t: (t.name) == "TCGP"))
     intro_template.add("1", expansion.get(1))
@@ -192,6 +193,7 @@ def translate_page(source: str, name_arg: Optional[str]) -> str:
 
     # Make the interwikis
     if name_arg is not None:
+        name_arg = name_arg.replace("Type_ Null", "Type: Null")
         resulting_page.append(f"[[en:{name_arg}]]")
     interwikis = wikicode.ifilter_wikilinks(matches=r"^\[\[\w{2}:")
     interwikis = filter(lambda i: not i.startswith("[[it"), interwikis)

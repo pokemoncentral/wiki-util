@@ -54,7 +54,7 @@ def main():
     for page_en in pages_en:
         # ------------ [test modifications start]
         # page_en_file = os.path.join(args["enpages"], utils.fix_file_name(f"{page_en.title()}.txt"))  # fmt: skip
-        # title_it = title_en_to_it(page_en.title(), en_to_it)
+        # title_it = utils.title_en_to_it(page_en.title(), en_to_it)
         # page_it_file = os.path.join(args["itpages"], utils.fix_file_name(f"{title_it}.txt"))  # fmt: skip
         # print(f"{page_en.title()} > {title_it}\n{page_en_file}\n{page_it_file}")
         # continue
