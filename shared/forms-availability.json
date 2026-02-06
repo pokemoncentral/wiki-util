@@ -2835,7 +2835,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "257M": {
         "rb": false,
@@ -2857,7 +2857,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "260M": {
         "rb": false,
@@ -2879,7 +2879,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "263G": {
         "rb": false,
@@ -3319,7 +3319,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "381M": {
         "rb": false,
@@ -3341,7 +3341,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "382A": {
         "rb": false,
