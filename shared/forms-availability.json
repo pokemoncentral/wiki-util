@@ -589,7 +589,7 @@
         "lgpe": false,
         "spsc": true,
         "dlps": true,
-        "lpa": true,
+        "lpa": false,
         "sv": true,
         "lpza": true
     },
@@ -635,7 +635,7 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "26MX": {
         "rb": false,
@@ -700,7 +700,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "28A": {
@@ -722,7 +722,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "36M": {
@@ -765,8 +765,8 @@
         "lgpe": true,
         "spsc": true,
         "dlps": false,
-        "lpa": false,
-        "sv": false,
+        "lpa": true,
+        "sv": true,
         "lpza": false
     },
     "38A": {
@@ -787,8 +787,8 @@
         "lgpe": true,
         "spsc": true,
         "dlps": false,
-        "lpa": false,
-        "sv": false,
+        "lpa": true,
+        "sv": true,
         "lpza": false
     },
     "50A": {
@@ -855,7 +855,7 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "52G": {
         "rb": false,
@@ -877,7 +877,7 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "52Gi": {
         "rb": false,
@@ -921,7 +921,7 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "58H": {
         "rb": false,
@@ -1052,7 +1052,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "75A": {
@@ -1074,7 +1074,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "76A": {
@@ -1096,7 +1096,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "77G": {
@@ -1163,7 +1163,7 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "80M": {
         "rb": false,
@@ -1207,7 +1207,7 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "83G": {
         "rb": false,
@@ -1229,7 +1229,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "88A": {
         "rb": false,
@@ -1404,7 +1404,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "105A": {
@@ -1427,7 +1427,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "110G": {
         "rb": false,
@@ -1448,7 +1448,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "115M": {
@@ -1515,7 +1515,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "127M": {
         "rb": false,
@@ -2021,7 +2021,7 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "201B": {
         "rb": false,
@@ -2659,7 +2659,7 @@
         "dlps": false,
         "lpa": true,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "212M": {
         "rb": false,
@@ -3363,7 +3363,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "383A": {
         "rb": false,
@@ -3385,7 +3385,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "384M": {
         "rb": false,
@@ -3407,7 +3407,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "386A": {
         "rb": false,
@@ -3428,7 +3428,7 @@
         "spsc": false,
         "dlps": true,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "386D": {
@@ -3450,7 +3450,7 @@
         "spsc": false,
         "dlps": true,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "386V": {
@@ -3472,7 +3472,7 @@
         "spsc": false,
         "dlps": true,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "412Sa": {
@@ -3781,7 +3781,7 @@
         "dlps": true,
         "lpa": true,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "479L": {
         "rb": false,
@@ -3803,7 +3803,7 @@
         "dlps": true,
         "lpa": true,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "479G": {
         "rb": false,
@@ -3825,7 +3825,7 @@
         "dlps": true,
         "lpa": true,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "479V": {
         "rb": false,
@@ -3847,7 +3847,7 @@
         "dlps": true,
         "lpa": true,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "479T": {
         "rb": false,
@@ -3869,7 +3869,7 @@
         "dlps": true,
         "lpa": true,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "483O": {
         "rb": false,
@@ -4683,7 +4683,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "569Gi": {
         "rb": false,
@@ -4991,7 +4991,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "628H": {
         "rb": false,
@@ -5211,7 +5211,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "649P": {
         "rb": false,
@@ -5233,7 +5233,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "649G": {
         "rb": false,
@@ -5255,7 +5255,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "652M": {
         "rb": false,
@@ -7322,7 +7322,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "774Ar": {
@@ -7344,7 +7344,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "774G": {
@@ -7366,7 +7366,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "774Ve": {
@@ -7388,7 +7388,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "774Az": {
@@ -7410,7 +7410,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "774I": {
@@ -7432,7 +7432,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "774Vi": {
@@ -7454,7 +7454,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "778S": {
@@ -7542,7 +7542,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "800U": {
@@ -7561,7 +7561,7 @@
         "sl": false,
         "usul": true,
         "lgpe": false,
-        "spsc": true,
+        "spsc": false,
         "dlps": false,
         "lpa": false,
         "sv": false,
@@ -7587,7 +7587,29 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
+    },
+    "801M": {
+        "rb": false,
+        "oa": false,
+        "rz": false,
+        "rfvf": false,
+        "s": false,
+        "dp": false,
+        "pt": false,
+        "hgss": false,
+        "nb": false,
+        "n2b2": false,
+        "xy": false,
+        "roza": false,
+        "sl": false,
+        "usul": false,
+        "lgpe": false,
+        "spsc": false,
+        "dlps": false,
+        "lpa": false,
+        "sv": false,
+        "lpza": true
     },
     "809Gi": {
         "rb": false,
@@ -7982,7 +8004,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": true,
+        "sv": false,
         "lpza": false
     },
     "855A": {
@@ -8004,7 +8026,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": true,
+        "sv": false,
         "lpza": false
     },
     "858Gi": {
@@ -8070,7 +8092,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869LvB": {
@@ -8092,7 +8114,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869LvFo": {
@@ -8114,7 +8136,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869LvFe": {
@@ -8136,7 +8158,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869LvS": {
@@ -8158,7 +8180,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869LvFc": {
@@ -8180,7 +8202,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RFa": {
@@ -8202,7 +8224,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RC": {
@@ -8224,7 +8246,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RB": {
@@ -8246,7 +8268,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RFo": {
@@ -8268,7 +8290,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RFe": {
@@ -8290,7 +8312,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RS": {
@@ -8312,7 +8334,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RFc": {
@@ -8334,7 +8356,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MaFa": {
@@ -8356,7 +8378,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MaC": {
@@ -8378,7 +8400,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MaB": {
@@ -8400,7 +8422,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MaFo": {
@@ -8422,7 +8444,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MaFe": {
@@ -8444,7 +8466,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MaS": {
@@ -8466,7 +8488,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MaFc": {
@@ -8488,7 +8510,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MeFa": {
@@ -8510,7 +8532,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MeC": {
@@ -8532,7 +8554,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MeB": {
@@ -8554,7 +8576,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MeFo": {
@@ -8576,7 +8598,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MeFe": {
@@ -8598,7 +8620,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MeS": {
@@ -8620,7 +8642,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869MeFc": {
@@ -8642,7 +8664,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869LFa": {
@@ -8664,7 +8686,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869LC": {
@@ -8686,7 +8708,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869LB": {
@@ -8708,7 +8730,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869LFo": {
@@ -8730,7 +8752,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869LFe": {
@@ -8752,7 +8774,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869LS": {
@@ -8774,7 +8796,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869LFc": {
@@ -8796,7 +8818,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869SFa": {
@@ -8818,7 +8840,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869SC": {
@@ -8840,7 +8862,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869SB": {
@@ -8862,7 +8884,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869SFo": {
@@ -8884,7 +8906,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869SFe": {
@@ -8906,7 +8928,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869SS": {
@@ -8928,7 +8950,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869SFc": {
@@ -8950,7 +8972,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RmFa": {
@@ -8972,7 +8994,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RmC": {
@@ -8994,7 +9016,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RmB": {
@@ -9016,7 +9038,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RmFo": {
@@ -9038,7 +9060,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RmFe": {
@@ -9060,7 +9082,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RmS": {
@@ -9082,7 +9104,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869RmFc": {
@@ -9104,7 +9126,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869CmFa": {
@@ -9126,7 +9148,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869CmC": {
@@ -9148,7 +9170,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869CmB": {
@@ -9170,7 +9192,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869CmFo": {
@@ -9192,7 +9214,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869CmFe": {
@@ -9214,7 +9236,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869CmS": {
@@ -9236,7 +9258,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869CmFc": {
@@ -9258,7 +9280,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869TmFa": {
@@ -9280,7 +9302,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869TmC": {
@@ -9302,7 +9324,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869TmB": {
@@ -9324,7 +9346,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869TmFo": {
@@ -9346,7 +9368,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869TmFe": {
@@ -9368,7 +9390,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869TmS": {
@@ -9390,7 +9412,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869TmFc": {
@@ -9412,7 +9434,7 @@
         "spsc": true,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "869Gi": {
@@ -9897,7 +9919,7 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "931G": {
         "rb": false,
@@ -9919,7 +9941,7 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "931B": {
         "rb": false,
@@ -9941,7 +9963,7 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "964P": {
         "rb": false,
@@ -9985,7 +10007,7 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "978T": {
         "rb": false,
@@ -10007,7 +10029,73 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
+    },
+    "978M": {
+        "rb": false,
+        "oa": false,
+        "rz": false,
+        "rfvf": false,
+        "s": false,
+        "dp": false,
+        "pt": false,
+        "hgss": false,
+        "nb": false,
+        "n2b2": false,
+        "xy": false,
+        "roza": false,
+        "sl": false,
+        "usul": false,
+        "lgpe": false,
+        "spsc": false,
+        "dlps": false,
+        "lpa": false,
+        "sv": true,
+        "lpza": true
+    },
+    "978MA": {
+        "rb": false,
+        "oa": false,
+        "rz": false,
+        "rfvf": false,
+        "s": false,
+        "dp": false,
+        "pt": false,
+        "hgss": false,
+        "nb": false,
+        "n2b2": false,
+        "xy": false,
+        "roza": false,
+        "sl": false,
+        "usul": false,
+        "lgpe": false,
+        "spsc": false,
+        "dlps": false,
+        "lpa": false,
+        "sv": true,
+        "lpza": true
+    },
+    "978MT": {
+        "rb": false,
+        "oa": false,
+        "rz": false,
+        "rfvf": false,
+        "s": false,
+        "dp": false,
+        "pt": false,
+        "hgss": false,
+        "nb": false,
+        "n2b2": false,
+        "xy": false,
+        "roza": false,
+        "sl": false,
+        "usul": false,
+        "lgpe": false,
+        "spsc": false,
+        "dlps": false,
+        "lpa": false,
+        "sv": true,
+        "lpza": true
     },
     "982T": {
         "rb": false,
@@ -10051,7 +10139,7 @@
         "dlps": false,
         "lpa": false,
         "sv": true,
-        "lpza": false
+        "lpza": true
     },
     "1012P": {
         "rb": false,
