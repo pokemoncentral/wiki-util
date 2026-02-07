@@ -25,7 +25,7 @@ def get_section_text(pagetext, delimiters, section):
 
 # update page (all section or given one) and check if it was actually modified
 # in that case save it to new text file
-def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, availdata, rangerdata, goforms, exceptionspath, section, downloadspath, updatespath):  # fmt: skip
+def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, availpokes, availforms, rangerdata, goforms, exceptionspath, section, downloadspath, updatespath):  # fmt: skip
     # get list of abbrs without duplicates
     abbrs = list(dict.fromkeys([form[0] for form in forms]))
     localfile = os.path.join(downloadspath, f"{poke}.txt")
@@ -80,7 +80,7 @@ def update_page(poke, name, gender, forms, pokelistspath, artsources, singleMS, 
         #         edited = True
     if section in ["main", "all"]:
         oldtext = get_section_text(pagetext, delimiters, "main")
-        newtext = build_main(poke, exceptionspath, forms, gender, singleMS, availdata, imgs)  # fmt: skip
+        newtext = build_main(poke, exceptionspath, forms, gender, singleMS, availpokes, availforms, imgs)  # fmt: skip
         if newtext != oldtext:
             pagetext = pagetext.replace(oldtext, newtext)
             edited = True
@@ -115,7 +115,8 @@ def main():
     parser.add_argument("--femaleonlyfile", default="data/pokepages-utils/femaleonly.txt")
     parser.add_argument("--artsourcesfile", default="data/pokepages-utils/artsources.txt")
     parser.add_argument("--singlemsfile", default="data/pokepages-utils/singleMS.txt")
-    parser.add_argument("--availdir", default="data/pokepages-availability")
+    parser.add_argument("--availpokesfile", default="data/wiki-util-data/poke-availability.json")
+    parser.add_argument("--availformsfile", default="data/wiki-util-data/forms-availability.json")
     parser.add_argument("--rangerfile", default="data/pokepages-utils/redirect_ranger.txt")
     parser.add_argument("--goformsfile", default="data/pokepages-utils/goforms.txt")
     parser.add_argument("--updatepoke", default="")
@@ -126,8 +127,28 @@ def main():
     # fmt: on
     args = parser.parse_args()
     # import data
-    getname, getenname, getesname, getdename, getfrname = import_ndex(args.dexfile)  # fmt: skip
-    genderdiffs, genderforms, femaleonly, artsources, singlemsdata, availdata, rangerdata, goforms = import_data(args.genderdiffsfile, args.genderformsfile, args.femaleonlyfile, args.artsourcesfile, args.singlemsfile, args.availdir, args.rangerfile, args.goformsfile)  # fmt: skip
+    getname, _, _, _, _ = import_ndex(args.dexfile)
+    (
+        genderdiffs,
+        genderforms,
+        femaleonly,
+        artsources,
+        singlemsdata,
+        availpokes,
+        availforms,
+        rangerdata,
+        goforms,
+    ) = import_data(
+        args.genderdiffsfile,
+        args.genderformsfile,
+        args.femaleonlyfile,
+        args.artsourcesfile,
+        args.singlemsfile,
+        args.availpokesfile,
+        args.availformsfile,
+        args.rangerfile,
+        args.goformsfile,
+    )
     # update pages
     if args.updatepoke:
         if args.updatepoke == "all":
@@ -139,7 +160,23 @@ def main():
         for poke in lst:
             gender, singleMS = get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata)  # fmt: skip
             forms = get_forms(poke, args.pokeformspath)
-            update_page(poke, getname[poke], gender, forms, args.pokelistspath, artsources, singleMS, availdata, rangerdata, goforms, args.exceptionspath, args.section, args.downloadspath, args.updatespath)  # fmt: skip
+            update_page(
+                poke,
+                getname[poke],
+                gender,
+                forms,
+                args.pokelistspath,
+                artsources,
+                singleMS,
+                availpokes,
+                availforms,
+                rangerdata,
+                goforms,
+                args.exceptionspath,
+                args.section,
+                args.downloadspath,
+                args.updatespath,
+            )
     # upload pages
     if args.upload:
         if args.upload == "all":
