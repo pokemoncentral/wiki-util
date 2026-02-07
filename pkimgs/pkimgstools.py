@@ -95,9 +95,9 @@ def import_data(genderdiffsfile, genderformsfile, femaleonlyfile, artsourcesfile
     with open(artsourcesfile, "r") as file:
         artsources = file.read().splitlines()
     with open(availpokesfile, "r") as file:
-        availpokes = json.dump(file)
+        availpokes = json.load(file)
     with open(availformsfile, "r") as file:
-        availforms = json.dump(file)
+        availforms = json.load(file)
     with open(singlemsfile, "r") as file:
         singlemsdata = file.read().splitlines()
     with open(rangerfile, "r") as file:
@@ -131,7 +131,8 @@ def get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata):
 def get_poke_forms(poke, availforms):
     ndex = int(poke)
     # initialize with base form
-    first_game = [g for g in last_ndex if ndex < last_ndex[g]][0]
+    # print(f"------ DEBUG ------ poke {poke} ")
+    first_game = [g for g in last_ndex if ndex <= last_ndex[g]][0]
     last_game = max(game_to_gen, key=game_to_gen.get)
     poke_forms = [["", first_game, last_game]]
     # get all keys that have this ndex followed by letter(s), then remove ndex to keep only abbrs
@@ -160,6 +161,8 @@ def get_poke_forms(poke, availforms):
         for j in range(1, 3):
             if convert_game_abbr.get(poke_forms[i][j], None):
                 poke_forms[i][j] = convert_game_abbr[poke_forms[i][j]]
+    # print(f"------ DEBUG ------ poke {ndex} has abbrs {forms_abbrs} and forms {poke_forms}")  # fmt: skip
+    # print(f"------ DEBUG ------ availforms abbrs: {[a for a in availforms]}")
     return poke_forms
 
 
@@ -288,19 +291,20 @@ def build_arts(poke, arts, abbrs, gender, sources, extras, pagetext=""):
 
 # check if given Pokémon/form is available in given game
 def check_pokeform_game_availability(poke, form, game, availpokes, availforms):
+    # print(f"------ DEBUG ------ availforms abbrs: {[a for a in availforms]}")
     ndex = int(poke)
     abbr, since, _ = form
     ndexabbr = f"{ndex}{abbr}"
     # for all alt forms, a check in availforms is enough
     if abbr != "":
-        is_available = availforms[ndexabbr][game]
+        is_available = availforms[ndexabbr].get(game, False)
     else:
         # before generation 8, ndex is enough to check existence of Pokémon in given game
         if int(game_to_gen[game]) < 8:
-            is_available = (game_to_gen[game] >= game_to_gen[since])
+            is_available = game_to_gen[game] >= game_to_gen[since]
         # from generation 8 onwards, a check in availpokes is needed
         else:
-            is_available = (str(ndex) in availpokes[game])
+            is_available = str(ndex) in availpokes[game]
     # ------ OLD PART ------
     # if int(game_to_gen[game]) >= 8:
     #     # availpokes entries are ndex/ndexabbr, i.e. without leading zeros
@@ -539,23 +543,23 @@ def build_main(
     else:
         ndex = int(poke)
         if ndex <= 151:
-            text += build_main_gen(poke, "1", forms=forms)
+            text += build_main_gen(poke, "1", availpokes=availpokes, availforms=availforms, forms=forms)  # fmt: skip
         if ndex <= 251:
-            text += build_main_gen(poke, "2", forms=forms)
+            text += build_main_gen(poke, "2", availpokes=availpokes, availforms=availforms, forms=forms)  # fmt: skip
         if ndex <= 385:
-            text += build_main_gen(poke, "3", forms=forms)
+            text += build_main_gen(poke, "3", availpokes=availpokes, availforms=availforms, forms=forms)  # fmt: skip
         if ndex == 386:
             with open(os.path.join(exceptionspath, f"{poke}_main3.txt"), "r") as file:
                 text += file.read().strip()
         if ndex <= 493:
             gen4sprites = [img for img in imgs if re.search(r"^Spr(dp|pt|hgss)", img)]
-            text += build_main_gen(poke, "4", forms=forms, gender=gender, gen4sprites=gen4sprites)  # fmt: skip
+            text += build_main_gen(poke, "4", availpokes=availpokes, availforms=availforms, forms=forms, gender=gender, gen4sprites=gen4sprites)  # fmt: skip
         if ndex <= 649:
-            text += build_main_gen(poke, "5", forms=forms, gender=gender)
+            text += build_main_gen(poke, "5", availpokes=availpokes, availforms=availforms, forms=forms, gender=gender)  # fmt: skip
         if ndex <= 721:
-            text += build_main_gen(poke, "6", forms=forms, gender=gender)
+            text += build_main_gen(poke, "6", availpokes=availpokes, availforms=availforms, forms=forms, gender=gender)  # fmt: skip
         if ndex <= 807:
-            text += build_main_gen(poke, "7", forms=forms, gender=gender)
+            text += build_main_gen(poke, "7", availpokes=availpokes, availforms=availforms, forms=forms, gender=gender)  # fmt: skip
         if ndex <= 905:
             text += build_main_gen(poke, "8", availpokes=availpokes, availforms=availforms, forms=forms, gender=gender)  # fmt: skip
         # mini sprites

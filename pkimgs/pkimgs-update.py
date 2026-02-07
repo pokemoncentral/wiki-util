@@ -1,5 +1,5 @@
 import pywikibot, argparse, os.path
-from scripts.userscripts.pkimgstools import import_ndex, import_data, get_poke_data, get_forms, get_spinoff_imgs, build_arts, build_main, build_spinoffs  # fmt: skip
+from scripts.userscripts.pkimgstools import import_ndex, import_data, get_poke_data, get_poke_forms, get_spinoff_imgs, build_arts, build_main, build_spinoffs  # fmt: skip
 """
 Quick infos about variables:
 - poke is Pokédex number with leading zeros and without form abbr
@@ -159,7 +159,7 @@ def main():
             os.mkdir(args.updatespath)
         for poke in lst:
             gender, singleMS = get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata)  # fmt: skip
-            forms = get_forms(poke, args.pokeformspath)
+            forms = get_poke_forms(poke, availforms)
             update_page(
                 poke,
                 getname[poke],
