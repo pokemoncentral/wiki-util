@@ -131,7 +131,6 @@ def get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata):
 def get_poke_forms(poke, availforms):
     ndex = int(poke)
     # initialize with base form
-    # print(f"------ DEBUG ------ poke {poke} ")
     first_game = [g for g in last_ndex if ndex <= last_ndex[g]][0]
     last_game = max(game_to_gen, key=game_to_gen.get)
     poke_forms = [["", first_game, last_game]]
@@ -161,8 +160,6 @@ def get_poke_forms(poke, availforms):
         for j in range(1, 3):
             if convert_game_abbr.get(poke_forms[i][j], None):
                 poke_forms[i][j] = convert_game_abbr[poke_forms[i][j]]
-    # print(f"------ DEBUG ------ poke {ndex} has abbrs {forms_abbrs} and forms {poke_forms}")  # fmt: skip
-    # print(f"------ DEBUG ------ availforms abbrs: {[a for a in availforms]}")
     return poke_forms
 
 
@@ -291,7 +288,6 @@ def build_arts(poke, arts, abbrs, gender, sources, extras, pagetext=""):
 
 # check if given Pokémon/form is available in given game
 def check_pokeform_game_availability(poke, form, game, availpokes, availforms):
-    # print(f"------ DEBUG ------ availforms abbrs: {[a for a in availforms]}")
     ndex = int(poke)
     abbr, since, _ = form
     ndexabbr = f"{ndex}{abbr}"
@@ -305,30 +301,6 @@ def check_pokeform_game_availability(poke, form, game, availpokes, availforms):
         # from generation 8 onwards, a check in availpokes is needed
         else:
             is_available = str(ndex) in availpokes[game]
-    # ------ OLD PART ------
-    # if int(game_to_gen[game]) >= 8:
-    #     # availpokes entries are ndex/ndexabbr, i.e. without leading zeros
-    #     game_pokes = availpokes[game]
-    #     # if base form, simply check if ndex is in list
-    #     if abbr == "":
-    #         if str(ndex) in game_pokes:
-    #             is_available = True
-    #         else:
-    #             is_available = False
-    #     # with alt forms, additional checks are required
-    #     else:
-    #         # if game contains alt form(s) of a Pokémon but not base form, availpokes
-    #         # contains all alt forms instead of base form
-    #         if ndexabbr in game_pokes:
-    #             is_available = True
-    #         # if availpokes doesn't contain base form, alt form is not available in game
-    #         elif str(ndex) not in game_pokes:
-    #             is_available = False
-    #         # game contains base form, check if alt form is available
-    #         else:
-    #             is_available = availforms[ndexabbr][game]
-    # else:
-    #     is_available = availforms[ndexabbr][game]
     return is_available
 
 
@@ -595,15 +567,31 @@ def build_main(
                     for form in forms:
                         text += build_ms_entry(poke, form, multiform, availpokes, availforms, gender)  # fmt: skip
         text += "}}\n"
-        # fix double lines for alt forms (testing)
-        text = re.sub(
-            r"\{\{pokemonimages/mainMS\|ndex=(.+?)\|(.+)\|form=yes\}\}\n\{\{pokemonimages/mainMS\|ndex=\1\|(.+)\|form=yes\}\}",
-            r"{{pokemonimages/mainMS|ndex=\1|\2|\3|form=yes}}",
-            text,
-        )
+        # merge multiple lines for alt forms
+        for pokeabbr in [f"{poke}{f[0]}" for f in forms]:
+            form_start = f"{{{{pokemonimages/mainMS|ndex={pokeabbr}|"
+            form_end = "|form=yes}}"
+            form_lines = [l for l in text.split("\n") if l.startswith(form_start)]
+            if len(form_lines) > 1:
+                # remove start and end part from each line
+                form_lines_cropped = [l.replace(form_start, "").replace(form_end, "") for l in form_lines]
+                # join cropped lines to obtain a single string
+                form_content = "|".join(form_lines_cropped)
+                # split obtained string to get all pieces in a single array
+                form_pieces = form_content.split("|")
+                # remove duplicated entries
+                form_pieces = list(dict.fromkeys(form_pieces))
+                # join to obtain a single line with all entries of current form
+                form_line = f'{form_start}{"|".join(form_pieces)}{form_end}'
+                # replace multiple lines with single line
+                text = text.replace("\n".join(form_lines), form_line)
         """
-        {{pokemonimages/mainMS|ndex=0025K|ms67=7|msspsc=yes|form=yes}}
-        {{pokemonimages/mainMS|ndex=0025K|mssv=yes|form=yes}}
+        {{pokemonimages/mainMS|ndex=0025K|ms67=7|msspsc=yes|mssv=yes|form=yes}}
+        {{pokemonimages/mainMS|ndex=0025K|msspsc=yes|mssv=yes|form=yes}}
+        ms67=7|msspsc=yes|mssv=yes   msspsc=yes|mssv=yes
+        ms67=7|msspsc=yes|mssv=yes|msspsc=yes|mssv=yes
+        ms67=7|msspsc=yes|mssv=yes
+        {{pokemonimages/mainMS|ndex=0025K|ms67=7|msspsc=yes|mssv=yes|form=yes}}
         """
     return text
 
