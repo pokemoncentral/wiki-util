@@ -32,9 +32,7 @@ def main():
     parser.add_argument("--pokeformspath", default="data/pokepages-pokeforms/")
     parser.add_argument("--exceptionspath", default="data/pokepages-exceptions/")
     parser.add_argument("--dexfile", default="data/wiki-util-data/poke-names.json")
-    parser.add_argument("--genderdiffsfile", default="data/pokepages-utils/genderdiffs.txt")
-    parser.add_argument("--genderformsfile", default="data/pokepages-utils/genderforms.txt")
-    parser.add_argument("--femaleonlyfile", default="data/pokepages-utils/femaleonly.txt")
+    parser.add_argument("--genderdatafile", default="data/wiki-util-data/gender-data.json")
     parser.add_argument("--artsourcesfile", default="data/pokepages-utils/artsources.txt")
     parser.add_argument("--singlemsfile", default="data/pokepages-utils/singleMS.txt")
     parser.add_argument("--availpokesfile", default="data/wiki-util-data/poke-availability.json")
@@ -58,9 +56,7 @@ def main():
             rangerdata,
             goforms,
         ) = import_data(
-            args.genderdiffsfile,
-            args.genderformsfile,
-            args.femaleonlyfile,
+            args.genderdatafile,
             args.artsourcesfile,
             args.singlemsfile,
             args.availpokesfile,

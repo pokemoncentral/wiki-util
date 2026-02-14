@@ -85,13 +85,12 @@ def import_ndex(dexfile):
 
 
 # import various useful data
-def import_data(genderdiffsfile, genderformsfile, femaleonlyfile, artsourcesfile, singlemsfile, availpokesfile, availformsfile, rangerfile, goformsfile):  # fmt: skip
-    with open(genderdiffsfile, "r") as file:
-        genderdiffs = file.read().splitlines()
-    with open(genderformsfile, "r") as file:
-        genderforms = file.read().splitlines()
-    with open(femaleonlyfile, "r") as file:
-        femaleonly = file.read().splitlines()
+def import_data(genderdatafile, artsourcesfile, singlemsfile, availpokesfile, availformsfile, rangerfile, goformsfile):  # fmt: skip
+    with open(genderdatafile, "r") as file:
+        genderdata = json.load(file)
+    genderdiffs = genderdata["gender-diffs"]
+    genderforms = genderdata["gender-forms"]
+    femaleonly = genderdata["female-only"]
     with open(artsourcesfile, "r") as file:
         artsources = file.read().splitlines()
     with open(availpokesfile, "r") as file:
@@ -108,16 +107,17 @@ def import_data(genderdiffsfile, genderformsfile, femaleonlyfile, artsourcesfile
 
 
 # get data for given Pokémon
-def get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata):
-    if poke in genderdiffs:
+def get_poke_data(pokeabbr, genderdiffs, genderforms, femaleonly, singlemsdata):
+    ndexabbr = pokeabbr.lstrip("0")
+    if ndexabbr in genderdiffs:
         gender = "both"
-    elif poke in genderforms:
+    elif ndexabbr in genderforms:
         gender = "bothforms"
-    elif poke in femaleonly:
+    elif ndexabbr in femaleonly:
         gender = "f"
     else:
         gender = ""
-    if poke in singlemsdata:
+    if pokeabbr in singlemsdata:
         singleMS = True
     else:
         singleMS = False
@@ -574,7 +574,9 @@ def build_main(
             form_lines = [l for l in text.split("\n") if l.startswith(form_start)]
             if len(form_lines) > 1:
                 # remove start and end part from each line
-                form_lines_cropped = [l.replace(form_start, "").replace(form_end, "") for l in form_lines]
+                form_lines_cropped = [
+                    l.replace(form_start, "").replace(form_end, "") for l in form_lines
+                ]
                 # join cropped lines to obtain a single string
                 form_content = "|".join(form_lines_cropped)
                 # split obtained string to get all pieces in a single array
