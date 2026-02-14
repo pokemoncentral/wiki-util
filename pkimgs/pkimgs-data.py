@@ -18,16 +18,13 @@ ndexabbr = '37A'
 
 
 # get list of images in given category and save it to text file
-def build_cat_list(site, cat, catspath):
+def build_cat_list(site, cat_name, cats_path):
     pages = pagegenerators.CategorizedPageGenerator(
-        pywikibot.Category(site, f"Categoria:{cat}")
+        pywikibot.Category(site, f"Categoria:{cat_name}"), recurse=True
     )
-    with open(
-        f'{os.path.join(catspath, cat.replace(":", ";"))}.txt', "w", encoding="utf8"
-    ) as file:
-        file.write(
-            "\n".join([page.title() for page in pages]).replace("File:", "") + "\n"
-        )
+    cat_file_path = f'{os.path.join(cats_path, cat_name.replace(":", ";"))}.txt'
+    with open(cat_file_path, "w", encoding="utf8") as file:
+        file.write("\n".join([page.title(with_ns=False) for page in pages]) + "\n")
 
 
 # get list of images in given category with given Pokémon
