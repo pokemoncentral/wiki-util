@@ -1,6 +1,3 @@
-==Sprite e modelli==
-===Serie principale===
-{{pokemonimages/head|content=
 {{pokemonimages/group|gen=2|content=
 {{pokemonimages/div|ndex=0201|textcolor=black-text}}
 {{pokemonimages/entry
@@ -5404,5 +5401,4 @@
 {{pokemonimages/mainMS|ndex=0201Z|ms2=yes|ms345=345|ms67=67|msdlps=yes|mslpa=single|form=yes}}
 {{pokemonimages/mainMS|ndex=0201PE|ms345=345|ms67=67|msdlps=yes|mslpa=single|form=yes}}
 {{pokemonimages/mainMS|ndex=0201PI|ms345=345|ms67=67|msdlps=yes|mslpa=single|form=yes}}
-}}
 }}
