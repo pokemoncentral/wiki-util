@@ -1,5 +1,5 @@
 {{pokemonimages/group|gen=3|content=
-{{pokemonimages/div|ndex=0386}}
+{{pokemonimages/div|ndex=0386|textcolor=black-text}}
 {{pokemonimages/entry
 |xl=25
 |xs=50
@@ -24,7 +24,7 @@
 |img=Sprrzdsh0386.png
 |updesc='''Retro'''{{#invoke: sup | RZ}} [[File:CromaticoRFVF.png]]
 }}
-{{pokemonimages/div|ndex=0386A}}
+{{pokemonimages/div|ndex=0386A|textcolor=black-text}}
 {{pokemonimages/entry
 |xl=25
 |xs=50
@@ -49,7 +49,7 @@
 |img=Sprrfvfdsh0386A.png
 |updesc='''Retro'''{{#invoke: sup | RF}} [[File:CromaticoRFVF.png]]
 }}
-{{pokemonimages/div|ndex=0386D}}
+{{pokemonimages/div|ndex=0386D|textcolor=black-text}}
 {{pokemonimages/entry
 |xl=25
 |xs=50
@@ -74,7 +74,7 @@
 |img=Sprrfvfdsh0386D.png
 |updesc='''Retro'''{{#invoke: sup | VF}} [[File:CromaticoRFVF.png]]
 }}
-{{pokemonimages/div|ndex=0386V}}
+{{pokemonimages/div|ndex=0386V|textcolor=black-text}}
 {{pokemonimages/entry
 |xl=25
 |xs=50
