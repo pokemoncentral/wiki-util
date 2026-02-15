@@ -502,6 +502,40 @@ def build_ms_entry(
     return text
 
 
+# merge multiple lines for alt forms
+def merge_duplicate_ms(main_text, poke, abbrs):
+    for pokeabbr in [f"{poke}{abbr}" for abbr in abbrs]:
+        form_start = f"{{{{pokemonimages/mainMS|ndex={pokeabbr}|"
+        form_lines = [l for l in main_text.split("\n") if l.startswith(form_start)]
+        if len(form_lines) > 1:
+            # split first line into three pieces: the part before all "|ms*=*", the
+            # part with all of them the the part after them
+            left_part_len = form_lines[0].find("|ms") + 1
+            left_part = form_lines[0][:left_part_len]
+            temp_part = form_lines[0][left_part_len:]
+            right_part = re.sub(r"\|?ms\w+=\w+\b", r"", temp_part)
+            middle_part = temp_part.replace(right_part, "")
+            # obtain all occurrencies of "ms*=*" from first line and from all other lines
+            first_pieces = middle_part.split("|")
+            other_pieces = re.findall(r"ms\w+=\w+\b", "".join(form_lines[1:]))
+            # merge all occurrencies removing duplicated ones
+            unique_pieces = list(dict.fromkeys(first_pieces + other_pieces))
+            final_line = f"{left_part}{'|'.join(unique_pieces)}{right_part}"
+            main_text = main_text.replace("\n".join(form_lines), final_line)
+    return main_text
+    """
+    {{pokemonimages/mainMS|ndex=0592|bothgenders=yes|gender=m|ms345=5|ms67=67|msspsc=yes}}
+    {{pokemonimages/mainMS|ndex=0592F|bothgenders=yes|gender=f|ms345=5|ms67=67|msspsc=yes}}
+    {{pokemonimages/mainMS|ndex=0592F|bothgenders=yes|gender=f|msspsc=yes}}
+    ------------
+    {{pokemonimages/mainMS|ndex=0421S|ms345=45|ms67=67|msspsc=yes|msdlps=yes|mslpa=single|form=yes|overworld=no}}
+    {{pokemonimages/mainMS|ndex=0421S|msspsc=yes|msdlps=yes|mslpa=single|form=yes|overworld=no}}
+    ------------
+    {{pokemonimages/mainMS|ndex=0025K|ms67=7|msspsc=yes|mssv=yes|form=yes}}
+    {{pokemonimages/mainMS|ndex=0025K|msspsc=yes|mssv=yes|form=yes}}
+    """
+
+
 # build main series entries
 def build_main(
     poke, exceptionspath, forms, gender, singleMS, availpokes, availforms, imgs
@@ -547,10 +581,7 @@ def build_main(
                     poke, forms[0], False, availpokes, availforms, gender
                 )
             else:
-                if len(forms) > 1:
-                    multiform = True
-                else:
-                    multiform = False
+                multiform = len(forms) > 1
                 if [form[0] for form in forms[:2]] == ["", "F"] and gender in ["both", "bothforms"]:  # fmt: skip
                     # gender difference treated as useless form
                     if gender == "both":
@@ -562,39 +593,19 @@ def build_main(
                         text += build_ms_entry(poke, forms[1], True, availpokes, availforms, gender="f")  # fmt: skip
                     if len(forms) > 2:
                         for form in forms[2:]:
-                            text += build_ms_entry(poke, form, multiform, availpokes, availforms, gender)  # fmt: skip
+                            if form[0] == "F" and gender in ["both", "bothforms"]:
+                                if gender == "both":
+                                    text += build_ms_entry(poke, form, False, availpokes, availforms, gender, genderform="f")  # fmt: skip
+                                else:
+                                    text += build_ms_entry(poke, form, True, availpokes, availforms, gender="f")  # fmt: skip
+                            else:
+                                text += build_ms_entry(poke, form, multiform, availpokes, availforms, gender)  # fmt: skip
                 else:
                     for form in forms:
                         text += build_ms_entry(poke, form, multiform, availpokes, availforms, gender)  # fmt: skip
         text += "}}\n"
         # merge multiple lines for alt forms
-        for pokeabbr in [f"{poke}{f[0]}" for f in forms]:
-            form_start = f"{{{{pokemonimages/mainMS|ndex={pokeabbr}|"
-            form_end = "|form=yes}}"
-            form_lines = [l for l in text.split("\n") if l.startswith(form_start)]
-            if len(form_lines) > 1:
-                # remove start and end part from each line
-                form_lines_cropped = [
-                    l.replace(form_start, "").replace(form_end, "") for l in form_lines
-                ]
-                # join cropped lines to obtain a single string
-                form_content = "|".join(form_lines_cropped)
-                # split obtained string to get all pieces in a single array
-                form_pieces = form_content.split("|")
-                # remove duplicated entries
-                form_pieces = list(dict.fromkeys(form_pieces))
-                # join to obtain a single line with all entries of current form
-                form_line = f'{form_start}{"|".join(form_pieces)}{form_end}'
-                # replace multiple lines with single line
-                text = text.replace("\n".join(form_lines), form_line)
-        """
-        {{pokemonimages/mainMS|ndex=0025K|ms67=7|msspsc=yes|mssv=yes|form=yes}}
-        {{pokemonimages/mainMS|ndex=0025K|msspsc=yes|mssv=yes|form=yes}}
-        ms67=7|msspsc=yes|mssv=yes   msspsc=yes|mssv=yes
-        ms67=7|msspsc=yes|mssv=yes|msspsc=yes|mssv=yes
-        ms67=7|msspsc=yes|mssv=yes
-        {{pokemonimages/mainMS|ndex=0025K|ms67=7|msspsc=yes|mssv=yes|form=yes}}
-        """
+        text = merge_duplicate_ms(text, poke, [f[0] for f in forms])
     return text
 
 
@@ -611,10 +622,7 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
     ndex = int(poke)
     texts = []
     finaltext = ""
-    if abbrs[:2] == ["", "F"] and gender == "both":
-        uselessgender = True
-    else:
-        uselessgender = False
+    uselessgender = abbrs[:2] == ["", "F"] and gender == "both"
     for abbr in abbrs:
         pokeabbr = poke + abbr
         ndexabbr = f"{ndex}{abbr}"
@@ -848,7 +856,7 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
             formtext += "|mastersmugshot=single\n"
         # HOME
         # gender differences treated as useless forms need some fixes
-        if uselessgender == True and abbr in ["", "F"]:
+        if uselessgender and abbr in ["", "F"]:
             if abbr == "":
                 if f"Homemsh{poke}.png" in imgs:
                     formtext += "|home=shiny\n"
@@ -911,7 +919,7 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
         for text in texts:
             finaltext += f"{{{{pokemonimages/spinoff\n|ndex={text[0]}\n|form=yes\n{text[1]}}}}}\n"
         # fix gender differences treated as useless forms
-        if uselessgender == True:
+        if uselessgender:
             finaltext = finaltext.replace("|form=yes", "|gender=m\n|bothgenders=yes", 1)
             finaltext = finaltext.replace("|form=yes", "|gender=f\n|bothgenders=yes", 1)
     elif len(texts) == 1:
