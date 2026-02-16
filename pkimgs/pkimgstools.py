@@ -92,7 +92,7 @@ def import_data(genderdatafile, artsourcesfile, singlemsfile, availpokesfile, av
     genderforms = genderdata["gender-forms"]
     femaleonly = genderdata["female-only"]
     with open(artsourcesfile, "r") as file:
-        artsources = file.read().splitlines()
+        artsources = json.load(file)
     with open(availpokesfile, "r") as file:
         availpokes = json.load(file)
     with open(availformsfile, "r") as file:
@@ -174,10 +174,10 @@ def check_art(arts, art_noext, exts):
 
 
 # get all artworks for given form
-def insert_arts(pokeabbr, arts, shiny, sources):
+def insert_arts(pokeabbr, arts, shiny, artsources):
     text = ""
     exts = ["png", "jpg"]
-    for source in sources:
+    for source in artsources:
         # handle these two special cases
         if source == "PMDDX" and pokeabbr.lstrip("0") in ["25", "133"]:
             text += "|PMDDX=2\n"
@@ -191,7 +191,7 @@ def insert_arts(pokeabbr, arts, shiny, sources):
             ext = check_art(arts, art_base, exts)
             if ext:
                 # parameter of template pokemonimages/artworks
-                sourceabbr = source.replace(" ", "").replace("é", "e")
+                sourceabbr = artsources[source]
                 # add found artwork to page and remove it from list of artworks
                 # this is needed to retrieve artworks with non-standard name
                 # they will be added separately and have to be handled manually
@@ -215,17 +215,14 @@ def insert_arts(pokeabbr, arts, shiny, sources):
 # insert piece of template with artworks of given form
 # if previous function returns non-empty text, return pokemonimages/artworks
 # otherwise nothing is done and empty text is returned
-def build_form_arts(pokeabbr, form, arts, sources):
-    if len([art for art in arts if f"Artwork{pokeabbr} cromatico" in art]) > 0:
-        shinies = True
-    else:
-        shinies = False
-    newtext, arts = insert_arts(pokeabbr, arts, False, sources)
+def build_form_arts(pokeabbr, form, arts, artsources):
+    shinies = (len([art for art in arts if f"Artwork{pokeabbr} cromatico" in art]) > 0)
+    newtext, arts = insert_arts(pokeabbr, arts, False, artsources)
     if newtext:
         text = f"{{{{pokemonimages/artworks\n|ndex={pokeabbr}\n"
-        if form == True:
+        if form:
             text += "|form=yes\n"
-        if shinies == True:
+        if shinies:
             text += "|shiny=no\n"
         text += newtext
         if shinies == True:
@@ -233,7 +230,7 @@ def build_form_arts(pokeabbr, form, arts, sources):
                 text += f"}}}}\n{{{{pokemonimages/artworks\n|ndex={pokeabbr}\n|form=yes\n|shiny=yes\n"
             else:
                 text += f"}}}}\n{{{{pokemonimages/artworks\n|ndex={pokeabbr}\n|shiny=yes\n"  # fmt: skip
-            newtext, arts = insert_arts(pokeabbr, arts, True, sources)
+            newtext, arts = insert_arts(pokeabbr, arts, True, artsources)
             text += newtext
         text += "}}\n"
     else:
@@ -242,7 +239,7 @@ def build_form_arts(pokeabbr, form, arts, sources):
 
 
 # build entire content of artworks box for given Pokémon
-def build_arts(poke, arts, abbrs, gender, sources, extras, pagetext=""):
+def build_arts(poke, arts, abbrs, gender, artsources, extras, pagetext=""):
     ndex = int(poke)
     # remove unneded arts
     arts = [art for art in arts if " tutte le forme" not in art]
@@ -251,12 +248,12 @@ def build_arts(poke, arts, abbrs, gender, sources, extras, pagetext=""):
         arts.remove(f"Artwork{poke}f PMDDX.png")
     # no alternative forms
     if len(abbrs) == 1:
-        text, arts = build_form_arts(poke, False, arts, sources)
+        text, arts = build_form_arts(poke, False, arts, artsources)
     # add all forms
     else:
         text = ""
         for abbr in abbrs:
-            addedtext, arts = build_form_arts(poke + abbr, True, arts, sources)
+            addedtext, arts = build_form_arts(poke + abbr, True, arts, artsources)
             text += addedtext
     # fix gender differences treated as useless forms
     if abbrs[:2] == ["", "F"] and gender == "both":

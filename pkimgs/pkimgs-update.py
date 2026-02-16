@@ -111,7 +111,7 @@ def main():
     parser.add_argument("--downloadspath", default="data/pokepages-downloaded/")
     parser.add_argument("--dexfile", default="data/wiki-util-data/poke-names.json")
     parser.add_argument("--genderdatafile", default="data/wiki-util-data/gender-data.json")
-    parser.add_argument("--artsourcesfile", default="data/pokepages-utils/artsources.txt")
+    parser.add_argument("--artsourcesfile", default="data/pokepages-utils/artsources.json")
     parser.add_argument("--singlemsfile", default="data/pokepages-utils/singleMS.txt")
     parser.add_argument("--availpokesfile", default="data/wiki-util-data/poke-availability.json")
     parser.add_argument("--availformsfile", default="data/wiki-util-data/forms-availability.json")
