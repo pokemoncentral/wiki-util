@@ -184,7 +184,7 @@ def insert_arts(pokeabbr, arts, shiny, artsources):
         else:
             # build name of artwork
             art_base = f"Artwork{pokeabbr} "
-            if shiny == True:
+            if shiny:
                 art_base += "cromatico "
             art_base += f"{source}"
             # now art_base will be something like 'Artwork<pokeabbr> <source>', without extension
@@ -225,8 +225,8 @@ def build_form_arts(pokeabbr, form, arts, artsources):
         if shinies:
             text += "|shiny=no\n"
         text += newtext
-        if shinies == True:
-            if form == True:
+        if shinies:
+            if form:
                 text += f"}}}}\n{{{{pokemonimages/artworks\n|ndex={pokeabbr}\n|form=yes\n|shiny=yes\n"
             else:
                 text += f"}}}}\n{{{{pokemonimages/artworks\n|ndex={pokeabbr}\n|shiny=yes\n"  # fmt: skip
@@ -487,7 +487,14 @@ def build_ms_entry(
                 text += "|mslpa=single"
         if check_pokeform_game_availability(poke, form, "sv", availpokes, availforms):
             text += "|mssv=yes"
-        if multiform == True:
+        if check_pokeform_game_availability(poke, form, "lpza", availpokes, availforms):
+            if gender == "both":
+                text += "|mslpza=both"
+            elif gender == "f":
+                text += "|mslpza=female"
+            else:
+                text += "|mslpza=single"
+        if multiform:
             text += "|form=yes"
             # Castform's forms don't have an overworld sprite in HGSS
             if ndex in (351, 421) and abbr:
@@ -573,7 +580,7 @@ def build_main(
             with open(exceptionfile, "r") as file:
                 text += file.read()
         else:
-            if singleMS == True:
+            if singleMS:
                 text += build_ms_entry(
                     poke, forms[0], False, availpokes, availforms, gender
                 )

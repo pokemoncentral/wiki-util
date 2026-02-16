@@ -176,7 +176,7 @@ def main():
     # upload pages
     if args.upload:
         if args.upload == "all":
-            lst = os.listdir(args.updatespath)
+            lst = sorted(os.listdir(args.updatespath))
         else:
             lst = [f"{page}.txt" for page in args.upload.split(",")]
         site = pywikibot.Site(args.lang, fam=args.fam)
