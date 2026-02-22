@@ -1,346 +1,437 @@
 {
     "RV": {
         "abbr": "RV",
-        "name": "Pocket Monsters aka e midori"
+        "cat": "Pocket Monsters aka e midori",
+        "pokeartwork_param": "maingame"
     },
     "Bj": {
         "abbr": "Bj",
-        "name": "Pocket Monsters ao"
+        "cat": "Pocket Monsters ao",
+        "pokeartwork_param": "maingame"
     },
     "RB": {
         "abbr": "RB",
-        "name": "Pokémon Rosso e Blu"
+        "cat": "Pokémon Rosso e Blu",
+        "pokeartwork_param": "maingame"
     },
     "G": {
         "abbr": "G",
-        "name": "Pokémon Giallo"
+        "cat": "Pokémon Giallo",
+        "pokeartwork_param": "maingame"
     },
     "OA": {
         "abbr": "OA",
-        "name": "Pokémon Oro e Argento"
+        "cat": "Pokémon Oro e Argento",
+        "pokeartwork_param": "maingame"
     },
     "C": {
         "abbr": "C",
-        "name": "Pokémon Cristallo"
+        "cat": "Pokémon Cristallo",
+        "pokeartwork_param": "maingame"
     },
     "RZ": {
         "abbr": "RZ",
-        "name": "Pokémon Rubino e Zaffiro"
+        "cat": "Pokémon Rubino e Zaffiro",
+        "pokeartwork_param": "maingame"
     },
     "RFVF": {
         "abbr": "RFVF",
-        "name": "Pokémon Rosso Fuoco e Verde Foglia"
+        "cat": "Pokémon Rosso Fuoco e Verde Foglia",
+        "pokeartwork_param": "maingame"
     },
     "S": {
         "abbr": "S",
-        "name": "Pokémon Smeraldo"
+        "cat": "Pokémon Smeraldo",
+        "pokeartwork_param": "maingame"
     },
     "DP": {
         "abbr": "DP",
-        "name": "Pokémon Diamante e Perla"
+        "cat": "Pokémon Diamante e Perla",
+        "pokeartwork_param": "maingame"
     },
     "Pt": {
         "abbr": "Pt",
-        "name": "Pokémon Platino"
+        "cat": "Pokémon Platino",
+        "pokeartwork_param": "maingame"
     },
     "HGSS": {
         "abbr": "HGSS",
-        "name": "Pokémon Oro HeartGold e Argento SoulSilver"
+        "cat": "Pokémon Oro HeartGold e Argento SoulSilver",
+        "pokeartwork_param": "maingame"
     },
     "NB": {
         "abbr": "NB",
-        "name": "Pokémon Nero e Bianco"
+        "cat": "Pokémon Nero e Bianco",
+        "pokeartwork_param": "maingame"
     },
     "N2B2": {
         "abbr": "N2B2",
-        "name": "Pokémon Nero 2 e Bianco 2"
+        "cat": "Pokémon Nero 2 e Bianco 2",
+        "pokeartwork_param": "maingame"
     },
     "XY": {
         "abbr": "XY",
-        "name": "Pokémon X e Y"
+        "cat": "Pokémon X e Y",
+        "pokeartwork_param": "maingame"
     },
     "ROZA": {
         "abbr": "ROZA",
-        "name": "Pokémon Rubino Omega e Zaffiro Alpha"
+        "cat": "Pokémon Rubino Omega e Zaffiro Alpha",
+        "pokeartwork_param": "maingame"
     },
     "SL": {
         "abbr": "SL",
-        "name": "Pokémon Sole e Luna"
+        "cat": "Pokémon Sole e Luna",
+        "pokeartwork_param": "maingame"
     },
     "UsUl": {
         "abbr": "UsUl",
-        "name": "Pokémon Ultrasole e Ultraluna"
+        "cat": "Pokémon Ultrasole e Ultraluna",
+        "pokeartwork_param": "maingame"
     },
     "LGPE": {
         "abbr": "LGPE",
-        "name": "Pokémon: Let's Go, Pikachu! e Let's Go, Eevee!"
+        "cat": "Pokémon: Let's Go, Pikachu! e Let's Go, Eevee!",
+        "pokeartwork_param": "maingame"
     },
     "SpSc": {
         "abbr": "SpSc",
-        "name": "Pokémon Spada e Scudo"
+        "cat": "Pokémon Spada e Scudo",
+        "pokeartwork_param": "maingame"
     },
     "DLPS": {
         "abbr": "DLPS",
-        "name": "Pokémon Diamante Lucente e Perla Splendente"
+        "cat": "Pokémon Diamante Lucente e Perla Splendente",
+        "pokeartwork_param": "maingame"
     },
     "LPA": {
         "abbr": "LPA",
-        "name": "Leggende Pokémon: Arceus"
+        "cat": "Leggende Pokémon: Arceus",
+        "pokeartwork_param": "maingame"
     },
     "SV": {
         "abbr": "SV",
-        "name": "Pokémon Scarlatto e Violetto"
+        "cat": "Pokémon Scarlatto e Violetto",
+        "pokeartwork_param": "maingame"
     },
     "LPZA": {
         "abbr": "LPZA",
-        "name": "Leggende Pokémon: Z-A"
+        "cat": "Leggende Pokémon: Z-A",
+        "pokeartwork_param": "maingame"
     },
     "St": {
         "abbr": "St",
-        "name": "Pokémon Stadium"
+        "cat": "Pokémon Stadium",
+        "pokeartwork_param": "spinoffgame"
     },
     "S2": {
         "abbr": "S2",
-        "name": "Pokémon Stadium 2"
+        "cat": "Pokémon Stadium 2",
+        "pokeartwork_param": "spinoffgame"
     },
     "64": {
         "abbr": "64",
-        "name": "Super Smash Bros."
+        "cat": "Super Smash Bros.",
+        "pokeartwork_param": "spinoffgame"
     },
     "Melee": {
         "abbr": "Melee",
-        "name": "Super Smash Bros. Melee"
+        "cat": "Super Smash Bros. Melee",
+        "pokeartwork_param": "spinoffgame"
     },
     "Brawl": {
         "abbr": "Brawl",
-        "name": "Super Smash Bros. Brawl"
+        "cat": "Super Smash Bros. Brawl",
+        "pokeartwork_param": "spinoffgame"
     },
     "3DS-WiiU": {
         "abbr": "3DS-WiiU",
-        "name": "Super Smash Bros. for Nintendo 3DS/Wii U"
+        "cat": "Super Smash Bros. for Nintendo 3DS/Wii U",
+        "pokeartwork_param": "spinoffgame"
     },
     "Ultimate": {
         "abbr": "Ultimate",
-        "name": "Super Smash Bros. Ultimate"
+        "cat": "Super Smash Bros. Ultimate",
+        "pokeartwork_param": "spinoffgame"
     },
     "Colo": {
         "abbr": "Colo",
-        "name": "Pokémon Colosseum"
+        "cat": "Pokémon Colosseum",
+        "pokeartwork_param": "spinoffgame"
     },
     "XD": {
         "abbr": "XD",
-        "name": "Pokémon XD"
+        "cat": "Pokémon XD",
+        "pokeartwork_param": "spinoffgame"
     },
     "Channel": {
         "abbr": "Channel",
-        "name": "Pokémon Channel"
+        "cat": "Pokémon Channel",
+        "pokeartwork_param": "spinoffgame"
     },
     "Link": {
         "abbr": "Link",
-        "name": "Pokémon Link"
+        "cat": "Pokémon Link",
+        "pokeartwork_param": "spinoffgame"
     },
     "PMDRB": {
         "abbr": "PMDRB",
-        "name": "Pokémon Mystery Dungeon: Squadra Rossa e Squadra Blu"
+        "cat": "Pokémon Mystery Dungeon: Squadra Rossa e Squadra Blu",
+        "pokeartwork_param": "spinoffgame"
     },
     "PMDTO": {
         "abbr": "PMDTO",
-        "name": "Pokémon Mystery Dungeon: Esploratori del Tempo e dell'Oscurità"
+        "cat": "Pokémon Mystery Dungeon: Esploratori del Tempo e dell'Oscurità",
+        "pokeartwork_param": "spinoffgame"
     },
     "PMDC": {
         "abbr": "PMDC",
-        "name": "Pokémon Mystery Dungeon: Esploratori del Cielo"
+        "cat": "Pokémon Mystery Dungeon: Esploratori del Cielo",
+        "pokeartwork_param": "spinoffgame"
     },
     "PMDPSI": {
         "abbr": "PMDPSI",
-        "name": "Pokémon Mystery Dungeon: i portali sull'infinito"
+        "cat": "Pokémon Mystery Dungeon: i portali sull'infinito",
+        "pokeartwork_param": "spinoffgame"
     },
     "PSMD": {
         "abbr": "PSMD",
-        "name": "Pokémon Super Mystery Dungeon"
+        "cat": "Pokémon Super Mystery Dungeon",
+        "pokeartwork_param": "spinoffgame"
     },
     "PMDDX": {
         "abbr": "PMDDX",
-        "name": "Pokémon Mystery Dungeon: Squadra di Soccorso DX"
+        "cat": "Pokémon Mystery Dungeon: Squadra di Soccorso DX",
+        "pokeartwork_param": "spinoffgame"
     },
     "Ra": {
         "abbr": "Ra",
-        "name": "Artwork Pokémon Ranger"
+        "cat": "Artwork Pokémon Ranger",
+        "pokeartwork_param": "spinoffgame"
     },
     "OsA": {
         "abbr": "OsA",
-        "name": "Artwork Pokémon Ranger: Ombre su Almia"
+        "cat": "Artwork Pokémon Ranger: Ombre su Almia",
+        "pokeartwork_param": "spinoffgame"
     },
     "Tdl": {
         "abbr": "Tdl",
-        "name": "Artwork Pokémon Ranger: Tracce di luce"
+        "cat": "Artwork Pokémon Ranger: Tracce di luce",
+        "pokeartwork_param": "spinoffgame"
     },
     "MPR": {
         "abbr": "MPR",
-        "name": "My Pokémon Ranch"
+        "cat": "My Pokémon Ranch",
+        "pokeartwork_param": "spinoffgame"
     },
     "Rumble Super": {
         "abbr": "RumbleSuper",
-        "name": "Pokémon Rumble Super"
+        "cat": "Pokémon Rumble Super",
+        "pokeartwork_param": "spinoffgame"
     },
     "Rumble U": {
         "abbr": "RumbleU",
-        "name": "Pokémon Rumble U"
+        "cat": "Pokémon Rumble U",
+        "pokeartwork_param": "spinoffgame"
     },
     "Rumble World": {
         "abbr": "RumbleWorld",
-        "name": "Pokémon Rumble World"
+        "cat": "Pokémon Rumble World",
+        "pokeartwork_param": "spinoffgame"
     },
     "PokéPark": {
         "abbr": "PokePark",
-        "name": "PokéPark"
+        "cat": "PokéPark",
+        "pokeartwork_param": "spinoffgame"
     },
     "Pokkén": {
         "abbr": "Pokken",
-        "name": "Pokkén"
+        "cat": "Pokkén",
+        "pokeartwork_param": "spinoffgame"
     },
     "Detective Pikachu": {
         "abbr": "DetectivePikachu",
-        "name": "Detective Pikachu"
+        "cat": "Detective Pikachu",
+        "pokeartwork_param": "spinoffgame"
     },
     "Detective Pikachu il ritorno": {
         "abbr": "DetectivePikachu2",
-        "name": "Detective Pikachu: il ritorno"
+        "cat": "Detective Pikachu: il ritorno",
+        "pokeartwork_param": "spinoffgame"
     },
     "Quest": {
         "abbr": "Quest",
-        "name": "Pokémon Quest"
+        "cat": "Pokémon Quest",
+        "pokeartwork_param": "spinoffgame"
     },
     "UNITE": {
         "abbr": "UNITE",
-        "name": "Pokémon UNITE"
+        "cat": "Pokémon UNITE",
+        "pokeartwork_param": "spinoffgame"
     },
     "UNITE holowear": {
         "abbr": "UNITEholowear",
-        "name": "Pokémon UNITE"
+        "cat": "Pokémon UNITE",
+        "pokeartwork_param": "spinoffgame"
     },
     "Corp": {
         "abbr": "Corp",
-        "name": "Corp"
+        "cat": "Corp",
+        "pokeartwork_param": "corp"
     },
     "distribuzione 2009": {
         "abbr": "distribuzione2009",
-        "name": "distribuzione 2009"
+        "cat": "distribuzione 2009",
+        "pokeartwork_param": "event"
     },
     "distribuzione 2013": {
         "abbr": "distribuzione2013",
-        "name": "distribuzione 2013"
+        "cat": "distribuzione 2013",
+        "pokeartwork_param": "event"
     },
     "distribuzione 2014": {
         "abbr": "distribuzione2014",
-        "name": "distribuzione 2014"
+        "cat": "distribuzione 2014",
+        "pokeartwork_param": "event"
     },
     "distribuzione 2016": {
         "abbr": "distribuzione2016",
-        "name": "distribuzione 2016"
+        "cat": "distribuzione 2016",
+        "pokeartwork_param": "event"
     },
     "distribuzione 2017": {
         "abbr": "distribuzione2017",
-        "name": "distribuzione 2017"
+        "cat": "distribuzione 2017",
+        "pokeartwork_param": "event"
     },
     "distribuzione 2018": {
         "abbr": "distribuzione2018",
-        "name": "distribuzione 2018"
+        "cat": "distribuzione 2018",
+        "pokeartwork_param": "event"
     },
     "distribuzione 2021": {
         "abbr": "distribuzione2021",
-        "name": "distribuzione 2021"
+        "cat": "distribuzione 2021",
+        "pokeartwork_param": "event"
     },
     "Japan Championships 2023": {
         "abbr": "JapanChampionships2023",
-        "name": "Japan Championships 2023"
+        "cat": "Japan Championships 2023",
+        "pokeartwork_param": "other"
     },
     "Japan Championships 2024": {
         "abbr": "JapanChampionships2024",
-        "name": "Japan Championships 2024"
+        "cat": "Japan Championships 2024",
+        "pokeartwork_param": "other"
     },
     "Japan Championships 2025": {
         "abbr": "JapanChampionships2025",
-        "name": "Japan Championships 2025"
+        "cat": "Japan Championships 2025",
+        "pokeartwork_param": "other"
     },
     "anime GA": {
         "abbr": "animeGA",
-        "name": "anime GA"
+        "cat": "anime GA",
+        "pokeartwork_param": "aniserie"
     },
     "anime OA": {
         "abbr": "animeOA",
-        "name": "anime OA"
+        "cat": "anime OA",
+        "pokeartwork_param": "aniserie"
     },
     "anime RZ": {
         "abbr": "animeRZ",
-        "name": "anime RZ"
+        "cat": "anime RZ",
+        "pokeartwork_param": "aniserie"
     },
     "anime DP": {
         "abbr": "animeDP",
-        "name": "anime DP"
+        "cat": "anime DP",
+        "pokeartwork_param": "aniserie"
     },
     "anime NB": {
         "abbr": "animeNB",
-        "name": "anime NB"
+        "cat": "anime NB",
+        "pokeartwork_param": "aniserie"
     },
     "anime XY": {
         "abbr": "animeXY",
-        "name": "anime XY"
+        "cat": "anime XY",
+        "pokeartwork_param": "aniserie"
     },
     "anime SL": {
         "abbr": "animeSL",
-        "name": "anime SL"
+        "cat": "anime SL",
+        "pokeartwork_param": "aniserie"
     },
     "anime EP": {
         "abbr": "animeEP",
-        "name": "anime EP"
+        "cat": "anime EP",
+        "pokeartwork_param": "aniserie"
     },
     "anime OP": {
         "abbr": "animeOP",
-        "name": "anime OP"
+        "cat": "anime OP",
+        "pokeartwork_param": "aniserie"
     },
     "anime F13": {
         "abbr": "animeF13",
-        "name": "anime F13"
+        "cat": "anime F13",
+        "pokeartwork_param": "film"
     },
     "anime F15": {
         "abbr": "animeF15",
-        "name": "anime F15"
+        "cat": "anime F15",
+        "pokeartwork_param": "film"
     },
     "anime F17": {
         "abbr": "animeF17",
-        "name": "anime F17"
+        "cat": "anime F17",
+        "pokeartwork_param": "film"
     },
     "anime F18": {
         "abbr": "animeF18",
-        "name": "anime F18"
+        "cat": "anime F18",
+        "pokeartwork_param": "film"
     },
     "anime F22": {
         "abbr": "animeF22",
-        "name": "anime F22"
+        "cat": "anime F22",
+        "pokeartwork_param": "film"
     },
     "anime F23": {
         "abbr": "animeF23",
-        "name": "anime F23"
+        "cat": "anime F23",
+        "pokeartwork_param": "film"
     },
     "anime NH": {
         "abbr": "animeNH",
-        "name": "anime NH"
+        "cat": "anime NH",
+        "pokeartwork_param": "otheranime"
     },
     "GCC": {
         "abbr": "GCC",
-        "name": "GCC"
+        "cat": "GCC",
+        "pokeartwork_param": "other"
     },
     "promo HOME SV": {
         "abbr": "promoHOMESV",
-        "name": "promo HOME SV"
+        "cat": "promozionali",
+        "pokeartwork_param": "promo"
+    },
+    "promo HOME": {
+        "abbr": "promoHOME",
+        "cat": "promozionali",
+        "pokeartwork_param": "promo"
     },
     "PF": {
         "abbr": "PF",
-        "name": "PF"
+        "cat": "Pokéfuta",
+        "pokeartwork_param": "other"
     },
     "PxVG": {
         "abbr": "PxVG",
-        "name": "PxVG"
+        "cat": "promozionali",
+        "pokeartwork_param": "other"
     }
 }

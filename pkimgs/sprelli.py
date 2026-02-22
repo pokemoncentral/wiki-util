@@ -232,7 +232,7 @@ if __name__ == "__main__":
     # if a category is specified, update all its images
     elif args.cat:
         cat = pywikibot.Category(site, f"Categoria:{args.cat}")
-        for page in pagegenerators.CategorizedPageGenerator(cat):
+        for page in pagegenerators.CategorizedPageGenerator(cat, recurse=True):
             img = page.title().replace("File:", "")
             template = build_template(
                 img,
@@ -243,7 +243,7 @@ if __name__ == "__main__":
                 args.ani,
                 args.credits,
             )
-            if args.test.tolower().strip() == "no":
+            if args.test.lower().strip() == "no":
                 page.text = template
                 page.save("Bot: using new template for licenses and categories of Pokémon images")  # fmt: skip
             else:
