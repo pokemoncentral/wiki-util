@@ -7,7 +7,8 @@
     "es": "Bulbasaur",
     "de": "Bisasam",
     "fr": "Bulbizarre",
-    "jp": "Fushigidane"
+    "jp": "Fushigidane",
+    "gen": 1
   },
   {
     "ndex": 2,
@@ -17,7 +18,8 @@
     "es": "Ivysaur",
     "de": "Bisaknosp",
     "fr": "Herbizarre",
-    "jp": "Fushigisou"
+    "jp": "Fushigisou",
+    "gen": 1
   },
   {
     "ndex": 3,
@@ -27,7 +29,8 @@
     "es": "Venusaur",
     "de": "Bisaflor",
     "fr": "Florizarre",
-    "jp": "Fushigibana"
+    "jp": "Fushigibana",
+    "gen": 1
   },
   {
     "ndex": 4,
@@ -37,7 +40,8 @@
     "es": "Charmander",
     "de": "Glumanda",
     "fr": "Salamèche",
-    "jp": "Hitokage"
+    "jp": "Hitokage",
+    "gen": 1
   },
   {
     "ndex": 5,
@@ -47,7 +51,8 @@
     "es": "Charmeleon",
     "de": "Glutexo",
     "fr": "Reptincel",
-    "jp": "Lizardo"
+    "jp": "Lizardo",
+    "gen": 1
   },
   {
     "ndex": 6,
@@ -57,7 +62,8 @@
     "es": "Charizard",
     "de": "Glurak",
     "fr": "Dracaufeu",
-    "jp": "Lizardon"
+    "jp": "Lizardon",
+    "gen": 1
   },
   {
     "ndex": 7,
@@ -67,7 +73,8 @@
     "es": "Squirtle",
     "de": "Schiggy",
     "fr": "Carapuce",
-    "jp": "Zenigame"
+    "jp": "Zenigame",
+    "gen": 1
   },
   {
     "ndex": 8,
@@ -77,7 +84,8 @@
     "es": "Wartortle",
     "de": "Schillok",
     "fr": "Carabaffe",
-    "jp": "Kameil"
+    "jp": "Kameil",
+    "gen": 1
   },
   {
     "ndex": 9,
@@ -87,7 +95,8 @@
     "es": "Blastoise",
     "de": "Turtok",
     "fr": "Tortank",
-    "jp": "Kamex"
+    "jp": "Kamex",
+    "gen": 1
   },
   {
     "ndex": 10,
@@ -97,7 +106,8 @@
     "es": "Caterpie",
     "de": "Raupy",
     "fr": "Chenipan",
-    "jp": "Caterpie"
+    "jp": "Caterpie",
+    "gen": 1
   },
   {
     "ndex": 11,
@@ -107,7 +117,8 @@
     "es": "Metapod",
     "de": "Safcon",
     "fr": "Chrysacier",
-    "jp": "Transel"
+    "jp": "Transel",
+    "gen": 1
   },
   {
     "ndex": 12,
@@ -117,7 +128,8 @@
     "es": "Butterfree",
     "de": "Smettbo",
     "fr": "Papilusion",
-    "jp": "Butterfree"
+    "jp": "Butterfree",
+    "gen": 1
   },
   {
     "ndex": 13,
@@ -127,7 +139,8 @@
     "es": "Weedle",
     "de": "Hornliu",
     "fr": "Aspicot",
-    "jp": "Beedle"
+    "jp": "Beedle",
+    "gen": 1
   },
   {
     "ndex": 14,
@@ -137,7 +150,8 @@
     "es": "Kakuna",
     "de": "Kokuna",
     "fr": "Coconfort",
-    "jp": "Cocoon"
+    "jp": "Cocoon",
+    "gen": 1
   },
   {
     "ndex": 15,
@@ -147,7 +161,8 @@
     "es": "Beedrill",
     "de": "Bibor",
     "fr": "Dardargnan",
-    "jp": "Spear"
+    "jp": "Spear",
+    "gen": 1
   },
   {
     "ndex": 16,
@@ -157,7 +172,8 @@
     "es": "Pidgey",
     "de": "Taubsi",
     "fr": "Roucool",
-    "jp": "Poppo"
+    "jp": "Poppo",
+    "gen": 1
   },
   {
     "ndex": 17,
@@ -167,7 +183,8 @@
     "es": "Pidgeotto",
     "de": "Tauboga",
     "fr": "Roucoups",
-    "jp": "Pigeon"
+    "jp": "Pigeon",
+    "gen": 1
   },
   {
     "ndex": 18,
@@ -177,7 +194,8 @@
     "es": "Pidgeot",
     "de": "Tauboss",
     "fr": "Roucarnage",
-    "jp": "Pigeot"
+    "jp": "Pigeot",
+    "gen": 1
   },
   {
     "ndex": 19,
@@ -187,7 +205,8 @@
     "es": "Rattata",
     "de": "Rattfratz",
     "fr": "Rattata",
-    "jp": "Koratta"
+    "jp": "Koratta",
+    "gen": 1
   },
   {
     "ndex": 20,
@@ -197,7 +216,8 @@
     "es": "Raticate",
     "de": "Rattikarl",
     "fr": "Rattatac",
-    "jp": "Ratta"
+    "jp": "Ratta",
+    "gen": 1
   },
   {
     "ndex": 21,
@@ -207,7 +227,8 @@
     "es": "Spearow",
     "de": "Habitak",
     "fr": "Piafabec",
-    "jp": "Onisuzume"
+    "jp": "Onisuzume",
+    "gen": 1
   },
   {
     "ndex": 22,
@@ -217,7 +238,8 @@
     "es": "Fearow",
     "de": "Ibitak",
     "fr": "Rapasdepic",
-    "jp": "Onidrill"
+    "jp": "Onidrill",
+    "gen": 1
   },
   {
     "ndex": 23,
@@ -227,7 +249,8 @@
     "es": "Ekans",
     "de": "Rettan",
     "fr": "Abo",
-    "jp": "Arbo"
+    "jp": "Arbo",
+    "gen": 1
   },
   {
     "ndex": 24,
@@ -237,7 +260,8 @@
     "es": "Arbok",
     "de": "Arbok",
     "fr": "Arbok",
-    "jp": "Arbok"
+    "jp": "Arbok",
+    "gen": 1
   },
   {
     "ndex": 25,
@@ -247,7 +271,8 @@
     "es": "Pikachu",
     "de": "Pikachu",
     "fr": "Pikachu",
-    "jp": "Pikachu"
+    "jp": "Pikachu",
+    "gen": 1
   },
   {
     "ndex": 26,
@@ -257,7 +282,8 @@
     "es": "Raichu",
     "de": "Raichu",
     "fr": "Raichu",
-    "jp": "Raichu"
+    "jp": "Raichu",
+    "gen": 1
   },
   {
     "ndex": 27,
@@ -267,7 +293,8 @@
     "es": "Sandshrew",
     "de": "Sandan",
     "fr": "Sabelette",
-    "jp": "Sand"
+    "jp": "Sand",
+    "gen": 1
   },
   {
     "ndex": 28,
@@ -277,7 +304,8 @@
     "es": "Sandslash",
     "de": "Sandamer",
     "fr": "Sablaireau",
-    "jp": "Sandpan"
+    "jp": "Sandpan",
+    "gen": 1
   },
   {
     "ndex": 29,
@@ -287,7 +315,8 @@
     "es": "Nidoran♀",
     "de": "Nidoran♀",
     "fr": "Nidoran♀",
-    "jp": "Nidoran♀"
+    "jp": "Nidoran♀",
+    "gen": 1
   },
   {
     "ndex": 30,
@@ -297,7 +326,8 @@
     "es": "Nidorina",
     "de": "Nidorina",
     "fr": "Nidorina",
-    "jp": "Nidorina"
+    "jp": "Nidorina",
+    "gen": 1
   },
   {
     "ndex": 31,
@@ -307,7 +337,8 @@
     "es": "Nidoqueen",
     "de": "Nidoqueen",
     "fr": "Nidoqueen",
-    "jp": "Nidoqueen"
+    "jp": "Nidoqueen",
+    "gen": 1
   },
   {
     "ndex": 32,
@@ -317,7 +348,8 @@
     "es": "Nidoran♂",
     "de": "Nidoran♂",
     "fr": "Nidoran♂",
-    "jp": "Nidoran♂"
+    "jp": "Nidoran♂",
+    "gen": 1
   },
   {
     "ndex": 33,
@@ -327,7 +359,8 @@
     "es": "Nidorino",
     "de": "Nidorino",
     "fr": "Nidorino",
-    "jp": "Nidorino"
+    "jp": "Nidorino",
+    "gen": 1
   },
   {
     "ndex": 34,
@@ -337,7 +370,8 @@
     "es": "Nidoking",
     "de": "Nidoking",
     "fr": "Nidoking",
-    "jp": "Nidoking"
+    "jp": "Nidoking",
+    "gen": 1
   },
   {
     "ndex": 35,
@@ -347,7 +381,8 @@
     "es": "Clefairy",
     "de": "Piepi",
     "fr": "Mélofée",
-    "jp": "Pippi"
+    "jp": "Pippi",
+    "gen": 1
   },
   {
     "ndex": 36,
@@ -357,7 +392,8 @@
     "es": "Clefable",
     "de": "Pixi",
     "fr": "Mélodelfe",
-    "jp": "Pixy"
+    "jp": "Pixy",
+    "gen": 1
   },
   {
     "ndex": 37,
@@ -367,7 +403,8 @@
     "es": "Vulpix",
     "de": "Vulpix",
     "fr": "Goupix",
-    "jp": "Rokon"
+    "jp": "Rokon",
+    "gen": 1
   },
   {
     "ndex": 38,
@@ -377,7 +414,8 @@
     "es": "Ninetales",
     "de": "Vulnona",
     "fr": "Feunard",
-    "jp": "Kyukon"
+    "jp": "Kyukon",
+    "gen": 1
   },
   {
     "ndex": 39,
@@ -387,7 +425,8 @@
     "es": "Jigglypuff",
     "de": "Pummeluff",
     "fr": "Rondoudou",
-    "jp": "Purin"
+    "jp": "Purin",
+    "gen": 1
   },
   {
     "ndex": 40,
@@ -397,7 +436,8 @@
     "es": "Wigglytuff",
     "de": "Knuddeluff",
     "fr": "Grodoudou",
-    "jp": "Pukurin"
+    "jp": "Pukurin",
+    "gen": 1
   },
   {
     "ndex": 41,
@@ -407,7 +447,8 @@
     "es": "Zubat",
     "de": "Zubat",
     "fr": "Nosferapti",
-    "jp": "Zubat"
+    "jp": "Zubat",
+    "gen": 1
   },
   {
     "ndex": 42,
@@ -417,7 +458,8 @@
     "es": "Golbat",
     "de": "Golbat",
     "fr": "Nosferalto",
-    "jp": "Golbat"
+    "jp": "Golbat",
+    "gen": 1
   },
   {
     "ndex": 43,
@@ -427,7 +469,8 @@
     "es": "Oddish",
     "de": "Myrapla",
     "fr": "Mystherbe",
-    "jp": "Nazonokusa"
+    "jp": "Nazonokusa",
+    "gen": 1
   },
   {
     "ndex": 44,
@@ -437,7 +480,8 @@
     "es": "Gloom",
     "de": "Duflor",
     "fr": "Ortide",
-    "jp": "Kusaihana"
+    "jp": "Kusaihana",
+    "gen": 1
   },
   {
     "ndex": 45,
@@ -447,7 +491,8 @@
     "es": "Vileplume",
     "de": "Giflor",
     "fr": "Rafflesia",
-    "jp": "Ruffresia"
+    "jp": "Ruffresia",
+    "gen": 1
   },
   {
     "ndex": 46,
@@ -457,7 +502,8 @@
     "es": "Paras",
     "de": "Paras",
     "fr": "Paras",
-    "jp": "Paras"
+    "jp": "Paras",
+    "gen": 1
   },
   {
     "ndex": 47,
@@ -467,7 +513,8 @@
     "es": "Parasect",
     "de": "Parasek",
     "fr": "Parasect",
-    "jp": "Parasect"
+    "jp": "Parasect",
+    "gen": 1
   },
   {
     "ndex": 48,
@@ -477,7 +524,8 @@
     "es": "Venonat",
     "de": "Bluzuk",
     "fr": "Mimitoss",
-    "jp": "Kongpang"
+    "jp": "Kongpang",
+    "gen": 1
   },
   {
     "ndex": 49,
@@ -487,7 +535,8 @@
     "es": "Venomoth",
     "de": "Omot",
     "fr": "Aéromite",
-    "jp": "Morphon"
+    "jp": "Morphon",
+    "gen": 1
   },
   {
     "ndex": 50,
@@ -497,7 +546,8 @@
     "es": "Diglett",
     "de": "Digda",
     "fr": "Taupiqueur",
-    "jp": "Digda"
+    "jp": "Digda",
+    "gen": 1
   },
   {
     "ndex": 51,
@@ -507,7 +557,8 @@
     "es": "Dugtrio",
     "de": "Digdri",
     "fr": "Triopikeur",
-    "jp": "Dugtrio"
+    "jp": "Dugtrio",
+    "gen": 1
   },
   {
     "ndex": 52,
@@ -517,7 +568,8 @@
     "es": "Meowth",
     "de": "Mauzi",
     "fr": "Miaouss",
-    "jp": "Nyarth"
+    "jp": "Nyarth",
+    "gen": 1
   },
   {
     "ndex": 53,
@@ -527,7 +579,8 @@
     "es": "Persian",
     "de": "Snobilikat",
     "fr": "Persian",
-    "jp": "Persian"
+    "jp": "Persian",
+    "gen": 1
   },
   {
     "ndex": 54,
@@ -537,7 +590,8 @@
     "es": "Psyduck",
     "de": "Enton",
     "fr": "Psykokwak",
-    "jp": "Koduck"
+    "jp": "Koduck",
+    "gen": 1
   },
   {
     "ndex": 55,
@@ -547,7 +601,8 @@
     "es": "Golduck",
     "de": "Entoron",
     "fr": "Akwakwak",
-    "jp": "Golduck"
+    "jp": "Golduck",
+    "gen": 1
   },
   {
     "ndex": 56,
@@ -557,7 +612,8 @@
     "es": "Mankey",
     "de": "Menki",
     "fr": "Férosinge",
-    "jp": "Mankey"
+    "jp": "Mankey",
+    "gen": 1
   },
   {
     "ndex": 57,
@@ -567,7 +623,8 @@
     "es": "Primeape",
     "de": "Rasaff",
     "fr": "Colossinge",
-    "jp": "Okorizaru"
+    "jp": "Okorizaru",
+    "gen": 1
   },
   {
     "ndex": 58,
@@ -577,7 +634,8 @@
     "es": "Growlithe",
     "de": "Fukano",
     "fr": "Caninos",
-    "jp": "Gardie"
+    "jp": "Gardie",
+    "gen": 1
   },
   {
     "ndex": 59,
@@ -587,7 +645,8 @@
     "es": "Arcanine",
     "de": "Arkani",
     "fr": "Arcanin",
-    "jp": "Windie"
+    "jp": "Windie",
+    "gen": 1
   },
   {
     "ndex": 60,
@@ -597,7 +656,8 @@
     "es": "Poliwag",
     "de": "Quapsel",
     "fr": "Ptitard",
-    "jp": "Nyoromo"
+    "jp": "Nyoromo",
+    "gen": 1
   },
   {
     "ndex": 61,
@@ -607,7 +667,8 @@
     "es": "Poliwhirl",
     "de": "Quaputzi",
     "fr": "Têtarte",
-    "jp": "Nyorozo"
+    "jp": "Nyorozo",
+    "gen": 1
   },
   {
     "ndex": 62,
@@ -617,7 +678,8 @@
     "es": "Poliwrath",
     "de": "Quappo",
     "fr": "Tartard",
-    "jp": "Nyorobon"
+    "jp": "Nyorobon",
+    "gen": 1
   },
   {
     "ndex": 63,
@@ -627,7 +689,8 @@
     "es": "Abra",
     "de": "Abra",
     "fr": "Abra",
-    "jp": "Casey"
+    "jp": "Casey",
+    "gen": 1
   },
   {
     "ndex": 64,
@@ -637,7 +700,8 @@
     "es": "Kadabra",
     "de": "Kadabra",
     "fr": "Kadabra",
-    "jp": "Yungerer"
+    "jp": "Yungerer",
+    "gen": 1
   },
   {
     "ndex": 65,
@@ -647,7 +711,8 @@
     "es": "Alakazam",
     "de": "Simsala",
     "fr": "Alakazam",
-    "jp": "Foodin"
+    "jp": "Foodin",
+    "gen": 1
   },
   {
     "ndex": 66,
@@ -657,7 +722,8 @@
     "es": "Machop",
     "de": "Machollo",
     "fr": "Machoc",
-    "jp": "Wanriky"
+    "jp": "Wanriky",
+    "gen": 1
   },
   {
     "ndex": 67,
@@ -667,7 +733,8 @@
     "es": "Machoke",
     "de": "Maschock",
     "fr": "Machopeur",
-    "jp": "Goriky"
+    "jp": "Goriky",
+    "gen": 1
   },
   {
     "ndex": 68,
@@ -677,7 +744,8 @@
     "es": "Machamp",
     "de": "Machomei",
     "fr": "Mackogneur",
-    "jp": "Kairiky"
+    "jp": "Kairiky",
+    "gen": 1
   },
   {
     "ndex": 69,
@@ -687,7 +755,8 @@
     "es": "Bellsprout",
     "de": "Knofensa",
     "fr": "Chétiflor",
-    "jp": "Madatsubomi"
+    "jp": "Madatsubomi",
+    "gen": 1
   },
   {
     "ndex": 70,
@@ -697,7 +766,8 @@
     "es": "Weepinbell",
     "de": "Ultrigaria",
     "fr": "Boustiflor",
-    "jp": "Utsudon"
+    "jp": "Utsudon",
+    "gen": 1
   },
   {
     "ndex": 71,
@@ -707,7 +777,8 @@
     "es": "Victreebel",
     "de": "Sarzenia",
     "fr": "Empiflor",
-    "jp": "Utsubot"
+    "jp": "Utsubot",
+    "gen": 1
   },
   {
     "ndex": 72,
@@ -717,7 +788,8 @@
     "es": "Tentacool",
     "de": "Tentacha",
     "fr": "Tentacool",
-    "jp": "Menokurage"
+    "jp": "Menokurage",
+    "gen": 1
   },
   {
     "ndex": 73,
@@ -727,7 +799,8 @@
     "es": "Tentacruel",
     "de": "Tentoxa",
     "fr": "Tentacruel",
-    "jp": "Dokukurage"
+    "jp": "Dokukurage",
+    "gen": 1
   },
   {
     "ndex": 74,
@@ -737,7 +810,8 @@
     "es": "Geodude",
     "de": "Kleinstein",
     "fr": "Racaillou",
-    "jp": "Isitsubute"
+    "jp": "Isitsubute",
+    "gen": 1
   },
   {
     "ndex": 75,
@@ -747,7 +821,8 @@
     "es": "Graveler",
     "de": "Georok",
     "fr": "Gravalanch",
-    "jp": "Golone"
+    "jp": "Golone",
+    "gen": 1
   },
   {
     "ndex": 76,
@@ -757,7 +832,8 @@
     "es": "Golem",
     "de": "Geowaz",
     "fr": "Grolem",
-    "jp": "Golonya"
+    "jp": "Golonya",
+    "gen": 1
   },
   {
     "ndex": 77,
@@ -767,7 +843,8 @@
     "es": "Ponyta",
     "de": "Ponita",
     "fr": "Ponyta",
-    "jp": "Ponyta"
+    "jp": "Ponyta",
+    "gen": 1
   },
   {
     "ndex": 78,
@@ -777,7 +854,8 @@
     "es": "Rapidash",
     "de": "Gallopa",
     "fr": "Galopa",
-    "jp": "Gallop"
+    "jp": "Gallop",
+    "gen": 1
   },
   {
     "ndex": 79,
@@ -787,7 +865,8 @@
     "es": "Slowpoke",
     "de": "Flegmon",
     "fr": "Ramoloss",
-    "jp": "Yadon"
+    "jp": "Yadon",
+    "gen": 1
   },
   {
     "ndex": 80,
@@ -797,7 +876,8 @@
     "es": "Slowbro",
     "de": "Lahmus",
     "fr": "Flagadoss",
-    "jp": "Yadoran"
+    "jp": "Yadoran",
+    "gen": 1
   },
   {
     "ndex": 81,
@@ -807,7 +887,8 @@
     "es": "Magnemite",
     "de": "Magnetilo",
     "fr": "Magnéti",
-    "jp": "Coil"
+    "jp": "Coil",
+    "gen": 1
   },
   {
     "ndex": 82,
@@ -817,7 +898,8 @@
     "es": "Magneton",
     "de": "Magneton",
     "fr": "Magnéton",
-    "jp": "Rarecoil"
+    "jp": "Rarecoil",
+    "gen": 1
   },
   {
     "ndex": 83,
@@ -827,7 +909,8 @@
     "es": "Farfetch'd",
     "de": "Porenta",
     "fr": "Canarticho",
-    "jp": "Kamonegi"
+    "jp": "Kamonegi",
+    "gen": 1
   },
   {
     "ndex": 84,
@@ -837,7 +920,8 @@
     "es": "Doduo",
     "de": "Dodu",
     "fr": "Doduo",
-    "jp": "Dodo"
+    "jp": "Dodo",
+    "gen": 1
   },
   {
     "ndex": 85,
@@ -847,7 +931,8 @@
     "es": "Dodrio",
     "de": "Dodri",
     "fr": "Dodrio",
-    "jp": "Dodorio"
+    "jp": "Dodorio",
+    "gen": 1
   },
   {
     "ndex": 86,
@@ -857,7 +942,8 @@
     "es": "Seel",
     "de": "Jurob",
     "fr": "Otaria",
-    "jp": "Pawou"
+    "jp": "Pawou",
+    "gen": 1
   },
   {
     "ndex": 87,
@@ -867,7 +953,8 @@
     "es": "Dewgong",
     "de": "Jugong",
     "fr": "Lamantine",
-    "jp": "Jugon"
+    "jp": "Jugon",
+    "gen": 1
   },
   {
     "ndex": 88,
@@ -877,7 +964,8 @@
     "es": "Grimer",
     "de": "Sleima",
     "fr": "Tadmorv",
-    "jp": "Betbeter"
+    "jp": "Betbeter",
+    "gen": 1
   },
   {
     "ndex": 89,
@@ -887,7 +975,8 @@
     "es": "Muk",
     "de": "Sleimok",
     "fr": "Grotadmorv",
-    "jp": "Betbeton"
+    "jp": "Betbeton",
+    "gen": 1
   },
   {
     "ndex": 90,
@@ -897,7 +986,8 @@
     "es": "Shellder",
     "de": "Muschas",
     "fr": "Kokiyas",
-    "jp": "Shellder"
+    "jp": "Shellder",
+    "gen": 1
   },
   {
     "ndex": 91,
@@ -907,7 +997,8 @@
     "es": "Cloyster",
     "de": "Austos",
     "fr": "Crustabri",
-    "jp": "Parshen"
+    "jp": "Parshen",
+    "gen": 1
   },
   {
     "ndex": 92,
@@ -917,7 +1008,8 @@
     "es": "Gastly",
     "de": "Nebulak",
     "fr": "Fantominus",
-    "jp": "Ghos"
+    "jp": "Ghos",
+    "gen": 1
   },
   {
     "ndex": 93,
@@ -927,7 +1019,8 @@
     "es": "Haunter",
     "de": "Alpollo",
     "fr": "Spectrum",
-    "jp": "Ghost"
+    "jp": "Ghost",
+    "gen": 1
   },
   {
     "ndex": 94,
@@ -937,7 +1030,8 @@
     "es": "Gengar",
     "de": "Gengar",
     "fr": "Ectoplasma",
-    "jp": "Gangar"
+    "jp": "Gangar",
+    "gen": 1
   },
   {
     "ndex": 95,
@@ -947,7 +1041,8 @@
     "es": "Onix",
     "de": "Onix",
     "fr": "Onix",
-    "jp": "Iwark"
+    "jp": "Iwark",
+    "gen": 1
   },
   {
     "ndex": 96,
@@ -957,7 +1052,8 @@
     "es": "Drowzee",
     "de": "Traumato",
     "fr": "Soporifik",
-    "jp": "Sleep"
+    "jp": "Sleep",
+    "gen": 1
   },
   {
     "ndex": 97,
@@ -967,7 +1063,8 @@
     "es": "Hypno",
     "de": "Hypno",
     "fr": "Hypnomade",
-    "jp": "Sleeper"
+    "jp": "Sleeper",
+    "gen": 1
   },
   {
     "ndex": 98,
@@ -977,7 +1074,8 @@
     "es": "Krabby",
     "de": "Krabby",
     "fr": "Krabby",
-    "jp": "Crab"
+    "jp": "Crab",
+    "gen": 1
   },
   {
     "ndex": 99,
@@ -987,7 +1085,8 @@
     "es": "Kingler",
     "de": "Kingler",
     "fr": "Krabboss",
-    "jp": "Kingler"
+    "jp": "Kingler",
+    "gen": 1
   },
   {
     "ndex": 100,
@@ -997,7 +1096,8 @@
     "es": "Voltorb",
     "de": "Voltobal",
     "fr": "Voltorbe",
-    "jp": "Biriridama"
+    "jp": "Biriridama",
+    "gen": 1
   },
   {
     "ndex": 101,
@@ -1007,7 +1107,8 @@
     "es": "Electrode",
     "de": "Lektrobal",
     "fr": "Électrode",
-    "jp": "Marumine"
+    "jp": "Marumine",
+    "gen": 1
   },
   {
     "ndex": 102,
@@ -1017,7 +1118,8 @@
     "es": "Exeggcute",
     "de": "Owei",
     "fr": "Noeunoeuf",
-    "jp": "Tamatama"
+    "jp": "Tamatama",
+    "gen": 1
   },
   {
     "ndex": 103,
@@ -1027,7 +1129,8 @@
     "es": "Exeggutor",
     "de": "Kokowei",
     "fr": "Noadkoko",
-    "jp": "Nassy"
+    "jp": "Nassy",
+    "gen": 1
   },
   {
     "ndex": 104,
@@ -1037,7 +1140,8 @@
     "es": "Cubone",
     "de": "Tragosso",
     "fr": "Osselait",
-    "jp": "Karakara"
+    "jp": "Karakara",
+    "gen": 1
   },
   {
     "ndex": 105,
@@ -1047,7 +1151,8 @@
     "es": "Marowak",
     "de": "Knogga",
     "fr": "Ossatueur",
-    "jp": "Garagara"
+    "jp": "Garagara",
+    "gen": 1
   },
   {
     "ndex": 106,
@@ -1057,7 +1162,8 @@
     "es": "Hitmonlee",
     "de": "Kicklee",
     "fr": "Kicklee",
-    "jp": "Sawamular"
+    "jp": "Sawamular",
+    "gen": 1
   },
   {
     "ndex": 107,
@@ -1067,7 +1173,8 @@
     "es": "Hitmonchan",
     "de": "Nockchan",
     "fr": "Tygnon",
-    "jp": "Ebiwalar"
+    "jp": "Ebiwalar",
+    "gen": 1
   },
   {
     "ndex": 108,
@@ -1077,7 +1184,8 @@
     "es": "Lickitung",
     "de": "Schlurp",
     "fr": "Excelangue",
-    "jp": "Beroringa"
+    "jp": "Beroringa",
+    "gen": 1
   },
   {
     "ndex": 109,
@@ -1087,7 +1195,8 @@
     "es": "Koffing",
     "de": "Smogon",
     "fr": "Smogo",
-    "jp": "Dogars"
+    "jp": "Dogars",
+    "gen": 1
   },
   {
     "ndex": 110,
@@ -1097,7 +1206,8 @@
     "es": "Weezing",
     "de": "Smogmog",
     "fr": "Smogogo",
-    "jp": "Matadogas"
+    "jp": "Matadogas",
+    "gen": 1
   },
   {
     "ndex": 111,
@@ -1107,7 +1217,8 @@
     "es": "Rhyhorn",
     "de": "Rihorn",
     "fr": "Rhinocorne",
-    "jp": "Sihorn"
+    "jp": "Sihorn",
+    "gen": 1
   },
   {
     "ndex": 112,
@@ -1117,7 +1228,8 @@
     "es": "Rhydon",
     "de": "Rizeros",
     "fr": "Rhinoféros",
-    "jp": "Sidon"
+    "jp": "Sidon",
+    "gen": 1
   },
   {
     "ndex": 113,
@@ -1127,7 +1239,8 @@
     "es": "Chansey",
     "de": "Chaneira",
     "fr": "Leveinard",
-    "jp": "Lucky"
+    "jp": "Lucky",
+    "gen": 1
   },
   {
     "ndex": 114,
@@ -1137,7 +1250,8 @@
     "es": "Tangela",
     "de": "Tangela",
     "fr": "Saquedeneu",
-    "jp": "Monjara"
+    "jp": "Monjara",
+    "gen": 1
   },
   {
     "ndex": 115,
@@ -1147,7 +1261,8 @@
     "es": "Kangaskhan",
     "de": "Kangama",
     "fr": "Kangourex",
-    "jp": "Garura"
+    "jp": "Garura",
+    "gen": 1
   },
   {
     "ndex": 116,
@@ -1157,7 +1272,8 @@
     "es": "Horsea",
     "de": "Seeper",
     "fr": "Hypotrempe",
-    "jp": "Tattu"
+    "jp": "Tattu",
+    "gen": 1
   },
   {
     "ndex": 117,
@@ -1167,7 +1283,8 @@
     "es": "Seadra",
     "de": "Seemon",
     "fr": "Hypocéan",
-    "jp": "Seadra"
+    "jp": "Seadra",
+    "gen": 1
   },
   {
     "ndex": 118,
@@ -1177,7 +1294,8 @@
     "es": "Goldeen",
     "de": "Goldini",
     "fr": "Poissirène",
-    "jp": "Tosakinto"
+    "jp": "Tosakinto",
+    "gen": 1
   },
   {
     "ndex": 119,
@@ -1187,7 +1305,8 @@
     "es": "Seaking",
     "de": "Golking",
     "fr": "Poissoroy",
-    "jp": "Azumao"
+    "jp": "Azumao",
+    "gen": 1
   },
   {
     "ndex": 120,
@@ -1197,7 +1316,8 @@
     "es": "Staryu",
     "de": "Sterndu",
     "fr": "Stari",
-    "jp": "Hitodeman"
+    "jp": "Hitodeman",
+    "gen": 1
   },
   {
     "ndex": 121,
@@ -1207,7 +1327,8 @@
     "es": "Starmie",
     "de": "Starmie",
     "fr": "Staross",
-    "jp": "Starmie"
+    "jp": "Starmie",
+    "gen": 1
   },
   {
     "ndex": 122,
@@ -1217,7 +1338,8 @@
     "es": "Mr. Mime",
     "de": "Pantimos",
     "fr": "M. Mime",
-    "jp": "Barrierd"
+    "jp": "Barrierd",
+    "gen": 1
   },
   {
     "ndex": 123,
@@ -1227,7 +1349,8 @@
     "es": "Scyther",
     "de": "Sichlor",
     "fr": "Insécateur",
-    "jp": "Strike"
+    "jp": "Strike",
+    "gen": 1
   },
   {
     "ndex": 124,
@@ -1237,7 +1360,8 @@
     "es": "Jynx",
     "de": "Rossana",
     "fr": "Lippoutou",
-    "jp": "Rougela"
+    "jp": "Rougela",
+    "gen": 1
   },
   {
     "ndex": 125,
@@ -1247,7 +1371,8 @@
     "es": "Electabuzz",
     "de": "Elektek",
     "fr": "Élektek",
-    "jp": "Eleboo"
+    "jp": "Eleboo",
+    "gen": 1
   },
   {
     "ndex": 126,
@@ -1257,7 +1382,8 @@
     "es": "Magmar",
     "de": "Magmar",
     "fr": "Magmar",
-    "jp": "Boober"
+    "jp": "Boober",
+    "gen": 1
   },
   {
     "ndex": 127,
@@ -1267,7 +1393,8 @@
     "es": "Pinsir",
     "de": "Pinsir",
     "fr": "Scarabrute",
-    "jp": "Kailios"
+    "jp": "Kailios",
+    "gen": 1
   },
   {
     "ndex": 128,
@@ -1277,7 +1404,8 @@
     "es": "Tauros",
     "de": "Tauros",
     "fr": "Tauros",
-    "jp": "Kentauros"
+    "jp": "Kentauros",
+    "gen": 1
   },
   {
     "ndex": 129,
@@ -1287,7 +1415,8 @@
     "es": "Magikarp",
     "de": "Karpador",
     "fr": "Magicarpe",
-    "jp": "Koiking"
+    "jp": "Koiking",
+    "gen": 1
   },
   {
     "ndex": 130,
@@ -1297,7 +1426,8 @@
     "es": "Gyarados",
     "de": "Garados",
     "fr": "Léviator",
-    "jp": "Gyarados"
+    "jp": "Gyarados",
+    "gen": 1
   },
   {
     "ndex": 131,
@@ -1307,7 +1437,8 @@
     "es": "Lapras",
     "de": "Lapras",
     "fr": "Lokhlass",
-    "jp": "Laplace"
+    "jp": "Laplace",
+    "gen": 1
   },
   {
     "ndex": 132,
@@ -1317,7 +1448,8 @@
     "es": "Ditto",
     "de": "Ditto",
     "fr": "Métamorph",
-    "jp": "Metamon"
+    "jp": "Metamon",
+    "gen": 1
   },
   {
     "ndex": 133,
@@ -1327,7 +1459,8 @@
     "es": "Eevee",
     "de": "Evoli",
     "fr": "Évoli",
-    "jp": "Eievui"
+    "jp": "Eievui",
+    "gen": 1
   },
   {
     "ndex": 134,
@@ -1337,7 +1470,8 @@
     "es": "Vaporeon",
     "de": "Aquana",
     "fr": "Aquali",
-    "jp": "Showers"
+    "jp": "Showers",
+    "gen": 1
   },
   {
     "ndex": 135,
@@ -1347,7 +1481,8 @@
     "es": "Jolteon",
     "de": "Blitza",
     "fr": "Voltali",
-    "jp": "Thunders"
+    "jp": "Thunders",
+    "gen": 1
   },
   {
     "ndex": 136,
@@ -1357,7 +1492,8 @@
     "es": "Flareon",
     "de": "Flamara",
     "fr": "Pyroli",
-    "jp": "Booster"
+    "jp": "Booster",
+    "gen": 1
   },
   {
     "ndex": 137,
@@ -1367,7 +1503,8 @@
     "es": "Porygon",
     "de": "Porygon",
     "fr": "Porygon",
-    "jp": "Porygon"
+    "jp": "Porygon",
+    "gen": 1
   },
   {
     "ndex": 138,
@@ -1377,7 +1514,8 @@
     "es": "Omanyte",
     "de": "Amonitas",
     "fr": "Amonita",
-    "jp": "Omnite"
+    "jp": "Omnite",
+    "gen": 1
   },
   {
     "ndex": 139,
@@ -1387,7 +1525,8 @@
     "es": "Omastar",
     "de": "Amoroso",
     "fr": "Amonistar",
-    "jp": "Omstar"
+    "jp": "Omstar",
+    "gen": 1
   },
   {
     "ndex": 140,
@@ -1397,7 +1536,8 @@
     "es": "Kabuto",
     "de": "Kabuto",
     "fr": "Kabuto",
-    "jp": "Kabuto"
+    "jp": "Kabuto",
+    "gen": 1
   },
   {
     "ndex": 141,
@@ -1407,7 +1547,8 @@
     "es": "Kabutops",
     "de": "Kabutops",
     "fr": "Kabutops",
-    "jp": "Kabutops"
+    "jp": "Kabutops",
+    "gen": 1
   },
   {
     "ndex": 142,
@@ -1417,7 +1558,8 @@
     "es": "Aerodactyl",
     "de": "Aerodactyl",
     "fr": "Ptéra",
-    "jp": "Ptera"
+    "jp": "Ptera",
+    "gen": 1
   },
   {
     "ndex": 143,
@@ -1427,7 +1569,8 @@
     "es": "Snorlax",
     "de": "Relaxo",
     "fr": "Ronflex",
-    "jp": "Kabigon"
+    "jp": "Kabigon",
+    "gen": 1
   },
   {
     "ndex": 144,
@@ -1437,7 +1580,8 @@
     "es": "Articuno",
     "de": "Arktos",
     "fr": "Artikodin",
-    "jp": "Freezer"
+    "jp": "Freezer",
+    "gen": 1
   },
   {
     "ndex": 145,
@@ -1447,7 +1591,8 @@
     "es": "Zapdos",
     "de": "Zapdos",
     "fr": "Électhor",
-    "jp": "Thunder"
+    "jp": "Thunder",
+    "gen": 1
   },
   {
     "ndex": 146,
@@ -1457,7 +1602,8 @@
     "es": "Moltres",
     "de": "Lavados",
     "fr": "Sulfura",
-    "jp": "Fire"
+    "jp": "Fire",
+    "gen": 1
   },
   {
     "ndex": 147,
@@ -1467,7 +1613,8 @@
     "es": "Dratini",
     "de": "Dratini",
     "fr": "Minidraco",
-    "jp": "Miniryu"
+    "jp": "Miniryu",
+    "gen": 1
   },
   {
     "ndex": 148,
@@ -1477,7 +1624,8 @@
     "es": "Dragonair",
     "de": "Dragonir",
     "fr": "Draco",
-    "jp": "Hakuryu"
+    "jp": "Hakuryu",
+    "gen": 1
   },
   {
     "ndex": 149,
@@ -1487,7 +1635,8 @@
     "es": "Dragonite",
     "de": "Dragoran",
     "fr": "Dracolosse",
-    "jp": "Kairyu"
+    "jp": "Kairyu",
+    "gen": 1
   },
   {
     "ndex": 150,
@@ -1497,7 +1646,8 @@
     "es": "Mewtwo",
     "de": "Mewtu",
     "fr": "Mewtwo",
-    "jp": "Mewtwo"
+    "jp": "Mewtwo",
+    "gen": 1
   },
   {
     "ndex": 151,
@@ -1507,7 +1657,8 @@
     "es": "Mew",
     "de": "Mew",
     "fr": "Mew",
-    "jp": "Mew"
+    "jp": "Mew",
+    "gen": 1
   },
   {
     "ndex": 152,
@@ -1517,7 +1668,8 @@
     "es": "Chikorita",
     "de": "Endivie",
     "fr": "Germignon",
-    "jp": "Chicorita"
+    "jp": "Chicorita",
+    "gen": 2
   },
   {
     "ndex": 153,
@@ -1527,7 +1679,8 @@
     "es": "Bayleef",
     "de": "Lorblatt",
     "fr": "Macronium",
-    "jp": "Bayleaf"
+    "jp": "Bayleaf",
+    "gen": 2
   },
   {
     "ndex": 154,
@@ -1537,7 +1690,8 @@
     "es": "Meganium",
     "de": "Meganie",
     "fr": "Méganium",
-    "jp": "Meganium"
+    "jp": "Meganium",
+    "gen": 2
   },
   {
     "ndex": 155,
@@ -1547,7 +1701,8 @@
     "es": "Cyndaquil",
     "de": "Feurigel",
     "fr": "Héricendre",
-    "jp": "Hinoarashi"
+    "jp": "Hinoarashi",
+    "gen": 2
   },
   {
     "ndex": 156,
@@ -1557,7 +1712,8 @@
     "es": "Quilava",
     "de": "Igelavar",
     "fr": "Feurisson",
-    "jp": "Magmarashi"
+    "jp": "Magmarashi",
+    "gen": 2
   },
   {
     "ndex": 157,
@@ -1567,7 +1723,8 @@
     "es": "Typhlosion",
     "de": "Tornupto",
     "fr": "Typhlosion",
-    "jp": "Bakphoon"
+    "jp": "Bakphoon",
+    "gen": 2
   },
   {
     "ndex": 158,
@@ -1577,7 +1734,8 @@
     "es": "Totodile",
     "de": "Karnimani",
     "fr": "Kaiminus",
-    "jp": "Waninoko"
+    "jp": "Waninoko",
+    "gen": 2
   },
   {
     "ndex": 159,
@@ -1587,7 +1745,8 @@
     "es": "Croconaw",
     "de": "Tyracroc",
     "fr": "Crocrodil",
-    "jp": "Alligates"
+    "jp": "Alligates",
+    "gen": 2
   },
   {
     "ndex": 160,
@@ -1597,7 +1756,8 @@
     "es": "Feraligatr",
     "de": "Impergator",
     "fr": "Aligatueur",
-    "jp": "Ordile"
+    "jp": "Ordile",
+    "gen": 2
   },
   {
     "ndex": 161,
@@ -1607,7 +1767,8 @@
     "es": "Sentret",
     "de": "Wiesor",
     "fr": "Fouinette",
-    "jp": "Otachi"
+    "jp": "Otachi",
+    "gen": 2
   },
   {
     "ndex": 162,
@@ -1617,7 +1778,8 @@
     "es": "Furret",
     "de": "Wiesenior",
     "fr": "Fouinar",
-    "jp": "Ootachi"
+    "jp": "Ootachi",
+    "gen": 2
   },
   {
     "ndex": 163,
@@ -1627,7 +1789,8 @@
     "es": "Hoothoot",
     "de": "Hoothoot",
     "fr": "Hoothoot",
-    "jp": "Hoho"
+    "jp": "Hoho",
+    "gen": 2
   },
   {
     "ndex": 164,
@@ -1637,7 +1800,8 @@
     "es": "Noctowl",
     "de": "Noctuh",
     "fr": "Noarfang",
-    "jp": "Yorunozuku"
+    "jp": "Yorunozuku",
+    "gen": 2
   },
   {
     "ndex": 165,
@@ -1647,7 +1811,8 @@
     "es": "Ledyba",
     "de": "Ledyba",
     "fr": "Coxy",
-    "jp": "Rediba"
+    "jp": "Rediba",
+    "gen": 2
   },
   {
     "ndex": 166,
@@ -1657,7 +1822,8 @@
     "es": "Ledian",
     "de": "Ledian",
     "fr": "Coxyclaque",
-    "jp": "Redian"
+    "jp": "Redian",
+    "gen": 2
   },
   {
     "ndex": 167,
@@ -1667,7 +1833,8 @@
     "es": "Spinarak",
     "de": "Webarak",
     "fr": "Mimigal",
-    "jp": "Itomaru"
+    "jp": "Itomaru",
+    "gen": 2
   },
   {
     "ndex": 168,
@@ -1677,7 +1844,8 @@
     "es": "Ariados",
     "de": "Ariados",
     "fr": "Migalos",
-    "jp": "Ariados"
+    "jp": "Ariados",
+    "gen": 2
   },
   {
     "ndex": 169,
@@ -1687,7 +1855,8 @@
     "es": "Crobat",
     "de": "Iksbat",
     "fr": "Nostenfer",
-    "jp": "Crobat"
+    "jp": "Crobat",
+    "gen": 2
   },
   {
     "ndex": 170,
@@ -1697,7 +1866,8 @@
     "es": "Chinchou",
     "de": "Lampi",
     "fr": "Loupio",
-    "jp": "Chonchie"
+    "jp": "Chonchie",
+    "gen": 2
   },
   {
     "ndex": 171,
@@ -1707,7 +1877,8 @@
     "es": "Lanturn",
     "de": "Lanturn",
     "fr": "Lanturn",
-    "jp": "Lantern"
+    "jp": "Lantern",
+    "gen": 2
   },
   {
     "ndex": 172,
@@ -1717,7 +1888,8 @@
     "es": "Pichu",
     "de": "Pichu",
     "fr": "Pichu",
-    "jp": "Pichu"
+    "jp": "Pichu",
+    "gen": 2
   },
   {
     "ndex": 173,
@@ -1727,7 +1899,8 @@
     "es": "Cleffa",
     "de": "Pii",
     "fr": "Mélo",
-    "jp": "Py"
+    "jp": "Py",
+    "gen": 2
   },
   {
     "ndex": 174,
@@ -1737,7 +1910,8 @@
     "es": "Igglybuff",
     "de": "Fluffeluff",
     "fr": "Toudoudou",
-    "jp": "Pupurin"
+    "jp": "Pupurin",
+    "gen": 2
   },
   {
     "ndex": 175,
@@ -1747,7 +1921,8 @@
     "es": "Togepi",
     "de": "Togepi",
     "fr": "Togepi",
-    "jp": "Togepy"
+    "jp": "Togepy",
+    "gen": 2
   },
   {
     "ndex": 176,
@@ -1757,7 +1932,8 @@
     "es": "Togetic",
     "de": "Togetic",
     "fr": "Togetic",
-    "jp": "Togechick"
+    "jp": "Togechick",
+    "gen": 2
   },
   {
     "ndex": 177,
@@ -1767,7 +1943,8 @@
     "es": "Natu",
     "de": "Natu",
     "fr": "Natu",
-    "jp": "Naty"
+    "jp": "Naty",
+    "gen": 2
   },
   {
     "ndex": 178,
@@ -1777,7 +1954,8 @@
     "es": "Xatu",
     "de": "Xatu",
     "fr": "Xatu",
-    "jp": "Natio"
+    "jp": "Natio",
+    "gen": 2
   },
   {
     "ndex": 179,
@@ -1787,7 +1965,8 @@
     "es": "Mareep",
     "de": "Voltilamm",
     "fr": "Wattouat",
-    "jp": "Merriep"
+    "jp": "Merriep",
+    "gen": 2
   },
   {
     "ndex": 180,
@@ -1797,7 +1976,8 @@
     "es": "Flaaffy",
     "de": "Waaty",
     "fr": "Lainergie",
-    "jp": "Mokoko"
+    "jp": "Mokoko",
+    "gen": 2
   },
   {
     "ndex": 181,
@@ -1807,7 +1987,8 @@
     "es": "Ampharos",
     "de": "Ampharos",
     "fr": "Pharamp",
-    "jp": "Denryu"
+    "jp": "Denryu",
+    "gen": 2
   },
   {
     "ndex": 182,
@@ -1817,7 +1998,8 @@
     "es": "Bellossom",
     "de": "Blubella",
     "fr": "Joliflor",
-    "jp": "Kireihana"
+    "jp": "Kireihana",
+    "gen": 2
   },
   {
     "ndex": 183,
@@ -1827,7 +2009,8 @@
     "es": "Marill",
     "de": "Marill",
     "fr": "Marill",
-    "jp": "Maril"
+    "jp": "Maril",
+    "gen": 2
   },
   {
     "ndex": 184,
@@ -1837,7 +2020,8 @@
     "es": "Azumarill",
     "de": "Azumarill",
     "fr": "Azumarill",
-    "jp": "Marilli"
+    "jp": "Marilli",
+    "gen": 2
   },
   {
     "ndex": 185,
@@ -1847,7 +2031,8 @@
     "es": "Sudowoodo",
     "de": "Mogelbaum",
     "fr": "Simularbre",
-    "jp": "Usokkie"
+    "jp": "Usokkie",
+    "gen": 2
   },
   {
     "ndex": 186,
@@ -1857,7 +2042,8 @@
     "es": "Politoed",
     "de": "Quaxo",
     "fr": "Tarpaud",
-    "jp": "Nyorotono"
+    "jp": "Nyorotono",
+    "gen": 2
   },
   {
     "ndex": 187,
@@ -1867,7 +2053,8 @@
     "es": "Hoppip",
     "de": "Hoppspross",
     "fr": "Granivol",
-    "jp": "Hanecco"
+    "jp": "Hanecco",
+    "gen": 2
   },
   {
     "ndex": 188,
@@ -1877,7 +2064,8 @@
     "es": "Skiploom",
     "de": "Hubelupf",
     "fr": "Floravol",
-    "jp": "Popocco"
+    "jp": "Popocco",
+    "gen": 2
   },
   {
     "ndex": 189,
@@ -1887,7 +2075,8 @@
     "es": "Jumpluff",
     "de": "Papungha",
     "fr": "Cotovol",
-    "jp": "Watacco"
+    "jp": "Watacco",
+    "gen": 2
   },
   {
     "ndex": 190,
@@ -1897,7 +2086,8 @@
     "es": "Aipom",
     "de": "Griffel",
     "fr": "Capumain",
-    "jp": "Eipam"
+    "jp": "Eipam",
+    "gen": 2
   },
   {
     "ndex": 191,
@@ -1907,7 +2097,8 @@
     "es": "Sunkern",
     "de": "Sonnkern",
     "fr": "Tournegrin",
-    "jp": "Himanuts"
+    "jp": "Himanuts",
+    "gen": 2
   },
   {
     "ndex": 192,
@@ -1917,7 +2108,8 @@
     "es": "Sunflora",
     "de": "Sonnflora",
     "fr": "Héliatronc",
-    "jp": "Kimawari"
+    "jp": "Kimawari",
+    "gen": 2
   },
   {
     "ndex": 193,
@@ -1927,7 +2119,8 @@
     "es": "Yanma",
     "de": "Yanma",
     "fr": "Yanma",
-    "jp": "Yanyanma"
+    "jp": "Yanyanma",
+    "gen": 2
   },
   {
     "ndex": 194,
@@ -1937,7 +2130,8 @@
     "es": "Wooper",
     "de": "Felino",
     "fr": "Axoloto",
-    "jp": "Upah"
+    "jp": "Upah",
+    "gen": 2
   },
   {
     "ndex": 195,
@@ -1947,7 +2141,8 @@
     "es": "Quagsire",
     "de": "Morlord",
     "fr": "Maraiste",
-    "jp": "Nuoh"
+    "jp": "Nuoh",
+    "gen": 2
   },
   {
     "ndex": 196,
@@ -1957,7 +2152,8 @@
     "es": "Espeon",
     "de": "Psiana",
     "fr": "Mentali",
-    "jp": "Eifie"
+    "jp": "Eifie",
+    "gen": 2
   },
   {
     "ndex": 197,
@@ -1967,7 +2163,8 @@
     "es": "Umbreon",
     "de": "Nachtara",
     "fr": "Noctali",
-    "jp": "Blacky"
+    "jp": "Blacky",
+    "gen": 2
   },
   {
     "ndex": 198,
@@ -1977,7 +2174,8 @@
     "es": "Murkrow",
     "de": "Kramurx",
     "fr": "Cornèbre",
-    "jp": "Yamikarasu"
+    "jp": "Yamikarasu",
+    "gen": 2
   },
   {
     "ndex": 199,
@@ -1987,7 +2185,8 @@
     "es": "Slowking",
     "de": "Laschoking",
     "fr": "Roigada",
-    "jp": "Yadoking"
+    "jp": "Yadoking",
+    "gen": 2
   },
   {
     "ndex": 200,
@@ -1997,7 +2196,8 @@
     "es": "Misdreavus",
     "de": "Traunfugil",
     "fr": "Feuforêve",
-    "jp": "Muma"
+    "jp": "Muma",
+    "gen": 2
   },
   {
     "ndex": 201,
@@ -2007,7 +2207,8 @@
     "es": "Unown",
     "de": "Icognito",
     "fr": "Zarbi",
-    "jp": "Unknown"
+    "jp": "Unknown",
+    "gen": 2
   },
   {
     "ndex": 202,
@@ -2017,7 +2218,8 @@
     "es": "Wobbuffet",
     "de": "Woingenau",
     "fr": "Qulbutoké",
-    "jp": "Sonans"
+    "jp": "Sonans",
+    "gen": 2
   },
   {
     "ndex": 203,
@@ -2027,7 +2229,8 @@
     "es": "Girafarig",
     "de": "Girafarig",
     "fr": "Girafarig",
-    "jp": "Kirinriki"
+    "jp": "Kirinriki",
+    "gen": 2
   },
   {
     "ndex": 204,
@@ -2037,7 +2240,8 @@
     "es": "Pineco",
     "de": "Tannza",
     "fr": "Pomdepik",
-    "jp": "Kunugidama"
+    "jp": "Kunugidama",
+    "gen": 2
   },
   {
     "ndex": 205,
@@ -2047,7 +2251,8 @@
     "es": "Forretress",
     "de": "Forstellka",
     "fr": "Foretress",
-    "jp": "Foretos"
+    "jp": "Foretos",
+    "gen": 2
   },
   {
     "ndex": 206,
@@ -2057,7 +2262,8 @@
     "es": "Dunsparce",
     "de": "Dummisel",
     "fr": "Insolourdo",
-    "jp": "Nokocchi"
+    "jp": "Nokocchi",
+    "gen": 2
   },
   {
     "ndex": 207,
@@ -2067,7 +2273,8 @@
     "es": "Gligar",
     "de": "Skorgla",
     "fr": "Scorplane",
-    "jp": "Gliger"
+    "jp": "Gliger",
+    "gen": 2
   },
   {
     "ndex": 208,
@@ -2077,7 +2284,8 @@
     "es": "Steelix",
     "de": "Stahlos",
     "fr": "Steelix",
-    "jp": "Haganeil"
+    "jp": "Haganeil",
+    "gen": 2
   },
   {
     "ndex": 209,
@@ -2087,7 +2295,8 @@
     "es": "Snubbull",
     "de": "Snubbull",
     "fr": "Snubbull",
-    "jp": "Bulu"
+    "jp": "Bulu",
+    "gen": 2
   },
   {
     "ndex": 210,
@@ -2097,7 +2306,8 @@
     "es": "Granbull",
     "de": "Granbull",
     "fr": "Granbull",
-    "jp": "Granbulu"
+    "jp": "Granbulu",
+    "gen": 2
   },
   {
     "ndex": 211,
@@ -2107,7 +2317,8 @@
     "es": "Qwilfish",
     "de": "Baldorfish",
     "fr": "Qwilfish",
-    "jp": "Harysen"
+    "jp": "Harysen",
+    "gen": 2
   },
   {
     "ndex": 212,
@@ -2117,7 +2328,8 @@
     "es": "Scizor",
     "de": "Scherox",
     "fr": "Cizayox",
-    "jp": "Hassam"
+    "jp": "Hassam",
+    "gen": 2
   },
   {
     "ndex": 213,
@@ -2127,7 +2339,8 @@
     "es": "Shuckle",
     "de": "Pottrott",
     "fr": "Caratroc",
-    "jp": "Tsubotsubo"
+    "jp": "Tsubotsubo",
+    "gen": 2
   },
   {
     "ndex": 214,
@@ -2137,7 +2350,8 @@
     "es": "Heracross",
     "de": "Skaraborn",
     "fr": "Scarhino",
-    "jp": "Heracros"
+    "jp": "Heracros",
+    "gen": 2
   },
   {
     "ndex": 215,
@@ -2147,7 +2361,8 @@
     "es": "Sneasel",
     "de": "Sniebel",
     "fr": "Farfuret",
-    "jp": "Nyula"
+    "jp": "Nyula",
+    "gen": 2
   },
   {
     "ndex": 216,
@@ -2157,7 +2372,8 @@
     "es": "Teddiursa",
     "de": "Teddiursa",
     "fr": "Teddiursa",
-    "jp": "Himeguma"
+    "jp": "Himeguma",
+    "gen": 2
   },
   {
     "ndex": 217,
@@ -2167,7 +2383,8 @@
     "es": "Ursaring",
     "de": "Ursaring",
     "fr": "Ursaring",
-    "jp": "Ringuma"
+    "jp": "Ringuma",
+    "gen": 2
   },
   {
     "ndex": 218,
@@ -2177,7 +2394,8 @@
     "es": "Slugma",
     "de": "Schneckmag",
     "fr": "Limagma",
-    "jp": "Magmag"
+    "jp": "Magmag",
+    "gen": 2
   },
   {
     "ndex": 219,
@@ -2187,7 +2405,8 @@
     "es": "Magcargo",
     "de": "Magcargo",
     "fr": "Volcaropod",
-    "jp": "Magcargot"
+    "jp": "Magcargot",
+    "gen": 2
   },
   {
     "ndex": 220,
@@ -2197,7 +2416,8 @@
     "es": "Swinub",
     "de": "Quiekel",
     "fr": "Marcacrin",
-    "jp": "Urimoo"
+    "jp": "Urimoo",
+    "gen": 2
   },
   {
     "ndex": 221,
@@ -2207,7 +2427,8 @@
     "es": "Piloswine",
     "de": "Keifel",
     "fr": "Cochignon",
-    "jp": "Inomoo"
+    "jp": "Inomoo",
+    "gen": 2
   },
   {
     "ndex": 222,
@@ -2217,7 +2438,8 @@
     "es": "Corsola",
     "de": "Corasonn",
     "fr": "Corayon",
-    "jp": "Sunnygo"
+    "jp": "Sunnygo",
+    "gen": 2
   },
   {
     "ndex": 223,
@@ -2227,7 +2449,8 @@
     "es": "Remoraid",
     "de": "Remoraid",
     "fr": "Rémoraid",
-    "jp": "Teppouo"
+    "jp": "Teppouo",
+    "gen": 2
   },
   {
     "ndex": 224,
@@ -2237,7 +2460,8 @@
     "es": "Octillery",
     "de": "Octillery",
     "fr": "Octillery",
-    "jp": "Okutank"
+    "jp": "Okutank",
+    "gen": 2
   },
   {
     "ndex": 225,
@@ -2247,7 +2471,8 @@
     "es": "Delibird",
     "de": "Botogel",
     "fr": "Cadoizo",
-    "jp": "Delibird"
+    "jp": "Delibird",
+    "gen": 2
   },
   {
     "ndex": 226,
@@ -2257,7 +2482,8 @@
     "es": "Mantine",
     "de": "Mantax",
     "fr": "Démanta",
-    "jp": "Mantain"
+    "jp": "Mantain",
+    "gen": 2
   },
   {
     "ndex": 227,
@@ -2267,7 +2493,8 @@
     "es": "Skarmory",
     "de": "Panzaeron",
     "fr": "Airmure",
-    "jp": "Airmd"
+    "jp": "Airmd",
+    "gen": 2
   },
   {
     "ndex": 228,
@@ -2277,7 +2504,8 @@
     "es": "Houndour",
     "de": "Hunduster",
     "fr": "Malosse",
-    "jp": "Delvil"
+    "jp": "Delvil",
+    "gen": 2
   },
   {
     "ndex": 229,
@@ -2287,7 +2515,8 @@
     "es": "Houndoom",
     "de": "Hundemon",
     "fr": "Démolosse",
-    "jp": "Hellgar"
+    "jp": "Hellgar",
+    "gen": 2
   },
   {
     "ndex": 230,
@@ -2297,7 +2526,8 @@
     "es": "Kingdra",
     "de": "Seedraking",
     "fr": "Hyporoi",
-    "jp": "Kingdra"
+    "jp": "Kingdra",
+    "gen": 2
   },
   {
     "ndex": 231,
@@ -2307,7 +2537,8 @@
     "es": "Phanpy",
     "de": "Phanpy",
     "fr": "Phanpy",
-    "jp": "Gomazou"
+    "jp": "Gomazou",
+    "gen": 2
   },
   {
     "ndex": 232,
@@ -2317,7 +2548,8 @@
     "es": "Donphan",
     "de": "Donphan",
     "fr": "Donphan",
-    "jp": "Donfan"
+    "jp": "Donfan",
+    "gen": 2
   },
   {
     "ndex": 233,
@@ -2327,7 +2559,8 @@
     "es": "Porygon2",
     "de": "Porygon2",
     "fr": "Porygon2",
-    "jp": "Porygon2"
+    "jp": "Porygon2",
+    "gen": 2
   },
   {
     "ndex": 234,
@@ -2337,7 +2570,8 @@
     "es": "Stantler",
     "de": "Damhirplex",
     "fr": "Cerfrousse",
-    "jp": "Odoshishi"
+    "jp": "Odoshishi",
+    "gen": 2
   },
   {
     "ndex": 235,
@@ -2347,7 +2581,8 @@
     "es": "Smeargle",
     "de": "Farbeagle",
     "fr": "Queulorior",
-    "jp": "Doble"
+    "jp": "Doble",
+    "gen": 2
   },
   {
     "ndex": 236,
@@ -2357,7 +2592,8 @@
     "es": "Tyrogue",
     "de": "Rabauz",
     "fr": "Debugant",
-    "jp": "Balkie"
+    "jp": "Balkie",
+    "gen": 2
   },
   {
     "ndex": 237,
@@ -2367,7 +2603,8 @@
     "es": "Hitmontop",
     "de": "Kapoera",
     "fr": "Kapoera",
-    "jp": "Kapoerer"
+    "jp": "Kapoerer",
+    "gen": 2
   },
   {
     "ndex": 238,
@@ -2377,7 +2614,8 @@
     "es": "Smoochum",
     "de": "Kussilla",
     "fr": "Lippouti",
-    "jp": "Muchul"
+    "jp": "Muchul",
+    "gen": 2
   },
   {
     "ndex": 239,
@@ -2387,7 +2625,8 @@
     "es": "Elekid",
     "de": "Elekid",
     "fr": "Élekid",
-    "jp": "Elekid"
+    "jp": "Elekid",
+    "gen": 2
   },
   {
     "ndex": 240,
@@ -2397,7 +2636,8 @@
     "es": "Magby",
     "de": "Magby",
     "fr": "Magby",
-    "jp": "Buby"
+    "jp": "Buby",
+    "gen": 2
   },
   {
     "ndex": 241,
@@ -2407,7 +2647,8 @@
     "es": "Miltank",
     "de": "Miltank",
     "fr": "Écrémeuh",
-    "jp": "Miltank"
+    "jp": "Miltank",
+    "gen": 2
   },
   {
     "ndex": 242,
@@ -2417,7 +2658,8 @@
     "es": "Blissey",
     "de": "Heiteira",
     "fr": "Leuphorie",
-    "jp": "Happinas"
+    "jp": "Happinas",
+    "gen": 2
   },
   {
     "ndex": 243,
@@ -2427,7 +2669,8 @@
     "es": "Raikou",
     "de": "Raikou",
     "fr": "Raikou",
-    "jp": "Raikou"
+    "jp": "Raikou",
+    "gen": 2
   },
   {
     "ndex": 244,
@@ -2437,7 +2680,8 @@
     "es": "Entei",
     "de": "Entei",
     "fr": "Entei",
-    "jp": "Entei"
+    "jp": "Entei",
+    "gen": 2
   },
   {
     "ndex": 245,
@@ -2447,7 +2691,8 @@
     "es": "Suicune",
     "de": "Suicune",
     "fr": "Suicune",
-    "jp": "Suicune"
+    "jp": "Suicune",
+    "gen": 2
   },
   {
     "ndex": 246,
@@ -2457,7 +2702,8 @@
     "es": "Larvitar",
     "de": "Larvitar",
     "fr": "Embrylex",
-    "jp": "Yogiras"
+    "jp": "Yogiras",
+    "gen": 2
   },
   {
     "ndex": 247,
@@ -2467,7 +2713,8 @@
     "es": "Pupitar",
     "de": "Pupitar",
     "fr": "Ymphect",
-    "jp": "Sanagiras"
+    "jp": "Sanagiras",
+    "gen": 2
   },
   {
     "ndex": 248,
@@ -2477,7 +2724,8 @@
     "es": "Tyranitar",
     "de": "Despotar",
     "fr": "Tyranocif",
-    "jp": "Bangiras"
+    "jp": "Bangiras",
+    "gen": 2
   },
   {
     "ndex": 249,
@@ -2487,7 +2735,8 @@
     "es": "Lugia",
     "de": "Lugia",
     "fr": "Lugia",
-    "jp": "Lugia"
+    "jp": "Lugia",
+    "gen": 2
   },
   {
     "ndex": 250,
@@ -2497,7 +2746,8 @@
     "es": "Ho-Oh",
     "de": "Ho-Oh",
     "fr": "Ho-Oh",
-    "jp": "Houou"
+    "jp": "Houou",
+    "gen": 2
   },
   {
     "ndex": 251,
@@ -2507,7 +2757,8 @@
     "es": "Celebi",
     "de": "Celebi",
     "fr": "Celebi",
-    "jp": "Celebi"
+    "jp": "Celebi",
+    "gen": 2
   },
   {
     "ndex": 252,
@@ -2517,7 +2768,8 @@
     "es": "Treecko",
     "de": "Geckarbor",
     "fr": "Arcko",
-    "jp": "Kimori"
+    "jp": "Kimori",
+    "gen": 3
   },
   {
     "ndex": 253,
@@ -2527,7 +2779,8 @@
     "es": "Grovyle",
     "de": "Reptain",
     "fr": "Massko",
-    "jp": "Juptile"
+    "jp": "Juptile",
+    "gen": 3
   },
   {
     "ndex": 254,
@@ -2537,7 +2790,8 @@
     "es": "Sceptile",
     "de": "Gewaldro",
     "fr": "Jungko",
-    "jp": "Jukain"
+    "jp": "Jukain",
+    "gen": 3
   },
   {
     "ndex": 255,
@@ -2547,7 +2801,8 @@
     "es": "Torchic",
     "de": "Flemmli",
     "fr": "Poussifeu",
-    "jp": "Achamo"
+    "jp": "Achamo",
+    "gen": 3
   },
   {
     "ndex": 256,
@@ -2557,7 +2812,8 @@
     "es": "Combusken",
     "de": "Jungglut",
     "fr": "Galifeu",
-    "jp": "Wakasyamo"
+    "jp": "Wakasyamo",
+    "gen": 3
   },
   {
     "ndex": 257,
@@ -2567,7 +2823,8 @@
     "es": "Blaziken",
     "de": "Lohgock",
     "fr": "Braségali",
-    "jp": "Bursyamo"
+    "jp": "Bursyamo",
+    "gen": 3
   },
   {
     "ndex": 258,
@@ -2577,7 +2834,8 @@
     "es": "Mudkip",
     "de": "Hydropi",
     "fr": "Gobou",
-    "jp": "Mizugorou"
+    "jp": "Mizugorou",
+    "gen": 3
   },
   {
     "ndex": 259,
@@ -2587,7 +2845,8 @@
     "es": "Marshtomp",
     "de": "Moorabbel",
     "fr": "Flobio",
-    "jp": "Numacraw"
+    "jp": "Numacraw",
+    "gen": 3
   },
   {
     "ndex": 260,
@@ -2597,7 +2856,8 @@
     "es": "Swampert",
     "de": "Sumpex",
     "fr": "Laggron",
-    "jp": "Laglarge"
+    "jp": "Laglarge",
+    "gen": 3
   },
   {
     "ndex": 261,
@@ -2607,7 +2867,8 @@
     "es": "Poochyena",
     "de": "Fiffyen",
     "fr": "Medhyèna",
-    "jp": "Pochiena"
+    "jp": "Pochiena",
+    "gen": 3
   },
   {
     "ndex": 262,
@@ -2617,7 +2878,8 @@
     "es": "Mightyena",
     "de": "Magnayen",
     "fr": "Grahyèna",
-    "jp": "Graena"
+    "jp": "Graena",
+    "gen": 3
   },
   {
     "ndex": 263,
@@ -2627,7 +2889,8 @@
     "es": "Zigzagoon",
     "de": "Zigzachs",
     "fr": "Zigzaton",
-    "jp": "Jiguzaguma"
+    "jp": "Jiguzaguma",
+    "gen": 3
   },
   {
     "ndex": 264,
@@ -2637,7 +2900,8 @@
     "es": "Linoone",
     "de": "Geradaks",
     "fr": "Linéon",
-    "jp": "Massuguma"
+    "jp": "Massuguma",
+    "gen": 3
   },
   {
     "ndex": 265,
@@ -2647,7 +2911,8 @@
     "es": "Wurmple",
     "de": "Waumpel",
     "fr": "Chenipotte",
-    "jp": "Kemusso"
+    "jp": "Kemusso",
+    "gen": 3
   },
   {
     "ndex": 266,
@@ -2657,7 +2922,8 @@
     "es": "Silcoon",
     "de": "Schaloko",
     "fr": "Armulys",
-    "jp": "Karasalis"
+    "jp": "Karasalis",
+    "gen": 3
   },
   {
     "ndex": 267,
@@ -2667,7 +2933,8 @@
     "es": "Beautifly",
     "de": "Papinella",
     "fr": "Charmillon",
-    "jp": "Agehunt"
+    "jp": "Agehunt",
+    "gen": 3
   },
   {
     "ndex": 268,
@@ -2677,7 +2944,8 @@
     "es": "Cascoon",
     "de": "Panekon",
     "fr": "Blindalys",
-    "jp": "Mayuld"
+    "jp": "Mayuld",
+    "gen": 3
   },
   {
     "ndex": 269,
@@ -2687,7 +2955,8 @@
     "es": "Dustox",
     "de": "Pudox",
     "fr": "Papinox",
-    "jp": "Dokucale"
+    "jp": "Dokucale",
+    "gen": 3
   },
   {
     "ndex": 270,
@@ -2697,7 +2966,8 @@
     "es": "Lotad",
     "de": "Loturzel",
     "fr": "Nénupiot",
-    "jp": "Hassboh"
+    "jp": "Hassboh",
+    "gen": 3
   },
   {
     "ndex": 271,
@@ -2707,7 +2977,8 @@
     "es": "Lombre",
     "de": "Lombrero",
     "fr": "Lombre",
-    "jp": "Hasubrero"
+    "jp": "Hasubrero",
+    "gen": 3
   },
   {
     "ndex": 272,
@@ -2717,7 +2988,8 @@
     "es": "Ludicolo",
     "de": "Kappalores",
     "fr": "Ludicolo",
-    "jp": "Runpappa"
+    "jp": "Runpappa",
+    "gen": 3
   },
   {
     "ndex": 273,
@@ -2727,7 +2999,8 @@
     "es": "Seedot",
     "de": "Samurzel",
     "fr": "Grainipiot",
-    "jp": "Taneboh"
+    "jp": "Taneboh",
+    "gen": 3
   },
   {
     "ndex": 274,
@@ -2737,7 +3010,8 @@
     "es": "Nuzleaf",
     "de": "Blanas",
     "fr": "Pifeuil",
-    "jp": "Konohana"
+    "jp": "Konohana",
+    "gen": 3
   },
   {
     "ndex": 275,
@@ -2747,7 +3021,8 @@
     "es": "Shiftry",
     "de": "Tengulist",
     "fr": "Tengalice",
-    "jp": "Dirteng"
+    "jp": "Dirteng",
+    "gen": 3
   },
   {
     "ndex": 276,
@@ -2757,7 +3032,8 @@
     "es": "Taillow",
     "de": "Schwalbini",
     "fr": "Nirondelle",
-    "jp": "Subame"
+    "jp": "Subame",
+    "gen": 3
   },
   {
     "ndex": 277,
@@ -2767,7 +3043,8 @@
     "es": "Swellow",
     "de": "Schwalboss",
     "fr": "Hélédelle",
-    "jp": "Ohsubame"
+    "jp": "Ohsubame",
+    "gen": 3
   },
   {
     "ndex": 278,
@@ -2777,7 +3054,8 @@
     "es": "Wingull",
     "de": "Wingull",
     "fr": "Goélise",
-    "jp": "Camome"
+    "jp": "Camome",
+    "gen": 3
   },
   {
     "ndex": 279,
@@ -2787,7 +3065,8 @@
     "es": "Pelipper",
     "de": "Pelipper",
     "fr": "Bekipan",
-    "jp": "Pelipper"
+    "jp": "Pelipper",
+    "gen": 3
   },
   {
     "ndex": 280,
@@ -2797,7 +3076,8 @@
     "es": "Ralts",
     "de": "Trasla",
     "fr": "Tarsal",
-    "jp": "Ralts"
+    "jp": "Ralts",
+    "gen": 3
   },
   {
     "ndex": 281,
@@ -2807,7 +3087,8 @@
     "es": "Kirlia",
     "de": "Kirlia",
     "fr": "Kirlia",
-    "jp": "Kirlia"
+    "jp": "Kirlia",
+    "gen": 3
   },
   {
     "ndex": 282,
@@ -2817,7 +3098,8 @@
     "es": "Gardevoir",
     "de": "Guardevoir",
     "fr": "Gardevoir",
-    "jp": "Sirnight"
+    "jp": "Sirnight",
+    "gen": 3
   },
   {
     "ndex": 283,
@@ -2827,7 +3109,8 @@
     "es": "Surskit",
     "de": "Gehweiher",
     "fr": "Arakdo",
-    "jp": "Ametama"
+    "jp": "Ametama",
+    "gen": 3
   },
   {
     "ndex": 284,
@@ -2837,7 +3120,8 @@
     "es": "Masquerain",
     "de": "Maskeregen",
     "fr": "Maskadra",
-    "jp": "Amemoth"
+    "jp": "Amemoth",
+    "gen": 3
   },
   {
     "ndex": 285,
@@ -2847,7 +3131,8 @@
     "es": "Shroomish",
     "de": "Knilz",
     "fr": "Balignon",
-    "jp": "Kinococo"
+    "jp": "Kinococo",
+    "gen": 3
   },
   {
     "ndex": 286,
@@ -2857,7 +3142,8 @@
     "es": "Breloom",
     "de": "Kapilz",
     "fr": "Chapignon",
-    "jp": "Kinogassa"
+    "jp": "Kinogassa",
+    "gen": 3
   },
   {
     "ndex": 287,
@@ -2867,7 +3153,8 @@
     "es": "Slakoth",
     "de": "Bummelz",
     "fr": "Parecool",
-    "jp": "Namakero"
+    "jp": "Namakero",
+    "gen": 3
   },
   {
     "ndex": 288,
@@ -2877,7 +3164,8 @@
     "es": "Vigoroth",
     "de": "Muntier",
     "fr": "Vigoroth",
-    "jp": "Yarukimono"
+    "jp": "Yarukimono",
+    "gen": 3
   },
   {
     "ndex": 289,
@@ -2887,7 +3175,8 @@
     "es": "Slaking",
     "de": "Letarking",
     "fr": "Monaflèmit",
-    "jp": "Kekking"
+    "jp": "Kekking",
+    "gen": 3
   },
   {
     "ndex": 290,
@@ -2897,7 +3186,8 @@
     "es": "Nincada",
     "de": "Nincada",
     "fr": "Ningale",
-    "jp": "Tutinin"
+    "jp": "Tutinin",
+    "gen": 3
   },
   {
     "ndex": 291,
@@ -2907,7 +3197,8 @@
     "es": "Ninjask",
     "de": "Ninjask",
     "fr": "Ninjask",
-    "jp": "Tekkanin"
+    "jp": "Tekkanin",
+    "gen": 3
   },
   {
     "ndex": 292,
@@ -2917,7 +3208,8 @@
     "es": "Shedinja",
     "de": "Ninjatom",
     "fr": "Munja",
-    "jp": "Nukenin"
+    "jp": "Nukenin",
+    "gen": 3
   },
   {
     "ndex": 293,
@@ -2927,7 +3219,8 @@
     "es": "Whismur",
     "de": "Flurmel",
     "fr": "Chuchmur",
-    "jp": "Gonyonyo"
+    "jp": "Gonyonyo",
+    "gen": 3
   },
   {
     "ndex": 294,
@@ -2937,7 +3230,8 @@
     "es": "Loudred",
     "de": "Krakeelo",
     "fr": "Ramboum",
-    "jp": "Dogohmb"
+    "jp": "Dogohmb",
+    "gen": 3
   },
   {
     "ndex": 295,
@@ -2947,7 +3241,8 @@
     "es": "Exploud",
     "de": "Krawumms",
     "fr": "Brouhabam",
-    "jp": "Bakuong"
+    "jp": "Bakuong",
+    "gen": 3
   },
   {
     "ndex": 296,
@@ -2957,7 +3252,8 @@
     "es": "Makuhita",
     "de": "Makuhita",
     "fr": "Makuhita",
-    "jp": "Makunoshita"
+    "jp": "Makunoshita",
+    "gen": 3
   },
   {
     "ndex": 297,
@@ -2967,7 +3263,8 @@
     "es": "Hariyama",
     "de": "Hariyama",
     "fr": "Hariyama",
-    "jp": "Hariteyama"
+    "jp": "Hariteyama",
+    "gen": 3
   },
   {
     "ndex": 298,
@@ -2977,7 +3274,8 @@
     "es": "Azurill",
     "de": "Azurill",
     "fr": "Azurill",
-    "jp": "Ruriri"
+    "jp": "Ruriri",
+    "gen": 3
   },
   {
     "ndex": 299,
@@ -2987,7 +3285,8 @@
     "es": "Nosepass",
     "de": "Nasgnet",
     "fr": "Tarinor",
-    "jp": "Nosepass"
+    "jp": "Nosepass",
+    "gen": 3
   },
   {
     "ndex": 300,
@@ -2997,7 +3296,8 @@
     "es": "Skitty",
     "de": "Eneco",
     "fr": "Skitty",
-    "jp": "Eneco"
+    "jp": "Eneco",
+    "gen": 3
   },
   {
     "ndex": 301,
@@ -3007,7 +3307,8 @@
     "es": "Delcatty",
     "de": "Enekoro",
     "fr": "Delcatty",
-    "jp": "Enekororo"
+    "jp": "Enekororo",
+    "gen": 3
   },
   {
     "ndex": 302,
@@ -3017,7 +3318,8 @@
     "es": "Sableye",
     "de": "Zobiris",
     "fr": "Ténéfix",
-    "jp": "Yamirami"
+    "jp": "Yamirami",
+    "gen": 3
   },
   {
     "ndex": 303,
@@ -3027,7 +3329,8 @@
     "es": "Mawile",
     "de": "Flunkifer",
     "fr": "Mysdibule",
-    "jp": "Kucheat"
+    "jp": "Kucheat",
+    "gen": 3
   },
   {
     "ndex": 304,
@@ -3037,7 +3340,8 @@
     "es": "Aron",
     "de": "Stollunior",
     "fr": "Galekid",
-    "jp": "Cokodora"
+    "jp": "Cokodora",
+    "gen": 3
   },
   {
     "ndex": 305,
@@ -3047,7 +3351,8 @@
     "es": "Lairon",
     "de": "Stollrak",
     "fr": "Galegon",
-    "jp": "Kodora"
+    "jp": "Kodora",
+    "gen": 3
   },
   {
     "ndex": 306,
@@ -3057,7 +3362,8 @@
     "es": "Aggron",
     "de": "Stolloss",
     "fr": "Galeking",
-    "jp": "Bossgodora"
+    "jp": "Bossgodora",
+    "gen": 3
   },
   {
     "ndex": 307,
@@ -3067,7 +3373,8 @@
     "es": "Meditite",
     "de": "Meditie",
     "fr": "Méditikka",
-    "jp": "Asanan"
+    "jp": "Asanan",
+    "gen": 3
   },
   {
     "ndex": 308,
@@ -3077,7 +3384,8 @@
     "es": "Medicham",
     "de": "Meditalis",
     "fr": "Charmina",
-    "jp": "Charem"
+    "jp": "Charem",
+    "gen": 3
   },
   {
     "ndex": 309,
@@ -3087,7 +3395,8 @@
     "es": "Electrike",
     "de": "Frizelbliz",
     "fr": "Dynavolt",
-    "jp": "Rakurai"
+    "jp": "Rakurai",
+    "gen": 3
   },
   {
     "ndex": 310,
@@ -3097,7 +3406,8 @@
     "es": "Manectric",
     "de": "Voltenso",
     "fr": "Élecsprint",
-    "jp": "Livolt"
+    "jp": "Livolt",
+    "gen": 3
   },
   {
     "ndex": 311,
@@ -3107,7 +3417,8 @@
     "es": "Plusle",
     "de": "Plusle",
     "fr": "Posipi",
-    "jp": "Prasle"
+    "jp": "Prasle",
+    "gen": 3
   },
   {
     "ndex": 312,
@@ -3117,7 +3428,8 @@
     "es": "Minun",
     "de": "Minun",
     "fr": "Négapi",
-    "jp": "Minun"
+    "jp": "Minun",
+    "gen": 3
   },
   {
     "ndex": 313,
@@ -3127,7 +3439,8 @@
     "es": "Volbeat",
     "de": "Volbeat",
     "fr": "Muciole",
-    "jp": "Barubeat"
+    "jp": "Barubeat",
+    "gen": 3
   },
   {
     "ndex": 314,
@@ -3137,7 +3450,8 @@
     "es": "Illumise",
     "de": "Illumise",
     "fr": "Lumivole",
-    "jp": "Illumise"
+    "jp": "Illumise",
+    "gen": 3
   },
   {
     "ndex": 315,
@@ -3147,7 +3461,8 @@
     "es": "Roselia",
     "de": "Roselia",
     "fr": "Rosélia",
-    "jp": "Roselia"
+    "jp": "Roselia",
+    "gen": 3
   },
   {
     "ndex": 316,
@@ -3157,7 +3472,8 @@
     "es": "Gulpin",
     "de": "Schluppuck",
     "fr": "Gloupti",
-    "jp": "Gokulin"
+    "jp": "Gokulin",
+    "gen": 3
   },
   {
     "ndex": 317,
@@ -3167,7 +3483,8 @@
     "es": "Swalot",
     "de": "Schlukwech",
     "fr": "Avaltout",
-    "jp": "Marunoom"
+    "jp": "Marunoom",
+    "gen": 3
   },
   {
     "ndex": 318,
@@ -3177,7 +3494,8 @@
     "es": "Carvanha",
     "de": "Kanivanha",
     "fr": "Carvanha",
-    "jp": "Kibanha"
+    "jp": "Kibanha",
+    "gen": 3
   },
   {
     "ndex": 319,
@@ -3187,7 +3505,8 @@
     "es": "Sharpedo",
     "de": "Tohaido",
     "fr": "Sharpedo",
-    "jp": "Samehader"
+    "jp": "Samehader",
+    "gen": 3
   },
   {
     "ndex": 320,
@@ -3197,7 +3516,8 @@
     "es": "Wailmer",
     "de": "Wailmer",
     "fr": "Wailmer",
-    "jp": "Hoeruko"
+    "jp": "Hoeruko",
+    "gen": 3
   },
   {
     "ndex": 321,
@@ -3207,7 +3527,8 @@
     "es": "Wailord",
     "de": "Wailord",
     "fr": "Wailord",
-    "jp": "Whaloh"
+    "jp": "Whaloh",
+    "gen": 3
   },
   {
     "ndex": 322,
@@ -3217,7 +3538,8 @@
     "es": "Numel",
     "de": "Camaub",
     "fr": "Chamallot",
-    "jp": "Donmel"
+    "jp": "Donmel",
+    "gen": 3
   },
   {
     "ndex": 323,
@@ -3227,7 +3549,8 @@
     "es": "Camerupt",
     "de": "Camerupt",
     "fr": "Camérupt",
-    "jp": "Bakuuda"
+    "jp": "Bakuuda",
+    "gen": 3
   },
   {
     "ndex": 324,
@@ -3237,7 +3560,8 @@
     "es": "Torkoal",
     "de": "Qurtel",
     "fr": "Chartor",
-    "jp": "Cotoise"
+    "jp": "Cotoise",
+    "gen": 3
   },
   {
     "ndex": 325,
@@ -3247,7 +3571,8 @@
     "es": "Spoink",
     "de": "Spoink",
     "fr": "Spoink",
-    "jp": "Baneboo"
+    "jp": "Baneboo",
+    "gen": 3
   },
   {
     "ndex": 326,
@@ -3257,7 +3582,8 @@
     "es": "Grumpig",
     "de": "Groink",
     "fr": "Groret",
-    "jp": "Boopig"
+    "jp": "Boopig",
+    "gen": 3
   },
   {
     "ndex": 327,
@@ -3267,7 +3593,8 @@
     "es": "Spinda",
     "de": "Pandir",
     "fr": "Spinda",
-    "jp": "Patcheel"
+    "jp": "Patcheel",
+    "gen": 3
   },
   {
     "ndex": 328,
@@ -3277,7 +3604,8 @@
     "es": "Trapinch",
     "de": "Knacklion",
     "fr": "Kraknoix",
-    "jp": "Nuckrar"
+    "jp": "Nuckrar",
+    "gen": 3
   },
   {
     "ndex": 329,
@@ -3287,7 +3615,8 @@
     "es": "Vibrava",
     "de": "Vibrava",
     "fr": "Vibraninf",
-    "jp": "Vibrava"
+    "jp": "Vibrava",
+    "gen": 3
   },
   {
     "ndex": 330,
@@ -3297,7 +3626,8 @@
     "es": "Flygon",
     "de": "Libelldra",
     "fr": "Libégon",
-    "jp": "Flygon"
+    "jp": "Flygon",
+    "gen": 3
   },
   {
     "ndex": 331,
@@ -3307,7 +3637,8 @@
     "es": "Cacnea",
     "de": "Tuska",
     "fr": "Cacnea",
-    "jp": "Sabonea"
+    "jp": "Sabonea",
+    "gen": 3
   },
   {
     "ndex": 332,
@@ -3317,7 +3648,8 @@
     "es": "Cacturne",
     "de": "Noktuska",
     "fr": "Cacturne",
-    "jp": "Noctus"
+    "jp": "Noctus",
+    "gen": 3
   },
   {
     "ndex": 333,
@@ -3327,7 +3659,8 @@
     "es": "Swablu",
     "de": "Wablu",
     "fr": "Tylton",
-    "jp": "Tyltto"
+    "jp": "Tyltto",
+    "gen": 3
   },
   {
     "ndex": 334,
@@ -3337,7 +3670,8 @@
     "es": "Altaria",
     "de": "Altaria",
     "fr": "Altaria",
-    "jp": "Tyltalis"
+    "jp": "Tyltalis",
+    "gen": 3
   },
   {
     "ndex": 335,
@@ -3347,7 +3681,8 @@
     "es": "Zangoose",
     "de": "Sengo",
     "fr": "Mangriff",
-    "jp": "Zangoose"
+    "jp": "Zangoose",
+    "gen": 3
   },
   {
     "ndex": 336,
@@ -3357,7 +3692,8 @@
     "es": "Seviper",
     "de": "Vipitis",
     "fr": "Séviper",
-    "jp": "Habunake"
+    "jp": "Habunake",
+    "gen": 3
   },
   {
     "ndex": 337,
@@ -3367,7 +3703,8 @@
     "es": "Lunatone",
     "de": "Lunastein",
     "fr": "Séléroc",
-    "jp": "Lunatone"
+    "jp": "Lunatone",
+    "gen": 3
   },
   {
     "ndex": 338,
@@ -3377,7 +3714,8 @@
     "es": "Solrock",
     "de": "Sonnfel",
     "fr": "Solaroc",
-    "jp": "Solrock"
+    "jp": "Solrock",
+    "gen": 3
   },
   {
     "ndex": 339,
@@ -3387,7 +3725,8 @@
     "es": "Barboach",
     "de": "Schmerbe",
     "fr": "Barloche",
-    "jp": "Dojoach"
+    "jp": "Dojoach",
+    "gen": 3
   },
   {
     "ndex": 340,
@@ -3397,7 +3736,8 @@
     "es": "Whiscash",
     "de": "Welsar",
     "fr": "Barbicha",
-    "jp": "Namazun"
+    "jp": "Namazun",
+    "gen": 3
   },
   {
     "ndex": 341,
@@ -3407,7 +3747,8 @@
     "es": "Corphish",
     "de": "Krebscorps",
     "fr": "Écrapince",
-    "jp": "Heigani"
+    "jp": "Heigani",
+    "gen": 3
   },
   {
     "ndex": 342,
@@ -3417,7 +3758,8 @@
     "es": "Crawdaunt",
     "de": "Krebutack",
     "fr": "Colhomard",
-    "jp": "Shizariger"
+    "jp": "Shizariger",
+    "gen": 3
   },
   {
     "ndex": 343,
@@ -3427,7 +3769,8 @@
     "es": "Baltoy",
     "de": "Puppance",
     "fr": "Balbuto",
-    "jp": "Yajilon"
+    "jp": "Yajilon",
+    "gen": 3
   },
   {
     "ndex": 344,
@@ -3437,7 +3780,8 @@
     "es": "Claydol",
     "de": "Lepumentas",
     "fr": "Kaorine",
-    "jp": "Nendoll"
+    "jp": "Nendoll",
+    "gen": 3
   },
   {
     "ndex": 345,
@@ -3447,7 +3791,8 @@
     "es": "Lileep",
     "de": "Liliep",
     "fr": "Lilia",
-    "jp": "Lilyla"
+    "jp": "Lilyla",
+    "gen": 3
   },
   {
     "ndex": 346,
@@ -3457,7 +3802,8 @@
     "es": "Cradily",
     "de": "Wielie",
     "fr": "Vacilys",
-    "jp": "Yuradle"
+    "jp": "Yuradle",
+    "gen": 3
   },
   {
     "ndex": 347,
@@ -3467,7 +3813,8 @@
     "es": "Anorith",
     "de": "Anorith",
     "fr": "Anorith",
-    "jp": "Anopth"
+    "jp": "Anopth",
+    "gen": 3
   },
   {
     "ndex": 348,
@@ -3477,7 +3824,8 @@
     "es": "Armaldo",
     "de": "Armaldo",
     "fr": "Armaldo",
-    "jp": "Armaldo"
+    "jp": "Armaldo",
+    "gen": 3
   },
   {
     "ndex": 349,
@@ -3487,7 +3835,8 @@
     "es": "Feebas",
     "de": "Barschwa",
     "fr": "Barpau",
-    "jp": "Hinbass"
+    "jp": "Hinbass",
+    "gen": 3
   },
   {
     "ndex": 350,
@@ -3497,7 +3846,8 @@
     "es": "Milotic",
     "de": "Milotic",
     "fr": "Milobellus",
-    "jp": "Milokaross"
+    "jp": "Milokaross",
+    "gen": 3
   },
   {
     "ndex": 351,
@@ -3507,7 +3857,8 @@
     "es": "Castform",
     "de": "Formeo",
     "fr": "Morphéo",
-    "jp": "Powalen"
+    "jp": "Powalen",
+    "gen": 3
   },
   {
     "ndex": 352,
@@ -3517,7 +3868,8 @@
     "es": "Kecleon",
     "de": "Kecleon",
     "fr": "Kecleon",
-    "jp": "Kakureon"
+    "jp": "Kakureon",
+    "gen": 3
   },
   {
     "ndex": 353,
@@ -3527,7 +3879,8 @@
     "es": "Shuppet",
     "de": "Shuppet",
     "fr": "Polichombr",
-    "jp": "Kagebouzu"
+    "jp": "Kagebouzu",
+    "gen": 3
   },
   {
     "ndex": 354,
@@ -3537,7 +3890,8 @@
     "es": "Banette",
     "de": "Banette",
     "fr": "Branette",
-    "jp": "Juppeta"
+    "jp": "Juppeta",
+    "gen": 3
   },
   {
     "ndex": 355,
@@ -3547,7 +3901,8 @@
     "es": "Duskull",
     "de": "Zwirrlicht",
     "fr": "Skelénox",
-    "jp": "Yomawaru"
+    "jp": "Yomawaru",
+    "gen": 3
   },
   {
     "ndex": 356,
@@ -3557,7 +3912,8 @@
     "es": "Dusclops",
     "de": "Zwirrklop",
     "fr": "Téraclope",
-    "jp": "Samayouru"
+    "jp": "Samayouru",
+    "gen": 3
   },
   {
     "ndex": 357,
@@ -3567,7 +3923,8 @@
     "es": "Tropius",
     "de": "Tropius",
     "fr": "Tropius",
-    "jp": "Tropius"
+    "jp": "Tropius",
+    "gen": 3
   },
   {
     "ndex": 358,
@@ -3577,7 +3934,8 @@
     "es": "Chimecho",
     "de": "Palimpalim",
     "fr": "Éoko",
-    "jp": "Chirean"
+    "jp": "Chirean",
+    "gen": 3
   },
   {
     "ndex": 359,
@@ -3587,7 +3945,8 @@
     "es": "Absol",
     "de": "Absol",
     "fr": "Absol",
-    "jp": "Absol"
+    "jp": "Absol",
+    "gen": 3
   },
   {
     "ndex": 360,
@@ -3597,7 +3956,8 @@
     "es": "Wynaut",
     "de": "Isso",
     "fr": "Okéoké",
-    "jp": "Sohnano"
+    "jp": "Sohnano",
+    "gen": 3
   },
   {
     "ndex": 361,
@@ -3607,7 +3967,8 @@
     "es": "Snorunt",
     "de": "Schneppke",
     "fr": "Stalgamin",
-    "jp": "Yukiwarashi"
+    "jp": "Yukiwarashi",
+    "gen": 3
   },
   {
     "ndex": 362,
@@ -3617,7 +3978,8 @@
     "es": "Glalie",
     "de": "Firnontor",
     "fr": "Oniglali",
-    "jp": "Onigohri"
+    "jp": "Onigohri",
+    "gen": 3
   },
   {
     "ndex": 363,
@@ -3627,7 +3989,8 @@
     "es": "Spheal",
     "de": "Seemops",
     "fr": "Obalie",
-    "jp": "Tamazarashi"
+    "jp": "Tamazarashi",
+    "gen": 3
   },
   {
     "ndex": 364,
@@ -3637,7 +4000,8 @@
     "es": "Sealeo",
     "de": "Seejong",
     "fr": "Phogleur",
-    "jp": "Todoggler"
+    "jp": "Todoggler",
+    "gen": 3
   },
   {
     "ndex": 365,
@@ -3647,7 +4011,8 @@
     "es": "Walrein",
     "de": "Walraisa",
     "fr": "Kaimorse",
-    "jp": "Todoseruga"
+    "jp": "Todoseruga",
+    "gen": 3
   },
   {
     "ndex": 366,
@@ -3657,7 +4022,8 @@
     "es": "Clamperl",
     "de": "Perlu",
     "fr": "Coquiperl",
-    "jp": "Pearlulu"
+    "jp": "Pearlulu",
+    "gen": 3
   },
   {
     "ndex": 367,
@@ -3667,7 +4033,8 @@
     "es": "Huntail",
     "de": "Aalabyss",
     "fr": "Serpang",
-    "jp": "Huntail"
+    "jp": "Huntail",
+    "gen": 3
   },
   {
     "ndex": 368,
@@ -3677,7 +4044,8 @@
     "es": "Gorebyss",
     "de": "Saganabyss",
     "fr": "Rosabyss",
-    "jp": "Sakurabyss"
+    "jp": "Sakurabyss",
+    "gen": 3
   },
   {
     "ndex": 369,
@@ -3687,7 +4055,8 @@
     "es": "Relicanth",
     "de": "Relicanth",
     "fr": "Relicanth",
-    "jp": "Glanth"
+    "jp": "Glanth",
+    "gen": 3
   },
   {
     "ndex": 370,
@@ -3697,7 +4066,8 @@
     "es": "Luvdisc",
     "de": "Liebiskus",
     "fr": "Lovdisc",
-    "jp": "Lovecus"
+    "jp": "Lovecus",
+    "gen": 3
   },
   {
     "ndex": 371,
@@ -3707,7 +4077,8 @@
     "es": "Bagon",
     "de": "Kindwurm",
     "fr": "Draby",
-    "jp": "Tatsubay"
+    "jp": "Tatsubay",
+    "gen": 3
   },
   {
     "ndex": 372,
@@ -3717,7 +4088,8 @@
     "es": "Shelgon",
     "de": "Draschel",
     "fr": "Drackhaus",
-    "jp": "Komoruu"
+    "jp": "Komoruu",
+    "gen": 3
   },
   {
     "ndex": 373,
@@ -3727,7 +4099,8 @@
     "es": "Salamence",
     "de": "Brutalanda",
     "fr": "Drattak",
-    "jp": "Bohmander"
+    "jp": "Bohmander",
+    "gen": 3
   },
   {
     "ndex": 374,
@@ -3737,7 +4110,8 @@
     "es": "Beldum",
     "de": "Tanhel",
     "fr": "Terhal",
-    "jp": "Dumbber"
+    "jp": "Dumbber",
+    "gen": 3
   },
   {
     "ndex": 375,
@@ -3747,7 +4121,8 @@
     "es": "Metang",
     "de": "Metang",
     "fr": "Métang",
-    "jp": "Metang"
+    "jp": "Metang",
+    "gen": 3
   },
   {
     "ndex": 376,
@@ -3757,7 +4132,8 @@
     "es": "Metagross",
     "de": "Metagross",
     "fr": "Métalosse",
-    "jp": "Metagross"
+    "jp": "Metagross",
+    "gen": 3
   },
   {
     "ndex": 377,
@@ -3767,7 +4143,8 @@
     "es": "Regirock",
     "de": "Regirock",
     "fr": "Regirock",
-    "jp": "Regirock"
+    "jp": "Regirock",
+    "gen": 3
   },
   {
     "ndex": 378,
@@ -3777,7 +4154,8 @@
     "es": "Regice",
     "de": "Regice",
     "fr": "Regice",
-    "jp": "Regice"
+    "jp": "Regice",
+    "gen": 3
   },
   {
     "ndex": 379,
@@ -3787,7 +4165,8 @@
     "es": "Registeel",
     "de": "Registeel",
     "fr": "Registeel",
-    "jp": "Registeel"
+    "jp": "Registeel",
+    "gen": 3
   },
   {
     "ndex": 380,
@@ -3797,7 +4176,8 @@
     "es": "Latias",
     "de": "Latias",
     "fr": "Latias",
-    "jp": "Latias"
+    "jp": "Latias",
+    "gen": 3
   },
   {
     "ndex": 381,
@@ -3807,7 +4187,8 @@
     "es": "Latios",
     "de": "Latios",
     "fr": "Latios",
-    "jp": "Latios"
+    "jp": "Latios",
+    "gen": 3
   },
   {
     "ndex": 382,
@@ -3817,7 +4198,8 @@
     "es": "Kyogre",
     "de": "Kyogre",
     "fr": "Kyogre",
-    "jp": "Kyogre"
+    "jp": "Kyogre",
+    "gen": 3
   },
   {
     "ndex": 383,
@@ -3827,7 +4209,8 @@
     "es": "Groudon",
     "de": "Groudon",
     "fr": "Groudon",
-    "jp": "Groudon"
+    "jp": "Groudon",
+    "gen": 3
   },
   {
     "ndex": 384,
@@ -3837,7 +4220,8 @@
     "es": "Rayquaza",
     "de": "Rayquaza",
     "fr": "Rayquaza",
-    "jp": "Rayquaza"
+    "jp": "Rayquaza",
+    "gen": 3
   },
   {
     "ndex": 385,
@@ -3847,7 +4231,8 @@
     "es": "Jirachi",
     "de": "Jirachi",
     "fr": "Jirachi",
-    "jp": "Jirachi"
+    "jp": "Jirachi",
+    "gen": 3
   },
   {
     "ndex": 386,
@@ -3857,7 +4242,8 @@
     "es": "Deoxys",
     "de": "Deoxys",
     "fr": "Deoxys",
-    "jp": "Deoxys"
+    "jp": "Deoxys",
+    "gen": 3
   },
   {
     "ndex": 387,
@@ -3867,7 +4253,8 @@
     "es": "Turtwig",
     "de": "Chelast",
     "fr": "Tortipouss",
-    "jp": "Naetle"
+    "jp": "Naetle",
+    "gen": 4
   },
   {
     "ndex": 388,
@@ -3877,7 +4264,8 @@
     "es": "Grotle",
     "de": "Chelcarain",
     "fr": "Boskara",
-    "jp": "Hayashigame"
+    "jp": "Hayashigame",
+    "gen": 4
   },
   {
     "ndex": 389,
@@ -3887,7 +4275,8 @@
     "es": "Torterra",
     "de": "Chelterrar",
     "fr": "Torterra",
-    "jp": "Dodaitose"
+    "jp": "Dodaitose",
+    "gen": 4
   },
   {
     "ndex": 390,
@@ -3897,7 +4286,8 @@
     "es": "Chimchar",
     "de": "Panflam",
     "fr": "Ouisticram",
-    "jp": "Hikozaru"
+    "jp": "Hikozaru",
+    "gen": 4
   },
   {
     "ndex": 391,
@@ -3907,7 +4297,8 @@
     "es": "Monferno",
     "de": "Panpyro",
     "fr": "Chimpenfeu",
-    "jp": "Moukazaru"
+    "jp": "Moukazaru",
+    "gen": 4
   },
   {
     "ndex": 392,
@@ -3917,7 +4308,8 @@
     "es": "Infernape",
     "de": "Panferno",
     "fr": "Simiabraz",
-    "jp": "Goukazaru"
+    "jp": "Goukazaru",
+    "gen": 4
   },
   {
     "ndex": 393,
@@ -3927,7 +4319,8 @@
     "es": "Piplup",
     "de": "Plinfa",
     "fr": "Tiplouf",
-    "jp": "Pochama"
+    "jp": "Pochama",
+    "gen": 4
   },
   {
     "ndex": 394,
@@ -3937,7 +4330,8 @@
     "es": "Prinplup",
     "de": "Pliprin",
     "fr": "Prinplouf",
-    "jp": "Pottaishi"
+    "jp": "Pottaishi",
+    "gen": 4
   },
   {
     "ndex": 395,
@@ -3947,7 +4341,8 @@
     "es": "Empoleon",
     "de": "Impoleon",
     "fr": "Pingoléon",
-    "jp": "Emperte"
+    "jp": "Emperte",
+    "gen": 4
   },
   {
     "ndex": 396,
@@ -3957,7 +4352,8 @@
     "es": "Starly",
     "de": "Staralili",
     "fr": "Étourmi",
-    "jp": "Mukkuru"
+    "jp": "Mukkuru",
+    "gen": 4
   },
   {
     "ndex": 397,
@@ -3967,7 +4363,8 @@
     "es": "Staravia",
     "de": "Staravia",
     "fr": "Étourvol",
-    "jp": "Mukubird"
+    "jp": "Mukubird",
+    "gen": 4
   },
   {
     "ndex": 398,
@@ -3977,7 +4374,8 @@
     "es": "Staraptor",
     "de": "Staraptor",
     "fr": "Étouraptor",
-    "jp": "Mukuhawk"
+    "jp": "Mukuhawk",
+    "gen": 4
   },
   {
     "ndex": 399,
@@ -3987,7 +4385,8 @@
     "es": "Bidoof",
     "de": "Bidiza",
     "fr": "Keunotor",
-    "jp": "Bippa"
+    "jp": "Bippa",
+    "gen": 4
   },
   {
     "ndex": 400,
@@ -3997,7 +4396,8 @@
     "es": "Bibarel",
     "de": "Bidifas",
     "fr": "Castorno",
-    "jp": "Beadaru"
+    "jp": "Beadaru",
+    "gen": 4
   },
   {
     "ndex": 401,
@@ -4007,7 +4407,8 @@
     "es": "Kricketot",
     "de": "Zirpurze",
     "fr": "Crikzik",
-    "jp": "Korobohshi"
+    "jp": "Korobohshi",
+    "gen": 4
   },
   {
     "ndex": 402,
@@ -4017,7 +4418,8 @@
     "es": "Kricketune",
     "de": "Zirpeise",
     "fr": "Mélokrik",
-    "jp": "Korotock"
+    "jp": "Korotock",
+    "gen": 4
   },
   {
     "ndex": 403,
@@ -4027,7 +4429,8 @@
     "es": "Shinx",
     "de": "Sheinux",
     "fr": "Lixy",
-    "jp": "Kolink"
+    "jp": "Kolink",
+    "gen": 4
   },
   {
     "ndex": 404,
@@ -4037,7 +4440,8 @@
     "es": "Luxio",
     "de": "Luxio",
     "fr": "Luxio",
-    "jp": "Luxio"
+    "jp": "Luxio",
+    "gen": 4
   },
   {
     "ndex": 405,
@@ -4047,7 +4451,8 @@
     "es": "Luxray",
     "de": "Luxtra",
     "fr": "Luxray",
-    "jp": "Rentorar"
+    "jp": "Rentorar",
+    "gen": 4
   },
   {
     "ndex": 406,
@@ -4057,7 +4462,8 @@
     "es": "Budew",
     "de": "Knospi",
     "fr": "Rozbouton",
-    "jp": "Subomie"
+    "jp": "Subomie",
+    "gen": 4
   },
   {
     "ndex": 407,
@@ -4067,7 +4473,8 @@
     "es": "Roserade",
     "de": "Roserade",
     "fr": "Roserade",
-    "jp": "Roserade"
+    "jp": "Roserade",
+    "gen": 4
   },
   {
     "ndex": 408,
@@ -4077,7 +4484,8 @@
     "es": "Cranidos",
     "de": "Koknodon",
     "fr": "Kranidos",
-    "jp": "Zugaidos"
+    "jp": "Zugaidos",
+    "gen": 4
   },
   {
     "ndex": 409,
@@ -4087,7 +4495,8 @@
     "es": "Rampardos",
     "de": "Rameidon ",
     "fr": "Charkos",
-    "jp": "Rampald"
+    "jp": "Rampald",
+    "gen": 4
   },
   {
     "ndex": 410,
@@ -4097,7 +4506,8 @@
     "es": "Shieldon",
     "de": "Schilterus",
     "fr": "Dinoclier",
-    "jp": "Tatetops"
+    "jp": "Tatetops",
+    "gen": 4
   },
   {
     "ndex": 411,
@@ -4107,7 +4517,8 @@
     "es": "Bastiodon",
     "de": "Bollterus",
     "fr": "Bastiodon",
-    "jp": "Torideps"
+    "jp": "Torideps",
+    "gen": 4
   },
   {
     "ndex": 412,
@@ -4117,7 +4528,8 @@
     "es": "Burmy",
     "de": "Burmy",
     "fr": "Cheniti",
-    "jp": "Minomucchi"
+    "jp": "Minomucchi",
+    "gen": 4
   },
   {
     "ndex": 413,
@@ -4127,7 +4539,8 @@
     "es": "Wormadam",
     "de": "Burmadame",
     "fr": "Cheniselle",
-    "jp": "Minomadam"
+    "jp": "Minomadam",
+    "gen": 4
   },
   {
     "ndex": 414,
@@ -4137,7 +4550,8 @@
     "es": "Mothim",
     "de": "Moterpel",
     "fr": "Papilord",
-    "jp": "Gamale"
+    "jp": "Gamale",
+    "gen": 4
   },
   {
     "ndex": 415,
@@ -4147,7 +4561,8 @@
     "es": "Combee",
     "de": "Wadribie",
     "fr": "Apitrini",
-    "jp": "Mitsuhoney"
+    "jp": "Mitsuhoney",
+    "gen": 4
   },
   {
     "ndex": 416,
@@ -4157,7 +4572,8 @@
     "es": "Vespiquen",
     "de": "Honweisel",
     "fr": "Apireine",
-    "jp": "Beequen"
+    "jp": "Beequen",
+    "gen": 4
   },
   {
     "ndex": 417,
@@ -4167,7 +4583,8 @@
     "es": "Pachirisu",
     "de": "Pachirisu",
     "fr": "Pachirisu",
-    "jp": "Pachirisu"
+    "jp": "Pachirisu",
+    "gen": 4
   },
   {
     "ndex": 418,
@@ -4177,7 +4594,8 @@
     "es": "Buizel",
     "de": "Bamelin",
     "fr": "Mustébouée",
-    "jp": "Buoysel"
+    "jp": "Buoysel",
+    "gen": 4
   },
   {
     "ndex": 419,
@@ -4187,7 +4605,8 @@
     "es": "Floatzel",
     "de": "Bojelin",
     "fr": "Mustéflott",
-    "jp": "Floazel"
+    "jp": "Floazel",
+    "gen": 4
   },
   {
     "ndex": 420,
@@ -4197,7 +4616,8 @@
     "es": "Cherubi",
     "de": "Kikugi",
     "fr": "Ceribou",
-    "jp": "Cherinbo"
+    "jp": "Cherinbo",
+    "gen": 4
   },
   {
     "ndex": 421,
@@ -4207,7 +4627,8 @@
     "es": "Cherrim",
     "de": "Kinoso",
     "fr": "Ceriflor",
-    "jp": "Cherrim"
+    "jp": "Cherrim",
+    "gen": 4
   },
   {
     "ndex": 422,
@@ -4217,7 +4638,8 @@
     "es": "Shellos",
     "de": "Schalellos",
     "fr": "Sancoki",
-    "jp": "Karanakushi"
+    "jp": "Karanakushi",
+    "gen": 4
   },
   {
     "ndex": 423,
@@ -4227,7 +4649,8 @@
     "es": "Gastrodon",
     "de": "Gastrodon",
     "fr": "Tritosor",
-    "jp": "Tritodon"
+    "jp": "Tritodon",
+    "gen": 4
   },
   {
     "ndex": 424,
@@ -4237,7 +4660,8 @@
     "es": "Ambipom",
     "de": "Ambidiffel",
     "fr": "Capidextre",
-    "jp": "Eteboth"
+    "jp": "Eteboth",
+    "gen": 4
   },
   {
     "ndex": 425,
@@ -4247,7 +4671,8 @@
     "es": "Drifloon",
     "de": "Driftlon",
     "fr": "Baudrive",
-    "jp": "Fuwante"
+    "jp": "Fuwante",
+    "gen": 4
   },
   {
     "ndex": 426,
@@ -4257,7 +4682,8 @@
     "es": "Drifblim",
     "de": "Drifzepeli",
     "fr": "Grodrive",
-    "jp": "Fuwaride"
+    "jp": "Fuwaride",
+    "gen": 4
   },
   {
     "ndex": 427,
@@ -4267,7 +4693,8 @@
     "es": "Buneary",
     "de": "Haspiror",
     "fr": "Laporeille",
-    "jp": "Mimirol"
+    "jp": "Mimirol",
+    "gen": 4
   },
   {
     "ndex": 428,
@@ -4277,7 +4704,8 @@
     "es": "Lopunny",
     "de": "Schlapor",
     "fr": "Lockpin",
-    "jp": "Mimilop"
+    "jp": "Mimilop",
+    "gen": 4
   },
   {
     "ndex": 429,
@@ -4287,7 +4715,8 @@
     "es": "Mismagius",
     "de": "Traunmagil",
     "fr": "Magirêve",
-    "jp": "Mumargi"
+    "jp": "Mumargi",
+    "gen": 4
   },
   {
     "ndex": 430,
@@ -4297,7 +4726,8 @@
     "es": "Honchkrow",
     "de": "Kramshef",
     "fr": "Corboss",
-    "jp": "Dongkarasu"
+    "jp": "Dongkarasu",
+    "gen": 4
   },
   {
     "ndex": 431,
@@ -4307,7 +4737,8 @@
     "es": "Glameow",
     "de": "Charmian",
     "fr": "Chaglam",
-    "jp": "Nyarmar"
+    "jp": "Nyarmar",
+    "gen": 4
   },
   {
     "ndex": 432,
@@ -4317,7 +4748,8 @@
     "es": "Purugly",
     "de": "Shnurgarst",
     "fr": "Chaffreux",
-    "jp": "Bunyatto"
+    "jp": "Bunyatto",
+    "gen": 4
   },
   {
     "ndex": 433,
@@ -4327,7 +4759,8 @@
     "es": "Chingling",
     "de": "Klingplim",
     "fr": "Korillon",
-    "jp": "Lisyan"
+    "jp": "Lisyan",
+    "gen": 4
   },
   {
     "ndex": 434,
@@ -4337,7 +4770,8 @@
     "es": "Stunky",
     "de": "Skunkapuh",
     "fr": "Moufouette",
-    "jp": "Skunpuu"
+    "jp": "Skunpuu",
+    "gen": 4
   },
   {
     "ndex": 435,
@@ -4347,7 +4781,8 @@
     "es": "Skuntank",
     "de": "Skuntank",
     "fr": "Moufflair",
-    "jp": "Skutank"
+    "jp": "Skutank",
+    "gen": 4
   },
   {
     "ndex": 436,
@@ -4357,7 +4792,8 @@
     "es": "Bronzor",
     "de": "Bronzel",
     "fr": "Archéomire",
-    "jp": "Dohmirror"
+    "jp": "Dohmirror",
+    "gen": 4
   },
   {
     "ndex": 437,
@@ -4367,7 +4803,8 @@
     "es": "Bronzong",
     "de": "Bronzong",
     "fr": "Archéodong",
-    "jp": "Dohtakun"
+    "jp": "Dohtakun",
+    "gen": 4
   },
   {
     "ndex": 438,
@@ -4377,7 +4814,8 @@
     "es": "Bonsly",
     "de": "Mobai",
     "fr": "Manzaï",
-    "jp": "Usohachi"
+    "jp": "Usohachi",
+    "gen": 4
   },
   {
     "ndex": 439,
@@ -4387,7 +4825,8 @@
     "es": "Mime Jr.",
     "de": "Pantimimi",
     "fr": "Mime Jr.",
-    "jp": "Manene"
+    "jp": "Manene",
+    "gen": 4
   },
   {
     "ndex": 440,
@@ -4397,7 +4836,8 @@
     "es": "Happiny",
     "de": "Wonneira",
     "fr": "Ptiravi",
-    "jp": "Pinpuku"
+    "jp": "Pinpuku",
+    "gen": 4
   },
   {
     "ndex": 441,
@@ -4407,7 +4847,8 @@
     "es": "Chatot",
     "de": "Plaudagei",
     "fr": "Pijako",
-    "jp": "Perap"
+    "jp": "Perap",
+    "gen": 4
   },
   {
     "ndex": 442,
@@ -4417,7 +4858,8 @@
     "es": "Spiritomb",
     "de": "Kryppuk",
     "fr": "Spiritomb",
-    "jp": "Mikaruge"
+    "jp": "Mikaruge",
+    "gen": 4
   },
   {
     "ndex": 443,
@@ -4427,7 +4869,8 @@
     "es": "Gible",
     "de": "Kaumalat",
     "fr": "Griknot",
-    "jp": "Fukamaru"
+    "jp": "Fukamaru",
+    "gen": 4
   },
   {
     "ndex": 444,
@@ -4437,7 +4880,8 @@
     "es": "Gabite",
     "de": "Knarksel",
     "fr": "Carmache",
-    "jp": "Gabite"
+    "jp": "Gabite",
+    "gen": 4
   },
   {
     "ndex": 445,
@@ -4447,7 +4891,8 @@
     "es": "Garchomp",
     "de": "Knakrack",
     "fr": "Carchacrok",
-    "jp": "Gaburias"
+    "jp": "Gaburias",
+    "gen": 4
   },
   {
     "ndex": 446,
@@ -4457,7 +4902,8 @@
     "es": "Munchlax",
     "de": "Mampfaxo",
     "fr": "Goinfrex",
-    "jp": "Gonbe"
+    "jp": "Gonbe",
+    "gen": 4
   },
   {
     "ndex": 447,
@@ -4467,7 +4913,8 @@
     "es": "Riolu",
     "de": "Riolu",
     "fr": "Riolu",
-    "jp": "Riolu"
+    "jp": "Riolu",
+    "gen": 4
   },
   {
     "ndex": 448,
@@ -4477,7 +4924,8 @@
     "es": "Lucario",
     "de": "Lucario",
     "fr": "Lucario",
-    "jp": "Lucario"
+    "jp": "Lucario",
+    "gen": 4
   },
   {
     "ndex": 449,
@@ -4487,7 +4935,8 @@
     "es": "Hippopotas",
     "de": "Hippopotas",
     "fr": "Hippopotas",
-    "jp": "Hippopotas"
+    "jp": "Hippopotas",
+    "gen": 4
   },
   {
     "ndex": 450,
@@ -4497,7 +4946,8 @@
     "es": "Hippowdon",
     "de": "Hippoterus",
     "fr": "Hippodocus",
-    "jp": "Kabaldon"
+    "jp": "Kabaldon",
+    "gen": 4
   },
   {
     "ndex": 451,
@@ -4507,7 +4957,8 @@
     "es": "Skorupi",
     "de": "Pionskora",
     "fr": "Rapion",
-    "jp": "Scorupi"
+    "jp": "Scorupi",
+    "gen": 4
   },
   {
     "ndex": 452,
@@ -4517,7 +4968,8 @@
     "es": "Drapion",
     "de": "Piondragi ",
     "fr": "Drascore",
-    "jp": "Dorapion"
+    "jp": "Dorapion",
+    "gen": 4
   },
   {
     "ndex": 453,
@@ -4527,7 +4979,8 @@
     "es": "Croagunk",
     "de": "Glibunkel",
     "fr": "Cradopaud",
-    "jp": "Gureggru"
+    "jp": "Gureggru",
+    "gen": 4
   },
   {
     "ndex": 454,
@@ -4537,7 +4990,8 @@
     "es": "Toxicroak",
     "de": "Toxiquak",
     "fr": "Coatox",
-    "jp": "Dokurog"
+    "jp": "Dokurog",
+    "gen": 4
   },
   {
     "ndex": 455,
@@ -4547,7 +5001,8 @@
     "es": "Carnivine",
     "de": "Venuflibis",
     "fr": "Vortente",
-    "jp": "Muskippa"
+    "jp": "Muskippa",
+    "gen": 4
   },
   {
     "ndex": 456,
@@ -4557,7 +5012,8 @@
     "es": "Finneon",
     "de": "Finneon",
     "fr": "Écayon",
-    "jp": "Keikouo"
+    "jp": "Keikouo",
+    "gen": 4
   },
   {
     "ndex": 457,
@@ -4567,7 +5023,8 @@
     "es": "Lumineon",
     "de": "Lumineon",
     "fr": "Luminéon",
-    "jp": "Neolant"
+    "jp": "Neolant",
+    "gen": 4
   },
   {
     "ndex": 458,
@@ -4577,7 +5034,8 @@
     "es": "Mantyke",
     "de": "Mantirps ",
     "fr": "Babimanta",
-    "jp": "Tamanta"
+    "jp": "Tamanta",
+    "gen": 4
   },
   {
     "ndex": 459,
@@ -4587,7 +5045,8 @@
     "es": "Snover",
     "de": "Shnebedeck",
     "fr": "Blizzi",
-    "jp": "Yukikaburi"
+    "jp": "Yukikaburi",
+    "gen": 4
   },
   {
     "ndex": 460,
@@ -4597,7 +5056,8 @@
     "es": "Abomasnow",
     "de": "Rexblisar",
     "fr": "Blizzaroi",
-    "jp": "Yukinooh"
+    "jp": "Yukinooh",
+    "gen": 4
   },
   {
     "ndex": 461,
@@ -4607,7 +5067,8 @@
     "es": "Weavile",
     "de": "Snibunna",
     "fr": "Dimoret",
-    "jp": "Manyula"
+    "jp": "Manyula",
+    "gen": 4
   },
   {
     "ndex": 462,
@@ -4617,7 +5078,8 @@
     "es": "Magnezone",
     "de": "Magnezone",
     "fr": "Magnézone",
-    "jp": "Jibacoil"
+    "jp": "Jibacoil",
+    "gen": 4
   },
   {
     "ndex": 463,
@@ -4627,7 +5089,8 @@
     "es": "Lickilicky",
     "de": "Schlurplek",
     "fr": "Coudlangue",
-    "jp": "Berobelt"
+    "jp": "Berobelt",
+    "gen": 4
   },
   {
     "ndex": 464,
@@ -4637,7 +5100,8 @@
     "es": "Rhyperior",
     "de": "Rihornior",
     "fr": "Rhinastoc",
-    "jp": "Dosidon"
+    "jp": "Dosidon",
+    "gen": 4
   },
   {
     "ndex": 465,
@@ -4647,7 +5111,8 @@
     "es": "Tangrowth",
     "de": "Tangoloss",
     "fr": "Bouldeneu",
-    "jp": "Mojumbo"
+    "jp": "Mojumbo",
+    "gen": 4
   },
   {
     "ndex": 466,
@@ -4657,7 +5122,8 @@
     "es": "Electivire",
     "de": "Elevoltek",
     "fr": "Élekable",
-    "jp": "Elekible"
+    "jp": "Elekible",
+    "gen": 4
   },
   {
     "ndex": 467,
@@ -4667,7 +5133,8 @@
     "es": "Magmortar",
     "de": "Magbrant",
     "fr": "Maganon",
-    "jp": "Booburn"
+    "jp": "Booburn",
+    "gen": 4
   },
   {
     "ndex": 468,
@@ -4677,7 +5144,8 @@
     "es": "Togekiss",
     "de": "Togekiss",
     "fr": "Togekiss",
-    "jp": "Togekiss"
+    "jp": "Togekiss",
+    "gen": 4
   },
   {
     "ndex": 469,
@@ -4687,7 +5155,8 @@
     "es": "Yanmega",
     "de": "Yanmega",
     "fr": "Yanméga",
-    "jp": "Megayanma"
+    "jp": "Megayanma",
+    "gen": 4
   },
   {
     "ndex": 470,
@@ -4697,7 +5166,8 @@
     "es": "Leafeon",
     "de": "Folipurba",
     "fr": "Phyllali",
-    "jp": "Leafia"
+    "jp": "Leafia",
+    "gen": 4
   },
   {
     "ndex": 471,
@@ -4707,7 +5177,8 @@
     "es": "Glaceon",
     "de": "Glaziola",
     "fr": "Givrali",
-    "jp": "Glacia"
+    "jp": "Glacia",
+    "gen": 4
   },
   {
     "ndex": 472,
@@ -4717,7 +5188,8 @@
     "es": "Gliscor",
     "de": "Skorgro",
     "fr": "Scorvol",
-    "jp": "Glion"
+    "jp": "Glion",
+    "gen": 4
   },
   {
     "ndex": 473,
@@ -4727,7 +5199,8 @@
     "es": "Mamoswine",
     "de": "Mamutel",
     "fr": "Mammochon",
-    "jp": "Mammoo"
+    "jp": "Mammoo",
+    "gen": 4
   },
   {
     "ndex": 474,
@@ -4737,7 +5210,8 @@
     "es": "Porygon-Z",
     "de": "Porygon-Z",
     "fr": "Porygon-Z",
-    "jp": "Porygon-Z"
+    "jp": "Porygon-Z",
+    "gen": 4
   },
   {
     "ndex": 475,
@@ -4747,7 +5221,8 @@
     "es": "Gallade",
     "de": "Galagladi",
     "fr": "Gallame",
-    "jp": "Erureido"
+    "jp": "Erureido",
+    "gen": 4
   },
   {
     "ndex": 476,
@@ -4757,7 +5232,8 @@
     "es": "Probopass",
     "de": "Voluminas",
     "fr": "Tarinorme",
-    "jp": "Dainose"
+    "jp": "Dainose",
+    "gen": 4
   },
   {
     "ndex": 477,
@@ -4767,7 +5243,8 @@
     "es": "Dusknoir",
     "de": "Zwirrfinst",
     "fr": "Noctunoir",
-    "jp": "Yonoir"
+    "jp": "Yonoir",
+    "gen": 4
   },
   {
     "ndex": 478,
@@ -4777,7 +5254,8 @@
     "es": "Froslass",
     "de": "Frosdedje",
     "fr": "Momartik",
-    "jp": "Yukimenoko"
+    "jp": "Yukimenoko",
+    "gen": 4
   },
   {
     "ndex": 479,
@@ -4787,7 +5265,8 @@
     "es": "Rotom",
     "de": "Rotom",
     "fr": "Motisma",
-    "jp": "Rotom"
+    "jp": "Rotom",
+    "gen": 4
   },
   {
     "ndex": 480,
@@ -4797,7 +5276,8 @@
     "es": "Uxie",
     "de": "Selfe",
     "fr": "Créhelf",
-    "jp": "Yuxie"
+    "jp": "Yuxie",
+    "gen": 4
   },
   {
     "ndex": 481,
@@ -4807,7 +5287,8 @@
     "es": "Mesprit",
     "de": "Vesprit",
     "fr": "Créfollet",
-    "jp": "Emrit"
+    "jp": "Emrit",
+    "gen": 4
   },
   {
     "ndex": 482,
@@ -4817,7 +5298,8 @@
     "es": "Azelf",
     "de": "Tobutz",
     "fr": "Créfadet",
-    "jp": "Agnome"
+    "jp": "Agnome",
+    "gen": 4
   },
   {
     "ndex": 483,
@@ -4827,7 +5309,8 @@
     "es": "Dialga",
     "de": "Dialga",
     "fr": "Dialga",
-    "jp": "Dialga"
+    "jp": "Dialga",
+    "gen": 4
   },
   {
     "ndex": 484,
@@ -4837,7 +5320,8 @@
     "es": "Palkia",
     "de": "Palkia",
     "fr": "Palkia",
-    "jp": "Palkia"
+    "jp": "Palkia",
+    "gen": 4
   },
   {
     "ndex": 485,
@@ -4847,7 +5331,8 @@
     "es": "Heatran",
     "de": "Heatran",
     "fr": "Heatran",
-    "jp": "Heatran"
+    "jp": "Heatran",
+    "gen": 4
   },
   {
     "ndex": 486,
@@ -4857,7 +5342,8 @@
     "es": "Regigigas",
     "de": "Regigigas",
     "fr": "Regigigas",
-    "jp": "Regigigas"
+    "jp": "Regigigas",
+    "gen": 4
   },
   {
     "ndex": 487,
@@ -4867,7 +5353,8 @@
     "es": "Giratina",
     "de": "Giratina",
     "fr": "Giratina",
-    "jp": "Giratina"
+    "jp": "Giratina",
+    "gen": 4
   },
   {
     "ndex": 488,
@@ -4877,7 +5364,8 @@
     "es": "Cresselia",
     "de": "Cresselia",
     "fr": "Cresselia",
-    "jp": "Cresselia"
+    "jp": "Cresselia",
+    "gen": 4
   },
   {
     "ndex": 489,
@@ -4887,7 +5375,8 @@
     "es": "Phione",
     "de": "Phione",
     "fr": "Phione",
-    "jp": "Phione"
+    "jp": "Phione",
+    "gen": 4
   },
   {
     "ndex": 490,
@@ -4897,7 +5386,8 @@
     "es": "Manaphy",
     "de": "Manaphy",
     "fr": "Manaphy",
-    "jp": "Manaphy"
+    "jp": "Manaphy",
+    "gen": 4
   },
   {
     "ndex": 491,
@@ -4907,7 +5397,8 @@
     "es": "Darkrai",
     "de": "Darkrai",
     "fr": "Darkrai",
-    "jp": "Darkrai"
+    "jp": "Darkrai",
+    "gen": 4
   },
   {
     "ndex": 492,
@@ -4917,7 +5408,8 @@
     "es": "Shaymin",
     "de": "Shaymin",
     "fr": "Shaymin",
-    "jp": "Shaymin"
+    "jp": "Shaymin",
+    "gen": 4
   },
   {
     "ndex": 493,
@@ -4927,7 +5419,8 @@
     "es": "Arceus",
     "de": "Arceus",
     "fr": "Arceus",
-    "jp": "Arceus"
+    "jp": "Arceus",
+    "gen": 4
   },
   {
     "ndex": 494,
@@ -4937,7 +5430,8 @@
     "es": "Victini",
     "de": "Victini",
     "fr": "Victini",
-    "jp": "Victini"
+    "jp": "Victini",
+    "gen": 5
   },
   {
     "ndex": 495,
@@ -4947,7 +5441,8 @@
     "es": "Snivy",
     "de": "Serpifeu",
     "fr": "Vipélierre",
-    "jp": "Tsutarja"
+    "jp": "Tsutarja",
+    "gen": 5
   },
   {
     "ndex": 496,
@@ -4957,7 +5452,8 @@
     "es": "Servine",
     "de": "Efoserp",
     "fr": "Lianaja",
-    "jp": "Janovy"
+    "jp": "Janovy",
+    "gen": 5
   },
   {
     "ndex": 497,
@@ -4967,7 +5463,8 @@
     "es": "Serperior",
     "de": "Serpiroyal",
     "fr": "Majaspic",
-    "jp": "Jalorda"
+    "jp": "Jalorda",
+    "gen": 5
   },
   {
     "ndex": 498,
@@ -4977,7 +5474,8 @@
     "es": "Tepig",
     "de": "Floink",
     "fr": "Gruikui",
-    "jp": "Pokabu"
+    "jp": "Pokabu",
+    "gen": 5
   },
   {
     "ndex": 499,
@@ -4987,7 +5485,8 @@
     "es": "Pignite",
     "de": "Ferkokel",
     "fr": "Grotichon",
-    "jp": "Chaoboo"
+    "jp": "Chaoboo",
+    "gen": 5
   },
   {
     "ndex": 500,
@@ -4997,7 +5496,8 @@
     "es": "Emboar",
     "de": "Flambirex",
     "fr": "Roitiflam",
-    "jp": "Enbuoh"
+    "jp": "Enbuoh",
+    "gen": 5
   },
   {
     "ndex": 501,
@@ -5007,7 +5507,8 @@
     "es": "Oshawott",
     "de": "Ottaro",
     "fr": "Moustillon",
-    "jp": "Mijumaru"
+    "jp": "Mijumaru",
+    "gen": 5
   },
   {
     "ndex": 502,
@@ -5017,7 +5518,8 @@
     "es": "Dewott",
     "de": "Zwottronin",
     "fr": "Mateloutre",
-    "jp": "Futachimaru"
+    "jp": "Futachimaru",
+    "gen": 5
   },
   {
     "ndex": 503,
@@ -5027,7 +5529,8 @@
     "es": "Samurott",
     "de": "Admurai",
     "fr": "Clamiral",
-    "jp": "Daikenki"
+    "jp": "Daikenki",
+    "gen": 5
   },
   {
     "ndex": 504,
@@ -5037,7 +5540,8 @@
     "es": "Patrat",
     "de": "Nagelotz",
     "fr": "Ratentif",
-    "jp": "Minezumi"
+    "jp": "Minezumi",
+    "gen": 5
   },
   {
     "ndex": 505,
@@ -5047,7 +5551,8 @@
     "es": "Watchog",
     "de": "Kukmarda",
     "fr": "Miradar",
-    "jp": "Miruhog"
+    "jp": "Miruhog",
+    "gen": 5
   },
   {
     "ndex": 506,
@@ -5057,7 +5562,8 @@
     "es": "Lillipup",
     "de": "Yorkleff",
     "fr": "Ponchiot",
-    "jp": "Yorterrie"
+    "jp": "Yorterrie",
+    "gen": 5
   },
   {
     "ndex": 507,
@@ -5067,7 +5573,8 @@
     "es": "Herdier",
     "de": "Terribark",
     "fr": "Ponchien",
-    "jp": "Herderrie"
+    "jp": "Herderrie",
+    "gen": 5
   },
   {
     "ndex": 508,
@@ -5077,7 +5584,8 @@
     "es": "Stoutland",
     "de": "Bissbark",
     "fr": "Mastouffe",
-    "jp": "Mooland"
+    "jp": "Mooland",
+    "gen": 5
   },
   {
     "ndex": 509,
@@ -5087,7 +5595,8 @@
     "es": "Purrloin",
     "de": "Felilou",
     "fr": "Chacripan",
-    "jp": "Choroneko"
+    "jp": "Choroneko",
+    "gen": 5
   },
   {
     "ndex": 510,
@@ -5097,7 +5606,8 @@
     "es": "Liepard",
     "de": "Kleoparda",
     "fr": "Léopardus",
-    "jp": "Lepardas"
+    "jp": "Lepardas",
+    "gen": 5
   },
   {
     "ndex": 511,
@@ -5107,7 +5617,8 @@
     "es": "Pansage",
     "de": "Vegimak",
     "fr": "Feuillajou",
-    "jp": "Yanappu"
+    "jp": "Yanappu",
+    "gen": 5
   },
   {
     "ndex": 512,
@@ -5117,7 +5628,8 @@
     "es": "Simisage",
     "de": "Vegichita",
     "fr": "Feuiloutan",
-    "jp": "Yanakkie"
+    "jp": "Yanakkie",
+    "gen": 5
   },
   {
     "ndex": 513,
@@ -5127,7 +5639,8 @@
     "es": "Pansear",
     "de": "Grillmak",
     "fr": "Flamajou",
-    "jp": "Baoppu"
+    "jp": "Baoppu",
+    "gen": 5
   },
   {
     "ndex": 514,
@@ -5137,7 +5650,8 @@
     "es": "Simisear",
     "de": "Grillchita",
     "fr": "Flamoutan",
-    "jp": "Baokkie"
+    "jp": "Baokkie",
+    "gen": 5
   },
   {
     "ndex": 515,
@@ -5147,7 +5661,8 @@
     "es": "Panpour",
     "de": "Sodamak",
     "fr": "Flotajou",
-    "jp": "Hiyappu"
+    "jp": "Hiyappu",
+    "gen": 5
   },
   {
     "ndex": 516,
@@ -5157,7 +5672,8 @@
     "es": "Simipour",
     "de": "Sodachita",
     "fr": "Flotoutan",
-    "jp": "Hiyakkie"
+    "jp": "Hiyakkie",
+    "gen": 5
   },
   {
     "ndex": 517,
@@ -5167,7 +5683,8 @@
     "es": "Munna",
     "de": "Somniam",
     "fr": "Munna",
-    "jp": "Munna"
+    "jp": "Munna",
+    "gen": 5
   },
   {
     "ndex": 518,
@@ -5177,7 +5694,8 @@
     "es": "Musharna",
     "de": "Somnivora",
     "fr": "Mushana",
-    "jp": "Musharna"
+    "jp": "Musharna",
+    "gen": 5
   },
   {
     "ndex": 519,
@@ -5187,7 +5705,8 @@
     "es": "Pidove",
     "de": "Dusselgurr",
     "fr": "Poichigeon",
-    "jp": "Mamepato"
+    "jp": "Mamepato",
+    "gen": 5
   },
   {
     "ndex": 520,
@@ -5197,7 +5716,8 @@
     "es": "Tranquill",
     "de": "Navitaub",
     "fr": "Colombeau",
-    "jp": "Hatoboh"
+    "jp": "Hatoboh",
+    "gen": 5
   },
   {
     "ndex": 521,
@@ -5207,7 +5727,8 @@
     "es": "Unfezant",
     "de": "Fasasnob",
     "fr": "Déflaisan",
-    "jp": "Kenhallow"
+    "jp": "Kenhallow",
+    "gen": 5
   },
   {
     "ndex": 522,
@@ -5217,7 +5738,8 @@
     "es": "Blitzle",
     "de": "Elezeba",
     "fr": "Zébribon",
-    "jp": "Shimama"
+    "jp": "Shimama",
+    "gen": 5
   },
   {
     "ndex": 523,
@@ -5227,7 +5749,8 @@
     "es": "Zebstrika",
     "de": "Zebritz",
     "fr": "Zéblitz",
-    "jp": "Zebraika"
+    "jp": "Zebraika",
+    "gen": 5
   },
   {
     "ndex": 524,
@@ -5237,7 +5760,8 @@
     "es": "Roggenrola",
     "de": "Kiesling",
     "fr": "Nodulithe",
-    "jp": "Dangoro"
+    "jp": "Dangoro",
+    "gen": 5
   },
   {
     "ndex": 525,
@@ -5247,7 +5771,8 @@
     "es": "Boldore",
     "de": "Sedimantur",
     "fr": "Géolithe",
-    "jp": "Gantle"
+    "jp": "Gantle",
+    "gen": 5
   },
   {
     "ndex": 526,
@@ -5257,7 +5782,8 @@
     "es": "Gigalith",
     "de": "Brockoloss",
     "fr": "Gigalithe",
-    "jp": "Gigaiath"
+    "jp": "Gigaiath",
+    "gen": 5
   },
   {
     "ndex": 527,
@@ -5267,7 +5793,8 @@
     "es": "Woobat",
     "de": "Fleknoil",
     "fr": "Chovsourir",
-    "jp": "Koromori"
+    "jp": "Koromori",
+    "gen": 5
   },
   {
     "ndex": 528,
@@ -5277,7 +5804,8 @@
     "es": "Swoobat",
     "de": "Fletiamo",
     "fr": "Rhinolove",
-    "jp": "Kokoromori"
+    "jp": "Kokoromori",
+    "gen": 5
   },
   {
     "ndex": 529,
@@ -5287,7 +5815,8 @@
     "es": "Drilbur",
     "de": "Rotomurf",
     "fr": "Rototaupe",
-    "jp": "Mogurew"
+    "jp": "Mogurew",
+    "gen": 5
   },
   {
     "ndex": 530,
@@ -5297,7 +5826,8 @@
     "es": "Excadrill",
     "de": "Stalobor",
     "fr": "Minotaupe",
-    "jp": "Doryuzu"
+    "jp": "Doryuzu",
+    "gen": 5
   },
   {
     "ndex": 531,
@@ -5307,7 +5837,8 @@
     "es": "Audino",
     "de": "Ohrdoch",
     "fr": "Nanméouïe",
-    "jp": "Tabunne"
+    "jp": "Tabunne",
+    "gen": 5
   },
   {
     "ndex": 532,
@@ -5317,7 +5848,8 @@
     "es": "Timburr",
     "de": "Praktibalk",
     "fr": "Charpenti",
-    "jp": "Dokkorer"
+    "jp": "Dokkorer",
+    "gen": 5
   },
   {
     "ndex": 533,
@@ -5327,7 +5859,8 @@
     "es": "Gurdurr",
     "de": "Strepoli",
     "fr": "Ouvrifier",
-    "jp": "Dotekkotsu"
+    "jp": "Dotekkotsu",
+    "gen": 5
   },
   {
     "ndex": 534,
@@ -5337,7 +5870,8 @@
     "es": "Conkeldurr",
     "de": "Meistagrif",
     "fr": "Bétochef",
-    "jp": "Roubushin"
+    "jp": "Roubushin",
+    "gen": 5
   },
   {
     "ndex": 535,
@@ -5347,7 +5881,8 @@
     "es": "Tympole",
     "de": "Schallquap",
     "fr": "Tritonde",
-    "jp": "Otamaro"
+    "jp": "Otamaro",
+    "gen": 5
   },
   {
     "ndex": 536,
@@ -5357,7 +5892,8 @@
     "es": "Palpitoad",
     "de": "Mebrana",
     "fr": "Batracné",
-    "jp": "Gamagaru"
+    "jp": "Gamagaru",
+    "gen": 5
   },
   {
     "ndex": 537,
@@ -5367,7 +5903,8 @@
     "es": "Seismitoad",
     "de": "Branawarz",
     "fr": "Crapustule",
-    "jp": "Gamageroge"
+    "jp": "Gamageroge",
+    "gen": 5
   },
   {
     "ndex": 538,
@@ -5377,7 +5914,8 @@
     "es": "Throh",
     "de": "Jiutesto",
     "fr": "Judokrak",
-    "jp": "Nageki"
+    "jp": "Nageki",
+    "gen": 5
   },
   {
     "ndex": 539,
@@ -5387,7 +5925,8 @@
     "es": "Sawk",
     "de": "Karadonis",
     "fr": "Karaclée",
-    "jp": "Dageki"
+    "jp": "Dageki",
+    "gen": 5
   },
   {
     "ndex": 540,
@@ -5397,7 +5936,8 @@
     "es": "Sewaddle",
     "de": "Strawickl",
     "fr": "Larveyette",
-    "jp": "Kurumiru"
+    "jp": "Kurumiru",
+    "gen": 5
   },
   {
     "ndex": 541,
@@ -5407,7 +5947,8 @@
     "es": "Swadloon",
     "de": "Folikon",
     "fr": "Couverdure",
-    "jp": "Kurumayu"
+    "jp": "Kurumayu",
+    "gen": 5
   },
   {
     "ndex": 542,
@@ -5417,7 +5958,8 @@
     "es": "Leavanny",
     "de": "Matrifol",
     "fr": "Manternel",
-    "jp": "Hahakomori"
+    "jp": "Hahakomori",
+    "gen": 5
   },
   {
     "ndex": 543,
@@ -5427,7 +5969,8 @@
     "es": "Venipede",
     "de": "Toxiped",
     "fr": "Venipatte",
-    "jp": "Fushide"
+    "jp": "Fushide",
+    "gen": 5
   },
   {
     "ndex": 544,
@@ -5437,7 +5980,8 @@
     "es": "Whirlipede",
     "de": "Rollum",
     "fr": "Scobolide",
-    "jp": "Wheega"
+    "jp": "Wheega",
+    "gen": 5
   },
   {
     "ndex": 545,
@@ -5447,7 +5991,8 @@
     "es": "Scolipede",
     "de": "Cerapendra",
     "fr": "Brutapode",
-    "jp": "Pendror"
+    "jp": "Pendror",
+    "gen": 5
   },
   {
     "ndex": 546,
@@ -5457,7 +6002,8 @@
     "es": "Cottonee",
     "de": "Waumboll",
     "fr": "Doudouvet",
-    "jp": "Monmen"
+    "jp": "Monmen",
+    "gen": 5
   },
   {
     "ndex": 547,
@@ -5467,7 +6013,8 @@
     "es": "Whimsicott",
     "de": "Elfun",
     "fr": "Farfaduvet",
-    "jp": "Elfuun"
+    "jp": "Elfuun",
+    "gen": 5
   },
   {
     "ndex": 548,
@@ -5477,7 +6024,8 @@
     "es": "Petilil",
     "de": "Lilminip",
     "fr": "Chlorobule",
-    "jp": "Churine"
+    "jp": "Churine",
+    "gen": 5
   },
   {
     "ndex": 549,
@@ -5487,7 +6035,8 @@
     "es": "Lilligant",
     "de": "Dressella",
     "fr": "Fragilady",
-    "jp": "Dredear"
+    "jp": "Dredear",
+    "gen": 5
   },
   {
     "ndex": 550,
@@ -5497,7 +6046,8 @@
     "es": "Basculin",
     "de": "Barschuft",
     "fr": "Bargantua",
-    "jp": "Bassrao"
+    "jp": "Bassrao",
+    "gen": 5
   },
   {
     "ndex": 551,
@@ -5507,7 +6057,8 @@
     "es": "Sandile",
     "de": "Ganovil",
     "fr": "Mascaïman",
-    "jp": "Meguroco"
+    "jp": "Meguroco",
+    "gen": 5
   },
   {
     "ndex": 552,
@@ -5517,7 +6068,8 @@
     "es": "Krokorok",
     "de": "Rokkaiman",
     "fr": "Escroco",
-    "jp": "Waruvile"
+    "jp": "Waruvile",
+    "gen": 5
   },
   {
     "ndex": 553,
@@ -5527,7 +6079,8 @@
     "es": "Krookodile",
     "de": "Rabigator",
     "fr": "Crocorible",
-    "jp": "Waruvial"
+    "jp": "Waruvial",
+    "gen": 5
   },
   {
     "ndex": 554,
@@ -5537,7 +6090,8 @@
     "es": "Darumaka",
     "de": "Flampion",
     "fr": "Darumarond",
-    "jp": "Darumakka"
+    "jp": "Darumakka",
+    "gen": 5
   },
   {
     "ndex": 555,
@@ -5547,7 +6101,8 @@
     "es": "Darmanitan",
     "de": "Flampivian",
     "fr": "Darumacho",
-    "jp": "Hihidaruma"
+    "jp": "Hihidaruma",
+    "gen": 5
   },
   {
     "ndex": 556,
@@ -5557,7 +6112,8 @@
     "es": "Maractus",
     "de": "Maracamba",
     "fr": "Maracachi",
-    "jp": "Maracacchi"
+    "jp": "Maracacchi",
+    "gen": 5
   },
   {
     "ndex": 557,
@@ -5567,7 +6123,8 @@
     "es": "Dwebble",
     "de": "Lithomith",
     "fr": "Crabicoque",
-    "jp": "Ishizumai"
+    "jp": "Ishizumai",
+    "gen": 5
   },
   {
     "ndex": 558,
@@ -5577,7 +6134,8 @@
     "es": "Crustle",
     "de": "Castellith",
     "fr": "Crabaraque",
-    "jp": "Iwapalace"
+    "jp": "Iwapalace",
+    "gen": 5
   },
   {
     "ndex": 559,
@@ -5587,7 +6145,8 @@
     "es": "Scraggy",
     "de": "Zurrokex",
     "fr": "Baggiguane",
-    "jp": "Zuruggu"
+    "jp": "Zuruggu",
+    "gen": 5
   },
   {
     "ndex": 560,
@@ -5597,7 +6156,8 @@
     "es": "Scrafty",
     "de": "Irokex",
     "fr": "Baggaïd",
-    "jp": "Zuruzukin"
+    "jp": "Zuruzukin",
+    "gen": 5
   },
   {
     "ndex": 561,
@@ -5607,7 +6167,8 @@
     "es": "Sigilyph",
     "de": "Symvolara",
     "fr": "Cryptéro",
-    "jp": "Symboler"
+    "jp": "Symboler",
+    "gen": 5
   },
   {
     "ndex": 562,
@@ -5617,7 +6178,8 @@
     "es": "Yamask",
     "de": "Makabaja",
     "fr": "Tutafeh",
-    "jp": "Desumasu"
+    "jp": "Desumasu",
+    "gen": 5
   },
   {
     "ndex": 563,
@@ -5627,7 +6189,8 @@
     "es": "Cofagrigus",
     "de": "Echnatoll",
     "fr": "Tutankafer",
-    "jp": "Desukarn"
+    "jp": "Desukarn",
+    "gen": 5
   },
   {
     "ndex": 564,
@@ -5637,7 +6200,8 @@
     "es": "Tirtouga",
     "de": "Galapaflos",
     "fr": "Carapagos",
-    "jp": "Protoga"
+    "jp": "Protoga",
+    "gen": 5
   },
   {
     "ndex": 565,
@@ -5647,7 +6211,8 @@
     "es": "Carracosta",
     "de": "Karippas",
     "fr": "Mégapagos",
-    "jp": "Abagoura"
+    "jp": "Abagoura",
+    "gen": 5
   },
   {
     "ndex": 566,
@@ -5657,7 +6222,8 @@
     "es": "Archen",
     "de": "Flapteryx",
     "fr": "Arkéapti",
-    "jp": "Archen"
+    "jp": "Archen",
+    "gen": 5
   },
   {
     "ndex": 567,
@@ -5667,7 +6233,8 @@
     "es": "Archeops",
     "de": "Aeropteryx",
     "fr": "Aéroptéryx",
-    "jp": "Archeos"
+    "jp": "Archeos",
+    "gen": 5
   },
   {
     "ndex": 568,
@@ -5677,7 +6244,8 @@
     "es": "Trubbish",
     "de": "Unratütox",
     "fr": "Miamiasme",
-    "jp": "Yabukuron"
+    "jp": "Yabukuron",
+    "gen": 5
   },
   {
     "ndex": 569,
@@ -5687,7 +6255,8 @@
     "es": "Garbodor",
     "de": "Deponitox",
     "fr": "Miasmax",
-    "jp": "Dustdas"
+    "jp": "Dustdas",
+    "gen": 5
   },
   {
     "ndex": 570,
@@ -5697,7 +6266,8 @@
     "es": "Zorua",
     "de": "Zorua",
     "fr": "Zorua",
-    "jp": "Zorua"
+    "jp": "Zorua",
+    "gen": 5
   },
   {
     "ndex": 571,
@@ -5707,7 +6277,8 @@
     "es": "Zoroark",
     "de": "Zoroark",
     "fr": "Zoroark",
-    "jp": "Zoroark"
+    "jp": "Zoroark",
+    "gen": 5
   },
   {
     "ndex": 572,
@@ -5717,7 +6288,8 @@
     "es": "Minccino",
     "de": "Picochilla",
     "fr": "Chinchidou",
-    "jp": "Chillarmy"
+    "jp": "Chillarmy",
+    "gen": 5
   },
   {
     "ndex": 573,
@@ -5727,7 +6299,8 @@
     "es": "Cinccino",
     "de": "Chillabell",
     "fr": "Pashmilla",
-    "jp": "Chillaccino"
+    "jp": "Chillaccino",
+    "gen": 5
   },
   {
     "ndex": 574,
@@ -5737,7 +6310,8 @@
     "es": "Gothita",
     "de": "Mollimorba",
     "fr": "Scrutella",
-    "jp": "Gothimu"
+    "jp": "Gothimu",
+    "gen": 5
   },
   {
     "ndex": 575,
@@ -5747,7 +6321,8 @@
     "es": "Gothorita",
     "de": "Hypnomorba",
     "fr": "Mesmérella",
-    "jp": "Gothimiru"
+    "jp": "Gothimiru",
+    "gen": 5
   },
   {
     "ndex": 576,
@@ -5757,7 +6332,8 @@
     "es": "Gothitelle",
     "de": "Morbitesse",
     "fr": "Sidérella",
-    "jp": "Gothiruselle"
+    "jp": "Gothiruselle",
+    "gen": 5
   },
   {
     "ndex": 577,
@@ -5767,7 +6343,8 @@
     "es": "Solosis",
     "de": "Monozyto",
     "fr": "Nucléos",
-    "jp": "Uniran"
+    "jp": "Uniran",
+    "gen": 5
   },
   {
     "ndex": 578,
@@ -5777,7 +6354,8 @@
     "es": "Duosion",
     "de": "Mitodos",
     "fr": "Méios",
-    "jp": "Doublan"
+    "jp": "Doublan",
+    "gen": 5
   },
   {
     "ndex": 579,
@@ -5787,7 +6365,8 @@
     "es": "Reuniclus",
     "de": "Zytomega",
     "fr": "Symbios",
-    "jp": "Lanculus"
+    "jp": "Lanculus",
+    "gen": 5
   },
   {
     "ndex": 580,
@@ -5797,7 +6376,8 @@
     "es": "Ducklett",
     "de": "Piccolente",
     "fr": "Couaneton",
-    "jp": "Koaruhie"
+    "jp": "Koaruhie",
+    "gen": 5
   },
   {
     "ndex": 581,
@@ -5807,7 +6387,8 @@
     "es": "Swanna",
     "de": "Swaroness",
     "fr": "Lakmécygne",
-    "jp": "Swanna"
+    "jp": "Swanna",
+    "gen": 5
   },
   {
     "ndex": 582,
@@ -5817,7 +6398,8 @@
     "es": "Vanillite",
     "de": "Gelatini",
     "fr": "Sorbébé",
-    "jp": "Vanipeti"
+    "jp": "Vanipeti",
+    "gen": 5
   },
   {
     "ndex": 583,
@@ -5827,7 +6409,8 @@
     "es": "Vanillish",
     "de": "Gelatroppo",
     "fr": "Sorboul",
-    "jp": "Vanirich"
+    "jp": "Vanirich",
+    "gen": 5
   },
   {
     "ndex": 584,
@@ -5837,7 +6420,8 @@
     "es": "Vanilluxe",
     "de": "Gelatwino",
     "fr": "Sorbouboul",
-    "jp": "Baivanilla"
+    "jp": "Baivanilla",
+    "gen": 5
   },
   {
     "ndex": 585,
@@ -5847,7 +6431,8 @@
     "es": "Deerling",
     "de": "Sesokitz",
     "fr": "Vivaldaim",
-    "jp": "Shikijika"
+    "jp": "Shikijika",
+    "gen": 5
   },
   {
     "ndex": 586,
@@ -5857,7 +6442,8 @@
     "es": "Sawsbuck",
     "de": "Kronjuwild",
     "fr": "Haydaim",
-    "jp": "Mebukijika"
+    "jp": "Mebukijika",
+    "gen": 5
   },
   {
     "ndex": 587,
@@ -5867,7 +6453,8 @@
     "es": "Emolga",
     "de": "Emolga",
     "fr": "Emolga",
-    "jp": "Emonga"
+    "jp": "Emonga",
+    "gen": 5
   },
   {
     "ndex": 588,
@@ -5877,7 +6464,8 @@
     "es": "Karrablast",
     "de": "Laukaps",
     "fr": "Carabing",
-    "jp": "Kaburumo"
+    "jp": "Kaburumo",
+    "gen": 5
   },
   {
     "ndex": 589,
@@ -5887,7 +6475,8 @@
     "es": "Escavalier",
     "de": "Cavalanzas",
     "fr": "Lançargot",
-    "jp": "Chevargo"
+    "jp": "Chevargo",
+    "gen": 5
   },
   {
     "ndex": 590,
@@ -5897,7 +6486,8 @@
     "es": "Foongus",
     "de": "Tarnpignon",
     "fr": "Trompignon",
-    "jp": "Tamagetake"
+    "jp": "Tamagetake",
+    "gen": 5
   },
   {
     "ndex": 591,
@@ -5907,7 +6497,8 @@
     "es": "Amoonguss",
     "de": "Hutsassa",
     "fr": "Gaulet",
-    "jp": "Morobareru"
+    "jp": "Morobareru",
+    "gen": 5
   },
   {
     "ndex": 592,
@@ -5917,7 +6508,8 @@
     "es": "Frillish",
     "de": "Quabbel",
     "fr": "Viskuse",
-    "jp": "Pururill"
+    "jp": "Pururill",
+    "gen": 5
   },
   {
     "ndex": 593,
@@ -5927,7 +6519,8 @@
     "es": "Jellicent",
     "de": "Apoquallyp",
     "fr": "Moyade",
-    "jp": "Burungel"
+    "jp": "Burungel",
+    "gen": 5
   },
   {
     "ndex": 594,
@@ -5937,7 +6530,8 @@
     "es": "Alomomola",
     "de": "Mamolida",
     "fr": "Mamanbo",
-    "jp": "Mamanbou"
+    "jp": "Mamanbou",
+    "gen": 5
   },
   {
     "ndex": 595,
@@ -5947,7 +6541,8 @@
     "es": "Joltik",
     "de": "Wattzapf",
     "fr": "Statitik",
-    "jp": "Bachuru"
+    "jp": "Bachuru",
+    "gen": 5
   },
   {
     "ndex": 596,
@@ -5957,7 +6552,8 @@
     "es": "Galvantula",
     "de": "Voltula",
     "fr": "Mygavolt",
-    "jp": "Dentula"
+    "jp": "Dentula",
+    "gen": 5
   },
   {
     "ndex": 597,
@@ -5967,7 +6563,8 @@
     "es": "Ferroseed",
     "de": "Kastadur",
     "fr": "Grindur",
-    "jp": "Tesseed"
+    "jp": "Tesseed",
+    "gen": 5
   },
   {
     "ndex": 598,
@@ -5977,7 +6574,8 @@
     "es": "Ferrothorn",
     "de": "Tentantel",
     "fr": "Noacier",
-    "jp": "Nutrey"
+    "jp": "Nutrey",
+    "gen": 5
   },
   {
     "ndex": 599,
@@ -5987,7 +6585,8 @@
     "es": "Klink",
     "de": "Klikk",
     "fr": "Tic",
-    "jp": "Giaru"
+    "jp": "Giaru",
+    "gen": 5
   },
   {
     "ndex": 600,
@@ -5997,7 +6596,8 @@
     "es": "Klang",
     "de": "Kliklak",
     "fr": "Clic",
-    "jp": "Gigiaru"
+    "jp": "Gigiaru",
+    "gen": 5
   },
   {
     "ndex": 601,
@@ -6007,7 +6607,8 @@
     "es": "Klinklang",
     "de": "Klikdiklak",
     "fr": "Cliticlic",
-    "jp": "Gigigiaru"
+    "jp": "Gigigiaru",
+    "gen": 5
   },
   {
     "ndex": 602,
@@ -6017,7 +6618,8 @@
     "es": "Tynamo",
     "de": "Zapplardin",
     "fr": "Anchwatt",
-    "jp": "Shibishirasu"
+    "jp": "Shibishirasu",
+    "gen": 5
   },
   {
     "ndex": 603,
@@ -6027,7 +6629,8 @@
     "es": "Eelektrik",
     "de": "Zapplalek",
     "fr": "Lampéroie",
-    "jp": "Shibibeel"
+    "jp": "Shibibeel",
+    "gen": 5
   },
   {
     "ndex": 604,
@@ -6037,7 +6640,8 @@
     "es": "Eelektross",
     "de": "Zapplarang",
     "fr": "Ohmassacre",
-    "jp": "Shibirudon"
+    "jp": "Shibirudon",
+    "gen": 5
   },
   {
     "ndex": 605,
@@ -6047,7 +6651,8 @@
     "es": "Elgyem",
     "de": "Pygraulon",
     "fr": "Lewsor",
-    "jp": "Ligray"
+    "jp": "Ligray",
+    "gen": 5
   },
   {
     "ndex": 606,
@@ -6057,7 +6662,8 @@
     "es": "Beheeyem",
     "de": "Megalon",
     "fr": "Neitram",
-    "jp": "Ohbem"
+    "jp": "Ohbem",
+    "gen": 5
   },
   {
     "ndex": 607,
@@ -6067,7 +6673,8 @@
     "es": "Litwick",
     "de": "Lichtel",
     "fr": "Funécire",
-    "jp": "Hitomoshi"
+    "jp": "Hitomoshi",
+    "gen": 5
   },
   {
     "ndex": 608,
@@ -6077,7 +6684,8 @@
     "es": "Lampent",
     "de": "Laternecto",
     "fr": "Mélancolux",
-    "jp": "Lampler"
+    "jp": "Lampler",
+    "gen": 5
   },
   {
     "ndex": 609,
@@ -6087,7 +6695,8 @@
     "es": "Chandelure",
     "de": "Skelabra",
     "fr": "Lugulabre",
-    "jp": "Chandela"
+    "jp": "Chandela",
+    "gen": 5
   },
   {
     "ndex": 610,
@@ -6097,7 +6706,8 @@
     "es": "Axew",
     "de": "Milza",
     "fr": "Coupenotte",
-    "jp": "Kibago"
+    "jp": "Kibago",
+    "gen": 5
   },
   {
     "ndex": 611,
@@ -6107,7 +6717,8 @@
     "es": "Fraxure",
     "de": "Sharfax",
     "fr": "Incisache",
-    "jp": "Onondo"
+    "jp": "Onondo",
+    "gen": 5
   },
   {
     "ndex": 612,
@@ -6117,7 +6728,8 @@
     "es": "Haxorus",
     "de": "Maxax",
     "fr": "Tranchodon",
-    "jp": "Ononokus"
+    "jp": "Ononokus",
+    "gen": 5
   },
   {
     "ndex": 613,
@@ -6127,7 +6739,8 @@
     "es": "Cubchoo",
     "de": "Petznief",
     "fr": "Polarhume",
-    "jp": "Kumasyun"
+    "jp": "Kumasyun",
+    "gen": 5
   },
   {
     "ndex": 614,
@@ -6137,7 +6750,8 @@
     "es": "Beartic",
     "de": "Siberio",
     "fr": "Polagriffe",
-    "jp": "Tunbear"
+    "jp": "Tunbear",
+    "gen": 5
   },
   {
     "ndex": 615,
@@ -6147,7 +6761,8 @@
     "es": "Cryogonal",
     "de": "Frigometri",
     "fr": "Hexagel",
-    "jp": "Freegeo"
+    "jp": "Freegeo",
+    "gen": 5
   },
   {
     "ndex": 616,
@@ -6157,7 +6772,8 @@
     "es": "Shelmet",
     "de": "Schnuthelm",
     "fr": "Escargaume",
-    "jp": "Chobomaki"
+    "jp": "Chobomaki",
+    "gen": 5
   },
   {
     "ndex": 617,
@@ -6167,7 +6783,8 @@
     "es": "Accelgor",
     "de": "Hydragil",
     "fr": "Limaspeed",
-    "jp": "Agilder"
+    "jp": "Agilder",
+    "gen": 5
   },
   {
     "ndex": 618,
@@ -6177,7 +6794,8 @@
     "es": "Stunfisk",
     "de": "Flunschlik",
     "fr": "Limonde",
-    "jp": "Maggyo"
+    "jp": "Maggyo",
+    "gen": 5
   },
   {
     "ndex": 619,
@@ -6187,7 +6805,8 @@
     "es": "Mienfoo",
     "de": "Lin-Fu",
     "fr": "Kungfouine",
-    "jp": "Kojofu"
+    "jp": "Kojofu",
+    "gen": 5
   },
   {
     "ndex": 620,
@@ -6197,7 +6816,8 @@
     "es": "Mienshao",
     "de": "Wie-Shu",
     "fr": "Shaofouine",
-    "jp": "Kojondo"
+    "jp": "Kojondo",
+    "gen": 5
   },
   {
     "ndex": 621,
@@ -6207,7 +6827,8 @@
     "es": "Druddigon",
     "de": "Shardrago",
     "fr": "Drakkarmin",
-    "jp": "Crimgan"
+    "jp": "Crimgan",
+    "gen": 5
   },
   {
     "ndex": 622,
@@ -6217,7 +6838,8 @@
     "es": "Golett",
     "de": "Golbit",
     "fr": "Gringolem",
-    "jp": "Gobit"
+    "jp": "Gobit",
+    "gen": 5
   },
   {
     "ndex": 623,
@@ -6227,7 +6849,8 @@
     "es": "Golurk",
     "de": "Golgantes",
     "fr": "Golemastoc",
-    "jp": "Goloog"
+    "jp": "Goloog",
+    "gen": 5
   },
   {
     "ndex": 624,
@@ -6237,7 +6860,8 @@
     "es": "Pawniard",
     "de": "Gladiantri",
     "fr": "Scalpion",
-    "jp": "Komatana"
+    "jp": "Komatana",
+    "gen": 5
   },
   {
     "ndex": 625,
@@ -6247,7 +6871,8 @@
     "es": "Bisharp",
     "de": "Caesurio",
     "fr": "Scalproie",
-    "jp": "Kirikizan"
+    "jp": "Kirikizan",
+    "gen": 5
   },
   {
     "ndex": 626,
@@ -6257,7 +6882,8 @@
     "es": "Bouffalant",
     "de": "Bisofank",
     "fr": "Frison",
-    "jp": "Buffron"
+    "jp": "Buffron",
+    "gen": 5
   },
   {
     "ndex": 627,
@@ -6267,7 +6893,8 @@
     "es": "Rufflet",
     "de": "Geronimatz",
     "fr": "Furaiglon",
-    "jp": "Washibon"
+    "jp": "Washibon",
+    "gen": 5
   },
   {
     "ndex": 628,
@@ -6277,7 +6904,8 @@
     "es": "Braviary",
     "de": "Washakwil",
     "fr": "Gueriaigle",
-    "jp": "Warrgle"
+    "jp": "Warrgle",
+    "gen": 5
   },
   {
     "ndex": 629,
@@ -6287,7 +6915,8 @@
     "es": "Vullaby",
     "de": "Skallyk",
     "fr": "Vostourno",
-    "jp": "Valchai"
+    "jp": "Valchai",
+    "gen": 5
   },
   {
     "ndex": 630,
@@ -6297,7 +6926,8 @@
     "es": "Mandibuzz",
     "de": "Grypheldis",
     "fr": "Vaututrice",
-    "jp": "Vulgina"
+    "jp": "Vulgina",
+    "gen": 5
   },
   {
     "ndex": 631,
@@ -6307,7 +6937,8 @@
     "es": "Heatmor",
     "de": "Furnifraß",
     "fr": "Aflamanoir",
-    "jp": "Kuitaran"
+    "jp": "Kuitaran",
+    "gen": 5
   },
   {
     "ndex": 632,
@@ -6317,7 +6948,8 @@
     "es": "Durant",
     "de": "Fermicula",
     "fr": "Fermite",
-    "jp": "Aiant"
+    "jp": "Aiant",
+    "gen": 5
   },
   {
     "ndex": 633,
@@ -6327,7 +6959,8 @@
     "es": "Deino",
     "de": "Kapuno",
     "fr": "Solochi",
-    "jp": "Monozu"
+    "jp": "Monozu",
+    "gen": 5
   },
   {
     "ndex": 634,
@@ -6337,7 +6970,8 @@
     "es": "Zweilous",
     "de": "Duodino",
     "fr": "Diamat",
-    "jp": "Dihead"
+    "jp": "Dihead",
+    "gen": 5
   },
   {
     "ndex": 635,
@@ -6347,7 +6981,8 @@
     "es": "Hydreigon",
     "de": "Trikephalo",
     "fr": "Trioxhydre",
-    "jp": "Sazandora"
+    "jp": "Sazandora",
+    "gen": 5
   },
   {
     "ndex": 636,
@@ -6357,7 +6992,8 @@
     "es": "Larvesta",
     "de": "Ignivor",
     "fr": "Pyronille",
-    "jp": "Merlarva"
+    "jp": "Merlarva",
+    "gen": 5
   },
   {
     "ndex": 637,
@@ -6367,7 +7003,8 @@
     "es": "Volcarona",
     "de": "Ramoth",
     "fr": "Pyrax",
-    "jp": "Ulgamoth"
+    "jp": "Ulgamoth",
+    "gen": 5
   },
   {
     "ndex": 638,
@@ -6377,7 +7014,8 @@
     "es": "Cobalion",
     "de": "Kobalium",
     "fr": "Cobaltium",
-    "jp": "Cobalon"
+    "jp": "Cobalon",
+    "gen": 5
   },
   {
     "ndex": 639,
@@ -6387,7 +7025,8 @@
     "es": "Terrakion",
     "de": "Terrakium",
     "fr": "Terrakium",
-    "jp": "Terrakion"
+    "jp": "Terrakion",
+    "gen": 5
   },
   {
     "ndex": 640,
@@ -6397,7 +7036,8 @@
     "es": "Virizion",
     "de": "Viridium",
     "fr": "Viridium",
-    "jp": "Virizion"
+    "jp": "Virizion",
+    "gen": 5
   },
   {
     "ndex": 641,
@@ -6407,7 +7047,8 @@
     "es": "Tornadus",
     "de": "Boreos",
     "fr": "Boréas",
-    "jp": "Tornelos"
+    "jp": "Tornelos",
+    "gen": 5
   },
   {
     "ndex": 642,
@@ -6417,7 +7058,8 @@
     "es": "Thundurus",
     "de": "Voltolos",
     "fr": "Fulguris",
-    "jp": "Voltolos"
+    "jp": "Voltolos",
+    "gen": 5
   },
   {
     "ndex": 643,
@@ -6427,7 +7069,8 @@
     "es": "Reshiram",
     "de": "Reshiram",
     "fr": "Reshiram",
-    "jp": "Reshiram"
+    "jp": "Reshiram",
+    "gen": 5
   },
   {
     "ndex": 644,
@@ -6437,7 +7080,8 @@
     "es": "Zekrom",
     "de": "Zekrom",
     "fr": "Zekrom",
-    "jp": "Zekrom"
+    "jp": "Zekrom",
+    "gen": 5
   },
   {
     "ndex": 645,
@@ -6447,7 +7091,8 @@
     "es": "Landorus",
     "de": "Demeteros",
     "fr": "Démétéros",
-    "jp": "Landlos"
+    "jp": "Landlos",
+    "gen": 5
   },
   {
     "ndex": 646,
@@ -6457,7 +7102,8 @@
     "es": "Kyurem",
     "de": "Kyurem",
     "fr": "Kyurem",
-    "jp": "Kyurem"
+    "jp": "Kyurem",
+    "gen": 5
   },
   {
     "ndex": 647,
@@ -6467,7 +7113,8 @@
     "es": "Keldeo",
     "de": "Keldeo",
     "fr": "Keldeo",
-    "jp": "Keldeo"
+    "jp": "Keldeo",
+    "gen": 5
   },
   {
     "ndex": 648,
@@ -6477,7 +7124,8 @@
     "es": "Meloetta",
     "de": "Meloetta",
     "fr": "Meloetta",
-    "jp": "Meloetta"
+    "jp": "Meloetta",
+    "gen": 5
   },
   {
     "ndex": 649,
@@ -6487,7 +7135,8 @@
     "es": "Genesect",
     "de": "Genesect",
     "fr": "Genesect",
-    "jp": "Genesect"
+    "jp": "Genesect",
+    "gen": 5
   },
   {
     "ndex": 650,
@@ -6497,7 +7146,8 @@
     "es": "Chespin",
     "de": "Igamaro",
     "fr": "Marisson",
-    "jp": "Harimaron"
+    "jp": "Harimaron",
+    "gen": 6
   },
   {
     "ndex": 651,
@@ -6507,7 +7157,8 @@
     "es": "Quilladin",
     "de": "Igastarnish",
     "fr": "Boguérisse",
-    "jp": "Hariborg"
+    "jp": "Hariborg",
+    "gen": 6
   },
   {
     "ndex": 652,
@@ -6517,7 +7168,8 @@
     "es": "Chesnaught",
     "de": "Brigaron",
     "fr": "Blindépique",
-    "jp": "Brigarron"
+    "jp": "Brigarron",
+    "gen": 6
   },
   {
     "ndex": 653,
@@ -6527,7 +7179,8 @@
     "es": "Fennekin",
     "de": "Fynx",
     "fr": "Feunnec",
-    "jp": "Fokko"
+    "jp": "Fokko",
+    "gen": 6
   },
   {
     "ndex": 654,
@@ -6537,7 +7190,8 @@
     "es": "Braixen",
     "de": "Rutena",
     "fr": "Roussil",
-    "jp": "Tairenar"
+    "jp": "Tairenar",
+    "gen": 6
   },
   {
     "ndex": 655,
@@ -6547,7 +7201,8 @@
     "es": "Delphox",
     "de": "Fennexis",
     "fr": "Goupelin",
-    "jp": "Mahoxy"
+    "jp": "Mahoxy",
+    "gen": 6
   },
   {
     "ndex": 656,
@@ -6557,7 +7212,8 @@
     "es": "Froakie",
     "de": "Froxy",
     "fr": "Grenousse",
-    "jp": "Keromatsu"
+    "jp": "Keromatsu",
+    "gen": 6
   },
   {
     "ndex": 657,
@@ -6567,7 +7223,8 @@
     "es": "Frogadier",
     "de": "Amphizel",
     "fr": "Croâporal",
-    "jp": "Gekogashira"
+    "jp": "Gekogashira",
+    "gen": 6
   },
   {
     "ndex": 658,
@@ -6577,7 +7234,8 @@
     "es": "Greninja",
     "de": "Quajutsu",
     "fr": "Amphinobi",
-    "jp": "Gekkouga"
+    "jp": "Gekkouga",
+    "gen": 6
   },
   {
     "ndex": 659,
@@ -6587,7 +7245,8 @@
     "es": "Bunnelby",
     "de": "Scoppel",
     "fr": "Sapereau",
-    "jp": "Horubee"
+    "jp": "Horubee",
+    "gen": 6
   },
   {
     "ndex": 660,
@@ -6597,7 +7256,8 @@
     "es": "Diggersby",
     "de": "Grebbit",
     "fr": "Excavarenne",
-    "jp": "Horudo"
+    "jp": "Horudo",
+    "gen": 6
   },
   {
     "ndex": 661,
@@ -6607,7 +7267,8 @@
     "es": "Fletchling",
     "de": "Dartiri",
     "fr": "Passerouge",
-    "jp": "Yayakoma"
+    "jp": "Yayakoma",
+    "gen": 6
   },
   {
     "ndex": 662,
@@ -6617,7 +7278,8 @@
     "es": "Fletchinder",
     "de": "Dartignis",
     "fr": "Braisillon",
-    "jp": "Hinoyakoma"
+    "jp": "Hinoyakoma",
+    "gen": 6
   },
   {
     "ndex": 663,
@@ -6627,7 +7289,8 @@
     "es": "Talonflame",
     "de": "Fiaro",
     "fr": "Flambusard",
-    "jp": "Fiarrow"
+    "jp": "Fiarrow",
+    "gen": 6
   },
   {
     "ndex": 664,
@@ -6637,7 +7300,8 @@
     "es": "Scatterbug",
     "de": "Purmel",
     "fr": "Lépidonille",
-    "jp": "Kofukimushi"
+    "jp": "Kofukimushi",
+    "gen": 6
   },
   {
     "ndex": 665,
@@ -6647,7 +7311,8 @@
     "es": "Spewpa",
     "de": "Puponcho",
     "fr": "Pérégrain",
-    "jp": "Kofuurai"
+    "jp": "Kofuurai",
+    "gen": 6
   },
   {
     "ndex": 666,
@@ -6657,7 +7322,8 @@
     "es": "Vivillon",
     "de": "Vivillon",
     "fr": "Prismillon",
-    "jp": "Viviyon"
+    "jp": "Viviyon",
+    "gen": 6
   },
   {
     "ndex": 667,
@@ -6667,7 +7333,8 @@
     "es": "Litleo",
     "de": "Leufeo",
     "fr": "Hélionceau",
-    "jp": "Shishiko"
+    "jp": "Shishiko",
+    "gen": 6
   },
   {
     "ndex": 668,
@@ -6677,7 +7344,8 @@
     "es": "Pyroar",
     "de": "Pyroleo",
     "fr": "Némélios",
-    "jp": "Kaenjishi"
+    "jp": "Kaenjishi",
+    "gen": 6
   },
   {
     "ndex": 669,
@@ -6687,7 +7355,8 @@
     "es": "Flabébé",
     "de": "Flabébé",
     "fr": "Flabébé",
-    "jp": "Flabebe"
+    "jp": "Flabebe",
+    "gen": 6
   },
   {
     "ndex": 670,
@@ -6697,7 +7366,8 @@
     "es": "Floette",
     "de": "Floette",
     "fr": "Floette",
-    "jp": "Floette"
+    "jp": "Floette",
+    "gen": 6
   },
   {
     "ndex": 671,
@@ -6707,7 +7377,8 @@
     "es": "Florges",
     "de": "Florges",
     "fr": "Florges",
-    "jp": "Florges"
+    "jp": "Florges",
+    "gen": 6
   },
   {
     "ndex": 672,
@@ -6717,7 +7388,8 @@
     "es": "Skiddo",
     "de": "Mähikel",
     "fr": "Cabriolaine",
-    "jp": "Meecle"
+    "jp": "Meecle",
+    "gen": 6
   },
   {
     "ndex": 673,
@@ -6727,7 +7399,8 @@
     "es": "Gogoat",
     "de": "Chevrumm",
     "fr": "Chevroum",
-    "jp": "Gogoat"
+    "jp": "Gogoat",
+    "gen": 6
   },
   {
     "ndex": 674,
@@ -6737,7 +7410,8 @@
     "es": "Pancham",
     "de": "Pam-Pam",
     "fr": "Pandespiègle",
-    "jp": "Yancham"
+    "jp": "Yancham",
+    "gen": 6
   },
   {
     "ndex": 675,
@@ -6747,7 +7421,8 @@
     "es": "Pangoro",
     "de": "Pandagro",
     "fr": "Pandarbare",
-    "jp": "Goronda"
+    "jp": "Goronda",
+    "gen": 6
   },
   {
     "ndex": 676,
@@ -6757,7 +7432,8 @@
     "es": "Furfrou",
     "de": "Coiffwaff",
     "fr": "Couafarel",
-    "jp": "Trimmien"
+    "jp": "Trimmien",
+    "gen": 6
   },
   {
     "ndex": 677,
@@ -6767,7 +7443,8 @@
     "es": "Espurr",
     "de": "Psiau",
     "fr": "Psystigri",
-    "jp": "Nyasper"
+    "jp": "Nyasper",
+    "gen": 6
   },
   {
     "ndex": 678,
@@ -6777,7 +7454,8 @@
     "es": "Meowstic",
     "de": "Psiaugon",
     "fr": "Mistigrix",
-    "jp": "Nyaonix"
+    "jp": "Nyaonix",
+    "gen": 6
   },
   {
     "ndex": 679,
@@ -6787,7 +7465,8 @@
     "es": "Honedge",
     "de": "Gramokles",
     "fr": "Monorpale",
-    "jp": "Hitotsuki"
+    "jp": "Hitotsuki",
+    "gen": 6
   },
   {
     "ndex": 680,
@@ -6797,7 +7476,8 @@
     "es": "Doublade",
     "de": "Duokles",
     "fr": "Dimoclès",
-    "jp": "Nidangill"
+    "jp": "Nidangill",
+    "gen": 6
   },
   {
     "ndex": 681,
@@ -6807,7 +7487,8 @@
     "es": "Aegislash",
     "de": "Durengard",
     "fr": "Exagide",
-    "jp": "Gillgard"
+    "jp": "Gillgard",
+    "gen": 6
   },
   {
     "ndex": 682,
@@ -6817,7 +7498,8 @@
     "es": "Spritzee",
     "de": "Parfi",
     "fr": "Fluvetin",
-    "jp": "Shushupu"
+    "jp": "Shushupu",
+    "gen": 6
   },
   {
     "ndex": 683,
@@ -6827,7 +7509,8 @@
     "es": "Aromatisse",
     "de": "Parfinesse",
     "fr": "Cocotine",
-    "jp": "Frefuwan"
+    "jp": "Frefuwan",
+    "gen": 6
   },
   {
     "ndex": 684,
@@ -6837,7 +7520,8 @@
     "es": "Swirlix",
     "de": "Flauschling",
     "fr": "Sucroquin",
-    "jp": "Peroppafu"
+    "jp": "Peroppafu",
+    "gen": 6
   },
   {
     "ndex": 685,
@@ -6847,7 +7531,8 @@
     "es": "Slurpuff",
     "de": "Sabbaione",
     "fr": "Cupcanaille",
-    "jp": "Peroream"
+    "jp": "Peroream",
+    "gen": 6
   },
   {
     "ndex": 686,
@@ -6857,7 +7542,8 @@
     "es": "Inkay",
     "de": "Iscalar",
     "fr": "Sepiatop",
-    "jp": "Maaiika"
+    "jp": "Maaiika",
+    "gen": 6
   },
   {
     "ndex": 687,
@@ -6867,7 +7553,8 @@
     "es": "Malamar",
     "de": "Calamanero",
     "fr": "Sepiatroce",
-    "jp": "Calamanero"
+    "jp": "Calamanero",
+    "gen": 6
   },
   {
     "ndex": 688,
@@ -6877,7 +7564,8 @@
     "es": "Binacle",
     "de": "Bithora",
     "fr": "Opermine",
-    "jp": "Kametete"
+    "jp": "Kametete",
+    "gen": 6
   },
   {
     "ndex": 689,
@@ -6887,7 +7575,8 @@
     "es": "Barbaracle",
     "de": "Thanathora",
     "fr": "Golgopathe",
-    "jp": "Gamenodes"
+    "jp": "Gamenodes",
+    "gen": 6
   },
   {
     "ndex": 690,
@@ -6897,7 +7586,8 @@
     "es": "Skrelp",
     "de": "Algitt",
     "fr": "Venalgue",
-    "jp": "Kuzumo"
+    "jp": "Kuzumo",
+    "gen": 6
   },
   {
     "ndex": 691,
@@ -6907,7 +7597,8 @@
     "es": "Dragalge",
     "de": "Tandrak",
     "fr": "Kravarech",
-    "jp": "Dramidoro"
+    "jp": "Dramidoro",
+    "gen": 6
   },
   {
     "ndex": 692,
@@ -6917,7 +7608,8 @@
     "es": "Clauncher",
     "de": "Scampisto",
     "fr": "Flingouste",
-    "jp": "Udeppou"
+    "jp": "Udeppou",
+    "gen": 6
   },
   {
     "ndex": 693,
@@ -6927,7 +7619,8 @@
     "es": "Clawitzer",
     "de": "Wummer",
     "fr": "Gamblast",
-    "jp": "Bloster"
+    "jp": "Bloster",
+    "gen": 6
   },
   {
     "ndex": 694,
@@ -6937,7 +7630,8 @@
     "es": "Helioptile",
     "de": "Eguana",
     "fr": "Galvaran",
-    "jp": "Erikiteru"
+    "jp": "Erikiteru",
+    "gen": 6
   },
   {
     "ndex": 695,
@@ -6947,7 +7641,8 @@
     "es": "Heliolisk",
     "de": "Elezard",
     "fr": "Iguolta",
-    "jp": "Elezard"
+    "jp": "Elezard",
+    "gen": 6
   },
   {
     "ndex": 696,
@@ -6957,7 +7652,8 @@
     "es": "Tyrunt",
     "de": "Balgoras",
     "fr": "Ptyranidur",
-    "jp": "Chigoras"
+    "jp": "Chigoras",
+    "gen": 6
   },
   {
     "ndex": 697,
@@ -6967,7 +7663,8 @@
     "es": "Tyrantrum",
     "de": "Monargoras",
     "fr": "Rexillius",
-    "jp": "Gachigoras"
+    "jp": "Gachigoras",
+    "gen": 6
   },
   {
     "ndex": 698,
@@ -6977,7 +7674,8 @@
     "es": "Amaura",
     "de": "Amarino",
     "fr": "Amagara",
-    "jp": "Amarus"
+    "jp": "Amarus",
+    "gen": 6
   },
   {
     "ndex": 699,
@@ -6987,7 +7685,8 @@
     "es": "Aurorus",
     "de": "Amagarga",
     "fr": "Dragmara",
-    "jp": "Amaruruga"
+    "jp": "Amaruruga",
+    "gen": 6
   },
   {
     "ndex": 700,
@@ -6997,7 +7696,8 @@
     "es": "Sylveon",
     "de": "Feelinara",
     "fr": "Nymphali",
-    "jp": "Nymphia"
+    "jp": "Nymphia",
+    "gen": 6
   },
   {
     "ndex": 701,
@@ -7007,7 +7707,8 @@
     "es": "Hawlucha",
     "de": "Resladero",
     "fr": "Brutalibré",
-    "jp": "Luchabull"
+    "jp": "Luchabull",
+    "gen": 6
   },
   {
     "ndex": 702,
@@ -7017,7 +7718,8 @@
     "es": "Dedenne",
     "de": "Dedenne",
     "fr": "Dedenne",
-    "jp": "Dedenne"
+    "jp": "Dedenne",
+    "gen": 6
   },
   {
     "ndex": 703,
@@ -7027,7 +7729,8 @@
     "es": "Carbink",
     "de": "Rocara",
     "fr": "Strassie",
-    "jp": "Melecie"
+    "jp": "Melecie",
+    "gen": 6
   },
   {
     "ndex": 704,
@@ -7037,7 +7740,8 @@
     "es": "Goomy",
     "de": "Viscora",
     "fr": "Mucuscule",
-    "jp": "Numera"
+    "jp": "Numera",
+    "gen": 6
   },
   {
     "ndex": 705,
@@ -7047,7 +7751,8 @@
     "es": "Sliggoo",
     "de": "Viscargot",
     "fr": "Colimucus",
-    "jp": "Numeil"
+    "jp": "Numeil",
+    "gen": 6
   },
   {
     "ndex": 706,
@@ -7057,7 +7762,8 @@
     "es": "Goodra",
     "de": "Viscogon",
     "fr": "Muplodocus",
-    "jp": "Numelgon"
+    "jp": "Numelgon",
+    "gen": 6
   },
   {
     "ndex": 707,
@@ -7067,7 +7773,8 @@
     "es": "Klefki",
     "de": "Clavion",
     "fr": "Trousselin",
-    "jp": "Cleffy"
+    "jp": "Cleffy",
+    "gen": 6
   },
   {
     "ndex": 708,
@@ -7077,7 +7784,8 @@
     "es": "Phantump",
     "de": "Paragoni",
     "fr": "Brocélôme",
-    "jp": "Bokurei"
+    "jp": "Bokurei",
+    "gen": 6
   },
   {
     "ndex": 709,
@@ -7087,7 +7795,8 @@
     "es": "Trevenant",
     "de": "Trombork",
     "fr": "Desséliande",
-    "jp": "Ohrot"
+    "jp": "Ohrot",
+    "gen": 6
   },
   {
     "ndex": 710,
@@ -7097,7 +7806,8 @@
     "es": "Pumpkaboo",
     "de": "Irrbis",
     "fr": "Pitrouille",
-    "jp": "Bakeccha"
+    "jp": "Bakeccha",
+    "gen": 6
   },
   {
     "ndex": 711,
@@ -7107,7 +7817,8 @@
     "es": "Gourgeist",
     "de": "Pumpdjinn",
     "fr": "Banshitrouye",
-    "jp": "Pumpjin"
+    "jp": "Pumpjin",
+    "gen": 6
   },
   {
     "ndex": 712,
@@ -7117,7 +7828,8 @@
     "es": "Bergmite",
     "de": "Arktip",
     "fr": "Grelaçon",
-    "jp": "Kachikohru"
+    "jp": "Kachikohru",
+    "gen": 6
   },
   {
     "ndex": 713,
@@ -7127,7 +7839,8 @@
     "es": "Avalugg",
     "de": "Arktilas",
     "fr": "Séracrawl",
-    "jp": "Crebase"
+    "jp": "Crebase",
+    "gen": 6
   },
   {
     "ndex": 714,
@@ -7137,7 +7850,8 @@
     "es": "Noibat",
     "de": "eF-eM",
     "fr": "Sonistrelle",
-    "jp": "Onbat"
+    "jp": "Onbat",
+    "gen": 6
   },
   {
     "ndex": 715,
@@ -7147,7 +7861,8 @@
     "es": "Noivern",
     "de": "UHaFnir",
     "fr": "Bruyverne",
-    "jp": "Onvern"
+    "jp": "Onvern",
+    "gen": 6
   },
   {
     "ndex": 716,
@@ -7157,7 +7872,8 @@
     "es": "Xerneas",
     "de": "Xerneas",
     "fr": "Xerneas",
-    "jp": "Xerneas"
+    "jp": "Xerneas",
+    "gen": 6
   },
   {
     "ndex": 717,
@@ -7167,7 +7883,8 @@
     "es": "Yveltal",
     "de": "Yveltal",
     "fr": "Yveltal",
-    "jp": "Yveltal"
+    "jp": "Yveltal",
+    "gen": 6
   },
   {
     "ndex": 718,
@@ -7177,7 +7894,8 @@
     "es": "Zygarde",
     "de": "Zygarde",
     "fr": "Zygarde",
-    "jp": "Zygarde"
+    "jp": "Zygarde",
+    "gen": 6
   },
   {
     "ndex": 719,
@@ -7187,7 +7905,8 @@
     "es": "Diancie",
     "de": "Diancie",
     "fr": "Diancie",
-    "jp": "Diancie"
+    "jp": "Diancie",
+    "gen": 6
   },
   {
     "ndex": 720,
@@ -7197,7 +7916,8 @@
     "es": "Hoopa",
     "de": "Hoopa",
     "fr": "Hoopa",
-    "jp": "Hoopa"
+    "jp": "Hoopa",
+    "gen": 6
   },
   {
     "ndex": 721,
@@ -7207,7 +7927,8 @@
     "es": "Volcanion",
     "de": "Volcanion",
     "fr": "Volcanion",
-    "jp": "Volcanion"
+    "jp": "Volcanion",
+    "gen": 6
   },
   {
     "ndex": 722,
@@ -7217,7 +7938,8 @@
     "es": "Rowlet",
     "de": "Bauz",
     "fr": "Brindibou",
-    "jp": "Mokuroh"
+    "jp": "Mokuroh",
+    "gen": 7
   },
   {
     "ndex": 723,
@@ -7227,7 +7949,8 @@
     "es": "Dartrix",
     "de": "Arboretoss",
     "fr": "Efflèche",
-    "jp": "Fukuthrow"
+    "jp": "Fukuthrow",
+    "gen": 7
   },
   {
     "ndex": 724,
@@ -7237,7 +7960,8 @@
     "es": "Decidueye",
     "de": "Silvarro",
     "fr": "Archéduc",
-    "jp": "Junaiper"
+    "jp": "Junaiper",
+    "gen": 7
   },
   {
     "ndex": 725,
@@ -7247,7 +7971,8 @@
     "es": "Litten",
     "de": "Flamiau",
     "fr": "Flamiaou",
-    "jp": "Nyabby"
+    "jp": "Nyabby",
+    "gen": 7
   },
   {
     "ndex": 726,
@@ -7257,7 +7982,8 @@
     "es": "Torracat",
     "de": "Miezunder",
     "fr": "Matoufeu",
-    "jp": "Nyaheat"
+    "jp": "Nyaheat",
+    "gen": 7
   },
   {
     "ndex": 727,
@@ -7267,7 +7993,8 @@
     "es": "Incineroar",
     "de": "Fuegro",
     "fr": "Félinferno",
-    "jp": "Gaogaen"
+    "jp": "Gaogaen",
+    "gen": 7
   },
   {
     "ndex": 728,
@@ -7277,7 +8004,8 @@
     "es": "Popplio",
     "de": "Robball",
     "fr": "Otaquin",
-    "jp": "Ashimari"
+    "jp": "Ashimari",
+    "gen": 7
   },
   {
     "ndex": 729,
@@ -7287,7 +8015,8 @@
     "es": "Brionne",
     "de": "Marikeck",
     "fr": "Otarlette",
-    "jp": "Osyamari"
+    "jp": "Osyamari",
+    "gen": 7
   },
   {
     "ndex": 730,
@@ -7297,7 +8026,8 @@
     "es": "Primarina",
     "de": "Primarene",
     "fr": "Oratoria",
-    "jp": "Ashirene"
+    "jp": "Ashirene",
+    "gen": 7
   },
   {
     "ndex": 731,
@@ -7307,7 +8037,8 @@
     "es": "Pikipek",
     "de": "Peppeck",
     "fr": "Picassaut",
-    "jp": "Tsutsukera"
+    "jp": "Tsutsukera",
+    "gen": 7
   },
   {
     "ndex": 732,
@@ -7317,7 +8048,8 @@
     "es": "Trumbeak",
     "de": "Trompeck",
     "fr": "Piclairon",
-    "jp": "Kerarappa"
+    "jp": "Kerarappa",
+    "gen": 7
   },
   {
     "ndex": 733,
@@ -7327,7 +8059,8 @@
     "es": "Toucannon",
     "de": "Tukanon",
     "fr": "Bazoucan",
-    "jp": "Dodekabashi"
+    "jp": "Dodekabashi",
+    "gen": 7
   },
   {
     "ndex": 734,
@@ -7337,7 +8070,8 @@
     "es": "Yungoos",
     "de": "Mangunior",
     "fr": "Manglouton",
-    "jp": "Youngoose"
+    "jp": "Youngoose",
+    "gen": 7
   },
   {
     "ndex": 735,
@@ -7347,7 +8081,8 @@
     "es": "Gumshoos",
     "de": "Manguspektor",
     "fr": "Argouste",
-    "jp": "Dekagoose"
+    "jp": "Dekagoose",
+    "gen": 7
   },
   {
     "ndex": 736,
@@ -7357,7 +8092,8 @@
     "es": "Grubbin",
     "de": "Mabula",
     "fr": "Larvibule",
-    "jp": "Agojimushi"
+    "jp": "Agojimushi",
+    "gen": 7
   },
   {
     "ndex": 737,
@@ -7367,7 +8103,8 @@
     "es": "Charjabug",
     "de": "Akkup",
     "fr": "Chrysapile",
-    "jp": "Dendimushi"
+    "jp": "Dendimushi",
+    "gen": 7
   },
   {
     "ndex": 738,
@@ -7377,7 +8114,8 @@
     "es": "Vikavolt",
     "de": "Donarion",
     "fr": "Lucanon",
-    "jp": "Kuwagannon"
+    "jp": "Kuwagannon",
+    "gen": 7
   },
   {
     "ndex": 739,
@@ -7387,7 +8125,8 @@
     "es": "Crabrawler",
     "de": "Krabbox",
     "fr": "Crabagarre",
-    "jp": "Makenkani"
+    "jp": "Makenkani",
+    "gen": 7
   },
   {
     "ndex": 740,
@@ -7397,7 +8136,8 @@
     "es": "Crabominable",
     "de": "Krawell",
     "fr": "Crabominable",
-    "jp": "Kekenkani"
+    "jp": "Kekenkani",
+    "gen": 7
   },
   {
     "ndex": 741,
@@ -7407,7 +8147,8 @@
     "es": "Oricorio",
     "de": "Choreogel",
     "fr": "Plumeline",
-    "jp": "Odoridori"
+    "jp": "Odoridori",
+    "gen": 7
   },
   {
     "ndex": 742,
@@ -7417,7 +8158,8 @@
     "es": "Cutiefly",
     "de": "Wommel",
     "fr": "Bombydou",
-    "jp": "Abuly"
+    "jp": "Abuly",
+    "gen": 7
   },
   {
     "ndex": 743,
@@ -7427,7 +8169,8 @@
     "es": "Ribombee",
     "de": "Bandelby",
     "fr": "Rubombelle",
-    "jp": "Aburibbon"
+    "jp": "Aburibbon",
+    "gen": 7
   },
   {
     "ndex": 744,
@@ -7437,7 +8180,8 @@
     "es": "Rockruff",
     "de": "Wuffels",
     "fr": "Rocabot",
-    "jp": "Iwanko"
+    "jp": "Iwanko",
+    "gen": 7
   },
   {
     "ndex": 745,
@@ -7447,7 +8191,8 @@
     "es": "Lycanroc",
     "de": "Wolwerock",
     "fr": "Lougaroc",
-    "jp": "Lugarugan"
+    "jp": "Lugarugan",
+    "gen": 7
   },
   {
     "ndex": 746,
@@ -7457,7 +8202,8 @@
     "es": "Wishiwashi",
     "de": "Lusardin",
     "fr": "Froussardine",
-    "jp": "Yowashi"
+    "jp": "Yowashi",
+    "gen": 7
   },
   {
     "ndex": 747,
@@ -7467,7 +8213,8 @@
     "es": "Mareanie",
     "de": "Garstella",
     "fr": "Vorastérie",
-    "jp": "Hidoide"
+    "jp": "Hidoide",
+    "gen": 7
   },
   {
     "ndex": 748,
@@ -7477,7 +8224,8 @@
     "es": "Toxapex",
     "de": "Aggrostella",
     "fr": "Prédastérie",
-    "jp": "Dohidoide"
+    "jp": "Dohidoide",
+    "gen": 7
   },
   {
     "ndex": 749,
@@ -7487,7 +8235,8 @@
     "es": "Mudbray",
     "de": "Pampuli",
     "fr": "Tiboudet",
-    "jp": "Dorobanko"
+    "jp": "Dorobanko",
+    "gen": 7
   },
   {
     "ndex": 750,
@@ -7497,7 +8246,8 @@
     "es": "Mudsdale",
     "de": "Pampross",
     "fr": "Bourrinos",
-    "jp": "Banbadoro"
+    "jp": "Banbadoro",
+    "gen": 7
   },
   {
     "ndex": 751,
@@ -7507,7 +8257,8 @@
     "es": "Dewpider",
     "de": "Araqua",
     "fr": "Araqua",
-    "jp": "Shizukumo"
+    "jp": "Shizukumo",
+    "gen": 7
   },
   {
     "ndex": 752,
@@ -7517,7 +8268,8 @@
     "es": "Araquanid",
     "de": "Aranestro",
     "fr": "Tarenbulle",
-    "jp": "Onishizukumo"
+    "jp": "Onishizukumo",
+    "gen": 7
   },
   {
     "ndex": 753,
@@ -7527,7 +8279,8 @@
     "es": "Fomantis",
     "de": "Imantis",
     "fr": "Mimantis",
-    "jp": "Karikiri"
+    "jp": "Karikiri",
+    "gen": 7
   },
   {
     "ndex": 754,
@@ -7537,7 +8290,8 @@
     "es": "Lurantis",
     "de": "Mantidea",
     "fr": "Floramantis",
-    "jp": "Lalantes"
+    "jp": "Lalantes",
+    "gen": 7
   },
   {
     "ndex": 755,
@@ -7547,7 +8301,8 @@
     "es": "Morelull",
     "de": "Bubungus",
     "fr": "Spododo",
-    "jp": "Nemasyu"
+    "jp": "Nemasyu",
+    "gen": 7
   },
   {
     "ndex": 756,
@@ -7557,7 +8312,8 @@
     "es": "Shiinotic",
     "de": "Lamellux",
     "fr": "Lampignon",
-    "jp": "Mashade"
+    "jp": "Mashade",
+    "gen": 7
   },
   {
     "ndex": 757,
@@ -7567,7 +8323,8 @@
     "es": "Salandit",
     "de": "Molunk",
     "fr": "Tritox",
-    "jp": "Yatoumori"
+    "jp": "Yatoumori",
+    "gen": 7
   },
   {
     "ndex": 758,
@@ -7577,7 +8334,8 @@
     "es": "Salazzle",
     "de": "Amfira",
     "fr": "Malamandre",
-    "jp": "Ennewt"
+    "jp": "Ennewt",
+    "gen": 7
   },
   {
     "ndex": 759,
@@ -7587,7 +8345,8 @@
     "es": "Stufful",
     "de": "Velursi",
     "fr": "Nounourson",
-    "jp": "Nuikoguma"
+    "jp": "Nuikoguma",
+    "gen": 7
   },
   {
     "ndex": 760,
@@ -7597,7 +8356,8 @@
     "es": "Bewear",
     "de": "Kosturso",
     "fr": "Chelours",
-    "jp": "Kiteruguma"
+    "jp": "Kiteruguma",
+    "gen": 7
   },
   {
     "ndex": 761,
@@ -7607,7 +8367,8 @@
     "es": "Bounsweet",
     "de": "Frubberl",
     "fr": "Croquine",
-    "jp": "Amakaji"
+    "jp": "Amakaji",
+    "gen": 7
   },
   {
     "ndex": 762,
@@ -7617,7 +8378,8 @@
     "es": "Steenee",
     "de": "Frubaila",
     "fr": "Candine",
-    "jp": "Amamaiko"
+    "jp": "Amamaiko",
+    "gen": 7
   },
   {
     "ndex": 763,
@@ -7627,7 +8389,8 @@
     "es": "Tsareena",
     "de": "Fruyal",
     "fr": "Sucreine",
-    "jp": "Amajo"
+    "jp": "Amajo",
+    "gen": 7
   },
   {
     "ndex": 764,
@@ -7637,7 +8400,8 @@
     "es": "Comfey",
     "de": "Curelei",
     "fr": "Guérilande",
-    "jp": "Cuwawa"
+    "jp": "Cuwawa",
+    "gen": 7
   },
   {
     "ndex": 765,
@@ -7647,7 +8411,8 @@
     "es": "Oranguru",
     "de": "Kommandutan",
     "fr": "Gouroutan",
-    "jp": "Yareyuutan"
+    "jp": "Yareyuutan",
+    "gen": 7
   },
   {
     "ndex": 766,
@@ -7657,7 +8422,8 @@
     "es": "Passimian",
     "de": "Quartermak",
     "fr": "Quartermac",
-    "jp": "Nagetukesaru"
+    "jp": "Nagetukesaru",
+    "gen": 7
   },
   {
     "ndex": 767,
@@ -7667,7 +8433,8 @@
     "es": "Wimpod",
     "de": "Reißlaus",
     "fr": "Sovkipou",
-    "jp": "Kosokumushi"
+    "jp": "Kosokumushi",
+    "gen": 7
   },
   {
     "ndex": 768,
@@ -7677,7 +8444,8 @@
     "es": "Golisopod",
     "de": "Tectass",
     "fr": "Sarmuraï",
-    "jp": "Gusokumusha"
+    "jp": "Gusokumusha",
+    "gen": 7
   },
   {
     "ndex": 769,
@@ -7687,7 +8455,8 @@
     "es": "Sandygast",
     "de": "Sankabuh",
     "fr": "Bacabouh",
-    "jp": "Sunaba"
+    "jp": "Sunaba",
+    "gen": 7
   },
   {
     "ndex": 770,
@@ -7697,7 +8466,8 @@
     "es": "Palossand",
     "de": "Colossand",
     "fr": "Trépassable",
-    "jp": "Sirodethna"
+    "jp": "Sirodethna",
+    "gen": 7
   },
   {
     "ndex": 771,
@@ -7707,7 +8477,8 @@
     "es": "Pyukumuku",
     "de": "Gufa",
     "fr": "Concombaffe",
-    "jp": "Namakobushi"
+    "jp": "Namakobushi",
+    "gen": 7
   },
   {
     "ndex": 772,
@@ -7717,7 +8488,8 @@
     "es": "Código Cero",
     "de": "Typ:Null",
     "fr": "Type:0",
-    "jp": "Type: Null"
+    "jp": "Type: Null",
+    "gen": 7
   },
   {
     "ndex": 773,
@@ -7727,7 +8499,8 @@
     "es": "Silvally",
     "de": "Amigento",
     "fr": "Silvallié",
-    "jp": "Silvady"
+    "jp": "Silvady",
+    "gen": 7
   },
   {
     "ndex": 774,
@@ -7737,7 +8510,8 @@
     "es": "Minior",
     "de": "Meteno",
     "fr": "Météno",
-    "jp": "Meteno"
+    "jp": "Meteno",
+    "gen": 7
   },
   {
     "ndex": 775,
@@ -7747,7 +8521,8 @@
     "es": "Komala",
     "de": "Koalelu",
     "fr": "Dodoala",
-    "jp": "Nekkoara"
+    "jp": "Nekkoara",
+    "gen": 7
   },
   {
     "ndex": 776,
@@ -7757,7 +8532,8 @@
     "es": "Turtonator",
     "de": "Tortunator",
     "fr": "Boumata",
-    "jp": "Bakugames"
+    "jp": "Bakugames",
+    "gen": 7
   },
   {
     "ndex": 777,
@@ -7767,7 +8543,8 @@
     "es": "Togedemaru",
     "de": "Togedemaru",
     "fr": "Togedemaru",
-    "jp": "Togedemaru"
+    "jp": "Togedemaru",
+    "gen": 7
   },
   {
     "ndex": 778,
@@ -7777,7 +8554,8 @@
     "es": "Mimikyu",
     "de": "Mimigma",
     "fr": "Mimiqui",
-    "jp": "Mimikkyu"
+    "jp": "Mimikkyu",
+    "gen": 7
   },
   {
     "ndex": 779,
@@ -7787,7 +8565,8 @@
     "es": "Bruxish",
     "de": "Knirfish",
     "fr": "Denticrisse",
-    "jp": "Hagigishiri"
+    "jp": "Hagigishiri",
+    "gen": 7
   },
   {
     "ndex": 780,
@@ -7797,7 +8576,8 @@
     "es": "Drampa",
     "de": "Sen-Long",
     "fr": "Draïeul",
-    "jp": "Jijilong"
+    "jp": "Jijilong",
+    "gen": 7
   },
   {
     "ndex": 781,
@@ -7807,7 +8587,8 @@
     "es": "Dhelmise",
     "de": "Moruda",
     "fr": "Sinistrail",
-    "jp": "Dadarin"
+    "jp": "Dadarin",
+    "gen": 7
   },
   {
     "ndex": 782,
@@ -7817,7 +8598,8 @@
     "es": "Jangmo-o",
     "de": "Miniras",
     "fr": "Bébécaille",
-    "jp": "Jyarako"
+    "jp": "Jyarako",
+    "gen": 7
   },
   {
     "ndex": 783,
@@ -7827,7 +8609,8 @@
     "es": "Hakamo-o",
     "de": "Mediras",
     "fr": "Écaïd",
-    "jp": "Jyarango"
+    "jp": "Jyarango",
+    "gen": 7
   },
   {
     "ndex": 784,
@@ -7837,7 +8620,8 @@
     "es": "Kommo-o",
     "de": "Grandiras",
     "fr": "Ékaïser",
-    "jp": "Jyararanga"
+    "jp": "Jyararanga",
+    "gen": 7
   },
   {
     "ndex": 785,
@@ -7847,7 +8631,8 @@
     "es": "Tapu Koko",
     "de": "Kapu-Riki",
     "fr": "Tokorico",
-    "jp": "Kapu-Kokeko"
+    "jp": "Kapu-Kokeko",
+    "gen": 7
   },
   {
     "ndex": 786,
@@ -7857,7 +8642,8 @@
     "es": "Tapu Lele",
     "de": "Kapu-Fala",
     "fr": "Tokopiyon",
-    "jp": "Kapu-Tetefu"
+    "jp": "Kapu-Tetefu",
+    "gen": 7
   },
   {
     "ndex": 787,
@@ -7867,7 +8653,8 @@
     "es": "Tapu Bulu",
     "de": "Kapu-Toro",
     "fr": "Tokotoro",
-    "jp": "Kapu-Bulul"
+    "jp": "Kapu-Bulul",
+    "gen": 7
   },
   {
     "ndex": 788,
@@ -7877,7 +8664,8 @@
     "es": "Tapu Fini",
     "de": "Kapu-Kime",
     "fr": "Tokopisco",
-    "jp": "Kapu-Rehire"
+    "jp": "Kapu-Rehire",
+    "gen": 7
   },
   {
     "ndex": 789,
@@ -7887,7 +8675,8 @@
     "es": "Cosmog",
     "de": "Cosmog",
     "fr": "Cosmog",
-    "jp": "Cosmog"
+    "jp": "Cosmog",
+    "gen": 7
   },
   {
     "ndex": 790,
@@ -7897,7 +8686,8 @@
     "es": "Cosmoem",
     "de": "Cosmovum",
     "fr": "Cosmovum",
-    "jp": "Cosmovum"
+    "jp": "Cosmovum",
+    "gen": 7
   },
   {
     "ndex": 791,
@@ -7907,7 +8697,8 @@
     "es": "Solgaleo",
     "de": "Solgaleo",
     "fr": "Solgaleo",
-    "jp": "Solgaleo"
+    "jp": "Solgaleo",
+    "gen": 7
   },
   {
     "ndex": 792,
@@ -7917,7 +8708,8 @@
     "es": "Lunala",
     "de": "Lunala",
     "fr": "Lunala",
-    "jp": "Lunala"
+    "jp": "Lunala",
+    "gen": 7
   },
   {
     "ndex": 793,
@@ -7927,7 +8719,8 @@
     "es": "Nihilego",
     "de": "Anego",
     "fr": "Zéroïd",
-    "jp": "Uturoid"
+    "jp": "Uturoid",
+    "gen": 7
   },
   {
     "ndex": 794,
@@ -7937,7 +8730,8 @@
     "es": "Buzzwole",
     "de": "Masskito",
     "fr": "Mouscoto",
-    "jp": "Massivoon"
+    "jp": "Massivoon",
+    "gen": 7
   },
   {
     "ndex": 795,
@@ -7947,7 +8741,8 @@
     "es": "Pheromosa",
     "de": "Schabelle",
     "fr": "Cancrelove",
-    "jp": "Pheroache"
+    "jp": "Pheroache",
+    "gen": 7
   },
   {
     "ndex": 796,
@@ -7957,7 +8752,8 @@
     "es": "Xurkitree",
     "de": "Voltriant",
     "fr": "Câblifère",
-    "jp": "Denjyumoku"
+    "jp": "Denjyumoku",
+    "gen": 7
   },
   {
     "ndex": 797,
@@ -7967,7 +8763,8 @@
     "es": "Celesteela",
     "de": "Kaguron",
     "fr": "Bamboiselle",
-    "jp": "Tekkaguya"
+    "jp": "Tekkaguya",
+    "gen": 7
   },
   {
     "ndex": 798,
@@ -7977,7 +8774,8 @@
     "es": "Kartana",
     "de": "Katagami",
     "fr": "Katagami",
-    "jp": "Kamiturugi"
+    "jp": "Kamiturugi",
+    "gen": 7
   },
   {
     "ndex": 799,
@@ -7987,7 +8785,8 @@
     "es": "Guzzlord",
     "de": "Schlingking",
     "fr": "Engloutyran",
-    "jp": "Akuziking"
+    "jp": "Akuziking",
+    "gen": 7
   },
   {
     "ndex": 800,
@@ -7997,7 +8796,8 @@
     "es": "Necrozma",
     "de": "Necrozma",
     "fr": "Necrozma",
-    "jp": "Necrozma"
+    "jp": "Necrozma",
+    "gen": 7
   },
   {
     "ndex": 801,
@@ -8007,7 +8807,8 @@
     "es": "Magearna",
     "de": "Magearna",
     "fr": "Magearna",
-    "jp": "Magearna"
+    "jp": "Magearna",
+    "gen": 7
   },
   {
     "ndex": 802,
@@ -8017,7 +8818,8 @@
     "es": "Marshadow",
     "de": "Marshadow",
     "fr": "Marshadow",
-    "jp": "Marshadow"
+    "jp": "Marshadow",
+    "gen": 7
   },
   {
     "ndex": 803,
@@ -8027,7 +8829,8 @@
     "es": "Poipole",
     "de": "Venicro",
     "fr": "Vémini",
-    "jp": "Bevenom"
+    "jp": "Bevenom",
+    "gen": 7
   },
   {
     "ndex": 804,
@@ -8037,7 +8840,8 @@
     "es": "Naganadel",
     "de": "Agoyon",
     "fr": "Mandrillon",
-    "jp": "Agoyon"
+    "jp": "Agoyon",
+    "gen": 7
   },
   {
     "ndex": 805,
@@ -8047,7 +8851,8 @@
     "es": "Stakataka",
     "de": "Muramura",
     "fr": "Ama-Ama",
-    "jp": "Tundetunde"
+    "jp": "Tundetunde",
+    "gen": 7
   },
   {
     "ndex": 806,
@@ -8057,7 +8862,8 @@
     "es": "Blacephalon",
     "de": "Kopplosio",
     "fr": "Pierroteknik",
-    "jp": "Zugadoon"
+    "jp": "Zugadoon",
+    "gen": 7
   },
   {
     "ndex": 807,
@@ -8067,7 +8873,8 @@
     "es": "Zeraora",
     "de": "Zeraora",
     "fr": "Zeraora",
-    "jp": "Zeraora"
+    "jp": "Zeraora",
+    "gen": 7
   },
   {
     "ndex": 808,
@@ -8077,7 +8884,8 @@
     "es": "Meltan",
     "de": "Meltan",
     "fr": "Meltan",
-    "jp": "Meltan"
+    "jp": "Meltan",
+    "gen": 7
   },
   {
     "ndex": 809,
@@ -8087,7 +8895,8 @@
     "es": "Melmetal",
     "de": "Melmetal",
     "fr": "Melmetal",
-    "jp": "Melmetal"
+    "jp": "Melmetal",
+    "gen": 7
   },
   {
     "ndex": 810,
@@ -8097,7 +8906,8 @@
     "es": "Grookey",
     "de": "Chimpep",
     "fr": "Ouistempo",
-    "jp": "Sarunori"
+    "jp": "Sarunori",
+    "gen": 8
   },
   {
     "ndex": 811,
@@ -8107,7 +8917,8 @@
     "es": "Thwackey",
     "de": "Chimstix",
     "fr": "Badabouin",
-    "jp": "Bachinkey"
+    "jp": "Bachinkey",
+    "gen": 8
   },
   {
     "ndex": 812,
@@ -8117,7 +8928,8 @@
     "es": "Rillaboom",
     "de": "Gortrom",
     "fr": "Gorythmic",
-    "jp": "Gorirander"
+    "jp": "Gorirander",
+    "gen": 8
   },
   {
     "ndex": 813,
@@ -8127,7 +8939,8 @@
     "es": "Scorbunny",
     "de": "Hopplo",
     "fr": "Flambino",
-    "jp": "Hibanny"
+    "jp": "Hibanny",
+    "gen": 8
   },
   {
     "ndex": 814,
@@ -8137,7 +8950,8 @@
     "es": "Raboot",
     "de": "Kickerlo",
     "fr": "Lapyro",
-    "jp": "Rabbifuto"
+    "jp": "Rabbifuto",
+    "gen": 8
   },
   {
     "ndex": 815,
@@ -8147,7 +8961,8 @@
     "es": "Cinderace",
     "de": "Liberlo",
     "fr": "Pyrobut",
-    "jp": "Aceburn"
+    "jp": "Aceburn",
+    "gen": 8
   },
   {
     "ndex": 816,
@@ -8157,7 +8972,8 @@
     "es": "Sobble",
     "de": "Memmeon",
     "fr": "Larméléon",
-    "jp": "Messon"
+    "jp": "Messon",
+    "gen": 8
   },
   {
     "ndex": 817,
@@ -8167,7 +8983,8 @@
     "es": "Drizzile",
     "de": "Phlegleon",
     "fr": "Arrozard",
-    "jp": "Jimereon"
+    "jp": "Jimereon",
+    "gen": 8
   },
   {
     "ndex": 818,
@@ -8177,7 +8994,8 @@
     "es": "Inteleon",
     "de": "Intelleon",
     "fr": "Lézargus",
-    "jp": "Intereon"
+    "jp": "Intereon",
+    "gen": 8
   },
   {
     "ndex": 819,
@@ -8187,7 +9005,8 @@
     "es": "Skwovet",
     "de": "Raffel",
     "fr": "Rongourmand",
-    "jp": "Hoshigarisu"
+    "jp": "Hoshigarisu",
+    "gen": 8
   },
   {
     "ndex": 820,
@@ -8197,7 +9016,8 @@
     "es": "Greedent",
     "de": "Schlaraffel",
     "fr": "Rongrigou",
-    "jp": "Yokubarisu"
+    "jp": "Yokubarisu",
+    "gen": 8
   },
   {
     "ndex": 821,
@@ -8207,7 +9027,8 @@
     "es": "Rookidee",
     "de": "Meikro",
     "fr": "Minisange",
-    "jp": "Kokogara"
+    "jp": "Kokogara",
+    "gen": 8
   },
   {
     "ndex": 822,
@@ -8217,7 +9038,8 @@
     "es": "Corvisquire",
     "de": "Kranoviz",
     "fr": "Bleuseille",
-    "jp": "Aogarasu"
+    "jp": "Aogarasu",
+    "gen": 8
   },
   {
     "ndex": 823,
@@ -8227,7 +9049,8 @@
     "es": "Corviknight",
     "de": "Krarmor",
     "fr": "Corvaillus",
-    "jp": "Armorga"
+    "jp": "Armorga",
+    "gen": 8
   },
   {
     "ndex": 824,
@@ -8237,7 +9060,8 @@
     "es": "Blipbug",
     "de": "Sensect",
     "fr": "Larvadar",
-    "jp": "Sacchimushi"
+    "jp": "Sacchimushi",
+    "gen": 8
   },
   {
     "ndex": 825,
@@ -8247,7 +9071,8 @@
     "es": "Dottler",
     "de": "Keradar",
     "fr": "Coléodôme",
-    "jp": "Redomushi"
+    "jp": "Redomushi",
+    "gen": 8
   },
   {
     "ndex": 826,
@@ -8257,7 +9082,8 @@
     "es": "Orbeetle",
     "de": "Maritellit",
     "fr": "Astronelle",
-    "jp": "Eolb"
+    "jp": "Eolb",
+    "gen": 8
   },
   {
     "ndex": 827,
@@ -8267,7 +9093,8 @@
     "es": "Nickit",
     "de": "Kleptifux",
     "fr": "Goupilou",
-    "jp": "Kusune"
+    "jp": "Kusune",
+    "gen": 8
   },
   {
     "ndex": 828,
@@ -8277,7 +9104,8 @@
     "es": "Thievul",
     "de": "Gaunux",
     "fr": "Roublenard",
-    "jp": "Foxly"
+    "jp": "Foxly",
+    "gen": 8
   },
   {
     "ndex": 829,
@@ -8287,7 +9115,8 @@
     "es": "Gossifleur",
     "de": "Cottini",
     "fr": "Tournicoton",
-    "jp": "Himenka"
+    "jp": "Himenka",
+    "gen": 8
   },
   {
     "ndex": 830,
@@ -8297,7 +9126,8 @@
     "es": "Eldegoss",
     "de": "Cottomi",
     "fr": "Blancoton",
-    "jp": "Watashiraga"
+    "jp": "Watashiraga",
+    "gen": 8
   },
   {
     "ndex": 831,
@@ -8307,7 +9137,8 @@
     "es": "Wooloo",
     "de": "Wolly",
     "fr": "Moumouton",
-    "jp": "Wooluu"
+    "jp": "Wooluu",
+    "gen": 8
   },
   {
     "ndex": 832,
@@ -8317,7 +9148,8 @@
     "es": "Dubwool",
     "de": "Zwollock",
     "fr": "Moumouflon",
-    "jp": "Baiwooluu"
+    "jp": "Baiwooluu",
+    "gen": 8
   },
   {
     "ndex": 833,
@@ -8327,7 +9159,8 @@
     "es": "Chewtle",
     "de": "Kamehaps",
     "fr": "Khélocrok",
-    "jp": "Kamukame"
+    "jp": "Kamukame",
+    "gen": 8
   },
   {
     "ndex": 834,
@@ -8337,7 +9170,8 @@
     "es": "Drednaw",
     "de": "Kamalm",
     "fr": "Torgamord",
-    "jp": "Kajirigame"
+    "jp": "Kajirigame",
+    "gen": 8
   },
   {
     "ndex": 835,
@@ -8347,7 +9181,8 @@
     "es": "Yamper",
     "de": "Voldi",
     "fr": "Voltoutou",
-    "jp": "Wanpachi"
+    "jp": "Wanpachi",
+    "gen": 8
   },
   {
     "ndex": 836,
@@ -8357,7 +9192,8 @@
     "es": "Boltund",
     "de": "Bellektro",
     "fr": "Fulgudog",
-    "jp": "Pulsewan"
+    "jp": "Pulsewan",
+    "gen": 8
   },
   {
     "ndex": 837,
@@ -8367,7 +9203,8 @@
     "es": "Rolycoly",
     "de": "Klonkett",
     "fr": "Charbi",
-    "jp": "Tandon"
+    "jp": "Tandon",
+    "gen": 8
   },
   {
     "ndex": 838,
@@ -8377,7 +9214,8 @@
     "es": "Carkol",
     "de": "Wagong",
     "fr": "Wagomine",
-    "jp": "Toroggon"
+    "jp": "Toroggon",
+    "gen": 8
   },
   {
     "ndex": 839,
@@ -8387,7 +9225,8 @@
     "es": "Coalossal",
     "de": "Montecarbo",
     "fr": "Monthracite",
-    "jp": "Sekitanzan"
+    "jp": "Sekitanzan",
+    "gen": 8
   },
   {
     "ndex": 840,
@@ -8397,7 +9236,8 @@
     "es": "Applin",
     "de": "Knapfel",
     "fr": "Verpom",
-    "jp": "Kajicchu"
+    "jp": "Kajicchu",
+    "gen": 8
   },
   {
     "ndex": 841,
@@ -8407,7 +9247,8 @@
     "es": "Flapple",
     "de": "Drapfel",
     "fr": "Pomdrapi",
-    "jp": "Appryu"
+    "jp": "Appryu",
+    "gen": 8
   },
   {
     "ndex": 842,
@@ -8417,7 +9258,8 @@
     "es": "Appletun",
     "de": "Schlapfel",
     "fr": "Dratatin",
-    "jp": "Tarupple"
+    "jp": "Tarupple",
+    "gen": 8
   },
   {
     "ndex": 843,
@@ -8427,7 +9269,8 @@
     "es": "Silicobra",
     "de": "Salanga",
     "fr": "Dunaja",
-    "jp": "Sunahebi"
+    "jp": "Sunahebi",
+    "gen": 8
   },
   {
     "ndex": 844,
@@ -8437,7 +9280,8 @@
     "es": "Sandaconda",
     "de": "Sanaconda",
     "fr": "Dunaconda",
-    "jp": "Sadaija"
+    "jp": "Sadaija",
+    "gen": 8
   },
   {
     "ndex": 845,
@@ -8447,7 +9291,8 @@
     "es": "Cramorant",
     "de": "Urgl",
     "fr": "Nigosier",
-    "jp": "Uu"
+    "jp": "Uu",
+    "gen": 8
   },
   {
     "ndex": 846,
@@ -8457,7 +9302,8 @@
     "es": "Arrokuda",
     "de": "Pikuda",
     "fr": "Embrochet",
-    "jp": "Sasikamasu"
+    "jp": "Sasikamasu",
+    "gen": 8
   },
   {
     "ndex": 847,
@@ -8467,7 +9313,8 @@
     "es": "Barraskewda",
     "de": "Barrakiefa",
     "fr": "Hastacuda",
-    "jp": "Kamasujaw"
+    "jp": "Kamasujaw",
+    "gen": 8
   },
   {
     "ndex": 848,
@@ -8477,7 +9324,8 @@
     "es": "Toxel",
     "de": "Toxel",
     "fr": "Toxizap",
-    "jp": "Eleson"
+    "jp": "Eleson",
+    "gen": 8
   },
   {
     "ndex": 849,
@@ -8487,7 +9335,8 @@
     "es": "Toxtricity",
     "de": "Riffex",
     "fr": "Salarsen",
-    "jp": "Strinder"
+    "jp": "Strinder",
+    "gen": 8
   },
   {
     "ndex": 850,
@@ -8497,7 +9346,8 @@
     "es": "Sizzlipede",
     "de": "Thermopod",
     "fr": "Grillepattes",
-    "jp": "Yakude"
+    "jp": "Yakude",
+    "gen": 8
   },
   {
     "ndex": 851,
@@ -8507,7 +9357,8 @@
     "es": "Centiskorch",
     "de": "Infernopod",
     "fr": "Scolocendre",
-    "jp": "Maruyakude"
+    "jp": "Maruyakude",
+    "gen": 8
   },
   {
     "ndex": 852,
@@ -8517,7 +9368,8 @@
     "es": "Clobbopus",
     "de": "Klopptopus",
     "fr": "Poulpaf",
-    "jp": "Tatakko"
+    "jp": "Tatakko",
+    "gen": 8
   },
   {
     "ndex": 853,
@@ -8527,7 +9379,8 @@
     "es": "Grapploct",
     "de": "Kaocto",
     "fr": "Krakos",
-    "jp": "Otosupus"
+    "jp": "Otosupus",
+    "gen": 8
   },
   {
     "ndex": 854,
@@ -8537,7 +9390,8 @@
     "es": "Sinistea",
     "de": "Fatalitee",
     "fr": "Théffroi",
-    "jp": "Yabacha"
+    "jp": "Yabacha",
+    "gen": 8
   },
   {
     "ndex": 855,
@@ -8547,7 +9401,8 @@
     "es": "Polteageist",
     "de": "Mortipot",
     "fr": "Polthégeist",
-    "jp": "Potdeath"
+    "jp": "Potdeath",
+    "gen": 8
   },
   {
     "ndex": 856,
@@ -8557,7 +9412,8 @@
     "es": "Hatenna",
     "de": "Brimova",
     "fr": "Bibichut",
-    "jp": "Mibrim"
+    "jp": "Mibrim",
+    "gen": 8
   },
   {
     "ndex": 857,
@@ -8567,7 +9423,8 @@
     "es": "Hattrem",
     "de": "Brimano",
     "fr": "Chapotus",
-    "jp": "Tebrim"
+    "jp": "Tebrim",
+    "gen": 8
   },
   {
     "ndex": 858,
@@ -8577,7 +9434,8 @@
     "es": "Hatterene",
     "de": "Silembrim",
     "fr": "Sorcilence",
-    "jp": "Brimuon"
+    "jp": "Brimuon",
+    "gen": 8
   },
   {
     "ndex": 859,
@@ -8587,7 +9445,8 @@
     "es": "Impidimp",
     "de": "Bähmon",
     "fr": "Grimalin",
-    "jp": "Beroba"
+    "jp": "Beroba",
+    "gen": 8
   },
   {
     "ndex": 860,
@@ -8597,7 +9456,8 @@
     "es": "Morgrem",
     "de": "Pelzebub",
     "fr": "Fourbelin",
-    "jp": "Gimoh"
+    "jp": "Gimoh",
+    "gen": 8
   },
   {
     "ndex": 861,
@@ -8607,7 +9467,8 @@
     "es": "Grimmsnarl",
     "de": "Olangaar",
     "fr": "Angoliath",
-    "jp": "Ohlonge"
+    "jp": "Ohlonge",
+    "gen": 8
   },
   {
     "ndex": 862,
@@ -8617,7 +9478,8 @@
     "es": "Obstagoon",
     "de": "Barrikadax",
     "fr": "Ixon",
-    "jp": "Tachifusaguma"
+    "jp": "Tachifusaguma",
+    "gen": 8
   },
   {
     "ndex": 863,
@@ -8627,7 +9489,8 @@
     "es": "Perrserker",
     "de": "Mauzinger",
     "fr": "Berserkatt",
-    "jp": "Nyaiking"
+    "jp": "Nyaiking",
+    "gen": 8
   },
   {
     "ndex": 864,
@@ -8637,7 +9500,8 @@
     "es": "Cursola",
     "de": "Gorgasonn",
     "fr": "Corayôme",
-    "jp": "Sunigoon"
+    "jp": "Sunigoon",
+    "gen": 8
   },
   {
     "ndex": 865,
@@ -8647,7 +9511,8 @@
     "es": "Sirfetch'd",
     "de": "Lauchzelot",
     "fr": "Palarticho",
-    "jp": "Negigaknight"
+    "jp": "Negigaknight",
+    "gen": 8
   },
   {
     "ndex": 866,
@@ -8657,7 +9522,8 @@
     "es": "Mr. Rime",
     "de": "Pantifrost",
     "fr": "M. Glaquette",
-    "jp": "Barrikohru"
+    "jp": "Barrikohru",
+    "gen": 8
   },
   {
     "ndex": 867,
@@ -8667,7 +9533,8 @@
     "es": "Runerigus",
     "de": "Oghnatoll",
     "fr": "Tutétékri",
-    "jp": "Deathbarn"
+    "jp": "Deathbarn",
+    "gen": 8
   },
   {
     "ndex": 868,
@@ -8677,7 +9544,8 @@
     "es": "Milcery",
     "de": "Hokumil",
     "fr": "Crèmy",
-    "jp": "Mahomil"
+    "jp": "Mahomil",
+    "gen": 8
   },
   {
     "ndex": 869,
@@ -8687,7 +9555,8 @@
     "es": "Alcremie",
     "de": "Pokusan",
     "fr": "Charmilly",
-    "jp": "Mawhip"
+    "jp": "Mawhip",
+    "gen": 8
   },
   {
     "ndex": 870,
@@ -8697,7 +9566,8 @@
     "es": "Falinks",
     "de": "Legios",
     "fr": "Hexadron",
-    "jp": "Tairetsu"
+    "jp": "Tairetsu",
+    "gen": 8
   },
   {
     "ndex": 871,
@@ -8707,7 +9577,8 @@
     "es": "Pincurchin",
     "de": "Britzigel",
     "fr": "Wattapik",
-    "jp": "Bachinuni"
+    "jp": "Bachinuni",
+    "gen": 8
   },
   {
     "ndex": 872,
@@ -8717,7 +9588,8 @@
     "es": "Snom",
     "de": "Snomnom",
     "fr": "Frissonille",
-    "jp": "Yukihami"
+    "jp": "Yukihami",
+    "gen": 8
   },
   {
     "ndex": 873,
@@ -8727,7 +9599,8 @@
     "es": "Frosmoth",
     "de": "Mottineva",
     "fr": "Beldeneige",
-    "jp": "Mothnow"
+    "jp": "Mothnow",
+    "gen": 8
   },
   {
     "ndex": 874,
@@ -8737,7 +9610,8 @@
     "es": "Stonjourner",
     "de": "Humanolith",
     "fr": "Dolman",
-    "jp": "Ishihengin"
+    "jp": "Ishihengin",
+    "gen": 8
   },
   {
     "ndex": 875,
@@ -8747,7 +9621,8 @@
     "es": "Eiscue",
     "de": "Kubuin",
     "fr": "Bekaglaçon",
-    "jp": "Korippo"
+    "jp": "Korippo",
+    "gen": 8
   },
   {
     "ndex": 876,
@@ -8757,7 +9632,8 @@
     "es": "Indeedee",
     "de": "Servol",
     "fr": "Wimessir",
-    "jp": "Yessan"
+    "jp": "Yessan",
+    "gen": 8
   },
   {
     "ndex": 877,
@@ -8767,7 +9643,8 @@
     "es": "Morpeko",
     "de": "Morpeko",
     "fr": "Morpeko",
-    "jp": "Morpeko"
+    "jp": "Morpeko",
+    "gen": 8
   },
   {
     "ndex": 878,
@@ -8777,7 +9654,8 @@
     "es": "Cufant",
     "de": "Kupfanti",
     "fr": "Charibari",
-    "jp": "Zoudou"
+    "jp": "Zoudou",
+    "gen": 8
   },
   {
     "ndex": 879,
@@ -8787,7 +9665,8 @@
     "es": "Copperajah",
     "de": "Patinaraja",
     "fr": "Pachyradjah",
-    "jp": "Daioudou"
+    "jp": "Daioudou",
+    "gen": 8
   },
   {
     "ndex": 880,
@@ -8797,7 +9676,8 @@
     "es": "Dracozolt",
     "de": "Lectragon",
     "fr": "Galvagon",
-    "jp": "Patchiragon"
+    "jp": "Patchiragon",
+    "gen": 8
   },
   {
     "ndex": 881,
@@ -8807,7 +9687,8 @@
     "es": "Arctozolt",
     "de": "Lecryodon",
     "fr": "Galvagla",
-    "jp": "Patchilldon"
+    "jp": "Patchilldon",
+    "gen": 8
   },
   {
     "ndex": 882,
@@ -8817,7 +9698,8 @@
     "es": "Dracovish",
     "de": "Pescragon",
     "fr": "Hydragon",
-    "jp": "Uonoragon"
+    "jp": "Uonoragon",
+    "gen": 8
   },
   {
     "ndex": 883,
@@ -8827,7 +9709,8 @@
     "es": "Arctovish",
     "de": "Pescryodon",
     "fr": "Hydragla",
-    "jp": "Uochilldon"
+    "jp": "Uochilldon",
+    "gen": 8
   },
   {
     "ndex": 884,
@@ -8837,7 +9720,8 @@
     "es": "Duraludon",
     "de": "Duraludon",
     "fr": "Duralugon",
-    "jp": "Duraludon"
+    "jp": "Duraludon",
+    "gen": 8
   },
   {
     "ndex": 885,
@@ -8847,7 +9731,8 @@
     "es": "Dreepy",
     "de": "Grolldra",
     "fr": "Fantyrm",
-    "jp": "Dorameshiya"
+    "jp": "Dorameshiya",
+    "gen": 8
   },
   {
     "ndex": 886,
@@ -8857,7 +9742,8 @@
     "es": "Drakloak",
     "de": "Phandra",
     "fr": "Dispareptil",
-    "jp": "Doronch"
+    "jp": "Doronch",
+    "gen": 8
   },
   {
     "ndex": 887,
@@ -8867,7 +9753,8 @@
     "es": "Dragapult",
     "de": "Katapuldra",
     "fr": "Lanssorien",
-    "jp": "Dorapult"
+    "jp": "Dorapult",
+    "gen": 8
   },
   {
     "ndex": 888,
@@ -8877,7 +9764,8 @@
     "es": "Zacian",
     "de": "Zacian",
     "fr": "Zacian",
-    "jp": "Zacian"
+    "jp": "Zacian",
+    "gen": 8
   },
   {
     "ndex": 889,
@@ -8887,7 +9775,8 @@
     "es": "Zamazenta",
     "de": "Zamazenta",
     "fr": "Zamazenta",
-    "jp": "Zamazenta"
+    "jp": "Zamazenta",
+    "gen": 8
   },
   {
     "ndex": 890,
@@ -8897,7 +9786,8 @@
     "es": "Eternatus",
     "de": "Endynalos",
     "fr": "Éthernatos",
-    "jp": "Mugendina"
+    "jp": "Mugendina",
+    "gen": 8
   },
   {
     "ndex": 891,
@@ -8907,7 +9797,8 @@
     "es": "Kubfu",
     "de": "Dakuma",
     "fr": "Wushours",
-    "jp": "Dakuma"
+    "jp": "Dakuma",
+    "gen": 8
   },
   {
     "ndex": 892,
@@ -8917,7 +9808,8 @@
     "es": "Urshifu",
     "de": "Wulaosu",
     "fr": "Shifours",
-    "jp": "Wulaosu"
+    "jp": "Wulaosu",
+    "gen": 8
   },
   {
     "ndex": 893,
@@ -8927,7 +9819,8 @@
     "es": "Zarude",
     "de": "Zarude",
     "fr": "Zarude",
-    "jp": "Zarude"
+    "jp": "Zarude",
+    "gen": 8
   },
   {
     "ndex": 894,
@@ -8937,7 +9830,8 @@
     "es": "Regieleki",
     "de": "Regieleki",
     "fr": "Regieleki",
-    "jp": "Regieleki"
+    "jp": "Regieleki",
+    "gen": 8
   },
   {
     "ndex": 895,
@@ -8947,7 +9841,8 @@
     "es": "Regidrago",
     "de": "Regidrago",
     "fr": "Regidrago",
-    "jp": "Regidorago"
+    "jp": "Regidorago",
+    "gen": 8
   },
   {
     "ndex": 896,
@@ -8957,7 +9852,8 @@
     "es": "Glastrier",
     "de": "Polaross",
     "fr": "Blizzeval",
-    "jp": "Blizzapos"
+    "jp": "Blizzapos",
+    "gen": 8
   },
   {
     "ndex": 897,
@@ -8967,7 +9863,8 @@
     "es": "Spectrier",
     "de": "Phantoross",
     "fr": "Spectreval",
-    "jp": "Wraithpos"
+    "jp": "Wraithpos",
+    "gen": 8
   },
   {
     "ndex": 898,
@@ -8977,7 +9874,8 @@
     "es": "Calyrex",
     "de": "Coronospa",
     "fr": "Sylveroy",
-    "jp": "Budrex"
+    "jp": "Budrex",
+    "gen": 8
   },
   {
     "ndex": 899,
@@ -8987,7 +9885,8 @@
     "es": "Wyrdeer",
     "de": "Damythir",
     "fr": "Cerbyllin",
-    "jp": "Ayashishi"
+    "jp": "Ayashishi",
+    "gen": 8
   },
   {
     "ndex": 900,
@@ -8997,7 +9896,8 @@
     "es": "Kleavor",
     "de": "Axantor",
     "fr": "Hachécateur",
-    "jp": "Basagiri"
+    "jp": "Basagiri",
+    "gen": 8
   },
   {
     "ndex": 901,
@@ -9007,7 +9907,8 @@
     "es": "Ursaluna",
     "de": "Ursaluna",
     "fr": "Ursaking",
-    "jp": "Gachiguma"
+    "jp": "Gachiguma",
+    "gen": 8
   },
   {
     "ndex": 902,
@@ -9017,7 +9918,8 @@
     "es": "Basculegion",
     "de": "Salmagnis",
     "fr": "Paragruel",
-    "jp": "Idaitou"
+    "jp": "Idaitou",
+    "gen": 8
   },
   {
     "ndex": 903,
@@ -9027,7 +9929,8 @@
     "es": "Sneasler",
     "de": "Snieboss",
     "fr": "Farfurex",
-    "jp": "Ohnyula"
+    "jp": "Ohnyula",
+    "gen": 8
   },
   {
     "ndex": 904,
@@ -9037,7 +9940,8 @@
     "es": "Overqwil",
     "de": "Myriador",
     "fr": "Qwilpik",
-    "jp": "Haryman"
+    "jp": "Haryman",
+    "gen": 8
   },
   {
     "ndex": 905,
@@ -9047,7 +9951,8 @@
     "es": "Enamorus",
     "de": "Cupidos",
     "fr": "Amovénus",
-    "jp": "Lovetolos"
+    "jp": "Lovetolos",
+    "gen": 8
   },
   {
     "ndex": 906,
@@ -9057,7 +9962,8 @@
     "es": "Sprigatito",
     "de": "Felori",
     "fr": "Poussacha",
-    "jp": "Nyahoja"
+    "jp": "Nyahoja",
+    "gen": 9
   },
   {
     "ndex": 907,
@@ -9067,7 +9973,8 @@
     "es": "Floragato",
     "de": "Feliospa",
     "fr": "Matourgeon",
-    "jp": "Nyarote"
+    "jp": "Nyarote",
+    "gen": 9
   },
   {
     "ndex": 908,
@@ -9077,7 +9984,8 @@
     "es": "Meowscarada",
     "de": "Maskagato",
     "fr": "Miascarade",
-    "jp": "Masquernya"
+    "jp": "Masquernya",
+    "gen": 9
   },
   {
     "ndex": 909,
@@ -9087,7 +9995,8 @@
     "es": "Fuecoco",
     "de": "Krokel",
     "fr": "Chochodile",
-    "jp": "Hogator"
+    "jp": "Hogator",
+    "gen": 9
   },
   {
     "ndex": 910,
@@ -9097,7 +10006,8 @@
     "es": "Crocalor",
     "de": "Lokroko",
     "fr": "Crocogril",
-    "jp": "Achigator"
+    "jp": "Achigator",
+    "gen": 9
   },
   {
     "ndex": 911,
@@ -9107,7 +10017,8 @@
     "es": "Skeledirge",
     "de": "Skelokrok",
     "fr": "Flâmigator",
-    "jp": "Laudbon"
+    "jp": "Laudbon",
+    "gen": 9
   },
   {
     "ndex": 912,
@@ -9117,7 +10028,8 @@
     "es": "Quaxly",
     "de": "Kwaks",
     "fr": "Coiffeton",
-    "jp": "Kuwassu"
+    "jp": "Kuwassu",
+    "gen": 9
   },
   {
     "ndex": 913,
@@ -9127,7 +10039,8 @@
     "es": "Quaxwell",
     "de": "Fuentente",
     "fr": "Canarbello",
-    "jp": "Welkamo"
+    "jp": "Welkamo",
+    "gen": 9
   },
   {
     "ndex": 914,
@@ -9137,7 +10050,8 @@
     "es": "Quaquaval",
     "de": "Bailonda",
     "fr": "Palmaval",
-    "jp": "Wanival"
+    "jp": "Wanival",
+    "gen": 9
   },
   {
     "ndex": 915,
@@ -9147,7 +10061,8 @@
     "es": "Lechonk",
     "de": "Ferkuli",
     "fr": "Gourmelet",
-    "jp": "Gourton"
+    "jp": "Gourton",
+    "gen": 9
   },
   {
     "ndex": 916,
@@ -9157,7 +10072,8 @@
     "es": "Oinkologne",
     "de": "Fragrunz",
     "fr": "Fragroin",
-    "jp": "Perfuton"
+    "jp": "Perfuton",
+    "gen": 9
   },
   {
     "ndex": 917,
@@ -9167,7 +10083,8 @@
     "es": "Tarountula",
     "de": "Tarundel",
     "fr": "Tissenboule",
-    "jp": "Tamantula"
+    "jp": "Tamantula",
+    "gen": 9
   },
   {
     "ndex": 918,
@@ -9177,7 +10094,8 @@
     "es": "Spidops",
     "de": "Spinsidias",
     "fr": "Filentrappe",
-    "jp": "Wanaider"
+    "jp": "Wanaider",
+    "gen": 9
   },
   {
     "ndex": 919,
@@ -9187,7 +10105,8 @@
     "es": "Nymble",
     "de": "Micrick",
     "fr": "Lilliterelle",
-    "jp": "Mamebatta"
+    "jp": "Mamebatta",
+    "gen": 9
   },
   {
     "ndex": 920,
@@ -9197,7 +10116,8 @@
     "es": "Lokix",
     "de": "Lextremo",
     "fr": "Gambex",
-    "jp": "Exleg"
+    "jp": "Exleg",
+    "gen": 9
   },
   {
     "ndex": 921,
@@ -9207,7 +10127,8 @@
     "es": "Pawmi",
     "de": "Pamo",
     "fr": "Pohm",
-    "jp": "Pamo"
+    "jp": "Pamo",
+    "gen": 9
   },
   {
     "ndex": 922,
@@ -9217,7 +10138,8 @@
     "es": "Pawmo",
     "de": "Pamamo",
     "fr": "Pohmotte",
-    "jp": "Pamot"
+    "jp": "Pamot",
+    "gen": 9
   },
   {
     "ndex": 923,
@@ -9227,7 +10149,8 @@
     "es": "Pawmot",
     "de": "Pamomamo",
     "fr": "Pohmarmotte",
-    "jp": "Parmot"
+    "jp": "Parmot",
+    "gen": 9
   },
   {
     "ndex": 924,
@@ -9237,7 +10160,8 @@
     "es": "Tandemaus",
     "de": "Zwieps",
     "fr": "Compagnol",
-    "jp": "Wakkanezumi"
+    "jp": "Wakkanezumi",
+    "gen": 9
   },
   {
     "ndex": 925,
@@ -9247,7 +10171,8 @@
     "es": "Maushold",
     "de": "Famieps",
     "fr": "Famignol",
-    "jp": "Ikkanezumi"
+    "jp": "Ikkanezumi",
+    "gen": 9
   },
   {
     "ndex": 926,
@@ -9257,7 +10182,8 @@
     "es": "Fidough",
     "de": "Hefel",
     "fr": "Pâtachiot",
-    "jp": "Pupimocchi"
+    "jp": "Pupimocchi",
+    "gen": 9
   },
   {
     "ndex": 927,
@@ -9267,7 +10193,8 @@
     "es": "Dachsbun",
     "de": "Backel",
     "fr": "Briochien",
-    "jp": "Bowtzel"
+    "jp": "Bowtzel",
+    "gen": 9
   },
   {
     "ndex": 928,
@@ -9277,7 +10204,8 @@
     "es": "Smoliv",
     "de": "Olini",
     "fr": "Olivini",
-    "jp": "Miniv"
+    "jp": "Miniv",
+    "gen": 9
   },
   {
     "ndex": 929,
@@ -9287,7 +10215,8 @@
     "es": "Dolliv",
     "de": "Olivinio",
     "fr": "Olivado",
-    "jp": "Olinyo"
+    "jp": "Olinyo",
+    "gen": 9
   },
   {
     "ndex": 930,
@@ -9297,7 +10226,8 @@
     "es": "Arboliva",
     "de": "Olithena",
     "fr": "Arboliva",
-    "jp": "Oliva"
+    "jp": "Oliva",
+    "gen": 9
   },
   {
     "ndex": 931,
@@ -9307,7 +10237,8 @@
     "es": "Squawkabilly",
     "de": "Krawalloro",
     "fr": "Tapatoès",
-    "jp": "Ikirinko"
+    "jp": "Ikirinko",
+    "gen": 9
   },
   {
     "ndex": 932,
@@ -9317,7 +10248,8 @@
     "es": "Nacli",
     "de": "Geosali",
     "fr": "Selutin",
-    "jp": "Kojio"
+    "jp": "Kojio",
+    "gen": 9
   },
   {
     "ndex": 933,
@@ -9327,7 +10259,8 @@
     "es": "Naclstack",
     "de": "Sedisal",
     "fr": "Amassel",
-    "jp": "Jiodumu"
+    "jp": "Jiodumu",
+    "gen": 9
   },
   {
     "ndex": 934,
@@ -9337,7 +10270,8 @@
     "es": "Garganacl",
     "de": "Saltigant",
     "fr": "Gigansel",
-    "jp": "Kyojiohn"
+    "jp": "Kyojiohn",
+    "gen": 9
   },
   {
     "ndex": 935,
@@ -9347,7 +10281,8 @@
     "es": "Charcadet",
     "de": "Knarbon",
     "fr": "Charbambin",
-    "jp": "Carbou"
+    "jp": "Carbou",
+    "gen": 9
   },
   {
     "ndex": 936,
@@ -9357,7 +10292,8 @@
     "es": "Armarouge",
     "de": "Crimanzo",
     "fr": "Carmadura",
-    "jp": "Gurenarma"
+    "jp": "Gurenarma",
+    "gen": 9
   },
   {
     "ndex": 937,
@@ -9367,7 +10303,8 @@
     "es": "Ceruledge",
     "de": "Azugladis",
     "fr": "Malvalame",
-    "jp": "Soublades"
+    "jp": "Soublades",
+    "gen": 9
   },
   {
     "ndex": 938,
@@ -9377,7 +10314,8 @@
     "es": "Tadbulb",
     "de": "Blipp",
     "fr": "Têtampoule",
-    "jp": "Zupika"
+    "jp": "Zupika",
+    "gen": 9
   },
   {
     "ndex": 939,
@@ -9387,7 +10325,8 @@
     "es": "Bellibolt",
     "de": "Wampitz",
     "fr": "Ampibidou",
-    "jp": "Harabarie"
+    "jp": "Harabarie",
+    "gen": 9
   },
   {
     "ndex": 940,
@@ -9397,7 +10336,8 @@
     "es": "Wattrel",
     "de": "Voltrel",
     "fr": "Zapétrel",
-    "jp": "Kaiden"
+    "jp": "Kaiden",
+    "gen": 9
   },
   {
     "ndex": 941,
@@ -9407,7 +10347,8 @@
     "es": "Kilowattrel",
     "de": "Voltrean",
     "fr": "Fulgulairo",
-    "jp": "Taikaiden"
+    "jp": "Taikaiden",
+    "gen": 9
   },
   {
     "ndex": 942,
@@ -9417,7 +10358,8 @@
     "es": "Maschiff",
     "de": "Mobtiff",
     "fr": "Grondogue",
-    "jp": "Orachifu"
+    "jp": "Orachifu",
+    "gen": 9
   },
   {
     "ndex": 943,
@@ -9427,7 +10369,8 @@
     "es": "Mabosstiff",
     "de": "Mastifioso",
     "fr": "Dogrino",
-    "jp": "Mafitiff"
+    "jp": "Mafitiff",
+    "gen": 9
   },
   {
     "ndex": 944,
@@ -9437,7 +10380,8 @@
     "es": "Shroodle",
     "de": "Sproxi",
     "fr": "Gribouraigne",
-    "jp": "Shirushrew"
+    "jp": "Shirushrew",
+    "gen": 9
   },
   {
     "ndex": 945,
@@ -9447,7 +10391,8 @@
     "es": "Grafaiai",
     "de": "Affiti",
     "fr": "Tag-Tag",
-    "jp": "Taggingru"
+    "jp": "Taggingru",
+    "gen": 9
   },
   {
     "ndex": 946,
@@ -9457,7 +10402,8 @@
     "es": "Bramblin",
     "de": "Weherba",
     "fr": "Virovent",
-    "jp": "Anokusa"
+    "jp": "Anokusa",
+    "gen": 9
   },
   {
     "ndex": 947,
@@ -9467,7 +10413,8 @@
     "es": "Brambleghast",
     "de": "Horrerba",
     "fr": "Virevorreur",
-    "jp": "Anohoragusa"
+    "jp": "Anohoragusa",
+    "gen": 9
   },
   {
     "ndex": 948,
@@ -9477,7 +10424,8 @@
     "es": "Toedscool",
     "de": "Tentagra",
     "fr": "Terracool",
-    "jp": "Nonokurage"
+    "jp": "Nonokurage",
+    "gen": 9
   },
   {
     "ndex": 949,
@@ -9487,7 +10435,8 @@
     "es": "Toedscruel",
     "de": "Tenterra",
     "fr": "Terracruel",
-    "jp": "Rikukurage"
+    "jp": "Rikukurage",
+    "gen": 9
   },
   {
     "ndex": 950,
@@ -9497,7 +10446,8 @@
     "es": "Klawf",
     "de": "Klibbe",
     "fr": "Craparoi",
-    "jp": "Gakegani"
+    "jp": "Gakegani",
+    "gen": 9
   },
   {
     "ndex": 951,
@@ -9507,7 +10457,8 @@
     "es": "Capsakid",
     "de": "Chilingel",
     "fr": "Pimito",
-    "jp": "Capsaiji"
+    "jp": "Capsaiji",
+    "gen": 9
   },
   {
     "ndex": 952,
@@ -9517,7 +10468,8 @@
     "es": "Scovillain",
     "de": "Halupenjo",
     "fr": "Scovilain",
-    "jp": "Scovillain"
+    "jp": "Scovillain",
+    "gen": 9
   },
   {
     "ndex": 953,
@@ -9527,7 +10479,8 @@
     "es": "Rellor",
     "de": "Relluk",
     "fr": "Léboulérou",
-    "jp": "Shigaroko"
+    "jp": "Shigaroko",
+    "gen": 9
   },
   {
     "ndex": 954,
@@ -9537,7 +10490,8 @@
     "es": "Rabsca",
     "de": "Skarabaks",
     "fr": "Bérasca",
-    "jp": "Beracas"
+    "jp": "Beracas",
+    "gen": 9
   },
   {
     "ndex": 955,
@@ -9547,7 +10501,8 @@
     "es": "Flittle",
     "de": "Flattutu",
     "fr": "Flotillon",
-    "jp": "Hirahina"
+    "jp": "Hirahina",
+    "gen": 9
   },
   {
     "ndex": 956,
@@ -9557,7 +10512,8 @@
     "es": "Espathra",
     "de": "Psiopatra",
     "fr": "Cléopsytra",
-    "jp": "Cuespatra"
+    "jp": "Cuespatra",
+    "gen": 9
   },
   {
     "ndex": 957,
@@ -9567,7 +10523,8 @@
     "es": "Tinkatink",
     "de": "Forgita",
     "fr": "Forgerette",
-    "jp": "Kanuchan"
+    "jp": "Kanuchan",
+    "gen": 9
   },
   {
     "ndex": 958,
@@ -9577,7 +10534,8 @@
     "es": "Tinkatuff",
     "de": "Tafforgita",
     "fr": "Forgella",
-    "jp": "Nakanuchan"
+    "jp": "Nakanuchan",
+    "gen": 9
   },
   {
     "ndex": 959,
@@ -9587,7 +10545,8 @@
     "es": "Tinkaton",
     "de": "Granforgita",
     "fr": "Forgelina",
-    "jp": "Dekanuchan"
+    "jp": "Dekanuchan",
+    "gen": 9
   },
   {
     "ndex": 960,
@@ -9597,7 +10556,8 @@
     "es": "Wiglett",
     "de": "Schligda",
     "fr": "Taupikeau",
-    "jp": "Umidigda"
+    "jp": "Umidigda",
+    "gen": 9
   },
   {
     "ndex": 961,
@@ -9607,7 +10567,8 @@
     "es": "Wugtrio",
     "de": "Schligdri",
     "fr": "Triopikeau",
-    "jp": "Umitrio"
+    "jp": "Umitrio",
+    "gen": 9
   },
   {
     "ndex": 962,
@@ -9617,7 +10578,8 @@
     "es": "Bombirdier",
     "de": "Adebom",
     "fr": "Lestombaile",
-    "jp": "Otoshidori"
+    "jp": "Otoshidori",
+    "gen": 9
   },
   {
     "ndex": 963,
@@ -9627,7 +10589,8 @@
     "es": "Finizen",
     "de": "Normifin",
     "fr": "Dofin",
-    "jp": "Namiiruka"
+    "jp": "Namiiruka",
+    "gen": 9
   },
   {
     "ndex": 964,
@@ -9637,7 +10600,8 @@
     "es": "Palafin",
     "de": "Delfinator",
     "fr": "Superdofin",
-    "jp": "Irukaman"
+    "jp": "Irukaman",
+    "gen": 9
   },
   {
     "ndex": 965,
@@ -9647,7 +10611,8 @@
     "es": "Varoom",
     "de": "Knattox",
     "fr": "Vrombi",
-    "jp": "Buroron"
+    "jp": "Buroron",
+    "gen": 9
   },
   {
     "ndex": 966,
@@ -9657,7 +10622,8 @@
     "es": "Revavroom",
     "de": "Knattatox",
     "fr": "Vrombotor",
-    "jp": "Burororoom"
+    "jp": "Burororoom",
+    "gen": 9
   },
   {
     "ndex": 967,
@@ -9667,7 +10633,8 @@
     "es": "Cyclizar",
     "de": "Mopex",
     "fr": "Motorizard",
-    "jp": "Mototokage"
+    "jp": "Mototokage",
+    "gen": 9
   },
   {
     "ndex": 968,
@@ -9677,7 +10644,8 @@
     "es": "Orthworm",
     "de": "Schlurm",
     "fr": "Ferdeter",
-    "jp": "Mimizuzu"
+    "jp": "Mimizuzu",
+    "gen": 9
   },
   {
     "ndex": 969,
@@ -9687,7 +10655,8 @@
     "es": "Glimmet",
     "de": "Lumispross",
     "fr": "Germéclat",
-    "jp": "Kirame"
+    "jp": "Kirame",
+    "gen": 9
   },
   {
     "ndex": 970,
@@ -9697,7 +10666,8 @@
     "es": "Glimmora",
     "de": "Lumiflora",
     "fr": "Floréclat",
-    "jp": "Kiraflor"
+    "jp": "Kiraflor",
+    "gen": 9
   },
   {
     "ndex": 971,
@@ -9707,7 +10677,8 @@
     "es": "Greavard",
     "de": "Gruff",
     "fr": "Toutombe",
-    "jp": "Bochi"
+    "jp": "Bochi",
+    "gen": 9
   },
   {
     "ndex": 972,
@@ -9717,7 +10688,8 @@
     "es": "Houndstone",
     "de": "Friedwuff",
     "fr": "Tomberro",
-    "jp": "Hakadog"
+    "jp": "Hakadog",
+    "gen": 9
   },
   {
     "ndex": 973,
@@ -9727,7 +10699,8 @@
     "es": "Flamigo",
     "de": "Flaminkno",
     "fr": "Flamenroule",
-    "jp": "Karamingo"
+    "jp": "Karamingo",
+    "gen": 9
   },
   {
     "ndex": 974,
@@ -9737,7 +10710,8 @@
     "es": "Cetoddle",
     "de": "Flaniwal",
     "fr": "Piétacé",
-    "jp": "Arukugira"
+    "jp": "Arukugira",
+    "gen": 9
   },
   {
     "ndex": 975,
@@ -9747,7 +10721,8 @@
     "es": "Cetitan",
     "de": "Kolowal",
     "fr": "Balbalèze",
-    "jp": "Hulkujira"
+    "jp": "Hulkujira",
+    "gen": 9
   },
   {
     "ndex": 976,
@@ -9757,7 +10732,8 @@
     "es": "Veluza",
     "de": "Agiluza",
     "fr": "Délestin",
-    "jp": "Migalusa"
+    "jp": "Migalusa",
+    "gen": 9
   },
   {
     "ndex": 977,
@@ -9767,7 +10743,8 @@
     "es": "Dondozo",
     "de": "Heerashai",
     "fr": "Oyacata",
-    "jp": "Heyrusher"
+    "jp": "Heyrusher",
+    "gen": 9
   },
   {
     "ndex": 978,
@@ -9777,7 +10754,8 @@
     "es": "Tatsugiri",
     "de": "Nigiragi",
     "fr": "Nigirigon",
-    "jp": "Syaritatsu"
+    "jp": "Syaritatsu",
+    "gen": 9
   },
   {
     "ndex": 979,
@@ -9787,7 +10765,8 @@
     "es": "Annihilape",
     "de": "Epitaff",
     "fr": "Courrousinge",
-    "jp": "Konoyozaru"
+    "jp": "Konoyozaru",
+    "gen": 9
   },
   {
     "ndex": 980,
@@ -9797,7 +10776,8 @@
     "es": "Clodsire",
     "de": "Suelord",
     "fr": "Terraiste",
-    "jp": "Dooh"
+    "jp": "Dooh",
+    "gen": 9
   },
   {
     "ndex": 981,
@@ -9807,7 +10787,8 @@
     "es": "Farigiraf",
     "de": "Farigiraf",
     "fr": "Farigiraf",
-    "jp": "Rikikirin"
+    "jp": "Rikikirin",
+    "gen": 9
   },
   {
     "ndex": 982,
@@ -9817,7 +10798,8 @@
     "es": "Dudunsparce",
     "de": "Dummimisel",
     "fr": "Deusolurdo",
-    "jp": "Nokokocchi"
+    "jp": "Nokokocchi",
+    "gen": 9
   },
   {
     "ndex": 983,
@@ -9827,7 +10809,8 @@
     "es": "Kingambit",
     "de": "Gladimperio",
     "fr": "Scalpereur",
-    "jp": "Dodogezan"
+    "jp": "Dodogezan",
+    "gen": 9
   },
   {
     "ndex": 984,
@@ -9837,7 +10820,8 @@
     "es": "Colmilargo",
     "de": "Riesenzahn",
     "fr": "Fort-Ivoire",
-    "jp": "Idainakiba"
+    "jp": "Idainakiba",
+    "gen": 9
   },
   {
     "ndex": 985,
@@ -9847,7 +10831,8 @@
     "es": "Colagrito",
     "de": "Brüllschweif",
     "fr": "Hurle-Queue",
-    "jp": "Sakebushippo"
+    "jp": "Sakebushippo",
+    "gen": 9
   },
   {
     "ndex": 986,
@@ -9857,7 +10842,8 @@
     "es": "Furioseta",
     "de": "Wutpilz",
     "fr": "Fongus-Furie",
-    "jp": "Araburutake"
+    "jp": "Araburutake",
+    "gen": 9
   },
   {
     "ndex": 987,
@@ -9867,7 +10853,8 @@
     "es": "Melenaleteo",
     "de": "Flatterhaar",
     "fr": "Flotte-Mèche",
-    "jp": "Habatakukami"
+    "jp": "Habatakukami",
+    "gen": 9
   },
   {
     "ndex": 988,
@@ -9877,7 +10864,8 @@
     "es": "Reptalada",
     "de": "Kriechflügel",
     "fr": "Rampe-Ailes",
-    "jp": "Chiwohauhane"
+    "jp": "Chiwohauhane",
+    "gen": 9
   },
   {
     "ndex": 989,
@@ -9887,7 +10875,8 @@
     "es": "Pelarena",
     "de": "Sandfell",
     "fr": "Pelage-Sablé",
-    "jp": "Sunanokegawa"
+    "jp": "Sunanokegawa",
+    "gen": 9
   },
   {
     "ndex": 990,
@@ -9897,7 +10886,8 @@
     "es": "Ferrodada",
     "de": "Eisenrad",
     "fr": "Roue-de-Fer",
-    "jp": "Tetsunowadachi"
+    "jp": "Tetsunowadachi",
+    "gen": 9
   },
   {
     "ndex": 991,
@@ -9907,7 +10897,8 @@
     "es": "Ferrosaco",
     "de": "Eisenbündel",
     "fr": "Hotte-de-Fer",
-    "jp": "Tetsunotsutsumi"
+    "jp": "Tetsunotsutsumi",
+    "gen": 9
   },
   {
     "ndex": 992,
@@ -9917,7 +10908,8 @@
     "es": "Ferropalmas",
     "de": "Eisenhand",
     "fr": "Paume-de-Fer",
-    "jp": "Tetsunokaina"
+    "jp": "Tetsunokaina",
+    "gen": 9
   },
   {
     "ndex": 993,
@@ -9927,7 +10919,8 @@
     "es": "Ferrocuello",
     "de": "Eisenhals",
     "fr": "Têtes-de-Fer",
-    "jp": "Tetsunokoube"
+    "jp": "Tetsunokoube",
+    "gen": 9
   },
   {
     "ndex": 994,
@@ -9937,7 +10930,8 @@
     "es": "Ferropolilla",
     "de": "Eisenfalter",
     "fr": "Mite-de-Fer",
-    "jp": "Tetsunodokuga"
+    "jp": "Tetsunodokuga",
+    "gen": 9
   },
   {
     "ndex": 995,
@@ -9947,7 +10941,8 @@
     "es": "Ferropúas",
     "de": "Eisendorn",
     "fr": "Épine-de-Fer",
-    "jp": "Tetsunoibara"
+    "jp": "Tetsunoibara",
+    "gen": 9
   },
   {
     "ndex": 996,
@@ -9957,7 +10952,8 @@
     "es": "Frigibax",
     "de": "Frospino",
     "fr": "Frigodo",
-    "jp": "Sebie"
+    "jp": "Sebie",
+    "gen": 9
   },
   {
     "ndex": 997,
@@ -9967,7 +10963,8 @@
     "es": "Arctibax",
     "de": "Cryospino",
     "fr": "Cryodo",
-    "jp": "Segohru"
+    "jp": "Segohru",
+    "gen": 9
   },
   {
     "ndex": 998,
@@ -9977,7 +10974,8 @@
     "es": "Baxcalibur",
     "de": "Espinodon",
     "fr": "Glaivodo",
-    "jp": "Seglaive"
+    "jp": "Seglaive",
+    "gen": 9
   },
   {
     "ndex": 999,
@@ -9987,7 +10985,8 @@
     "es": "Gimmighoul",
     "de": "Gierspenst",
     "fr": "Mordudor",
-    "jp": "Collecurei"
+    "jp": "Collecurei",
+    "gen": 9
   },
   {
     "ndex": 1000,
@@ -9997,7 +10996,8 @@
     "es": "Gholdengo",
     "de": "Monetigo",
     "fr": "Gromago",
-    "jp": "Surfugo"
+    "jp": "Surfugo",
+    "gen": 9
   },
   {
     "ndex": 1001,
@@ -10007,7 +11007,8 @@
     "es": "Wo-Chien",
     "de": "Chongjian",
     "fr": "Chongjian",
-    "jp": "Chionjen"
+    "jp": "Chionjen",
+    "gen": 9
   },
   {
     "ndex": 1002,
@@ -10017,7 +11018,8 @@
     "es": "Chien-Pao",
     "de": "Baojian",
     "fr": "Baojian",
-    "jp": "Paojian"
+    "jp": "Paojian",
+    "gen": 9
   },
   {
     "ndex": 1003,
@@ -10027,7 +11029,8 @@
     "es": "Ting-Lu",
     "de": "Dinglu",
     "fr": "Dinglu",
-    "jp": "Dinlu"
+    "jp": "Dinlu",
+    "gen": 9
   },
   {
     "ndex": 1004,
@@ -10037,7 +11040,8 @@
     "es": "Chi-Yu",
     "de": "Yuyu",
     "fr": "Yuyu",
-    "jp": "Yitui"
+    "jp": "Yitui",
+    "gen": 9
   },
   {
     "ndex": 1005,
@@ -10047,7 +11051,8 @@
     "es": "Bramaluna",
     "de": "Donnersichel",
     "fr": "Rugit-Lune",
-    "jp": "Todorokutsuki"
+    "jp": "Todorokutsuki",
+    "gen": 9
   },
   {
     "ndex": 1006,
@@ -10057,7 +11062,8 @@
     "es": "Ferropaladín",
     "de": "Eisenkrieger",
     "fr": "Garde-de-Fer",
-    "jp": "Tetsunobujin"
+    "jp": "Tetsunobujin",
+    "gen": 9
   },
   {
     "ndex": 1007,
@@ -10067,7 +11073,8 @@
     "es": "Koraidon",
     "de": "Koraidon",
     "fr": "Koraidon",
-    "jp": "Koraidon"
+    "jp": "Koraidon",
+    "gen": 9
   },
   {
     "ndex": 1008,
@@ -10077,7 +11084,8 @@
     "es": "Miraidon",
     "de": "Miraidon",
     "fr": "Miraidon",
-    "jp": "Miraidon"
+    "jp": "Miraidon",
+    "gen": 9
   },
   {
     "ndex": 1009,
@@ -10087,7 +11095,8 @@
     "es": "Ondulagua",
     "de": "Windewoge",
     "fr": "Serpente-Eau",
-    "jp": "Uneruminamo"
+    "jp": "Uneruminamo",
+    "gen": 9
   },
   {
     "ndex": 1010,
@@ -10097,7 +11106,8 @@
     "es": "Ferroverdor",
     "de": "Eisenblatt",
     "fr": "Vert-de-Fer",
-    "jp": "Tetsunoisaha"
+    "jp": "Tetsunoisaha",
+    "gen": 9
   },
   {
     "ndex": 1011,
@@ -10107,7 +11117,8 @@
     "es": "Dipplin",
     "de": "Sirapfel",
     "fr": "Pomdramour",
-    "jp": "Kamicchu"
+    "jp": "Kamicchu",
+    "gen": 9
   },
   {
     "ndex": 1012,
@@ -10117,7 +11128,8 @@
     "es": "Poltchageist",
     "de": "Mortcha",
     "fr": "Poltchageist",
-    "jp": "Chadesu"
+    "jp": "Chadesu",
+    "gen": 9
   },
   {
     "ndex": 1013,
@@ -10127,7 +11139,8 @@
     "es": "Sinistcha",
     "de": "Fatalitcha",
     "fr": "Théffroyable",
-    "jp": "Yabasocha"
+    "jp": "Yabasocha",
+    "gen": 9
   },
   {
     "ndex": 1014,
@@ -10137,7 +11150,8 @@
     "es": "Okidogi",
     "de": "Boninu",
     "fr": "Félicanis",
-    "jp": "Iineinu"
+    "jp": "Iineinu",
+    "gen": 9
   },
   {
     "ndex": 1015,
@@ -10147,7 +11161,8 @@
     "es": "Munkidori",
     "de": "Benesaru",
     "fr": "Fortusimia",
-    "jp": "Mashimashira"
+    "jp": "Mashimashira",
+    "gen": 9
   },
   {
     "ndex": 1016,
@@ -10157,7 +11172,8 @@
     "es": "Fezandipiti",
     "de": "Beatori",
     "fr": "Favianos",
-    "jp": "Kichikigisu"
+    "jp": "Kichikigisu",
+    "gen": 9
   },
   {
     "ndex": 1017,
@@ -10167,7 +11183,8 @@
     "es": "Ogerpon",
     "de": "Ogerpon",
     "fr": "Ogerpon",
-    "jp": "Ogerpon"
+    "jp": "Ogerpon",
+    "gen": 9
   },
   {
     "ndex": 1018,
@@ -10177,7 +11194,8 @@
     "es": "Archaludon",
     "de": "Briduradon",
     "fr": "Pondralugon",
-    "jp": "Briduras"
+    "jp": "Briduras",
+    "gen": 9
   },
   {
     "ndex": 1019,
@@ -10187,7 +11205,8 @@
     "es": "Hydrapple",
     "de": "Hydrapfel",
     "fr": "Pomdorochi",
-    "jp": "Kamitsuorochi"
+    "jp": "Kamitsuorochi",
+    "gen": 9
   },
   {
     "ndex": 1020,
@@ -10197,7 +11216,8 @@
     "es": "Flamariete",
     "de": "Keilflamme",
     "fr": "Feu-Perçant",
-    "jp": "Ugatsuhomura"
+    "jp": "Ugatsuhomura",
+    "gen": 9
   },
   {
     "ndex": 1021,
@@ -10207,7 +11227,8 @@
     "es": "Electrofuria",
     "de": "Furinblitz",
     "fr": "Ire-Foudre",
-    "jp": "Takeruraiko"
+    "jp": "Takeruraiko",
+    "gen": 9
   },
   {
     "ndex": 1022,
@@ -10217,7 +11238,8 @@
     "es": "Ferromole",
     "de": "Eisenfels",
     "fr": "Roc-de-Fer",
-    "jp": "Tetsunoiwao"
+    "jp": "Tetsunoiwao",
+    "gen": 9
   },
   {
     "ndex": 1023,
@@ -10227,7 +11249,8 @@
     "es": "Ferrotesta",
     "de": "Eisenhaupt",
     "fr": "Chef-de-Fer",
-    "jp": "Tetsunokashira"
+    "jp": "Tetsunokashira",
+    "gen": 9
   },
   {
     "ndex": 1024,
@@ -10237,7 +11260,8 @@
     "es": "Terapagos",
     "de": "Terapagos",
     "fr": "Terapagos",
-    "jp": "Terapagos"
+    "jp": "Terapagos",
+    "gen": 9
   },
   {
     "ndex": 1025,
@@ -10247,6 +11271,7 @@
     "es": "Pecharunt",
     "de": "Infamomo",
     "fr": "Pêchaminus",
-    "jp": "Momowarou"
+    "jp": "Momowarou",
+    "gen": 9
   }
 ]

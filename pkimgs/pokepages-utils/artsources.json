@@ -1,88 +1,346 @@
 {
-    "RV": "RV",
-    "Bj": "Bj",
-    "RB": "RB",
-    "G": "G",
-    "OA": "OA",
-    "C": "C",
-    "RZ": "RZ",
-    "RFVF": "RFVF",
-    "S": "S",
-    "DP": "DP",
-    "Pt": "Pt",
-    "HGSS": "HGSS",
-    "NB": "NB",
-    "N2B2": "N2B2",
-    "XY": "XY",
-    "ROZA": "ROZA",
-    "SL": "SL",
-    "UsUl": "UsUl",
-    "LGPE": "LGPE",
-    "SpSc": "SpSc",
-    "DLPS": "DLPS",
-    "LPA": "LPA",
-    "SV": "SV",
-    "LPZA": "LPZA",
-    "St": "St",
-    "S2": "S2",
-    "64": "64",
-    "Melee": "Melee",
-    "Brawl": "Brawl",
-    "3DS-WiiU": "3DS-WiiU",
-    "Ultimate": "Ultimate",
-    "Colo": "Colo",
-    "XD": "XD",
-    "Channel": "Channel",
-    "Link": "Link",
-    "PMDRB": "PMDRB",
-    "PMDTO": "PMDTO",
-    "PMDC": "PMDC",
-    "PMDPSI": "PMDPSI",
-    "PSMD": "PSMD",
-    "PMDDX": "PMDDX",
-    "Ra": "Ra",
-    "OsA": "OsA",
-    "Tdl": "Tdl",
-    "MPR": "MPR",
-    "Rumble Super": "RumbleSuper",
-    "Rumble U": "RumbleU",
-    "Rumble World": "RumbleWorld",
-    "PokéPark": "PokePark",
-    "Pokkén": "Pokken",
-    "Detective Pikachu": "DetectivePikachu",
-    "Detective Pikachu il ritorno": "DetectivePikachu2",
-    "Quest": "Quest",
-    "UNITE": "UNITE",
-    "UNITE holowear": "UNITEholowear",
-    "Corp": "Corp",
-    "distribuzione 2009": "distribuzione2009",
-    "distribuzione 2013": "distribuzione2013",
-    "distribuzione 2014": "distribuzione2014",
-    "distribuzione 2016": "distribuzione2016",
-    "distribuzione 2017": "distribuzione2017",
-    "distribuzione 2018": "distribuzione2018",
-    "distribuzione 2021": "distribuzione2021",
-    "Japan Championships 2023": "JapanChampionships2023",
-    "Japan Championships 2024": "JapanChampionships2024",
-    "Japan Championships 2025": "JapanChampionships2025",
-    "anime GA": "animeGA",
-    "anime OA": "animeOA",
-    "anime RZ": "animeRZ",
-    "anime DP": "animeDP",
-    "anime NB": "animeNB",
-    "anime XY": "animeXY",
-    "anime SL": "animeSL",
-    "anime EP": "animeEP",
-    "anime OP": "animeOP",
-    "anime F13": "animeF13",
-    "anime F15": "animeF15",
-    "anime F17": "animeF17",
-    "anime F18": "animeF18",
-    "anime F22": "animeF22",
-    "anime F23": "animeF23",
-    "anime NH": "animeNH",
-    "GCC": "GCC",
-    "promo HOME SV": "promoHOMESV",
-    "PF": "PF",
-    "PxVG": "PxVG"
+    "RV": {
+        "abbr": "RV",
+        "name": "Pocket Monsters aka e midori"
+    },
+    "Bj": {
+        "abbr": "Bj",
+        "name": "Pocket Monsters ao"
+    },
+    "RB": {
+        "abbr": "RB",
+        "name": "Pokémon Rosso e Blu"
+    },
+    "G": {
+        "abbr": "G",
+        "name": "Pokémon Giallo"
+    },
+    "OA": {
+        "abbr": "OA",
+        "name": "Pokémon Oro e Argento"
+    },
+    "C": {
+        "abbr": "C",
+        "name": "Pokémon Cristallo"
+    },
+    "RZ": {
+        "abbr": "RZ",
+        "name": "Pokémon Rubino e Zaffiro"
+    },
+    "RFVF": {
+        "abbr": "RFVF",
+        "name": "Pokémon Rosso Fuoco e Verde Foglia"
+    },
+    "S": {
+        "abbr": "S",
+        "name": "Pokémon Smeraldo"
+    },
+    "DP": {
+        "abbr": "DP",
+        "name": "Pokémon Diamante e Perla"
+    },
+    "Pt": {
+        "abbr": "Pt",
+        "name": "Pokémon Platino"
+    },
+    "HGSS": {
+        "abbr": "HGSS",
+        "name": "Pokémon Oro HeartGold e Argento SoulSilver"
+    },
+    "NB": {
+        "abbr": "NB",
+        "name": "Pokémon Nero e Bianco"
+    },
+    "N2B2": {
+        "abbr": "N2B2",
+        "name": "Pokémon Nero 2 e Bianco 2"
+    },
+    "XY": {
+        "abbr": "XY",
+        "name": "Pokémon X e Y"
+    },
+    "ROZA": {
+        "abbr": "ROZA",
+        "name": "Pokémon Rubino Omega e Zaffiro Alpha"
+    },
+    "SL": {
+        "abbr": "SL",
+        "name": "Pokémon Sole e Luna"
+    },
+    "UsUl": {
+        "abbr": "UsUl",
+        "name": "Pokémon Ultrasole e Ultraluna"
+    },
+    "LGPE": {
+        "abbr": "LGPE",
+        "name": "Pokémon: Let's Go, Pikachu! e Let's Go, Eevee!"
+    },
+    "SpSc": {
+        "abbr": "SpSc",
+        "name": "Pokémon Spada e Scudo"
+    },
+    "DLPS": {
+        "abbr": "DLPS",
+        "name": "Pokémon Diamante Lucente e Perla Splendente"
+    },
+    "LPA": {
+        "abbr": "LPA",
+        "name": "Leggende Pokémon: Arceus"
+    },
+    "SV": {
+        "abbr": "SV",
+        "name": "Pokémon Scarlatto e Violetto"
+    },
+    "LPZA": {
+        "abbr": "LPZA",
+        "name": "Leggende Pokémon: Z-A"
+    },
+    "St": {
+        "abbr": "St",
+        "name": "Pokémon Stadium"
+    },
+    "S2": {
+        "abbr": "S2",
+        "name": "Pokémon Stadium 2"
+    },
+    "64": {
+        "abbr": "64",
+        "name": "Super Smash Bros."
+    },
+    "Melee": {
+        "abbr": "Melee",
+        "name": "Super Smash Bros. Melee"
+    },
+    "Brawl": {
+        "abbr": "Brawl",
+        "name": "Super Smash Bros. Brawl"
+    },
+    "3DS-WiiU": {
+        "abbr": "3DS-WiiU",
+        "name": "Super Smash Bros. for Nintendo 3DS/Wii U"
+    },
+    "Ultimate": {
+        "abbr": "Ultimate",
+        "name": "Super Smash Bros. Ultimate"
+    },
+    "Colo": {
+        "abbr": "Colo",
+        "name": "Pokémon Colosseum"
+    },
+    "XD": {
+        "abbr": "XD",
+        "name": "Pokémon XD"
+    },
+    "Channel": {
+        "abbr": "Channel",
+        "name": "Pokémon Channel"
+    },
+    "Link": {
+        "abbr": "Link",
+        "name": "Pokémon Link"
+    },
+    "PMDRB": {
+        "abbr": "PMDRB",
+        "name": "Pokémon Mystery Dungeon: Squadra Rossa e Squadra Blu"
+    },
+    "PMDTO": {
+        "abbr": "PMDTO",
+        "name": "Pokémon Mystery Dungeon: Esploratori del Tempo e dell'Oscurità"
+    },
+    "PMDC": {
+        "abbr": "PMDC",
+        "name": "Pokémon Mystery Dungeon: Esploratori del Cielo"
+    },
+    "PMDPSI": {
+        "abbr": "PMDPSI",
+        "name": "Pokémon Mystery Dungeon: i portali sull'infinito"
+    },
+    "PSMD": {
+        "abbr": "PSMD",
+        "name": "Pokémon Super Mystery Dungeon"
+    },
+    "PMDDX": {
+        "abbr": "PMDDX",
+        "name": "Pokémon Mystery Dungeon: Squadra di Soccorso DX"
+    },
+    "Ra": {
+        "abbr": "Ra",
+        "name": "Artwork Pokémon Ranger"
+    },
+    "OsA": {
+        "abbr": "OsA",
+        "name": "Artwork Pokémon Ranger: Ombre su Almia"
+    },
+    "Tdl": {
+        "abbr": "Tdl",
+        "name": "Artwork Pokémon Ranger: Tracce di luce"
+    },
+    "MPR": {
+        "abbr": "MPR",
+        "name": "My Pokémon Ranch"
+    },
+    "Rumble Super": {
+        "abbr": "RumbleSuper",
+        "name": "Pokémon Rumble Super"
+    },
+    "Rumble U": {
+        "abbr": "RumbleU",
+        "name": "Pokémon Rumble U"
+    },
+    "Rumble World": {
+        "abbr": "RumbleWorld",
+        "name": "Pokémon Rumble World"
+    },
+    "PokéPark": {
+        "abbr": "PokePark",
+        "name": "PokéPark"
+    },
+    "Pokkén": {
+        "abbr": "Pokken",
+        "name": "Pokkén"
+    },
+    "Detective Pikachu": {
+        "abbr": "DetectivePikachu",
+        "name": "Detective Pikachu"
+    },
+    "Detective Pikachu il ritorno": {
+        "abbr": "DetectivePikachu2",
+        "name": "Detective Pikachu: il ritorno"
+    },
+    "Quest": {
+        "abbr": "Quest",
+        "name": "Pokémon Quest"
+    },
+    "UNITE": {
+        "abbr": "UNITE",
+        "name": "Pokémon UNITE"
+    },
+    "UNITE holowear": {
+        "abbr": "UNITEholowear",
+        "name": "Pokémon UNITE"
+    },
+    "Corp": {
+        "abbr": "Corp",
+        "name": "Corp"
+    },
+    "distribuzione 2009": {
+        "abbr": "distribuzione2009",
+        "name": "distribuzione 2009"
+    },
+    "distribuzione 2013": {
+        "abbr": "distribuzione2013",
+        "name": "distribuzione 2013"
+    },
+    "distribuzione 2014": {
+        "abbr": "distribuzione2014",
+        "name": "distribuzione 2014"
+    },
+    "distribuzione 2016": {
+        "abbr": "distribuzione2016",
+        "name": "distribuzione 2016"
+    },
+    "distribuzione 2017": {
+        "abbr": "distribuzione2017",
+        "name": "distribuzione 2017"
+    },
+    "distribuzione 2018": {
+        "abbr": "distribuzione2018",
+        "name": "distribuzione 2018"
+    },
+    "distribuzione 2021": {
+        "abbr": "distribuzione2021",
+        "name": "distribuzione 2021"
+    },
+    "Japan Championships 2023": {
+        "abbr": "JapanChampionships2023",
+        "name": "Japan Championships 2023"
+    },
+    "Japan Championships 2024": {
+        "abbr": "JapanChampionships2024",
+        "name": "Japan Championships 2024"
+    },
+    "Japan Championships 2025": {
+        "abbr": "JapanChampionships2025",
+        "name": "Japan Championships 2025"
+    },
+    "anime GA": {
+        "abbr": "animeGA",
+        "name": "anime GA"
+    },
+    "anime OA": {
+        "abbr": "animeOA",
+        "name": "anime OA"
+    },
+    "anime RZ": {
+        "abbr": "animeRZ",
+        "name": "anime RZ"
+    },
+    "anime DP": {
+        "abbr": "animeDP",
+        "name": "anime DP"
+    },
+    "anime NB": {
+        "abbr": "animeNB",
+        "name": "anime NB"
+    },
+    "anime XY": {
+        "abbr": "animeXY",
+        "name": "anime XY"
+    },
+    "anime SL": {
+        "abbr": "animeSL",
+        "name": "anime SL"
+    },
+    "anime EP": {
+        "abbr": "animeEP",
+        "name": "anime EP"
+    },
+    "anime OP": {
+        "abbr": "animeOP",
+        "name": "anime OP"
+    },
+    "anime F13": {
+        "abbr": "animeF13",
+        "name": "anime F13"
+    },
+    "anime F15": {
+        "abbr": "animeF15",
+        "name": "anime F15"
+    },
+    "anime F17": {
+        "abbr": "animeF17",
+        "name": "anime F17"
+    },
+    "anime F18": {
+        "abbr": "animeF18",
+        "name": "anime F18"
+    },
+    "anime F22": {
+        "abbr": "animeF22",
+        "name": "anime F22"
+    },
+    "anime F23": {
+        "abbr": "animeF23",
+        "name": "anime F23"
+    },
+    "anime NH": {
+        "abbr": "animeNH",
+        "name": "anime NH"
+    },
+    "GCC": {
+        "abbr": "GCC",
+        "name": "GCC"
+    },
+    "promo HOME SV": {
+        "abbr": "promoHOMESV",
+        "name": "promo HOME SV"
+    },
+    "PF": {
+        "abbr": "PF",
+        "name": "PF"
+    },
+    "PxVG": {
+        "abbr": "PxVG",
+        "name": "PxVG"
+    }
 }

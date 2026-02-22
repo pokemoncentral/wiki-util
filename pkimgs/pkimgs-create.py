@@ -29,7 +29,6 @@ def main():
     parser.add_argument("--pokelistspath", default="data/pokepages-pokelists/")
     parser.add_argument("--pokepage", default="")
     parser.add_argument("--pokepagespath", default="data/pokepages-created/")
-    parser.add_argument("--pokeformspath", default="data/pokepages-pokeforms/")
     parser.add_argument("--exceptionspath", default="data/pokepages-exceptions/")
     parser.add_argument("--dexfile", default="data/wiki-util-data/poke-names.json")
     parser.add_argument("--genderdatafile", default="data/wiki-util-data/gender-data.json")
@@ -81,7 +80,6 @@ def main():
                 itname,
                 args.pokelistspath,
                 args.pokepagespath,
-                args.pokeformspath,
                 artsources,
                 goforms,
                 args.exceptionspath,

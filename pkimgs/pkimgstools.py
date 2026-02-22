@@ -191,7 +191,7 @@ def insert_arts(pokeabbr, arts, shiny, artsources):
             ext = check_art(arts, art_base, exts)
             if ext:
                 # parameter of template pokemonimages/artworks
-                sourceabbr = artsources[source]
+                sourceabbr = artsources[source]["abbr"]
                 # add found artwork to page and remove it from list of artworks
                 # this is needed to retrieve artworks with non-standard name
                 # they will be added separately and have to be handled manually
@@ -974,7 +974,7 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
 
 
 # build wikicode of page for given Pokémon
-def build_poke_page(poke, name, pokelistspath, pagespath, formspath, artsources, goforms, exceptionspath, gender, singleMS, availpokes, availforms, rangerdata, enname, esname, dename, frname):  # fmt: skip
+def build_poke_page(poke, name, pokelistspath, pagespath, artsources, goforms, exceptionspath, gender, singleMS, availpokes, availforms, rangerdata, enname, esname, dename, frname):  # fmt: skip
     # get alternative forms
     forms = get_poke_forms(poke, availforms)
     # get list of abbrs without duplicates
