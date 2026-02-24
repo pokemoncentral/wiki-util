@@ -1,4 +1,4 @@
-import pywikibot, argparse, re, os, os.path, sys, json
+import pywikibot, argparse, re, os, os.path, sys, subprocess, json
 from pywikibot import pagegenerators
 
 """
@@ -106,13 +106,29 @@ if __name__ == "__main__":
                     else:
                         print(f"Skipping {img} since it already exists and is not a redirect")  # fmt: skip
                         continue
-                os.system(f'python3 pwb.py upload -keep -noverify -ignorewarn -abortonwarn:exists "{os.path.join(args.dir, img)}" "{template}"')  # fmt: skip
+                # os.system(f'python3 pwb.py upload -keep -noverify -ignorewarn -abortonwarn:exists "{os.path.join(args.dir, img)}" "{template}"')  # fmt: skip
+                subprocess.run(
+                    [
+                        "python3",
+                        "pwb.py",
+                        "upload",
+                        "-keep",
+                        "-noverify",
+                        "-ignorewarn",
+                        "-abortonwarn:exists",
+                        '"{os.path.join(args.dir, img)}"',
+                        f'"{template}"',
+                    ]
+                )
             else:
                 print(f"{img}   >   {template}")
     # process images in specified category
     elif args.cat:
         cat = pywikibot.Category(site, f"Categoria:{args.cat}")
         for page in pagegenerators.CategorizedPageGenerator(cat, recurse=True):
+            if not page.title(with_ns=False).startswith("Artwork"):
+                print(f"Unprocessable file: {page.title()}")
+                continue
             img = page.title().replace("File:", "")
             template = build_template(img, artsources, args.credits)
             if args.test.lower().strip() == "no":

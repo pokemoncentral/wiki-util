@@ -1,4 +1,4 @@
-import pywikibot, argparse, re, os, os.path, sys
+import pywikibot, argparse, re, os, os.path, sys, subprocess
 from pywikibot import pagegenerators
 
 """
@@ -226,7 +226,20 @@ if __name__ == "__main__":
                     else:
                         print(f"Skipping {img} since it already exists and is not a redirect")  # fmt: skip
                         continue
-                os.system(f'python3 pwb.py upload -keep -noverify -ignorewarn -abortonwarn:exists "{os.path.join(args.dir, img)}" "{template}"')  # fmt: skip
+                # os.system(f'python3 pwb.py upload -keep -noverify -ignorewarn -abortonwarn:exists "{os.path.join(args.dir, img)}" "{template}"')  # fmt: skip
+                subprocess.run(
+                    [
+                        "python3",
+                        "pwb.py",
+                        "upload",
+                        "-keep",
+                        "-noverify",
+                        "-ignorewarn",
+                        "-abortonwarn:exists",
+                        '"{os.path.join(args.dir, img)}"',
+                        f'"{template}"',
+                    ]
+                )
             else:
                 print(f"{img}   >   {template}")
     # if a category is specified, update all its images
