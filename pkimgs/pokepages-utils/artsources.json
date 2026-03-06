@@ -329,6 +329,11 @@
         "cat": "Japan Championships 2025",
         "pokeartwork_param": "other"
     },
+    "Japan Championships 2026": {
+        "abbr": "JapanChampionships2026",
+        "cat": "Japan Championships 2026",
+        "pokeartwork_param": "other"
+    },
     "anime GA": {
         "abbr": "animeGA",
         "cat": "anime GA",
@@ -432,6 +437,11 @@
     "PxVG": {
         "abbr": "PxVG",
         "cat": "promozionali",
+        "pokeartwork_param": "other"
+    },
+    "30 anni": {
+        "abbr": "30anni",
+        "cat": "30º Anniversario Pokémon",
         "pokeartwork_param": "other"
     }
 }

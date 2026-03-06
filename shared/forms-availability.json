@@ -10512,7 +10512,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "1013E": {
@@ -10534,7 +10534,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "1017P": {
@@ -10556,7 +10556,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "1017Fc": {
@@ -10578,7 +10578,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "1017Fn": {
@@ -10600,7 +10600,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "1017TT": {
@@ -10622,7 +10622,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "1017PT": {
@@ -10644,7 +10644,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "1017FcT": {
@@ -10666,7 +10666,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "1017FnT": {
@@ -10688,7 +10688,7 @@
         "spsc": false,
         "dlps": false,
         "lpa": false,
-        "sv": false,
+        "sv": true,
         "lpza": false
     },
     "1024T": {
