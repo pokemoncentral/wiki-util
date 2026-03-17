@@ -3739,6 +3739,28 @@
         "sv": false,
         "lpza": true
     },
+    "445MZ": {
+        "rb": false,
+        "oa": false,
+        "rz": false,
+        "rfvf": false,
+        "s": false,
+        "dp": false,
+        "pt": false,
+        "hgss": false,
+        "nb": false,
+        "n2b2": false,
+        "xy": false,
+        "roza": false,
+        "sl": false,
+        "usul": false,
+        "lgpe": false,
+        "spsc": false,
+        "dlps": false,
+        "lpa": false,
+        "sv": false,
+        "lpza": true
+    },
     "448M": {
         "rb": false,
         "oa": false,
@@ -6071,7 +6093,7 @@
         "sv": true,
         "lpza": true
     },
-    "670M": {
+    "670EM": {
         "rb": false,
         "oa": false,
         "rz": false,
