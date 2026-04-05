@@ -74,6 +74,17 @@ def get_ndex_names_dicts(invalids_replacement="_"):
     return ndex_to_it, en_to_it, it_to_en, it_to_es, it_to_de, it_to_fr, it_to_jp
 
 
+# get a dictionary that maps ndex (both with and without leading zeros) to
+# generation; keys are all strings
+def get_ndex_gen_dict():
+    json_names = read_json_names()
+    ndex_to_gen = {}
+    for j in json_names:
+        ndex_to_gen.update({str(j["ndex"]): j["gen"]})
+        ndex_to_gen.update({j["poke"]: j["gen"]})
+    return ndex_to_gen
+
+
 # Convert title of an English page to Italian. If title ends with " (TCG Pocket)",
 # this string is removed and will be replaced by " (GCC Pocket)". Then page title
 # is searched in en_to_it dictionary to check if English title is a Pokémon name:

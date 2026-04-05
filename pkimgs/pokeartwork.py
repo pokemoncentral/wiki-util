@@ -1,4 +1,4 @@
-import pywikibot, argparse, re, os, os.path, sys, subprocess, json
+import pywikibot, argparse, re, os, os.path, sys, subprocess, json, importlib
 from pywikibot import pagegenerators
 
 """
@@ -35,14 +35,25 @@ Artwork Reshiram Zekrom distribuzione 2018.png
 Artwork Ampharos Treecko Lilligant PF.png
 """
 
+# import utils from 'shared' directory of this repository
+script_path = os.path.realpath(__file__)
+script_dir = os.path.dirname(script_path)
+utils_dir = os.path.join(os.path.dirname(script_dir), "shared")
+spec = importlib.util.spec_from_file_location("utils", os.path.join(utils_dir, "utils.py"))  # fmt: skip
+utils = importlib.util.module_from_spec(spec)
+sys.modules["utils"] = utils
+spec.loader.exec_module(utils)
 
-def build_template(file_name, artsources, credits=""):
+
+def build_template(file_name, artsources, ndex_to_gen, credits=""):
     # remove extension and, if present, final number
     file_name = re.sub(r"\.\w+$", r"", file_name)
     file_name = re.sub(r" \d{1,2}$", r"", file_name)
     # find artwork source
     source = None
-    for entry in artsources:
+    # sorted from longest to shortest to avoid problems with sources such as
+    # "promo HOME SV" that would be classified as SV" without sorting
+    for entry in sorted(artsources, key=len, reverse=True):
         if file_name.endswith(f" {entry}"):
             source = entry
             source_param = artsources[entry]["pokeartwork_param"]
@@ -71,9 +82,22 @@ def build_template(file_name, artsources, credits=""):
             ndex = ""
             name = re.sub(r"^Artwork ", r"", file_name)
             altform = "no"
-        template = f"{{{{pokeartwork|ndex={ndex}|name={name}|shiny={shiny}|altform={altform}|{source_param}={source_cat}|credits={credits}}}}}"
-        # remove empty fields before returning final string
-        template = re.sub(r"\|\w+=(?=[\|\}])", r"", template)
+        # fix/skip special cases
+        skip = False
+        if source == "Corp":
+            if ndex:
+                # fix Corp parameter to insert gen instead of "Corp"
+                gen = ndex_to_gen[re.sub(r"\D", r"", ndex)]
+                source_cat = f"{{{{subst:#invoke: GenerationsData | getOrdinal | {gen} }}}}"
+            else:
+                # skip Corp artworks without ndex, better manage them manually
+                skip = True
+        if skip:
+            template = None
+        else:
+            template = f"{{{{pokeartwork|ndex={ndex}|name={name}|shiny={shiny}|altform={altform}|{source_param}={source_cat}|credits={credits}}}}}"
+            # remove empty fields before returning final string
+            template = re.sub(r"\|\w+=(?=[\|\}])", r"", template)
     return template
 
 
@@ -94,10 +118,11 @@ if __name__ == "__main__":
     # get sources data
     with open(args.artsourcesfile, "r") as file:
         artsources = json.load(file)
+    ndex_to_gen = utils.get_ndex_gen_dict()
     # if a directory is specified, upload all images inside it
     if args.dir:
         for img in sorted(os.listdir(args.dir)):
-            template = build_template(img, artsources, args.credits)
+            template = build_template(img, artsources, ndex_to_gen, args.credits)
             if args.test.lower().strip() == "no":
                 page = pywikibot.Page(site, f"File:{img}")
                 if page.exists():
@@ -130,9 +155,15 @@ if __name__ == "__main__":
                 print(f"Unprocessable file: {page.title()}")
                 continue
             img = page.title().replace("File:", "")
-            template = build_template(img, artsources, args.credits)
+            template = build_template(img, artsources, ndex_to_gen, args.credits)
+            if not template:
+                print(f"Failed to build template: {img}")
+                continue
             if args.test.lower().strip() == "no":
-                page.text = template
-                page.save("Bot: using new template for licenses and categories of Pokémon images")  # fmt: skip
+                if page.text.strip() == template.strip():
+                    print(f"Skipping page {page.title()}")
+                else:
+                    page.text = template
+                    page.save("Bot: using new template for licenses and categories of Pokémon images")  # fmt: skip
             else:
                 print(f"{img}   >   {template}")
