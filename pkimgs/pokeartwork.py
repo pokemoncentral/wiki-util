@@ -6,6 +6,7 @@ This script fills "Pokeartwork" template fields: it can be used to mass upload i
 in a directory or to update an entire category on Pokémon Central Wiki. Arguments:
 --dir: directory with images to upload.
 --cat: category with images to update (without "Categoria:").
+--file: file with images to update.
 --credits: credits for images (wikicode, optional).
 --artsourcesfile: path of file with sources data (already populated).
 --test: "no" to perform actual modifications/uploads on website, otherwise only a preview will be printed.
@@ -46,59 +47,97 @@ spec.loader.exec_module(utils)
 
 
 def build_template(file_name, artsources, ndex_to_gen, credits=""):
+    # initialize some variables used in this function
+    template = None
+    source = None
+    skip = False
+    shiny = "no"
+    altform = "no"
     # remove extension and, if present, final number
     file_name = re.sub(r"\.\w+$", r"", file_name)
     file_name = re.sub(r" \d{1,2}$", r"", file_name)
-    # find artwork source
-    source = None
-    # sorted from longest to shortest to avoid problems with sources such as
-    # "promo HOME SV" that would be classified as SV" without sorting
+    # find artwork source; they are sorted from longest to shortest to avoid
+    # problems with sources such as "promo HOME SV" that would be classified as
+    # "SV" without sorting
     for entry in sorted(artsources, key=len, reverse=True):
         if file_name.endswith(f" {entry}"):
             source = entry
             source_param = artsources[entry]["pokeartwork_param"]
             source_cat = artsources[entry]["cat"]
             break
-    if not source:
-        template = None
-    else:
+    if source:
         # remove source
         file_name = re.sub(f" {source}$", r"", file_name)
         # check if shiny
         if file_name.endswith(" cromatico"):
             shiny = "yes"
             file_name = re.sub(r" cromatico$", r"", file_name)
-        else:
-            shiny = "no"
         # check if ndex or name
         if re.search(r"^Artwork\d", file_name):
             ndex = re.sub(r"Artwork(\w+)( tutte le forme)?", r"\1", file_name)
             name = ""
-            if re.search(r"\D", ndex) or file_name.endswith(" tutte le forme"):
+            # if ndex doesn't follow standard, reset it to avoid building a wrong template
+            if not re.search(r"^\d{4}\w{0,2}$", ndex):
+                ndex = ""
+            elif re.search(r"\D", ndex) or file_name.endswith(" tutte le forme"):
                 altform = "yes"
-            else:
-                altform = "no"
         else:
             ndex = ""
             name = re.sub(r"^Artwork ", r"", file_name)
-            altform = "no"
         # fix/skip special cases
-        skip = False
         if source == "Corp":
             if ndex:
                 # fix Corp parameter to insert gen instead of "Corp"
                 gen = ndex_to_gen[re.sub(r"\D", r"", ndex)]
-                source_cat = f"{{{{subst:#invoke: GenerationsData | getOrdinal | {gen} }}}}"
+                source_cat = (f"{{{{subst:#invoke: GenerationsData | getOrdinal | {gen} }}}}")  # fmt: skip
             else:
                 # skip Corp artworks without ndex, better manage them manually
                 skip = True
-        if skip:
+        elif source.startswith("anime "):
+            source_cat = source_cat.replace("anime ", "")
+        # check if current image was identified correctly
+        if skip or (not ndex and not name):
             template = None
         else:
-            template = f"{{{{pokeartwork|ndex={ndex}|name={name}|shiny={shiny}|altform={altform}|{source_param}={source_cat}|credits={credits}}}}}"
+            template = "|".join(
+                [
+                    "{{pokeartwork",
+                    f"ndex={ndex}",
+                    f"name={name}",
+                    f"shiny={shiny}",
+                    f"altform={altform}",
+                    f"{source_param}={source_cat}",
+                    f"credits={credits}}}}}",
+                ]
+            )
             # remove empty fields before returning final string
             template = re.sub(r"\|\w+=(?=[\|\}])", r"", template)
     return template
+
+
+# process existing file: build template and overwrite it if different
+def process_wiki_file(file_page, test_mode=True):
+    # check that specified file page exists
+    if not page.exists():
+        print(f"File not found in wiki: {file_page.title()}")
+        return
+    # skip files with other naming
+    if not file_page.title(with_ns=False).startswith("Artwork"):
+        print(f"Unprocessable file: {file_page.title()}")
+        return
+    img = file_page.title().replace("File:", "")
+    template = build_template(img, artsources, ndex_to_gen, args.credits)
+    if not template:
+        print(f"Failed to build template: {img}")
+        return
+    if test_mode:
+        print(f"{img}   >   {template}")
+    else:
+        if file_page.text.strip() == template.strip():
+            print(f"Skipping page {file_page.title()}")
+        else:
+            file_page.text = template
+            file_page.save("Bot: using new template for licenses and categories of Pokémon images")  # fmt: skip
 
 
 # main function
@@ -108,6 +147,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--dir", default="")
     parser.add_argument("--cat", default="")
+    parser.add_argument("--file", default="")
     parser.add_argument("--credits", default="")
     parser.add_argument("--artsourcesfile", default="data/pokepages-utils/artsources.json")  # fmt: skip
     parser.add_argument("--test", default="yes")
@@ -115,6 +155,7 @@ if __name__ == "__main__":
     # check arguments
     if args.dir and not os.path.isdir(args.dir):
         sys.exit(f'Error: directory "{args.dir}" not found!')
+    test_mode = not (args.test.lower().strip() == "no")
     # get sources data
     with open(args.artsourcesfile, "r") as file:
         artsources = json.load(file)
@@ -123,7 +164,12 @@ if __name__ == "__main__":
     if args.dir:
         for img in sorted(os.listdir(args.dir)):
             template = build_template(img, artsources, ndex_to_gen, args.credits)
-            if args.test.lower().strip() == "no":
+            if not template:
+                print(f"Cannot build template for file, skipping upload: {img}")
+                continue
+            if test_mode:
+                print(f"{img}   >   {template}")
+            else:
                 page = pywikibot.Page(site, f"File:{img}")
                 if page.exists():
                     if page.text.startswith("#RINVIA") or page.text.startswith("#REDIRECT"):  # fmt: skip
@@ -145,25 +191,17 @@ if __name__ == "__main__":
                         f'"{template}"',
                     ]
                 )
-            else:
-                print(f"{img}   >   {template}")
-    # process images in specified category
+    # if a category is specified, process images in it (recursively)
     elif args.cat:
         cat = pywikibot.Category(site, f"Categoria:{args.cat}")
         for page in pagegenerators.CategorizedPageGenerator(cat, recurse=True):
-            if not page.title(with_ns=False).startswith("Artwork"):
-                print(f"Unprocessable file: {page.title()}")
-                continue
-            img = page.title().replace("File:", "")
-            template = build_template(img, artsources, ndex_to_gen, args.credits)
-            if not template:
-                print(f"Failed to build template: {img}")
-                continue
-            if args.test.lower().strip() == "no":
-                if page.text.strip() == template.strip():
-                    print(f"Skipping page {page.title()}")
-                else:
-                    page.text = template
-                    page.save("Bot: using new template for licenses and categories of Pokémon images")  # fmt: skip
-            else:
-                print(f"{img}   >   {template}")
+            process_wiki_file(page, test_mode)
+    # if a local file is specified, read titles from it and process them on wiki
+    elif args.file:
+        if not os.path.isfile(args.file):
+            sys.exit(f"Cannot find specified file: {args.file}")
+        with open(args.file, "r") as file:
+            titles = [t for t in file.read().splitlines() if t]
+        for title in titles:
+            page = pywikibot.Page(site, f"File:{title}")
+            process_wiki_file(page, test_mode)
