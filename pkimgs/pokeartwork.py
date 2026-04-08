@@ -77,7 +77,7 @@ def build_template(file_name, artsources, ndex_to_gen, credits=""):
             ndex = re.sub(r"Artwork(\w+)( tutte le forme)?", r"\1", file_name)
             name = ""
             # if ndex doesn't follow standard, reset it to avoid building a wrong template
-            if not re.search(r"^\d{4}\w{0,2}$", ndex):
+            if not re.search(r"^\d{4}\w{0,4}$", ndex):
                 ndex = ""
             elif re.search(r"\D", ndex) or file_name.endswith(" tutte le forme"):
                 altform = "yes"
@@ -127,6 +127,7 @@ def process_wiki_file(file_page, test_mode=True):
         return
     img = file_page.title().replace("File:", "")
     template = build_template(img, artsources, ndex_to_gen, args.credits)
+    # check if template was built correctly
     if not template:
         print(f"Failed to build template: {img}")
         return
@@ -187,7 +188,7 @@ if __name__ == "__main__":
                         "-noverify",
                         "-ignorewarn",
                         "-abortonwarn:exists",
-                        '"{os.path.join(args.dir, img)}"',
+                        f'"{os.path.join(args.dir, img)}"',
                         f'"{template}"',
                     ]
                 )
