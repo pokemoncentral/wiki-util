@@ -85,6 +85,7 @@
 \bFantastical Parade\b,Parata Fantasmagorica,
 \bPaldean Wonders\b,Meraviglie di Paldea,
 \bMega Shine\b,Mega Splendore,
+\bPulsing Aura\b,Aura Pulsante,
 ,, ------------------------------- rarities -------------------------------
 \bDiamond\b,Diamante,
 \bStar\b,Stella,
@@ -102,3 +103,8 @@
 \B\| currnum=\d+ \|\B,|,
 \bRelease\|type=[^|]+\|\b,Release|,
 \B{{GCCPocketCardList\/Footer\|type=[^}]+}}\B,{{GCCPocketCardList/Footer}},
+\B{{GCCPocketCardList\/Header\|Clodsire\|Oscurità}}\n{{GCCPocketCardList\/Divider\|Clodsire di Paldea\|Oscurità\|}}\B,{{GCCPocketCardList/Header|Clodsire di Paldea|Oscurità|catname=Clodsire}},
+\B{{GCCPocketCardList\/Header\|Cursola\|Psico}}\n{{GCCPocketCardList\/Divider\|Cursola di Galar\|Psico\|}}\B,{{GCCPocketCardList/Header|Cursola di Galar|Psico|catname=Cursola}},
+\B{{GCCPocketCardList\/Header\|Perrserker\|Metallo}}\n{{GCCPocketCardList\/Divider\|Perrserker di Galar\|Metallo\|}}\B,{{GCCPocketCardList/Header|Perrserker di Galar|Metallo|catname=Perrserker}},
+\B{{GCCPocketCardList\/Header\|Obstagoon\|Oscurità}}\n{{GCCPocketCardList\/Divider\|Obstagoon di Galar\|Oscurità\|}}\B,{{GCCPocketCardList/Header|Obstagoon di Galar|Oscurità|catname=Obstagoon}},
+\B{{GCCPocketCardList\/Header\|Mr\. Rime\|Acqua}}\n{{GCCPocketCardList\/Divider|Mr\. Rime di Galar\|Acqua\|}}\B,{{GCCPocketCardList/Header|Mr. Rime di Galar|Acqua|catname=Mr. Rime}},
