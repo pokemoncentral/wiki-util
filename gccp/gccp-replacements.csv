@@ -64,6 +64,11 @@
 \bHearthflame Mask Ogerpon\b,Ogerpon Maschera Focolare,
 \bWellspring Mask Ogerpon\b,Ogerpon Maschera Pozzo,
 \bCornerstone Mask Ogerpon\b,Ogerpon Maschera Fondamenta,
+\bCastform Sunny Form\b,Castform Forma Sole,
+\bCastform Rainy Form\b,Castform Forma Pioggia,
+\bCastform Snowy Form\b,Castform Forma Nuvola di Neve,
+\bRapid Strike Urshifu\b,Urshifu Stile Pluricolpo,
+\bSingle Strike Urshifu\b,Urshifu Stile Singolcolpo,
 ,, --------------------------------- pkmn ex ---------------------------------
 (?:\b|\B){{TCGP Icon\|ex}}\B,{{ex|pocket}},
 (?:\b|\B){{TCGP Icon\|Mega ex}}\B,{{ex|mega pocket}},
