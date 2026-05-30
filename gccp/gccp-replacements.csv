@@ -1,18 +1,3 @@
-,, ----------------------------------- types -----------------------------------
-\bGrass\b,Erba,
-\bFire\b,Fuoco,
-\bWater\b,Acqua,
-\bLightning\b,Lampo,
-\bPsychic\b,Psico,
-\bFighting\b,Lotta,
-\bDarkness\b,Oscurità,
-\bMetal\b,Metallo,
-\bDragon\b,Drago,
-\bColorless\b,Incolore,
-,, --------------------------------- templates ---------------------------------
-\bTCGPocketPokémonPrevNext\b,GCCPocketPokémonPrevNext,
-\bTCGPocketCardList\b,GCCPocketCardList,
-\bTCG ID\b,GCC ID,
 ,, --------------------------------- pkmn names ---------------------------------
 \bType: Null\b,Tipo Zero,
 \bGreat Tusk\b,Grandizanne,
@@ -35,6 +20,21 @@
 \bIron Leaves\b,Fogliaferrea,
 \bIron Boulder\b,Massoferreo,
 \bIron Crown\b,Capoferreo,
+,, ----------------------------------- types -----------------------------------
+\bGrass\b,Erba,
+\bFire\b,Fuoco,
+\bWater\b,Acqua,
+\bLightning\b,Lampo,
+\bPsychic\b,Psico,
+\bFighting\b,Lotta,
+\bDarkness\b,Oscurità,
+\bMetal\b,Metallo,
+\bDragon\b,Drago,
+\bColorless\b,Incolore,
+,, --------------------------------- templates ---------------------------------
+\bTCGPocketPokémonPrevNext\b,GCCPocketPokémonPrevNext,
+\bTCGPocketCardList\b,GCCPocketCardList,
+\bTCG ID\b,GCC ID,
 ,, --------------------------------- alt forms ---------------------------------
 \bMow Rotom\b,Rotom Taglio,
 \bHeat Rotom\b,Rotom Calore,
@@ -111,6 +111,7 @@
 \bPaldean Wonders\b,Meraviglie di Paldea,
 \bMega Shine\b,Mega Splendore,
 \bPulsing Aura\b,Aura Pulsante,
+\bParadox Drive\b,Assalto dei Paradossi,
 ,, ------------------------------- rarities -------------------------------
 \bDiamond\b,Diamante,
 \bStar\b,Stella,
