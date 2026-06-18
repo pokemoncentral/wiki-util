@@ -5365,7 +5365,7 @@
         "dlps": false,
         "lpa": false,
         "sv": false,
-        "lpza": false
+        "lpza": true
     },
     "649V": {
         "rb": false,
