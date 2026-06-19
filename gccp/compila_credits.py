@@ -22,7 +22,8 @@ come nome espansione (la pagina cercata sara' "NomeEspansione (GCC Pocket)").
 Gestisce due casi nel template credits:
   a) {{credits|artist=|other=...}}   ->  aggiunge artist e cardartist, mantiene other
   b) {{credits|artist=[[nome]]}}     ->  sostituisce artist con nome pulito,
-                                         aggiunge cardartist, mantiene other se presente
+                                         aggiunge cardartist, mantiene other e
+                                         sourcesite/sourcelink/sourcetext se presenti
 
 DIPENDENZE:
   - Python 3.6+
@@ -131,41 +132,43 @@ def update_credits_template(file_text, artist_name):
 
     Due casi:
       a) artist e' vuoto (artist=|) e c'e' other=...
-         -> aggiunge artist e cardartist, conserva other
-         -> "{{credits|artist=NOME|cardartist=tcgpocket|other=...}}"
+         -> aggiunge artist e cardartist, conserva other e altri parametri
+         -> "{{credits|artist=NOME|cardartist=tcgpocket|other=...|sourcesite=...}}"
 
       b) artist contiene un wikilink (artist=[[nome]])
          -> sostituisce artist con il nome pulito, aggiunge cardartist,
-           conserva other (se presente) con il suo valore originale
-         -> "{{credits|artist=NOME|cardartist=tcgpocket}}"           (senza other)
-         -> "{{credits|artist=NOME|cardartist=tcgpocket|other=XXX}}" (con other)
+           conserva other (se presente) con il suo valore originale,
+           conserva sourcesite, sourcelink e sourcetext (se presenti)
 
     Restituisce (nuovo_testo, errore).
     """
     if "{{credits" not in file_text:
         return None, "Template 'credits' non trovato nella pagina dell'immagine"
 
+    # --- Caso B: artist=[[nome]] gia' compilato con wikilink ---
     bracket_match = re.search(
         r"\{\{credits\s*\|artist\s*=\s*\[\[([^\]|]+)(?:\|[^\]]+)?\]\]",
         file_text,
     )
     if bracket_match:
-        other_match = re.search(
-            r"\{\{credits\s*\|[^}]*\|other\s*=\s*([^|}\n]+)",
-            file_text,
+        # Estrae eventuali parametri aggiuntivi dal template originale
+        extra_params = ""
+        for param_name in ("other", "sourcesite", "sourcelink", "sourcetext"):
+            # Costruisce il pattern senza f-string per evitare conflitti {{/}}
+            pattern = (
+                r"\{\{credits\s*\|[^}]*\|"
+                + re.escape(param_name)
+                + r"\s*=\s*([^|}\n]+)"
+            )
+            m = re.search(pattern, file_text)
+            if m:
+                extra_params += f"|{param_name}={m.group(1).strip()}"
+
+        replacement = (
+            f"{{{{credits|artist={artist_name}"
+            f"|cardartist=tcgpocket"
+            f"{extra_params}}}}}"
         )
-        if other_match:
-            other_val = other_match.group(1).strip()
-            replacement = (
-                f"{{{{credits|artist={artist_name}"
-                f"|cardartist=tcgpocket"
-                f"|other={other_val}}}}}"
-            )
-        else:
-            replacement = (
-                f"{{{{credits|artist={artist_name}"
-                f"|cardartist=tcgpocket}}}}"
-            )
 
         new_text = re.sub(
             r"\{\{credits\s*\|[^}]*\}\}",
@@ -175,6 +178,31 @@ def update_credits_template(file_text, artist_name):
         )
         return new_text, None
 
+    # --- Caso A: artist vuoto (artist=|) con other=... ---
+    already = re.search(r"\{\{credits\s*\|[^}]*\|artist=([^|}\n]+)", file_text)
+    if already and already.group(1).strip():
+        return None, (
+            f"Il parametro 'artist' e' gia' compilato (senza wikilink): "
+            f"'{already.group(1).strip()}'"
+        )
+
+    pattern = r"\{\{credits\s*\|artist\s*=\s*\|"
+    if not re.search(pattern, file_text):
+        return None, (
+            "Formato del template 'credits' non riconosciuto "
+            "(atteso: {{credits|artist=|other=...}})"
+        )
+
+    new_text = re.sub(
+        pattern,
+        f"{{{{credits|artist={artist_name}|cardartist=tcgpocket|",
+        file_text,
+        count=1,
+    )
+
+    return new_text, None
+
+    # --- Caso A: artist vuoto (artist=|) con other=... ---
     already = re.search(r"\{\{credits\s*\|[^}]*\|artist=([^|}\n]+)", file_text)
     if already and already.group(1).strip():
         return None, (
@@ -357,7 +385,7 @@ def main():
 
     # --- Connessione al sito ---
     site = pywikibot.Site(lang, fam)
-    site.throttle.setDelays(writedelay=3.0)  # 3 secondi tra un edit e l'altro
+    site.throttle.setDelays(writedelay=2.0)  # 2 secondi tra un edit e l'altro
     print(f"Connesso a: {site}")
 
     # --- Auto-riconoscimento: carta singola o espansione? ---
