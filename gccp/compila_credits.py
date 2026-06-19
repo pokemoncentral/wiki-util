@@ -304,11 +304,12 @@ def resolve_and_deduplicate(site, card_titles):
 def filter_pairs_by_expansion(pairs, expansion_name):
     """
     Filtra le coppie (image_file, artist_name) mantenendo solo quelle
-    il cui nome file contiene il nome dell'espansione (senza spazi).
+    il cui nome file contiene il nome dell'espansione (senza spazi e apostrofi).
 
-    Es. expansion_name="Assalto dei Paradossi" -> cerca "AssaltodeiParadossi"
+    Es. expansion_name="L'Isola Misteriosa" -> cerca "LIsolaMisteriosa"
+        expansion_name="Assalto dei Paradossi" -> cerca "AssaltodeiParadossi"
     """
-    expansion_key = expansion_name.replace(" ", "")
+    expansion_key = expansion_name.replace(" ", "").replace("'", "")
     return [
         (img, art)
         for img, art in pairs
@@ -385,7 +386,7 @@ def main():
 
     # --- Connessione al sito ---
     site = pywikibot.Site(lang, fam)
-    site.throttle.setDelays(writedelay=2.0)  # 2 secondi tra un edit e l'altro
+    site.throttle.setDelays(writedelay=1.0)  # 1 secondo tra un edit e l'altro
     print(f"Connesso a: {site}")
 
     # --- Auto-riconoscimento: carta singola o espansione? ---
