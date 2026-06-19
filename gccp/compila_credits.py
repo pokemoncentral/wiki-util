@@ -25,6 +25,9 @@ Gestisce due casi nel template credits:
                                          aggiunge cardartist, mantiene other e
                                          sourcesite/sourcelink/sourcetext se presenti
 
+Se l'artista ha una pagina PCW "Nome (illustratore)", il template viene compilato con
+artist=Nome (illustratore) e artistalt=Nome.
+
 DIPENDENZE:
   - Python 3.6+
   - pywikibot (pip install pywikibot)
@@ -42,6 +45,7 @@ ESEMPI D'USO
   Espansione (da riga di comando):
       $ python compila_credits.py pokemoncentral it "Assalto dei Paradossi"
       $ python compila_credits.py pokemoncentral it "Aura Pulsante"
+      $ python compila_credits.py pokemoncentral it "L'Isola Misteriosa"
 """
 
 import pywikibot
@@ -126,24 +130,31 @@ def extract_card_info(card_text):
     return pairs
 
 
-def update_credits_template(file_text, artist_name):
+def update_credits_template(file_text, artist_name, artistalt=None):
     """
     Sostituisce il template {{credits}} nella pagina dell'immagine.
 
     Due casi:
       a) artist e' vuoto (artist=|) e c'e' other=...
          -> aggiunge artist e cardartist, conserva other e altri parametri
-         -> "{{credits|artist=NOME|cardartist=tcgpocket|other=...|sourcesite=...}}"
 
       b) artist contiene un wikilink (artist=[[nome]])
          -> sostituisce artist con il nome pulito, aggiunge cardartist,
-           conserva other (se presente) con il suo valore originale,
-           conserva sourcesite, sourcelink e sourcetext (se presenti)
+           conserva other e sourcesite/sourcelink/sourcetext se presenti
+
+    Se artistalt e' specificato, il template viene compilato come:
+      |artist=Nome (illustratore)|artistalt=Nome
 
     Restituisce (nuovo_testo, errore).
     """
     if "{{credits" not in file_text:
         return None, "Template 'credits' non trovato nella pagina dell'immagine"
+
+    # Costruisce la stringa artist da inserire
+    if artistalt:
+        artist_insert = f"artist={artist_name}|artistalt={artistalt}"
+    else:
+        artist_insert = f"artist={artist_name}"
 
     # --- Caso B: artist=[[nome]] gia' compilato con wikilink ---
     bracket_match = re.search(
@@ -154,7 +165,6 @@ def update_credits_template(file_text, artist_name):
         # Estrae eventuali parametri aggiuntivi dal template originale
         extra_params = ""
         for param_name in ("other", "sourcesite", "sourcelink", "sourcetext"):
-            # Costruisce il pattern senza f-string per evitare conflitti {{/}}
             pattern = (
                 r"\{\{credits\s*\|[^}]*\|"
                 + re.escape(param_name)
@@ -165,7 +175,7 @@ def update_credits_template(file_text, artist_name):
                 extra_params += f"|{param_name}={m.group(1).strip()}"
 
         replacement = (
-            f"{{{{credits|artist={artist_name}"
+            f"{{{{credits|{artist_insert}"
             f"|cardartist=tcgpocket"
             f"{extra_params}}}}}"
         )
@@ -195,31 +205,7 @@ def update_credits_template(file_text, artist_name):
 
     new_text = re.sub(
         pattern,
-        f"{{{{credits|artist={artist_name}|cardartist=tcgpocket|",
-        file_text,
-        count=1,
-    )
-
-    return new_text, None
-
-    # --- Caso A: artist vuoto (artist=|) con other=... ---
-    already = re.search(r"\{\{credits\s*\|[^}]*\|artist=([^|}\n]+)", file_text)
-    if already and already.group(1).strip():
-        return None, (
-            f"Il parametro 'artist' e' gia' compilato (senza wikilink): "
-            f"'{already.group(1).strip()}'"
-        )
-
-    pattern = r"\{\{credits\s*\|artist\s*=\s*\|"
-    if not re.search(pattern, file_text):
-        return None, (
-            "Formato del template 'credits' non riconosciuto "
-            "(atteso: {{credits|artist=|other=...}})"
-        )
-
-    new_text = re.sub(
-        pattern,
-        f"{{{{credits|artist={artist_name}|cardartist=tcgpocket|",
+        f"{{{{credits|{artist_insert}|cardartist=tcgpocket|",
         file_text,
         count=1,
     )
@@ -322,9 +308,9 @@ def process_card_page(site, card_title, expansion_name=None):
     Elabora una singola pagina carta: estrae le coppie (immagine, artista)
     e restituisce una lista di modifiche da applicare.
 
-    Se expansion_name e' specificato, filtra le coppie per espansione.
-
-    Restituisce (modifiche, warnings).
+    Se l'artista ha una pagina "Nome (illustratore)" su PCW (sia nel wikilink
+    che come pagina separata), compila il template con artist=Nome (illustratore)
+    e artistalt=Nome.
     """
     card_page = pywikibot.Page(site, card_title)
     if not card_page.exists():
@@ -359,15 +345,33 @@ def process_card_page(site, card_title, expansion_name=None):
             )
             continue
 
-        new_text, error = update_credits_template(file_page.text, artist_name)
+        # Controlla se l'artista ha una pagina "Nome (illustratore)"
+        # Se il nome estratto gia' termina con " (illustratore)" (es. da
+        # [[rika (illustratore)|rika]]), estrae il nome base
+        artistalt = None
+        illustratore_suffix = " (illustratore)"
+        if artist_name.lower().endswith(illustratore_suffix.lower()):
+            # Il nome estratto contiene gia' il suffisso
+            base_name = artist_name[:-len(illustratore_suffix)]
+            artistalt = base_name
+            artist_name = artist_name  # mantiene "Nome (illustratore)"
+        else:
+            # Il nome estratto e' semplice: cerca se esiste "Nome (illustratore)"
+            page_ill = pywikibot.Page(site, artist_name + illustratore_suffix)
+            if page_ill.exists():
+                artistalt = artist_name
+                artist_name = artist_name + illustratore_suffix
+
+        new_text, error = update_credits_template(
+            file_page.text, artist_name, artistalt
+        )
         if error:
             warnings.append(f"  [{card_title}] '{img_file}': {error}")
             continue
 
-        modifiche.append((file_page, new_text, artist_name))
+        modifiche.append((file_page, new_text, artist_name, artistalt))
 
     return modifiche, warnings
-
 
 def main():
     # --- Input interattivo o da riga di comando ---
@@ -462,11 +466,14 @@ def main():
     print(f"ANTEPRIMA MODIFICHE")
     print("=" * 60)
 
-    for i, (file_page, new_text, artist_name) in enumerate(all_modifiche):
+    for i, (file_page, new_text, artist_name, artistalt) in enumerate(all_modifiche):
         if i > 0:
             print()
         print(f"--- {file_page.title()} ---")
-        print(f"    Artista: {artist_name}")
+        if artistalt:
+            print(f"    Artista: {artist_name}  (artistalt: {artistalt})")
+        else:
+            print(f"    Artista: {artist_name}")
         print(new_text)
 
     print("=" * 60)
@@ -488,10 +495,15 @@ def main():
         return
 
     # --- Salvataggio ---
-    for file_page, new_text, artist_name in all_modifiche:
+    for file_page, new_text, artist_name, artistalt in all_modifiche:
         file_page.text = new_text
+        if artistalt:
+            summary_artist = artistalt
+        else:
+            # Estrae il nome pulito da "Nome (illustratore)" se presente
+            summary_artist = artist_name.replace(" (illustratore)", "")
         file_page.save(
-            summary=f"Bot: Aggiunto artista ({artist_name}) e cardartist=tcgpocket"
+            summary=f"Bot: Aggiunto artista ({summary_artist}) e cardartist=tcgpocket"
         )
         print(f"  [OK] {file_page.title()} salvata.")
 
