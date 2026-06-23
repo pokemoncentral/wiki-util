@@ -4,7 +4,7 @@ Compila il template {{credits}} nella pagina File: di una carta PCW.
 Riceve in input fam, lang e:
   a) il titolo di una pagina carta (Pokémon o Allenatore) -> elabora quella carta
   b) il nome di un'espansione GCC Pocket -> elabora TUTTE le carte
-     dell'espansione (regolari + segrete/ultrarare).
+     dell'espansione (regolari + segrete).
 
 Per ogni carta estrae immagine e artista di TUTTE le varianti (originale + ristampe)
 dal template PokemoncardInfobox o GCCCartaTrainerInfobox, e compila i parametri
@@ -28,6 +28,11 @@ Gestisce due casi nel template credits:
 Se l'artista ha una pagina PCW "Nome (illustratore)", il template viene compilato con
 artist=Nome (illustratore) e artistalt=Nome.
 
+MODALITA' DI VERIFICA (--check):
+  Invece di scrivere, controlla che i template {{credits}} delle carte
+  siano compilati correttamente (artist + cardartist, ed eventualmente artistalt).
+  Stampa un riepilogo con l'elenco delle carte OK e di quelle non compilate.
+
 DIPENDENZE:
   - Python 3.6+
   - pywikibot (pip install pywikibot)
@@ -37,15 +42,17 @@ ESEMPI D'USO
   Interattivo (i parametri vengono chiesti a schermo):
       $ python compila_credits.py
 
-  Carta singola (da riga di comando):
+  Carta singola:
       $ python compila_credits.py pokemoncentral it "Surskit (Assalto dei Paradossi 1)"
-      $ python compila_credits.py pokemoncentral it "Lunaruggente (Assalto dei Paradossi 47)"
-      $ python compila_credits.py pokemoncentral it "Professor Turum (Assalto dei Paradossi 73)"
 
-  Espansione (da riga di comando):
+  Espansione:
       $ python compila_credits.py pokemoncentral it "Assalto dei Paradossi"
-      $ python compila_credits.py pokemoncentral it "Aura Pulsante"
-      $ python compila_credits.py pokemoncentral it "L'Isola Misteriosa"
+
+  Verifica carta singola:
+      $ python compila_credits.py --check pokemoncentral it "Surskit (Assalto dei Paradossi 1)"
+
+  Verifica espansione:
+      $ python compila_credits.py --check pokemoncentral it "Assalto dei Paradossi"
 """
 
 import pywikibot
@@ -216,7 +223,7 @@ def update_credits_template(file_text, artist_name, artistalt=None):
 def extract_card_titles_from_expansion(expansion_text):
     """
     Dall'wikitext della pagina di un'espansione GCC Pocket, estrae i titoli
-    delle pagine di TUTTE le carte elencate (regolari + segrete/ultrarare).
+    delle pagine di TUTTE le carte elencate (regolari + segrete).
 
     Cerca i template {{setlist/entry|...}} nella sezione "Elenco delle carte".
     Per ogni entry:
@@ -373,12 +380,155 @@ def process_card_page(site, card_title, expansion_name=None):
 
     return modifiche, warnings
 
+
+# ======================================================================
+#  NUOVE FUNZIONI: MODALITA' DI VERIFICA (--check)
+# ======================================================================
+
+def check_credits_template(file_text, artist_expected, artistalt_expected=None):
+    """
+    Verifica che il template {{credits}} in una pagina File sia compilato
+    correttamente, ovvero con i parametri:
+      - artist=<valore> (non vuoto)
+      - cardartist=tcgpocket
+      - (opzionale) artistalt=<valore> se atteso
+
+    Restituisce:
+      (True, messaggio_ok) se tutto corretto
+      (False, messaggio_errore) altrimenti
+    """
+    if "{{credits" not in file_text:
+        return False, "Template 'credits' non presente nella pagina File"
+
+    # Estrai il template credits completo
+    m = re.search(r"\{\{credits\s*\|([^}]*)\}\}", file_text)
+    if not m:
+        return False, "Template 'credits' non trovato (formato non riconosciuto)"
+
+    params_text = m.group(1)
+
+    # Estrai parametri dividendo sui | non annidati dentro [[ ]]
+    params = {}
+    parts = re.split(
+        r'\s*\|\s*(?=(?:[^\]]*\[\[[^\]]*\]\])*[^\]]*$)',
+        params_text
+    )
+    for part in parts:
+        if '=' not in part:
+            continue
+        key, _, val = part.partition('=')
+        key = key.strip().lower()
+        val = val.strip()
+        params[key] = val
+
+    # Verifica artist
+    artist_val = params.get('artist', '')
+    if not artist_val:
+        return False, "Parametro 'artist' assente o vuoto"
+
+    # Verifica cardartist
+    cardartist_val = params.get('cardartist', '').lower()
+    if cardartist_val != 'tcgpocket':
+        return False, (
+            f"Parametro 'cardartist' assente o errato: "
+            f"'{cardartist_val}' (atteso: tcgpocket)"
+        )
+
+    # Verifica artistalt (solo se atteso, altrimenti e' opzionale)
+    if artistalt_expected:
+        artistalt_val = params.get('artistalt', '').strip()
+        if not artistalt_val:
+            return False, (
+                f"Parametro 'artistalt' assente "
+                f"(atteso: '{artistalt_expected}')"
+            )
+        if artistalt_val.lower() != artistalt_expected.lower():
+            return False, (
+                f"Parametro 'artistalt' errato: '{artistalt_val}' "
+                f"(atteso: '{artistalt_expected}')"
+            )
+
+    return True, "OK: tutti i parametri compilati correttamente"
+
+
+def check_card_page(site, card_title, expansion_name=None):
+    """
+    Verifica che tutte le pagine File di una carta abbiano il template credits
+    compilato correttamente.
+
+    Restituisce (risultati, warnings) dove risultati e' una lista di tuple:
+      (file_title, card_title, status, messaggio)
+    con status=True/False.
+    """
+    card_page = pywikibot.Page(site, card_title)
+    if not card_page.exists():
+        return [], [f"Pagina '{card_title}' non esiste."]
+
+    pairs = extract_card_info(card_page.text)
+    if not pairs:
+        return [], [f"Nessuna immagine trovata nell'infobox di '{card_title}'."]
+
+    if expansion_name:
+        pairs = filter_pairs_by_expansion(pairs, expansion_name)
+        if not pairs:
+            return [], [
+                f"Nessuna immagine dell'espansione '{expansion_name}' "
+                f"nell'infobox di '{card_title}'."
+            ]
+
+    risultati = []
+    warnings = []
+
+    for img_file, artist_name in pairs:
+        if not artist_name:
+            warnings.append(
+                f"  [{card_title}] '{img_file}': artista non trovato nel caption."
+            )
+            risultati.append(
+                (img_file, card_title, False, "Artista non trovato nel caption")
+            )
+            continue
+
+        file_page = pywikibot.FilePage(site, img_file)
+        if not file_page.exists():
+            warnings.append(
+                f"  [{card_title}] '{img_file}': la pagina File: non esiste."
+            )
+            risultati.append(
+                (img_file, card_title, False, "Pagina File non esistente")
+            )
+            continue
+
+        # Determina se ci si aspetta artistalt
+        page_ill = pywikibot.Page(site, artist_name + " (illustratore)")
+        artistalt_expected = artist_name if page_ill.exists() else None
+
+        ok, msg = check_credits_template(
+            file_page.text, artist_name, artistalt_expected
+        )
+        risultati.append((img_file, card_title, ok, msg))
+
+    return risultati, warnings
+
+
+# ======================================================================
+#  MAIN
+# ======================================================================
+
 def main():
+    # --- Riconoscimento parametro --check ---
+    check_mode = False
+    args = list(sys.argv)
+
+    if '--check' in args:
+        check_mode = True
+        args.remove('--check')
+
     # --- Input interattivo o da riga di comando ---
-    if len(sys.argv) == 4:
-        fam = sys.argv[1]
-        lang = sys.argv[2]
-        input_title = sys.argv[3]
+    if len(args) == 4:
+        fam = args[1]
+        lang = args[2]
+        input_title = args[3]
     else:
         fam = input("Famiglia (fam): ").strip()
         lang = input("Lingua (lang): ").strip()
@@ -390,7 +540,8 @@ def main():
 
     # --- Connessione al sito ---
     site = pywikibot.Site(lang, fam)
-    site.throttle.setDelays(writedelay=1.0)  # 1 secondo tra un edit e l'altro
+    if not check_mode:
+        site.throttle.setDelays(writedelay=1.0)
     print(f"Connesso a: {site}")
 
     # --- Auto-riconoscimento: carta singola o espansione? ---
@@ -408,8 +559,8 @@ def main():
         expansion_page = pywikibot.Page(site, expansion_page_title)
         if not expansion_page.exists():
             print(
-                f"ERRORE: la pagina dell'espansione '{expansion_page_title}' "
-                f"non esiste."
+                f"ERRORE: la pagina dell'espansione "
+                f"'{expansion_page_title}' non esiste."
             )
             sys.exit(1)
 
@@ -420,7 +571,7 @@ def main():
 
         print(
             f"Trovate {len(card_titles)} carte nell'elenco "
-            f"(regolari + segrete/ultrarare)."
+            f"(regolari + segrete)."
         )
 
         resolved_map = resolve_and_deduplicate(site, card_titles)
@@ -431,7 +582,74 @@ def main():
                 f"({redirect_count} redirect assorbiti)."
             )
 
-    # --- Elabora tutte le carte, mostrando dettagli durante il processo ---
+    # ================================================================
+    #  MODALITA' DI VERIFICA
+    # ================================================================
+    if check_mode:
+        print("\n" + "=" * 60)
+        print("MODALITA' DI VERIFICA (nessuna scrittura)")
+        print("=" * 60)
+
+        total_pages = len(resolved_map)
+        processed = 0
+        all_risultati = []
+        all_warnings = []
+
+        for resolved_title, original_titles in resolved_map.items():
+            processed += 1
+
+            if not is_single_card and len(original_titles) > 1:
+                print(
+                    f"[{processed}/{total_pages}] -> '{resolved_title}' "
+                    f"(raggiunta da {len(original_titles)} voci setlist)"
+                )
+            else:
+                print(
+                    f"\r[{processed}/{total_pages}] '{resolved_title}'...",
+                    end=""
+                )
+
+            risultati, warnings = check_card_page(
+                site, resolved_title, expansion_name
+            )
+            all_risultati.extend(risultati)
+            all_warnings.extend(warnings)
+
+        print()
+
+        # --- Riepilogo ---
+        print("\n" + "=" * 60)
+        print("RIEPILOGO VERIFICA")
+        print("=" * 60)
+
+        ok_files = [r for r in all_risultati if r[2]]
+        ko_files = [r for r in all_risultati if not r[2]]
+
+        print(f"\nFile verificati: {len(all_risultati)}")
+        print(f"  [OK] Compilati correttamente: {len(ok_files)}")
+        print(f"  [KO] Non compilati o errati: {len(ko_files)}")
+
+        if ko_files:
+            print("\n--- DETTAGLIO FILE NON COMPILATI ---")
+            for img_file, card_title, ok, msg in ko_files:
+                print(f"\n  File: {img_file}")
+                print(f"  Carta: {card_title}")
+                print(f"  Problema: {msg}")
+
+        if ok_files and not ko_files:
+            print("\n[OK] TUTTE LE CARTE SONO COMPILATE CORRETTAMENTE!")
+            print("  Nessun intervento necessario.")
+
+        if all_warnings:
+            print(f"\n[!] {len(all_warnings)} avvisi:")
+            for w in all_warnings:
+                print(w)
+
+        return
+
+    # ================================================================
+    #  MODALITA' DI SCRITTURA
+    # ================================================================
     all_modifiche = []
     all_warnings = []
     processed = 0
@@ -447,7 +665,10 @@ def main():
                 f"(raggiunta da {len(original_titles)} voci setlist)"
             )
         else:
-            print(f"\r[{processed}/{total_pages}] elaborazione in corso...", end="")
+            print(
+                f"\r[{processed}/{total_pages}] elaborazione in corso...",
+                end=""
+            )
 
         modifiche, warnings = process_card_page(
             site, resolved_title, expansion_name
@@ -466,7 +687,9 @@ def main():
     print(f"ANTEPRIMA MODIFICHE")
     print("=" * 60)
 
-    for i, (file_page, new_text, artist_name, artistalt) in enumerate(all_modifiche):
+    for i, (file_page, new_text, artist_name, artistalt) in enumerate(
+        all_modifiche
+    ):
         if i > 0:
             print()
         print(f"--- {file_page.title()} ---")
@@ -500,10 +723,12 @@ def main():
         if artistalt:
             summary_artist = artistalt
         else:
-            # Estrae il nome pulito da "Nome (illustratore)" se presente
             summary_artist = artist_name.replace(" (illustratore)", "")
         file_page.save(
-            summary=f"Bot: Aggiunto artista ({summary_artist}) e cardartist=tcgpocket"
+            summary=(
+                f"Bot: Aggiunto artista ({summary_artist}) "
+                f"e cardartist=tcgpocket"
+            )
         )
         print(f"  [OK] {file_page.title()} salvata.")
 
