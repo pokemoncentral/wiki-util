@@ -89,6 +89,11 @@
 \bCastform Snowy Form\b,Castform Forma Nuvola di Neve,
 \bRapid Strike Urshifu\b,Urshifu Stile Pluricolpo,
 \bSingle Strike Urshifu\b,Urshifu Stile Singolcolpo,
+\bHisuian Lilligant\b,Lilligant di Hisui,
+\bHisuian Sliggoo\b,Sliggoo di Hisui,
+\bHisuian Goodra\b,Goodra di Hisui,
+\bHisuian Zorua\b,Zorua di Hisui,
+\bHisuian Zoroark\b,Zoroark di Hisui,
 ,, --------------------------------- pkmn ex ---------------------------------
 (?:\b|\B){{TCGP Icon\|ex}}\B,{{ex|pocket}},
 (?:\b|\B){{TCGP Icon\|Mega ex}}\B,{{ex|mega pocket}},
