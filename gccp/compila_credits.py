@@ -10,6 +10,9 @@ Per ogni carta estrae immagine e artista di TUTTE le varianti (originale + rista
 dal template PokemoncardInfobox o GCCCartaTrainerInfobox, e compila i parametri
 artist e cardartist in ciascuna pagina File: corrispondente.
 
+Supporta carte con DOPPIO ARTISTA: se la caption contiene "[[Nome1]]/[[Nome2]]",
+compila il credits come |artist=Nome1|artist2=Nome2.
+
 In modalita' espansione, le carte segrete vengono risolte seguendo i redirect:
   - redirect nella STESSA espansione -> ignorato (la carta base ha gia' il reprint)
   - redirect in un'ALTRA espansione -> il file viene cercato tra i reprint
@@ -19,18 +22,17 @@ L'auto-riconoscimento della modalita' avviene tramite pattern: se il titolo
 contiene "(NomeSet Numero)" viene trattato come carta singola, altrimenti
 come nome espansione (la pagina cercata sara' "NomeEspansione (GCC Pocket)").
 
-Gestisce due casi nel template credits:
-  a) {{credits|artist=|other=...}}   ->  aggiunge artist e cardartist, mantiene other
-  b) {{credits|artist=[[nome]]}}     ->  sostituisce artist con nome pulito,
-                                         aggiunge cardartist, mantiene other e
-                                         sourcesite/sourcelink/sourcetext se presenti
+Gestisce il template credits:
+  - {{credits|artist=|other=...}}          -> aggiunge artist e cardartist
+  - {{credits|artist=[[nome]]}}            -> sostituisce con nome pulito
+  - Doppio artista                        -> |artist=Nome1|artist2=Nome2
 
 Se l'artista ha una pagina PCW "Nome (illustratore)", il template viene compilato con
-artist=Nome (illustratore) e artistalt=Nome.
+artist=Nome (illustratore) e artistalt=Nome (solo per singolo artista).
 
 MODALITA' DI VERIFICA (--check):
   Invece di scrivere, controlla che i template {{credits}} delle carte
-  siano compilati correttamente (artist + cardartist, ed eventualmente artistalt).
+  siano compilati correttamente (artist + cardartist, ed eventualmente artist2).
   Stampa un riepilogo con l'elenco delle carte OK e di quelle non compilate.
 
 DIPENDENZE:
@@ -39,20 +41,20 @@ DIPENDENZE:
   - user-config.py configurato per pokemoncentral (it)
 
 ESEMPI D'USO
-  Interattivo (i parametri vengono chiesti a schermo):
+  Interattivo:
       $ python compila_credits.py
 
-  Carta singola:
-      $ python compila_credits.py pokemoncentral it "Surskit (Assalto dei Paradossi 1)"
+  Carta singola (doppio artista):
+      $ python compila_credits.py pokemoncentral it "Camelia (Giorni Giocondi 66)"
 
   Espansione:
-      $ python compila_credits.py pokemoncentral it "Assalto dei Paradossi"
+      $ python compila_credits.py pokemoncentral it "Giorni Giocondi"
 
   Verifica carta singola:
-      $ python compila_credits.py --check pokemoncentral it "Surskit (Assalto dei Paradossi 1)"
+      $ python compila_credits.py --check pokemoncentral it "Camelia (Giorni Giocondi 66)"
 
   Verifica espansione:
-      $ python compila_credits.py --check pokemoncentral it "Assalto dei Paradossi"
+      $ python compila_credits.py --check pokemoncentral it "Giorni Giocondi"
 """
 
 import pywikibot
@@ -71,9 +73,13 @@ INFOBOX_NAMES = {
 def extract_card_info(card_text):
     """
     Dal wikitext di una pagina carta (Pokemon o Allenatore), estrae le coppie
-    (image_file, artist_name) per l'originale e tutte le ristampe.
+    (image_file, artist_names) per l'originale e tutte le ristampe.
 
-    Restituisce una lista di tuple: [(image_file, artist_name), ...]
+    artist_names e' una LISTA di nomi (1 o 2 elementi):
+      - 1 elemento: artista singolo (es. ['Ken Sugimori'])
+      - 2 elementi: doppio artista (es. ['Nobusawa', 'Mochipuyo'])
+
+    Restituisce una lista di tuple: [(image_file, [artist_names...]), ...]
     dove il primo elemento e' l'originale (da image/caption),
     gli eventuali successivi sono le ristampe (da reprint{i}/recaption{i}).
 
@@ -100,23 +106,27 @@ def extract_card_info(card_text):
                     break
 
             image_file = None
-            artist_name = None
+            artist_names = []
             for key, val in params.items():
                 k = key.strip().lower()
                 v = val.strip()
                 if k == "image":
                     image_file = v
                 elif k == "caption":
-                    m = re.search(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]", v)
-                    if m:
-                        artist_name = m.group(1).strip()
+                    # Estrai TUTTI i wikilink dal caption
+                    # Formato singolo: Ill. [[Nome]]
+                    # Formato doppio:  Ill. [[Nome1]]/[[Nome2]]
+                    names = re.findall(
+                        r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]", v
+                    )
+                    artist_names = [n.strip() for n in names]
 
             if image_file:
-                pairs.append((image_file, artist_name or ""))
+                pairs.append((image_file, artist_names))
 
             for i in range(1, reprint_count):
                 r_image = None
-                r_artist = None
+                r_artists = []
                 r_key_img = f"reprint{i}"
                 r_key_cap = f"recaption{i}"
                 for key, val in params.items():
@@ -125,43 +135,64 @@ def extract_card_info(card_text):
                     if k == r_key_img:
                         r_image = v
                     elif k == r_key_cap:
-                        m = re.search(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]", v)
-                        if m:
-                            r_artist = m.group(1).strip()
+                        names = re.findall(
+                            r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]", v
+                        )
+                        r_artists = [n.strip() for n in names]
 
                 if r_image:
-                    pairs.append((r_image, r_artist or ""))
+                    pairs.append((r_image, r_artists))
 
             break
 
     return pairs
 
 
-def update_credits_template(file_text, artist_name, artistalt=None):
+def _format_artist_insert(artist_names):
+    """
+    Costruisce la stringa dei parametri artist da inserire nel template credits.
+
+    Per singolo artista: artist=Nome
+    Per doppio artista:  artist=Nome1|artist2=Nome2
+    """
+    if len(artist_names) == 0:
+        return "artist="
+    elif len(artist_names) == 1:
+        return f"artist={artist_names[0]}"
+    else:
+        return f"artist={artist_names[0]}|artist2={'|artist2='.join(artist_names[1:])}"
+
+
+def update_credits_template(file_text, artist_names, artistalt=None):
     """
     Sostituisce il template {{credits}} nella pagina dell'immagine.
 
-    Due casi:
-      a) artist e' vuoto (artist=|) e c'e' other=...
-         -> aggiunge artist e cardartist, conserva other e altri parametri
+    artist_names e' una lista di nomi artisti (1 o 2 elementi).
 
-      b) artist contiene un wikilink (artist=[[nome]])
-         -> sostituisce artist con il nome pulito, aggiunge cardartist,
-           conserva other e sourcesite/sourcelink/sourcetext se presenti
+    Per artista singolo:
+      - Se esiste una pagina "Nome (illustratore)":
+          |artist=Nome (illustratore)|artistalt=Nome|cardartist=tcgpocket
+      - Altrimenti:
+          |artist=Nome|cardartist=tcgpocket
 
-    Se artistalt e' specificato, il template viene compilato come:
-      |artist=Nome (illustratore)|artistalt=Nome
+    Per doppio artista:
+      |artist=Nome1|artist2=Nome2|cardartist=tcgpocket
 
     Restituisce (nuovo_testo, errore).
     """
     if "{{credits" not in file_text:
         return None, "Template 'credits' non trovato nella pagina dell'immagine"
 
+    num_artists = len(artist_names)
+
+    if num_artists == 0:
+        return None, "Nessun artista trovato nella caption"
+
     # Costruisce la stringa artist da inserire
-    if artistalt:
-        artist_insert = f"artist={artist_name}|artistalt={artistalt}"
+    if num_artists == 1 and artistalt:
+        artist_insert = f"artist={artist_names[0]}|artistalt={artistalt}"
     else:
-        artist_insert = f"artist={artist_name}"
+        artist_insert = _format_artist_insert(artist_names)
 
     # --- Caso B: artist=[[nome]] gia' compilato con wikilink ---
     bracket_match = re.search(
@@ -296,7 +327,7 @@ def resolve_and_deduplicate(site, card_titles):
 
 def filter_pairs_by_expansion(pairs, expansion_name):
     """
-    Filtra le coppie (image_file, artist_name) mantenendo solo quelle
+    Filtra le coppie (image_file, artist_names) mantenendo solo quelle
     il cui nome file contiene il nome dell'espansione (senza spazi e apostrofi).
 
     Es. expansion_name="L'Isola Misteriosa" -> cerca "LIsolaMisteriosa"
@@ -304,20 +335,21 @@ def filter_pairs_by_expansion(pairs, expansion_name):
     """
     expansion_key = expansion_name.replace(" ", "").replace("'", "")
     return [
-        (img, art)
-        for img, art in pairs
+        (img, artists)
+        for img, artists in pairs
         if expansion_key.lower() in img.lower()
     ]
 
 
 def process_card_page(site, card_title, expansion_name=None):
     """
-    Elabora una singola pagina carta: estrae le coppie (immagine, artista)
+    Elabora una singola pagina carta: estrae le coppie (immagine, artisti)
     e restituisce una lista di modifiche da applicare.
 
-    Se l'artista ha una pagina "Nome (illustratore)" su PCW (sia nel wikilink
-    che come pagina separata), compila il template con artist=Nome (illustratore)
-    e artistalt=Nome.
+    Per artista singolo: se l'artista ha una pagina "Nome (illustratore)" su PCW,
+    compila il template con artist=Nome (illustratore) e artistalt=Nome.
+
+    Per doppio artista: compila con artist=Nome1|artist2=Nome2 (senza artistalt).
     """
     card_page = pywikibot.Page(site, card_title)
     if not card_page.exists():
@@ -338,10 +370,10 @@ def process_card_page(site, card_title, expansion_name=None):
     modifiche = []
     warnings = []
 
-    for img_file, artist_name in pairs:
-        if not artist_name:
+    for img_file, artist_names in pairs:
+        if not artist_names or len(artist_names) == 0:
             warnings.append(
-                f"  [{card_title}] '{img_file}': artista non trovato nel caption."
+                f"  [{card_title}] '{img_file}': artista/i non trovati nel caption."
             )
             continue
 
@@ -352,46 +384,46 @@ def process_card_page(site, card_title, expansion_name=None):
             )
             continue
 
-        # Controlla se l'artista ha una pagina "Nome (illustratore)"
-        # Se il nome estratto gia' termina con " (illustratore)" (es. da
-        # [[rika (illustratore)|rika]]), estrae il nome base
+        # Determina artistalt SOLO per singolo artista
         artistalt = None
         illustratore_suffix = " (illustratore)"
-        if artist_name.lower().endswith(illustratore_suffix.lower()):
-            # Il nome estratto contiene gia' il suffisso
-            base_name = artist_name[:-len(illustratore_suffix)]
-            artistalt = base_name
-            artist_name = artist_name  # mantiene "Nome (illustratore)"
-        else:
-            # Il nome estratto e' semplice: cerca se esiste "Nome (illustratore)"
-            page_ill = pywikibot.Page(site, artist_name + illustratore_suffix)
-            if page_ill.exists():
-                artistalt = artist_name
-                artist_name = artist_name + illustratore_suffix
+        final_artist_names = list(artist_names)  # copia
+
+        if len(artist_names) == 1:
+            name = artist_names[0]
+            # Se il nome gia' termina con " (illustratore)"
+            if name.lower().endswith(illustratore_suffix.lower()):
+                base_name = name[:-len(illustratore_suffix)]
+                artistalt = base_name
+            else:
+                page_ill = pywikibot.Page(site, name + illustratore_suffix)
+                if page_ill.exists():
+                    artistalt = name
+                    final_artist_names[0] = name + illustratore_suffix
 
         new_text, error = update_credits_template(
-            file_page.text, artist_name, artistalt
+            file_page.text, final_artist_names, artistalt
         )
         if error:
             warnings.append(f"  [{card_title}] '{img_file}': {error}")
             continue
 
-        modifiche.append((file_page, new_text, artist_name, artistalt))
+        modifiche.append((file_page, new_text, final_artist_names, artistalt))
 
     return modifiche, warnings
 
 
 # ======================================================================
-#  NUOVE FUNZIONI: MODALITA' DI VERIFICA (--check)
+#  MODALITA' DI VERIFICA (--check)
 # ======================================================================
 
-def check_credits_template(file_text, artist_expected, artistalt_expected=None):
+def check_credits_template(file_text, expected_artist_names, artistalt_expected=None):
     """
     Verifica che il template {{credits}} in una pagina File sia compilato
-    correttamente, ovvero con i parametri:
-      - artist=<valore> (non vuoto)
-      - cardartist=tcgpocket
-      - (opzionale) artistalt=<valore> se atteso
+    correttamente.
+
+    Per singolo artista atteso: verifica artist e opzionalmente artistalt.
+    Per doppio artista atteso:  verifica artist e artist2.
 
     Restituisce:
       (True, messaggio_ok) se tutto corretto
@@ -400,7 +432,6 @@ def check_credits_template(file_text, artist_expected, artistalt_expected=None):
     if "{{credits" not in file_text:
         return False, "Template 'credits' non presente nella pagina File"
 
-    # Estrai il template credits completo
     m = re.search(r"\{\{credits\s*\|([^}]*)\}\}", file_text)
     if not m:
         return False, "Template 'credits' non trovato (formato non riconosciuto)"
@@ -421,6 +452,8 @@ def check_credits_template(file_text, artist_expected, artistalt_expected=None):
         val = val.strip()
         params[key] = val
 
+    num_expected = len(expected_artist_names)
+
     # Verifica artist
     artist_val = params.get('artist', '')
     if not artist_val:
@@ -434,18 +467,36 @@ def check_credits_template(file_text, artist_expected, artistalt_expected=None):
             f"'{cardartist_val}' (atteso: tcgpocket)"
         )
 
-    # Verifica artistalt (solo se atteso, altrimenti e' opzionale)
-    if artistalt_expected:
-        artistalt_val = params.get('artistalt', '').strip()
-        if not artistalt_val:
+    if num_expected == 1:
+        # Verifica che artist2 NON sia presente (non atteso per singolo artista)
+        artist2_val = params.get('artist2', '')
+        if artist2_val:
             return False, (
-                f"Parametro 'artistalt' assente "
-                f"(atteso: '{artistalt_expected}')"
+                f"Parametro 'artist2' presente ma non atteso "
+                f"(carta con artista singolo): artist2={artist2_val}"
             )
-        if artistalt_val.lower() != artistalt_expected.lower():
+
+        # Verifica artistalt (opzionale se atteso)
+        if artistalt_expected:
+            artistalt_val = params.get('artistalt', '').strip()
+            if not artistalt_val:
+                return False, (
+                    f"Parametro 'artistalt' assente "
+                    f"(atteso: '{artistalt_expected}')"
+                )
+            if artistalt_val.lower() != artistalt_expected.lower():
+                return False, (
+                    f"Parametro 'artistalt' errato: '{artistalt_val}' "
+                    f"(atteso: '{artistalt_expected}')"
+                )
+
+    elif num_expected == 2:
+        # Verifica artist2
+        artist2_val = params.get('artist2', '')
+        if not artist2_val:
             return False, (
-                f"Parametro 'artistalt' errato: '{artistalt_val}' "
-                f"(atteso: '{artistalt_expected}')"
+                f"Parametro 'artist2' assente o vuoto "
+                f"(atteso secondo artista: '{expected_artist_names[1]}')"
             )
 
     return True, "OK: tutti i parametri compilati correttamente"
@@ -479,13 +530,13 @@ def check_card_page(site, card_title, expansion_name=None):
     risultati = []
     warnings = []
 
-    for img_file, artist_name in pairs:
-        if not artist_name:
+    for img_file, artist_names in pairs:
+        if not artist_names or len(artist_names) == 0:
             warnings.append(
-                f"  [{card_title}] '{img_file}': artista non trovato nel caption."
+                f"  [{card_title}] '{img_file}': artista/i non trovato nel caption."
             )
             risultati.append(
-                (img_file, card_title, False, "Artista non trovato nel caption")
+                (img_file, card_title, False, "Artista/i non trovato nel caption")
             )
             continue
 
@@ -499,12 +550,15 @@ def check_card_page(site, card_title, expansion_name=None):
             )
             continue
 
-        # Determina se ci si aspetta artistalt
-        page_ill = pywikibot.Page(site, artist_name + " (illustratore)")
-        artistalt_expected = artist_name if page_ill.exists() else None
+        # Determina se ci si aspetta artistalt (solo per singolo artista)
+        artistalt_expected = None
+        if len(artist_names) == 1:
+            page_ill = pywikibot.Page(site, artist_names[0] + " (illustratore)")
+            if page_ill.exists():
+                artistalt_expected = artist_names[0]
 
         ok, msg = check_credits_template(
-            file_page.text, artist_name, artistalt_expected
+            file_page.text, artist_names, artistalt_expected
         )
         risultati.append((img_file, card_title, ok, msg))
 
@@ -687,16 +741,19 @@ def main():
     print(f"ANTEPRIMA MODIFICHE")
     print("=" * 60)
 
-    for i, (file_page, new_text, artist_name, artistalt) in enumerate(
+    for i, (file_page, new_text, artist_names, artistalt) in enumerate(
         all_modifiche
     ):
         if i > 0:
             print()
         print(f"--- {file_page.title()} ---")
-        if artistalt:
-            print(f"    Artista: {artist_name}  (artistalt: {artistalt})")
+        if len(artist_names) == 1:
+            if artistalt:
+                print(f"    Artista: {artist_names[0]}  (artistalt: {artistalt})")
+            else:
+                print(f"    Artista: {artist_names[0]}")
         else:
-            print(f"    Artista: {artist_name}")
+            print(f"    Artisti: {' + '.join(artist_names)}")
         print(new_text)
 
     print("=" * 60)
@@ -718,12 +775,17 @@ def main():
         return
 
     # --- Salvataggio ---
-    for file_page, new_text, artist_name, artistalt in all_modifiche:
+    for file_page, new_text, artist_names, artistalt in all_modifiche:
         file_page.text = new_text
-        if artistalt:
-            summary_artist = artistalt
+        if len(artist_names) == 1:
+            if artistalt:
+                summary_artist = artistalt
+            else:
+                summary_artist = artist_names[0].replace(" (illustratore)", "")
         else:
-            summary_artist = artist_name.replace(" (illustratore)", "")
+            summary_artist = " e ".join(
+                a.replace(" (illustratore)", "") for a in artist_names
+            )
         file_page.save(
             summary=(
                 f"Bot: Aggiunto artista ({summary_artist}) "
