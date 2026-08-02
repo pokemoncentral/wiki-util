@@ -69,16 +69,22 @@ def tr_additional_category(val) -> str:
 
 def clean_text(text: str) -> str:
     """
-    - Sostituisce \\n con uno spazio
-    - Traduce i tipi inglesi racchiusi tra \\x04 (es. \\x04Water\\x04) in {{et|TipoItaliano}}
-    - Sostituisce Pokémon-\\x03 con Pokémon-''''''<big>ex</big>''''''
-    - Rimuove gli spazi multipli
+    - \\n → spazio
+    - \\x11 → spazio normale
+    - \\x12 → rimosso
+    - \\x04<TipoInglese>\\x04 → {{et|TipoItaliano}}
+    - Pokémon-\\x03 → Pokémon-''''''<big>ex</big>''''''
+    - Spazi multipli → spazio singolo
     """
     if not text:
         return text
 
     # \n → spazio
     text = text.replace("\n", " ")
+
+    # \x11 → spazio normale, \x12 → rimosso
+    text = text.replace("\x11", " ")
+    text = text.replace("\x12", "")
 
     # \x04<TipoInglese>\x04 → {{et|<TipoItaliano>}}
     for eng, ita in TYPE_MAP.items():
@@ -98,7 +104,7 @@ def extract_attack(atk):
     if atk is None:
         return ("", "", "", ["", "", "", "", ""], "")
 
-    name = atk.get("name", "")
+    name = clean_text(atk.get("name", ""))
     desc = clean_text(atk.get("desc", ""))
     costs = [tr_type(c) for c in atk.get("cost", [])]
     while len(costs) < 5:
@@ -118,6 +124,9 @@ def json_to_txt(input_path: str, output_path: str) -> None:
     rows = []
     for card in data:
         kind = card.get("kind", "pokemon")
+
+        # name (ora passa da clean_text per \x11/\x12)
+        name = clean_text(card.get("name", ""))
 
         # ability
         ability = card.get("ability")
@@ -141,10 +150,10 @@ def json_to_txt(input_path: str, output_path: str) -> None:
         # additionalCategory
         ac = tr_additional_category(card.get("additionalCategory"))
 
-        # flavor: \n → spazio
+        # flavor: \n → spazio, \x11 → spazio, \x12 → rimosso
         flavor = card.get("flavor", "")
         if flavor:
-            flavor = flavor.replace("\n", " ")
+            flavor = flavor.replace("\n", " ").replace("\x11", " ").replace("\x12", "")
 
         # footer e typeLabel
         ui = card.get("ui", {})
@@ -155,7 +164,7 @@ def json_to_txt(input_path: str, output_path: str) -> None:
             card.get("cardId", ""),
             card.get("expansion", ""),
             card.get("collectionNumber", ""),
-            card.get("name", ""),
+            name,
             card.get("isEX", False),
             card.get("isMega", False),
             ac,
