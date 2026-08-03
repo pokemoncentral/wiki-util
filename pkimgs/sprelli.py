@@ -236,8 +236,8 @@ if __name__ == "__main__":
                         "-noverify",
                         "-ignorewarn",
                         "-abortonwarn:exists",
-                        '"{os.path.join(args.dir, img)}"',
-                        f'"{template}"',
+                        f"{os.path.join(args.dir, img)}",
+                        f"{template}",
                     ]
                 )
             else:
