@@ -9,7 +9,8 @@ in a directory or to update an entire category on Pokémon Central Wiki. Argumen
 --file: file with images to update.
 --credits: credits for images (wikicode, optional).
 --artsourcesfile: path of file with sources data (already populated).
---test: "no" to perform actual modifications/uploads on website, otherwise only a preview will be printed.
+--test: "no" to perform actual modifications/uploads on website, otherwise only
+a preview will be printed.
 
 Artwork names for single Pokémon are built as follows:
 - "Artwork" prefix.

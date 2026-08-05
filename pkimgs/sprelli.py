@@ -14,7 +14,8 @@ be "Spr" for sprite/models or "Icon" for mugshots.
 specify abbreviation of game (is lowercase and may be differ from Modulo:Sigle/data).
 --ani: if uploading/updating main series images (excluding mini sprites), can be "yes" or "no".
 --credits: credits for images (wikicode, optional).
---test: "no" to perform actual modifications/uploads on website, otherwise only a preview will be printed.
+--test: "no" to perform actual modifications/uploads on website, otherwise only
+a preview will be printed.
 
 In all file names mentioned in following comments it holds that:
 - <...> indicates something variable, for example <ndex> is National Pokédex number.
