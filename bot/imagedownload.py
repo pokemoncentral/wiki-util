@@ -12,9 +12,10 @@ NOTE: <pagename> SHOULD contain the namespace prefix (ie: File or its translatio
 
 The following parameters are supported:
 
-  -target:z    Target directory for the download (optional, default /tmp)
-  -family:y    Name of family with desired wiki (optional)
-  -lang:it     Language of desired wiki (optional)
+  -target:z     Target directory for the download (optional, default /tmp)
+  -family:y     Name of family with desired wiki (optional)
+  -lang:it      Language of desired wiki (optional)
+  -overwrite    Overwrite file if already exists (optional, by default is skipped)
 
 If pagename is an image description page, simply downloads it. If it is
 a normal page, it will offer to copy any of the images used on that page,
@@ -23,6 +24,7 @@ reachable via interwiki links.
 
 &params;
 """
+
 #
 # (C) Andre Engels, 2004
 # (C) Pywikibot team, 2004-2019
@@ -42,7 +44,6 @@ import pywikibot
 from pywikibot import config, i18n, pagegenerators, textlib
 from pywikibot.specialbots import UploadRobot
 
-
 docuReplacements = {"&params;": pagegenerators.parameterHelp}
 
 
@@ -56,6 +57,7 @@ class ImageTransferBot(object):
         interwiki=False,
         ignore_warning=False,
         target_dir="/tmp",
+        overwrite=False,
     ):
         """Initializer."""
         self.generator = generator
@@ -63,6 +65,7 @@ class ImageTransferBot(object):
         self.targetSite = targetSite
         self.ignore_warning = ignore_warning
         self.target_dir = target_dir
+        self.overwrite = overwrite
 
         if not os.path.isdir(self.target_dir):
             os.mkdir(self.target_dir)
@@ -73,12 +76,18 @@ class ImageTransferBot(object):
 
         @return: None
         """
-        url = sourceImagePage.get_file_url()
         target_file = os.path.join(self.target_dir, sourceImagePage._link._title)
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with open(target_file, "wb") as outfile, urllib.request.urlopen(req) as infile:
-            outfile.write(infile.read())
-        pywikibot.output("Downloaded file to {}".format(target_file))
+        if not self.overwrite and os.path.isfile(target_file):
+            pywikibot.output("Skipped already existing file {}".format(target_file))
+        else:
+            url = sourceImagePage.get_file_url()
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with (
+                open(target_file, "wb") as outfile,
+                urllib.request.urlopen(req) as infile,
+            ):
+                outfile.write(infile.read())
+            pywikibot.output("Downloaded file to {}".format(target_file))
 
     def showImageList(self, imagelist):
         """Print image list."""
@@ -170,6 +179,7 @@ def main(*args):
     keep_name = False
     targetLang = None
     targetFamily = None
+    overwrite = False
 
     local_args = pywikibot.handle_args(args)
     generator_factory = pagegenerators.GeneratorFactory(positional_arg_name="page")
@@ -185,6 +195,8 @@ def main(*args):
         #     targetFamily = arg[10:]
         elif arg.startswith("-target:"):
             targetDir = arg[8:]
+        elif arg == "-overwrite":
+            overwrite = True
         else:
             generator_factory.handle_arg(arg)
 
@@ -202,7 +214,11 @@ def main(*args):
     # else:
     targetSite = pywikibot.Site(targetLang or site.lang, targetFamily or site.family)
     bot = ImageTransferBot(
-        gen, interwiki=interwiki, targetSite=targetSite, target_dir=targetDir
+        gen,
+        interwiki=interwiki,
+        targetSite=targetSite,
+        target_dir=targetDir,
+        overwrite=overwrite,
     )
     bot.run()
 
