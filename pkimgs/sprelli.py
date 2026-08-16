@@ -26,7 +26,7 @@ In all file names mentioned in following comments it holds that:
 
 # fmt: off
 """
-Build template for sprites, models and icons in main series games (NOT mini sprites).
+Get data for sprites, models and icons in main series games (NOT mini sprites).
 File name is "[Spr|Icon]<game>[m|f][d][sh]<ndex>.<ext>", where:
 - [Spr|Icon] is 'Spr' for sprites and models, 'Icon' for mugshots.
 - <game> is abbr of game(s), for example 'nb' is for "Pokémon Nero e Bianco".
@@ -36,7 +36,7 @@ File name is "[Spr|Icon]<game>[m|f][d][sh]<ndex>.<ext>", where:
 - <ndex> is National Pokédex number, including abbr of form if applicable.
 - <ext> is file extension.
 """  # fmt: on
-def build_main_template(img, prefix, type, game, gameabbr, ani, credits):
+def get_data_main(img, prefix, gameabbr):
     ndex = re.sub(prefix + r"\w+[mf]d?(sh)?(\d+(\w+)?)\.\w+", r"\2", img)
     if re.search(f"^{prefix}{gameabbr}[mf]?d?sh", img):
         shiny = "yes"
@@ -57,12 +57,12 @@ def build_main_template(img, prefix, type, game, gameabbr, ani, credits):
         altform = "yes"
     else:
         altform = "no"
-    return f"{{{{sprello|type={type}|ndex={ndex}|game={game}|ani={ani}|back={back}|shiny={shiny}|female={female}|altform={altform}|credits={credits}}}}}"
+    return ndex, back, shiny, female, altform
 
 
 # fmt: off
 """
-Build template for main series mini sprites. File name is
+Get data for main series mini sprites. File name is
 "[Ani]<ndex>MS<gen|game>[OW*[sh]].<ext>", where:
 - [Ani] is used for animated mini sprites.
 - <ndex> works as above, except generation 1/2 where is name of a Pokémon (many
@@ -73,17 +73,18 @@ of them shared same mini sprite).
 
 AniClefairyMS1.gif
 AniClefairyMS2.gif
-001MS4OWEsh.gif
-Ani001MS5.gif
-001MS5.png
-001MS7.png
-001MS.png
-001MSDLPS.png
+0001MS4OWEsh.gif
+Ani0001MS5.gif
+0001MS5.png
+0001MS7.png
+0001MS.png
+0001MSDLPS.png
 """  # fmt: on
-def build_main_ms_template(img, game, credits):
+def get_data_ms(img):
+    type = "mini sprite"
     ndex = re.sub(r"^(Ani)?(.+?)MS.+$", r"\2", img)
     if re.search(r"^[A-z]", ndex):
-        ndex = "000"
+        ndex = "0000"
     if img.startswith("Ani"):
         ani = "yes"
     else:
@@ -99,12 +100,12 @@ def build_main_ms_template(img, game, credits):
         altform = "yes"
     else:
         altform = "no"
-    return f"{{{{sprello|type=mini sprite|ndex={ndex}|game={game}|ani={ani}|shiny={shiny}|altform={altform}|credits={credits}}}}}"
+    return type, ndex, ani, shiny, altform
 
 
 # fmt: off
 """
-Build template for HOME models (both standard and resized). File name is
+Get data for HOME models (both standard and resized). File name is
 "Home[m|f][sh]<ndex>[ r].png" for standard models and Mini[m|f][sh]<ndex>[ r].png
 for resized models, where:
 - [m|f] works as above.
@@ -112,7 +113,7 @@ for resized models, where:
 - <ndex> works as above.
 - [ r] is used for back models.
 """  # fmt: on
-def build_home_template(img, credits=""):
+def get_data_home(img):
     if img.startswith("Home"):
         type = "modelli"
         ani = "no"
@@ -137,18 +138,19 @@ def build_home_template(img, credits=""):
         altform = "yes"
     else:
         altform = "no"
-    return f"{{{{sprello|type={type}|ndex={ndex}|game=Pokémon HOME|ani={ani}|back={back}|shiny={shiny}|female={female}|altform={altform}|credits={credits}}}}}"
+    return type, ndex, ani, back, shiny, female, altform
 
 
 # fmt: off
 """
-Build template for GO models. File name is "GO<ndex>[ <event>][ f][ s].png", where:
+Get data for GO models. File name is "GO<ndex>[ <event>][ f][ s].png", where:
 - <ndex> works as above.
 - <event> is special event, for example "FashionWeek21" or "Clone".
 - [ f] is used for female models.
 - [ s] is used for shiny models.
 """  # fmt: on
-def build_go_template(img):
+def get_data_go(img):
+    type = "modelli"
     ndex = re.sub(r"^GO(\d+\w*)[ \.].+$", r"\1", img)
     if re.search(r" s\b", img):
         shiny = "yes"
@@ -166,20 +168,81 @@ def build_go_template(img):
         event = "yes"
     else:
         event = "no"
-    return f"{{{{sprello|type=modelli|ndex={ndex}|game=Pokémon GO|shiny={shiny}|female={female}|altform={altform}|event={event}}}}}"
+    return type, ndex, shiny, female, altform, event
+
+
+# fmt: off
+"""
+Get data for Sleep sprite/models. File name is "Sleep<type>[sh]<ndex>[-<event>-<form>].png, where:
+- <type> is be "Icona" for mugshots and "Sonno" for sleep styles.
+- [sh] is used for shiny sprite/models.
+- <ndex> works as above.
+- <event> and <form> are used for event-exclusive variants, using in-app names formatted
+in Pascal Case: examples are "-Halloween-Arancione" and "-Feste-GhirlandaFestiva".
+"""  # fmt: on
+def get_data_sleep(img):
+    if img.startswith("SleepIcona"):
+        type = "mugshot"
+    elif img.startswith("SleepSonno"):
+        type = "sprite stili di sonno"
+    ndex = re.sub(r"^[A-z]+(\d+\w*)[ \.\-].+$", r"\1", img)
+    if re.search(r"sh\d{4}", img):
+        shiny = "yes"
+    else:
+        shiny = "no"
+    if re.search(r"[A-z]", ndex):
+        altform = "yes"
+    else:
+        altform = "no"
+    if re.search(r"-\w+-\w+", img):
+        event = "yes"
+    else:
+        event = "no"
+    return type, ndex, shiny, altform, event
 
 
 # build appropriate template
 def build_template(img, prefix, type, game, gameabbr, ani, credits):
+    # initialize variables to avoid errors
+    back = None
+    shiny = None
+    female = None
+    altform = None
+    event = None
+    # detect type, game and other info
     if prefix in ["Spr", "Icon"]:
-        template = build_main_template(img, prefix, type, game, gameabbr, ani, credits)
+        # type and game must be specified in these cases
+        ndex, back, shiny, female, altform = get_data_main(img, prefix, gameabbr)
     elif type == "mini sprite":
-        template = build_main_ms_template(img, game, credits)
+        # game must be specified in these cases
+        type, ndex, ani, shiny, altform = get_data_ms(img)
     elif re.search(r"^(Home|Mini)[mf]", img):
-        template = build_home_template(img, credits=credits)
+        game = "Pokémon HOME"
+        type, ndex, ani, back, shiny, female, altform = get_data_home(img)
     elif img.startswith("GO"):
-        template = build_go_template(img)
-    return re.sub(r"\|\w+=(?=[\|\}])", r"", template)  # remove empty fields
+        game = "Pokémon GO"
+        type, ndex, shiny, female, altform, event = get_data_go(img)
+    elif img.startswith("Sleep"):
+        game = "Pokémon Sleep"
+        type, ndex, shiny, altform, event = get_data_sleep(img)
+    # build template with retrieved info
+    template = f"{{{{sprello|type={type}|ndex={ndex}|game={game}"
+    if ani:
+        template += f"|ani={ani}"
+    if back:
+        template += f"|back={back}"
+    if shiny:
+        template += f"|shiny={shiny}"
+    if female:
+        template += f"|female={female}"
+    if altform:
+        template += f"|altform={altform}"
+    if event:
+        template += f"|event={event}"
+    if credits:
+        template += f"|credits={credits}"
+    template += "}}"
+    return template
 
 
 # main function
@@ -207,6 +270,7 @@ if __name__ == "__main__":
             sys.exit(f'Error: argument "game" not provided!')
         if not args.gameabbr:
             sys.exit(f'Error: argument "gameabbr" not provided!')
+    test_mode = not (args.test.lower().strip() == "no")
     # if a directory is specified, upload all images inside it
     if args.dir:
         for img in sorted(os.listdir(args.dir)):
@@ -219,7 +283,7 @@ if __name__ == "__main__":
                 args.ani,
                 args.credits,
             )
-            if args.test.lower().strip() == "no":
+            if not test_mode:
                 page = pywikibot.Page(site, f"File:{img}")
                 if page.exists():
                     if page.text.startswith("#RINVIA") or page.text.startswith("#REDIRECT"):  # fmt: skip
@@ -257,10 +321,8 @@ if __name__ == "__main__":
                 args.ani,
                 args.credits,
             )
-            if args.test.lower().strip() == "no":
+            if not test_mode:
                 page.text = template
                 page.save("Bot: using new template for licenses and categories of Pokémon images")  # fmt: skip
             else:
                 print(f"{img}   >   {template}")
-
-# f"{{{{sprello|type={type}|ndex={ndex}|game={game}|ani={ani}|back={back}|shiny={shiny}|female={female}|altform={altform}|credits={credits}}}}}"
