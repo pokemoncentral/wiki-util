@@ -106,21 +106,27 @@ def import_data(genderdatafile, artsourcesfile, singlemsfile, availpokesfile, av
     return genderdiffs, genderforms, femaleonly, artsources, singlemsdata, availpokes, availforms, rangerdata, goforms  # fmt: skip
 
 
+# From lst get all entries that start with ndex with or without form abbr; then
+# insert these abbrs in provided dictionary as keys with specified value. For example,
+# if lst is ["215", "215H", "229"] and ndex in "215" the dictionary is updated
+# by assigning to keys "" and "H" specified value.
+def update_poke_gender_dict(ndex, lst, value, gender):
+    ndexabbrs = [i for i in lst if re.search(f"^{ndex}(?!\\d)", i)]
+    for ndexabbr in ndexabbrs:
+        gender[re.sub(r"\d", r"", ndexabbr)] = value
+    return gender
+
+
 # get data for given Pokémon
-def get_poke_data(pokeabbr, genderdiffs, genderforms, femaleonly, singlemsdata):
-    ndexabbr = pokeabbr.lstrip("0")
-    if ndexabbr in genderdiffs:
-        gender = "both"
-    elif ndexabbr in genderforms:
-        gender = "bothforms"
-    elif ndexabbr in femaleonly:
-        gender = "f"
-    else:
-        gender = ""
-    if pokeabbr in singlemsdata:
-        singleMS = True
-    else:
-        singleMS = False
+def get_poke_data(poke, genderdiffs, genderforms, femaleonly, singlemsdata):
+    ndex = poke.lstrip("0")
+    gender = {}
+    gender = update_poke_gender_dict(ndex, genderdiffs, "both", gender)
+    gender = update_poke_gender_dict(ndex, genderforms, "bothforms", gender)
+    gender = update_poke_gender_dict(ndex, femaleonly, "f", gender)
+    if not gender.get("", None):
+        gender[""] = ""
+    singleMS = poke in singlemsdata
     return gender, singleMS
 
 
@@ -256,7 +262,7 @@ def build_arts(poke, arts, abbrs, gender, artsources, extras, pagetext=""):
             addedtext, arts = build_form_arts(poke + abbr, True, arts, artsources)
             text += addedtext
     # fix gender differences treated as useless forms
-    if abbrs[:2] == ["", "F"] and gender == "both":
+    if abbrs[:2] == ["", "F"] and gender[""] == "both":
         text = text.replace("|form=yes", "|gender=m\n|bothgenders=yes", 1)
         text = text.replace("|form=yes", "|gender=f\n|bothgenders=yes", 1)
     # unused arts (those with non-standard names)
@@ -339,9 +345,7 @@ def build_main_gen_entry(poke, form, gen, availpokes, availforms, isform=False, 
 
 
 # build all pokemonimages/main* entries for given Pokémon in given generation
-def build_main_gen(
-    poke, gen, availpokes={}, availforms={}, forms=[], gender="", gen4sprites=[]
-):
+def build_main_gen(poke, gen, availpokes={}, availforms={}, forms=[], gender={"": ""}, gen4sprites=[]):  # fmt: skip
     text = ""
     # search for other forms that esist in given generation
     numgen = int(gen)
@@ -350,9 +354,9 @@ def build_main_gen(
     else:
         multiform = False
     # gender forms
-    if [form[0] for form in forms[:2]] == ["", "F"] and gender in ["both", "bothforms"]:
+    if [form[0] for form in forms[:2]] == ["", "F"] and gender[""] in ["both", "bothforms"]:
         # gender difference is treated as useless form
-        if gender == "both":
+        if gender[""] == "both":
             text += f"{build_main_gen_entry(poke, forms[0], gen, availpokes, availforms, isform = False, bothgenders = True)}\n"
             text += f"{build_main_gen_entry(poke, forms[0], gen, availpokes, availforms, isform = False, female = True, bothgenders = True)}\n"
         # gender difference is treated as alt form
@@ -394,11 +398,11 @@ def build_main_gen(
         # maybe the following part can be done better, but it works and I don't want to break it
         if abbr == "":
             # gender differences
-            if gender == "both":
+            if gender[""] == "both":
                 text += f"{build_main_gen_entry(poke, form, gen, availpokes, availforms, isform = False, bothgenders = True, gen4common = gen4common)}\n"
                 text += f"{build_main_gen_entry(poke, form, gen, availpokes, availforms, isform = False, female = True, bothgenders = True, gen4common = gen4common)}\n"
             # female only
-            elif gender == "f":
+            elif gender[""] == "f":
                 text += f"{build_main_gen_entry(poke, form, gen, availpokes, availforms, isform = multiform, female = True, gen4common = gen4common)}\n"
             # other cases
             else:
@@ -406,10 +410,10 @@ def build_main_gen(
                 if numgen >= 8 or not middlegen:
                     since = ""
                 text += f"{build_main_gen_entry(poke, form, gen, availpokes, availforms, isform = multiform, since = since, female = False, gen4common = gen4common)}\n"
-        elif abbr == "F" and gender == "both":
+        elif abbr == "F" and gender[""] == "both":
             pass  # already done
         elif floor(game_to_gen[since]) <= numgen and numgen <= game_to_gen[until]:
-            if gender == "f":
+            if gender[""] == "f":
                 female = True
             else:
                 female = False
@@ -426,9 +430,7 @@ def build_main_gen(
 
 
 # build mini sprites entry for given form
-def build_ms_entry(
-    poke, form, multiform, availpokes, availforms, gender, genderform=""
-):
+def build_ms_entry(poke, form, multiform, availpokes, availforms, gender, genderform=""):  # fmt: skip
     # dicts to map introduction to pokemonimages/mainMS parameter values
     ms345 = {
         3: "345",
@@ -475,9 +477,9 @@ def build_ms_entry(
         # some ndexes are hardcoded here, because game won't change and it's
         # much easier than reading this info from external file
         if check_pokeform_game_availability(poke, form, "lpa", availpokes, availforms):
-            if gender == "both":
+            if gender.get(form[0], "") == "both":
                 text += "|mslpa=both"
-            elif gender == "f":
+            elif gender.get(form[0], gender[""]) == "f":
                 text += "|mslpa=female"
             elif ndexabbr in ["59H", "101H", "713H", "900"]:
                 text += "|mslpa=rm"
@@ -488,9 +490,10 @@ def build_ms_entry(
         if check_pokeform_game_availability(poke, form, "sv", availpokes, availforms):
             text += "|mssv=yes"
         if check_pokeform_game_availability(poke, form, "lpza", availpokes, availforms):
-            if gender == "both":
+            # print(f"poke '{poke}', form '{form}' > gender {gender}")  # DEBUG
+            if gender.get(form[0], "") == "both":
                 text += "|mslpza=both"
-            elif gender == "f":
+            elif gender.get(form[0], gender[""]) == "f":
                 text += "|mslpza=female"
             else:
                 text += "|mslpza=single"
@@ -541,9 +544,7 @@ def merge_duplicate_ms(main_text, poke, abbrs):
 
 
 # build main series entries
-def build_main(
-    poke, exceptionspath, forms, gender, singleMS, availpokes, availforms, imgs
-):
+def build_main(poke, exceptionspath, forms, gender, singleMS, availpokes, availforms, imgs):  # fmt: skip
     text = ""
     # check for exception
     exceptionfile = os.path.join(exceptionspath, f"{poke}_main.txt")
@@ -581,27 +582,25 @@ def build_main(
                 text += file.read()
         else:
             if singleMS:
-                text += build_ms_entry(
-                    poke, forms[0], False, availpokes, availforms, gender
-                )
+                text += build_ms_entry(poke, forms[0], False, availpokes, availforms, gender)  # fmt: skip
             else:
                 multiform = len(forms) > 1
-                if [form[0] for form in forms[:2]] == ["", "F"] and gender in ["both", "bothforms"]:  # fmt: skip
+                if [form[0] for form in forms[:2]] == ["", "F"] and gender[""] in ["both", "bothforms"]:  # fmt: skip
                     # gender difference treated as useless form
-                    if gender == "both":
+                    if gender[""] == "both":
                         text += build_ms_entry(poke, forms[0], False, availpokes, availforms, gender, genderform="m")  # fmt: skip
                         text += build_ms_entry(poke, forms[1], False, availpokes, availforms, gender, genderform="f")  # fmt: skip
                     # gender difference treated as alt form
                     else:
-                        text += build_ms_entry(poke, forms[0], True, availpokes, availforms, gender="m")  # fmt: skip
-                        text += build_ms_entry(poke, forms[1], True, availpokes, availforms, gender="f")  # fmt: skip
+                        text += build_ms_entry(poke, forms[0], True, availpokes, availforms, gender={"": ""})  # fmt: skip
+                        text += build_ms_entry(poke, forms[1], True, availpokes, availforms, gender={"": "f"})  # fmt: skip
                     if len(forms) > 2:
                         for form in forms[2:]:
-                            if form[0] == "F" and gender in ["both", "bothforms"]:
-                                if gender == "both":
+                            if form[0] == "F" and gender.get(form[0], gender[""]) in ["both", "bothforms"]:
+                                if gender.get(form[0], gender[""]) == "both":
                                     text += build_ms_entry(poke, form, False, availpokes, availforms, gender, genderform="f")  # fmt: skip
                                 else:
-                                    text += build_ms_entry(poke, form, True, availpokes, availforms, gender="f")  # fmt: skip
+                                    text += build_ms_entry(poke, form, True, availpokes, availforms, gender={"": "f"})  # fmt: skip
                             else:
                                 text += build_ms_entry(poke, form, multiform, availpokes, availforms, gender)  # fmt: skip
                 else:
@@ -626,7 +625,7 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
     ndex = int(poke)
     texts = []
     finaltext = ""
-    uselessgender = abbrs[:2] == ["", "F"] and gender == "both"
+    uselessgender = abbrs[:2] == ["", "F"] and gender[""] == "both"
     for abbr in abbrs:
         pokeabbr = poke + abbr
         ndexabbr = f"{ndex}{abbr}"

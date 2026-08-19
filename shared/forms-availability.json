@@ -2723,7 +2723,7 @@
         "lgpe": false,
         "spsc": false,
         "dlps": false,
-        "lpa": false,
+        "lpa": true,
         "sv": true,
         "lpza": false
     },
