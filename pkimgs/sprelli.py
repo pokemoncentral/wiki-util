@@ -21,6 +21,13 @@ In all file names mentioned in following comments it holds that:
 - <...> indicates something variable, for example <ndex> is National Pokédex number.
 - [...] indicates something that may be present or not.
 - | indicates alternative among two or more options.
+
+Supported games:
+- Main series games (sprites, models, icons and mini sprites).
+- Pokémon HOME (both standard and resized).
+- Pokémon GO.
+- Pokémon Sleep.
+- Pokémon Masters EX.
 """
 
 
@@ -106,18 +113,18 @@ def get_data_ms(img):
 # fmt: off
 """
 Get data for HOME models (both standard and resized). File name is
-"Home[m|f][sh]<ndex>[ r].png" for standard models and Mini[m|f][sh]<ndex>[ r].png
-for resized models, where:
+"<Home|Mini>[m|f][d][sh]<ndex>.png", where:
+- <Home|Mini> is for standard and resized models respectively.
 - [m|f] works as above.
+- [d] is used for back models.
 - [sh] works as above.
 - <ndex> works as above.
-- [ r] is used for back models.
 """  # fmt: on
 def get_data_home(img):
     if img.startswith("Home"):
         type = "modelli"
         ani = "no"
-        if " r" in img or "_r" in img:
+        if re.search(r"(Home|Mini)[mf]d", img):
             back = "yes"
         else:
             back = "no"
@@ -173,8 +180,8 @@ def get_data_go(img):
 
 # fmt: off
 """
-Get data for Sleep sprite/models. File name is "Sleep<type>[sh]<ndex>[-<event>-<form>].png, where:
-- <type> is be "Icona" for mugshots and "Sonno" for sleep styles.
+Get data for Sleep sprite/models. File name is "Sleep<type>[sh]<ndex>[-<event>-<form>].png", where:
+- <type> is "Icona" for mugshots and "Sonno" for sleep styles.
 - [sh] is used for shiny sprite/models.
 - <ndex> works as above.
 - <event> and <form> are used for event-exclusive variants, using in-app names formatted
@@ -201,6 +208,35 @@ def get_data_sleep(img):
     return type, ndex, shiny, altform, event
 
 
+# fmt: off
+"""
+Get data for Masters sprite/models. File name is "MastersEX[sh]<ndex>[f].png"
+or "MastersIcona[sh]<ndex>[ f].png", where:
+- [sh] is used for shiny sprite/models.
+- [f] and [ f] are used for female sprite/models.
+- <ndex> works as above.
+"""  # fmt: on
+def get_data_masters(img):
+    if img.startswith("MastersIcona"):
+        type = "mugshot"
+    elif img.startswith("MastersEX"):
+        type = "modelli"
+    ndex = re.sub(r"^[A-z]+(\d+\w*)[ \.\-].+$", r"\1", img)
+    if re.search(r"sh\d{4}", img):
+        shiny = "yes"
+    else:
+        shiny = "no"
+    if re.search(r"\d{4}f$", ndex) or re.search(r" f\b", img):
+        female = "yes"
+    else:
+        female = "no"
+    if re.search(r"[A-Z][A-z]?", ndex):
+        altform = "yes"
+    else:
+        altform = "no"
+    return type, ndex, shiny, female, altform
+
+
 # build appropriate template
 def build_template(img, prefix, type, game, gameabbr, ani, credits):
     # initialize variables to avoid errors
@@ -225,6 +261,9 @@ def build_template(img, prefix, type, game, gameabbr, ani, credits):
     elif img.startswith("Sleep"):
         game = "Pokémon Sleep"
         type, ndex, shiny, altform, event = get_data_sleep(img)
+    elif img.startswith("Masters"):
+        game = "Pokémon Masters EX"
+        type, ndex, shiny, female, altform = get_data_masters(img)
     # build template with retrieved info
     template = f"{{{{sprello|type={type}|ndex={ndex}|game={game}"
     if ani:

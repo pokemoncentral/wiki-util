@@ -2,6 +2,23 @@ import argparse, os, json, re
 import pywikibot
 from pywikibot import pagegenerators
 
+"""
+This script compares categories in two wikis to check if some images from one
+may be missing from the other. Specifically, for each ndex the script counts the
+number of images in the two categories, if different they are all printed and a
+manual check is needed (no automatic check is performed because it would require
+a lot of effort to handle all naming conventions). After this, images without
+ndex are counted as well. Arguments:
+--catsfile: path of JSON file with categories names (already populated).
+--game: one of the keys in pokepages-utils/categories-names.json.
+--sourcefam: name of family of source wiki (default "archibulba").
+--destfam: name of family of destination wiki (default "encypok").
+--sourcelang: language of source wiki (default "en").
+--destlang: language of destination wiki (default "it").
+--outdir: if specified, all files in source wiki that may be missing from
+destination wiki are written to a text file in specified directory.
+"""
+
 
 # get a list with all images in specified site and category
 def get_imgs(fam, lang, cat_name):
@@ -34,7 +51,7 @@ def main():
     parser.add_argument("--destfam", default="encypok")
     parser.add_argument("--sourcelang", default="en")
     parser.add_argument("--destlang", default="it")
-    parser.add_argument("--outdir", default="data")
+    parser.add_argument("--outdir", default="")
     args = parser.parse_args()
     # read file with categories data and get their names
     with open(args.catsfile, "r") as file:
@@ -66,14 +83,17 @@ def main():
         discrepancies = compare_pokeimgs(poke, pokeimgs_source, pokeimgs_dest, discrepancies)  # fmt: skip
     # compare number of images without ndex
     discrepancies = compare_pokeimgs("____", other_source, other_dest, discrepancies)
+    # remove duplicated entries if any and convert list to text
+    discrepancies = list(set(discrepancies))
+    discrepancies_text = "\n".join(discrepancies)
     # check if a file was specified to list all discrepancies
     if not args.outdir:
-        print(f"Found {len(discrepancies)} discrepancies")
+        print(f"Found {len(discrepancies)} discrepancies:\n{discrepancies_text}")
     else:
         output_file_path = os.path.join(args.outdir, f"imgs-discrepancies-{args.game}.txt")  # fmt: skip
         print(f"Writing {len(discrepancies)} discrepancies to file {output_file_path}")
         with open(output_file_path, "w") as file:
-            file.write("\n".join(discrepancies) + "\n")
+            file.write(discrepancies_text + "\n")
 
 
 # invoke main function
