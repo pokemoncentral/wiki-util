@@ -1,5 +1,32 @@
 import argparse, json, re, pywikibot
 
+"""
+This script updates Sprite template in Pokémon pages. This template should
+display the following HOME models (each one both standard and shiny):
+- Base form.
+- Female model if different from male one.
+- All alt forms if 5 or less; if more than 5 only base form is displayed.
+
+Arguments:
+--pokesfile: path of file with Pokémon data (already populated).
+--formsfile: path of file with forms data (already populated).
+--genderfile: path of file with gender data (already populated).
+--updatepoke: ndexes of Pokémon to be updated, or "all" to update everything.
+--summary: summary of edit (optional, already populated with a default message).
+--test: "no" to perform actual modifications/uploads on website, otherwise only
+a preview will be printed.
+"""
+
+
+# utility function that pads ndexes on 4 digits, keeping form abbr if any
+def pad_ndexabbrs(ndexabbrs):
+    # for each entry compute length of abbr (which is number of non-digits),
+    # then use zfill to add leading zeros and obtain an ndex padded on 4 digits
+    return [
+        f"{ndexabbr.zfill(4 + len(re.sub(r"\d", "", ndexabbr)))}"
+        for ndexabbr in ndexabbrs
+    ]
+
 
 # main function
 def main():
@@ -9,6 +36,8 @@ def main():
     parser.add_argument("--formsfile", default="data/wiki-util-data/forms-availability.json")  # fmt: skip
     parser.add_argument("--genderfile", default="data/wiki-util-data/gender-data.json")  # fmt: skip
     parser.add_argument("--updatepoke", default="")
+    parser.add_argument("--summary", default="Bot: updating Sprite template in Pokémon pages")  # fmt: skip
+    parser.add_argument("--test", default="yes")
     args = parser.parse_args()
     # setup
     with open(args.pokesfile, "r") as file:
@@ -17,10 +46,7 @@ def main():
         forms_data = json.load(file)
     # for each entry compute length of abbr (which is number of non-digits),
     # then use zfill to add leading zeros and obtain an ndex padded on 4 digits
-    forms = [
-        f"{ndexabbr.zfill(4 + len(re.sub(r"\d", "", ndexabbr)))}"
-        for ndexabbr in forms_data
-    ]
+    forms = pad_ndexabbrs(forms_data)
     with open(args.genderfile, "r") as file:
         gender_data = json.load(file)
     site = pywikibot.Site()
@@ -28,7 +54,7 @@ def main():
     if args.updatepoke == "all":
         pokes = [item["poke"] for item in pokes_data]
     else:
-        pokes = args.updatepoke.split(",")
+        pokes = pad_ndexabbrs(args.updatepoke.split(","))
     # process desired Pokémon pages
     for poke in pokes:
         poke_data = [item for item in pokes_data if item["poke"] == poke][0]
@@ -67,8 +93,11 @@ def main():
         sprite_new += "}}"
         # replace existing Sprite with with updated one
         if sprite_new != sprite_existing:
-            page.text = page.text.replace(sprite_existing, sprite_new)
-            page.save("Bot: updating Sprite template in Pokémon pages")
+            if args.test.lower().strip() != "no":
+                print(sprite_new)
+            else:
+                page.text = page.text.replace(sprite_existing, sprite_new)
+                page.save(args.summary)
 
 
 # invoke main function

@@ -858,18 +858,6 @@ def build_spinoffs(poke, name, gender, abbrs, imgs, rangerdata, goforms, excepti
         elif f"MastersIcona{pokeabbr}.png" in imgs:
             formtext += "|mastersmugshot=single\n"
         # HOME
-        # single:               Homem
-        # single-f:             Homef
-        # gender:               Homem, Homef
-        # shiny:                Homem, Homemsh
-        # shiny-f:              Homef, Homefsh
-        # back:                 Homem, Homemd
-        # back-f:               Homef, Homefd
-        # gendershiny:          Homem, Homef, Homemsh, Homefsh
-        # genderback:           Homem, Homef, Homemd, Homefd
-        # shinyback:            Homem, Homemsh, Homemd, Homemdsh
-        # shinyback-f:          Homef, Homefsh, Homefd, Homefdsh
-        # all:                  Homem, Homef, Homemsh, Homefsh, Homemd, Homefd, Homemdsh, Homefdsh
         # gender differences treated as useless forms need some fixes
         if uselessgender and abbr in ["", "F"]:
             if abbr == "":
