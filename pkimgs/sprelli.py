@@ -285,7 +285,7 @@ def build_template(img, prefix, type, game, gameabbr, ani, credits):
 
 
 # main function
-if __name__ == "__main__":
+def main():
     site = pywikibot.Site()
     # parse arguments
     parser = argparse.ArgumentParser()
@@ -365,3 +365,8 @@ if __name__ == "__main__":
                 page.save("Bot: using new template for licenses and categories of Pokémon images")  # fmt: skip
             else:
                 print(f"{img}   >   {template}")
+
+
+# invoke main function
+if __name__ == "__main__":
+    main()

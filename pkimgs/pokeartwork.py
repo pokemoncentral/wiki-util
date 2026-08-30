@@ -117,7 +117,7 @@ def build_template(file_name, artsources, ndex_to_gen, credits=""):
 
 
 # process existing file: build template and overwrite it if different
-def process_wiki_file(file_page, credits, test_mode=True, overwrite_credits=True):
+def process_wiki_file(file_page, artsources, ndex_to_gen, credits, test_mode=True, overwrite_credits=True):
     # check that specified file page exists
     if not file_page.exists():
         print(f"File not found in wiki: {file_page.title()}")
@@ -154,7 +154,7 @@ def process_wiki_file(file_page, credits, test_mode=True, overwrite_credits=True
 
 
 # main function
-if __name__ == "__main__":
+def main():
     site = pywikibot.Site()
     # parse arguments
     parser = argparse.ArgumentParser()
@@ -208,7 +208,7 @@ if __name__ == "__main__":
     elif args.cat:
         cat = pywikibot.Category(site, f"Categoria:{args.cat}")
         for page in pagegenerators.CategorizedPageGenerator(cat, recurse=True):
-            process_wiki_file(page, args.credits, test_mode)
+            process_wiki_file(page, artsources, ndex_to_gen, args.credits, test_mode)
     # if a local file is specified, read titles from it and process them on wiki
     elif args.file:
         if not os.path.isfile(args.file):
@@ -217,4 +217,9 @@ if __name__ == "__main__":
             titles = [t for t in file.read().splitlines() if t]
         for title in titles:
             page = pywikibot.Page(site, f"File:{title}")
-            process_wiki_file(page, args.credits, test_mode)
+            process_wiki_file(page, artsources, ndex_to_gen, args.credits, test_mode)
+
+
+# invoke main function
+if __name__ == "__main__":
+    main()
