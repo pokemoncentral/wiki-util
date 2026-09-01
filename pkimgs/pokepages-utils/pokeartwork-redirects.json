@@ -1,0 +1,58 @@
+{
+    "pokeartwork_params": [
+        "maingame",
+        "corp",
+        "aniserie",
+        "film",
+        "otheranime",
+        "spinoffgame"
+    ],
+    "ignored_cats": [
+        "Pokémon Diamante Lucente e Perla Splendente"
+    ],
+    "ignored_arts": [
+        "Artwork0025 NB.png",
+        "Artwork0006MX LPZA.png",
+        "Artwork0006MY LPZA.png",
+        "Artwork0115M LPZA.png",
+        "Artwork0130M LPZA_2.png",
+        "Artwork0181M LPZA.png",
+        "Artwork0282M LPZA.png",
+        "Artwork0302M LPZA.png",
+        "Artwork0334M LPZA.png",
+        "Artwork0359M LPZA.png",
+        "Artwork0448M LPZA.png",
+        "Artwork0026MX LPZA.png",
+        "Artwork0026MY LPZA.png",
+        "Artwork0071M LPZA.png",
+        "Artwork0129 LPZA.png",
+        "Artwork0130 LPZA.png",
+        "Artwork0130M LPZA.png",
+        "Artwork0149M LPZA.png",
+        "Artwork0152 LPZA.png",
+        "Artwork0154M LPZA.png",
+        "Artwork0158 LPZA.png",
+        "Artwork0160M LPZA.png",
+        "Artwork0358M LPZA.png",
+        "Artwork0448MZ LPZA.png",
+        "Artwork0498 LPZA.png",
+        "Artwork0500M LPZA.png",
+        "Artwork0604M LPZA.png",
+        "Artwork0652M LPZA.png",
+        "Artwork0655M LPZA.png",
+        "Artwork0658M LPZA.png",
+        "Artwork0670 LPZA.png",
+        "Artwork0670E LPZA.png",
+        "Artwork0687M LPZA.png",
+        "Artwork0701M LPZA.png",
+        "Artwork0718 LPZA.png",
+        "Artwork0718D LPZA.png",
+        "Artwork0718P LPZA.png",
+        "Artwork0720 LPZA.png",
+        "Artwork0807M LPZA.png",
+        "Artwork0998M LPZA.png"
+    ],
+    "forced_arts": {
+        "1017": "Artwork1017 SV 3.png"
+    }
+}
