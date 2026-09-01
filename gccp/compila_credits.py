@@ -22,10 +22,14 @@ L'auto-riconoscimento della modalita' avviene tramite pattern: se il titolo
 contiene "(NomeSet Numero)" viene trattato come carta singola, altrimenti
 come nome espansione (la pagina cercata sara' "NomeEspansione (GCC Pocket)").
 
-Gestisce il template credits:
-  - {{credits|artist=|other=...}}          -> aggiunge artist e cardartist
-  - {{credits|artist=[[nome]]}}            -> sostituisce con nome pulito
-  - Doppio artista                        -> |artist=Nome1|artist2=Nome2
+Gestisce il template credits in TUTTI i formati presenti su PCW:
+  - {{credits|other=...}}                     -> inserisce artist e cardartist
+                                                 (parametro artist assente)
+  - {{credits|artist=|other=...}}             -> aggiunge artist e cardartist
+  - {{credits|artist=[[nome]]}}               -> sostituisce con nome pulito
+  - {{credits|artist=Nome|cardartist=...}}    -> gia' compilato, non tocca
+
+Doppio artista                                -> |artist=Nome1|artist2=Nome2
 
 Se l'artista ha una pagina PCW "Nome (illustratore)", il template viene compilato con
 artist=Nome (illustratore) e artistalt=Nome (solo per singolo artista).
@@ -178,6 +182,12 @@ def update_credits_template(file_text, artist_names, artistalt=None):
     Per doppio artista:
       |artist=Nome1|artist2=Nome2|cardartist=tcgpocket
 
+    Gestisce tre formati del template credits:
+      A) {{credits|artist=|other=...}}        -> riempie artist (vuoto)
+      B) {{credits|artist=[[nome]]...}}       -> sostituisce il wikilink
+      C) {{credits|other=...}}                -> INSERISCE artist ex-novo
+         (formato delle pagine File non ancora compilate, es. upload)
+
     Restituisce (nuovo_testo, errore).
     """
     if "{{credits" not in file_text:
@@ -226,7 +236,7 @@ def update_credits_template(file_text, artist_names, artistalt=None):
         )
         return new_text, None
 
-    # --- Caso A: artist vuoto (artist=|) con other=... ---
+    # --- Caso A1: artist gia' compilato senza wikilink ---
     already = re.search(r"\{\{credits\s*\|[^}]*\|artist=([^|}\n]+)", file_text)
     if already and already.group(1).strip():
         return None, (
@@ -234,11 +244,29 @@ def update_credits_template(file_text, artist_names, artistalt=None):
             f"'{already.group(1).strip()}'"
         )
 
+    # --- Caso C: template SENZA parametro artist (es. {{credits|other=...}}) ---
+    # Le pagine File non compilate hanno solo {{credits|other=...}} (o
+    # sourcesite=/ep=): il parametro artist manca del tutto e va inserito
+    # subito dopo {{credits|, conservando tutti i parametri esistenti.
+    credits_match = re.search(r"\{\{credits\s*\|([^}]*)\}\}", file_text)
+    if credits_match and not re.search(
+        r"(?:^|\|)\s*artist\s*=", credits_match.group(1)
+    ):
+        new_text = re.sub(
+            r"\{\{credits\s*\|",
+            f"{{{{credits|{artist_insert}|cardartist=tcgpocket|",
+            file_text,
+            count=1,
+        )
+        return new_text, None
+
+    # --- Caso A: artist vuoto (artist=|) con other=... ---
     pattern = r"\{\{credits\s*\|artist\s*=\s*\|"
     if not re.search(pattern, file_text):
         return None, (
             "Formato del template 'credits' non riconosciuto "
-            "(atteso: {{credits|artist=|other=...}})"
+            "(attesi: {{credits|other=...}}, {{credits|artist=|other=...}} "
+            "o {{credits|artist=[[nome]]}})"
         )
 
     new_text = re.sub(
