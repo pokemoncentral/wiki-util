@@ -96,6 +96,10 @@
 \bHisuian Zorua\b,Zorua di Hisui,
 \bHisuian Zoroark\b,Zoroark di Hisui,
 ,, ---------------------------- team rocket pokemon ----------------------------
+,, Owner's ex: template GCC ID completo -> due GCC ID (nome + "del Team Rocket")
+{{GCC ID\|Team Rocket's Ambition\|Team Rocket's ([A-Za-z. ]+?) ex\|(\d+)\|Team Rocket's \1}}{{TCGP Icon\|ex}},{{GCC ID|I Loschi Piani del Team Rocket|\1-ex del Team Rocket|\2|\1}}{{ex|pocket}} {{GCC ID|I Loschi Piani del Team Rocket|\1-ex del Team Rocket|\2|del Team Rocket}},
+,, Divider: "Team Rocket's X{{TCGP Icon|ex}}" -> "X{{ex|pocket}} del Team Rocket"
+\bTeam Rocket's ([A-Za-z. ]+?)(?<! ex){{TCGP Icon\|ex}},\1{{ex|pocket}} del Team Rocket,
 \bTeam Rocket's Magmar\b,Magmar del Team Rocket,
 \bTeam Rocket's Moltres ex\b,Moltres-ex del Team Rocket,
 \bTeam Rocket's Moltres\b,Moltres del Team Rocket,
