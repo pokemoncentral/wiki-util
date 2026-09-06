@@ -126,7 +126,7 @@ def main():
     else:
         sys.exit("No input provided!")
     # parse inputs
-    pokeabbrs = re.findall(r"\d{4}[A-z]{0,2}", input)
+    pokeabbrs = re.findall(r"\d{4}[A-z]{0,3}", input)
     test_mode = args.test.lower().strip() != "no"
     # process all inputs
     for pokeabbr in pokeabbrs:
