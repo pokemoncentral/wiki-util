@@ -37,6 +37,24 @@ ADDITIONAL_CATEGORY_MAP = {
     3: "Tempo Futuro",
 }
 
+# Caratteri "spazio" anomali -> spazio normale
+WEIRD_SPACES = [
+    "\u00a0",  # NO-BREAK SPACE
+    "\u2007",  # FIGURE SPACE
+    "\u2009",  # THIN SPACE
+    "\u200a",  # HAIR SPACE
+    "\u202f",  # NARROW NO-BREAK SPACE
+    "\u3000",  # IDEOGRAPHIC SPACE
+    "\u0011",  # controllo usato come spazio
+]
+
+# Caratteri da rimuovere senza sostituzione
+DROP_CHARS = [
+    "\u0012",  # controllo di chiusura
+    "\u200b",  # ZERO WIDTH SPACE
+    "\ufeff",  # ZERO WIDTH NO-BREAK SPACE
+]
+
 HEADER = [
     "cardId", "expansion", "collectionNumber", "name",
     "isEX", "isMega", "additionalCategory", "hp", "type",
@@ -69,31 +87,35 @@ def tr_additional_category(val) -> str:
 
 def clean_text(text: str) -> str:
     """
-    - \\n → spazio
-    - \\x11 → spazio normale
-    - \\x12 → rimosso
-    - \\x04<TipoInglese>\\x04 → {{et|TipoItaliano}}
-    - Pokémon-\\x03 → Pokémon-''''''<big>ex</big>''''''
-    - Spazi multipli → spazio singolo
+    - \\n -> spazio
+    - caratteri spazio anomali (NBSP, thin space, ...) -> spazio normale
+    - \\x12 e caratteri a larghezza zero -> rimossi
+    - \\x04<TipoInglese>\\x04 -> {{et|TipoItaliano}}
+    - Pokémon-\\x03 -> Pokémon-''''''<big>ex</big>''''''
+    - spazi multipli -> spazio singolo
     """
     if not text:
         return text
 
-    # \n → spazio
+    # \n -> spazio
     text = text.replace("\n", " ")
 
-    # \x11 → spazio normale, \x12 → rimosso
-    text = text.replace("\x11", " ")
-    text = text.replace("\x12", "")
+    # spazi anomali -> spazio normale
+    for ch in WEIRD_SPACES:
+        text = text.replace(ch, " ")
 
-    # \x04<TipoInglese>\x04 → {{et|<TipoItaliano>}}
+    # caratteri da eliminare
+    for ch in DROP_CHARS:
+        text = text.replace(ch, "")
+
+    # \x04<TipoInglese>\x04 -> {{et|<TipoItaliano>}}
     for eng, ita in TYPE_MAP.items():
         text = text.replace("\x04" + eng + "\x04", "{{et|" + ita + "}}")
 
-    # Pokémon-\x03 → Pokémon-''''''<big>ex</big>''''''
+    # Pokémon-\x03 -> Pokémon-''''''<big>ex</big>''''''
     text = text.replace("Pokémon-\x03", "Pokémon-''''''<big>ex</big>''''''")
 
-    # Spazi multipli → spazio singolo
+    # spazi multipli -> spazio singolo
     text = re.sub(r" +", " ", text)
 
     return text.strip()
@@ -125,13 +147,13 @@ def json_to_txt(input_path: str, output_path: str) -> None:
     for card in data:
         kind = card.get("kind", "pokemon")
 
-        # name (ora passa da clean_text per \x11/\x12)
+        # name
         name = clean_text(card.get("name", ""))
 
         # ability
         ability = card.get("ability")
         if ability and isinstance(ability, dict):
-            aname = ability.get("name", "")
+            aname = clean_text(ability.get("name", ""))
             adesc = clean_text(ability.get("desc", ""))
         else:
             aname, adesc = "", ""
@@ -150,14 +172,13 @@ def json_to_txt(input_path: str, output_path: str) -> None:
         # additionalCategory
         ac = tr_additional_category(card.get("additionalCategory"))
 
-        # flavor: \n → spazio, \x11 → spazio, \x12 → rimosso
-        flavor = card.get("flavor", "")
-        if flavor:
-            flavor = flavor.replace("\n", " ").replace("\x11", " ").replace("\x12", "")
+        # flavor
+        flavor = clean_text(card.get("flavor", ""))
 
         # footer e typeLabel
         ui = card.get("ui", {})
         footer = ui.get("footer", "") if isinstance(ui, dict) else ""
+        footer = clean_text(footer)
         type_label = card.get("typeLabel", "")
 
         row = [
@@ -195,7 +216,7 @@ def json_to_txt(input_path: str, output_path: str) -> None:
         writer.writerow(HEADER)
         writer.writerows(rows)
 
-    print(f"Fatto: {len(rows)} righe → {output_path}")
+    print(f"Fatto: {len(rows)} righe -> {output_path}")
 
 
 if __name__ == "__main__":
