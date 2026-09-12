@@ -29,6 +29,13 @@ import pywikibot as pwb
 from mwparserfromhell.wikicode import Wikicode
 
 
+CARDLIST_HEADER = "GCCPocketCardList/Header"
+CARDLIST_DIVIDER = "GCCPocketCardList/Divider"
+# Bulbapedia segnala le carte -ex con questo template: va ignorato quando si
+# confrontano due nomi, per capire se sono la stessa forma o due forme diverse.
+EX_ICON_RE = re.compile(r"\{\{\s*ex\s*\|[^}]*\}\}", re.IGNORECASE)
+
+
 def replacements_from_file(text: str, file_path: str, fields_separator=",") -> str:
     """Perform replacements reading them from a CSV.
 
@@ -124,6 +131,62 @@ CARDLIST_ENTRY_UNTOUCHED = [
 ]
 
 
+def _template_name(template: Wikicode) -> str:
+    """Nome del template, come stringa ripulita."""
+    return str(template.name).strip()
+
+
+def _form_key(name: str) -> str:
+    """Chiave di confronto fra nomi di forma: senza il template {{ex|...}}."""
+    return EX_ICON_RE.sub("", re.sub(r"\s+", " ", str(name))).strip()
+
+
+def _param_text(template: Wikicode, name) -> Optional[str]:
+    """Valore testuale di un parametro, o None se il parametro non c'e'."""
+    if not template.has(name):
+        return None
+    return str(template.get(name).value).strip()
+
+
+def merge_divider_into_header(rows: List[Wikicode]) -> List[Wikicode]:
+    """Fonde in un unico Header un Header seguito subito da un Divider.
+
+    Su Bulbapedia, quando la prima carta di un Pokémon appartiene a una variante
+    (es. Hisuian Basculegion, Paldean Clodsire), la tabella inizia con un Header
+    col nome base e subito dopo un Divider col nome della variante. Su PCW
+    l'Header resterebbe senza carte sotto, mostrando una riga vuota: il nome
+    dell'Header diventa quindi quello del Divider, il nome base viene
+    conservato in `catname` (per la categorizzazione) e il Divider si elimina.
+
+    Il Divider NON viene fuso quando il suo nome coincide con quello dell'Header
+    (es. Header|Infernape seguito da Divider|Infernape{{ex|pocket}}): e' la
+    struttura prevista dalla documentazione di Template:GCCPocketCardList/Divider
+    per le sezioni -ex. Vengono inoltre saltate le intestazioni con `nocat=yes`
+    (elenchi e pagine di servizio), dove l'Header e' un vero titolo di tabella.
+    """
+    merged: List[Wikicode] = []
+    drawn: List[int] = []
+    for index, row in enumerate(rows):
+        if index in drawn:
+            continue
+        if (
+            _template_name(row) == CARDLIST_HEADER
+            and index + 1 < len(rows)
+            and _template_name(rows[index + 1]) == CARDLIST_DIVIDER
+            and not row.has("nocat")
+        ):
+            divider = rows[index + 1]
+            base_text = _param_text(row, 1)
+            variant_text = _param_text(divider, 1)
+            if base_text and variant_text:
+                if _form_key(variant_text) != _form_key(base_text):
+                    row.add("1", variant_text)
+                    row.add("catname", base_text)
+                    drawn.append(index + 1)
+        merged.append(row)
+    return merged
+
+
 def make_card_list_entry(
     entry: Wikicode, firstcard: bool, first_type: str, second_type: Optional[str] = None
 ) -> Tuple[Wikicode, bool]:
@@ -151,9 +214,16 @@ def make_card_list(wikicode: Wikicode) -> List[Wikicode]:
     first_type = header.get("2")
     second_type = header.get("3", default=None)
 
+    card_list_rows = list(
+        wikicode.ifilter_templates(matches=r"^{{GCCPocketCardList\/")
+    )
+    # Un Header subito seguito da un Divider di forma diversa diventa un unico
+    # Header: vedi merge_divider_into_header.
+    card_list_rows = merge_divider_into_header(card_list_rows)
+
     card_list = []
     firstcard = False
-    for card_list_row in wikicode.ifilter_templates(matches=r"^{{GCCPocketCardList\/"):
+    for card_list_row in card_list_rows:
         new_row, firstcard = make_card_list_entry(
             card_list_row, firstcard, first_type, second_type
         )
