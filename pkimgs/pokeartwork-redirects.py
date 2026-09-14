@@ -12,12 +12,13 @@ digits) with form abbreviation, separated by any non-alphanumeric character. For
 example "0181 0229M 0303 0303M" (without quotes) updates Ampharos, MegaHoundoom,
 Mawile and MegaMawile.
 --file: path of file that contains input, formatted as above; data can stay on
-one line or multiple lines.
+one line or multiple lines. Is ignored if --pokeabbrs is passed.
 --artworksfile: path of file with list of all artworks (generated with pkimgs-data.py).
 --artsourcesfile: path of file with sources data (already populated).
 --redirectsfile: path of file with redirects data (already populated).
 --test: "no" to perform actual modifications/uploads on website, otherwise only
 a preview will be printed.
+--output: path where list of destinations should be written (optional).
 
 Quick infos about variables:
 - poke is Pokédex number with leading zeros and without form abbr
@@ -33,7 +34,8 @@ ndexabbr = '37A'
 """
 
 
-#
+# for each specified value of pokeartwork_param in artsources.json, extract all abbrs,
+# reverse them to have most recent ones first, then concat to obtain a single list
 def get_artsources_sources(arts_data, pokeartwork_params):
     arts_sources = []
     for param in pokeartwork_params:
@@ -46,8 +48,9 @@ def get_artsources_sources(arts_data, pokeartwork_params):
     return arts_sources
 
 
-#
-def find_redirect(pokeabbr, artworks, arts_sources, redirects_data):
+# try to find a destination for given pokeabbr, checking if it is forced before
+# looping over possible sources
+def find_redirect_destination(pokeabbr, artworks, arts_sources, redirects_data):
     redirect = f"File:Artwork{pokeabbr}.png"
     destination = None
     # check if destination is explicitly specified
@@ -93,6 +96,7 @@ def main():
     parser.add_argument("--redirectsfile", default="data/pokepages-utils/pokeartwork-redirects.json")  # fmt: skip
     parser.add_argument("--genderdatafile", default="data/wiki-util-data/gender-data.json")  # fmt: skip
     parser.add_argument("--test", default="yes")
+    parser.add_argument("--output", default="")
     args = parser.parse_args()
     # read input files
     with open(args.artworksfile, "r") as file:
@@ -128,21 +132,46 @@ def main():
     # parse inputs
     pokeabbrs = re.findall(r"\d{4}[A-z]{0,3}", input)
     test_mode = args.test.lower().strip() != "no"
+    # initialize empty list that will contain all destinations
+    destinations = []
     # process all inputs
     for pokeabbr in pokeabbrs:
-        redirect, destination = find_redirect(pokeabbr, artworks, arts_sources, redirects_data)  # fmt: skip
+        # find proper destination
+        redirect, destination = find_redirect_destination(pokeabbr, artworks, arts_sources, redirects_data)  # fmt: skip
         if not destination:
             destination = get_fallback_destination(pokeabbr, gender_data)
+        destinations.append(destination)
+        # create redirect or print its preview
         destination = f"#RINVIA [[File:{destination}]]"
         if test_mode:
-            print(f"{redirect}      >      {destination}")
+            if not args.output:
+                print(f"{redirect}      >      {destination}")
         else:
             site = pywikibot.Site()
             page = pywikibot.Page(site, redirect)
             if page.text.strip() != destination:
-                # print(f"{pokeabbr}      >      {page.text.strip()}      >      {destination}")
+                # print(f"{pokeabbr}      >      {page.text.strip()}      >      {destination}")  # fmt: skip
                 page.text = redirect
                 page.save("Bot: managing redirects of Pokémon artworks")
+    # save processed items in output file if specified
+    if args.output:
+        # initialize dict with sources as keys and empty lists as values
+        out_data = {s: [] for s in arts_sources}
+        out_data["others"] = []
+        # loop over destinations to find their sources and update dict
+        for destination in destinations:
+            # remove extension, then number if any, then first part
+            dest_noext = re.sub(r"\.\w+$", "", destination)
+            dest_nonum = re.sub(r" \d+$", "", dest_noext)
+            source = re.sub(r"^Artwork\w+ ", "", dest_nonum)
+            if out_data.get(source, None) is None:
+                # print(f"Found source '{source}' for destination {destination}")
+                out_data["others"].append(destination)
+            else:
+                out_data[source].append(destination)
+        # write data to output file
+        with open(args.output, "w") as file:
+            json.dump(out_data, file, indent=4, ensure_ascii=False)
 
 
 # invoke main function
