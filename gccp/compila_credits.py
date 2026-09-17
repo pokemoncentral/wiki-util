@@ -87,8 +87,10 @@ def extract_card_info(card_text):
     dove il primo elemento e' l'originale (da image/caption),
     gli eventuali successivi sono le ristampe (da reprint{i}/recaption{i}).
 
-    Il parametro reprint=N indica N varianti totali (originale + N-1 ristampe).
-    Le ristampe hanno chiavi reprint1, recaption1, reprint2, recaption2, ecc.
+    Il numero di varianti si ricava dalle chiavi presenti: image/caption per
+    l'originale, reprint{i}/recaption{i} per le ristampe (nelle carte del GCC
+    Pocket e' l'unica fonte, dato che il parametro reprint=N e' usato solo
+    dalle carte del GCC cartaceo e vale N varianti totali).
     """
     templates = pywikibot.textlib.extract_templates_and_params(card_text)
 
@@ -101,13 +103,22 @@ def extract_card_info(card_text):
             clean = clean[9:]
 
         if clean in INFOBOX_NAMES:
+            # Il numero di varianti non e' dichiarato da un parametro "reprint=":
+            # le pagine del GCC Pocket elencano image/caption + reprintN/recaptionN
+            # (N da 1 a 30, si veda Modulo:PokemoncardInfobox/tabs). Si ricava
+            # quindi dall'indice massimo di reprintN presente; l'eventuale
+            # "reprint=N" (convenzione delle carte del GCC cartaceo, dove N e' il
+            # numero totale di varianti) continua comunque a essere rispettato.
             for key, val in params.items():
-                if key.strip().lower() == "reprint":
+                k = key.strip().lower()
+                m = re.fullmatch(r"reprint(\d+)", k)
+                if m:
+                    reprint_count = max(reprint_count, int(m.group(1)) + 1)
+                elif k == "reprint":
                     try:
-                        reprint_count = int(val.strip())
+                        reprint_count = max(reprint_count, int(val.strip()))
                     except ValueError:
                         pass
-                    break
 
             image_file = None
             artist_names = []
