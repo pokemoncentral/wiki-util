@@ -28,6 +28,7 @@ Supported games:
 - Pokémon GO.
 - Pokémon Sleep.
 - Pokémon Masters EX.
+- Gioco di Carte Collezionabili Pokémon Pocket (icone di evoluzione).
 """
 
 
@@ -237,6 +238,27 @@ def get_data_masters(img):
     return type, ndex, shiny, female, altform
 
 
+# fmt: off
+"""
+Get data for TCG Pocket evolution icons. File name is
+"GCCPEvoIcon<ndex><sigla forma>.png", where:
+- <ndex> is the National Pokédex number, padded to 4 digits; fossils, which
+have no Pokédex number, use 0000.
+- <sigla forma> works as above, and is used only for alternative forms.
+"""  # fmt: on
+def get_data_tcgpocket(img):
+    type = "icone"
+    if re.fullmatch(r"GCCPEvoIcon\d{4}\w*\.\w+", img):
+        ndex = re.sub(r"^GCCPEvoIcon(\d{4}\w*)\.\w+$", r"\1", img)
+    else:
+        ndex = "0000"
+    if re.search(r"\d{4}[A-z]", ndex):
+        altform = "yes"
+    else:
+        altform = "no"
+    return type, ndex, altform
+
+
 # build appropriate template
 def build_template(img, prefix, type, game, gameabbr, ani, credits):
     # initialize variables to avoid errors
@@ -264,6 +286,10 @@ def build_template(img, prefix, type, game, gameabbr, ani, credits):
     elif img.startswith("Masters"):
         game = "Pokémon Masters EX"
         type, ndex, shiny, female, altform = get_data_masters(img)
+    elif img.startswith("GCCPEvoIcon"):
+        game = "Gioco di Carte Collezionabili Pokémon Pocket"
+        type, ndex, altform = get_data_tcgpocket(img)
+        ani = "no"
     # build template with retrieved info
     template = f"{{{{sprello|type={type}|ndex={ndex}|game={game}"
     if ani:
@@ -284,6 +310,54 @@ def build_template(img, prefix, type, game, gameabbr, ani, credits):
     return template
 
 
+# Locate pwb.py. It sits at the root of a pywikibot checkout: normally that is
+# the working directory (the scripts are symlinked into scripts/userscripts/ by
+# create-symlinks.sh), but it may also be an ancestor of the working directory
+# or of this script. An explicit path can be given with --pwb, or through the
+# PYWIKIBOT_DIR environment variable.
+def find_pwb():
+    starts = [
+        os.environ.get("PYWIKIBOT_DIR"),
+        os.getcwd(),
+        os.path.dirname(os.path.realpath(__file__)),
+    ]
+    for start in starts:
+        if not start:
+            continue
+        folder = os.path.abspath(start)
+        while True:
+            candidate = os.path.join(folder, "pwb.py")
+            if os.path.isfile(candidate):
+                return candidate
+            parent = os.path.dirname(folder)
+            if parent == folder:  # reached the filesystem root
+                break
+            folder = parent
+    return None
+
+
+# Fallback for when pwb.py is not available (for example pywikibot installed as
+# a package with pip): pywikibot's own upload API, mirroring the options used
+# for the pwb.py call. Returns True if the file was uploaded.
+def upload_inprocess(site, img, template, path):
+    page = pywikibot.FilePage(site, f"File:{img}")
+    summary = "Bot: using new template for licenses and categories of Pokémon images"  # fmt: skip
+    kwargs = {
+        "source_filename": path,
+        "text": template,
+        "ignore_warnings": True,
+    }
+    try:
+        # pywikibot >= 11.8 renamed the parameter "comment" to "summary"
+        try:
+            return site.upload(page, summary=summary, **kwargs)
+        except TypeError:
+            return site.upload(page, comment=summary, **kwargs)
+    except Exception as exc:
+        print(f"Failed to upload {img}: {exc}")
+        return False
+
+
 # main function
 def main():
     site = pywikibot.Site()
@@ -298,6 +372,7 @@ def main():
     parser.add_argument("--ani", default="")
     parser.add_argument("--credits", default="")
     parser.add_argument("--test", default="yes")
+    parser.add_argument("--pwb", default="")
     args = parser.parse_args()
     # check arguments
     if args.dir and not os.path.isdir(args.dir):
@@ -310,6 +385,17 @@ def main():
         if not args.gameabbr:
             sys.exit(f'Error: argument "gameabbr" not provided!')
     test_mode = not (args.test.lower().strip() == "no")
+    # Launch the child process with sys.executable instead of "python3":
+    # on Windows there is no python3 executable on PATH.
+    pwb_script = args.pwb or find_pwb()
+    if not test_mode:
+        if pwb_script:
+            print(f"Uploads will be done with: {pwb_script}")
+        else:
+            print(
+                "pwb.py not found: uploading through the pywikibot API "
+                "(pass --pwb to use pwb.py instead)"
+            )
     # if a directory is specified, upload all images inside it
     if args.dir:
         for img in sorted(os.listdir(args.dir)):
@@ -330,20 +416,25 @@ def main():
                     else:
                         print(f"Skipping {img} since it already exists and is not a redirect")  # fmt: skip
                         continue
-                # os.system(f'python3 pwb.py upload -keep -noverify -ignorewarn -abortonwarn:exists "{os.path.join(args.dir, img)}" "{template}"')  # fmt: skip
-                subprocess.run(
-                    [
-                        "python3",
-                        "pwb.py",
-                        "upload",
-                        "-keep",
-                        "-noverify",
-                        "-ignorewarn",
-                        "-abortonwarn:exists",
-                        f"{os.path.join(args.dir, img)}",
-                        f"{template}",
-                    ]
-                )
+                # absolute, because pwb.py is run from its own directory
+                img_path = os.path.abspath(os.path.join(args.dir, img))
+                if pwb_script:
+                    subprocess.run(
+                        [
+                            sys.executable,
+                            pwb_script,
+                            "upload",
+                            "-keep",
+                            "-noverify",
+                            "-ignorewarn",
+                            "-abortonwarn:exists",
+                            img_path,
+                            template,
+                        ],
+                        cwd=os.path.dirname(pwb_script),
+                    )
+                else:
+                    upload_inprocess(site, img, template, img_path)
             else:
                 print(f"{img}   >   {template}")
     # if a category is specified, update all its images
