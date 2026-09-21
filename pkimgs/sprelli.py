@@ -289,7 +289,6 @@ def build_template(img, prefix, type, game, gameabbr, ani, credits):
     elif img.startswith("GCCPEvoIcon"):
         game = "Gioco di Carte Collezionabili Pokémon Pocket"
         type, ndex, altform = get_data_tcgpocket(img)
-        ani = "no"
     # build template with retrieved info
     template = f"{{{{sprello|type={type}|ndex={ndex}|game={game}"
     if ani:
