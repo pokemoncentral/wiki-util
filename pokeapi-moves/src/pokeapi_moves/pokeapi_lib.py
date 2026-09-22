@@ -8,8 +8,10 @@ from pokeapi_moves.lib import PathOrStr, sh
 db_file = os.path.join(paths.pokeapi, "db.sqlite3")
 db_min_size_bytes = 50 * 2**20
 
+sql_lib_file = "lib.sql"
 
-def ensure_db(*, wipe_db: bool = False):
+
+def ensure_db(*, wipe_db=False):
     # These are fast, no need to skip calling them if not necessary
     pokeapi_make("install")
     pokeapi_make("setup")
@@ -23,15 +25,21 @@ def ensure_db(*, wipe_db: bool = False):
         pokeapi_make("build-db")
 
 
-def query_db(file: PathOrStr):
-    with open(file, "r", encoding="utf-8") as sql_file:
-        sql = sql_file.read()
-
-    db = sqlite3.connect(db_file)
-    cursor = db.cursor()
-    for row in cursor.execute(sql):
-        print(row)
+def load_query_file(file: PathOrStr) -> str:
+    with open(os.path.join(paths.queries, file), "r", encoding="utf-8") as sql_file:
+        return sql_file.read()
 
 
 def pokeapi_make(*args: str) -> CompletedProcess[bytes]:
     return sh("make", *args, cwd=paths.pokeapi)
+
+
+def query_db(file: PathOrStr, *args: str, with_lib=True):
+    db = sqlite3.connect(db_file)
+    cursor = db.cursor()
+
+    if with_lib:
+        cursor.executescript(load_query_file(sql_lib_file))
+
+    for row in cursor.execute(load_query_file(file), args):
+        print(row)
