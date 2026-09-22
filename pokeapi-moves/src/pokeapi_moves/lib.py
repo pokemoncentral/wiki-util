@@ -10,6 +10,8 @@ type LearningMethod = Literal["level-up", "tutor"]
 
 type PathOrStr = PathLike | str
 
+wipe_db_help = "Wipe the PokéAPI database, and recreate it from the CSV files"
+
 
 @dataclass(kw_only=True)
 class PkmnResult:

@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [project.scripts]
-pokeapi-moves = "pokeapi_moves:main"
+pokeapi-moves = "pokeapi_moves:cli"
 
 [build-system]
 requires = ["uv_build>=0.12.17,<0.13.0"]
