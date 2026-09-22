@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-import re
 import csv
-import sys
 import logging
+import re
+import sys
 from typing import List, Tuple
-from lib import replaces, should_ignore
+
+from lib import datamine_pkm_to_pcw, should_ignore
 
 logger = logging.getLogger("log")
 logger.setLevel(logging.DEBUG)
@@ -27,8 +28,8 @@ def flatten(l):
 
 def convert_pokename(poke: str):
     poke = poke.lower().replace(" ", "-")
-    if poke in replaces:
-        return replaces[poke]
+    if poke in datamine_pkm_to_pcw:
+        return datamine_pkm_to_pcw[poke]
     else:
         return poke
 
