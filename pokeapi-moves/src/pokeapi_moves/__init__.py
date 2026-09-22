@@ -8,4 +8,4 @@ def main():
     pokeapi_lib.ensure_db(wipe_db="--wipe-db" in sys.argv[1:])
     match sys.argv[1]:
         case "movelist":
-            movelist(move="ember", learning_method="level-up", game="sun-moon")
+            movelist(move="superpower", learning_method="tutor", game="platinum")

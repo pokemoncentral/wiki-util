@@ -4,7 +4,12 @@ select
     p.type1,
     p.type2,
     l.learning_method_name,
-    jsonb_group_array(j.level) as levels
+    (
+        case l.learning_method_name
+            when 'level-up' then json_group_array(j.level)
+            else json('[]')
+        end
+    ) as levels
 from learnset l
     join pkmn p on l.pkmn_id = p.id
     join (

@@ -1,8 +1,28 @@
 import shutil
 import subprocess
+from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from os import PathLike
+from sqlite3 import Cursor
+from typing import Any, Literal, Self
+
+type LearningMethod = Literal["level-up", "tutor"]
 
 type PathOrStr = PathLike | str
+
+
+@dataclass(kw_only=True)
+class PkmnResult:
+    id: int
+    name: str
+    type1: str
+    type2: str | None
+
+
+class SqliteResultFactory[TSqlTuple: tuple[Any, ...]](ABC):
+    @classmethod
+    @abstractmethod
+    def from_sqlite_tuple(cls, cursor: Cursor, sqlite_tuple: TSqlTuple) -> Self: ...
 
 
 def sh(

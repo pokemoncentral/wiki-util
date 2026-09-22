@@ -1,9 +1,10 @@
 import os
 import sqlite3
+from collections.abc import Iterable
 from subprocess import CompletedProcess
 
 from pokeapi_moves import paths
-from pokeapi_moves.lib import PathOrStr, sh
+from pokeapi_moves.lib import PathOrStr, SqliteResultFactory, sh
 
 db_file = os.path.join(paths.pokeapi, "db.sqlite3")
 db_min_size_bytes = 50 * 2**20
@@ -34,12 +35,20 @@ def pokeapi_make(*args: str) -> CompletedProcess[bytes]:
     return sh("make", *args, cwd=paths.pokeapi)
 
 
-def query_db(file: PathOrStr, *args: str, with_lib=True):
+def query_db[
+    TResult: SqliteResultFactory,
+](
+    file: PathOrStr,
+    *args: str | None,
+    with_lib=True,
+    result_class: type[TResult] | None = None,
+) -> Iterable[type[TResult]]:
     db = sqlite3.connect(db_file)
+    if result_class is not None:
+        db.row_factory = result_class.from_sqlite_tuple
     cursor = db.cursor()
 
     if with_lib:
         cursor.executescript(load_query_file(sql_lib_file))
 
-    for row in cursor.execute(load_query_file(file), args):
-        print(row)
+    return cursor.execute(load_query_file(file), args)
