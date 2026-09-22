@@ -1,0 +1,17 @@
+[project]
+name = "pokeapi-moves"
+version = "0.0.1-alpha.0"
+description = "Movelist and learnlist generator based off PokéAPI"
+readme = "README.md"
+authors = [
+    { name = "Davide Laezza", email = "truzzialrogo@gmx.com" }
+]
+requires-python = ">=3.13.1"
+dependencies = []
+
+[project.scripts]
+pokeapi-moves = "pokeapi_moves:main"
+
+[build-system]
+requires = ["uv_build>=0.12.17,<0.13.0"]
+build-backend = "uv_build"
