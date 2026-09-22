@@ -7,7 +7,9 @@ authors = [
     { name = "Davide Laezza", email = "truzzialrogo@gmx.com" }
 ]
 requires-python = ">=3.13.1"
-dependencies = []
+dependencies = [
+    "typer>=0.27.2",
+]
 
 [project.scripts]
 pokeapi-moves = "pokeapi_moves:main"
