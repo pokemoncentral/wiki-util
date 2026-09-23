@@ -6,13 +6,9 @@ from typing import Annotated, Self, cast
 import typer
 from typer import Argument, Option
 
-from pokeapi_moves import pokeapi_lib
-from pokeapi_moves.lib import (
-    LearningMethod,
-    PkmnResult,
-    SqliteResultFactory,
-    wipe_db_help,
-)
+from pokeapi_moves import pokeapi_db
+from pokeapi_moves.lib import LearningMethod, replace_none, wipe_db_help
+from pokeapi_moves.pokeapi_db import PkmnResult, SqliteResultFactory
 
 sql_file = "movelist.sql"
 
@@ -44,15 +40,25 @@ def movelist(
     """
     Generate the movelist module call in WikiCode
     """
-    pokeapi_lib.ensure_db(wipe_db=wipe_db)
-    rows = pokeapi_lib.query_db(
+
+    pokeapi_db.ensure(wipe_db=wipe_db)
+    db_move = pokeapi_db.query_move(move)
+    rows = pokeapi_db.query_file(
         sql_file, move, learning_method, game, result_class=MovelistResult
     )
+
+    print(
+        "{{#invoke: Movelist | learningMethod = %s | type = %s"  # noqa: UP031
+        % (learning_method, db_move.type)
+    )
     for row in rows:
-        print(row)
+        print(row.to_wikicode())
+    print("}}")
 
 
-type MovelistTupleResult = tuple[int, str, str, str | None, LearningMethod, str]
+type MovelistTupleResult = tuple[
+    int, str, str, str | None, int, str, str, LearningMethod, str
+]
 
 
 @dataclass(kw_only=True)
@@ -60,6 +66,9 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
     pkmn: PkmnResult
     learning_method: LearningMethod
     levels: list[int] | None
+
+    def to_wikicode(self) -> str:
+        return f"""|{self.pkmn.id}|{self.pkmn.name}|{self.pkmn.type1}|{replace_none(self.pkmn.type2)}|//"""
 
     @classmethod
     def from_sqlite_tuple(
