@@ -3,7 +3,7 @@ import subprocess
 from os import PathLike
 from typing import Any, Literal
 
-type LearningMethod = Literal["level-up", "tutor"]
+type LearningMethod = Literal["egg", "level-up", "tutor"]
 
 type PathOrStr = PathLike | str
 
@@ -21,3 +21,7 @@ def sh(
 
 def replace_none(value: Any, if_none: str = "") -> str:
     return if_none if value is None else str(value)
+
+
+def to_ndex(ndex_number: int) -> str:
+    return f"""{ndex_number:04d}"""

@@ -16,18 +16,25 @@ db_min_size_bytes = 50 * 2**20
 sql_lib_file = "lib.sql"
 
 
+class SqliteResultFactory[TSqlTuple: tuple[Any, ...]](ABC):
+    @classmethod
+    @abstractmethod
+    def from_sqlite_tuple(cls, cursor: Cursor, sqlite_tuple: TSqlTuple) -> Self: ...
+
+
 @dataclass(kw_only=True)
-class PkmnResult:
+class PkmnResult(SqliteResultFactory[tuple[int, str, str, str | None]]):
     id: int
     name: str
     type1: str
     type2: str | None
 
-
-class SqliteResultFactory[TSqlTuple: tuple[Any, ...]](ABC):
     @classmethod
-    @abstractmethod
-    def from_sqlite_tuple(cls, cursor: Cursor, sqlite_tuple: TSqlTuple) -> Self: ...
+    def from_sqlite_tuple(
+        cls, cursor: Cursor, sqlite_tuple: tuple[int, str, str, str | None]
+    ) -> Self:
+        id, name, type1, type2 = sqlite_tuple
+        return cls(id=id, name=name, type1=type1, type2=type2)
 
 
 @dataclass(kw_only=True)
@@ -40,7 +47,8 @@ class MoveResult(SqliteResultFactory[tuple[int, str, str]]):
     def from_sqlite_tuple(
         cls, cursor: Cursor, sqlite_tuple: tuple[int, str, str]
     ) -> Self:
-        return cls(id=sqlite_tuple[0], name=sqlite_tuple[1], type=sqlite_tuple[2])
+        id, name, type = sqlite_tuple
+        return cls(id=id, name=name, type=type)
 
 
 def ensure(*, wipe_db=False):

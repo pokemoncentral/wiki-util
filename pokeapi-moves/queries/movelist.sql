@@ -4,10 +4,11 @@ select
     p.type1,
     p.type2,
     l.learning_method_name,
+    l.game_name,
     (
         case l.learning_method_name
             when 'level-up' then json_group_array(j.level)
-            else json('[]')
+            else '[]'
         end
     ) as levels
 from learnset l
@@ -20,5 +21,12 @@ where
     (:move is null or l.move_name = :move)
     and (:learning_method is null or l.learning_method_name = :learning_method)
     and (:game is null or l.game_name = :game)
-group by p.id
-order by p.id asc
+group by
+    l.learning_method_name,
+    l.game_name,
+    p.id
+order by
+    l.learning_method_name asc,
+    l.game_name asc,
+    p.id asc,
+    j.level asc
