@@ -3,7 +3,7 @@ import subprocess
 from os import PathLike
 from typing import Any, Literal
 
-type LearningMethod = Literal["egg", "level-up", "tutor"]
+type LearningMethod = Literal["egg", "level-up", "machine", "tutor"]
 
 type PathOrStr = PathLike | str
 

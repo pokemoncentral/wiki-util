@@ -63,7 +63,7 @@ def movelist(
         print("}}")
 
 
-type MovelistTupleResult = tuple[*PkmnResultTuple, LearningMethod, str, str]
+type MovelistTupleResult = tuple[*PkmnResultTuple, LearningMethod, str, str, str | None]
 
 
 @dataclass(kw_only=True)
@@ -72,6 +72,7 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
     learning_method: LearningMethod
     game: str
     levels: list[int] | None
+    machine: str | None
 
     def to_wikicode(self) -> str:
         match self.learning_method:
@@ -80,7 +81,8 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
                 tail = ", ".join(map(str, self.levels))
 
             case "machine":
-                tail = ""
+                assert self.machine is not None
+                tail = self.machine
 
             case _:
                 raise ValueError(f"Uknown LearningMethod: {self.learning_method}")
@@ -102,11 +104,12 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
         cursor: Cursor,
         sqlite_tuple: MovelistTupleResult,
     ) -> Self:
-        learning_method, game, levels_json = sqlite_tuple[6:]
+        learning_method, game, levels_json, machine = sqlite_tuple[6:]
         levels = json.loads(levels_json)
         return cls(
             pkmn=PkmnResult.from_sqlite_tuple(cursor, sqlite_tuple[:6]),
             learning_method=cast(LearningMethod, learning_method),
             game=game,
             levels=levels if len(levels) > 0 else None,
+            machine=machine,
         )
