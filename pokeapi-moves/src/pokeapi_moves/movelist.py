@@ -84,6 +84,9 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
                 assert self.machine is not None
                 tail = self.machine
 
+            case "tutor":
+                tail = None
+
             case _:
                 raise ValueError(f"Uknown LearningMethod: {self.learning_method}")
 
@@ -95,8 +98,9 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
             self.pkmn.egg_group1,
             replace_none(self.pkmn.egg_group2),
             tail,
+            "//",
         )
-        return "|".join((*map(str, args), "//"))
+        return "|".join(str(arg) for arg in args if arg is not None)
 
     @classmethod
     def from_sqlite_tuple(
