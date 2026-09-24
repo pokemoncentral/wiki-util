@@ -22,31 +22,42 @@ class SqliteResultFactory[TSqlTuple: tuple[Any, ...]](ABC):
     def from_sqlite_tuple(cls, cursor: Cursor, sqlite_tuple: TSqlTuple) -> Self: ...
 
 
+type PkmnResultTuple = tuple[int, str, str, str | None, str, str | None]
+
+
 @dataclass(kw_only=True)
-class PkmnResult(SqliteResultFactory[tuple[int, str, str, str | None]]):
+class PkmnResult(SqliteResultFactory[PkmnResultTuple]):
     id: int
     name: str
     type1: str
     type2: str | None
+    egg_group1: str
+    egg_group2: str | None
 
     @classmethod
-    def from_sqlite_tuple(
-        cls, cursor: Cursor, sqlite_tuple: tuple[int, str, str, str | None]
-    ) -> Self:
-        id, name, type1, type2 = sqlite_tuple
-        return cls(id=id, name=name, type1=type1, type2=type2)
+    def from_sqlite_tuple(cls, cursor: Cursor, sqlite_tuple: PkmnResultTuple) -> Self:
+        id, name, type1, type2, egg_group1, egg_group2 = sqlite_tuple
+        return cls(
+            id=id,
+            name=name,
+            type1=type1,
+            type2=type2,
+            egg_group1=egg_group1,
+            egg_group2=egg_group2,
+        )
+
+
+type MoveResultTuple = tuple[int, str, str]
 
 
 @dataclass(kw_only=True)
-class MoveResult(SqliteResultFactory[tuple[int, str, str]]):
+class MoveResult(SqliteResultFactory[MoveResultTuple]):
     id: int
     name: str
     type: str
 
     @classmethod
-    def from_sqlite_tuple(
-        cls, cursor: Cursor, sqlite_tuple: tuple[int, str, str]
-    ) -> Self:
+    def from_sqlite_tuple(cls, cursor: Cursor, sqlite_tuple: MoveResultTuple) -> Self:
         id, name, type = sqlite_tuple
         return cls(id=id, name=name, type=type)
 
