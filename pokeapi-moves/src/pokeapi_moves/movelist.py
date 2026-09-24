@@ -9,7 +9,7 @@ from typer import Argument, Option
 
 from pokeapi_moves import pokeapi_db
 from pokeapi_moves.lib import LearningMethod, replace_none, to_ndex, wipe_db_help
-from pokeapi_moves.pokeapi_db import PkmnResult, SqliteResultFactory
+from pokeapi_moves.pokeapi_db import PkmnResult, PkmnResultTuple, SqliteResultFactory
 
 sql_file = "movelist.sql"
 
@@ -63,7 +63,7 @@ def movelist(
         print("}}")
 
 
-type MovelistTupleResult = tuple[int, str, str, str | None, LearningMethod, str, str]
+type MovelistTupleResult = tuple[*PkmnResultTuple, LearningMethod, str, str]
 
 
 @dataclass(kw_only=True)
@@ -85,7 +85,16 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
             case _:
                 raise ValueError(f"Uknown LearningMethod: {self.learning_method}")
 
-        return f"""|{to_ndex(self.pkmn.id)}|{self.pkmn.name}|{self.pkmn.type1}|{replace_none(self.pkmn.type2)}|{tail}|//"""
+        args = (
+            to_ndex(self.pkmn.id),
+            self.pkmn.name,
+            self.pkmn.type1,
+            replace_none(self.pkmn.type2),
+            self.pkmn.egg_group1,
+            replace_none(self.pkmn.egg_group2),
+            tail,
+        )
+        return "|".join((*map(str, args), "//"))
 
     @classmethod
     def from_sqlite_tuple(
@@ -93,10 +102,10 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
         cursor: Cursor,
         sqlite_tuple: MovelistTupleResult,
     ) -> Self:
-        learning_method, game, levels_json = sqlite_tuple[4:]
+        learning_method, game, levels_json = sqlite_tuple[6:]
         levels = json.loads(levels_json)
         return cls(
-            pkmn=PkmnResult.from_sqlite_tuple(cursor, sqlite_tuple[:4]),
+            pkmn=PkmnResult.from_sqlite_tuple(cursor, sqlite_tuple[:6]),
             learning_method=cast(LearningMethod, learning_method),
             game=game,
             levels=levels if len(levels) > 0 else None,

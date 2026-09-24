@@ -3,6 +3,8 @@ select
     p.name,
     p.type1,
     p.type2,
+    p.egg_group1,
+    p.egg_group2,
     l.learning_method_name,
     l.game_name,
     (
