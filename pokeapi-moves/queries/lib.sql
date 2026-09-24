@@ -36,10 +36,12 @@ pkmn_names as (
             limit 1
         )
 ),
-egg_group_names as (
-    select eg.id, en.name as it_name
-    from pokemon_v2_pokemonegggroup eg
-        join pokemon_v2_egggroupname en on en.egg_group_id = eg.id
+pkmn_egg_group as (
+    select
+        egj.pokemon_species_id as species_id,
+        en.name as it_name
+    from pokemon_v2_pokemonegggroup egj
+        join pokemon_v2_egggroupname en on en.egg_group_id = egj.egg_group_id
     where
         en.language_id = (
             select id
@@ -47,35 +49,31 @@ egg_group_names as (
             where iso3166 = 'it'
             limit 1
         )
-    )
+    order by en.name
+)
 select
     p.id as id,
+    p.pokemon_species_id as species_id,
     pn.name as name,
     t1.it_name as type1,
     t2.it_name as type2,
     (
-        select en.it_name
-        from pokemon_v2_pokemonegggroup egj
-            join egg_group_names en on en.id = egj.egg_group_id
-        where egj.pokemon_species_id = p.pokemon_species_id
-        order by egj.id
+        select it_name
+        from pkmn_egg_group
+        where species_id = p.pokemon_species_id
         limit 1
     ) as egg_group1,
     (
-        select en.it_name
-        from pokemon_v2_pokemonegggroup egj
-            join egg_group_names en on en.id = egj.egg_group_id
-        where egj.pokemon_species_id = p.pokemon_species_id
-        order by egj.id
+        select it_name
+        from pkmn_egg_group
+        where species_id = p.pokemon_species_id
         limit 1
         offset 1
     ) as egg_group2
 from pokemon_v2_pokemon p
-    join (select * from pkmn_type where slot = 1) t1 on t1.pokemon_id = p.id
-    left join (select * from pkmn_type where slot = 2) t2 on t2.pokemon_id = p.id
     join (select * from pkmn_names) pn on pn.id = p.pokemon_species_id
-    join pokemon_v2_pokemonegggroup egj on egj.pokemon_species_id = p.pokemon_species_id
-    join (select * from egg_group_names) en on en.id = egj.egg_group_id;
+    join (select * from pkmn_type where slot = 1) t1 on t1.pokemon_id = p.id
+    left join (select * from pkmn_type where slot = 2) t2 on t2.pokemon_id = p.id;
 
 drop view if exists move;
 create view move as
@@ -93,6 +91,22 @@ where
         where iso3166 = 'it'
         limit 1
     );
+
+drop view if exists evolution_chain;
+create view evolution_chain as
+select
+    ec.id,
+    json_group_array(p.id) as pkmn_ids,
+    json_group_array(t.it_name) as types
+from pokemon_v2_evolutionchain ec
+    join pokemon_v2_pokemonspecies ps on ps.evolution_chain_id = ec.id
+    join pkmn p on p.species_id = ps.id
+    join (
+        select pt.pokemon_id, t.it_name
+        from pokemon_v2_pokemontype pt
+            join type t on t.id = pt.type_id
+    ) t on t.pokemon_id = p.id
+group by ec.id;
 
 drop view if exists learnset;
 create view learnset as

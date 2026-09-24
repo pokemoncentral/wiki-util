@@ -43,10 +43,14 @@ select
             when 'machine' then j.machine_name
             else null
         end
-    ) as machine
+    ) as machine,
+    m.type_it_name in (p.type1, p.type2) as stab,
+    ec.types like ('%' || m.type_it_name || '%') as evo_stab
 from learnset l
     join pkmn p on l.pkmn_id = p.id
     join join_table j on j.id = l.join_id
+    join move m on l.move_id = m.id
+    join evolution_chain ec on ec.pkmn_ids like ('%' || p.id || '%')
 where
     (:move is null or l.move_name = :move)
     and (:learning_method is null or l.learning_method_name = :learning_method)
