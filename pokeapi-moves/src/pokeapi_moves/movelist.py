@@ -1,5 +1,6 @@
 import itertools
 import json
+from collections.abc import Iterable
 from dataclasses import dataclass
 from sqlite3 import Cursor
 from typing import Annotated, Self, cast
@@ -44,8 +45,10 @@ def movelist(
 
     pokeapi_db.ensure(wipe_db=wipe_db)
     db_move = pokeapi_db.query_move(move)
-    movelist_entries = pokeapi_db.query_file(
-        sql_file, move, learning_method, game, result_class=MovelistResult
+    movelist_entries = list(
+        pokeapi_db.query_file(
+            sql_file, move, learning_method, game, result_class=MovelistResult
+        )
     )
 
     for group_learning_method, by_learning_method in itertools.groupby(
@@ -59,7 +62,7 @@ def movelist(
             by_learning_method, lambda r: r.game
         ):
             for entry in by_game:
-                print(entry.to_wikicode())
+                print(entry.to_wikicode(movelist_entries))
         print("}}")
 
 
@@ -74,8 +77,11 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
     levels: list[int] | None
     machine: str | None
 
-    def to_wikicode(self) -> str:
+    def to_wikicode(self, resultset: Iterable[Self]) -> str:
         match self.learning_method:
+            case "egg":
+                tail = ",".join(map(str, self.find_parents(self, resultset)))
+
             case "level-up":
                 assert self.levels is not None
                 tail = ", ".join(map(str, self.levels))
@@ -116,4 +122,24 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
             game=game,
             levels=levels if len(levels) > 0 else None,
             machine=machine,
+        )
+
+    @classmethod
+    def find_parents(cls, entry: Self, resultset: Iterable[Self]) -> Iterable[int]:
+        entry_egg_groups = {
+            egg_group
+            for egg_group in (entry.pkmn.egg_group1, entry.pkmn.egg_group2)
+            if egg_group is not None
+        }
+        return sorted(
+            {
+                parent.pkmn.id
+                for parent in resultset
+                if parent.learning_method != "egg"
+                and entry.game == parent.game
+                and entry.pkmn.id != parent.pkmn.id
+                and not entry_egg_groups.isdisjoint(
+                    (parent.pkmn.egg_group1, parent.pkmn.egg_group2)
+                )
+            }
         )
