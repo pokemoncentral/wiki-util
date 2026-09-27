@@ -44,6 +44,8 @@ select
             else null
         end
     ) as machine,
+    m.type_it_name in (p.type1, p.type2) as stab,
+    ecf.types like ('%' || m.type_it_name || '%') as evo_stab,
     ecf.chain_id as evo_chains_id,
     json(ecf.chain) as evo_chains,
     p.is_baby as is_baby

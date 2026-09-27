@@ -73,7 +73,7 @@ def movelist(
 
 
 type MovelistTupleResult = tuple[
-    *PkmnResultTuple, LearningMethod, str, str, str | None, int, str, int
+    *PkmnResultTuple, LearningMethod, str, str, str | None, int, int, int, str, int
 ]
 
 
@@ -84,6 +84,8 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
     game: str
     levels: list[int] | None
     machine: str | None
+    stab: bool
+    evo_stab: bool
     evo_chains_id: int
     stage_in_evo_chain: int | None
     is_baby: bool
@@ -107,6 +109,16 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
             case _:
                 raise ValueError(f"Uknown LearningMethod: {self.learning_method}")
 
+        match (self.stab, self.evo_stab):
+            case (True, _):
+                apostrophes = "'''"
+
+            case (False, True):
+                apostrophes = "''"
+
+            case _:
+                apostrophes = None
+
         args = (
             to_ndex(self.pkmn.id),
             self.pkmn.name,
@@ -115,6 +127,7 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
             self.pkmn.egg_group1,
             replace_none(self.pkmn.egg_group2),
             tail,
+            apostrophes,
             "//",
         )
         return "|".join(str(arg) for arg in args if arg is not None)
@@ -130,6 +143,8 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
             game,
             levels_json,
             machine,
+            stab,
+            evo_stab,
             evo_chains_id,
             evo_chains_json,
             is_baby,
@@ -144,6 +159,8 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
             game=game,
             levels=levels if len(levels) > 0 else None,
             machine=machine,
+            stab=stab == 1,
+            evo_stab=evo_stab == 1,
             evo_chains_id=evo_chains_id,
             stage_in_evo_chain=cls.find_stage_in_evo_chain(pkmn.id, chains),
             is_baby=is_baby == 1,
