@@ -15,17 +15,17 @@ drop view if exists pkmn;
 create view pkmn as
 with pkmn_type as (
     select
-        j.id,
-        j.type_id,
         j.pokemon_id,
         j.slot,
-        t.name,
         t.it_name
     from pokemon_v2_pokemontype j
         join type t on t.id = j.type_id
 ),
 pkmn_species as (
-    select ps.id, pn.name, ps.is_baby
+    select
+        ps.id,
+        pn.name,
+        ps.is_baby
     from pokemon_v2_pokemonspecies ps
         join pokemon_v2_pokemonspeciesname pn on pn.pokemon_species_id = ps.id
     where
@@ -152,17 +152,11 @@ drop view if exists learnset;
 create view learnset as
 select
     j.id as join_id,
-
     p.id as pkmn_id,
     p.name as pkmn_name,
-
     m.id as move_id,
     m.name as move_name,
-
-    ml.id as learning_method_id,
     ml.name as learning_method_name,
-
-    vg.id as game_id,
     vg.name as game_name
 from pokemon_v2_pokemonmove j
     join pokemon_v2_movelearnmethod ml on j.move_learn_method_id = ml.id
