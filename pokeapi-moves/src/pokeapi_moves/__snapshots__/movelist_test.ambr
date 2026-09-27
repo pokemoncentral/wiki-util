@@ -1,0 +1,96 @@
+# serializer version: 1
+# name: test_sample
+  '''
+  {{#invoke: Movelist | learningMethod = egg | type = Lotta
+  0183|Marill||Acqua|Folletto|Acqua 1|Magico|141,149,158,209,258,286,341,399|//
+  0341|Corphish||Acqua||Acqua 1|Acqua 3|98,141,149,158,183,258,348,399|//
+  0387|Turtwig||Erba||Erba|Mostro|34,111,143,158,246,258,286,304,332,408|//
+  }}
+  {{#invoke: Movelist | learningMethod = level-up | type = Lotta
+  0031|Nidoqueen||Veleno|Terra|Non ancora scoperto||58|//
+  0127|Pinsir||Coleottero||Coleottero||52|//
+  0158|Totodile||Acqua||Acqua 1|Mostro|43|//
+  0159|Croconaw||Acqua||Acqua 1|Mostro|51|//
+  0160|Feraligatr||Acqua||Acqua 1|Mostro|63|//
+  0377|Regirock||Roccia||Non ancora scoperto||25|//
+  0378|Regice||Ghiaccio||Non ancora scoperto||25|//
+  0379|Registeel||Acciaio||Non ancora scoperto||25|//
+  0386|Deoxys|form = Forma Attacco|Psico||Non ancora scoperto||49|//
+  0399|Bidoof||Normale||Acqua 1|Campo|41|//
+  0400|Bibarel||Normale|Acqua|Acqua 1|Campo|48|//
+  }}
+  {{#invoke: Movelist | learningMethod = tutor | type = Lotta
+  0031|Nidoqueen||Veleno|Terra|Non ancora scoperto||//
+  0034|Nidoking||Veleno|Terra|Campo|Mostro|//
+  0066|Machop||Lotta||Umanoide||'''|//
+  0067|Machoke||Lotta||Umanoide||'''|//
+  0068|Machamp||Lotta||Umanoide||'''|//
+  0074|Geodude||Roccia|Terra|Minerale||//
+  0075|Graveler||Roccia|Terra|Minerale||//
+  0076|Golem||Roccia|Terra|Minerale||//
+  0098|Krabby||Acqua||Acqua 3||//
+  0099|Kingler||Acqua||Acqua 3||//
+  0106|Hitmonlee||Lotta||Umanoide||'''|//
+  0111|Rhyhorn||Terra|Roccia|Campo|Mostro|//
+  0112|Rhydon||Terra|Roccia|Campo|Mostro|//
+  0127|Pinsir||Coleottero||Coleottero||//
+  0136|Flareon||Fuoco||Campo||//
+  0141|Kabutops||Roccia|Acqua|Acqua 1|Acqua 3|//
+  0143|Snorlax||Normale||Mostro||//
+  0149|Dragonite||Drago|Volante|Acqua 1|Drago|//
+  0151|Mew||Psico||Non ancora scoperto||//
+  0158|Totodile||Acqua||Acqua 1|Mostro|//
+  0159|Croconaw||Acqua||Acqua 1|Mostro|//
+  0160|Feraligatr||Acqua||Acqua 1|Mostro|//
+  0183|Marill||Acqua|Folletto|Acqua 1|Magico|//
+  0184|Azumarill||Acqua|Folletto|Acqua 1|Magico|//
+  0209|Snubbull||Folletto||Campo|Magico|//
+  0210|Granbull||Folletto||Campo|Magico|//
+  0212|Scizor||Coleottero|Acciaio|Coleottero||//
+  0216|Teddiursa||Normale||Campo||//
+  0217|Ursaring||Normale||Campo||//
+  0220|Swinub||Ghiaccio|Terra|Campo||//
+  0221|Piloswine||Ghiaccio|Terra|Campo||//
+  0231|Phanpy||Terra||Campo||//
+  0232|Donphan||Terra||Campo||//
+  0246|Larvitar||Roccia|Terra|Mostro||//
+  0247|Pupitar||Roccia|Terra|Mostro||//
+  0248|Tyranitar||Roccia|Buio|Mostro||//
+  0257|Blaziken||Fuoco|Lotta|Campo||'''|//
+  0258|Mudkip||Acqua||Acqua 1|Mostro|//
+  0259|Marshtomp||Acqua|Terra|Acqua 1|Mostro|//
+  0260|Swampert||Acqua|Terra|Acqua 1|Mostro|//
+  0286|Breloom||Erba|Lotta|Erba|Magico|'''|//
+  0296|Makuhita||Lotta||Umanoide||'''|//
+  0297|Hariyama||Lotta||Umanoide||'''|//
+  0304|Aron||Acciaio|Roccia|Mostro||//
+  0305|Lairon||Acciaio|Roccia|Mostro||//
+  0306|Aggron||Acciaio|Roccia|Mostro||//
+  0332|Cacturne||Erba|Buio|Erba|Umanoide|//
+  0341|Corphish||Acqua||Acqua 1|Acqua 3|//
+  0342|Crawdaunt||Acqua|Buio|Acqua 1|Acqua 3|//
+  0348|Armaldo||Roccia|Coleottero|Acqua 3||//
+  0359|Absol||Buio||Campo||//
+  0377|Regirock||Roccia||Non ancora scoperto||//
+  0378|Regice||Ghiaccio||Non ancora scoperto||//
+  0379|Registeel||Acciaio||Non ancora scoperto||//
+  0386|Deoxys|form = Forma Attacco|Psico||Non ancora scoperto||//
+  0387|Turtwig||Erba||Erba|Mostro|//
+  0388|Grotle||Erba||Erba|Mostro|//
+  0389|Torterra||Erba|Terra|Erba|Mostro|//
+  0399|Bidoof||Normale||Acqua 1|Campo|//
+  0400|Bibarel||Normale|Acqua|Acqua 1|Campo|//
+  0405|Luxray||Elettro||Campo||//
+  0408|Cranidos||Roccia||Mostro||//
+  0409|Rampardos||Roccia||Mostro||//
+  0430|Honchkrow||Buio|Volante|Volante||//
+  0446|Munchlax||Normale||Non ancora scoperto||//
+  0449|Hippopotas||Terra||Campo||//
+  0450|Hippowdon||Terra||Campo||//
+  0464|Rhyperior||Terra|Roccia|Campo|Mostro|//
+  0473|Mamoswine||Ghiaccio|Terra|Campo||//
+  0486|Regigigas||Normale||Non ancora scoperto||//
+  }}
+  
+  '''
+# ---
