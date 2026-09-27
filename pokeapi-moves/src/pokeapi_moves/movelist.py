@@ -1,3 +1,5 @@
+# ruff: noqa: UP031
+
 import itertools
 import json
 from collections.abc import Iterable
@@ -60,16 +62,25 @@ def movelist(
     for group_learning_method, by_learning_method in itertools.groupby(
         movelist_entries, lambda r: r.learning_method
     ):
-        print(
-            "{{#invoke: Movelist | learningMethod = %s | type = %s"  # noqa: UP031
-            % (group_learning_method, db_move.type)
-        )
-        for group_game, by_game in itertools.groupby(
-            by_learning_method, lambda r: r.game
-        ):
-            for entry in by_game:
-                print(entry.to_wikicode(parent_candidates))
-        print("}}")
+        by_game = [
+            (game, list(entries))
+            for game, entries in itertools.groupby(by_learning_method, lambda r: r.game)
+        ]
+        movelists = [
+            "{{#invoke: Movelist | learningMethod = %s | type = %s\n%s\n}}"
+            % (
+                group_learning_method,
+                db_move.type,
+                "\n".join(entry.to_wikicode(parent_candidates) for entry in entries),
+            )
+            for _, entries in by_game
+        ]
+
+        if len(movelists) == 1:
+            print(movelists[0])
+            continue
+
+        print(make_tabs((game for game, _ in by_game), movelists))
 
 
 type MovelistTupleResult = tuple[
@@ -216,3 +227,27 @@ def filter_parent_candidates(resultset: list[MovelistResult]) -> list[MovelistRe
             parents, key=lambda p: p.evo_chains_id
         )
     ]
+
+
+def make_tabs(games: Iterable[str], movelists: Iterable[str]) -> str:
+    header_items = (
+        (
+            '{{Tabs/headeritem|n=%d|class=text-center width-xl-10 width-lg-15 width-sm-20 width-xs-25|style=margin: 0.1em 0;|title=<div class="width-xl-100">{{#invoke: blackabbrev | %s}}</div>}}'
+            % (idx, game)
+        )
+        for idx, game in enumerate(games)
+    )
+    body_items = (
+        "{{Tabs/item|n=%d|content=%s}}" % (idx, movelist)
+        for idx, movelist in enumerate(movelists)
+    )
+
+    return "\n".join(
+        (
+            "{{Tabs/header|style=roundy|class=tabs-grad-border|labelborder=0.3em solid|containerstyle=--tabs-border-grad: linear-gradient(to right, #91A119, #81B9EF);|headerclass=flex flex-items-center flex-main-space-around flex-wrap|headerstyle=gap: 0.1px;}}",
+            *header_items,
+            "{{Tabs/body}}",
+            *body_items,
+            "{{Tabs/footer}}",
+        )
+    )
