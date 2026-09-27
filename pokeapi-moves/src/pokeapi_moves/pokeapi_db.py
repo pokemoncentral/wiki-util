@@ -87,20 +87,25 @@ def pokeapi_make(*args: str) -> CompletedProcess[bytes]:
 
 def query_file[TResult: SqliteResultFactory](
     file: PathOrStr,
-    *args: str | None,
+    *,
     with_lib=True,
     result_class: type[TResult] | None = None,
+    **sql_params: str | None,
 ) -> Iterator[TResult]:
     return query_str(
-        load_query_file(file), *args, with_lib=with_lib, result_class=result_class
+        load_query_file(file),
+        with_lib=with_lib,
+        result_class=result_class,
+        **sql_params,
     )
 
 
 def query_str[TResult: SqliteResultFactory](
     sql: str,
-    *args: str | None,
+    *,
     with_lib=True,
     result_class: type[TResult] | None = None,
+    **sql_params: str | None,
 ) -> Iterator[TResult]:
     db = sqlite3.connect(db_file)
     if result_class is not None:
@@ -110,7 +115,7 @@ def query_str[TResult: SqliteResultFactory](
     if with_lib:
         cursor.executescript(load_query_file(sql_lib_file))
 
-    return cursor.execute(sql, args)
+    return cursor.execute(sql, sql_params)
 
 
 def query_move(move: str) -> MoveResult:
@@ -119,9 +124,9 @@ def query_move(move: str) -> MoveResult:
             """
             select id, it_name as name, type_it_name as type
             from move
-            where name = ?
+            where name = :move
             """,
-            move,
             result_class=MoveResult,
+            move=move,
         )
     )

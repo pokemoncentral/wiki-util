@@ -43,10 +43,15 @@ select
             when 'machine' then j.machine_name
             else null
         end
-    ) as machine
+    ) as machine,
+    ecf.chain_id as evo_chains_id,
+    json(ecf.chain) as evo_chains,
+    p.is_baby as is_baby
 from learnset l
     join pkmn p on l.pkmn_id = p.id
     join join_table j on j.id = l.join_id
+    join move m on l.move_id = m.id
+    join evolution_chain_forwards ecf on ecf.species_id = p.species_id
 where
     (:move is null or l.move_name = :move)
     and (:learning_method is null or l.learning_method_name = :learning_method)

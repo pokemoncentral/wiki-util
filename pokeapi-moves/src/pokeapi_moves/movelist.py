@@ -1,5 +1,6 @@
 import itertools
 import json
+from collections.abc import Iterable
 from dataclasses import dataclass
 from sqlite3 import Cursor
 from typing import Annotated, Self, cast
@@ -44,9 +45,17 @@ def movelist(
 
     pokeapi_db.ensure(wipe_db=wipe_db)
     db_move = pokeapi_db.query_move(move)
-    movelist_entries = pokeapi_db.query_file(
-        sql_file, move, learning_method, game, result_class=MovelistResult
+    movelist_entries = list(
+        pokeapi_db.query_file(
+            sql_file,
+            move=move,
+            learning_method=learning_method,
+            game=game,
+            result_class=MovelistResult,
+        )
     )
+
+    parent_candidates = filter_parent_candidates(movelist_entries)
 
     for group_learning_method, by_learning_method in itertools.groupby(
         movelist_entries, lambda r: r.learning_method
@@ -59,11 +68,13 @@ def movelist(
             by_learning_method, lambda r: r.game
         ):
             for entry in by_game:
-                print(entry.to_wikicode())
+                print(entry.to_wikicode(parent_candidates))
         print("}}")
 
 
-type MovelistTupleResult = tuple[*PkmnResultTuple, LearningMethod, str, str, str | None]
+type MovelistTupleResult = tuple[
+    *PkmnResultTuple, LearningMethod, str, str, str | None, int, str, int
+]
 
 
 @dataclass(kw_only=True)
@@ -73,9 +84,15 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
     game: str
     levels: list[int] | None
     machine: str | None
+    evo_chains_id: int
+    stage_in_evo_chain: int | None
+    is_baby: bool
 
-    def to_wikicode(self) -> str:
+    def to_wikicode(self, parents: Iterable[Self]) -> str:
         match self.learning_method:
+            case "egg":
+                tail = ",".join(map(str, self.find_parents(self, parents)))
+
             case "level-up":
                 assert self.levels is not None
                 tail = ", ".join(map(str, self.levels))
@@ -108,12 +125,77 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
         cursor: Cursor,
         sqlite_tuple: MovelistTupleResult,
     ) -> Self:
-        learning_method, game, levels_json, machine = sqlite_tuple[6:]
-        levels = json.loads(levels_json)
+        (
+            learning_method,
+            game,
+            levels_json,
+            machine,
+            evo_chains_id,
+            evo_chains_json,
+            is_baby,
+        ) = sqlite_tuple[6:]
+
+        pkmn = PkmnResult.from_sqlite_tuple(cursor, sqlite_tuple[:6])
+        levels = sorted(set(cast(list[int], json.loads(levels_json))))
+        chains = cast(list[list[int]], json.loads(evo_chains_json))
         return cls(
-            pkmn=PkmnResult.from_sqlite_tuple(cursor, sqlite_tuple[:6]),
+            pkmn=pkmn,
             learning_method=cast(LearningMethod, learning_method),
             game=game,
             levels=levels if len(levels) > 0 else None,
             machine=machine,
+            evo_chains_id=evo_chains_id,
+            stage_in_evo_chain=cls.find_stage_in_evo_chain(pkmn.id, chains),
+            is_baby=is_baby == 1,
         )
+
+    @classmethod
+    def find_parents(cls, entry: Self, parents: Iterable[Self]) -> Iterable[int]:
+        entry_egg_groups = {
+            egg_group
+            for egg_group in (entry.pkmn.egg_group1, entry.pkmn.egg_group2)
+            if egg_group is not None
+        }
+        return sorted(
+            {
+                parent.pkmn.id
+                for parent in parents
+                if entry.game == parent.game
+                and entry.evo_chains_id != parent.evo_chains_id
+                and not entry_egg_groups.isdisjoint(
+                    (parent.pkmn.egg_group1, parent.pkmn.egg_group2)
+                )
+            }
+        )
+
+    @staticmethod
+    def find_stage_in_evo_chain(
+        pkmn_id: int, evo_chains: list[list[int]]
+    ) -> int | None:
+        for c in evo_chains:
+            try:
+                return c.index(pkmn_id)
+            except ValueError:
+                pass
+        return None
+
+
+def filter_parent_candidates(resultset: list[MovelistResult]) -> list[MovelistResult]:
+    parents = sorted(
+        (
+            parent
+            for parent in resultset
+            if not parent.is_baby
+            and parent.learning_method != "egg"
+            and parent.stage_in_evo_chain is not None
+        ),
+        key=lambda p: (p.evo_chains_id, p.stage_in_evo_chain),
+    )
+
+    return [
+        # entries are already sorted by earliest stage in evolution chain
+        next(evo_chain_entries)
+        for _, evo_chain_entries in itertools.groupby(
+            parents, key=lambda p: p.evo_chains_id
+        )
+    ]
