@@ -11,7 +11,13 @@ import typer
 from typer import Argument, Option
 
 from pokeapi_moves import pokeapi_db
-from pokeapi_moves.lib import LearningMethod, replace_none, to_ndex, wipe_db_help
+from pokeapi_moves.lib import (
+    LearningMethod,
+    named_args,
+    replace_none,
+    to_ndex,
+    wipe_db_help,
+)
 from pokeapi_moves.pokeapi_db import PkmnResult, PkmnResultTuple, SqliteResultFactory
 
 sql_file = "movelist.sql"
@@ -131,17 +137,18 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
                 apostrophes = None
 
         args = (
-            to_ndex(self.pkmn.id),
+            to_ndex(self.pkmn.ndex),
             self.pkmn.name,
+            named_args(form=self.pkmn.form),
             self.pkmn.type1,
             replace_none(self.pkmn.type2),
             self.pkmn.egg_group1,
             replace_none(self.pkmn.egg_group2),
             tail,
             apostrophes,
-            "//",
+            " //",
         )
-        return "|".join(str(arg) for arg in args if arg is not None)
+        return "|" + "|".join(str(arg) for arg in args if arg is not None)
 
     @classmethod
     def from_sqlite_tuple(
@@ -159,9 +166,9 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
             evo_chains_id,
             evo_chains_json,
             is_baby,
-        ) = sqlite_tuple[6:]
+        ) = sqlite_tuple[7:]
 
-        pkmn = PkmnResult.from_sqlite_tuple(cursor, sqlite_tuple[:6])
+        pkmn = PkmnResult.from_sqlite_tuple(cursor, sqlite_tuple[:7])
         levels = sorted(set(cast(list[int], json.loads(levels_json))))
         chains = cast(list[list[int]], json.loads(evo_chains_json))
         return cls(
@@ -173,7 +180,7 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
             stab=stab == 1,
             evo_stab=evo_stab == 1,
             evo_chains_id=evo_chains_id,
-            stage_in_evo_chain=cls.find_stage_in_evo_chain(pkmn.id, chains),
+            stage_in_evo_chain=cls.find_stage_in_evo_chain(pkmn.ndex, chains),
             is_baby=is_baby == 1,
         )
 
@@ -186,7 +193,7 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
         }
         return sorted(
             {
-                parent.pkmn.id
+                parent.pkmn.ndex
                 for parent in parents
                 if entry.game == parent.game
                 and entry.evo_chains_id != parent.evo_chains_id

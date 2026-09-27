@@ -24,8 +24,9 @@ join_table as (
             and j.version_group_id = mc.version_group_id
 )
 select
-    p.id,
+    p.species_id as ndex,
     p.name,
+    p.form_name as form,
     p.type1,
     p.type2,
     p.egg_group1,
@@ -65,5 +66,6 @@ group by
 order by
     l.learning_method_name asc,
     l.game_name asc,
-    p.id asc,
+    p.species_id asc,
+    p.form_order asc,
     j.level asc

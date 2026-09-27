@@ -22,13 +22,14 @@ class SqliteResultFactory[TSqlTuple: tuple[Any, ...]](ABC):
     def from_sqlite_tuple(cls, cursor: Cursor, sqlite_tuple: TSqlTuple) -> Self: ...
 
 
-type PkmnResultTuple = tuple[int, str, str, str | None, str, str | None]
+type PkmnResultTuple = tuple[int, str, str, str, str | None, str, str | None]
 
 
 @dataclass(kw_only=True)
 class PkmnResult(SqliteResultFactory[PkmnResultTuple]):
-    id: int
+    ndex: int
     name: str
+    form: str | None
     type1: str
     type2: str | None
     egg_group1: str
@@ -36,10 +37,11 @@ class PkmnResult(SqliteResultFactory[PkmnResultTuple]):
 
     @classmethod
     def from_sqlite_tuple(cls, cursor: Cursor, sqlite_tuple: PkmnResultTuple) -> Self:
-        id, name, type1, type2, egg_group1, egg_group2 = sqlite_tuple
+        ndex, name, form, type1, type2, egg_group1, egg_group2 = sqlite_tuple
         return cls(
-            id=id,
+            ndex=ndex,
             name=name,
+            form=form,
             type1=type1,
             type2=type2,
             egg_group1=egg_group1,

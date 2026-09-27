@@ -19,6 +19,13 @@ def sh(
     return subprocess.run((bin_path, *args), cwd=cwd, check=True, shell=False)
 
 
+def named_args(**args: Any) -> str | None:
+    wikicode_args = [
+        f"{name} = {value}" for name, value in args.items() if value is not None
+    ]
+    return " | ".join(wikicode_args) if wikicode_args else None
+
+
 def replace_none(value: Any, if_none: str = "") -> str:
     return if_none if value is None else str(value)
 
