@@ -43,20 +43,23 @@ python3 pwb.py pkimgs-update --upload all
 ### pkimgstools.py
 This file contains functions that are used by previous scripts, it is not intended to be launched directly.
 
+### pkimgs-sprite-template.py
+This script updates Sprite template in Pokémon pages.
+
 ### pkimgs-compare-wikis.py
 This script compares categories in two wikis to check if some images from one may be missing from the other. Specifically, for each ndex the script counts the number of images in the two categories, if different they are all printed and a manual check is needed (no automatic check is performed because it would require a lot of effort to handle all naming conventions).
+
+### pokeartwork.py
+This script fills "Pokeartwork" template fields: it can be used to mass upload images in a directory or to update an entire category on Pokémon Central Wiki.
+
+### pokeartwork-redirects.py
+This script manages redirects for Pokémon artworks.
 
 ### sprelli.py
 This script fills "Sprello" template fields: it can be used to mass upload images in a directory or to update an entire category on Pokémon Central Wiki.
 
 ### sprelli-redirects.py
 This script creates needed redirects for game sprites/models whose name follows main games naming convention (an example is Pokémon HOME).
-
-### pokeartwork.py
-This script fills "Pokeartwork" template fields: it can be used to mass upload images in a directory or to update an entire category on Pokémon Central Wiki.
-
-### pkimgs-sprite-template.py
-This script updates Sprite template in Pokémon pages.
 
 ## Other files
 ### pokepages-exceptions
@@ -69,6 +72,7 @@ Each file contains one entry per line; files that list Pokémon (e.g. `femaleonl
 - `categories-names.json` contains data of some categories with Pokémon images, is used by `pkimgs-compare-wikis.py`.
 - `cats.txt` contains all categories with Pokémon images (they are retrieved recursively).
 - `goforms.txt` lists abbreviations of events exclusive to Pokémon GO.
+- `pokeartwork-redirects.json` contains useful data to manage redirects for Pokémon artworks, is used by `pokeartwork-redirects.py`.
 - `redirect_ranger.txt` lists redirects for Pokémon Ranger sprites.
 - `singleMS.txt` lists Pokémon that have the same mini sprite for base form and all alternative forms.
 

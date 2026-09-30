@@ -53,16 +53,22 @@ def get_artsources_sources(arts_data, pokeartwork_params):
 def find_redirect_destination(pokeabbr, artworks, arts_sources, redirects_data):
     redirect = f"File:Artwork{pokeabbr}.png"
     destination = None
-    # check if destination is explicitly specified
     ndexabbr = pokeabbr.lstrip("0")
+    # check if destination is explicitly specified
     if redirects_data["forced_arts"].get(ndexabbr, None):
         destination = redirects_data["forced_arts"][ndexabbr]
     else:
         # find most recent source for destination
         for source in arts_sources:
-            art = f"Artwork{pokeabbr} {source}.png"
-            if art in artworks:
-                destination = art
+            # build collection with artworks from current source; 69 is a random
+            # number to include all possible additional artworks, they are way
+            # less than 70
+            source_artworks = [f"Artwork{pokeabbr} {source}.png"] + [
+                f"Artwork{pokeabbr} {source} {n}.png" for n in range(2, 69)
+            ]
+            artwork = next((art for art in source_artworks if art in artworks), None)
+            if artwork:
+                destination = artwork
                 break
     return redirect, destination
 
