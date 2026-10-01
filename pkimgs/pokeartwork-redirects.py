@@ -58,6 +58,13 @@ def find_redirect_destination(pokeabbr, artworks, arts_sources, redirects_data):
     if redirects_data["forced_arts"].get(ndexabbr, None):
         destination = redirects_data["forced_arts"][ndexabbr]
     else:
+        # check if current ndexabbr should use another pokeabbr
+        if redirects_data["redirected_ndexabbrs"].get(ndexabbr, None):
+            ndexabbr = redirects_data["redirected_ndexabbrs"][ndexabbr]
+            ndex = int(re.sub(r"\D", "", ndexabbr))
+            abbr = re.sub(r"\d", "", ndexabbr)
+            pokeabbr_len = len(re.sub(r"\D", "", pokeabbr))
+            pokeabbr = f"{str(ndex).zfill(pokeabbr_len)}{abbr}"
         # find most recent source for destination
         for source in arts_sources:
             # build collection with artworks from current source; 69 is a random

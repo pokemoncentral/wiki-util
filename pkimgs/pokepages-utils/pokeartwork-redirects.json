@@ -54,22 +54,24 @@
         "Artwork1017 SV.png",
         "Artwork1017 SV 2.png"
     ],
+    "redirected_ndexabbrs": {
+        "710S": "710",
+        "710L": "710",
+        "710XL": "710",
+        "711S": "711",
+        "711L": "711",
+        "711XL": "711",
+        "842Gi": "841Gi",
+        "849BGi": "849Gi",
+        "854A": "854",
+        "855A": "855",
+        "1012P": "1012",
+        "1013E": "1013"
+    },
     "forced_arts": {
         "25Cs": "Sprrozaf0025Cs.png",
         "201": "Artwork0201F RFVF.png",
         "493Sc": "Sprptm0493Sc.png",
-        "710S": "Artwork0710 XY.png",
-        "710L": "Artwork0710 XY.png",
-        "710XL": "Artwork0710 XY.png",
-        "711S": "Artwork0711 XY.png",
-        "711L": "Artwork0711 XY.png",
-        "711XL": "Artwork0711 XY.png",
-        "716": "Artwork0716A XY.png",
-        "842Gi": "Artwork0841Gi SpSc.png",
-        "849BGi": "Artwork0849Gi SpSc.png",
-        "854A": "Artwork0854 SpSc.png",
-        "855A": "Artwork0855 SpSc.png",
-        "1012P": "Artwork1012 SV.png",
-        "1013E": "Artwork1013 SV.png"
+        "716": "Artwork0716A XY.png"
     }
 }
