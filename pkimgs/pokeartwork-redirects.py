@@ -145,15 +145,24 @@ def main():
     # parse inputs
     pokeabbrs = re.findall(r"\d{4}[A-z]{0,3}", input)
     test_mode = args.test.lower().strip() != "no"
-    # initialize empty list that will contain all destinations
-    destinations = []
+    # initialize dict with sources as keys and empty dicts as values
+    out_data = {s: {} for s in arts_sources}
+    out_data["others"] = {}
     # process all inputs
     for pokeabbr in pokeabbrs:
         # find proper destination
         redirect, destination = find_redirect_destination(pokeabbr, artworks, arts_sources, redirects_data)  # fmt: skip
         if not destination:
             destination = get_fallback_destination(pokeabbr, gender_data)
-        destinations.append(destination)
+        # remove extension, then number if any, then first part
+        dest_noext = re.sub(r"\.\w+$", "", destination)
+        dest_nonum = re.sub(r" \d+$", "", dest_noext)
+        source = re.sub(r"^Artwork\w+ ", "", dest_nonum)
+        if out_data.get(source, None) is None:
+            # print(f"Found source '{source}' for destination {destination}")
+            out_data["others"][pokeabbr] = destination
+        else:
+            out_data[source][pokeabbr] = destination
         # create redirect or print its preview
         destination = f"#RINVIA [[File:{destination}]]"
         if test_mode:
@@ -168,21 +177,6 @@ def main():
                 page.save("Bot: managing redirects of Pokémon artworks")
     # save processed items in output file if specified
     if args.output:
-        # initialize dict with sources as keys and empty lists as values
-        out_data = {s: [] for s in arts_sources}
-        out_data["others"] = []
-        # loop over destinations to find their sources and update dict
-        for destination in destinations:
-            # remove extension, then number if any, then first part
-            dest_noext = re.sub(r"\.\w+$", "", destination)
-            dest_nonum = re.sub(r" \d+$", "", dest_noext)
-            source = re.sub(r"^Artwork\w+ ", "", dest_nonum)
-            if out_data.get(source, None) is None:
-                # print(f"Found source '{source}' for destination {destination}")
-                out_data["others"].append(destination)
-            else:
-                out_data[source].append(destination)
-        # write data to output file
         with open(args.output, "w") as file:
             json.dump(out_data, file, indent=4, ensure_ascii=False)
 
