@@ -1,0 +1,3 @@
+[submodule "pokeapi-moves/pokeapi"]
+	path = pokeapi-moves/pokeapi
+	url = git@github.com:PokeAPI/pokeapi.git
