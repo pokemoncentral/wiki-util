@@ -13,7 +13,13 @@ from pokeapi_moves.lib import PathOrStr, sh
 db_file = os.path.join(paths.pokeapi, "db.sqlite3")
 db_min_size_bytes = 50 * 2**20
 
-sql_lib_file = "lib.sql"
+generated_files_prefix = "__generated__"
+sql_lib_files = [
+    sql_file.name
+    for sql_file in os.scandir(paths.queries)
+    if sql_file.is_file() and sql_file.name.startswith(generated_files_prefix)
+]
+sql_lib_files.append("lib.sql")
 
 
 class SqliteResultFactory[TSqlTuple: tuple[Any, ...]](ABC):
@@ -78,6 +84,10 @@ def ensure(*, wipe_db=False):
         pokeapi_make("build-db")
 
 
+def generated_file_name(file_name: str) -> str:
+    return os.path.join(paths.queries, generated_files_prefix + file_name)
+
+
 def load_query_file(file: PathOrStr) -> str:
     with open(os.path.join(paths.queries, file), "r", encoding="utf-8") as sql_file:
         return sql_file.read()
@@ -115,7 +125,8 @@ def query_str[TResult: SqliteResultFactory](
     cursor = db.cursor()
 
     if with_lib:
-        cursor.executescript(load_query_file(sql_lib_file))
+        for lib_file in sql_lib_files:
+            cursor.executescript(load_query_file(lib_file))
 
     return cursor.execute(sql, sql_params)
 

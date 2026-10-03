@@ -50,34 +50,12 @@ pkmn_egg_group as (
             limit 1
         )
     order by en.name
-),
-pkmn_form as (
-    select
-        f.pokemon_id,
-        f.form_order,
-        fn.name as it_name
-    from pokemon_v2_pokemonform f
-        join pokemon_v2_pokemonformname fn on fn.pokemon_form_id = f.id
-        join pokemon_v2_pokemon p on p.id = f.pokemon_id
-    where
-        fn.language_id = (
-            select id
-            from pokemon_v2_language
-            where iso3166 = 'it'
-            limit 1
-        )
-        and p.pokemon_species_id in (
-            select pokemon_species_id
-            from pokemon_v2_pokemon
-            group by pokemon_species_id
-            having count(*) > 1
-        )
 )
 select
     p.id,
     p.pokemon_species_id as species_id,
     ps.name,
-    f.it_name as form_name,
+    f.abbr as form_abbr,
     f.form_order,
     ps.is_baby,
     t1.it_name as type1,
@@ -99,7 +77,7 @@ from pokemon_v2_pokemon p
     join pkmn_species ps on ps.id = p.pokemon_species_id
     join (select * from pkmn_type where slot = 1) t1 on t1.pokemon_id = p.id
     left join (select * from pkmn_type where slot = 2) t2 on t2.pokemon_id = p.id
-    left join pkmn_form f on f.pokemon_id = p.id;
+    left join pkmn_form f on f.pkmn_id = p.id;
 
 drop view if exists move;
 create view move as

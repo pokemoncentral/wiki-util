@@ -44,3 +44,7 @@ def replace_none(value: Any, if_none: str = "") -> str:
 
 def to_ndex(ndex_number: int) -> str:
     return f"""{ndex_number:04d}"""
+
+
+def to_sql(value: Any) -> str:
+    return f"'{value.replace("'", "''")}'" if isinstance(value, str) else str(value)
