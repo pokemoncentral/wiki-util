@@ -11,12 +11,24 @@ wipe_db_help = "Wipe the PokéAPI database, and recreate it from the CSV files"
 
 
 def sh(
-    bin: PathOrStr, *args: str, cwd: PathOrStr | None = None
-) -> subprocess.CompletedProcess[bytes]:
+    bin: PathOrStr,
+    *args: str,
+    cwd: PathOrStr | None = None,
+    input: str | None = None,
+    pipe_stdio=True,
+) -> subprocess.CompletedProcess[str]:
     bin_path = shutil.which(bin)
     if bin_path is None:
         raise ValueError(f"Binary {bin} not found on PATH")
-    return subprocess.run((bin_path, *args), cwd=cwd, check=True, shell=False)
+    return subprocess.run(
+        (bin_path, *args),
+        capture_output=not pipe_stdio,
+        check=True,
+        cwd=cwd,
+        input=input,
+        shell=False,
+        text=True,
+    )
 
 
 def named_args(**args: Any) -> str | None:

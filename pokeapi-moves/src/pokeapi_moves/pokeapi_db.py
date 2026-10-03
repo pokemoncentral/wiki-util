@@ -83,7 +83,7 @@ def load_query_file(file: PathOrStr) -> str:
         return sql_file.read()
 
 
-def pokeapi_make(*args: str) -> CompletedProcess[bytes]:
+def pokeapi_make(*args: str) -> CompletedProcess[str]:
     return sh("make", *args, cwd=paths.pokeapi)
 
 
