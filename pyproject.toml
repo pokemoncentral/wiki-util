@@ -3,11 +3,12 @@ name = "pcw-utils"
 version = "0.1.0"
 description = "Pokémon Central Wiki utilities"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.14.7"
 dependencies = [
     "jsonpickle>=4.1.1",
     "pillow>=11.2.1",
     "pywikibot>=9.6.1",
+    "typer>=0.27.2",
 ]
 
 [dependency-groups]
@@ -15,17 +16,21 @@ dev = [
     "black<26.5",
     "isort>=9.0.1",
     "pre-commit>=4.0.1",
+    "pytest>=9.1.1",
+    "syrupy>=6.1.1",
 ]
 
-# This is so that `pip install .` doesn't crash
-[tool.setuptools]
-packages = []
+[project.scripts]
+pokeapi-moves = "pokeapi_moves:cli"
+
+[tool.setuptools.packages.find]
+where = [
+    "pokeapi-moves/src"
+]
 
 [tool.isort]
 known_local_folder = "pokeapi_moves"
 profile = "black"
 
-[tool.uv.workspace]
-members = [
-    "pokeapi-moves",
-]
+[tool.uv]
+package = true
