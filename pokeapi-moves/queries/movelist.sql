@@ -26,7 +26,7 @@ join_table as (
 select
     p.species_id as ndex,
     p.name,
-    p.form_name as form,
+    p.form_abbr as form,
     p.type1,
     p.type2,
     p.egg_group1,

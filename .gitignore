@@ -284,3 +284,6 @@ config.*
 
 # I use this directory to keep miscellanea files
 /misc
+
+# Generated files
+/pokeapi-moves/**/*generated*

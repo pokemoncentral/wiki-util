@@ -7,13 +7,20 @@ import typer
 from typer import Option
 
 from pokeapi_moves.lib import sh
+from pokeapi_moves.pokeapi_db import generated_file_name
 
 cli = typer.Typer()
+
+forms_sql_output = generated_file_name("forms.sql")
 
 
 @cli.command()
 def forms(
     alt_forms_lua: Annotated[str, Option(help="The path to AltForms-data.lua")],
+    output: Annotated[
+        str,
+        Option(help="The generated SQL output path. Mostly useful for testing"),
+    ] = forms_sql_output,
 ):
 
     lua_export = sh(
@@ -22,23 +29,58 @@ def forms(
     alt_forms_json: list[LuaFormExport] = json.loads(
         lua_export, object_hook=LuaFormExport.from_json
     )
-    alt_forms_sql_values = ", ".join(f.as_sql_row() for f in alt_forms_json)
+    alt_forms_sql_values = ",\n".join(f.as_sql_row() for f in alt_forms_json)
+    with open(output, "w", encoding="utf-8") as forms_sql:
+        forms_sql.write(f"""
+create table lua_forms_export (
+    id integer primary key,
+    name text,
+    abbr text,
+    ndex int
+);
+insert into lua_forms_export
+(name, abbr, ndex)
+values
+{alt_forms_sql_values};
 
-    print(f"""
-        select a.form_abbr, fn.name, f.*
-        from pokemon_v2_pokemonform f
-            join pkmn p on p.id = f.pokemon_id
-            join pokemon_v2_pokemonformname fn on fn.pokemon_form_id = f.id
-            join (
-                select
-                    a.column1 as form_abbr,
-                    a.column2 as form_name,
-                    a.column3 as form_ndex
-                from (values {alt_forms_sql_values}) a
-            ) a on fn.name = a.form_name
-                and a.form_ndex = p.species_id
-        where fn.language_id = 8
-    """)
+drop table if exists pkmn_form;
+create table if not exists pkmn_form (
+    id integer primary key,
+    form_id int,
+    pkmn_id int,
+    ndex int,
+    name text,
+    abbr text,
+    form_order int
+);
+insert into pkmn_form(form_id, pkmn_id, ndex, name, abbr, form_order)
+select
+    f.id,
+    p.id,
+    l.ndex,
+    fn.name,
+    l.abbr,
+    f."order"
+from pokemon_v2_pokemonform f
+    join pokemon_v2_pokemon p on p.id = f.pokemon_id
+    join pokemon_v2_pokemonformname fn on fn.pokemon_form_id = f.id
+    join lua_forms_export l on fn.name = l.name
+        and l.ndex = p.pokemon_species_id
+where
+    not exists (select 1 from pkmn_form)
+    and fn.language_id = (
+        select id
+        from pokemon_v2_language
+        where iso3166 = 'it'
+        limit 1
+    )
+    and p.pokemon_species_id in (
+        select pokemon_species_id
+        from pokemon_v2_pokemon
+        group by pokemon_species_id
+        having count(*) > 1
+    )
+""".strip())
 
 
 # Short name for readability in string interpolation
@@ -65,7 +107,7 @@ class LuaFormExport:
     lua_var: ClassVar[str] = "altForms"
 
     def as_sql_row(self) -> str:
-        return f"({s(self.abbr)}, {s(self.name)}, {self.ndex})"
+        return f"({s(self.name)}, {s(self.abbr)}, {self.ndex})"
 
     @classmethod
     def from_json(cls, json_dict: dict[str, Any]) -> Self:
