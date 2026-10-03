@@ -6,5 +6,10 @@ from pokeapi_moves.movelist import movelist
 
 def test_sample(snapshot):
     with redirect_stdout(io.StringIO()) as out:
-        movelist(move="superpower", game="platinum", wipe_db=False)
+        movelist(
+            move="superpower",
+            game="platinum",
+            reset_pcw_utils=False,
+            wipe_pokeapi_db=False,
+        )
     assert out.getvalue().strip() == snapshot

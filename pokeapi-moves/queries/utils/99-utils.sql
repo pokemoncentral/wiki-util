@@ -1,6 +1,8 @@
-drop view if exists type;
-create view type as
-select t.*, tn.name as it_name
+drop table if exists type;
+create table type as
+select
+    t.*,
+    tn.name as it_name
 from pokemon_v2_type t
     join pokemon_v2_typename tn on tn.type_id = t.id
 where
@@ -11,8 +13,36 @@ where
         limit 1
     );
 
-drop view if exists pkmn;
-create view pkmn as
+drop table if exists pkmn_form;
+create table pkmn_form as
+select
+    f.id as form_id,
+    p.id as pkmn_id,
+    l.ndex,
+    fn.name,
+    l.abbr,
+    f."order" as form_order
+from pokemon_v2_pokemonform f
+    join pokemon_v2_pokemon p on p.id = f.pokemon_id
+    join pokemon_v2_pokemonformname fn on fn.pokemon_form_id = f.id
+    join lua_forms_export l on fn.name = l.name
+        and l.ndex = p.pokemon_species_id
+where
+    fn.language_id = (
+        select id
+        from pokemon_v2_language
+        where iso3166 = 'it'
+        limit 1
+    )
+    and p.pokemon_species_id in (
+        select pokemon_species_id
+        from pokemon_v2_pokemon
+        group by pokemon_species_id
+        having count(*) > 1
+    );
+
+drop table if exists pkmn;
+create table pkmn as
 with pkmn_type as (
     select
         j.pokemon_id,
@@ -79,8 +109,8 @@ from pokemon_v2_pokemon p
     left join (select * from pkmn_type where slot = 2) t2 on t2.pokemon_id = p.id
     left join pkmn_form f on f.pkmn_id = p.id;
 
-drop view if exists move;
-create view move as
+drop table if exists move;
+create table move as
 select
     m.*,
     mn.name as it_name,
@@ -100,8 +130,8 @@ where
         limit 1
     );
 
--- drop table if exists evolution_chain_forwards;
-create table if not exists evolution_chain_forwards (
+drop table if exists evolution_chain_forwards;
+create table evolution_chain_forwards (
     id integer primary key,
     species_id integer,
 
@@ -168,12 +198,6 @@ with evo_forwards(
         join pkmn p on p.species_id = final_stage.id
     where
         final_stage.id not in (select * from species_that_evolve)
-        -- This is a hack to prevent this insert statement from running if
-        -- there is already data in the table it populates.
-        -- It needs to be here, in the base case of the recursive CTE, to stop
-        -- the recursive CTE from executing in the first place, which is the
-        -- slow part we want to avoid.
-        and not exists (select 1 from evolution_chain_forwards)
 
     union
 
@@ -202,8 +226,8 @@ select
 from evo_forwards
 group by species_id;
 
-drop view if exists learnset;
-create view learnset as
+drop table if exists learnset;
+create table learnset as
 select
     j.id as join_id,
     p.id as pkmn_id,
