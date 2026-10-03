@@ -46,9 +46,9 @@ select
         end
     ) as machine,
     m.type_it_name in (p.type1, p.type2) as stab,
-    ecf.types like ('%' || m.type_it_name || '%') as evo_stab,
+    ecf.evolves_into_types like ('%' || m.type_it_name || '%') as evo_stab,
     ecf.chain_id as evo_chains_id,
-    json(ecf.chain) as evo_chains,
+    json(ecf.evolves_into_species) as evo_chains,
     p.is_baby as is_baby
 from learnset l
     join pkmn p on l.pkmn_id = p.id

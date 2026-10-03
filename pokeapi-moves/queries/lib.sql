@@ -122,45 +122,92 @@ where
 create table if not exists evolution_chain_forwards (
     id integer primary key,
     species_id integer,
+
+    -- All Pokémon in the same evolution chain share the same value in this
+    -- column. At present, it's the same as pokemon_v2_evolution_chain.id.
     chain_id integer,
-    chain jsonb,
-    types jsonb
+
+    -- Holds the IDs of this Pokémon species and the ones it evolves into.
+    -- Each evolution chain has its own sub-array.
+    -- Example for Gloom:
+    -- ```json
+    -- [
+    --   [44,45],
+    --   [44,182]
+    -- ]
+    -- ```
+    evolves_into_species jsonb,
+
+    -- Contains the types of this Pokémon species and those it evolves into, as
+    -- strings.
+    -- Contains duplicates, as removing them in sqlite is horrendously
+    -- complicated.
+    -- Each evolution chain has its own sub-array.
+    -- Example for Gloom:
+    -- ```json
+	-- [
+	--   ["Erba","Veleno","Erba","Veleno"],
+	--   ["Erba","Veleno","Erba"]
+	-- ]
+    -- ```
+    evolves_into_types jsonb
 );
-insert into evolution_chain_forwards(species_id, chain_id, chain, types)
-with evo_forwards(species_id, chain_id, evolves_from, chain, types) as (
+insert into evolution_chain_forwards(
+    species_id,
+    chain_id,
+    evolves_into_species,
+    evolves_into_types
+)
+-- This is a recursive CTE (https://www.sqlite.org/lang_with.html).
+with evo_forwards(
+    species_id,
+    chain_id,
+    evolves_from,
+    evolves_into_species,
+    evolves_into_types
+) as (
+
+    -- Base case: final stage evolutions, containing only their own data.
+    with species_that_evolve as (
+        select distinct evolves_from_species_id
+        from pokemon_v2_pokemonspecies
+        where evolves_from_species_id is not null
+    )
     select
         final_stage.id as species_id,
         final_stage.evolution_chain_id as chain_id,
         final_stage.evolves_from_species_id as evolves_from,
-        jsonb_array(final_stage.id) as chain,
+        jsonb_array(final_stage.id) as evolves_into_species,
         case
             when p.type2 is null then jsonb_array(p.type1)
             else jsonb_array(p.type1, p.type2)
-        end as type
+        end as evolves_into_types
     from pokemon_v2_pokemonspecies final_stage
         join pkmn p on p.species_id = final_stage.id
     where
-        final_stage.id not in (
-            select evolves_from_species_id
-            from pokemon_v2_pokemonspecies
-            where evolves_from_species_id is not null
-        )
+        final_stage.id not in (select * from species_that_evolve)
         -- This is a hack to prevent this insert statement from running if
         -- there is already data in the table it populates.
         -- It needs to be here, in the base case of the recursive CTE, to stop
         -- the recursive CTE from executing in the first place, which is the
         -- slow part we want to avoid.
         and not exists (select 1 from evolution_chain_forwards)
+
     union
+
+    -- Recursive case:
+    -- * Match this species' ID with evo_forwards.evolves_from
+    -- * Prepend this species' ID and type to evolves_into_species and
+    --   evolves_into_types respectively.
     select
         pre_evo.id as species_id,
         pre_evo.evolution_chain_id as chain_id,
         pre_evo.evolves_from_species_id as evolves_from,
-        jsonb_array_insert(evo.chain, '$[0]', pre_evo.id) as chain,
+        jsonb_array_insert(evo.evolves_into_species, '$[0]', pre_evo.id) as evolves_into_species,
         case
-            when p.type2 is null then jsonb_array_insert(evo.types, '$[0]', p.type1)
-            else jsonb_array_insert(evo.types, '$[0]', p.type1, '$[1]', p.type2)
-        end as types
+            when p.type2 is null then jsonb_array_insert(evo.evolves_into_types, '$[0]', p.type1)
+            else jsonb_array_insert(evo.evolves_into_types, '$[0]', p.type1, '$[1]', p.type2)
+        end as evolves_into_types
     from evo_forwards evo
         join pokemon_v2_pokemonspecies pre_evo on pre_evo.id = evo.evolves_from
         join pkmn p on p.species_id = pre_evo.id
@@ -168,8 +215,8 @@ with evo_forwards(species_id, chain_id, evolves_from, chain, types) as (
 select
     species_id,
     chain_id,
-    jsonb_group_array(chain) as chain,
-    jsonb_group_array(types) as types
+    jsonb_group_array(evolves_into_species) as evolves_into_species,
+    jsonb_group_array(evolves_into_types) as evolves_into_types
 from evo_forwards
 group by species_id;
 
