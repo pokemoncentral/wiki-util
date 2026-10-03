@@ -11,13 +11,7 @@ import typer
 from typer import Argument, Option
 
 from pokeapi_moves import pokeapi_db
-from pokeapi_moves.lib import (
-    LearningMethod,
-    named_args,
-    replace_none,
-    to_ndex,
-    wipe_db_help,
-)
+from pokeapi_moves.lib import LearningMethod, named_args, to_ndex, wipe_db_help
 from pokeapi_moves.pokeapi_db import PkmnResult, PkmnResultTuple, SqliteResultFactory
 
 sql_file = "movelist.sql"
@@ -138,12 +132,7 @@ class MovelistResult(SqliteResultFactory[MovelistTupleResult]):
 
         args = (
             to_ndex(self.pkmn.ndex),
-            self.pkmn.name,
             named_args(form=self.pkmn.form),
-            self.pkmn.type1,
-            replace_none(self.pkmn.type2),
-            self.pkmn.egg_group1,
-            replace_none(self.pkmn.egg_group2),
             tail,
             apostrophes,
             " //",
