@@ -106,9 +106,13 @@ create view move as
 select
     m.*,
     mn.name as it_name,
-    t.it_name as type_it_name
+    t.it_name as type_it_name,
+    mdcn.name as category_it_name
 from pokemon_v2_move m
     join pokemon_v2_movename mn on mn.move_id = m.id
+    join pokemon_v2_movedamageclassname mdcn
+        on mdcn.move_damage_class_id = m.move_damage_class_id
+            and mdcn.language_id = mn.language_id
     join type t on t.id = m.type_id
 where
     mn.language_id = (

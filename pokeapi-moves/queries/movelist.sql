@@ -45,8 +45,10 @@ select
             else null
         end
     ) as machine,
-    m.type_it_name in (p.type1, p.type2) as stab,
-    ecf.evolves_into_types like ('%' || m.type_it_name || '%') as evo_stab,
+    m.type_it_name in (p.type1, p.type2)
+        and m.category_it_name <> 'stato' as stab,
+    ecf.evolves_into_types like ('%' || m.type_it_name || '%')
+        and m.category_it_name <> 'stato' as evo_stab,
     ecf.chain_id as evo_chains_id,
     json(ecf.evolves_into_species) as evo_chains,
     p.is_baby as is_baby
