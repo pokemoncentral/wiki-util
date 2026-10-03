@@ -12,7 +12,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "black>=26.5.1",
+    "black<26.5",
     "isort>=9.0.1",
     "pre-commit>=4.0.1",
 ]
@@ -22,6 +22,7 @@ dev = [
 packages = []
 
 [tool.isort]
+known_local_folder = "pokeapi_moves"
 profile = "black"
 
 [tool.uv.workspace]
