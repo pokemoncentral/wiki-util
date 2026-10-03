@@ -7,7 +7,18 @@ type LearningMethod = Literal["egg", "level-up", "machine", "tutor"]
 
 type PathOrStr = PathLike | str
 
-wipe_db_help = "Wipe the PokéAPI database, and recreate it from the CSV files"
+generated_files_marker = "__generated__"
+
+
+def named_args(**args: Any) -> str | None:
+    wikicode_args = [
+        f"{name} = {value}" for name, value in args.items() if value is not None
+    ]
+    return " | ".join(wikicode_args) if wikicode_args else None
+
+
+def replace_none(value: Any, if_none: str = "") -> str:
+    return if_none if value is None else str(value)
 
 
 def sh(
@@ -29,17 +40,6 @@ def sh(
         shell=False,
         text=True,
     )
-
-
-def named_args(**args: Any) -> str | None:
-    wikicode_args = [
-        f"{name} = {value}" for name, value in args.items() if value is not None
-    ]
-    return " | ".join(wikicode_args) if wikicode_args else None
-
-
-def replace_none(value: Any, if_none: str = "") -> str:
-    return if_none if value is None else str(value)
 
 
 def to_ndex(ndex_number: int) -> str:

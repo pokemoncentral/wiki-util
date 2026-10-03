@@ -11,7 +11,7 @@ import typer
 from typer import Argument, Option
 
 from pokeapi_moves import pokeapi_db
-from pokeapi_moves.lib import LearningMethod, named_args, to_ndex, wipe_db_help
+from pokeapi_moves.lib import LearningMethod, named_args, to_ndex
 from pokeapi_moves.pokeapi_db import PkmnResult, PkmnResultTuple, SqliteResultFactory
 
 sql_file = "movelist.sql"
@@ -39,13 +39,20 @@ def movelist(
             help="The game for the Movelist module call. If omitted, generate tabs and module calls for all games the move is available in"
         ),
     ] = None,
-    wipe_db: Annotated[bool, Option(help=wipe_db_help)] = False,
+    reset_pcw_utils: Annotated[
+        bool,
+        Option(help="Recreate the Pokémon Central Wiki SQL utility tables."),
+    ] = False,
+    wipe_pokeapi_db: Annotated[
+        bool,
+        Option(help="Wipe the PokéAPI database and recreates it from the CSV files"),
+    ] = False,
 ):
     """
     Generate the movelist module call in WikiCode
     """
 
-    pokeapi_db.ensure(wipe_db=wipe_db)
+    pokeapi_db.ensure(wipe_db="all" if wipe_pokeapi_db else reset_pcw_utils)
     db_move = pokeapi_db.query_move(move)
     movelist_entries = list(
         pokeapi_db.query_file(

@@ -5,7 +5,7 @@ from collections.abc import Iterator
 from dataclasses import dataclass
 from sqlite3 import Cursor
 from subprocess import CompletedProcess
-from typing import Any, Self
+from typing import Any, Literal, Self
 
 from pokeapi_moves import paths
 from pokeapi_moves.lib import PathOrStr, sh
@@ -13,13 +13,12 @@ from pokeapi_moves.lib import PathOrStr, sh
 db_file = os.path.join(paths.pokeapi, "db.sqlite3")
 db_min_size_bytes = 50 * 2**20
 
-generated_files_prefix = "__generated__"
-sql_lib_files = [
-    sql_file.name
-    for sql_file in os.scandir(paths.queries)
-    if sql_file.is_file() and sql_file.name.startswith(generated_files_prefix)
-]
-sql_lib_files.append("lib.sql")
+utils_dir = os.path.join(paths.queries, "utils")
+util_files = sorted(
+    sql_file.path
+    for sql_file in os.scandir(utils_dir)
+    if sql_file.is_file() and sql_file.name.endswith(".sql")
+)
 
 
 class SqliteResultFactory[TSqlTuple: tuple[Any, ...]](ABC):
@@ -70,27 +69,23 @@ class MoveResult(SqliteResultFactory[MoveResultTuple]):
         return cls(id=id, name=name, type=type)
 
 
-def ensure(*, wipe_db=False):
+def ensure(*, wipe_db: bool | Literal["all"] = False):
     # These are fast, no need to skip calling them if not necessary
     pokeapi_make("install")
+    if wipe_db == "all":
+        pokeapi_make("wipe-sqlite-db")
     pokeapi_make("setup")
 
     try:
-        should_build_db = wipe_db or os.path.getsize(db_file) < db_min_size_bytes
+        should_build_db = os.path.getsize(db_file) < db_min_size_bytes
     except OSError:
         # Db file doesn't exist at all
         should_build_db = True
+
     if should_build_db:
         pokeapi_make("build-db")
-
-
-def generated_file_name(file_name: str) -> str:
-    return os.path.join(paths.queries, generated_files_prefix + file_name)
-
-
-def load_query_file(file: PathOrStr) -> str:
-    with open(os.path.join(paths.queries, file), "r", encoding="utf-8") as sql_file:
-        return sql_file.read()
+    if should_build_db or wipe_db != False:
+        utils()
 
 
 def pokeapi_make(*args: str) -> CompletedProcess[str]:
@@ -100,35 +95,23 @@ def pokeapi_make(*args: str) -> CompletedProcess[str]:
 def query_file[TResult: SqliteResultFactory](
     file: PathOrStr,
     *,
-    with_lib=True,
     result_class: type[TResult] | None = None,
     **sql_params: str | None,
 ) -> Iterator[TResult]:
-    return query_str(
-        load_query_file(file),
-        with_lib=with_lib,
-        result_class=result_class,
-        **sql_params,
-    )
+    with open(os.path.join(paths.queries, file), "r", encoding="utf-8") as sql:
+        return query_str(sql.read(), result_class=result_class, **sql_params)
 
 
 def query_str[TResult: SqliteResultFactory](
     sql: str,
     *,
-    with_lib=True,
     result_class: type[TResult] | None = None,
     **sql_params: str | None,
 ) -> Iterator[TResult]:
     db = sqlite3.connect(db_file)
     if result_class is not None:
         db.row_factory = result_class.from_sqlite_tuple
-    cursor = db.cursor()
-
-    if with_lib:
-        for lib_file in sql_lib_files:
-            cursor.executescript(load_query_file(lib_file))
-
-    return cursor.execute(sql, sql_params)
+    return db.cursor().execute(sql, sql_params)
 
 
 def query_move(move: str) -> MoveResult:
@@ -143,3 +126,11 @@ def query_move(move: str) -> MoveResult:
             move=move,
         )
     )
+
+
+def utils():
+    db = sqlite3.connect(db_file)
+    cursor = db.cursor()
+    for file_path in util_files:
+        with open(file_path, "r", encoding="utf-8") as util_file:
+            cursor.executescript(util_file.read())

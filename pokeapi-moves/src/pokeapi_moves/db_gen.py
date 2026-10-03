@@ -6,12 +6,14 @@ from typing import Annotated, Any, ClassVar, Self
 import typer
 from typer import Option
 
-from pokeapi_moves.lib import sh, to_sql
-from pokeapi_moves.pokeapi_db import generated_file_name
+from pokeapi_moves import pokeapi_db
+from pokeapi_moves.lib import generated_files_marker, sh, to_sql
 
 type JSONObject = dict[str, Any]
 
-forms_sql_output = generated_file_name("forms.sql")
+forms_sql_output = os.path.join(
+    pokeapi_db.utils_dir, f"01-{generated_files_marker}-forms.sql"
+)
 
 cli = typer.Typer()
 
@@ -35,6 +37,7 @@ def forms(
     with open(output, "w", encoding="utf-8") as forms_sql:
         forms_sql.write(
             f"""
+drop table if exists lua_forms_export;
 create table lua_forms_export (
     id integer primary key,
     name text,
@@ -45,44 +48,6 @@ insert into lua_forms_export
 (name, abbr, ndex)
 values
 {alt_forms_sql_values};
-
-drop table if exists pkmn_form;
-create table if not exists pkmn_form (
-    id integer primary key,
-    form_id int,
-    pkmn_id int,
-    ndex int,
-    name text,
-    abbr text,
-    form_order int
-);
-insert into pkmn_form(form_id, pkmn_id, ndex, name, abbr, form_order)
-select
-    f.id,
-    p.id,
-    l.ndex,
-    fn.name,
-    l.abbr,
-    f."order"
-from pokemon_v2_pokemonform f
-    join pokemon_v2_pokemon p on p.id = f.pokemon_id
-    join pokemon_v2_pokemonformname fn on fn.pokemon_form_id = f.id
-    join lua_forms_export l on fn.name = l.name
-        and l.ndex = p.pokemon_species_id
-where
-    not exists (select 1 from pkmn_form)
-    and fn.language_id = (
-        select id
-        from pokemon_v2_language
-        where iso3166 = 'it'
-        limit 1
-    )
-    and p.pokemon_species_id in (
-        select pokemon_species_id
-        from pokemon_v2_pokemon
-        group by pokemon_species_id
-        having count(*) > 1
-    )
 """.strip()
         )
 
