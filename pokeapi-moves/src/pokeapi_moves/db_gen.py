@@ -1,5 +1,6 @@
 import json
 import os
+import textwrap
 from dataclasses import dataclass
 from typing import Annotated, Any, ClassVar, Self
 
@@ -22,34 +23,35 @@ cli = typer.Typer()
 def forms(
     alt_forms_lua: Annotated[str, Option(help="The path to `AltForms-data.lua`")],
     output: Annotated[
-        str,
-        Option(help="The generated SQL output path. Mostly useful for testing"),
-    ] = forms_sql_output,
+        str | None,
+        Option(help="The generated SQL file path. Mostly useful in tests"),
+    ] = None,
 ):
-
     lua_export = sh(
         "lua", "-", input=LuaFormExport.lua_script(alt_forms_lua), pipe_stdio=False
     ).stdout
     alt_forms_json: list[LuaFormExport] = json.loads(
         lua_export, object_hook=LuaFormExport.from_json
     )
-    alt_forms_sql_values = ",\n".join(f.as_sql_row() for f in alt_forms_json)
-    with open(output, "w", encoding="utf-8") as forms_sql:
-        forms_sql.write(
-            f"""
-drop table if exists lua_forms_export;
-create table lua_forms_export (
-    id integer primary key,
-    name text,
-    abbr text,
-    ndex int
-);
-insert into lua_forms_export
-(name, abbr, ndex)
-values
-{alt_forms_sql_values};
-""".strip()
-        )
+    alt_forms_sql_values = f",\n{4 * 4 * ' '}".join(
+        f.as_sql_row() for f in alt_forms_json
+    )
+
+    sql_output = forms_sql_output if output is None else output
+    with open(sql_output, "w", encoding="utf-8") as forms_sql:
+        forms_sql.write(textwrap.dedent(f"""
+            drop table if exists lua_forms_export;
+            create table lua_forms_export (
+                id integer primary key,
+                name text,
+                abbr text,
+                ndex int
+            );
+            insert into lua_forms_export
+            (name, abbr, ndex)
+            values
+            {alt_forms_sql_values};
+            """.strip("\n")))
 
 
 @dataclass(kw_only=True)
