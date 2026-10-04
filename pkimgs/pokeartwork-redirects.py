@@ -98,6 +98,15 @@ def get_fallback_destination(pokeabbr, gender_data):
     return destination
 
 
+# create/edit a redirect, but only if needed
+def create_redirect(redirect, destination):
+    site = pywikibot.Site()
+    page = pywikibot.Page(site, redirect)
+    if page.text.strip() != destination:
+        page.text = destination
+        page.save("Bot: managing redirects of Pokémon artworks")
+
+
 # main function
 def main():
     # parse arguments
@@ -169,12 +178,15 @@ def main():
             if not args.output:
                 print(f"{redirect}      >      {destination}")
         else:
-            site = pywikibot.Site()
-            page = pywikibot.Page(site, redirect)
-            if page.text.strip() != destination:
-                # print(f"{pokeabbr}      >      {page.text.strip()}      >      {destination}")  # fmt: skip
-                page.text = redirect
-                page.save("Bot: managing redirects of Pokémon artworks")
+            create_redirect(redirect, destination)
+            # if ndex < 1000, also handle artwork with ndex padded on 3 digits
+            ndex = int(re.sub(r"\D+", "", pokeabbr.lstrip("0")))
+            if ndex <= 999:
+                abbr = re.sub(r"\d+", "", pokeabbr)
+                poke3 = str(ndex).zfill(3)
+                pokeabbr3 = f"{poke3}{abbr}"
+                redirect3 = f"File:Artwork{pokeabbr3}.png"
+                create_redirect(redirect3, destination)
     # save processed items in output file if specified
     if args.output:
         with open(args.output, "w") as file:

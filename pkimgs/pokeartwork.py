@@ -54,6 +54,8 @@ def build_template(file_name, artsources, ndex_to_gen, credits=""):
     skip = False
     shiny = "no"
     altform = "no"
+    variant = "no"
+    variant_name = ""
     # remove extension and, if present, final number
     file_name = re.sub(r"\.\w+$", r"", file_name)
     file_name = re.sub(r" \d{1,2}$", r"", file_name)
@@ -73,15 +75,26 @@ def build_template(file_name, artsources, ndex_to_gen, credits=""):
         if file_name.endswith(" cromatico"):
             shiny = "yes"
             file_name = re.sub(r" cromatico$", r"", file_name)
+        # remove "tutte le forme" or "varie forme" if present
+        if file_name.endswith(" tutte le forme"):
+            altform = "yes"
+            file_name = re.sub(r" tutte le forme$", r"", file_name)
+        if file_name.endswith(" varie forme"):
+            altform = "yes"
+            file_name = re.sub(r" varie forme$", r"", file_name)
         # check if ndex or name
         if re.search(r"^Artwork\d", file_name):
-            ndex = re.sub(r"Artwork(\w+)( tutte le forme)?", r"\1", file_name)
+            ndex = re.search(r"(?<=Artwork)\w+\b", file_name).group(0)
             name = ""
             # if ndex doesn't follow standard, reset it to avoid building a wrong template
             if not re.search(r"^\d{4}\w{0,4}$", ndex):
                 ndex = ""
-            elif re.search(r"\D", ndex) or file_name.endswith(" tutte le forme"):
-                altform = "yes"
+            else:
+                if re.search(r"\D", ndex):
+                    altform = "yes"
+                if re.search(r"Artwork\d{4} .+", file_name):
+                    variant = "yes"
+                    variant_name = re.sub(r"Artwork\d{4} ", r"", file_name).strip()
         else:
             ndex = ""
             name = re.sub(r"^Artwork ", r"", file_name)
@@ -103,10 +116,11 @@ def build_template(file_name, artsources, ndex_to_gen, credits=""):
             template = "|".join(
                 [
                     "{{pokeartwork",
-                    f"ndex={ndex}",
+                    f"ndex={ndex} {variant_name}".strip(),
                     f"name={name}",
                     f"shiny={shiny}",
                     f"altform={altform}",
+                    f"variant={variant}",
                     f"{source_param}={source_cat}",
                     f"credits={credits}}}}}",
                 ]
