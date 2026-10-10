@@ -1,4 +1,4 @@
-import pywikibot, argparse, re, os, os.path, sys, subprocess, json, importlib
+import pywikibot, mwparserfromhell, argparse, re, os, os.path, sys, subprocess, json, importlib
 from pywikibot import pagegenerators
 
 """
@@ -131,7 +131,7 @@ def build_template(file_name, artsources, ndex_to_gen, credits=""):
 
 
 # process existing file: build template and overwrite it if different
-def process_wiki_file(file_page, artsources, ndex_to_gen, credits, test_mode=True, overwrite_credits=True):
+def process_wiki_file(file_page, artsources, ndex_to_gen, credits, summary, test_mode=True, overwrite_credits=True):
     # check that specified file page exists
     if not file_page.exists():
         print(f"File not found in wiki: {file_page.title()}")
@@ -146,11 +146,11 @@ def process_wiki_file(file_page, artsources, ndex_to_gen, credits, test_mode=Tru
         pass
     else:
         if "{{credits|" in file_page.text.lower():
-            credits_pattern = r"\{\{[Cc]redits\|[^\{\}]+\}\}"
-            if re.search(credits_pattern, file_page.text):
-                existing_credits = re.findall(credits_pattern, file_page.text)[0]
-                existing_credits = existing_credits.replace("{{Credits|", "{{credits|")
-                credits = existing_credits
+            file_page_wikicode = mwparserfromhell.parse(file_page.text)
+            credits_template = file_page_wikicode.filter_templates()[0]
+            existing_credits = credits_template.get("credits").value
+            existing_credits = str(existing_credits).replace("{{Credits|", "{{credits|")
+            credits = existing_credits
     # try to build template
     template = build_template(img, artsources, ndex_to_gen, credits)
     # check if template was built correctly
@@ -164,7 +164,7 @@ def process_wiki_file(file_page, artsources, ndex_to_gen, credits, test_mode=Tru
             print(f"Skipping page {file_page.title()}")
         else:
             file_page.text = template
-            file_page.save("Bot: using new template for licenses and categories of Pokémon images")  # fmt: skip
+            file_page.save(summary)
 
 
 # main function
@@ -177,6 +177,7 @@ def main():
     parser.add_argument("--file", default="")
     parser.add_argument("--credits", default="")
     parser.add_argument("--artsourcesfile", default="data/pokepages-utils/artsources.json")  # fmt: skip
+    parser.add_argument("--summary", default="Bot: managing Pokémon artworks using Pokeartwork template")  # fmt: skip
     parser.add_argument("--test", default="yes")
     args = parser.parse_args()
     # check arguments
@@ -222,7 +223,7 @@ def main():
     elif args.cat:
         cat = pywikibot.Category(site, f"Categoria:{args.cat}")
         for page in pagegenerators.CategorizedPageGenerator(cat, recurse=True):
-            process_wiki_file(page, artsources, ndex_to_gen, args.credits, test_mode)
+            process_wiki_file(page, artsources, ndex_to_gen, args.credits, args.summary, test_mode=test_mode, overwrite_credits=True)
     # if a local file is specified, read titles from it and process them on wiki
     elif args.file:
         if not os.path.isfile(args.file):
@@ -231,7 +232,7 @@ def main():
             titles = [t for t in file.read().splitlines() if t]
         for title in titles:
             page = pywikibot.Page(site, f"File:{title}")
-            process_wiki_file(page, artsources, ndex_to_gen, args.credits, test_mode)
+            process_wiki_file(page, artsources, ndex_to_gen, args.credits, args.summary, test_mode=test_mode, overwrite_credits=True)
 
 
 # invoke main function
