@@ -177,6 +177,7 @@
 \B{{rand\/3\|Fuoco\|Psico\|Lampo}}\B,Psico,
 \B{{rand\/3\|Psico\|Lampo\|Fuoco}}\B,Lampo,
 \b\|symbol=Deluxe Pack-ex\b,,
+\b\|symbol=Deluxe Pack Mega\b,,
 \B\| curr=[^ |]+ \|\B,|,
 \B\| currnum=\d+ \|\B,|,
 \bRelease\|type=[^|]+\|\b,Release|,
