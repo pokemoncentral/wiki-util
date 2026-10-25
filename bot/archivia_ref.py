@@ -20,6 +20,12 @@ UN COMANDO PER TUTTO
     La stessa cosa senza --consenti è la prova generale: esegue ogni passo in
     sola lettura e mostra cosa farebbe, senza archiviare né scrivere nulla.
 
+    Ogni esecuzione ha un tetto (--max-controlli 150, --max-archiviazioni 60):
+    così la sera non dura ore e Internet Archive non prende a malvolere il bot.
+    I controlli già fatti restano nel file di stato e non si ripetono le sere
+    seguenti, quindi il lavoro arretrato si smaltisce in qualche sera e poi
+    resta solo quello nuovo. Con 0 il tetto si toglie.
+
 COMANDI SINGOLI, se serve intervenire su un passo solo
     pagine    elenca le pagine col template → pagine.txt
     fetch     scarica/aggiorna il wikitext in cache/
@@ -709,24 +715,32 @@ def ia_save(url, timeout=120):
         return None, str(e)
 
 
-def cerca_copia(url, timeout=12):
-    """Cerca una copia della pagina, prima su Internet Archive e poi su archive.is.
+def cerca_copia(url, timeout=12, ais=True):
+    """Cerca una copia della pagina, prima su Internet Archive e poi, se
+    raggiungibile, su archive.is.
 
     Restituisce (indirizzo_copia, timestamp, esito, dettaglio, servizio).
-    esito: "trovato" | "assente" | "errore". "assente" si restituisce solo se
-    entrambi i servizi hanno risposto di non avere nulla.
+    esito: "trovato" | "assente" | "errore".
+
+    Il CDX di Internet Archive è la fonte affidabile: se dice «nessuna copia»
+    l'esito è "assente" e la nota si può archiviare, anche quando archive.today
+    non risponde. Fino alla v0.3 il silenzio di archive.today produceva
+    "errore" e fermava l'archiviazione: in Italia archive.ph è oscurato dal DNS
+    e archive.is risponde 429, quindi nessuna nota veniva archiviata. Con
+    ais=False il servizio non viene interrogato affatto.
     """
     snap, ts, esito, dettaglio = ia_snapshot(url, timeout=timeout)
     if esito == "trovato":
         return snap, ts, "trovato", dettaglio, "IA"
     # archive.is, che ha copie sue: può averle anche dove IA non le ha
-    copia, esito_ais, dettaglio_ais = archiveis_copia(url, timeout=max(timeout * 2, 25))
-    if esito_ais == "trovato":
-        return copia, None, "trovato", "archive.is", "archive.is"
-    if esito == "assente" and esito_ais == "assente":
-        return None, None, "assente", "nessuna copia (IA e archive.is)", None
+    if ais:
+        copia, esito_ais, dettaglio_ais = archiveis_copia(url, timeout=max(timeout * 2, 25))
+        if esito_ais == "trovato":
+            return copia, None, "trovato", "archive.is", "archive.is"
+    else:
+        esito_ais, dettaglio_ais = "saltato", "archive.today non raggiungibile da qui"
     if esito == "assente":
-        return None, None, "errore", "IA: nessuna copia; %s" % dettaglio_ais, None
+        return None, None, "assente", "nessuna copia (IA; %s)" % dettaglio_ais, None
     if esito_ais == "assente":
         return None, None, "errore", "%s; archive.is: nessuna copia" % dettaglio, None
     return None, None, "errore", "%s; %s" % (dettaglio, dettaglio_ais), None
@@ -757,14 +771,30 @@ def scrivi_stato(s):
 
 def cmd_check(args):
     stato = leggi_stato()
+    controlli = 0
+    # una prova sola per tutta l'esecuzione: se archive.today non risponde non
+    # si aspetta il suo timeout per ognuna delle centinaia di note
+    ais, perche = _ais_raggiungibile(timeout=10)
+    if not ais:
+        print("archive.today non raggiungibile (%s): si controlla solo Internet Archive"
+              % perche)
     for r in scan(args.cache):
         if r["esito"] != "da_controllare":
             continue
-        snap, ts, esito, dettaglio, servizio = cerca_copia(r["url"], timeout=args.timeout)
+        if (stato["snapshot"].get(r["url"]) or {}).get("esito") in ("trovato", "assente"):
+            continue                     # già controllato in una sera precedente
+        if args.max_controlli and controlli >= args.max_controlli:
+            print("controllati %d indirizzi: il resto alla prossima sera" % controlli)
+            break
+        snap, ts, esito, dettaglio, servizio = cerca_copia(r["url"], timeout=args.timeout,
+                                                          ais=ais)
         stato["snapshot"][r["url"]] = {"url": snap, "timestamp": ts, "esito": esito,
                                        "stato": dettaglio, "servizio": servizio}
         print("%-64s %-9s %-11s %s" % (r["url"][:64], esito, servizio or "—",
                                        ts or dettaglio))
+        controlli += 1
+        if controlli % 20 == 0:          # se la sera si interrompe, niente è perso
+            scrivi_stato(stato)
         time.sleep(1)
     scrivi_stato(stato)
     return 0
@@ -772,6 +802,11 @@ def cmd_check(args):
 
 def cmd_archive(args):
     stato = leggi_stato()
+    archiviazioni = 0
+    ais, perche = _ais_raggiungibile(timeout=10)
+    if not ais:
+        print("archive.today non raggiungibile (%s): si usa solo Internet Archive"
+              % perche)
     for r in scan(args.cache):
         if r["esito"] != "da_controllare":
             continue
@@ -786,10 +821,17 @@ def cmd_archive(args):
             print("[saltato] %s — %s"
                   % (r["url"], (s or {}).get("stato") or "controllo non ancora eseguito"))
             continue
+        tentato = stato["tentativi"].get(r["url"]) or {}
+        if tentato.get("quando") and time.time() - tentato["quando"] < 7 * 86400:
+            continue                                  # tentato da poco: non si insiste
+        if args.max_archiviazioni and archiviazioni >= args.max_archiviazioni:
+            print("archiviate %d note: il resto alla prossima sera" % archiviazioni)
+            break
         if not args.consenti:
             print("[dry-run] archivierei: %s" % r["url"])
             continue
         print("archivio: %s" % r["url"])
+        archiviazioni += 1
         # 1. Internet Archive
         codice, finale = ia_save(r["url"])
         print("  IA → HTTP %s %s" % (codice, finale or ""))
@@ -797,7 +839,7 @@ def cmd_archive(args):
         riuscito = bool(codice and 200 <= int(codice) < 400)
         servizio = "IA" if riuscito else None
         # 2. se è andata male (X/Twitter, ad esempio), si tenta archive.is
-        if not riuscito:
+        if not riuscito and ais:
             print("  IA non riuscita: provo archive.is…")
             esito_ais, dettaglio_ais, copia = archiveis_salva(
                 r["url"], timeout=max(args.timeout * 6, 90))
@@ -824,11 +866,15 @@ def cmd_archive(args):
                                                "servizio": "megalodon.jp"}
         if riuscito:
             if servizio == "IA":
-                snap, ts, esito2, dettaglio2 = cerca_copia(r["url"], timeout=args.timeout)
+                # cerca_copia restituisce cinque valori: il servizio è il quinto
+                snap, ts, esito2, dettaglio2, servizio2 = cerca_copia(
+                    r["url"], timeout=args.timeout, ais=ais)
                 stato["snapshot"][r["url"]] = {"url": snap, "timestamp": ts,
                                                "esito": esito2, "stato": "salvato",
-                                               "servizio": servizio}
+                                               "servizio": servizio2 or servizio}
             print("  ✓ copia su %s" % servizio)
+        if archiviazioni % 10 == 0:      # se la sera si interrompe, niente è perso
+            scrivi_stato(stato)
         time.sleep(args.intervallo)
     scrivi_stato(stato)
     return 0
@@ -1075,14 +1121,26 @@ def leggi_config_pywikibot(percorso_config):
 
 
 def leggi_password_pywikibot(percorso):
-    """Le coppie utente/password di user-password.py, in ordine di comparsa."""
+    """Le coppie utente/password di user-password.py, in ordine di comparsa.
+
+    Riconosce le forme documentate da Pywikibot:
+        (utente, password)
+        (famiglia, utente, password)
+        (lingua, famiglia, utente, password)
+        (lingua, famiglia, utente, BotPassword('nomebot', 'password'))
+    L'ultima è quella delle bot password: il nome d'accesso da usare è
+    utente@nomebot, ed è la forma che Pywikibot stesso consiglia.
+    """
     coppie = []
     if not percorso or not os.path.exists(percorso):
         return coppie
     with open(percorso, encoding="utf-8-sig", errors="replace") as f:
         for riga in f:
             pezzi = _stringhe(riga)
-            if len(pezzi) == 4:                      # (famiglia, codice, utente, password)
+            if "BotPassword(" in riga and len(pezzi) == 5:
+                # ('it', 'pcw', 'Utente', BotPassword('nomebot', 'password'))
+                coppie.append((pezzi[2] + "@" + pezzi[3], pezzi[4]))
+            elif len(pezzi) == 4:                    # (lingua, famiglia, utente, password)
                 coppie.append((pezzi[2], pezzi[3]))
             elif len(pezzi) >= 2:                    # (utente, password)
                 coppie.append((pezzi[0], pezzi[1]))
@@ -1523,6 +1581,14 @@ def main():
                     help="secondi di attesa per le chiamate a Internet Archive")
     ap.add_argument("--intervallo", type=int, default=15,
                     help="secondi fra due richieste di archiviazione")
+    ap.add_argument("--max-controlli", type=int, default=150,
+                    help="con 'check': quanti indirizzi controllare per esecuzione "
+                         "(default 150; 0 = tutti). I controlli già fatti restano "
+                         "nel file di stato e non si ripetono le sere seguenti")
+    ap.add_argument("--max-archiviazioni", type=int, default=60,
+                    help="con 'archive': quante archiviazioni chiedere per esecuzione "
+                         "(default 60; 0 = tutte). Un indirizzo tentato da meno di "
+                         "sette giorni non si ritenta")
     ap.add_argument("--consenti", action="store_true",
                     help="autorizza le operazioni che modificano qualcosa: "
                          "l'archiviazione su Internet Archive e la scrittura sul wiki")
