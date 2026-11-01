@@ -129,6 +129,10 @@ CARDLIST_ENTRY_UNTOUCHED = [
     "GCCPocketCardList/Footer",
     "GCCPocketCardList/Release",
 ]
+# parametri che le liste di Bulbapedia passano a Release e Footer ma che su PCW
+# non servono: il tipo (ed eventualmente il secondo, per le carte di doppio tipo)
+# sta gia' nella Card che precede la Release
+CARDLIST_UNUSED_PARAMS = ("type", "type2")
 
 
 def _template_name(template: Wikicode) -> str:
@@ -190,6 +194,11 @@ def merge_divider_into_header(rows: List[Wikicode]) -> List[Wikicode]:
 def make_card_list_entry(
     entry: Wikicode, firstcard: bool, first_type: str, second_type: Optional[str] = None
 ) -> Tuple[Wikicode, bool]:
+    # Release e Footer non usano il tipo: lo togliamo dalla riga
+    if entry.name in ("GCCPocketCardList/Release", "GCCPocketCardList/Footer"):
+        for name in CARDLIST_UNUSED_PARAMS:
+            if entry.has(name):
+                entry.remove(name)
     if entry.name in CARDLIST_NEXT_FIRSTCARD:
         firstcard = True
     if entry.name in CARDLIST_ENTRY_UNTOUCHED:
@@ -197,10 +206,13 @@ def make_card_list_entry(
     if entry.name == "GCCPocketCardList/Card" and firstcard:
         entry.add("firstcard", "yes")
         firstcard = False
-    # Reset dividers types
+    # Tipi del divisore: il primo e' quello della tabella (colore della riga), il
+    # secondo e' quello delle carte della sezione (carte di doppio tipo), che
+    # Bulbapedia indica gia': si aggiunge solo se manca
     if entry.name == "GCCPocketCardList/Divider":
         entry.add("2", first_type)
-        entry.add("3", second_type)
+        if not entry.has("3") and second_type is not None:
+            entry.add("3", second_type)
     return (entry, firstcard)
 
 
