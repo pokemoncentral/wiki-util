@@ -129,15 +129,36 @@ CARDLIST_ENTRY_UNTOUCHED = [
     "GCCPocketCardList/Footer",
     "GCCPocketCardList/Release",
 ]
-# parametri che le liste di Bulbapedia passano a Release e Footer ma che su PCW
-# non servono: il tipo (ed eventualmente il secondo, per le carte di doppio tipo)
-# sta gia' nella Card che precede la Release
-CARDLIST_UNUSED_PARAMS = ("type", "type2")
+# Parametri che Bulbapedia passa nelle liste di carte ma che su PCW non servono:
+# il tipo (o i due tipi, per le carte di doppio tipo) sta gia' nella Card, mentre
+# simbolo e collegamento del set si ricavano dal nome del set; curr e currnum
+# della barra di navigazione si ricavano dal titolo della pagina.
+UNUSED_PARAMS = {
+    "GCCPocketCardList/Release": ("type", "type2", "symbol", "setlink"),
+    "GCCPocketCardList/Footer": ("type", "type2"),
+    "GCCPocketPokémonPrevNext": ("curr", "currnum"),
+}
+# Bulbapedia mostra a caso uno dei tre tipi (Oricorio: {{rand/3|Fuoco|Psico|Lampo}}):
+# su PCW se ne fissa uno, il secondo, come faceva la regola che stava nel CSV.
+RAND_TYPE_TEMPLATE = re.compile(r"\{\{rand/3\|([^|}]+)\|([^|}]+)\|([^|}]+)\}\}")
 
 
 def _template_name(template: Wikicode) -> str:
     """Nome del template, come stringa ripulita."""
     return str(template.name).strip()
+
+
+def fix_random_types(text: str) -> str:
+    """Fissa il tipo scelto al posto di {{rand/3|...}} (vedi RAND_TYPE_TEMPLATE)."""
+    return RAND_TYPE_TEMPLATE.sub(lambda match: match.group(2).strip(), text)
+
+
+def drop_unused_params(wikicode: Wikicode) -> None:
+    """Toglie dai template i parametri che Bulbapedia passa e PCW non usa."""
+    for template in wikicode.filter_templates():
+        for name in UNUSED_PARAMS.get(_template_name(template), ()):
+            if template.has(name):
+                template.remove(name)
 
 
 def _form_key(name: str) -> str:
@@ -194,11 +215,6 @@ def merge_divider_into_header(rows: List[Wikicode]) -> List[Wikicode]:
 def make_card_list_entry(
     entry: Wikicode, firstcard: bool, first_type: str, second_type: Optional[str] = None
 ) -> Tuple[Wikicode, bool]:
-    # Release e Footer non usano il tipo: lo togliamo dalla riga
-    if entry.name in ("GCCPocketCardList/Release", "GCCPocketCardList/Footer"):
-        for name in CARDLIST_UNUSED_PARAMS:
-            if entry.has(name):
-                entry.remove(name)
     if entry.name in CARDLIST_NEXT_FIRSTCARD:
         firstcard = True
     if entry.name in CARDLIST_ENTRY_UNTOUCHED:
@@ -251,7 +267,9 @@ def translate_page(source: str, name_arg: Optional[str]) -> str:
     the en interwiki and tries to guess the Pokémon name from the source.
     """
     source = replacements_from_file(source, "gccp-replacements.csv")
+    source = fix_random_types(source)
     wikicode = mwparserfromhell.parse(source, skip_style_tags=True)
+    drop_unused_params(wikicode)
     pokemon_name = get_name(wikicode, name_arg)
 
     resulting_page = []
