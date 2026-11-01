@@ -1,6 +1,8 @@
 import os
 import json
 import re
+import sys
+import unicodedata
 import pywikibot
 
 
@@ -98,6 +100,9 @@ def title_en_to_it(title_en, en_to_it):
     else:
         name_en = title_en
         suffix_it = ""
+    # i nomi possono arrivare in forme Unicode diverse (NFC o NFD, a seconda di
+    # come sono stati salvati i file): il dizionario usa la forma composta
+    name_en = unicodedata.normalize("NFC", name_en)
     # try to get IT name from dict, if key does not exist perform all replacements
     name_it = en_to_it.get(name_en, None)
     if not name_it:
@@ -111,6 +116,14 @@ def title_en_to_it(title_en, en_to_it):
             for key in en_to_it:
                 if re.search(r"\b{}\b".format(key), name_en):
                     name_it = name_en.replace(key, en_to_it[key])
+            if not name_it:
+                # nome assente dal dizionario: si tiene quello inglese, invece di
+                # ritrovarsi la pagina intitolata "None"
+                print(
+                    f"ATTENZIONE: nome senza traduzione in title_en_to_it: {name_en!r}",
+                    file=sys.stderr,
+                )
+                name_it = name_en
     title_it = f"{name_it}{suffix_it}"
     return title_it
 
