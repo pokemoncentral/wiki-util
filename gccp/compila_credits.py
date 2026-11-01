@@ -42,23 +42,23 @@ MODALITA' DI VERIFICA (--check):
 DIPENDENZE:
   - Python 3.6+
   - pywikibot (pip install pywikibot)
-  - user-config.py configurato per pokemoncentral (it)
+  - user-config.py configurato per pcw (it)
 
 ESEMPI D'USO
   Interattivo:
       $ python compila_credits.py
 
   Carta singola (doppio artista):
-      $ python compila_credits.py pokemoncentral it "Camelia (Giorni Giocondi 66)"
+      $ python compila_credits.py pcw it "Camelia (Giorni Giocondi 66)"
 
   Espansione:
-      $ python compila_credits.py pokemoncentral it "Giorni Giocondi"
+      $ python compila_credits.py pcw it "Giorni Giocondi"
 
   Verifica carta singola:
-      $ python compila_credits.py --check pokemoncentral it "Camelia (Giorni Giocondi 66)"
+      $ python compila_credits.py --check pcw it "Camelia (Giorni Giocondi 66)"
 
   Verifica espansione:
-      $ python compila_credits.py --check pokemoncentral it "Giorni Giocondi"
+      $ python compila_credits.py --check pcw it "Giorni Giocondi"
 """
 
 import pywikibot
@@ -178,6 +178,19 @@ def _format_artist_insert(artist_names):
         return f"artist={artist_names[0]}|artist2={'|artist2='.join(artist_names[1:])}"
 
 
+# parametri del template {{credits}} della pagina, o None se non c'e'
+def credits_params(file_text):
+    match = re.search(r"\{\{credits\s*\|([^}]*)\}\}", file_text)
+    if not match:
+        return None
+    params = {}
+    for part in match.group(1).split("|"):
+        key, sep, value = part.partition("=")
+        if sep:
+            params[key.strip()] = value.strip()
+    return params
+
+
 def update_credits_template(file_text, artist_names, artistalt=None):
     """
     Sostituisce il template {{credits}} nella pagina dell'immagine.
@@ -201,7 +214,8 @@ def update_credits_template(file_text, artist_names, artistalt=None):
 
     Restituisce (nuovo_testo, errore).
     """
-    if "{{credits" not in file_text:
+    params = credits_params(file_text)
+    if params is None:
         return None, "Template 'credits' non trovato nella pagina dell'immagine"
 
     num_artists = len(artist_names)
@@ -248,11 +262,11 @@ def update_credits_template(file_text, artist_names, artistalt=None):
         return new_text, None
 
     # --- Caso A1: artist gia' compilato senza wikilink ---
-    already = re.search(r"\{\{credits\s*\|[^}]*\|artist=([^|}\n]+)", file_text)
-    if already and already.group(1).strip():
+    current_artist = params.get("artist", "")
+    if current_artist and "[[" not in current_artist:
         return None, (
             f"Il parametro 'artist' e' gia' compilato (senza wikilink): "
-            f"'{already.group(1).strip()}'"
+            f"'{current_artist}'"
         )
 
     # --- Caso C: template SENZA parametro artist (es. {{credits|other=...}}) ---
@@ -271,18 +285,21 @@ def update_credits_template(file_text, artist_names, artistalt=None):
         )
         return new_text, None
 
-    # --- Caso A: artist vuoto (artist=|) con other=... ---
-    pattern = r"\{\{credits\s*\|artist\s*=\s*\|"
+    # --- Caso A: artist vuoto, con o senza altri parametri ---
+    # Formati delle pagine File appena caricate:
+    #   {{credits|artist=}}            (nessun altro parametro)
+    #   {{credits|artist=|other=...}}
+    pattern = r"\{\{credits\s*\|\s*artist\s*=(?=\||\}\})"
     if not re.search(pattern, file_text):
         return None, (
             "Formato del template 'credits' non riconosciuto "
-            "(attesi: {{credits|other=...}}, {{credits|artist=|other=...}} "
-            "o {{credits|artist=[[nome]]}})"
+            "(attesi: {{credits|other=...}}, {{credits|artist=}}, "
+            "{{credits|artist=|other=...}} o {{credits|artist=[[nome]]}})"
         )
 
     new_text = re.sub(
         pattern,
-        f"{{{{credits|{artist_insert}|cardartist=tcgpocket|",
+        f"{{{{credits|{artist_insert}|cardartist=tcgpocket",
         file_text,
         count=1,
     )
@@ -634,7 +651,7 @@ def main():
     # --- Connessione al sito ---
     site = pywikibot.Site(lang, fam)
     if not check_mode:
-        site.throttle.setDelays(writedelay=1.0)
+        site.throttle.set_delays(writedelay=1.0)
     print(f"Connesso a: {site}")
 
     # --- Auto-riconoscimento: carta singola o espansione? ---
@@ -773,6 +790,10 @@ def main():
 
     if not all_modifiche:
         print("Nessuna modifica da fare.")
+        if all_warnings:
+            print(f"\n[!] {len(all_warnings)} avvisi:")
+            for warning in all_warnings:
+                print(warning)
         return
 
     # --- Anteprima ---
