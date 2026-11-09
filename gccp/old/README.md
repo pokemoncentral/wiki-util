@@ -8,5 +8,7 @@ dati di gioco (`ptcgp-carddump`).
 - `gccp-translate-page-test.py` — prova delle sostituzioni.
 - `gccp-replacements.csv` — sostituzioni regex usate dalla traduzione.
 - `tcgp_scraper.py` — raccoglieva da Bulbapedia i dati giapponesi delle carte.
+- `rename-pictures-from-drive.py` — rinominava le immagini delle carte scaricate
+  da Drive secondo la nomenclatura del wiki.
 
 Sono tenuti solo come riferimento: non servono più per generare le pagine.
