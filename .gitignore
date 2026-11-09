@@ -284,3 +284,6 @@ config.*
 
 # I use this directory to keep miscellanea files
 /misc
+
+# pywikibot's own throttle bookkeeping
+throttle.ctrl

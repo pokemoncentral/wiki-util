@@ -16,8 +16,8 @@ Arguments:
 
 Options:
     -summary:<text> the edit summary of every page (required)
-    -pt:<seconds>   minimum time between two saves (Pywikibot option, default
-                    from user-config.py)
+    -pt:<seconds>   seconds between two saves (default: 1; pywikibot alone
+                    would use 10, which makes a bulk upload take hours)
     -simulate       shows the pages to upload without writing anything
     -help           show this help text
 """
@@ -30,6 +30,8 @@ import pywikibot
 from pywikibot import pagegenerators
 
 PAGE_SUFFIX = ".txt"
+# secondi fra due salvataggi (pywikibot di default ne usa 10)
+DEFAULT_PUT_THROTTLE = 1
 # quante pagine chiedere al server per volta, per confrontare il testo attuale
 PRELOAD_SIZE = 50
 # i nomi dei file hanno i caratteri non validi sostituiti con "_" (vedi
@@ -56,6 +58,15 @@ def page_files(directory):
 
 # main function
 def main():
+    # pywikibot aspetta put_throttle secondi fra due salvataggi; il suo default
+    # rende un caricamento in blocco interminabile, quindi qui vale 1 s se non
+    # e' stato chiesto altro con -pt: / -put_throttle:. Va impostato PRIMA di
+    # handle_args(): quel metodo crea il Site, e il Site si porta dietro il
+    # valore letto in quel momento.
+    throttle_given = any(arg.startswith(("-pt:", "-put_throttle:"))
+                         for arg in sys.argv[1:])
+    if not throttle_given:
+        pywikibot.config.put_throttle = DEFAULT_PUT_THROTTLE
     local_args = pywikibot.handle_args()
     named_args = {"summary": None}
     pos_args = []
@@ -107,12 +118,22 @@ def main():
         f" {len(files) - len(todo)} gia' a posto",
         flush=True,
     )
+    # tempo di salvataggio: il throttle piu' la richiesta al server
+    throttle = pywikibot.config.put_throttle
+    if len(todo) > 1:
+        print(
+            f"Salvataggio a {throttle:g} s per pagina"
+            f" (circa {len(todo) * (throttle + 0.3) / 60:.0f} minuti in tutto);"
+            f" -pt:0.2 per accelerare.",
+            flush=True,
+        )
     if pywikibot.config.simulate:
         print("Prova generale (-simulate): non viene scritto nulla", flush=True)
         for page, _ in todo[:20]:
             print(f"  {page.title()}")
         if len(todo) > 20:
             print(f"  ... e altre {len(todo) - 20}")
+        return
     saved = failed = 0
     for page, text in todo:
         page.text = text
