@@ -486,7 +486,7 @@ def build_page(title, ndex, cards, data, interwikis):
     gallery += "|content="
     lines.append(gallery)
     for card in gallery_cards:
-        image = image_stem(card["_name"]) + image_stem(data.set_names[card["_exp"]]) + str(card["_num"]) + ".png"
+        image = image_stem(card["_name"]) + image_stem(data.set_names[card["_exp"]]) + str(data.display_number(card)) + ".png"
         target = f"{card['_name']} ({data.set_names[card['_exp']]} {data.display_number(card)})"
         lines.append(f"{{{{GalleryDisplay/entry|{image}|[[{target}]]|{GALLERY_SIZE}}}}}")
     lines.append("}}")
