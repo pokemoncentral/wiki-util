@@ -6,12 +6,28 @@ Riceve in input fam, lang e:
   b) il nome di un'espansione GCC Pocket -> elabora TUTTE le carte
      dell'espansione (regolari + segrete).
 
-Per ogni carta estrae immagine e artista di TUTTE le varianti (originale + ristampe)
-dal template PokemoncardInfobox o GCCCartaTrainerInfobox, e compila i parametri
-artist e cardartist in ciascuna pagina File: corrispondente.
+L'artista NON viene piu' letto dalla caption della pagina carta: per ogni
+variante (originale + ristampe) il nome dell'illustratore si ricava dai JSON
+di gioco prodotti da ptcgp-carddump (out/cards/<set>_it_IT.json), dove ogni
+carta porta il campo "illustrator". Le pagine carta servono solo per sapere
+quali sono le varianti (immagine + ristampe) e le pagine File: da compilare.
 
-Supporta carte con DOPPIO ARTISTA: se la caption contiene "[[Nome1]]/[[Nome2]]",
-compila il credits come |artist=Nome1|artist2=Nome2.
+Abbinamento variante -> carta del dump:
+  per ogni variante si ricava la coppia (espansione, numero) da tre fonti:
+    1. i parametri setN/cardnoN dell'infobox (es. set1=Promo-A|cardno1=023/P-A);
+    2. la riga corrispondente di {{PokemoncardInfobox/Expansion}} (le pagine
+       piu' vecchie non hanno setN/cardnoN: set e numero stanno solo li');
+    3. il nome del file immagine, che e' costruito come
+       <nome carta><nome espansione><numero> (es. BulbasaurGeniSupremi227.png).
+  Se le fonti concordano si usa quella; se discordano si sceglie la carta del
+  dump il cui nome coincide con quello della carta (prefisso del nome file),
+  poi quella il cui illustrator coincide con l'artista della caption, e in
+  ultima istanza la prima fonte in ordine di priorita'. Ogni disaccordo viene
+  segnalato fra gli avvisi.
+
+Supporta carte con DOPPIO ARTISTA: nel dump sono indicate come
+"Nome1/Nome2" (es. Nobusawa/Mochipuyo) e vengono compilate come
+|artist=Nome1|artist2=Nome2.
 
 In modalita' espansione, le carte segrete vengono risolte seguendo i redirect:
   - redirect nella STESSA espansione -> ignorato (la carta base ha gia' il reprint)
@@ -23,11 +39,10 @@ contiene "(NomeSet Numero)" viene trattato come carta singola, altrimenti
 come nome espansione (la pagina cercata sara' "NomeEspansione (GCC Pocket)").
 
 Gestisce il template credits in TUTTI i formati presenti su PCW:
-  - {{credits|other=...}}                     -> inserisce artist e cardartist
-                                                 (parametro artist assente)
-  - {{credits|artist=|other=...}}             -> aggiunge artist e cardartist
-  - {{credits|artist=[[nome]]}}               -> sostituisce con nome pulito
-  - {{credits|artist=Nome|cardartist=...}}    -> gia' compilato, non tocca
+  - {{credits|...}} senza artist            -> inserisce artist e cardartist
+  - {{credits|artist=}} o {{credits|artist=|...}} -> riempie artist (vuoto)
+  - {{credits|artist=[[nome]]}}             -> sostituisce con nome pulito
+  - {{credits|artist=Nome|cardartist=...}}  -> gia' compilato, non tocca
 
 Doppio artista                                -> |artist=Nome1|artist2=Nome2
 
@@ -36,13 +51,21 @@ artist=Nome (illustratore) e artistalt=Nome (solo per singolo artista).
 
 MODALITA' DI VERIFICA (--check):
   Invece di scrivere, controlla che i template {{credits}} delle carte
-  siano compilati correttamente (artist + cardartist, ed eventualmente artist2).
-  Stampa un riepilogo con l'elenco delle carte OK e di quelle non compilate.
+  siano compilati correttamente (artist + cardartist, ed eventualmente artist2),
+  confrontandoli con l'artista del dump. Stampa un riepilogo con l'elenco delle
+  carte OK e di quelle non compilate.
 
 DIPENDENZE:
   - Python 3.6+
   - pywikibot (pip install pywikibot)
   - user-config.py configurato per pcw (it)
+  - i dump di ptcgp-carddump (https://github.com/pokemoncentral/ptcgp-carddump):
+    out/cards/<set>_it_IT.json, generati con `carddump cards`
+
+PERCORSO DEI DUMP:
+  la variabile d'ambiente PTCGP_CARD_DUMP o --dump CARTELLA; se non sono
+  indicate si usa un checkout di ptcgp-carddump accanto a wiki-util
+  (<cartella di wiki-util>/../ptcgp-carddump/out/cards).
 
 ESEMPI D'USO
   Interattivo:
@@ -54,6 +77,10 @@ ESEMPI D'USO
   Espansione:
       $ python compila_credits.py pcw it "Giorni Giocondi"
 
+  Dump in un'altra cartella:
+      $ python compila_credits.py --dump "D:\\ptcgp\\out\\cards" \
+            pcw it "Giorni Giocondi"
+
   Verifica carta singola:
       $ python compila_credits.py --check pcw it "Camelia (Giorni Giocondi 66)"
 
@@ -61,10 +88,64 @@ ESEMPI D'USO
       $ python compila_credits.py --check pcw it "Giorni Giocondi"
 """
 
-import pywikibot
+import json
+import os
 import re
 import sys
 
+import pywikibot
+
+
+# Cartella dei dump di ptcgp-carddump, con un file per espansione e lingua.
+# Si può indicare con PTCGP_CARD_DUMP o con --dump; altrimenti si usa un
+# checkout di ptcgp-carddump accanto a wiki-util, come fa ptcgp-cardrender.
+DUMP_DIR = os.environ.get(
+    "PTCGP_CARD_DUMP",
+    os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        os.pardir,
+        "ptcgp-carddump",
+        "out",
+        "cards",
+    ),
+)
+DUMP_LOCALE = "it_IT"  # i nomi su PCW sono quelli italiani
+
+# Codice espansione nei JSON di gioco -> nome dell'espansione su PCW
+# (lo stesso usato nel parametro "set" degli infobox e in {{GCC ID}}).
+# Va aggiornato all'uscita di una nuova espansione.
+EXPANSION_NAMES = {
+    "A1": "Geni Supremi",
+    "A1a": "L'Isola Misteriosa",
+    "A2": "Scontro Spaziotemporale",
+    "A2a": "Luce Trionfale",
+    "A2b": "Tripudio Splendente",
+    "A3": "Guardiani Astrali",
+    "A3a": "Crisi Ultradimensionale",
+    "A3b": "Il Bosco di Eevee",
+    "A4": "La Via del Cielo e del Mare",
+    "A4a": "Sorgenti Recondite",
+    "A4b": "Busta Deluxe ex",
+    "B1": "Mega Ascesa",
+    "B1a": "Fiamme Cremisi",
+    "B2": "Parata Fantasmagorica",
+    "B2a": "Meraviglie di Paldea",
+    "B2b": "Mega Splendore",
+    "B3": "Aura Pulsante",
+    "B3a": "Assalto dei Paradossi",
+    "B3b": "Giorni Giocondi",
+    "B4": "Sovrano dei Cieli",
+    "B4a": "I Loschi Piani del Team Rocket",
+    "B4b": "Busta Deluxe Mega",
+    "C1": "Fusione Duale",
+    "SP1": "Primi Amici",
+    "PROMO-A": "Promo-A",
+    "PROMO-B": "Promo-B",
+    "PROMO-C": "Promo-C",
+}
+
+# Caratteri invisibili che compaiono nei nomi dei file e nelle voci del wiki.
+INVISIBLE_CHARS = "\u200e\u200f\u200b\u200c\u200d\u00ad\ufeff\x11\x12"
 
 # Template infobox riconosciuti (case-insensitive)
 INFOBOX_NAMES = {
@@ -73,94 +154,375 @@ INFOBOX_NAMES = {
     "gcccartatrainerinfobox",
 }
 
+# Nome dell'artista nei JSON: i doppi artisti sono separati da "/".
+ARTIST_SEPARATOR = "/"
 
-def extract_card_info(card_text):
+
+# ======================================================================
+#  DUMP DI GIOCO
+# ======================================================================
+
+
+def _strip_invisible(text):
+    """Toglie caratteri invisibili e di controllo (LRM, ZWSP, \x11, \x12...)."""
+    for char in INVISIBLE_CHARS:
+        text = text.replace(char, "")
+    return text
+
+
+def normalize_name(text):
+    """Forma di confronto di un nome: minuscole, senza spazi ne' apostrofi."""
+    text = _strip_invisible(text or "")
+    return re.sub(r"[\s'’]", "", text).lower()
+
+
+def normalize_set(text):
+    """Forma di confronto di un nome di espansione."""
+    return re.sub(r"\s+", " ", _strip_invisible(text or "")).strip().lower()
+
+
+# Chiavi usate nel nome dei file immagine (senza spazi e apostrofi):
+# "L'Isola Misteriosa" -> "LIsolaMisteriosa", "Busta Deluxe ex" -> "BustaDeluxeex".
+SET_KEYS = {
+    re.sub(r"[\s'’]", "", name): code for code, name in EXPANSION_NAMES.items()
+}
+SET_KEYS_BY_LENGTH = sorted(SET_KEYS, key=len, reverse=True)
+CODE_BY_SET_NAME = {normalize_set(name): code for code, name in EXPANSION_NAMES.items()}
+CODE_BY_LOWER_CODE = {code.lower(): code for code in EXPANSION_NAMES}
+
+
+def expansion_code(set_name):
+    """Codice del dump (es. "B3b") a partire dal nome usato su PCW."""
+    text = normalize_set(set_name)
+    if not text:
+        return None
+    return CODE_BY_SET_NAME.get(text) or CODE_BY_LOWER_CODE.get(text)
+
+
+def parse_image_name(filename):
     """
-    Dal wikitext di una pagina carta (Pokemon o Allenatore), estrae le coppie
-    (image_file, artist_names) per l'originale e tutte le ristampe.
+    Ricava (codice espansione, numero, nome carta) dal nome di un file immagine.
 
-    artist_names e' una LISTA di nomi (1 o 2 elementi):
-      - 1 elemento: artista singolo (es. ['Ken Sugimori'])
-      - 2 elementi: doppio artista (es. ['Nobusawa', 'Mochipuyo'])
+    I file delle carte GCC Pocket si chiamano <nome carta><nome espansione><numero>
+    (es. BulbasaurGeniSupremi227.png, ChimcharPromo-A40.png). Restituisce None
+    se il nome non segue lo schema.
+    """
+    stem = os.path.splitext(_strip_invisible(filename or "").strip())[0]
+    lowered = stem.lower()
+    for key in SET_KEYS_BY_LENGTH:
+        position = lowered.find(key.lower())
+        if position <= 0:
+            continue
+        number = stem[position + len(key):]
+        if not number.isdigit():
+            continue
+        return SET_KEYS[key], int(number), stem[:position]
+    return None
 
-    Restituisce una lista di tuple: [(image_file, [artist_names...]), ...]
-    dove il primo elemento e' l'originale (da image/caption),
-    gli eventuali successivi sono le ristampe (da reprint{i}/recaption{i}).
 
-    Il numero di varianti si ricava dalle chiavi presenti: image/caption per
-    l'originale, reprint{i}/recaption{i} per le ristampe (nelle carte del GCC
-    Pocket e' l'unica fonte, dato che il parametro reprint=N e' usato solo
-    dalle carte del GCC cartaceo e vale N varianti totali).
+def load_dump(dump_dir):
+    """
+    Legge tutti i dump del gioco e restituisce {(codice, numero): carta}.
+
+    Ogni carta e' un dizionario con "name" (nome italiano) e "illustrator".
+    """
+    if not os.path.isdir(dump_dir):
+        raise SystemExit(
+            f"ERRORE: cartella dei dump '{dump_dir}' non trovata.\n"
+            f"Genera i JSON con `carddump cards` oppure indica la cartella "
+            f"con --dump."
+        )
+
+    suffix = f"_{DUMP_LOCALE}.json"
+    files = sorted(name for name in os.listdir(dump_dir) if name.endswith(suffix))
+    if not files:
+        raise SystemExit(
+            f"ERRORE: nessun file '*{suffix}' in '{dump_dir}'.\n"
+            f"Genera i JSON con `carddump cards`."
+        )
+
+    cards = {}
+    for file_name in files:
+        raw_code = file_name[: -len(suffix)]
+        code = CODE_BY_LOWER_CODE.get(raw_code.lower(), raw_code)
+        if code not in EXPANSION_NAMES:
+            print(
+                f"ATTENZIONE: l'espansione '{raw_code}' del dump non ha un nome "
+                f"in EXPANSION_NAMES: le sue carte non verranno riconosciute."
+            )
+        with open(os.path.join(dump_dir, file_name), encoding="utf-8") as handle:
+            rows = json.load(handle)
+
+        # I numeri negativi sono le carte "oltre" il totale del set (i tre Mew
+        # di SP1, -3/-2/-1): su PCW sono numerate dopo l'ultima carta, quindi
+        # vengono spostate in coda nell'ordine in cui il gioco le elenca.
+        positives = [
+            row["collectionNumber"] for row in rows if row["collectionNumber"] > 0
+        ]
+        highest = max(positives) if positives else 0
+        negatives = sorted(
+            row["collectionNumber"] for row in rows if row["collectionNumber"] < 0
+        )
+        moved = {number: highest + 1 + index for index, number in enumerate(negatives)}
+
+        for row in rows:
+            number = moved.get(row["collectionNumber"], row["collectionNumber"])
+            cards[(code, number)] = {
+                "name": row.get("name") or "",
+                "illustrator": (row.get("illustrator") or "").strip(),
+            }
+    return cards
+
+
+def split_artists(illustrator):
+    """Divide "Nome1/Nome2" nella lista dei nomi (di solito uno solo)."""
+    if not illustrator:
+        return []
+    return [
+        name.strip()
+        for name in illustrator.split(ARTIST_SEPARATOR)
+        if name.strip()
+    ]
+
+
+# ======================================================================
+#  ESTRAZIONE DELLE VARIANTI DALLA PAGINA CARTA
+# ======================================================================
+
+
+def extract_variants(card_text):
+    """
+    Dal wikitext di una pagina carta (Pokemon o Allenatore) estrae le varianti:
+    l'originale (image/caption) e le ristampe (reprint{i}/recaption{i}).
+
+    Restituisce una lista di dizionari con "image", "set_name", "cardno"
+    (dai parametri setN/cardnoN, vuoti se assenti) e "row" (la coppia
+    (espansione, numero) della riga {{PokemoncardInfobox/Expansion}} nella
+    stessa posizione, oppure ("", "")).
+
+    Il numero di varianti si ricava dalle chiavi presenti: reprint{i} per le
+    ristampe e, per le carte del GCC cartaceo, il parametro reprint=N.
     """
     templates = pywikibot.textlib.extract_templates_and_params(card_text)
 
-    pairs = []
-    reprint_count = 1  # default: solo originale
+    infobox = None
+    rows = []
 
     for tmpl_name, params in templates:
         clean = tmpl_name.strip().lower()
         if clean.startswith("template:"):
             clean = clean[9:]
 
-        if clean in INFOBOX_NAMES:
-            # Il numero di varianti non e' dichiarato da un parametro "reprint=":
-            # le pagine del GCC Pocket elencano image/caption + reprintN/recaptionN
-            # (N da 1 a 30, si veda Modulo:PokemoncardInfobox/tabs). Si ricava
-            # quindi dall'indice massimo di reprintN presente; l'eventuale
-            # "reprint=N" (convenzione delle carte del GCC cartaceo, dove N e' il
-            # numero totale di varianti) continua comunque a essere rispettato.
-            for key, val in params.items():
-                k = key.strip().lower()
-                m = re.fullmatch(r"reprint(\d+)", k)
-                if m:
-                    reprint_count = max(reprint_count, int(m.group(1)) + 1)
-                elif k == "reprint":
-                    try:
-                        reprint_count = max(reprint_count, int(val.strip()))
-                    except ValueError:
-                        pass
+        if infobox is None and clean in INFOBOX_NAMES:
+            infobox = {
+                key.strip().lower(): (value or "").strip()
+                for key, value in params.items()
+            }
+        elif clean == "pokémoncardinfobox/expansion":
+            # La riga porta l'espansione come {{GCCP|Nome}} e il numero in cardno.
+            expansion = params.get("expansion") or ""
+            match = re.search(r"\{\{\s*gccp\s*\|([^|}]+)", expansion, re.I)
+            rows.append(
+                (
+                    match.group(1).strip() if match else "",
+                    (params.get("cardno") or "").strip(),
+                )
+            )
 
-            image_file = None
-            artist_names = []
-            for key, val in params.items():
-                k = key.strip().lower()
-                v = val.strip()
-                if k == "image":
-                    image_file = v
-                elif k == "caption":
-                    # Estrai TUTTI i wikilink dal caption
-                    # Formato singolo: Ill. [[Nome]]
-                    # Formato doppio:  Ill. [[Nome1]]/[[Nome2]]
-                    names = re.findall(
-                        r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]", v
-                    )
-                    artist_names = [n.strip() for n in names]
+    if infobox is None:
+        return []
 
-            if image_file:
-                pairs.append((image_file, artist_names))
+    reprint_count = 1  # default: solo originale
+    for key, value in infobox.items():
+        match = re.fullmatch(r"reprint(\d+)", key)
+        if match:
+            reprint_count = max(reprint_count, int(match.group(1)) + 1)
+        elif key == "reprint":
+            try:
+                reprint_count = max(reprint_count, int(value))
+            except ValueError:
+                pass
 
-            for i in range(1, reprint_count):
-                r_image = None
-                r_artists = []
-                r_key_img = f"reprint{i}"
-                r_key_cap = f"recaption{i}"
-                for key, val in params.items():
-                    k = key.strip().lower()
-                    v = val.strip()
-                    if k == r_key_img:
-                        r_image = v
-                    elif k == r_key_cap:
-                        names = re.findall(
-                            r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]", v
-                        )
-                        r_artists = [n.strip() for n in names]
+    variants = []
+    for index in range(reprint_count):
+        suffix = "" if index == 0 else str(index)
+        image = infobox.get(("reprint" + suffix) if suffix else "image", "")
+        if not image:
+            continue
+        variants.append(
+            {
+                "index": index,
+                "image": image,
+                "set_name": infobox.get(("set" + suffix) if suffix else "set0", ""),
+                "cardno": infobox.get(("cardno" + suffix) if suffix else "cardno0", ""),
+                "caption": infobox.get(
+                    ("recaption" + suffix) if suffix else "caption", ""
+                ),
+                "row": rows[index] if index < len(rows) else ("", ""),
+            }
+        )
+    return variants
 
-                if r_image:
-                    pairs.append((r_image, r_artists))
 
-            break
+def caption_artists(caption):
+    """Nomi mostrati nei wikilink della caption ([[Nome|mostrato]] -> mostrato)."""
+    artists = []
+    for match in re.finditer(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]", caption or ""):
+        artists.append((match.group(2) or match.group(1)).strip())
+    return artists
 
-    return pairs
+
+def number_of(cardno):
+    """Numero della carta da "001/226", "023/P-A", "-2/027"..."""
+    match = re.match(r"\s*(-?\d+)", cardno or "")
+    return int(match.group(1)) if match else None
+
+
+def variant_candidates(variant):
+    """
+    Coppie (codice, numero, fonte) ricavate da una variante, senza duplicati
+    e in ordine di priorita': infobox, riga Expansion, nome del file.
+    """
+    candidates = []
+    seen = set()
+
+    def add(set_name, number, source):
+        code = expansion_code(set_name)
+        if not code or number is None:
+            return
+        if (code, number) in seen:
+            return
+        seen.add((code, number))
+        candidates.append((code, number, source))
+
+    add(variant["set_name"], number_of(variant["cardno"]), "infobox")
+    add(variant["row"][0], number_of(variant["row"][1]), "riga Expansion")
+    parsed = parse_image_name(variant["image"])
+    if parsed:
+        add(parsed[0], parsed[1], "nome file")
+    return candidates
+
+
+def resolve_variant(variant, dump, page_name):
+    """
+    Trova nel dump la carta corrispondente alla variante.
+
+    Restituisce (codice, numero, fonte, artisti, avviso): "artisti" e' la lista
+    dei nomi (vuota se la carta non si trova) e "avviso" una nota da stampare.
+    """
+    candidates = variant_candidates(variant)
+    found = [item for item in candidates if (item[0], item[1]) in dump]
+
+    if not found:
+        listed = ", ".join(f"{code} {number}" for code, number, _ in candidates)
+        missing = "carta non trovata nel dump"
+        if listed:
+            missing += f" ({listed})"
+        else:
+            missing += " (nessun candidato)"
+        return None, None, None, [], missing
+
+    warning = None
+    if len(found) == 1:
+        chosen = found[0]
+        if len(candidates) > 1:
+            warning = f"altre fonti scartate, valida solo {chosen[0]} {chosen[1]}"
+    else:
+        # Fonti discordanti: la carta giusta e' quella con il nome della carta
+        # (il prefisso del nome file, oppure il titolo della pagina per
+        # l'originale), poi quella con l'artista indicato nella caption.
+        parsed = parse_image_name(variant["image"])
+        expected = parsed[2] if parsed else page_name
+        named = [
+            item
+            for item in found
+            if normalize_name(dump[(item[0], item[1])]["name"])
+            == normalize_name(expected)
+        ]
+        if len(named) == 1:
+            chosen = named[0]
+            warning = (
+                f"fonti discordanti, scelto {chosen[0]} {chosen[1]} "
+                f"(nome della carta)"
+            )
+        else:
+            caption = [
+                normalize_name(name) for name in caption_artists(variant["caption"])
+            ]
+            by_caption = []
+            for item in found:
+                illustrators = split_artists(dump[(item[0], item[1])]["illustrator"])
+                if [normalize_name(name) for name in illustrators] == caption:
+                    by_caption.append(item)
+            if len(by_caption) == 1:
+                chosen = by_caption[0]
+                warning = (
+                    f"fonti discordanti, scelto {chosen[0]} {chosen[1]} "
+                    f"(artista in caption)"
+                )
+            else:
+                chosen = found[0]
+                warning = (
+                    f"fonti discordanti, scelto {chosen[0]} {chosen[1]} "
+                    f"(prima fonte)"
+                )
+
+    card = dump[(chosen[0], chosen[1])]
+    artists = split_artists(card["illustrator"])
+    if not artists:
+        return chosen[0], chosen[1], chosen[2], [], "illustratore assente nel dump"
+    return chosen[0], chosen[1], chosen[2], artists, warning
+
+
+def variant_in_expansion(variant, expansion_name):
+    """Vero se la variante appartiene all'espansione indicata (nome PCW)."""
+    target = normalize_set(expansion_name)
+    if variant["set_name"] and normalize_set(variant["set_name"]) == target:
+        return True
+    if variant["row"][0] and normalize_set(variant["row"][0]) == target:
+        return True
+    parsed = parse_image_name(variant["image"])
+    if parsed and normalize_set(EXPANSION_NAMES[parsed[0]]) == target:
+        return True
+    return False
+
+
+# ======================================================================
+#  MODIFICA DEL TEMPLATE CREDITS
+# ======================================================================
+
+
+def credits_params(file_text):
+    """Parametri del template {{credits}} della pagina File ({} se non c'e')."""
+    match = re.search(r"\{\{credits\s*\|([^}]*)\}\}", file_text)
+    if not match:
+        return {}
+
+    params = {}
+    parts = re.split(
+        r"\s*\|\s*(?=(?:[^\]]*\[\[[^\]]*\]\])*[^\]]*$)",
+        match.group(1),
+    )
+    for part in parts:
+        if "=" not in part:
+            continue
+        key, _, value = part.partition("=")
+        params[key.strip().lower()] = value.strip()
+    return params
+
+
+def compiled_artists(params):
+    """
+    Artisti gia' scritti nel template, senza il suffisso " (illustratore)".
+
+    Considera artist e artist2, come li compila lo script.
+    """
+    artists = []
+    for key in ("artist", "artist2"):
+        value = (params.get(key) or "").strip()
+        if value:
+            artists.append(re.sub(r"\s*\(illustratore\)$", "", value, flags=re.I))
+    return artists
 
 
 def _format_artist_insert(artist_names):
@@ -176,19 +538,6 @@ def _format_artist_insert(artist_names):
         return f"artist={artist_names[0]}"
     else:
         return f"artist={artist_names[0]}|artist2={'|artist2='.join(artist_names[1:])}"
-
-
-# parametri del template {{credits}} della pagina, o None se non c'e'
-def credits_params(file_text):
-    match = re.search(r"\{\{credits\s*\|([^}]*)\}\}", file_text)
-    if not match:
-        return None
-    params = {}
-    for part in match.group(1).split("|"):
-        key, sep, value = part.partition("=")
-        if sep:
-            params[key.strip()] = value.strip()
-    return params
 
 
 def update_credits_template(file_text, artist_names, artistalt=None):
@@ -207,21 +556,20 @@ def update_credits_template(file_text, artist_names, artistalt=None):
       |artist=Nome1|artist2=Nome2|cardartist=tcgpocket
 
     Gestisce tre formati del template credits:
-      A) {{credits|artist=|other=...}}        -> riempie artist (vuoto)
-      B) {{credits|artist=[[nome]]...}}       -> sostituisce il wikilink
-      C) {{credits|other=...}}                -> INSERISCE artist ex-novo
+      A) {{credits|artist=...}} con artist vuoto -> riempie artist
+      B) {{credits|artist=[[nome]]...}}          -> sostituisce il wikilink
+      C) {{credits|...}} senza parametro artist  -> INSERISCE artist ex-novo
          (formato delle pagine File non ancora compilate, es. upload)
 
     Restituisce (nuovo_testo, errore).
     """
-    params = credits_params(file_text)
-    if params is None:
+    if "{{credits" not in file_text:
         return None, "Template 'credits' non trovato nella pagina dell'immagine"
 
     num_artists = len(artist_names)
 
     if num_artists == 0:
-        return None, "Nessun artista trovato nella caption"
+        return None, "Nessun artista trovato nel dump"
 
     # Costruisce la stringa artist da inserire
     if num_artists == 1 and artistalt:
@@ -235,9 +583,10 @@ def update_credits_template(file_text, artist_names, artistalt=None):
         file_text,
     )
     if bracket_match:
-        # Estrae eventuali parametri aggiuntivi dal template originale
+        # Conserva i parametri di provenienza ancora in uso (other non lo e'
+        # piu': non viene ne' copiato ne' aggiunto).
         extra_params = ""
-        for param_name in ("other", "sourcesite", "sourcelink", "sourcetext"):
+        for param_name in ("sourcesite", "sourcelink", "sourcetext"):
             pattern = (
                 r"\{\{credits\s*\|[^}]*\|"
                 + re.escape(param_name)
@@ -262,17 +611,17 @@ def update_credits_template(file_text, artist_names, artistalt=None):
         return new_text, None
 
     # --- Caso A1: artist gia' compilato senza wikilink ---
-    current_artist = params.get("artist", "")
-    if current_artist and "[[" not in current_artist:
+    already = compiled_artists(credits_params(file_text))
+    if already:
         return None, (
             f"Il parametro 'artist' e' gia' compilato (senza wikilink): "
-            f"'{current_artist}'"
+            f"'{' / '.join(already)}'"
         )
 
-    # --- Caso C: template SENZA parametro artist (es. {{credits|other=...}}) ---
-    # Le pagine File non compilate hanno solo {{credits|other=...}} (o
-    # sourcesite=/ep=): il parametro artist manca del tutto e va inserito
-    # subito dopo {{credits|, conservando tutti i parametri esistenti.
+    # --- Caso C: template SENZA parametro artist ---
+    # Le pagine File non compilate possono avere solo sourcesite=/ep= (o altri
+    # parametri): il parametro artist manca del tutto e va inserito subito
+    # dopo {{credits|, conservando tutti i parametri esistenti.
     credits_match = re.search(r"\{\{credits\s*\|([^}]*)\}\}", file_text)
     if credits_match and not re.search(
         r"(?:^|\|)\s*artist\s*=", credits_match.group(1)
@@ -286,25 +635,30 @@ def update_credits_template(file_text, artist_names, artistalt=None):
         return new_text, None
 
     # --- Caso A: artist vuoto, con o senza altri parametri ---
-    # Formati delle pagine File appena caricate:
-    #   {{credits|artist=}}            (nessun altro parametro)
-    #   {{credits|artist=|other=...}}
-    pattern = r"\{\{credits\s*\|\s*artist\s*=(?=\||\}\})"
-    if not re.search(pattern, file_text):
+    # Forme presenti su PCW: {{credits|artist=}} e {{credits|artist=|sourcesite=...}}.
+    found = re.search(r"\{\{credits\s*\|artist\s*=\s*(\||\}\})", file_text)
+    if not found:
         return None, (
             "Formato del template 'credits' non riconosciuto "
-            "(attesi: {{credits|other=...}}, {{credits|artist=}}, "
-            "{{credits|artist=|other=...}} o {{credits|artist=[[nome]]}})"
+            "(attesi: {{credits|artist=...}}, {{credits|artist=}} "
+            "o {{credits|sourcesite=...}} senza artist)"
         )
 
-    new_text = re.sub(
-        pattern,
-        f"{{{{credits|{artist_insert}|cardartist=tcgpocket",
-        file_text,
-        count=1,
+    # Se dopo artist= c'e' un altro parametro il separatore resta,
+    # altrimenti si chiude subito il template.
+    tail = "|" if found.group(1) == "|" else "}}"
+    new_text = (
+        file_text[: found.start()]
+        + f"{{{{credits|{artist_insert}|cardartist=tcgpocket{tail}"
+        + file_text[found.end():]
     )
 
     return new_text, None
+
+
+# ======================================================================
+#  PAGINE CARTA ED ESPANSIONI
+# ======================================================================
 
 
 def extract_card_titles_from_expansion(expansion_text):
@@ -381,26 +735,10 @@ def resolve_and_deduplicate(site, card_titles):
     return resolved_map
 
 
-def filter_pairs_by_expansion(pairs, expansion_name):
+def process_card_page(site, card_title, dump, expansion_name=None):
     """
-    Filtra le coppie (image_file, artist_names) mantenendo solo quelle
-    il cui nome file contiene il nome dell'espansione (senza spazi e apostrofi).
-
-    Es. expansion_name="L'Isola Misteriosa" -> cerca "LIsolaMisteriosa"
-        expansion_name="Assalto dei Paradossi" -> cerca "AssaltodeiParadossi"
-    """
-    expansion_key = expansion_name.replace(" ", "").replace("'", "")
-    return [
-        (img, artists)
-        for img, artists in pairs
-        if expansion_key.lower() in img.lower()
-    ]
-
-
-def process_card_page(site, card_title, expansion_name=None):
-    """
-    Elabora una singola pagina carta: estrae le coppie (immagine, artisti)
-    e restituisce una lista di modifiche da applicare.
+    Elabora una singola pagina carta: per ogni variante ricava l'artista dal
+    dump e restituisce una lista di modifiche da applicare.
 
     Per artista singolo: se l'artista ha una pagina "Nome (illustratore)" su PCW,
     compila il template con artist=Nome (illustratore) e artistalt=Nome.
@@ -411,25 +749,37 @@ def process_card_page(site, card_title, expansion_name=None):
     if not card_page.exists():
         return [], [f"Pagina '{card_title}' non esiste."]
 
-    pairs = extract_card_info(card_page.text)
-    if not pairs:
+    variants = extract_variants(card_page.text)
+    if not variants:
         return [], [f"Nessuna immagine trovata nell'infobox di '{card_title}'."]
 
     if expansion_name:
-        pairs = filter_pairs_by_expansion(pairs, expansion_name)
-        if not pairs:
+        variants = [
+            variant
+            for variant in variants
+            if variant_in_expansion(variant, expansion_name)
+        ]
+        if not variants:
             return [], [
                 f"Nessuna immagine dell'espansione '{expansion_name}' "
                 f"nell'infobox di '{card_title}'."
             ]
 
+    page_name = card_title.split(" (")[0]
     modifiche = []
     warnings = []
 
-    for img_file, artist_names in pairs:
-        if not artist_names or len(artist_names) == 0:
+    for variant in variants:
+        img_file = variant["image"]
+
+        code, number, source, artist_names, warning = resolve_variant(
+            variant, dump, page_name
+        )
+        if warning:
+            warnings.append(f"  [{card_title}] '{img_file}': {warning}.")
+        if not artist_names:
             warnings.append(
-                f"  [{card_title}] '{img_file}': artista/i non trovati nel caption."
+                f"  [{card_title}] '{img_file}': artista non ricavabile dal dump."
             )
             continue
 
@@ -438,6 +788,21 @@ def process_card_page(site, card_title, expansion_name=None):
             warnings.append(
                 f"  [{card_title}] '{img_file}': la pagina File: non esiste."
             )
+            continue
+
+        # Se il template e' gia' compilato (senza wikilink) non lo si tocca:
+        # si segnala solo quando il nome scritto non e' quello del dump.
+        current_params = credits_params(file_page.text)
+        current = compiled_artists(current_params)
+        if current and "[[" not in (current_params.get("artist") or ""):
+            if [normalize_name(name) for name in current] != [
+                normalize_name(name) for name in artist_names
+            ]:
+                warnings.append(
+                    f"  [{card_title}] '{img_file}': artista gia' compilato "
+                    f"'{' / '.join(current)}' diverso dal dump "
+                    f"('{' / '.join(artist_names)}'), lasciato invariato."
+                )
             continue
 
         # Determina artistalt SOLO per singolo artista
@@ -449,7 +814,7 @@ def process_card_page(site, card_title, expansion_name=None):
             name = artist_names[0]
             # Se il nome gia' termina con " (illustratore)"
             if name.lower().endswith(illustratore_suffix.lower()):
-                base_name = name[:-len(illustratore_suffix)]
+                base_name = name[: -len(illustratore_suffix)]
                 artistalt = base_name
             else:
                 page_ill = pywikibot.Page(site, name + illustratore_suffix)
@@ -464,7 +829,9 @@ def process_card_page(site, card_title, expansion_name=None):
             warnings.append(f"  [{card_title}] '{img_file}': {error}")
             continue
 
-        modifiche.append((file_page, new_text, final_artist_names, artistalt))
+        modifiche.append(
+            (file_page, new_text, final_artist_names, artistalt, code, number, source)
+        )
 
     return modifiche, warnings
 
@@ -473,10 +840,11 @@ def process_card_page(site, card_title, expansion_name=None):
 #  MODALITA' DI VERIFICA (--check)
 # ======================================================================
 
+
 def check_credits_template(file_text, expected_artist_names, artistalt_expected=None):
     """
     Verifica che il template {{credits}} in una pagina File sia compilato
-    correttamente.
+    correttamente, cioe' con i nomi degli artisti del dump.
 
     Per singolo artista atteso: verifica artist e opzionalmente artistalt.
     Per doppio artista atteso:  verifica artist e artist2.
@@ -488,25 +856,9 @@ def check_credits_template(file_text, expected_artist_names, artistalt_expected=
     if "{{credits" not in file_text:
         return False, "Template 'credits' non presente nella pagina File"
 
-    m = re.search(r"\{\{credits\s*\|([^}]*)\}\}", file_text)
-    if not m:
+    params = credits_params(file_text)
+    if not params:
         return False, "Template 'credits' non trovato (formato non riconosciuto)"
-
-    params_text = m.group(1)
-
-    # Estrai parametri dividendo sui | non annidati dentro [[ ]]
-    params = {}
-    parts = re.split(
-        r'\s*\|\s*(?=(?:[^\]]*\[\[[^\]]*\]\])*[^\]]*$)',
-        params_text
-    )
-    for part in parts:
-        if '=' not in part:
-            continue
-        key, _, val = part.partition('=')
-        key = key.strip().lower()
-        val = val.strip()
-        params[key] = val
 
     num_expected = len(expected_artist_names)
 
@@ -523,15 +875,17 @@ def check_credits_template(file_text, expected_artist_names, artistalt_expected=
             f"'{cardartist_val}' (atteso: tcgpocket)"
         )
 
-    if num_expected == 1:
-        # Verifica che artist2 NON sia presente (non atteso per singolo artista)
-        artist2_val = params.get('artist2', '')
-        if artist2_val:
-            return False, (
-                f"Parametro 'artist2' presente ma non atteso "
-                f"(carta con artista singolo): artist2={artist2_val}"
-            )
+    # Verifica che i nomi scritti siano quelli del dump (artist + artist2)
+    compiled = compiled_artists(params)
+    if [normalize_name(name) for name in compiled] != [
+        normalize_name(name) for name in expected_artist_names
+    ]:
+        return False, (
+            f"Artista errato: '{' / '.join(compiled)}' "
+            f"(atteso dal dump: '{' / '.join(expected_artist_names)}')"
+        )
 
+    if num_expected == 1:
         # Verifica artistalt (opzionale se atteso)
         if artistalt_expected:
             artistalt_val = params.get('artistalt', '').strip()
@@ -546,22 +900,13 @@ def check_credits_template(file_text, expected_artist_names, artistalt_expected=
                     f"(atteso: '{artistalt_expected}')"
                 )
 
-    elif num_expected == 2:
-        # Verifica artist2
-        artist2_val = params.get('artist2', '')
-        if not artist2_val:
-            return False, (
-                f"Parametro 'artist2' assente o vuoto "
-                f"(atteso secondo artista: '{expected_artist_names[1]}')"
-            )
-
     return True, "OK: tutti i parametri compilati correttamente"
 
 
-def check_card_page(site, card_title, expansion_name=None):
+def check_card_page(site, card_title, dump, expansion_name=None):
     """
     Verifica che tutte le pagine File di una carta abbiano il template credits
-    compilato correttamente.
+    compilato con l'artista del dump.
 
     Restituisce (risultati, warnings) dove risultati e' una lista di tuple:
       (file_title, card_title, status, messaggio)
@@ -571,28 +916,40 @@ def check_card_page(site, card_title, expansion_name=None):
     if not card_page.exists():
         return [], [f"Pagina '{card_title}' non esiste."]
 
-    pairs = extract_card_info(card_page.text)
-    if not pairs:
+    variants = extract_variants(card_page.text)
+    if not variants:
         return [], [f"Nessuna immagine trovata nell'infobox di '{card_title}'."]
 
     if expansion_name:
-        pairs = filter_pairs_by_expansion(pairs, expansion_name)
-        if not pairs:
+        variants = [
+            variant
+            for variant in variants
+            if variant_in_expansion(variant, expansion_name)
+        ]
+        if not variants:
             return [], [
                 f"Nessuna immagine dell'espansione '{expansion_name}' "
                 f"nell'infobox di '{card_title}'."
             ]
 
+    page_name = card_title.split(" (")[0]
     risultati = []
     warnings = []
 
-    for img_file, artist_names in pairs:
-        if not artist_names or len(artist_names) == 0:
+    for variant in variants:
+        img_file = variant["image"]
+
+        code, number, source, artist_names, warning = resolve_variant(
+            variant, dump, page_name
+        )
+        if warning:
+            warnings.append(f"  [{card_title}] '{img_file}': {warning}.")
+        if not artist_names:
             warnings.append(
-                f"  [{card_title}] '{img_file}': artista/i non trovato nel caption."
+                f"  [{card_title}] '{img_file}': artista non ricavabile dal dump."
             )
             risultati.append(
-                (img_file, card_title, False, "Artista/i non trovato nel caption")
+                (img_file, card_title, False, "Artista non ricavabile dal dump")
             )
             continue
 
@@ -625,20 +982,36 @@ def check_card_page(site, card_title, expansion_name=None):
 #  MAIN
 # ======================================================================
 
-def main():
-    # --- Riconoscimento parametro --check ---
-    check_mode = False
-    args = list(sys.argv)
 
-    if '--check' in args:
-        check_mode = True
-        args.remove('--check')
+def main():
+    # --- Parametri da riga di comando ---
+    check_mode = False
+    dump_dir = DUMP_DIR
+    args = list(sys.argv[1:])
+
+    rest = []
+    position = 0
+    while position < len(args):
+        arg = args[position]
+        if arg == "--check":
+            check_mode = True
+            position += 1
+        elif arg == "--dump":
+            if position + 1 >= len(args):
+                print("ERRORE: --dump richiede una cartella.")
+                sys.exit(1)
+            dump_dir = args[position + 1]
+            position += 2
+        elif arg in ("-h", "--help"):
+            print(__doc__)
+            return
+        else:
+            rest.append(arg)
+            position += 1
 
     # --- Input interattivo o da riga di comando ---
-    if len(args) == 4:
-        fam = args[1]
-        lang = args[2]
-        input_title = args[3]
+    if len(rest) == 3:
+        fam, lang, input_title = rest
     else:
         fam = input("Famiglia (fam): ").strip()
         lang = input("Lingua (lang): ").strip()
@@ -648,10 +1021,19 @@ def main():
         print("ERRORE: tutti i parametri (fam, lang, titolo) sono obbligatori.")
         sys.exit(1)
 
+    # --- Dump di gioco ---
+    dump = load_dump(dump_dir)
+    print(f"Dump: {len(dump)} carte lette da {dump_dir}")
+
     # --- Connessione al sito ---
     site = pywikibot.Site(lang, fam)
     if not check_mode:
-        site.throttle.set_delays(writedelay=1.0)
+        # pywikibot ha rinominato setDelays in set_delays (10.3.0)
+        set_delays = getattr(site.throttle, "set_delays", None)
+        if set_delays:
+            set_delays(writedelay=1.0)
+        else:
+            site.throttle.setDelays(writedelay=1.0)
     print(f"Connesso a: {site}")
 
     # --- Auto-riconoscimento: carta singola o espansione? ---
@@ -720,7 +1102,7 @@ def main():
                 )
 
             risultati, warnings = check_card_page(
-                site, resolved_title, expansion_name
+                site, resolved_title, dump, expansion_name
             )
             all_risultati.extend(risultati)
             all_warnings.extend(warnings)
@@ -781,7 +1163,7 @@ def main():
             )
 
         modifiche, warnings = process_card_page(
-            site, resolved_title, expansion_name
+            site, resolved_title, dump, expansion_name
         )
         all_modifiche.extend(modifiche)
         all_warnings.extend(warnings)
@@ -792,8 +1174,8 @@ def main():
         print("Nessuna modifica da fare.")
         if all_warnings:
             print(f"\n[!] {len(all_warnings)} avvisi:")
-            for warning in all_warnings:
-                print(warning)
+            for w in all_warnings:
+                print(w)
         return
 
     # --- Anteprima ---
@@ -801,9 +1183,8 @@ def main():
     print(f"ANTEPRIMA MODIFICHE")
     print("=" * 60)
 
-    for i, (file_page, new_text, artist_names, artistalt) in enumerate(
-        all_modifiche
-    ):
+    for i, modifica in enumerate(all_modifiche):
+        file_page, new_text, artist_names, artistalt, code, number, source = modifica
         if i > 0:
             print()
         print(f"--- {file_page.title()} ---")
@@ -814,6 +1195,7 @@ def main():
                 print(f"    Artista: {artist_names[0]}")
         else:
             print(f"    Artisti: {' + '.join(artist_names)}")
+        print(f"    Carta nel dump: {code} {number} (da {source})")
         print(new_text)
 
     print("=" * 60)
@@ -835,7 +1217,8 @@ def main():
         return
 
     # --- Salvataggio ---
-    for file_page, new_text, artist_names, artistalt in all_modifiche:
+    for modifica in all_modifiche:
+        file_page, new_text, artist_names, artistalt, code, number, source = modifica
         file_page.text = new_text
         if len(artist_names) == 1:
             if artistalt:
