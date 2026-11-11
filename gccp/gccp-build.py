@@ -7,9 +7,13 @@ interwiki links. Everything comes from the game's own data, so no page has to
 be downloaded or translated.
 
 No other files are needed: the cards, their release dates (including the promo
-ones), the rarities and the types all come from the dump, and the names of the
-expansions come from Modulo:GCCPocket/data on the wiki (the same module the
-templates use), so a new set only has to be added there.
+ones), the rarities, the types and the Japanese names used by the ja: interwiki
+all come from the dump, and the names of the expansions come from
+Modulo:GCCPocket/data on the wiki (the same module the templates use), so a new
+set only has to be added there. The de: interwiki points to the section
+"Pokémon-Sammelkartenspiel-Pocket" of the Pokémon's (TCG) page on pokewiki.de,
+where the German wiki keeps the Pocket cards: the script asks that wiki which
+pages have the section, so nothing has to be listed here.
 
 Examples:
     python gccp-build.py -data:C:\\ptcgp-carddump\\out -out:data\\gccp-itpages
@@ -21,8 +25,8 @@ Options:
     -data:<path>        the dump's out directory (default: $PTCGP_DATA)
     -out:<path>         where the pages are written (default: data/gccp-itpages)
     -locale:<code>      the language of the cards (default: it_IT)
-    -interwiki:<list>   interwiki links to add, comma separated, among en, es, ja
-                        (default: en,es)
+    -interwiki:<list>   interwiki links to add, comma separated, among de, en, es,
+                        ja (default: de,en,es,ja)
     -help               show this help text.
 """
 
@@ -40,9 +44,22 @@ SHARED_DIR = os.path.join(os.path.dirname(SCRIPT_DIR), "shared")
 
 WIKI_API = "https://wiki.pokemoncentral.it/api.php"
 SETS_MODULE = "Modulo:GCCPocket/data"
+# il wiki tedesco tiene le carte del GCC Pocket in una sezione della pagina del
+# Pokémon nel GCC (per esempio Kleptifux (TCG)), non in una pagina a parte
+DE_WIKI_API = "https://www.pokewiki.de/api.php"
+DE_PAGE_SUFFIX = " (TCG)"
+DE_SECTION = "Pokémon-Sammelkartenspiel-Pocket"
+# quante pagine chiedere per volta all'API del wiki tedesco
+DE_BATCH = 50
+USER_AGENT = "Pywikibot/1.0"
 
 PAGE_SUFFIX = " (GCC Pocket)"
 GALLERY_SIZE = "x200px"
+# il wiki giapponese intitola le pagine dei Pokémon "<nome in katakana> (ポケポケ)"
+JA_LOCALE = "ja_JP"
+JA_SUFFIX = "ポケポケ"
+# prefissi che i nomi giapponesi delle forme regionali hanno e la specie no
+JA_REGIONS = ("アローラ", "ガラル", "ヒスイ", "パルデア")
 
 # tipi del GCC Pocket: nome inglese nei dati -> nome italiano sul wiki
 TYPES = {
@@ -108,19 +125,41 @@ def read_json(path):
         return json.load(f)
 
 
+def common_affix(names):
+    """Prefisso o suffisso più lungo comune ai nomi: la parte che è la specie.
+
+    "ライチュウ"/"アローラライチュウ" -> "ライチュウ" (suffisso),
+    "ポワルン"/"ポワルン ゆきぐものすがた" -> "ポワルン" (prefisso).
+    """
+    if len(names) == 1:
+        return names[0]
+    first, last = names[0], names[-1]
+    prefix = 0
+    while prefix < min(len(first), len(last)) and first[prefix] == last[prefix]:
+        prefix += 1
+    suffix = 0
+    while (suffix < min(len(first), len(last)) - prefix
+           and first[-1 - suffix] == last[-1 - suffix]):
+        suffix += 1
+    if prefix >= suffix:
+        return first[:prefix].strip()
+    return first[len(first) - suffix:].strip()
+
+
+def api_query(base, params, timeout=120):
+    """Risposta JSON di un'API MediaWiki (Pywikibot/1.0 è l'agente accettato)."""
+    url = base + "?" + urllib.parse.urlencode(params)
+    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        return json.load(response)
+
+
 def fetch_set_names():
     """Codici delle espansioni da Modulo:GCCPocket/data (nome -> codice)."""
-    params = urllib.parse.urlencode({
-        "action": "parse",
-        "page": SETS_MODULE,
-        "prop": "wikitext",
-        "format": "json",
-        "formatversion": "2",
-    })
-    request = urllib.request.Request(f"{WIKI_API}?{params}",
-                                     headers={"User-Agent": "Pywikibot/1.0"})
-    with urllib.request.urlopen(request, timeout=30) as response:
-        wikitext = json.load(response)["parse"]["wikitext"]
+    data = api_query(WIKI_API, {"action": "parse", "page": SETS_MODULE,
+                                "prop": "wikitext", "format": "json",
+                                "formatversion": "2"}, timeout=30)
+    wikitext = data["parse"]["wikitext"]
     block = re.search(r"data\.codes\s*=\s*\{(.*?)\n\}", wikitext, re.S)
     if not block:
         raise ValueError(f"data.codes non trovato in {SETS_MODULE}")
@@ -136,6 +175,63 @@ def load_set_names():
         raise RuntimeError(f"non riesco a leggere {SETS_MODULE} dal wiki: {error}") from error
     print(f"Nomi dei set da {SETS_MODULE} ({len(names)})")
     return names
+
+
+def german_page_texts(titles):
+    """Wikitext delle pagine tedesche che esistono (titolo -> testo)."""
+    texts = {}
+    for start in range(0, len(titles), DE_BATCH):
+        batch = titles[start:start + DE_BATCH]
+        data = api_query(DE_WIKI_API, {"action": "query", "format": "json",
+                                       "formatversion": "2", "prop": "revisions",
+                                       "rvprop": "content", "rvslots": "main",
+                                       "titles": "|".join(batch)})
+        for page in data["query"]["pages"]:
+            revisions = page.get("revisions") or []
+            if page.get("missing") or not revisions:
+                continue
+            texts[page["title"]] = revisions[0]["slots"]["main"].get("content", "")
+    return texts
+
+
+def german_page_title(title):
+    """Il titolo com'è scritto davvero, quando differisce solo per le maiuscole.
+
+    Il wiki tedesco scrive per esempio "EF-eM (TCG)", mentre il nome del Pokémon
+    è "eF-eM": il titolo cercato non esiste e va trovato per prefisso.
+    """
+    data = api_query(DE_WIKI_API, {"action": "query", "format": "json",
+                                   "formatversion": "2", "list": "prefixsearch",
+                                   "pssearch": title, "pslimit": "5"})
+    for hit in data["query"]["prefixsearch"]:
+        if hit["title"].lower() == title.lower():
+            return hit["title"]
+    return None
+
+
+def fetch_german_pages(names):
+    """Pagina tedesca di ogni specie, quando ha la sezione del GCC Pocket.
+
+    Il wiki tedesco non ha una pagina per il GCC Pocket: le carte stanno in una
+    sezione "Pokémon-Sammelkartenspiel-Pocket" della pagina (TCG) del Pokémon,
+    quindi l'interwiki de: punta a quella sezione. Chi non ce l'ha resta senza.
+    """
+    names = sorted({name.strip() for name in names if name and name.strip()})
+    found = {}
+    texts = german_page_texts([f"{name}{DE_PAGE_SUFFIX}" for name in names])
+    # il wiki tedesco può scrivere un titolo con altre maiuscole (EF-eM)
+    spelled = {title.lower(): title for title in texts}
+    for name in names:
+        title = f"{name}{DE_PAGE_SUFFIX}"
+        real = title if title in texts else spelled.get(title.lower())
+        if not real:
+            real = german_page_title(title)
+            if not real:
+                continue
+            texts.update(german_page_texts([real]))
+        if re.search(r"^=+ *" + re.escape(DE_SECTION) + r" *=+$", texts.get(real, ""), re.M):
+            found[name] = real
+    return found
 
 
 def load_promo_dates(masterdir, schedules):
@@ -270,6 +366,16 @@ class Data:
                 card["_date"] = self.card_date(card)
                 self.cards.append(card)
 
+        # nomi giapponesi delle carte, per l'interwiki ja:
+        self.ja_names = {}
+        for path in sorted(glob.glob(os.path.join(data_dir, "cards", f"*_{JA_LOCALE}.json"))):
+            for card in read_json(path):
+                if card.get("kind") == "pokemon":
+                    self.ja_names[card["cardId"]] = clean(card["name"])
+        if not self.ja_names:
+            print(f"ATTENZIONE: mancano i nomi giapponesi (cards/*_{JA_LOCALE}.json):"
+                  " nessun interwiki ja:", file=sys.stderr)
+
         # nomi delle specie: ndex -> nome italiano
         self.names = read_json(os.path.join(SHARED_DIR, "poke-names.json"))
         self.ndex_of_name = {x["it"]: x["ndex"] for x in self.names}
@@ -297,6 +403,37 @@ class Data:
             if name.startswith(species + " ") or name.startswith(species + "-"):
                 return species, self.ndex_of_name[species]
         return None, None
+
+    def ja_title(self, title, cards):
+        """Titolo della pagina giapponese: il nome della specie, non della stampa.
+
+        Le carte di una pagina possono essere forme diverse (regionali, Mega, ex);
+        il wiki giapponese le riunisce sotto il nome della specie, che è quello
+        della forma base, o la parte comune ai nomi delle forme quando la forma
+        base non ha carte (Basculegion di Hisui, Urshifu Stile …, Ogerpon …).
+        """
+        ordered = sorted(cards, key=self.sort_key)
+        base = [c for c in ordered if not c.get("isEX") and c["_name"] == title]
+        if base and self.ja_names.get(base[0]["cardId"]):
+            return re.sub(r"ex$", "", self.ja_names[base[0]["cardId"]])
+        names = []
+        for card in ordered:
+            # "テラパゴスex" è la carta, "テラパゴス" la specie
+            name = re.sub(r"ex$", "", self.ja_names.get(card["cardId"], ""))
+            if name and name not in names:
+                names.append(name)
+        if not names:
+            return ""
+        name = common_affix(names)
+        # la specie è in katakana: da un pezzo comune che comincia con un kana
+        # diverso ("いちげき"/"れんげき" + "ウーラオス") si taglia fino al katakana
+        while name and not "\u30a0" <= name[0] <= "\u30ff":
+            name = name[1:]
+        for region in JA_REGIONS:
+            if name.startswith(region):
+                name = name[len(region):]
+        # "オーガポン みどりのめん" -> "オーガポン"
+        return name.split(" ")[0]
 
     def sort_key(self, card):
         """Ordine cronologico: data, poi ordine dell'espansione, poi numero."""
@@ -492,14 +629,14 @@ def build_page(title, ndex, cards, data, interwikis):
     lines.append("}}")
     lines.append("")
     # interwiki
-    for language, name in interwikis(title):
+    for language, name in interwikis(title, cards):
         lines.append(f"[[{language}:{name}]]")
     return "\n".join(lines) + "\n"
 
 
 def main():
     named_args = {"data": os.environ.get("PTCGP_DATA", ""), "out": "data/gccp-itpages",
-                  "locale": "it_IT", "interwiki": "en,es"}
+                  "locale": "it_IT", "interwiki": "de,en,es,ja"}
     for arg in sys.argv[1:]:
         name, _, value = arg[1:].partition(":")
         named_args[name] = value.strip()
@@ -521,13 +658,21 @@ def main():
         return
     languages = [x.strip() for x in named_args["interwiki"].split(",") if x.strip()]
 
-    def interwikis(title):
+    def interwikis(title, cards):
         row = data.name_by_ndex[data.ndex_of_name[title]]
         out = []
+        if "de" in languages:
+            german = german_pages.get(row.get("de", "").strip())
+            if german:
+                out.append(("de", f"{german}#{DE_SECTION}"))
         if "en" in languages and row.get("en"):
             out.append(("en", f"{row['en']} (TCG Pocket)"))
         if "es" in languages and row.get("es"):
             out.append(("es", f"{row['es']} (TCG Pocket)"))
+        if "ja" in languages:
+            japanese = data.ja_title(title, cards)
+            if japanese:
+                out.append(("ja", f"{japanese} ({JA_SUFFIX})"))
         return out
 
     # specie con almeno una carta
@@ -552,6 +697,21 @@ def main():
 
     data.species_nav = lambda ndex, step: nav(ndex, step)[0]
     data.species_nav_num = lambda ndex, step: nav(ndex, step)[1]
+
+    # pagine tedesche con la sezione del GCC Pocket (una richiesta ogni 50)
+    german_pages = {}
+    if "de" in languages:
+        try:
+            german_pages = fetch_german_pages(
+                data.name_by_ndex[ndex]["de"] for (_, ndex), _ in ordered
+            )
+        except Exception as error:  # noqa: BLE001
+            # senza l'elenco si perderebbero gli interwiki gia' presenti: meglio
+            # non scrivere niente
+            print(f"non riesco a leggere le pagine tedesche da {DE_WIKI_API}: {error}",
+                  file=sys.stderr)
+            return
+        print(f"Interwiki de: su {len(german_pages)} pagine tedesche")
 
     out_dir = named_args["out"]
     os.makedirs(out_dir, exist_ok=True)
