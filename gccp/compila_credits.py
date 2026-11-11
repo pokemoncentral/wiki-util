@@ -303,14 +303,15 @@ def load_dump(dump_dir):
             rows = json.load(handle)
 
         # I numeri negativi sono le carte "oltre" il totale del set (i tre Mew
-        # di SP1, -3/-2/-1): su PCW sono numerate dopo l'ultima carta, quindi
-        # vengono spostate in coda nell'ordine in cui il gioco le elenca.
+        # di SP1): -1 e' la prima dopo l'ultima carta regolare, -2 la seconda e
+        # cosi' via, quindi su PCW diventano 28, 29, 30 nell'ordine -1, -2, -3.
         positives = [
             row["collectionNumber"] for row in rows if row["collectionNumber"] > 0
         ]
         highest = max(positives) if positives else 0
         negatives = sorted(
-            row["collectionNumber"] for row in rows if row["collectionNumber"] < 0
+            (row["collectionNumber"] for row in rows if row["collectionNumber"] < 0),
+            reverse=True,
         )
         moved = {number: highest + 1 + index for index, number in enumerate(negatives)}
 
