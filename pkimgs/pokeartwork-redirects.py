@@ -12,7 +12,8 @@ digits) with form abbreviation, separated by any non-alphanumeric character. For
 example "0181 0229M 0303 0303M" (without quotes) updates Ampharos, MegaHoundoom,
 Mawile and MegaMawile.
 --file: path of file that contains input, formatted as above; data can stay on
-one line or multiple lines. Is ignored if --pokeabbrs is passed.
+one line or multiple lines. Is ignored if --pokeabbrs is passed. Use all-pokeabbrs.txt
+file in shared folder of this repository to process all Pokémon.
 --artworksfile: path of file with list of all artworks (generated with pkimgs-data.py).
 --artsourcesfile: path of file with sources data (already populated).
 --redirectsfile: path of file with redirects data (already populated).
