@@ -62,6 +62,11 @@ DIPENDENZE:
   - i dump di ptcgp-carddump (https://github.com/pokemoncentral/ptcgp-carddump):
     out/cards/<set>_it_IT.json, generati con `carddump cards`
 
+NOMI DELLE ESPANSIONI:
+  la corrispondenza fra il codice del gioco (A1, B3b, ...) e il nome
+  dell'espansione usato su PCW si legge dal modulo Modulo:GCCPocket/data:
+  una nuova espansione si aggiunge li', senza toccare questo script.
+
 PERCORSO DEI DUMP:
   la variabile d'ambiente PTCGP_CARD_DUMP o --dump CARTELLA; se non sono
   indicate si usa un checkout di ptcgp-carddump accanto a wiki-util
@@ -111,38 +116,17 @@ DUMP_DIR = os.environ.get(
 )
 DUMP_LOCALE = "it_IT"  # i nomi su PCW sono quelli italiani
 
-# Codice espansione nei JSON di gioco -> nome dell'espansione su PCW
-# (lo stesso usato nel parametro "set" degli infobox e in {{GCC ID}}).
-# Va aggiornato all'uscita di una nuova espansione.
-EXPANSION_NAMES = {
-    "A1": "Geni Supremi",
-    "A1a": "L'Isola Misteriosa",
-    "A2": "Scontro Spaziotemporale",
-    "A2a": "Luce Trionfale",
-    "A2b": "Tripudio Splendente",
-    "A3": "Guardiani Astrali",
-    "A3a": "Crisi Ultradimensionale",
-    "A3b": "Il Bosco di Eevee",
-    "A4": "La Via del Cielo e del Mare",
-    "A4a": "Sorgenti Recondite",
-    "A4b": "Busta Deluxe ex",
-    "B1": "Mega Ascesa",
-    "B1a": "Fiamme Cremisi",
-    "B2": "Parata Fantasmagorica",
-    "B2a": "Meraviglie di Paldea",
-    "B2b": "Mega Splendore",
-    "B3": "Aura Pulsante",
-    "B3a": "Assalto dei Paradossi",
-    "B3b": "Giorni Giocondi",
-    "B4": "Sovrano dei Cieli",
-    "B4a": "I Loschi Piani del Team Rocket",
-    "B4b": "Busta Deluxe Mega",
-    "C1": "Fusione Duale",
-    "SP1": "Primi Amici",
-    "PROMO-A": "Promo-A",
-    "PROMO-B": "Promo-B",
-    "PROMO-C": "Promo-C",
-}
+# Codice espansione del gioco -> nome dell'espansione su PCW: si legge dal
+# modulo del wiki (EXPANSION_MODULE) all'avvio, cosi' una nuova espansione si
+# aggiunge li' e non qui. Lo riempie load_expansion_names().
+EXPANSION_MODULE = "GCCPocket/data"
+EXPANSION_NAMES = {}
+
+# Indici ricavati da EXPANSION_NAMES, riempiti da set_expansion_names().
+SET_KEYS = {}
+SET_KEYS_BY_LENGTH = []
+CODE_BY_SET_NAME = {}
+CODE_BY_LOWER_CODE = {}
 
 # Caratteri invisibili che compaiono nei nomi dei file e nelle voci del wiki.
 INVISIBLE_CHARS = "\u200e\u200f\u200b\u200c\u200d\u00ad\ufeff\x11\x12"
@@ -181,14 +165,78 @@ def normalize_set(text):
     return re.sub(r"\s+", " ", _strip_invisible(text or "")).strip().lower()
 
 
-# Chiavi usate nel nome dei file immagine (senza spazi e apostrofi):
-# "L'Isola Misteriosa" -> "LIsolaMisteriosa", "Busta Deluxe ex" -> "BustaDeluxeex".
-SET_KEYS = {
-    re.sub(r"[\s'’]", "", name): code for code, name in EXPANSION_NAMES.items()
-}
-SET_KEYS_BY_LENGTH = sorted(SET_KEYS, key=len, reverse=True)
-CODE_BY_SET_NAME = {normalize_set(name): code for code, name in EXPANSION_NAMES.items()}
-CODE_BY_LOWER_CODE = {code.lower(): code for code in EXPANSION_NAMES}
+def set_expansion_names(names):
+    """
+    Registra la corrispondenza {codice: nome PCW} e ne ricava gli indici.
+
+    SET_KEYS usa il nome come compare nei nomi dei file immagine, senza spazi
+    e apostrofi: "L'Isola Misteriosa" -> "LIsolaMisteriosa".
+    """
+    global SET_KEYS, SET_KEYS_BY_LENGTH, CODE_BY_SET_NAME, CODE_BY_LOWER_CODE
+
+    EXPANSION_NAMES.clear()
+    EXPANSION_NAMES.update(names)
+    SET_KEYS = {re.sub(r"[\s'’]", "", name): code for code, name in names.items()}
+    SET_KEYS_BY_LENGTH = sorted(SET_KEYS, key=len, reverse=True)
+    CODE_BY_SET_NAME = {normalize_set(name): code for code, name in names.items()}
+    CODE_BY_LOWER_CODE = {code.lower(): code for code in names}
+
+
+def expansion_module_title(site):
+    """Titolo della pagina del modulo con i codici delle espansioni."""
+    prefix = "Modulo"
+    try:
+        prefix = site.namespace(828) or prefix
+    except Exception:
+        pass
+    return f"{prefix}:{EXPANSION_MODULE}"
+
+
+def parse_expansion_codes(text):
+    """
+    Ricava {codice: nome su PCW} dalla tabella data.codes del modulo.
+
+    Il modulo associa il nome dell'espansione al codice del gioco,
+    es. ['Geni Supremi'] = 'A1'.
+    """
+    block = re.search(r"data\.codes\s*=\s*\{(.*?)\n\}", text, re.S)
+    if not block:
+        raise ValueError("tabella 'data.codes' non trovata")
+
+    # Chiave e valore possono usare apostrofi o virgolette ("L'Isola
+    # Misteriosa" sta fra virgolette perche' contiene un apostrofo).
+    pattern = re.compile(
+        r"\[\s*(?:\"([^\"]*)\"|'([^']*)')\s*\]\s*=\s*(?:\"([^\"]*)\"|'([^']*)')\s*,?"
+    )
+    names = {}
+    for match in pattern.finditer(block.group(1)):
+        name = match.group(1) if match.group(1) is not None else match.group(2)
+        code = match.group(3) if match.group(3) is not None else match.group(4)
+        if not name or not code:
+            continue
+        names[code.strip()] = name.strip()
+    return names
+
+
+def load_expansion_names(site):
+    """Legge dal wiki i codici delle espansioni e li registra."""
+    title = expansion_module_title(site)
+    page = pywikibot.Page(site, title)
+    if not page.exists():
+        raise SystemExit(
+            f"ERRORE: modulo '{title}' non trovato: senza la corrispondenza "
+            f"fra codici del gioco e nomi delle espansioni le carte del dump "
+            f"non si riconoscono."
+        )
+    try:
+        names = parse_expansion_codes(page.text)
+    except ValueError as error:
+        raise SystemExit(f"ERRORE: modulo '{title}': {error}.")
+    if not names:
+        raise SystemExit(f"ERRORE: modulo '{title}': nessuna espansione letta.")
+    set_expansion_names(names)
+    print(f"Espansioni: {len(names)} codici letti da {title}")
+    return names
 
 
 def expansion_code(set_name):
@@ -247,8 +295,9 @@ def load_dump(dump_dir):
         code = CODE_BY_LOWER_CODE.get(raw_code.lower(), raw_code)
         if code not in EXPANSION_NAMES:
             print(
-                f"ATTENZIONE: l'espansione '{raw_code}' del dump non ha un nome "
-                f"in EXPANSION_NAMES: le sue carte non verranno riconosciute."
+                f"ATTENZIONE: l'espansione '{raw_code}' del dump non e' nel "
+                f"modulo Modulo:{EXPANSION_MODULE}: le sue carte non verranno "
+                f"riconosciute."
             )
         with open(os.path.join(dump_dir, file_name), encoding="utf-8") as handle:
             rows = json.load(handle)
@@ -1021,10 +1070,6 @@ def main():
         print("ERRORE: tutti i parametri (fam, lang, titolo) sono obbligatori.")
         sys.exit(1)
 
-    # --- Dump di gioco ---
-    dump = load_dump(dump_dir)
-    print(f"Dump: {len(dump)} carte lette da {dump_dir}")
-
     # --- Connessione al sito ---
     site = pywikibot.Site(lang, fam)
     if not check_mode:
@@ -1035,6 +1080,11 @@ def main():
         else:
             site.throttle.setDelays(writedelay=1.0)
     print(f"Connesso a: {site}")
+
+    # --- Codici delle espansioni (dal modulo del wiki) e dump di gioco ---
+    load_expansion_names(site)
+    dump = load_dump(dump_dir)
+    print(f"Dump: {len(dump)} carte lette da {dump_dir}")
 
     # --- Auto-riconoscimento: carta singola o espansione? ---
     is_single_card = bool(re.search(r"\([^)]+ \d+\)$", input_title))
