@@ -88,7 +88,7 @@ def main():
     out_data = ""
     for pokeabbr in pokeabbrs:
         # find proper destination
-        redirect = f"{pokeabbr}.png"
+        redirect = f"File:{pokeabbr}.png"
         destination = find_redirect_destination(pokeabbr, gender_data)
         # create redirect or print its preview
         destination = f"#RINVIA [[File:{destination}]]"
