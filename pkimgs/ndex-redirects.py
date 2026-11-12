@@ -65,6 +65,7 @@ def main():
     parser.add_argument("--pokeabbrs", default="")
     parser.add_argument("--file", default="")
     parser.add_argument("--genderdatafile", default="data/wiki-util-data/gender-data.json")  # fmt: skip
+    parser.add_argument("--redirectsfile", default="data/pokepages-utils/ndex-redirects.json")  # fmt: skip
     parser.add_argument("--test", default="yes")
     parser.add_argument("--output", default="")
     args = parser.parse_args()
@@ -82,6 +83,8 @@ def main():
     test_mode = args.test.lower().strip() != "no"
     with open(args.genderdatafile, "r") as file:
         gender_data = json.load(file)
+    with open(args.redirectsfile, "r") as file:
+        redirects_data = json.load(file)
     # get inputs
     pokeabbrs = re.findall(r"\d{4}[A-z]{0,2}", input)
     # process all inputs
@@ -89,7 +92,10 @@ def main():
     for pokeabbr in pokeabbrs:
         # find proper destination
         redirect = f"File:{pokeabbr}.png"
-        destination = find_redirect_destination(pokeabbr, gender_data)
+        if redirects_data["exceptions"].get(pokeabbr, None):
+            destination = redirects_data["exceptions"][pokeabbr]
+        else:
+            destination = find_redirect_destination(pokeabbr, gender_data)
         # create redirect or print its preview
         destination = f"#RINVIA [[File:{destination}]]"
         preview = f"{redirect}      >      {destination}"
