@@ -12,7 +12,10 @@ output sono, nella cartella indicata da -out: (la corrente, se manca)
     <codice>_allenatori.txt   Nome IT / Classe / EN / JP delle carte Allenatore
 
 Le colonne sono separate da "|" e la prima riga è l'intestazione, così il
-file si apre in un foglio di calcolo o si legge a occhio. Nella tabella
+file si apre in un foglio di calcolo o si legge a occhio. La prima colonna
+è il codice della carta del dump (PK_10_021190_00), che torna comodo per
+ritrovarla; la rarità è l'etichetta del wiki (Diamante 1, Stella 2,
+Cromatico 1, Corona 1...), non il codice numerico del dump. Nella tabella
 delle carte "Testo Allenatore" è il testo della carta (il campo rule del
 dump), non la regola della classe (il footer, "Puoi giocare una sola carta
 Aiuto durante il tuo turno"): quella non va mai nel file.
@@ -79,6 +82,14 @@ ADDITIONAL_CATEGORY = {
     3: "Tempo Futuro",
 }
 
+# rarità: il codice del dump -> l'etichetta che usa il wiki ({{rar|...}}), come la tabella RARITY
+# di gccp-build.py. 1000 è la rarità delle tre Mew di Primi Amici, che sulle pagine non è indicata.
+RARITY = {
+    100: "Diamante 1", 200: "Diamante 2", 300: "Diamante 3", 400: "Diamante 4",
+    500: "Stella 1", 600: "Stella 2", 700: "Stella 2", 800: "Stella 3",
+    830: "Cromatico 1", 860: "Cromatico 2", 900: "Corona 1",
+}
+
 # classe delle carte Allenatore, quando il gioco non la scrive già in italiano
 TRAINER_CLASS = {
     1: "Aiuto",
@@ -107,7 +118,7 @@ DROP_CHARS = [
 ]
 
 MAIN_HEADER = [
-    "Nome espansione", "Numero carta", "Nome carta",
+    "Codice carta", "Nome espansione", "Numero carta", "Nome carta",
     "isEX", "isMega", "additionalCategory", "PS", "Tipo", "Tipo 2",
     "Nome Abilità", "Effetto Abilità",
     "Nome Attacco 1", "Effetto Attacco 1",
@@ -116,7 +127,7 @@ MAIN_HEADER = [
     "Nome Attacco 2", "Effetto Attacco 2",
     "Energia 1 Attacco 2", "Energia 2 Attacco 2", "Energia 3 Attacco 2",
     "Energia 4 Attacco 2", "Energia 5 Attacco 2", "Danno Attacco 2",
-    "Debolezza", "Ritirata", "Illustratore",
+    "Debolezza", "Ritirata", "Illustratore", "Rarità",
     "Pokédex", "Jdex", "Testo Allenatore",
 ]
 
@@ -258,6 +269,11 @@ def trainer_class(card):
     return card.get("typeLabel") or TRAINER_CLASS.get(card.get("trainerType"), "")
 
 
+def rarity_name(card):
+    """L'etichetta della rarità, quella che il wiki mostra con {{rar|...}}."""
+    return RARITY.get(card.get("rarity"), "")
+
+
 def number_of(card, offset):
     """Numero della carta; i negativi del gioco vanno dopo il totale del set."""
     number = card.get("collectionNumber")
@@ -328,6 +344,7 @@ def card_rows(cards, others, set_name):
                             damage_text(atk)])
 
         rows.append([
+            card.get("cardId", ""),
             set_name,
             number_of(card, offset),
             clean_text(card.get("name", "")),
@@ -344,6 +361,7 @@ def card_rows(cards, others, set_name):
             "" if is_trainer else it_type(card.get("weakness", "")),
             card.get("retreat", ""),
             clean_text(card.get("illustrator", "")),
+            rarity_name(card),
             clean_text(card.get("flavor", "")),
             clean_text(ja.get("flavor", ""), japanese=True),
             rule_text(card.get("rule", "")) if is_trainer else "",
@@ -477,6 +495,12 @@ def main():
     if missing:
         print(f"ATTENZIONE: {len(missing)} carte italiane senza la stessa carta in inglese"
               f" o giapponese (es. {missing[0]}): restano senza nomi tradotti", file=sys.stderr)
+
+    unknown = sorted({c["rarity"] for c in italian
+                      if c.get("rarity") is not None and c.get("rarity") not in RARITY})
+    if unknown:
+        print(f"ATTENZIONE: rarità senza etichetta ({', '.join(str(r) for r in unknown)}):"
+              f" la colonna Rarità resta vuota per quelle carte", file=sys.stderr)
 
     code = italian[0].get("expansion", "") if italian else ""
     set_name = options["espansione"]
