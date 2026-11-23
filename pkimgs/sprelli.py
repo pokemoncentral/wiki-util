@@ -35,17 +35,22 @@ Supported games:
 # fmt: off
 """
 Get data for sprites, models and icons in main series games (NOT mini sprites).
-File name is "[Spr|Icon]<game>[m|f][d][sh]<ndex>.<ext>", where:
+File name is "[Spr|Icon]<game>[m|f][d][sh][jp]<ndex>.<ext>", where:
 - [Spr|Icon] is 'Spr' for sprites and models, 'Icon' for mugshots.
 - <game> is abbr of game(s), for example 'nb' is for "Pokémon Nero e Bianco".
 - [m|f] is 'f' if female and 'm' in any other case, it is not used before generation 4.
 - [d] is used for back sprites/models.
 - [sh] is used for shiny sprites/models.
+- [jp] is used for Japanese sprites/models if they are different from international ones.
 - <ndex> is National Pokédex number, including abbr of form if applicable.
 - <ext> is file extension.
 """  # fmt: on
 def get_data_main(img, prefix, gameabbr):
-    ndex = re.sub(prefix + r"\w+[mf]d?(sh)?(\d+(\w+)?)\.\w+", r"\2", img)
+    ndex = re.sub(prefix + r"\w+[mf]d?(sh)?(jp)?(\d+(\w+)?)\.\w+", r"\3", img)
+    if re.search(f"^{prefix}{gameabbr}[mf]?d?(sh)?jp", img):
+        jap = "yes"
+    else:
+        jap = "no"
     if re.search(f"^{prefix}{gameabbr}[mf]?d?sh", img):
         shiny = "yes"
     else:
@@ -65,7 +70,7 @@ def get_data_main(img, prefix, gameabbr):
         altform = "yes"
     else:
         altform = "no"
-    return ndex, back, shiny, female, altform
+    return ndex, back, shiny, female, altform, jap
 
 
 # fmt: off
@@ -267,10 +272,11 @@ def build_template(img, prefix, type, game, gameabbr, ani, credits):
     female = None
     altform = None
     event = None
+    jap = None
     # detect type, game and other info
     if prefix in ["Spr", "Icon"]:
         # type and game must be specified in these cases
-        ndex, back, shiny, female, altform = get_data_main(img, prefix, gameabbr)
+        ndex, back, shiny, female, altform, jap = get_data_main(img, prefix, gameabbr)
     elif type == "mini sprite":
         # game must be specified in these cases
         type, ndex, ani, shiny, altform = get_data_ms(img)
@@ -303,6 +309,8 @@ def build_template(img, prefix, type, game, gameabbr, ani, credits):
         template += f"|altform={altform}"
     if event:
         template += f"|event={event}"
+    if jap:
+        template += f"|jap={jap}"
     if credits:
         template += f"|credits={credits}"
     template += "}}"

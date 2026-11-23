@@ -3,12 +3,13 @@ import pywikibot
 
 """
 This script creates needed redirects for game sprites/models whose name follows
-<prefix>[m|f][d][sh]<ndex>.<ext>, where
+<prefix>[m|f][d][sh][jp]<ndex>.<ext>, where
 - <prefix> is abbr of game(s) preceded by "Spr"/"Icon", or just "Home"/"Mini"; for
 example 'Sprnb' is for "Pokémon Nero e Bianco", "Iconlpa" is for "Leggende Pokémon: Z-A".
 - [m|f] is 'f' if female and 'm' in any other case, it is not used before generation 4.
 - [d] is used for back sprites/models.
 - [sh] is used for shiny sprites/models.
+- [jp] is used for Japanese sprites/models if they are different from international ones.
 - <ndex> is National Pokédex number, including abbr of form if applicable.
 - <ext> is file extension.
 Do note that a redirect is only created if destination page exists.
