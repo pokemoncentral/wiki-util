@@ -46,7 +46,7 @@ File name is "[Spr|Icon]<game>[m|f][d][sh][jp]<ndex>.<ext>", where:
 - <ext> is file extension.
 """  # fmt: on
 def get_data_main(img, prefix, gameabbr):
-    ndex = re.sub(prefix + r"\w+[mf]d?(sh)?(jp)?(\d+(\w+)?)\.\w+", r"\3", img)
+    ndex = re.sub(prefix + r"\w+?[mf]?d?(sh)?(jp)?(\d+(\w+)?)\.\w+", r"\3", img)
     if re.search(f"^{prefix}{gameabbr}[mf]?d?(sh)?jp", img):
         jap = "yes"
     else:
